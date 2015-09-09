@@ -6,15 +6,17 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/angular/angular-csp.css">
 </head>
-<body>
-<div>
-    <h4>用户名:</h4><label><input type="text" ng-model="username"></label>
-</div>
-<div>
-    <h4>密　码:</h4><label><input type="password" ng-model="password"></label>
-</div>
-</body>
+<body ng-app="iCloudApp">
+<div ui-view=""></div>
+
+
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/crypto/crypto.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="js/base.js"></script>
+<script src="js/apps/app.index.js"></script>
+<script src="js/controllers/controller.index.js"></script>
+</body>
 </html>

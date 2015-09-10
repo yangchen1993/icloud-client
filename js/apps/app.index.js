@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-var iCloudApp = angular.module("iCloudApp", ["ui.router", "iCloudController"]);
+var iCloudApp = angular.module("iCloudApp", ["ui.router", "iCloudController", "iCloudService"]);
 
 
 iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
@@ -12,9 +12,10 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         .state("login", {
             url: "/login",
             templateUrl: "template/login.html",
-            controller:"IndexController"
+            controller: "IndexController"
         })
-        .state("main",{
-            url:"/main"
+        .state("main", {
+            url: "/main",
+            templateUrl: "template/main.html"
         })
 });

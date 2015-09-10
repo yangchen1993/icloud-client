@@ -8,6 +8,6 @@ var iCloudController = angular.module("iCloudController", ["ngCookies"]);
 
 iCloudController.controller("IndexController", ["$scope", "$http", "$window",
     function ($scope, $http, $window) {
-        $window.alert($window.host);
+
     }]);
 

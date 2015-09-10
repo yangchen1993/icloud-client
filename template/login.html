@@ -1,9 +1,17 @@
 <div>
     <h3>用户名:</h3>
-    <label><input type="tel" ng-model="username" class="input input-sm"></label>
+    <label><input type="tel" ng-model="auth.username" class="input input-sm"></label>
 
     <h3>密码:</h3>
-    <label><input type="password" ng-model="password" class="input input-sm"></label>
+    <label><input type="password" ng-model="auth.password" class="input input-sm"></label>
 
-    <button ng-click="login()">登录</button>
+    <br>
+
+    <button ng-click="login(auth)">登录</button>
+
+    <span ng-bind="errorMsg.msg"></span>
+    <span ng-bind="authMsg.msg"></span>
+
+
+    <button ng-click="permissions()">全部权限</button>
 </div>

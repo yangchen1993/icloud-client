@@ -5,18 +5,30 @@
 var iCloudService = angular.module("iCloudService", ["ngCookies"]);
 
 
-iCloudService.controller("$auth", ["$rootScope", "$http", "$cookies", "$window", "$timeout",
-    function ($rootScope, $http, $cookies, $window, $timeout) {
+iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window", "$timeout",
+    function ($rootScope, $http, $cookieStore, $window, $timeout) {
+
+        $rootScope.errorMsg = "";
+
+        var resetErrorMsg = function () {
+            $rootScope.errorMsg = ""
+        };
 
         return {
             "login": function (data) {
                 if (data.username && data.password) {
                     $http.post($window.login_url, data)
                         .success(function (data) {
-                            $cookies.icloud_key = data.icloud_key;
+                            $rootScope.authMsg = data;
+                            $cookieStore.put("icloud_key", data.icloud_key);
                         })
                         .error(function (data) {
-                            $rootScope
+                            $rootScope.errorMsg = data;
+
+                            // 3秒钟后重置错误信息
+                            $timeout(function () {
+                                resetErrorMsg()
+                            }, 3000)
                         })
                 }
             }

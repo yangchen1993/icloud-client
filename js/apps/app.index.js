@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-var iCloudApp = angular.module("iCloudApp", ["ui.router", "iCloudController", "iCloudService"]);
+var iCloudApp = angular.module("iCloudApp", ["ui.router", "ui.grid", "iCloudController", "iCloudService"]);
 
 
 iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
@@ -17,5 +17,10 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         .state("main", {
             url: "/main",
             templateUrl: "template/main.html"
+        })
+        .state("main.permissions", {
+            url: "/permissions",
+            templateUrl: "template/center/permissions.html",
+            controller: "PermissionController"
         })
 });

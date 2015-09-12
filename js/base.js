@@ -5,3 +5,9 @@
 window.host = "http://192.168.0.112";
 
 window.login_url = window.host + "/api/users/login/";
+
+window.logout_url = window.host + "/api/users/logout/";
+
+window.register_url = window.host + "/api/users/register/";
+
+window.permissions_url = window.host + "/api/permissions/";

@@ -3,9 +3,6 @@
  */
 
 
-var iCloudController = angular.module("iCloudController", ["ngCookies"]);
-
-
 iCloudController.controller("IndexController", ["$scope", "$http", "$window", "$auth", "$cookieStore",
     function ($scope, $http, $window, $auth, $cookieStore) {
 
@@ -32,11 +29,5 @@ iCloudController.controller("IndexController", ["$scope", "$http", "$window", "$
 
             $auth.login(data)
         };
-
-
-        $scope.permissions = function () {
-            $http.get($window.host + "/api/permissions/", {"icloud_key": $cookieStore.get("icloud_key")})
-        }
-
     }]);
 

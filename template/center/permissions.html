@@ -1,0 +1,19 @@
+<div>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td align="center">
+                <a href="">全选</a>
+                <a href="">反选</a>
+            </td>
+            <td>ID</td>
+            <td>NAME</td>
+        </tr>
+        <tr ng-repeat="p in permissions_page.results">
+            <td align="center">
+                <label><input type="checkbox" ng-value="p.id"></label>
+            </td>
+            <td ng-bind="p.id"></td>
+            <td ng-bind="p.name"></td>
+        </tr>
+    </table>
+</div>

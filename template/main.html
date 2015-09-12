@@ -1,4 +1,12 @@
-<!--header-->
-<div class="header">
+<div ng-include="'/icloud-client/template/top/header.html'"></div>
 
+
+<div>
+    <a ui-sref=".permissions" href="#">权限列表</a>
+    <a ui-sref=".m2" href="#">菜单2</a>
+    <a ui-sref=".m3" href="#">菜单3</a>
+    <a ui-sref=".m4" href="#">菜单4</a>
+    <a ui-sref=".m5" href="#">菜单5</a>
+    <a ui-sref=".m6" href="#">菜单6</a>
+    <div ui-view=""></div>
 </div>

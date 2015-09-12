@@ -19,8 +19,8 @@ iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window"
                 if (data.username && data.password) {
                     $http.post($window.login_url, data)
                         .success(function (data) {
-                            $rootScope.authMsg = data;
-                            $cookieStore.put("icloud_key", data.icloud_key);
+                            $cookieStore.put("key", data.key);
+                            $window.location.href = "#/main";
                         })
                         .error(function (data) {
                             $rootScope.errorMsg = data;
@@ -31,6 +31,14 @@ iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window"
                             }, 3000)
                         })
                 }
+            },
+            "logout": function () {
+                $http.get($window.logout_url + "?key=" + $cookieStore.get("key"))
+                    .success(function (data) {
+                        $window.location.href = "#/login";
+                    })
+                    .error(function (data) {
+                    });
             }
         }
 

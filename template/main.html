@@ -1,12 +1,147 @@
 <div ng-include="'/icloud-client/template/top/header.html'"></div>
 
-
+<script>
+    var full_h=$(window).height();
+    $(".nav").css("height",full_h+"px")
+    $(".content").css("height",full_h-60+"px")
+</script>
 <div>
-    <a ui-sref=".permissions" href="#">权限列表</a>
-    <a ui-sref=".m2" href="#">菜单2</a>
-    <a ui-sref=".m3" href="#">菜单3</a>
-    <a ui-sref=".m4" href="#">菜单4</a>
-    <a ui-sref=".m5" href="#">菜单5</a>
-    <a ui-sref=".m6" href="#">菜单6</a>
-    <div ui-view=""></div>
+    <div class="nav">
+        <div class="text-center">
+            <img src="img/logo.png">
+        </div>
+        <hr>
+        <ul class="list-group">
+            <li>
+                <div></div>
+                <span class="glyphicon glyphicon-user"></span>
+                <a ui-sref=".permissions" href="#">权限列表</a>
+                <ul>
+                    <li>
+                        <div></div>
+                        <span class="glyphicon glyphicon-link"></span>
+                        省级代理
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-link"></span>
+                        <div></div>
+                        市级代理
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-link"></span>
+                        <div></div>
+                        商圈代理
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-link"></span>
+                        <div></div>
+                        商店
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div></div>
+                <span class="glyphicon glyphicon-download-alt"></span>
+                <a ui-sref=".m2" href="#">广告投放</a>
+                <ul>
+                    <li>
+                        <div></div>
+                        <span class="glyphicon glyphicon-link"></span>
+                        自媒体广告
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-link"></span>
+                        <div></div>
+                        倒计时广告
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-link"></span>
+                        <div></div>
+                        精准广告
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-link"></span>
+                        <div></div>
+                        商家免费广告
+                    </li>
+                    <li>
+
+                        <span class="glyphicon glyphicon-link"></span>
+                        <div></div>
+                        <a ui-sref=".paidlisting">
+                        竞价广告
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div></div>
+                <span class="glyphicon glyphicon-usd"></span>
+                <a ui-sref=".m3" href="#">广告分账</a>
+                <ul>
+                    <li>
+                        <div></div>
+                        <span class="glyphicon glyphicon-link"></span>
+                        财务
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-link"></span>
+                        <div></div>
+                        明细
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-link"></span>
+                        <div></div>
+                        优惠活动
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div></div>
+                <span class="glyphicon glyphicon-screenshot"></span>
+                <a ui-sref=".m4" href="#">菜单4</a>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </li>
+            <li>
+                <div></div>
+                <span class="glyphicon glyphicon-screenshot"></span>
+                <a ui-sref=".m5" href="#">菜单5</a>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </li>
+            <li>
+                <div></div>
+                <span class="glyphicon glyphicon-screenshot"></span>
+                <a ui-sref=".m6" href="#">菜单6</a>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div ui-view="" class="content"></div>
 </div>
+<script>
+    $("li").mouseover(function () {
+        $(this).find("div").eq(0).css("display", "inline");
+    })
+    $("li").mouseout(function () {
+        $(this).find("div").eq(0).css("display", "none");
+    })
+    $(".list-group").find("a").click(function () {
+        $(this).siblings("ul").slideToggle("slow");
+        $(this).siblings("div").css("display", "inline");
+    })
+</script>

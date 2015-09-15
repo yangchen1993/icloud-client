@@ -103,6 +103,7 @@ iCloudService.service("$icloudGrid", ["$rootScope", "$http", "uiGridConstants", 
                     .success(function (data) {
                         $rootScope.restPage = data;
                         self.icloudGrid.data = data.results;
+                        console.log(data.results)
                         self.icloudGrid.totalItems = data.count;
                     })
                     .error(function (data) {

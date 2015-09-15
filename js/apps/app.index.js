@@ -23,4 +23,9 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/permissions.html",
             controller: "PermissionController"
         })
+        .state("main.paidlisting", {
+            url: "/paidlisting",
+            templateUrl: "template/center/paidlisting.html",
+            controller: "PaidlistingController"
+        })
 });

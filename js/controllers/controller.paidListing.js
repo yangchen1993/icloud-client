@@ -4,8 +4,12 @@
 
 iCloudController.controller("PaidlistingController", ["$scope", "$http", "$cookieStore", "$window", "$icloudGrid",
     function ($scope, $http, $cookieStore, $window, $icloudGrid) {
-        $icloudGrid.setEnableSelect(true);
-        $scope.paidlistingGrid = $icloudGrid.icloudGrid;
-        $icloudGrid.extraParams.id=1;
-        $icloudGrid.initialData($window.paidlisting_url);
+
+        console.log(
+            $icloudGrid.initial({
+                "gridOptions": {
+                    "name": "1234"
+                }
+            })
+        )
     }]);

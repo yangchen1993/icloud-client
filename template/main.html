@@ -2,7 +2,7 @@
 
 <script>
     var full_h=$(window).height();
-    $(".nav").css("height",full_h+"px")
+    $(".nav").css("height",full_h+"px");
     $(".content").css("height",full_h-60+"px")
 </script>
 <div>
@@ -15,7 +15,7 @@
             <li>
                 <div></div>
                 <span class="glyphicon glyphicon-user"></span>
-                <a ui-sref=".permissions" href="#">权限列表</a>
+                <a href="">权限列表</a>
                 <ul>
                     <li>
                         <div></div>
@@ -36,6 +36,11 @@
                         <span class="glyphicon glyphicon-link"></span>
                         <div></div>
                         商店
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-link"></span>
+                        <div></div>
+                        <a ui-sref=".permissions" href="#">权限</a>
                     </li>
                 </ul>
             </li>
@@ -68,7 +73,7 @@
 
                         <span class="glyphicon glyphicon-link"></span>
                         <div></div>
-                        <a ui-sref=".paidlisting">
+                        <a ui-sref=".paidlisting" href="">
                         竞价广告
                         </a>
                     </li>

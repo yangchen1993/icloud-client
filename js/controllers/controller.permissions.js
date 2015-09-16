@@ -4,14 +4,8 @@
 
 iCloudController.controller("PermissionController", ["$scope", "$http", "$cookieStore", "$window", "$icloudGrid",
     function ($scope, $http, $cookieStore, $window, $icloudGrid) {
-        $icloudGrid.setEnableSelect(true);
-        $scope.permissionsGrid = $icloudGrid.icloudGrid;
-        $icloudGrid.initialData($window.permissions_url);
-/*        $scope.permissionsGrid = {
-            columnDefs: [
-                { name: 'Name', enableCellEdit: true },
-                { name: 'Codename' },
-                { name: 'Content Type' }
-            ]
-        };*/
+        var grid = $icloudGrid.initial($window.permissions_url);
+        grid.setEnableSelect(true);
+        console.log(grid);
+        $scope.permissionsGrid = grid.gridOptions;
     }]);

@@ -1,0 +1,8 @@
+.grid {
+    width: 800px;
+    height: 500px;
+}
+
+.grid2 .ui-grid-header-cell {
+     height: 60px;
+ }

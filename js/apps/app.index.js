@@ -28,4 +28,9 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/paidlisting.html",
             controller: "PaidlistingController"
         })
+        .state("main.wemedia",{
+            url:"/wemedia",
+            templateUrl:"template/center/wemedia.html",
+            controller:"wemediaController"
+        })
 });

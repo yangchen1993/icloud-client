@@ -44,157 +44,136 @@ iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window"
 
     }]);
 
-
-iCloudService.service("$icloudGrid", ["$rootScope", "$http", "uiGridConstants", "$cookieStore", "$timeout",
-    function ($rootScope, $http, uiGridConstants, $cookieStore, $timeout) {
-
-        var defaultPaginationOptions = {
-            pageSize: 20,
-            ordering: "id"
-        };
-
-        var defaultExtraParams = {
-            key: $cookieStore.get("key"),
-            page: 1
-        };
-
-
-        var defaultGridOptions = {
-            paginationPageSizes: [20, 30, 40, 50],
-            paginationPageSize: 20,
-            useExternalPagination: true,
-            useExternalSorting: true,
-            enableRowSelection: false,
-            enableSelectAll: false,
-            enableFiltering: true,
-            useExternalFiltering: true,
-            selectionRowHeaderWidth: 35,
-            showGridFooter: true,
-            multiSelect: false
-        };
-
-        var checkOptions = function (options) {
+iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
+    function ($rootScope, $http, $cookieStore) {
+        var defaultParams = function () {
             return {
-                gridOptions: options.hasOwnProperty("gridOptions") ? options.gridOptions : {},
-                paginationOptions: options.hasOwnProperty("paginationOptions") ? options.paginationOptions : {},
-                extraParams: options.hasOwnProperty("extraParams") ? options.extraParams : {}
-            }
-        };
-
-        var queryConditions = function () {
-
-        };
-
-
-        var nullOptions = {
-            gridOptions: {},
-            paginationOptions: {},
-            extraParams: {}
-        };
-
-        this.initial = function (url, options) {
-            options = options || {};
-            options = checkOptions(options);
-
-            var self = angular.copy(nullOptions);
-
-            self.queryString = function (params) {
-                var base = [$.param(self.paginationOptions), "&", $.param(self.extraParams)].join("");
-
-                if (params) {
-                    return [base, "&", $.param(params)].join("");
-                } else {
-                    return base;
-                }
-
+                key: $cookieStore.get("key"),
+                ordering: "id",
+                page: 1,
+                pageSize: 20
             };
+        };
 
-            self.replaceUrl = function (url, replace) {
-                if (url.indexOf("\?") >= 0) {
-                    return url.replace(/(\?)(.*)/, ["$1", replace].join(""))
+        this.initial = function (scope, url) {
+            scope.pageSizes = [20, 30, 40, 50];
+            scope.pageSize = 20;
+
+            var self = angular.copy({});
+            self.url = url;
+            self.defaultParams = defaultParams();
+            self.urlWithDefaultParams = function () {
+                var key = $cookieStore.get("key");
+                if (key) {
+                    return [self.url, "?", $.param(self.defaultParams)].join("")
                 } else {
-                    return [url, "?", replace].join("")
+                    return self.url;
                 }
             };
+
+            self.urlWithParams = function (params) {
+                params = params || {};
+                return [self.restPage.current, "&", $.param(params)].join("");
+            };
+
+            self.replacePageNumber = function (newPage) {
+                return self.restPage.current.replace(/page=(\d)+/, ["page=", newPage].join(""))
+            };
+
+            self.replacePageSize = function (newSize) {
+                return self.restPage.current.replace(/pageSize=(\d)+/, ["pageSize=", newSize].join(""))
+            };
+
+            self.restPage = {};
 
             self.restGet = function (url) {
-                $http.get(url)
-                    .success(function (data) {
-                        self.restPage = data;
-                        self.gridOptions.data = data.results;
-                        self.gridOptions.totalItems = data.count;
-                    })
-                    .error(function (data) {
-                        console.log(data)
-                    })
+                $http.get(url).success(function (data) {
+                    self.restPage = scope.grid = scope.pagination = data;
+                    scope.headers = data.results[0].keys;
+                })
             };
 
-            self.restDelete = function (url) {
-            };
-            self.restUpdate = function (url) {
-            };
-            self.restAdd = function (url) {
+            self.load = function () {
+                self.restGet(self.urlWithDefaultParams());
             };
 
-            self.filterInterval = [0, 0];
+            scope.sort = function () {
 
-            self.setEnableSelect = function (v) {
-                self.gridOptions.enableRowSelection = v;
-                self.gridOptions.enableSelectAll = v;
-                self.gridOptions.multiSelect = v;
             };
 
-            self.gridOptions = angular.extend(options.gridOptions, defaultGridOptions);
-            self.paginationOptions = angular.extend(options.paginationOptions, defaultPaginationOptions);
-            self.extraParams = angular.extend(options.extraParams, defaultExtraParams);
-            self.restGet(self.replaceUrl(url, self.queryString()));
-            self.gridOptions.onRegisterApi = function (gridApi) {
-                gridApi.core.on.sortChanged($rootScope, function (grid, sortColumns) {
-                    if (sortColumns.length == 0) {
-                        self.paginationOptions.ordering = "id";
-                    } else {
-                        var field = sortColumns[0].field;
-                        if (sortColumns[0].sort.direction == uiGridConstants.ASC) {
-                            self.paginationOptions.ordering = field;
-                        } else {
-                            self.paginationOptions.ordering = ["-", field].join("");
-                        }
+            scope.pageNumberChanged = function (newPage) {
+
+                var page = newPage;
+                if (scope.pagination) {
+                    if (parseInt(newPage) < 1) {
+                        scope.pagination.pageNumber = 1;
+                        page = 1
                     }
-                    self.extraParams.key = $cookieStore.get("key");
-                    self.restGet(self.replaceUrl(self.restPage.current, self.queryString()))
-                });
+                    if (parseInt(newPage) > scope.pagination.totalPage) {
+                        scope.pagination.pageNumber = scope.pagination.totalPage;
+                        page = scope.pagination.totalPage
+                    }
 
-                gridApi.core.on.filterChanged($rootScope, function () {
-
-                    var grid = this.grid;
-                    var cols = this.grid.columns;
-                    var filterParams = {};
-                    angular.forEach(cols, function (v) {
-                        if (v.field !== "selectionRowHeaderCol") {
-                            if (v.filters[0].term) {
-                                filterParams[grid.options.customFilter[v.field]] = v.filters[0].term;
-                            }
-                        }
-                    });
-
-                    self.extraParams.key = $cookieStore.get("key");
-
-                    console.log(self.filterInterval);
-
-                    $timeout(function () {
-                        self.restGet(self.replaceUrl(self.restPage.current, self.queryString(filterParams)))
-                    }, 1000)
-                });
-
-                gridApi.pagination.on.paginationChanged($rootScope, function (newPage, pageSize) {
-                    self.paginationOptions.pageSize = pageSize;
-                    self.extraParams.page = newPage;
-                    self.extraParams.key = $cookieStore.get("key");
-                    self.restGet(self.replaceUrl(self.restPage.current, self.queryString()));
-                });
+                    self.restGet(self.replacePageNumber(page))
+                }
             };
 
-            return self;
+            scope.pageSizeChanged = function (newSize) {
+                console.log(newSize);
+                self.restGet(self.replacePageSize(newSize))
+            };
+
+            scope.pre = function () {
+                if (self.restPage && self.restPage.previous) {
+                    self.restGet(self.restPage.previous);
+                } else {
+                    return false;
+                }
+            };
+            scope.next = function () {
+                if (self.restPage && self.restPage.next) {
+                    self.restGet(self.restPage.next);
+                } else {
+                    return false;
+                }
+            };
+            scope.first = function () {
+                if (self.restPage.pageNumber != 1) {
+                    self.restGet(self.replacePageNumber(1))
+                }
+            };
+            scope.last = function () {
+                if (self.restPage.pageNumber != self.restPage.totalPage) {
+                    self.restGet(self.replacePageNumber(self.restPage.totalPage))
+                }
+            };
+            scope.refresh = function () {
+                self.restGet(self.restPage.current)
+            };
+
+            self.load();
+
+            return self
         };
 
+    }]);
+
+iCloudService.service("$checkBox", ["$rootScope",
+    function ($rootScope) {
+        this.enableCheck = function (tableId) {
+            $rootScope.checkAll = function () {
+                var selector = ["#", tableId, " :checkbox"].join("");
+                var checkBoxes = angular.element(selector);
+                angular.forEach(checkBoxes, function (v, k) {
+                    angular.element(v).prop("checked", true)
+                })
+            };
+            $rootScope.checkInverse = function () {
+                var selector = ["#", tableId, " :checkbox"].join("");
+                var checkBoxes = angular.element(selector);
+                angular.forEach(checkBoxes, function (v, k) {
+                    angular.element(v).prop("checked", !angular.element(v).prop("checked"))
+                })
+            }
+        }
     }]);

@@ -45,8 +45,8 @@ iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window"
     }]);
 
 
-iCloudService.service("$icloudGrid", ["$rootScope", "$http", "uiGridConstants", "$cookieStore",
-    function ($rootScope, $http, uiGridConstants, $cookieStore) {
+iCloudService.service("$icloudGrid", ["$rootScope", "$http", "uiGridConstants", "$cookieStore", "$timeout",
+    function ($rootScope, $http, uiGridConstants, $cookieStore, $timeout) {
 
         var defaultPaginationOptions = {
             pageSize: 20,
@@ -81,6 +81,10 @@ iCloudService.service("$icloudGrid", ["$rootScope", "$http", "uiGridConstants", 
             }
         };
 
+        var queryConditions = function () {
+
+        };
+
 
         var nullOptions = {
             gridOptions: {},
@@ -88,48 +92,58 @@ iCloudService.service("$icloudGrid", ["$rootScope", "$http", "uiGridConstants", 
             extraParams: {}
         };
 
-        var self = angular.copy(nullOptions);
-
-        self.queryString = function () {
-            return [$.param(self.paginationOptions), "&", $.param(self.extraParams)].join("")
-        };
-
-        self.replaceUrl = function (url, replace) {
-            if (url.indexOf("\?") >= 0) {
-                return url.replace(/(\?)(.*)/, ["$1", replace].join(""))
-            } else {
-                return [url, "?", replace].join("")
-            }
-        };
-
-        self.restGet = function (url) {
-            $http.get(url)
-                .success(function (data) {
-                    self.restPage = data;
-                    self.gridOptions.data = data.results;
-                    self.gridOptions.totalItems = data.count;
-                })
-                .error(function (data) {
-                    console.log(data)
-                })
-        };
-
-        self.restDelete = function (url) {
-        };
-        self.restUpdate = function (url) {
-        };
-        self.restAdd = function (url) {
-        };
-
-        self.setEnableSelect = function (v) {
-            self.gridOptions.enableRowSelection = v;
-            self.gridOptions.enableSelectAll = v;
-            self.gridOptions.multiSelect = v;
-        };
-
         this.initial = function (url, options) {
             options = options || {};
             options = checkOptions(options);
+
+            var self = angular.copy(nullOptions);
+
+            self.queryString = function (params) {
+                var base = [$.param(self.paginationOptions), "&", $.param(self.extraParams)].join("");
+
+                if (params) {
+                    return [base, "&", $.param(params)].join("");
+                } else {
+                    return base;
+                }
+
+            };
+
+            self.replaceUrl = function (url, replace) {
+                if (url.indexOf("\?") >= 0) {
+                    return url.replace(/(\?)(.*)/, ["$1", replace].join(""))
+                } else {
+                    return [url, "?", replace].join("")
+                }
+            };
+
+            self.restGet = function (url) {
+                $http.get(url)
+                    .success(function (data) {
+                        self.restPage = data;
+                        self.gridOptions.data = data.results;
+                        self.gridOptions.totalItems = data.count;
+                    })
+                    .error(function (data) {
+                        console.log(data)
+                    })
+            };
+
+            self.restDelete = function (url) {
+            };
+            self.restUpdate = function (url) {
+            };
+            self.restAdd = function (url) {
+            };
+
+            self.filterInterval = [0, 0];
+
+            self.setEnableSelect = function (v) {
+                self.gridOptions.enableRowSelection = v;
+                self.gridOptions.enableSelectAll = v;
+                self.gridOptions.multiSelect = v;
+            };
+
             self.gridOptions = angular.extend(options.gridOptions, defaultGridOptions);
             self.paginationOptions = angular.extend(options.paginationOptions, defaultPaginationOptions);
             self.extraParams = angular.extend(options.extraParams, defaultExtraParams);
@@ -146,18 +160,37 @@ iCloudService.service("$icloudGrid", ["$rootScope", "$http", "uiGridConstants", 
                             self.paginationOptions.ordering = ["-", field].join("");
                         }
                     }
+                    self.extraParams.key = $cookieStore.get("key");
                     self.restGet(self.replaceUrl(self.restPage.current, self.queryString()))
                 });
 
                 gridApi.core.on.filterChanged($rootScope, function () {
-                    console.log(this.grid);
+
+                    var grid = this.grid;
+                    var cols = this.grid.columns;
+                    var filterParams = {};
+                    angular.forEach(cols, function (v) {
+                        if (v.field !== "selectionRowHeaderCol") {
+                            if (v.filters[0].term) {
+                                filterParams[grid.options.customFilter[v.field]] = v.filters[0].term;
+                            }
+                        }
+                    });
+
+                    self.extraParams.key = $cookieStore.get("key");
+
+                    console.log(self.filterInterval);
+
+                    $timeout(function () {
+                        self.restGet(self.replaceUrl(self.restPage.current, self.queryString(filterParams)))
+                    }, 1000)
                 });
 
                 gridApi.pagination.on.paginationChanged($rootScope, function (newPage, pageSize) {
                     self.paginationOptions.pageSize = pageSize;
                     self.extraParams.page = newPage;
+                    self.extraParams.key = $cookieStore.get("key");
                     self.restGet(self.replaceUrl(self.restPage.current, self.queryString()));
-                    console.log(self)
                 });
             };
 

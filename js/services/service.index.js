@@ -60,6 +60,7 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             scope.pageSize = 20;
 
             var self = angular.copy({});
+            self.pageSize = 20;
             self.url = url;
             self.defaultParams = defaultParams();
             self.urlWithDefaultParams = function () {
@@ -89,15 +90,46 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             self.restGet = function (url) {
                 $http.get(url).success(function (data) {
                     self.restPage = scope.grid = scope.pagination = data;
-                    scope.headers = data.results[0].keys;
+                    scope.headers = _.keys(data.results[0]);
                 })
             };
 
             self.load = function () {
                 self.restGet(self.urlWithDefaultParams());
             };
+            self.currentSort = {};  // 当前的排序规则,true代表升序
+            
+            self.resetSort = function (key) {
+                _.mapObject(self.currentSort, function (v,k) {
+                    if (k != key){
+                        return ""
+                    }
+                })
+            };
 
-            scope.sort = function () {
+
+            scope.sort = function (colName) {
+
+                if (_.isEmpty(self.currentSort)) {
+                    self.currentSort[colName] = true;
+                } else {
+                    self.resetSort(colName);
+                    self.currentSort[colName] = !self.currentSort[colName]
+                }
+
+                var ordering = "";
+                if (self.currentSort[colName]) {
+                    ordering = colName;
+                } else {
+                    ordering = ["-", colName].join("");
+                }
+                var url = self.restPage.current.replace(/(ordering=)(-?[a-z]+_?[a-z]*)/, ["ordering=", ordering
+                ].join(""));
+                scope.currentSort = self.currentSort;
+                self.restGet(url);
+            };
+
+            scope.filter = function () {
 
             };
 
@@ -119,7 +151,7 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             };
 
             scope.pageSizeChanged = function (newSize) {
-                console.log(newSize);
+                self.pageSize = newSize;
                 self.restGet(self.replacePageSize(newSize))
             };
 

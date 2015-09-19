@@ -98,22 +98,33 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
                 self.restGet(self.urlWithDefaultParams());
             };
             self.currentSort = {};  // 当前的排序规则,true代表升序
-            
+
             self.resetSort = function (key) {
-                _.mapObject(self.currentSort, function (v,k) {
-                    if (k != key){
-                        return ""
+                return _.mapObject(self.currentSort, function (v, k) {
+                    if (k != key) {
+                        return "";
+                    } else {
+                        return v
                     }
                 })
             };
 
+            scope.filtering = function (params) {
+                params.key = $cookieStore.get("key");
+                params.ordering = "id";
+                params.pageSize = self.pageSize;
+                params.page = 1;
+
+                var url = [self.url, "?", $.param(params)].join("");
+                self.restGet(url)
+            };
 
             scope.sort = function (colName) {
 
                 if (_.isEmpty(self.currentSort)) {
                     self.currentSort[colName] = true;
                 } else {
-                    self.resetSort(colName);
+                    self.currentSort = self.resetSort(colName);
                     self.currentSort[colName] = !self.currentSort[colName]
                 }
 

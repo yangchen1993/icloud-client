@@ -13,3 +13,5 @@ window.register_url = window.host + "/api/users/register/";
 window.permissions_url = window.host + "/api/permissions/";
 
 window.paidlisting_url = window.host + "/api/bid/";
+
+window.wemedia_url = window.host + "/api/ads/";

@@ -1,6 +1,8 @@
 <div style="height: 500px">
     <input type="text" ng-model="filter.bid_price">
-    <input type="text" ng-model="filter.time_range">
+    <input type="text" ng-model="filter.time_range_start">
+    <input type="text" ng-model="filter.time_range_start">
+    <button ng-click="filtering(filter)">查询</button>
     <table id="table-paidlisting" class="table table-hover table-bordered table-condensed table-selectable">
         <tr>
             <td>
@@ -12,14 +14,25 @@
                 <span ng-show="currentSort[headers[1]] === true">升序</span>
                 <span ng-show="currentSort[headers[1]] === false">降序</span>
             </td>
+            <td id="{{ headers[2] }}" ng-click="sort(headers[1])">
+                开始时间
+                <span ng-show="currentSort[headers[2]] === true">升序</span>
+                <span ng-show="currentSort[headers[2]] === false">降序</span>
+            </td>
+            <td id="{{ headers[3] }}" ng-click="sort(headers[1])">
+                结束时间
+                <span ng-show="currentSort[headers[3]] === true">升序</span>
+                <span ng-show="currentSort[headers[3]] === false">降序</span>
+            </td>
         </tr>
         <tr ng-repeat="p in grid.results">
             <td>
                 <input type="checkbox">
             </td>
-            <td ng-bind="p.id"></td>
             <td ng-bind="p.bid_price"></td>
+            <td ng-bind="p.time_range_start"></td>
+            <td ng-bind="p.time_range_end"></td>
         </tr>
     </table>
-    <div ng-include="'template/partial/pagination.html'"></div>
+    <div ng-include="'/icloud-client/template/partial/pagination.html'"></div>
 </div>

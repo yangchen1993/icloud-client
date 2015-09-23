@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <input type="text" class="form-control" placeholder="广告标题" id="ad_title">
+        <input type="text" class="form-control" placeholder="广告标题" id="ad_title" ng-model="ad.title">
 
         <div id="crop-avatar">
             <div id="avatar-modal" role="dialog" tabindex="-1">
@@ -36,8 +36,8 @@
                     <img src="../../../icloud-client/img/phone.png" class="model_p">
                     <div class="avatar-preview preview-lg"></div>
                     <div class="form-inline">
-                    <input type="text" class="form-control ad_url" placeholder="广告链接地址：如www.abc.com" id="ad_url">
-                    <button type="button" class="btn btn-success " ng-click="uploadImg()">确定</button>
+                    <input type="text" class="form-control ad_url" placeholder="广告链接地址：如www.abc.com" id="ad_url" ng-model="ad.link">
+                    <button type="button" class="btn btn-success " ng-click="uploadImg(ad)">确定</button>
                     </div>
                 </form>
             </div>

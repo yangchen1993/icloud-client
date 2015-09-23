@@ -221,42 +221,29 @@ iCloudService.service("$checkBox", ["$rootScope",
         }
     }]);
 
-iCloudService.service("$uploadImg", ["$http", "$cookieStore",
-    function ($http, $cookieStore) {
-        this.initial = function (url, ad_title, ad_url) {
-            if(ad_title!=null&&ad_url!=null){
+iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
+    function ($http, $cookieStore, $window) {
+        this.upload = function (scope, url) {
             var self = angular.copy({});
             self.defaultParams = function () {
                 return {
                     "key": $cookieStore.get("key")
                 }
             };
-            self.url = url;
-            self.urlWithDefaultParams = function () {
-                var key = $cookieStore.get("key");
-                if (key) {
-                    return [self.url, "?", $.param(self.defaultParams)].join("")
-                } else {
-                    return self.url;
-                }
-            };
             var data = {
-                file: $(".avatar-wrapper > img").cropper("getCroppedCanvas").toDataURL(),
-                price: 20,
-                ad_url: ad_title,
-                ad_title: ad_url
+                img: $(".avatar-wrapper > img").cropper("getCroppedCanvas").toDataURL(),
+                link: scope.link,
+                title: scope.title,
+                brief: scope.brief,
+                category: scope.category
             };
 
 
             $http.post([url, "?", $.param(self.defaultParams())].join(""), data)
                 .success(function (data) {
-
+                    console.log(data);
                 }).error(function (data) {
                     console.log(data);
                 })
-        }
-            else{
-                alert("广告标题或链接地址不能为空")
-            }
         }
     }]);

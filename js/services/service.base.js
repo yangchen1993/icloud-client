@@ -1,49 +1,6 @@
 /**
- * Created by lee on 2015/9/9.
+ * Created by Jun on 2015/9/24.
  */
-
-var iCloudService = angular.module("iCloudService", ["ngCookies"]);
-
-
-iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window", "$timeout",
-    function ($rootScope, $http, $cookieStore, $window, $timeout) {
-
-        $rootScope.errorMsg = "";
-
-        var resetErrorMsg = function () {
-            $rootScope.errorMsg = ""
-        };
-
-        return {
-            "login": function (data) {
-                if (data.username && data.password) {
-                    $http.post($window.login_url, data)
-                        .success(function (data) {
-                            $cookieStore.put("key", data.key);
-                            $window.location.href = "#/main";
-                        })
-                        .error(function (data) {
-                            $rootScope.errorMsg = data;
-
-                            // 3ÁßíÈíüÂêéÈáçÁΩÆÈîôËØØ‰ø°ÊÅØ
-                            $timeout(function () {
-                                resetErrorMsg()
-                            }, 3000)
-                        })
-                }
-            },
-            "logout": function () {
-                $http.get($window.logout_url + "?key=" + $cookieStore.get("key"))
-                    .success(function (data) {
-                        $window.location.href = "#/login";
-                    })
-                    .error(function (data) {
-                    });
-            }
-        }
-
-    }]);
-
 iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
     function ($rootScope, $http, $cookieStore) {
         var defaultParams = function () {
@@ -97,7 +54,7 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             self.load = function () {
                 self.restGet(self.urlWithDefaultParams());
             };
-            self.currentSort = {};  // ÂΩìÂâçÁöÑÊéíÂ∫èËßÑÂàô,true‰ª£Ë°®ÂçáÂ∫è
+            self.currentSort = {};  // µ±«∞µƒ≈≈–ÚπÊ‘Ú,true¥˙±Ì…˝–Ú
 
             self.resetSort = function (key) {
                 return _.mapObject(self.currentSort, function (v, k) {
@@ -218,63 +175,6 @@ iCloudService.service("$checkBox", ["$rootScope",
                 var checkBoxes = angular.element(selector);
                 angular.forEach(checkBoxes, function (v, k) {
                     angular.element(v).prop("checked", !angular.element(v).prop("checked"))
-                })
-            }
-        }
-    }]);
-
-iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
-    function ($http, $cookieStore, $window) {
-        this.upload = function (scope, url) {
-
-            var self = angular.copy({});
-            self.defaultParams = function () {
-                return {
-                    "key": $cookieStore.get("key")
-                }
-            };
-            self.url = url;
-            self.urlWithDefaultParams = function () {
-                var key = $cookieStore.get("key");
-                if (key) {
-                    return [self.url, "?", $.param(self.defaultParams)].join("")
-                } else {
-                    return self.url;
-                }
-            };
-            var data = {
-                img: $(".avatar-wrapper > img").cropper("getCroppedCanvas").toDataURL(),
-                link: scope.ad_url,
-                title: scope.ad_title,
-                brief: scope.ad_brief,
-                category: scope.selectId
-            };
-            $http.post([url, "?", $.param(self.defaultParams())].join(""), data)
-                .success(function (data) {
-                    alert("ÂàõÂª∫ÊàêÂäü")
-                }).error(function (data) {
-                    console.log(data);
-                })
-        }
-    }]);
-
-iCloudService.service("$permissions", ["$http", "$window", "$q", "$cookieStore",
-    function ($http, $window, $q, $cookieStore) {
-        return {
-            query: function () {
-                var deferred = $q.defer();
-                $http.get([$window.permissions_url, "?key=", $cookieStore.get("key")].join(""))
-                    .success(function (data) {
-                        deferred.resolve(data)
-                    })
-                    .error(function (data) {
-                        deferred.reject(data)
-                    });
-                deferred.promise.then(function (data) {
-                    console.log(1);
-                    return data
-                }, function (data) {
-                    return data;
                 })
             }
         }

@@ -7,7 +7,7 @@ var iCloudController = angular.module("iCloudController", []);
 
 iCloudController.controller("BaseController", ["$scope",
     function ($scope) {
-        $scope.$on('send',function(e){
+        $scope.$on('send', function (e) {
             $scope.$broadcast()
         })
     }]);

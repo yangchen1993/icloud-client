@@ -9,8 +9,23 @@ iCloudController.controller("PermissionController", ["$scope", "$http", "$cookie
     }]);
 
 
-iCloudController.controller("FunctionsController", ["$scope", "$http", "$cookieStore", "$window", "$grid", "$checkBox",
-    function ($scope, $http, $cookieStore, $window, $grid, $checkBox) {
-        $grid.initial($scope,$window.functions_url);
+iCloudController.controller("FunctionsController", ["$scope", "$http", "$cookieStore", "$window", "$grid", "$checkBox", "$permissions",
+    function ($scope, $http, $cookieStore, $window, $grid, $checkBox, $permissions) {
+        $grid.initial($scope, $window.functions_url);
         $checkBox.enableCheck("table-functions");
+
+        $scope.functionModal = {
+            title: "添加新功能",
+            data: {
+                name: "",
+                id: ""
+            }
+        };
+
+        console.log($permissions.query());
+
+        $scope.newFunction = function (data) {
+
+        }
+
     }]);

@@ -15,7 +15,7 @@
         </tr>
         <tr ng-repeat="p in grid.results">
             <td>
-                <input type="checkbox">
+                <input type="checkbox" ng-value="p.id">
             </td>
             <td ng-bind="p.name"></td>
         </tr>

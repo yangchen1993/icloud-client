@@ -257,3 +257,4 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
                 })
         }
     }]);
+

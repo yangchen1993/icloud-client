@@ -23,8 +23,8 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/permissions.html",
             controller: "PermissionController"
         })
-        .state("main.paidlisting", {
-            url: "/paidlisting",
+        .state("main.paid", {
+            url: "/paid",
             templateUrl: "template/center/paid.html",
             controller: "PaidController"
         })
@@ -32,5 +32,10 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             url:"/wemedia",
             templateUrl:"template/center/wemedia.html",
             controller:"WeMediaController"
+        })
+        .state("main.wemedia_edit",{
+            url:"/wemedia_edit",
+            templateUrl:"template/center/wemedia_edit.html",
+            controller:"WeMediaEditController"
         })
 });

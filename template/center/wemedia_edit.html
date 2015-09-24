@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="/css/wemedia_edit.css">
+<link rel="stylesheet" href="/bower_components/cropper/dist/cropper.min.css">
+<link rel="stylesheet" href="/css/phone.css">
+<div class="w_header">
+    <span class="h4">自媒体广告</span>
+</div>
+<div class="w_content">
+    <div class="col-md-4">
+        <div class="form-inline">
+            <label>
+                <input type="radio" name="adtype" checked="checked">
+                <span>编辑广告</span>
+            </label>
+            <label>
+                <input type="radio" name="adtype">
+                <span>系统默认广告</span>
+            </label>
+        </div>
+
+        <span>广告标题：</span>
+        <input type="text" class="form-control" ng-model="ad_title">
+        <span>广告链接地址：</span>
+        <input type="text" class="form-control" placeholder="如www.abc.com" ng-model="ad_url">
+        <span>广告行业：</span>
+        <select class="form-control" ng-model="selectId" ng-options="v.id as v.name for v in ad_category">
+            <option value="">请选择你的广告行业</option>
+        </select>
+        <span>广告简介：</span>
+        <textarea class="form-control" rows="3" ng-model="ad_brief"></textarea>
+    </div>
+    <div class="col-md-5">
+            <div id="crop-avatar">
+                <div id="avatar-modal" role="dialog" tabindex="-1">
+                    <form class="avatar-form" enctype="multipart/form-data" method="post">
+                        <div class="avatar-upload">
+                            <!--<input type="hidden" class="avatar-src" name="avatar_src">
+                            <input type="hidden" class="avatar-data" name="avatar_data">-->
+                            <div class="form-inline">
+                                <label  class="h4">请选择一个图像文件</label>
+                                <input type="file" class="avatar-input" id="avatarInput" name="avatar_file" ng-model="ad_name">
+                            </div>
+
+                        </div>
+                        <div class="avatar-wrapper"></div>
+                        <img src="/img/phone.png" class="model_p">
+                        <div class="avatar-preview preview-lg"></div>
+
+
+                        <button type="button" class="btn btn-success btn-block" ng-click="uploadImg()">确定</button>
+
+                    </form>
+                </div>
+            </div>
+
+    </div>
+</div>
+
+<script src="/bower_components/cropper/dist/cropper.min.js"></script>
+<script src="/js/phone.js"></script>

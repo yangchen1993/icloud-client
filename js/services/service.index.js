@@ -110,11 +110,11 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             };
 
             scope.filtering = function (params) {
+
                 params.key = $cookieStore.get("key");
                 params.ordering = "id";
                 params.pageSize = self.pageSize;
                 params.page = 1;
-
                 var url = [self.url, "?", $.param(params)].join("");
                 self.restGet(url)
             };
@@ -224,26 +224,43 @@ iCloudService.service("$checkBox", ["$rootScope",
 iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
     function ($http, $cookieStore, $window) {
         this.upload = function (scope, url) {
+
             var self = angular.copy({});
             self.defaultParams = function () {
                 return {
                     "key": $cookieStore.get("key")
                 }
             };
+            self.url = url;
+            self.urlWithDefaultParams = function () {
+                var key = $cookieStore.get("key");
+                if (key) {
+                    return [self.url, "?", $.param(self.defaultParams)].join("")
+                } else {
+                    return self.url;
+                }
+            };
             var data = {
                 img: $(".avatar-wrapper > img").cropper("getCroppedCanvas").toDataURL(),
-                link: scope.link,
-                title: scope.title,
-                brief: scope.brief,
-                category: scope.category
+                link: scope.ad_url,
+                title: scope.ad_title,
+                brief: scope.ad_brief,
+                category: scope.selectId
             };
-
-
             $http.post([url, "?", $.param(self.defaultParams())].join(""), data)
                 .success(function (data) {
-                    console.log(data);
+                    alert("创建成功")
                 }).error(function (data) {
                     console.log(data);
                 })
         }
     }]);
+
+iCloudService.service("mySend", function () {
+        var ads ={};
+        ads.title=$scope.p.title;
+        ads.breaf=$scope.p.breaf;
+        ads.link=$scope.p.link;
+        ads.category=$scope.p.category;
+        ads.img=$scope.p.img;
+});

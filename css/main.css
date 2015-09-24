@@ -111,7 +111,7 @@ hr{
     position: absolute;
     top:60px;
     left:14%;
-  /*  overflow:scroll;*/
+    overflow:scroll;
     width:86%;
 
 }

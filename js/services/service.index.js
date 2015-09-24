@@ -121,23 +121,25 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
 
             scope.sort = function (colName) {
 
-                if (_.isEmpty(self.currentSort)) {
-                    self.currentSort[colName] = true;
-                } else {
-                    self.currentSort = self.resetSort(colName);
-                    self.currentSort[colName] = !self.currentSort[colName]
-                }
+                if (colName) {
+                    if (_.isEmpty(self.currentSort)) {
+                        self.currentSort[colName] = true;
+                    } else {
+                        self.currentSort = self.resetSort(colName);
+                        self.currentSort[colName] = !self.currentSort[colName]
+                    }
 
-                var ordering = "";
-                if (self.currentSort[colName]) {
-                    ordering = colName;
-                } else {
-                    ordering = ["-", colName].join("");
+                    var ordering = "";
+                    if (self.currentSort[colName]) {
+                        ordering = colName;
+                    } else {
+                        ordering = ["-", colName].join("");
+                    }
+                    var url = self.restPage.current.replace(/(ordering=)(-?[a-z]+_?[a-z]*)/, ["ordering=", ordering
+                    ].join(""));
+                    scope.currentSort = self.currentSort;
+                    self.restGet(url);
                 }
-                var url = self.restPage.current.replace(/(ordering=)(-?[a-z]+_?[a-z]*)/, ["ordering=", ordering
-                ].join(""));
-                scope.currentSort = self.currentSort;
-                self.restGet(url);
             };
 
             scope.filter = function () {
@@ -255,12 +257,3 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
                 })
         }
     }]);
-
-iCloudService.service("mySend", function () {
-        var ads ={};
-        ads.title=$scope.p.title;
-        ads.breaf=$scope.p.breaf;
-        ads.link=$scope.p.link;
-        ads.category=$scope.p.category;
-        ads.img=$scope.p.img;
-});

@@ -1,5 +1,4 @@
-<div style="height: 500px">
-
+<div style="height: 500px; width: 300px">
     <input type="text" ng-model="filter.name__icontains">
     <button ng-click="filtering(filter)">查询</button>
     <table id="table-permissions" class="table table-hover table-bordered table-condensed table-selectable">
@@ -7,11 +6,6 @@
             <td>
                 <a href="javascript:" ng-click="checkAll()">全选</a>
                 <a href="javascript:" ng-click="checkInverse()">反选</a>
-            </td>
-            <td id="{{ headers[0] }}" ng-click="sort(headers[0])">
-                ID
-                <span ng-show="currentSort[headers[0]] === true">升序</span>
-                <span ng-show="currentSort[headers[0]] === false">降序</span>
             </td>
             <td id="{{ headers[1] }}" ng-click="sort(headers[1])">
                 NAME
@@ -23,7 +17,6 @@
             <td>
                 <input type="checkbox">
             </td>
-            <td ng-bind="p.id"></td>
             <td ng-bind="p.name"></td>
         </tr>
     </table>

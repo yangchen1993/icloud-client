@@ -256,11 +256,3 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
         }
     }]);
 
-iCloudService.service("mySend", function () {
-        var ads ={};
-        ads.title=$scope.p.title;
-        ads.breaf=$scope.p.breaf;
-        ads.link=$scope.p.link;
-        ads.category=$scope.p.category;
-        ads.img=$scope.p.img;
-});

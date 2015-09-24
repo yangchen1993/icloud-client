@@ -8,9 +8,8 @@ iCloudController.controller("WeMediaController", ["$scope", "$http", "$cookieSto
     }]);
 
 
-iCloudController.controller("WeMediaEditController", ["$scope", "$http", "$cookieStore", "$window", "$uploadImg", "mySend",
-    function ($scope, $http, $cookieStore, $window, $uploadImg, $mySend) {
-        console.log($mySend.ads.title);
+iCloudController.controller("WeMediaEditController", ["$scope", "$http", "$cookieStore", "$window", "$uploadImg",
+    function ($scope, $http, $cookieStore, $window, $uploadImg) {
         $http.get("http://192.168.0.112/api/business/category/?key=cc8e704e-9427-403a-835e-2cbfb1ff3115").success(function (data) {
             $scope.ad_category = data.results;
         });

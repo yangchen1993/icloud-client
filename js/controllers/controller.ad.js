@@ -1,7 +1,7 @@
 /**
  * Created by chen on 2015/9/16.
  */
-iCloudController.controller("WeMediaController", ["$scope", "$http", "$cookieStore", "$window", "$grid", "$checkBox",
+iCloudController.controller("AdController", ["$scope", "$http", "$cookieStore", "$window", "$grid", "$checkBox",
     function ($scope, $http, $cookieStore, $window, $grid, $checkBox) {
         var grid = $grid.initial($scope, $window.wemedia_url);
         $checkBox.enableCheck("table-wemedia");

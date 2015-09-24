@@ -27,9 +27,9 @@ span{
 .form-inline>.h4{
     width:170px;
 }
-input[type='text']{
+/*input[type='text']{
     width: 80%;
-}
+}*/
 select{
     width:60% !important;
 }
@@ -45,6 +45,7 @@ select{
 textarea{
     height:137px !important;
 }
+/*
 button{
     margin-top:50px !important;
-}
+}*/

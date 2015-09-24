@@ -36,7 +36,7 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         .state("main.ad", {
             url: "/ad",
             templateUrl: "template/center/ad.html",
-            controller: "adController"
+            controller: "AdController"
         })
         .state("main.wemedia", {
             url: "/wemedia",

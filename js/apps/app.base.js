@@ -33,10 +33,10 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/paid.html",
             controller: "PaidController"
         })
-        .state("main.ad", {
-            url: "/ad",
-            templateUrl: "template/center/ad.html",
-            controller: "AdController"
+        .state("main.ads", {
+            url: "/ads",
+            templateUrl: "template/center/ads.html",
+            controller: "AdsController"
         })
         .state("main.wemedia", {
             url: "/wemedia",

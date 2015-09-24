@@ -25,12 +25,12 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("main.paidlisting", {
             url: "/paidlisting",
-            templateUrl: "template/center/paidlisting.html",
-            controller: "PaidlistingController"
+            templateUrl: "template/center/paid.html",
+            controller: "PaidController"
         })
         .state("main.wemedia",{
             url:"/wemedia",
             templateUrl:"template/center/wemedia.html",
-            controller:"wemediaController"
+            controller:"WeMediaController"
         })
 });

@@ -2,8 +2,6 @@
  * Created by lee on 2015/9/9.
  */
 
-var iCloudService = angular.module("iCloudService", ["ngCookies"]);
-
 
 iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window", "$timeout",
     function ($rootScope, $http, $cookieStore, $window, $timeout) {

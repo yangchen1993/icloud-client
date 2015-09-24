@@ -1,6 +1,8 @@
 /**
  * Created by Jun on 2015/9/24.
  */
+var iCloudService = angular.module("iCloudService", ["ngCookies"]);
+
 iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
     function ($rootScope, $http, $cookieStore) {
         var defaultParams = function () {
@@ -48,6 +50,7 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
                 $http.get(url).success(function (data) {
                     self.restPage = scope.grid = scope.pagination = data;
                     scope.headers = _.keys(data.results[0]);
+                    console.log(scope.headers);
                 })
             };
 

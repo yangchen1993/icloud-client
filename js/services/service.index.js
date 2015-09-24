@@ -251,10 +251,17 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
             };
             $http.post([url, "?", $.param(self.defaultParams())].join(""), data)
                 .success(function (data) {
-                    alert("创建成功")
+                    alert("创建成功");
                 }).error(function (data) {
                     console.log(data);
                 })
         }
     }]);
+
+iCloudService.service("$category", ['$http', '$cookieStore', '$q', function ($http, $cookieStore, $q) {
+    var key = $cookieStore.get("key");
+    this.get = function(){
+       return  $http.get([window.requestcategory, "?key=", key].join(""));
+    }
+}]);
 

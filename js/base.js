@@ -17,3 +17,5 @@ window.paidlisting_url = [window.host, "/api/bid/"].join("");
 window.wemedia_url = [window.host, "/api/ads/"].join("");
 
 window.functions_url = [window.host, "/api/functions/"].join("");
+
+window.requestcategory =[window.host, "/api/business/category/"].join("");

@@ -6,6 +6,8 @@ iCloudController.controller("PermissionController", ["$scope", "$http", "$cookie
     function ($scope, $http, $cookieStore, $window, $grid, $checkBox) {
         var grid = $grid.initial($scope, $window.permissions_url);
         $checkBox.enableCheck("table-permissions");
+
+
     }]);
 
 

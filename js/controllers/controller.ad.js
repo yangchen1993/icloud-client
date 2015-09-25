@@ -13,11 +13,9 @@ iCloudController.controller("AdController", ["$scope", "$http", "$cookieStore", 
 
 iCloudController.controller("WeMediaEditController", ["$scope", "$http", "$cookieStore", "$window", "$uploadImg","$category",
     function ($scope, $http, $cookieStore, $window, $uploadImg,$category) {
-        var object ={}
         $scope.$on('executeData',function(){
-            object =$scope.p.title;
+            console.log($scope.p.title);
         })
-        console.log(object)
         var promise = $category.get();
         promise.success(function(data){
             $scope.ad_category=data.results;

@@ -5,9 +5,10 @@
 var iCloudController = angular.module("iCloudController", []);
 
 
-iCloudController.controller("BaseController", ["$scope",
-    function ($scope) {
-        $scope.$on('sendData',function(e){
-            $scope.$broadcast('executeData');
-        })
-    }]);
+iCloudController.controller("BaseController", ["$scope", "$timeout", function ($scope, $timeout) {
+    $scope.$on('sendData', function (e, newscope) {
+        $timeout(function () {
+            $scope.$broadcast('executeData', newscope);
+        }, 100)
+    })
+}]);

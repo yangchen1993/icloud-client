@@ -36,5 +36,5 @@ iCloudController.controller("TopController", ["$scope", "$http", "$auth", "$cook
         $scope.logout = function () {
             $cookieStore.remove("key");
             $auth.logout();
-        }
+        };
     }]);

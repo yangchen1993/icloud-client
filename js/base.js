@@ -4,6 +4,8 @@
 
 window.host = "http://mb.idianjia.cn:8000";
 
+window.media_host = "http://mb.idianjia.cn:10000";
+
 window.login_url = [window.host, "/api/users/login/"].join("");
 
 window.logout_url = [window.host, "/api/users/logout/"].join("");

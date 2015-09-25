@@ -4,8 +4,7 @@
 
 iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
     function ($http, $cookieStore, $window) {
-        this.upload = function (scope, url) {
-
+        this.upload = function (url, data) {
             var self = angular.copy({});
             self.defaultParams = function () {
                 return {
@@ -21,18 +20,38 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
                     return self.url;
                 }
             };
-            var data = {
-                img: $(".avatar-wrapper > img").cropper("getCroppedCanvas").toDataURL(),
-                link: scope.ad_url,
-                title: scope.ad_title,
-                brief: scope.ad_brief,
-                category: scope.selectId
-            };
-            $http.post([url, "?", $.param(self.defaultParams())].join(""), data)
-                .success(function (data) {
-                    alert("添加成功")
-                }).error(function (data) {
-                    console.log(data);
-                })
+            var img = $(".avatar-wrapper > img").cropper("getCroppedCanvas").toDataURL();
+            if (img) {
+                data.img = img;
+            }
+
+            if (data.hasOwnProperty("id")) {
+                $http.put([url, "?", $.param(self.defaultParams())].join(""), data)
+                    .success(function (data) {
+                        alert("更新成功")
+                    }).error(function (data) {
+                        console.log(data);
+                    })
+            } else {
+                $http.post([url, "?", $.param(self.defaultParams())].join(""), data)
+                    .success(function (data) {
+                        alert("添加成功")
+                    }).error(function (data) {
+                        console.log(data);
+                    })
+            }
+
+
         }
     }]);
+
+iCloudService.service("$MyDelete", ['$http', '$cookieStore', function ($http, $cookieStore) {
+    var key = $cookieStore.get("key");
+    this.init = function (url, id) {
+        $http.delete([url, id, "/?key=", key].join("")).success(function (data) {
+            alert("删除成功");
+        }).error(function (data) {
+            console.log(data);
+        })
+    }
+}])

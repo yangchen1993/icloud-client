@@ -16,15 +16,15 @@
         </div>
 
         <span>广告标题：</span>
-        <input type="text" class="form-control" ng-model="ad_title">
+        <input type="text" class="form-control" ng-model="adToEdit.title">
         <span>广告链接地址：</span>
-        <input type="text" class="form-control" placeholder="如www.abc.com" ng-model="ad_url">
+        <input type="text" class="form-control" placeholder="如www.abc.com" ng-model="adToEdit.link">
         <span>广告行业：</span>
-        <select class="form-control" ng-model="selectId" ng-options="v.id as v.name for v in ad_category">
+        <select class="form-control" ng-model="adToEdit.category" ng-options="v.id as v.name for v in ad_category">
             <option value="">请选择你的广告行业</option>
         </select>
         <span>广告简介：</span>
-        <textarea class="form-control" rows="3" ng-model="ad_brief"></textarea>
+        <textarea class="form-control" rows="3" ng-model="adToEdit.brief"></textarea>
     </div>
     <div class="col-md-5">
             <div id="crop-avatar">
@@ -33,13 +33,13 @@
                         <div class="avatar-upload">
                             <div class="form-inline">
                                 <label  class="h4">请选择一个图像文件</label>
-                                <input type="file" class="avatar-input" id="avatarInput" name="avatar_file" ng-model="ad_name">
+                                <input type="file" class="avatar-input" id="avatarInput" name="avatar_file">
                             </div>
                         </div>
                         <div class="avatar-wrapper"></div>
                         <img src="/img/phone.png" class="model_p">
                         <div class="avatar-preview preview-lg"></div>
-                        <button type="button" class="btn btn-success btn-block" ng-click="uploadImg()">确定</button>
+                        <button type="button" class="btn btn-success btn-block" ng-click="uploadImg(adToEdit)">确定</button>
 
                     </form>
                 </div>

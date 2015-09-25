@@ -47,6 +47,7 @@
                 操作
             </td>
         </tr>
+        {{aaa}}
         <tr ng-repeat="p in grid.results">
             <td>
                 <input type="checkbox">
@@ -58,7 +59,7 @@
             <td ng-bind="p.category"></td>
             <td ng-bind="p.create_time"></td>
             <td ng-bind="p.modified_time"></td>
-            <td><a ui-sref="main.wemedia_edit" ng-click="send()">修改</a><a href="#">删除</a></td>
+            <td><a ui-sref="main.wemedia_edit" ng-click="send(p)">修改</a><a href="#" ng-click="delete(p.id)">删除</a></td>
         </tr>
     </table>
     <div ng-include="'/template/partial/pagination.html'"></div>

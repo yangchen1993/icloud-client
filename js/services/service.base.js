@@ -57,7 +57,7 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             self.load = function () {
                 self.restGet(self.urlWithDefaultParams());
             };
-            self.currentSort = {};  // 当前的排序规则,true代表升序
+            self.currentSort = {};
 
             self.resetSort = function (key) {
                 return _.mapObject(self.currentSort, function (v, k) {
@@ -181,7 +181,6 @@ iCloudService.service("$checkBox", ["$rootScope",
                 })
             }
         }
-<<<<<<< HEAD:js/services/service.index.js
     }]);
 
 iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
@@ -225,27 +224,3 @@ iCloudService.service("$category", ['$http', '$cookieStore', '$q', function ($ht
        return  $http.get([window.requestcategory, "?key=", key].join(""));
     }
 }]);
-
-iCloudService.service("$permissions", ["$http", "$window", "$q", "$cookieStore",
-    function ($http, $window, $q, $cookieStore) {
-        return {
-            query: function () {
-                var deferred = $q.defer();
-                $http.get([$window.permissions_url, "?key=", $cookieStore.get("key")].join(""))
-                    .success(function (data) {
-                        deferred.resolve(data)
-                    })
-                    .error(function (data) {
-                        deferred.reject(data)
-                    });
-                deferred.promise.then(function (data) {
-                    console.log(1);
-                    return data
-                }, function (data) {
-                    return data;
-                })
-            }
-        }
-=======
->>>>>>> origin/master:js/services/service.base.js
-    }]);

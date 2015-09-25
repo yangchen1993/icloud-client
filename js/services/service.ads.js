@@ -30,7 +30,7 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
             };
             $http.post([url, "?", $.param(self.defaultParams())].join(""), data)
                 .success(function (data) {
-                    alert("创建成功")
+                    alert("娣诲姞鎴愬姛")
                 }).error(function (data) {
                     console.log(data);
                 })

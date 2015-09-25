@@ -6,7 +6,7 @@
 iCloudService.service("$permissions", ["$http", "$window", "$q", "$cookieStore",
     function ($http, $window, $q, $cookieStore) {
         return {
-            query: function () {
+            promise: function () {
                 var deferred = $q.defer();
                 $http.get([$window.permissions_url, "?key=", $cookieStore.get("key")].join(""))
                     .success(function (data) {
@@ -15,12 +15,7 @@ iCloudService.service("$permissions", ["$http", "$window", "$q", "$cookieStore",
                     .error(function (data) {
                         deferred.reject(data)
                     });
-                deferred.promise.then(function (data) {
-                    console.log(1);
-                    return data
-                }, function (data) {
-                    return data;
-                })
+                return deferred.promise
             }
         }
     }]);

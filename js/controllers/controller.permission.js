@@ -24,10 +24,15 @@ iCloudController.controller("FunctionsController", ["$scope", "$http", "$cookieS
             }
         };
 
-        console.log($permissions.query());
 
-        $scope.newFunction = function (data) {
-
+        $scope.newFunctionsModal = function (isNew, p) {
+            if (isNew) {
+                $permissions.promise().then(function (data) {
+                    $scope.functionModal.data.permissions = data.results;
+                })
+            } else {
+                $scope.functionModal.data = p;
+            }
         }
 
     }]);

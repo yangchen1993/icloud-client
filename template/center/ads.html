@@ -8,42 +8,42 @@
                 <a href="javascript:" ng-click="checkAll()">全选</a>
                 <a href="javascript:" ng-click="checkInverse()">反选</a>
             </td>
-            <td id="{{ headers[0] }}" ng-click="sort(headers[0])">
-                标题
-                <span ng-show="currentSort[headers[0]] === true">升序</span>
-                <span ng-show="currentSort[headers[0]] === false">降序</span>
-            </td>
             <td id="{{ headers[1] }}" ng-click="sort(headers[1])">
-                简介
+                标题
                 <span ng-show="currentSort[headers[1]] === true">升序</span>
                 <span ng-show="currentSort[headers[1]] === false">降序</span>
             </td>
             <td id="{{ headers[2] }}" ng-click="sort(headers[2])">
-                缩略图
-                <span ng-show="currentSort[headers[1]] === true">升序</span>
-                <span ng-show="currentSort[headers[1]] === false">降序</span>
+                简介
+                <span ng-show="currentSort[headers[2]] === true">升序</span>
+                <span ng-show="currentSort[headers[2]] === false">降序</span>
             </td>
             <td id="{{ headers[3] }}" ng-click="sort(headers[3])">
-                链接地址
-                <span ng-show="currentSort[headers[1]] === true">升序</span>
-                <span ng-show="currentSort[headers[1]] === false">降序</span>
+                缩略图
+                <span ng-show="currentSort[headers[3]] === true">升序</span>
+                <span ng-show="currentSort[headers[3]] === false">降序</span>
             </td>
             <td id="{{ headers[4] }}" ng-click="sort(headers[4])">
-                行业类型
-                <span ng-show="currentSort[headers[1]] === true">升序</span>
-                <span ng-show="currentSort[headers[1]] === false">降序</span>
+                链接地址
+                <span ng-show="currentSort[headers[4]] === true">升序</span>
+                <span ng-show="currentSort[headers[4]] === false">降序</span>
             </td>
             <td id="{{ headers[5] }}" ng-click="sort(headers[5])">
-                创建时间
-                <span ng-show="currentSort[headers[1]] === true">升序</span>
-                <span ng-show="currentSort[headers[1]] === false">降序</span>
+                行业类型
+                <span ng-show="currentSort[headers[5]] === true">升序</span>
+                <span ng-show="currentSort[headers[5]] === false">降序</span>
             </td>
             <td id="{{ headers[6] }}" ng-click="sort(headers[6])">
-                修改时间
-                <span ng-show="currentSort[headers[1]] === true">升序</span>
-                <span ng-show="currentSort[headers[1]] === false">降序</span>
+                创建时间
+                <span ng-show="currentSort[headers[6]] === true">升序</span>
+                <span ng-show="currentSort[headers[6]] === false">降序</span>
             </td>
             <td id="{{ headers[7] }}" ng-click="sort(headers[7])">
+                修改时间
+                <span ng-show="currentSort[headers[7]] === true">升序</span>
+                <span ng-show="currentSort[headers[7]] === false">降序</span>
+            </td>
+            <td>
                 操作
             </td>
         </tr>

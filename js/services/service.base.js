@@ -1,48 +1,7 @@
 /**
- * Created by lee on 2015/9/9.
+ * Created by Jun on 2015/9/24.
  */
-
 var iCloudService = angular.module("iCloudService", ["ngCookies"]);
-
-
-iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window", "$timeout",
-    function ($rootScope, $http, $cookieStore, $window, $timeout) {
-
-        $rootScope.errorMsg = "";
-
-        var resetErrorMsg = function () {
-            $rootScope.errorMsg = ""
-        };
-
-        return {
-            "login": function (data) {
-                if (data.username && data.password) {
-                    $http.post($window.login_url, data)
-                        .success(function (data) {
-                            $cookieStore.put("key", data.key);
-                            $window.location.href = "#/main";
-                        })
-                        .error(function (data) {
-                            $rootScope.errorMsg = data;
-
-                            // 3ÁßíÈíüÂêéÈáçÁΩÆÈîôËØØ‰ø°ÊÅØ
-                            $timeout(function () {
-                                resetErrorMsg()
-                            }, 3000)
-                        })
-                }
-            },
-            "logout": function () {
-                $http.get($window.logout_url + "?key=" + $cookieStore.get("key"))
-                    .success(function (data) {
-                        $window.location.href = "#/login";
-                    })
-                    .error(function (data) {
-                    });
-            }
-        }
-
-    }]);
 
 iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
     function ($rootScope, $http, $cookieStore) {
@@ -91,13 +50,14 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
                 $http.get(url).success(function (data) {
                     self.restPage = scope.grid = scope.pagination = data;
                     scope.headers = _.keys(data.results[0]);
+                    console.log(scope.headers);
                 })
             };
 
             self.load = function () {
                 self.restGet(self.urlWithDefaultParams());
             };
-            self.currentSort = {};  // ÂΩìÂâçÁöÑÊéíÂ∫èËßÑÂàô,true‰ª£Ë°®ÂçáÂ∫è
+            self.currentSort = {};  // µ±«∞µƒ≈≈–ÚπÊ‘Ú,true¥˙±Ì…˝–Ú
 
             self.resetSort = function (key) {
                 return _.mapObject(self.currentSort, function (v, k) {
@@ -221,6 +181,7 @@ iCloudService.service("$checkBox", ["$rootScope",
                 })
             }
         }
+<<<<<<< HEAD:js/services/service.index.js
     }]);
 
 iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
@@ -285,4 +246,6 @@ iCloudService.service("$permissions", ["$http", "$window", "$q", "$cookieStore",
                 })
             }
         }
+=======
+>>>>>>> origin/master:js/services/service.base.js
     }]);

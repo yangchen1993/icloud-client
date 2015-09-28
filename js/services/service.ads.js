@@ -20,7 +20,7 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
                     return self.url;
                 }
             };
-            var img = $(".avatar-wrapper > img").cropper("getCroppedCanvas").toDataURL();
+            var img = $(".avatar-wrapper > img").cropper("getCroppedCanvas",{width:227,height:403}).toDataURL();
             if (img) {
                 data.img = img;
             }
@@ -45,12 +45,12 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
         }
     }]);
 
-iCloudService.service("$MyDelete", ['$http', '$cookieStore','$window', function ($http, $cookieStore,$window) {
+iCloudService.service("$MyDelete", ['$http', '$cookieStore', '$window', function ($http, $cookieStore, $window) {
     var key = $cookieStore.get("key");
     this.init = function (url, id) {
         $http.delete([url, id, "/?key=", key].join("")).success(function (data) {
             alert("删除成功");
-
+            location.reload();
         }).error(function (data) {
             console.log(data);
         })

@@ -49,12 +49,14 @@
         </tr>
         {{aaa}}
         <tr ng-repeat="p in grid.results">
-            <td>
+            <td class="center">
                 <input type="checkbox">
             </td>
             <td ng-bind="p.title"></td>
             <td ng-bind="p.brief"></td>
-            <td ng-bind="123"></td>
+            <td width="150px">
+                <img ng-src="{{ p.img }}" style="width:140px;height:30px">
+            </td>
             <td ng-bind="p.link"></td>
             <td ng-bind="p.category"></td>
             <td ng-bind="p.create_time"></td>

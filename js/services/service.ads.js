@@ -45,11 +45,12 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
         }
     }]);
 
-iCloudService.service("$MyDelete", ['$http', '$cookieStore', function ($http, $cookieStore) {
+iCloudService.service("$MyDelete", ['$http', '$cookieStore','$window', function ($http, $cookieStore,$window) {
     var key = $cookieStore.get("key");
     this.init = function (url, id) {
         $http.delete([url, id, "/?key=", key].join("")).success(function (data) {
             alert("删除成功");
+
         }).error(function (data) {
             console.log(data);
         })

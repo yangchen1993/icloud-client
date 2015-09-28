@@ -23,8 +23,6 @@ iCloudController.controller("FunctionsController", ["$scope", "$http", "$cookieS
                 id: ""
             }
         };
-
-
         $scope.newFunctionsModal = function (isNew, p) {
             if (isNew) {
                 $permissions.promise().then(function (data) {
@@ -34,5 +32,4 @@ iCloudController.controller("FunctionsController", ["$scope", "$http", "$cookieS
                 $scope.functionModal.data = p;
             }
         }
-
     }]);

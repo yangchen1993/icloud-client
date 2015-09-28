@@ -2,7 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-window.host = "http://mb.idianjia.cn:8000";
+//window.host = "http://mb.idianjia.cn:8000";
+window.host = "http://192.168.0.112";
 
 window.media_host = "http://mb.idianjia.cn:10000";
 
@@ -20,4 +21,4 @@ window.wemedia_url = [window.host, "/api/ads/"].join("");
 
 window.functions_url = [window.host, "/api/functions/"].join("");
 
-window.requestcategory =[window.host, "/api/business/category/"].join("");
+window.requestcategory = [window.host, "/api/business/category/"].join("");

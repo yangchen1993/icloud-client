@@ -71,14 +71,12 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
 
             scope.filtering = function (params) {
 
-
                 params.key = $cookieStore.get("key");
                 params.ordering = "id";
                 params.pageSize = self.pageSize;
                 params.page = 1;
                 var url = [self.url, "?", $.param(params)].join("");
                 self.restGet(url);
-                console.log(url);
             };
 
             scope.sort = function (colName) {

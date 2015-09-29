@@ -20,13 +20,12 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
                     return self.url;
                 }
             };
-            var img = $(".avatar-wrapper > img").cropper("getCroppedCanvas",{width:227,height:403}).toDataURL();
-            if (img) {
-                data.img = img;
-            }
+            var img = $(".avatar-wrapper > img").cropper("getCroppedCanvas", {width: 227, height: 403});
+            data.img = img.localName === "canvas" ? img.toDataURL() : "";
+
 
             if (data.hasOwnProperty("id")) {
-                $http.put([url, "?", $.param(self.defaultParams())].join(""), data)
+                $http.put([url, data.id, "/", "?", $.param(self.defaultParams())].join(""), data)
                     .success(function (data) {
                         alert("更新成功")
                     }).error(function (data) {

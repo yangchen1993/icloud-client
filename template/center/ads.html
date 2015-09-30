@@ -1,4 +1,3 @@
-
 <div class="w_header">
     <span class="h4">自媒体广告</span>
 </div>
@@ -24,10 +23,13 @@
                 <span ng-show="currentSort[headers[2]] === true">升序</span>
                 <span ng-show="currentSort[headers[2]] === false">降序</span>
             </td>
-            <td id="{{ headers[3] }}" ng-click="sort(headers[3])">
+            <td id="{{ headers[10] }}" ng-click="sort(headers[10])">
+                行业类型
+                <span ng-show="currentSort[headers[10]] === true">升序</span>
+                <span ng-show="currentSort[headers[10]] === false">降序</span>
+            </td>
+            <td>
                 缩略图
-                <span ng-show="currentSort[headers[3]] === true">升序</span>
-                <span ng-show="currentSort[headers[3]] === false">降序</span>
             </td>
             <td id="{{ headers[4] }}" ng-click="sort(headers[4])">
                 链接地址
@@ -35,19 +37,14 @@
                 <span ng-show="currentSort[headers[4]] === false">降序</span>
             </td>
             <td id="{{ headers[5] }}" ng-click="sort(headers[5])">
-                行业类型
+                创建时间
                 <span ng-show="currentSort[headers[5]] === true">升序</span>
                 <span ng-show="currentSort[headers[5]] === false">降序</span>
             </td>
             <td id="{{ headers[6] }}" ng-click="sort(headers[6])">
-                创建时间
+                修改时间
                 <span ng-show="currentSort[headers[6]] === true">升序</span>
                 <span ng-show="currentSort[headers[6]] === false">降序</span>
-            </td>
-            <td id="{{ headers[7] }}" ng-click="sort(headers[7])">
-                修改时间
-                <span ng-show="currentSort[headers[7]] === true">升序</span>
-                <span ng-show="currentSort[headers[7]] === false">降序</span>
             </td>
             <td>
                 操作
@@ -57,11 +54,12 @@
             <td><input type="checkbox"></td>
             <td ng-bind="p.title"></td>
             <td ng-bind="p.brief"></td>
+            <td ng-bind="p.category"></td>
             <td width="60px">
-                <a href="" data-toggle="modal" data-target="#myModal" ng-click="sendindex($index)"><img ng-src="{{ p.img }}" style="width:27px;height:48px"></a>
+                <a href="" data-toggle="modal" data-target="#myModal" ng-click="sendindex($index)"><img
+                        ng-src="{{ p.img }}" style="width:27px;height:48px"></a>
             </td>
             <td ng-bind="p.link"></td>
-            <td ng-bind="p.category"></td>
             <td ng-bind="p.create_time"></td>
             <td ng-bind="p.modified_time"></td>
             <td>
@@ -78,7 +76,8 @@
     <div class="modal-dialog" role="document" style="width: 260px">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -12px"><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -12px">
+                    <span class="glyphicon glyphicon-remove"></span></button>
             </div>
             <div class="modal-body">
                 <img ng-src="{{grid.results[number].img}}">

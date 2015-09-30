@@ -80,7 +80,6 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             };
 
             scope.sort = function (colName) {
-
                 if (colName) {
                     if (_.isEmpty(self.currentSort)) {
                         self.currentSort[colName] = true;

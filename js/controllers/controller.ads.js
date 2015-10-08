@@ -10,11 +10,11 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
         };
         $scope.sendindex=function(index){
             $scope.number=index;
-        }
+        };
         //删除自媒体广告
         $scope.delete = function (id) {
             $MyDelete.init(window.wemedia_url, id);
-        }
+        };
         //下架
         $scope.under = function (id) {
 

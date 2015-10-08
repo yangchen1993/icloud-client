@@ -54,4 +54,4 @@ iCloudService.service("$MyDelete", ['$http', '$cookieStore', '$window', function
             console.log(data);
         })
     }
-}])
+}]);

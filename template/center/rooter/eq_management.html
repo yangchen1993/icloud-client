@@ -1,0 +1,128 @@
+<div style="padding:10px ">
+    <div class="eq_m">
+        <div class="form-inline">
+            <input class="form-control" placeholder="请输入关键字搜索">
+            <button class="btn btn-primary">搜索</button>
+        </div>
+        <hr>
+        <div class="form-inline">
+            <select class="form-control">
+                <option>所有路由器</option>
+                <option>已激活</option>
+                <option>未激活</option>
+            </select>
+            <select class="form-control">
+                <option>运行状态</option>
+                <option>正常</option>
+                <option>停用</option>
+                <option>暂停</option>
+            </select>
+            <select class="form-control">
+                <option>访问量</option>
+                <option>从高到低</option>
+                <option>从低到高</option>
+            </select>
+            <button class="chazhao" ng-click="chazhao()">按地区查找</button>
+            <button class="chazhao" ng-click="chazhao()">按发货时间查找</button>
+            <button class="chazhao" ng-click="chazhao()">按行业查找</button>
+            <button class="btn btn-success btn-mg">版本管理</button>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px">
+        <span>数量：</span>
+        <span>5</span>
+    </div>
+
+    <table class="table table-bordered text-center" style="margin-top: 20px">
+        <thead>
+        <tr>
+            <td>
+                <a href="javascript:" ng-click="checkAll()">全选</a>
+                <a href="javascript:" ng-click="checkInverse()">反选</a>
+            </td>
+            <td>mac码</td>
+            <td>入库时间</td>
+            <td>商铺名称</td>
+            <td>行业</td>
+            <td>地区</td>
+            <td>总访问量</td>
+            <td>运行状态</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>锦江区</td>
+            <td>22385</td>
+            <td>正常</td>
+            <td><a href="">查看</a><a href="">删除</a></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>锦江区</td>
+            <td>22385</td>
+            <td>正常</td>
+            <td><a href="">查看</a><a href="">删除</a></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>锦江区</td>
+            <td>22385</td>
+            <td>正常</td>
+            <td><a href="">查看</a><a href="">删除</a></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>锦江区</td>
+            <td>22385</td>
+            <td>正常</td>
+            <td><a href="">查看</a><a href="">删除</a></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>锦江区</td>
+            <td>22385</td>
+            <td>正常</td>
+            <td><a href="">查看</a><a href="">删除</a></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>锦江区</td>
+            <td>22385</td>
+            <td>正常</td>
+            <td><a href="">查看</a><a href="">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-right">
+        <button class="btn btn-danger">删除</button>
+        <button class="btn btn-info">修改</button>
+    </div>
+    <div ng-include="'/template/partial/pagination.html'" style="margin-top: 20px"></div>
+</div>

@@ -48,4 +48,14 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/wemedia_edit.html",
             controller: "WeMediaEditController"
         })
+        .state("main.eq_management",{
+            url:"/eq_management",
+            templateUrl:"template/center/rooter/eq_management.html",
+            controller:"EqManagementController"
+        })
+        .state("main.shop_management",{
+            url:"/shop_management",
+            templateUrl:"template/center/shop/shop_management.html",
+            controller:"ShopManagementController"
+        })
 });

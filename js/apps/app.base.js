@@ -58,4 +58,19 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl:"template/center/shop/shop_management.html",
             controller:"ShopManagementController"
         })
+        .state("main.version_manage",{
+            url:"/version_management",
+            templateUrl:"template/center/rooter/version_manage.html",
+            controller:"VersionManagementController"
+        })
+        .state("main.firmware_update",{
+            url:"/firmware_update",
+            templateUrl:"template/center/rooter/firmware_update.html",
+            controller:"FirmwareUpdateController"
+        })
+        .state("main.details",{
+            url:"/details",
+            templateUrl:"template/center/rooter/details.html",
+            controller:"DetailsController"
+        })
 });

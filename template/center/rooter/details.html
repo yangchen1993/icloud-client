@@ -4,7 +4,7 @@
         <li class="active">路由器详情</li>
     </ol>
     <div class="form-inline">
-        <button ng-click="chazhao()" class="btn btn-info">认证设置</button>
+        <button ui-sref="main.identify_conf" class="btn btn-info">认证设置</button>
         <button ng-click="chazhao()" class="btn btn-info">放行设置</button>
         <button ng-click="chazhao()" class="btn btn-info">删除</button>
     </div>
@@ -22,7 +22,7 @@
         <hr>
         <span>所属店铺：</span><span>红旗连锁</span>
         <span style="margin-left: 50px">店铺地址：</span><span>四川省 成都市 锦江区 春熙路123号</span>
-        <button class="btn btn-info">解绑</button>
+        <button class="btn btn-info" ng-click="jiebang()">解绑</button>
         <hr>
         <span>所属代理商：</span><span>大新前路商代</span>
     </div>
@@ -33,6 +33,90 @@
     <span>总访问量：</span><span>125445</span>
     <span style="margin-left: 50px">今日访问量：</span><span>3356</span>
     <hr style="margin-top: 10px">
-    <label for="meeting">日期：</label><input id="meeting" type="date" value="2014-01-13"/>
-
+    <label for="meeting">日期：</label><input id="meeting" type="date" value="2014-01-01"/>
+    <span style="margin-left:10px">到</span>
+    <label for="meeting1" style="margin-left: 10px">日期：</label><input id="meeting1" type="date" value="2014-01-01"/>
+    <div id="main" style="height:400px"></div>
 </div>
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+
+    // 使用
+    require(
+            [
+                'echarts',
+                'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main'));
+
+                var option = {
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['访问量']
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            boundaryGap : false,
+                            data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            axisLabel : {
+                                formatter: '{value} 次'
+                            }
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'访问量',
+                            type:'line',
+                            data:[10305, 11254, 8896, 3325, 15421, 8999, 7677,5847,5589,8845,9987,6698],
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name: '平均值'}
+                                ]
+                            }
+                        },
+//                        {
+//                            name:'最低气温',
+//                            type:'line',
+//                            data:[1, -2, 2, 5, 3, 2, 0],
+//                            markPoint : {
+//                                data : [
+//                                    {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
+//                                ]
+//                            },
+//                            markLine : {
+//                                data : [
+//                                    {type : 'average', name : '平均值'}
+//                                ]
+//                            }
+//                        }
+                    ]
+                };
+
+
+                // 为echarts对象加载数据
+                myChart.setOption(option);
+            }
+    );
+</script>

@@ -78,9 +78,19 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl:"template/center/rooter/identify_conf.html",
             controller:"IdentifyConfController"
         })
+        .state("main.release_conf",{
+            url:"/release_conf",
+            templateUrl:"template/center/rooter/release_conf.html",
+            controller:"ReleaseConfController"
+        })
         .state("main.binding",{
             url:"/binding",
             templateUrl:"template/center/rooter/binding.html",
             controller:"BindingController"
+        })
+        .state("main.insales",{
+            url:"/insales",
+            templateUrl:"template/center/rooter/Insales.html",
+            controller:"InSalesController"
         })
 });

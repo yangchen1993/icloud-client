@@ -8,8 +8,8 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
         $scope.send = function (data) {
             $scope.$emit('sendData', data);
         };
-        $scope.sendindex=function(index){
-            $scope.number=index;
+        $scope.sendindex = function (index) {
+            $scope.number = index;
         };
         //删除自媒体广告
         $scope.delete = function (id) {
@@ -18,6 +18,9 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
         //下架
         $scope.under = function (id) {
 
+        }
+        $scope.reset = function () {
+            $scope.filter.title__icontains = "";
         }
     }]);
 

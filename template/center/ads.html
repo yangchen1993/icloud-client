@@ -5,9 +5,21 @@
     <div style="height: 500px;margin-top:50px">
         <div class="ads_top">
             <div class="form-inline">
-                <input type="text" ng-model="filter.title__icontains" placeholder="广告标题" class="form-control" style="width: 70%">
+                <span>筛选条件：</span>
+                <!--<select class="form-control" style="width: 150px !important;">-->
+                    <!--<option>标题</option>-->
+                    <!--<option>行业类型</option>-->
+                    <!--<option>链接地址</option>-->
+                <!--</select>-->
+                <input type="text" ng-model="filter.title__icontains" placeholder="广告标题" class="form-control" style="width: 15%">
+                <select class="form-control" style="width: 15% !important;" ng-options="cate">
+                    <option>电影</option>
+                    <option>餐饮</option>
+                </select>
+                <input type="date" class="form-control" style="width: 15%">
                 <button ng-click="filtering(filter)" class="btn btn-info">查询</button>
-                <button class="btn btn-info" ui-sref="main.wemedia_edit" style="margin-left: 230px">新建</button>
+                <button class="btn btn-info" ng-click="reset()">重置</button>
+                <button class="btn btn-info pull-right" ui-sref="main.wemedia_edit" style="margin-left: 80px">新建</button>
             </div>
 
         </div>

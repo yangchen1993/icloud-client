@@ -1,360 +1,495 @@
-<div style="padding:10px">
+<!--<div style="padding:10px">-->
+    <!--<ol class="breadcrumb">-->
+        <!--<li><a ui-sref="main.eq_management">设备管理</a></li>-->
+        <!--<li><a ui-sref="main.details">路由器详情</a></li>-->
+        <!--<li class="active">认证设置</li>-->
+    <!--</ol>-->
+    <!--<span class="h3">MAC码</span>-->
+
+    <!--<div class="mac_back">-->
+        <!--<span>124-1254577841112255</span>-->
+    <!--</div>-->
+    <!--<div class="form-inline">-->
+        <!--<div class="radio">-->
+            <!--<input type="radio" id="a" name="cate" ng-click="sele('1')" checked>-->
+            <!--<label for="a">免认证登录</label>-->
+        <!--</div>-->
+        <!--<div class="radio">-->
+            <!--<input type="radio" id="b" name="cate" ng-click="sele('2')">-->
+            <!--<label for="b">一键上网</label>-->
+        <!--</div>-->
+        <!--<div class="radio">-->
+            <!--<input type="radio" id="c" name="cate" ng-click="sele('3')">-->
+            <!--<label for="c">账号登录</label>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<hr>-->
+    <!--<div ng-switch="status">-->
+        <!--<div ng-switch-when="2">-->
+            <!--<span>认证设置</span>-->
+
+            <!--<div class="identify">-->
+                <!--<div class="col-md-4 identify_top">-->
+                    <!--<p>认证有效时间</p>-->
+
+                    <!--<p class="text-muted">连网时间超出认证有效期后需再次认证才能上网</p>-->
+
+                    <!--<div class="form-inline">-->
+                        <!--<input type="text" class="form-control" style="width:100px">-->
+                        <!--<span>小时</span>-->
+                        <!--<input type="text" class="form-control" style="width:100px;margin-left: 30px">-->
+                        <!--<span>分</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-md-4 identify_top">-->
+                    <!--<p>认证限制</p>-->
+
+                    <!--<div class="btn-group" data-toggle="buttons">-->
+                        <!--<label class="btn btn-info active">-->
+                            <!--<input type="radio" name="options" id="option1" autocomplete="off" checked> 开-->
+                        <!--</label>-->
+                        <!--<label class="btn btn-info">-->
+                            <!--<input type="radio" name="options" id="option2" autocomplete="off"> 关-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<div class="form-inline">-->
+                        <!--<span>一天每个设备只认证</span>-->
+                        <!--<select class="form-control" style="width: 60px !important">-->
+                            <!--<option>1</option>-->
+                            <!--<option>2</option>-->
+                        <!--</select>-->
+                        <!--<span>次</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-md-4 identify_top" style="border-right: 0">-->
+                    <!--<p>广告显示</p>-->
+
+                    <!--<div class="form-inline">-->
+                        <!--<select class="form-control" style="width: 100px !important">-->
+                            <!--<option>1</option>-->
+                            <!--<option>2</option>-->
+                            <!--<option>3</option>-->
+                            <!--<option>4</option>-->
+                        <!--</select>-->
+                        <!--<span>秒</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="identify_middle col-md-12">-->
+                    <!--<p>登录白名单设置</p>-->
+
+                    <!--<p>白名单手机号不受登录次数限制</p>-->
+
+                    <!--<div class="btn-group" data-toggle="buttons">-->
+                        <!--<label class="btn btn-info active">-->
+                            <!--<input type="radio" name="options" id="option3" autocomplete="off" checked> 开-->
+                        <!--</label>-->
+                        <!--<label class="btn btn-info">-->
+                            <!--<input type="radio" name="options" id="option4" autocomplete="off"> 关-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<div class="form-inline">-->
+                        <!--<span>现白名单有</span><span>x</span><span>个号码</span>-->
+                        <!--<button class="btn btn-success">添加号码</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="identify_middle col-md-12">-->
+                    <!--<p>登录黑名单设置</p>-->
+
+                    <!--<p>黑名单手机号无法连接wi-fi</p>-->
+
+                    <!--<div class="btn-group" data-toggle="buttons">-->
+                        <!--<label class="btn btn-info active">-->
+                            <!--<input type="radio" name="options" id="option5" autocomplete="off" checked> 开-->
+                        <!--</label>-->
+                        <!--<label class="btn btn-info">-->
+                            <!--<input type="radio" name="options" id="option6" autocomplete="off"> 关-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<div class="form-inline">-->
+                        <!--<span>现白名单有</span><span>x</span><span>个号码</span>-->
+                        <!--<button class="btn btn-success">添加号码</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-md-12 identify_bottom">-->
+                    <!--<p>WI-FI推广</p>-->
+
+                    <!--<p>认证前即可访问设置网站和APP</p>-->
+
+                    <!--<div class="btn-group" data-toggle="buttons">-->
+                        <!--<label class="btn btn-info active">-->
+                            <!--<input type="radio" name="options" id="option7" autocomplete="off" checked> 开-->
+                        <!--</label>-->
+                        <!--<label class="btn btn-info">-->
+                            <!--<input type="radio" name="options" id="option8" autocomplete="off"> 关-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<ul class="nav nav-tabs nav_se" role="tablist">-->
+                        <!--<li role="presentation" class="active"><a href="#white" aria-controls="white" role="tab"-->
+                                                                  <!--data-toggle="tab">App白名单</a></li>-->
+                        <!--<li role="presentation"><a href="#black" aria-controls="black" role="tab"-->
+                                                   <!--data-toggle="tab">网址黑名单</a></li>-->
+                    <!--</ul>-->
+                    <!--<div class="tab-content">-->
+                        <!--<div role="tabpanel" class="tab-pane active form-inline" id="white">-->
+                            <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">网易-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">微信-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">QQ-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">土豆-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div role="tabpanel" class="tab-pane form-inline" id="black">-->
+                            <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">微信-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">QQ-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">凤凰新闻客户端-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">优酷-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<button class="btn btn-primary" style="margin: 10px 0 0 15px">保存</button>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div ng-switch-when="3">-->
+            <!--<div class="phone_login">-->
+                <!--<span>手机号登录</span>-->
+
+                <!--<div class="btn-group" data-toggle="buttons">-->
+                    <!--<label class="btn btn-info active">-->
+                        <!--<input type="radio" name="options" id="option11" autocomplete="off" checked> 开-->
+                    <!--</label>-->
+                    <!--<label class="btn btn-info">-->
+                        <!--<input type="radio" name="options" id="option12" autocomplete="off"> 关-->
+                    <!--</label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div  style="margin-top: 20px"></div>-->
+            <!--<span>认证设置</span>-->
+            <!--<div class="identify">-->
+                <!--<div class="col-md-4 identify_top">-->
+                    <!--<p>认证有效时间</p>-->
+
+                    <!--<p class="text-muted">连网时间超出认证有效期后需再次认证才能上网</p>-->
+
+                    <!--<div class="form-inline">-->
+                        <!--<input type="text" class="form-control" style="width:100px">-->
+                        <!--<span>小时</span>-->
+                        <!--<input type="text" class="form-control" style="width:100px;margin-left: 30px">-->
+                        <!--<span>分</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-md-4 identify_top">-->
+                    <!--<p>认证限制</p>-->
+
+                    <!--<div class="btn-group" data-toggle="buttons">-->
+                        <!--<label class="btn btn-info active">-->
+                            <!--<input type="radio" name="options" id="option13" autocomplete="off" checked> 开-->
+                        <!--</label>-->
+                        <!--<label class="btn btn-info">-->
+                            <!--<input type="radio" name="options" id="optionb14" autocomplete="off"> 关-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<div class="form-inline">-->
+                        <!--<span>一天每个设备只认证</span>-->
+                        <!--<select class="form-control" style="width: 60px !important">-->
+                            <!--<option>1</option>-->
+                            <!--<option>2</option>-->
+                        <!--</select>-->
+                        <!--<span>次</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-md-4 identify_top" style="border-right: 0">-->
+                    <!--<p>广告显示</p>-->
+
+                    <!--<div class="form-inline">-->
+                        <!--<select class="form-control" style="width: 100px !important">-->
+                            <!--<option>1</option>-->
+                            <!--<option>2</option>-->
+                            <!--<option>3</option>-->
+                            <!--<option>4</option>-->
+                        <!--</select>-->
+                        <!--<span>秒</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="identify_middle col-md-12">-->
+                    <!--<p>登录白名单设置</p>-->
+
+                    <!--<p>白名单手机号不受登录次数限制</p>-->
+
+                    <!--<div class="btn-group" data-toggle="buttons">-->
+                        <!--<label class="btn btn-info active">-->
+                            <!--<input type="radio" name="options" id="option15" autocomplete="off" checked> 开-->
+                        <!--</label>-->
+                        <!--<label class="btn btn-info">-->
+                            <!--<input type="radio" name="options" id="option16" autocomplete="off"> 关-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<div class="form-inline">-->
+                        <!--<span>现白名单有</span><span>x</span><span>个号码</span>-->
+                        <!--<button class="btn btn-success">添加号码</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="identify_middle col-md-12">-->
+                    <!--<p>登录黑名单设置</p>-->
+
+                    <!--<p>黑名单手机号无法连接wi-fi</p>-->
+
+                    <!--<div class="btn-group" data-toggle="buttons">-->
+                        <!--<label class="btn btn-info active">-->
+                            <!--<input type="radio" name="options" id="option17" autocomplete="off" checked> 开-->
+                        <!--</label>-->
+                        <!--<label class="btn btn-info">-->
+                            <!--<input type="radio" name="options" id="option18" autocomplete="off"> 关-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<div class="form-inline">-->
+                        <!--<span>现白名单有</span><span>x</span><span>个号码</span>-->
+                        <!--<button class="btn btn-success">添加号码</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-md-12 identify_bottom">-->
+                    <!--<p>WI-FI推广</p>-->
+
+                    <!--<p>认证前即可访问设置网站和APP</p>-->
+
+                    <!--<div class="btn-group" data-toggle="buttons">-->
+                        <!--<label class="btn btn-info active">-->
+                            <!--<input type="radio" name="options" id="option17" autocomplete="off" checked> 开-->
+                        <!--</label>-->
+                        <!--<label class="btn btn-info">-->
+                            <!--<input type="radio" name="options" id="option18" autocomplete="off"> 关-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<ul class="nav nav-tabs nav_se" role="tablist">-->
+                        <!--<li role="presentation" class="active"><a href="#white1" aria-controls="white1" role="tab"-->
+                                                                  <!--data-toggle="tab">App白名单</a></li>-->
+                        <!--<li role="presentation"><a href="#black1" aria-controls="black1" role="tab"-->
+                                                   <!--data-toggle="tab">网址黑名单</a></li>-->
+                    <!--</ul>-->
+                    <!--<div class="tab-content">-->
+                        <!--<div role="tabpanel" class="tab-pane active form-inline" id="white1">-->
+                            <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">网易-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">微信-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">QQ-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">土豆-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div role="tabpanel" class="tab-pane form-inline" id="black1">-->
+                            <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">微信-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">QQ-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">凤凰新闻客户端-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox checkbox_se">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="">优酷-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<button class="btn btn-primary" style="margin: 10px 0 0 15px">保存</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div style="padding: 10px">
     <ol class="breadcrumb">
-        <li><a ui-sref="main.eq_management">设备管理</a></li>
-        <li><a ui-sref="main.details">路由器详情</a></li>
-        <li class="active">认证设置</li>
+    <li><a ui-sref="main.eq_management">设备管理</a></li>
+    <li><a ui-sref="main.details">路由器详情</a></li>
+    <li class="active">认证设置</li>
     </ol>
-    <span class="h3">MAC码</span>
-
-    <div class="mac_back">
-        <span>124-1254577841112255</span>
-    </div>
-    <div class="form-inline">
-        <div class="radio">
-            <input type="radio" id="a" name="cate" ng-click="sele('1')" checked>
-            <label for="a">免认证登录</label>
+    <div class="eq_m">
+        <div class="form-inline">
+            <select class="form-control">
+                <option>MAC码</option>
+                <option>入库时间</option>
+                <option>商铺名称</option>
+                <option>行业</option>
+                <option>地区</option>
+                <option>运行状态</option>
+            </select>
+            <input class="form-control" placeholder="请输入关键字搜索">
+            <button class="btn btn-info">搜索</button>
         </div>
-        <div class="radio">
-            <input type="radio" id="b" name="cate" ng-click="sele('2')">
-            <label for="b">一键上网</label>
-        </div>
-        <div class="radio">
-            <input type="radio" id="c" name="cate" ng-click="sele('3')">
-            <label for="c">账号登录</label>
-        </div>
-    </div>
-    <hr>
-    <div ng-switch="status">
-        <div ng-switch-when="2">
-            <span>认证设置</span>
-
-            <div class="identify">
-                <div class="col-md-4 identify_top">
-                    <p>认证有效时间</p>
-
-                    <p class="text-muted">连网时间超出认证有效期后需再次认证才能上网</p>
-
-                    <div class="form-inline">
-                        <input type="text" class="form-control" style="width:100px">
-                        <span>小时</span>
-                        <input type="text" class="form-control" style="width:100px;margin-left: 30px">
-                        <span>分</span>
-                    </div>
-                </div>
-
-                <div class="col-md-4 identify_top">
-                    <p>认证限制</p>
-
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> 开
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> 关
-                        </label>
-                    </div>
-                    <div class="form-inline">
-                        <span>一天每个设备只认证</span>
-                        <select class="form-control" style="width: 60px !important">
-                            <option>1</option>
-                            <option>2</option>
-                        </select>
-                        <span>次</span>
-                    </div>
-                </div>
-
-                <div class="col-md-4 identify_top" style="border-right: 0">
-                    <p>广告显示</p>
-
-                    <div class="form-inline">
-                        <select class="form-control" style="width: 100px !important">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                        <span>秒</span>
-                    </div>
-                </div>
-
-                <div class="identify_middle col-md-12">
-                    <p>登录白名单设置</p>
-
-                    <p>白名单手机号不受登录次数限制</p>
-
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="options" id="option3" autocomplete="off" checked> 开
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="options" id="option4" autocomplete="off"> 关
-                        </label>
-                    </div>
-                    <div class="form-inline">
-                        <span>现白名单有</span><span>x</span><span>个号码</span>
-                        <button class="btn btn-success">添加号码</button>
-                    </div>
-                </div>
-
-                <div class="identify_middle col-md-12">
-                    <p>登录黑名单设置</p>
-
-                    <p>黑名单手机号无法连接wi-fi</p>
-
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="options" id="option5" autocomplete="off" checked> 开
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="options" id="option6" autocomplete="off"> 关
-                        </label>
-                    </div>
-                    <div class="form-inline">
-                        <span>现白名单有</span><span>x</span><span>个号码</span>
-                        <button class="btn btn-success">添加号码</button>
-                    </div>
-                </div>
-
-                <div class="col-md-12 identify_bottom">
-                    <p>WI-FI推广</p>
-
-                    <p>认证前即可访问设置网站和APP</p>
-
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="options" id="option7" autocomplete="off" checked> 开
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="options" id="option8" autocomplete="off"> 关
-                        </label>
-                    </div>
-                    <ul class="nav nav-tabs nav_se" role="tablist">
-                        <li role="presentation" class="active"><a href="#white" aria-controls="white" role="tab"
-                                                                  data-toggle="tab">App白名单</a></li>
-                        <li role="presentation"><a href="#black" aria-controls="black" role="tab"
-                                                   data-toggle="tab">网址黑名单</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active form-inline" id="white">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="">网易
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">微信
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">QQ
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">土豆
-                                </label>
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane form-inline" id="black">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="">微信
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">QQ
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">凤凰新闻客户端
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">优酷
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-primary" style="margin: 10px 0 0 15px">保存</button>
+        <hr>
+        <div class="form-inline">
+            <span>使用状态：</span>
+            <div class="radio">
+                <input type="radio" id="use" name="use_status" ng-click="route(1)">
+                <label for="use"><span>已使用路由器</span></label>
             </div>
-        </div>
-
-        <div ng-switch-when="3">
-            <div class="phone_login">
-                <span>手机号登录</span>
-
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-info active">
-                        <input type="radio" name="options" id="option11" autocomplete="off" checked> 开
-                    </label>
-                    <label class="btn btn-info">
-                        <input type="radio" name="options" id="option12" autocomplete="off"> 关
-                    </label>
-                </div>
+            <div class="radio">
+                <input type="radio" id="nouse" name="use_status" ng-click="route(2)">
+                <label for="nouse"><span>未使用路由器</span></label>
             </div>
-            <div  style="margin-top: 20px"></div>
-            <span>认证设置</span>
-            <div class="identify">
-                <div class="col-md-4 identify_top">
-                    <p>认证有效时间</p>
-
-                    <p class="text-muted">连网时间超出认证有效期后需再次认证才能上网</p>
-
-                    <div class="form-inline">
-                        <input type="text" class="form-control" style="width:100px">
-                        <span>小时</span>
-                        <input type="text" class="form-control" style="width:100px;margin-left: 30px">
-                        <span>分</span>
-                    </div>
-                </div>
-
-                <div class="col-md-4 identify_top">
-                    <p>认证限制</p>
-
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="options" id="option13" autocomplete="off" checked> 开
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="options" id="optionb14" autocomplete="off"> 关
-                        </label>
-                    </div>
-                    <div class="form-inline">
-                        <span>一天每个设备只认证</span>
-                        <select class="form-control" style="width: 60px !important">
-                            <option>1</option>
-                            <option>2</option>
-                        </select>
-                        <span>次</span>
-                    </div>
-                </div>
-
-                <div class="col-md-4 identify_top" style="border-right: 0">
-                    <p>广告显示</p>
-
-                    <div class="form-inline">
-                        <select class="form-control" style="width: 100px !important">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                        <span>秒</span>
-                    </div>
-                </div>
-
-                <div class="identify_middle col-md-12">
-                    <p>登录白名单设置</p>
-
-                    <p>白名单手机号不受登录次数限制</p>
-
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="options" id="option15" autocomplete="off" checked> 开
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="options" id="option16" autocomplete="off"> 关
-                        </label>
-                    </div>
-                    <div class="form-inline">
-                        <span>现白名单有</span><span>x</span><span>个号码</span>
-                        <button class="btn btn-success">添加号码</button>
-                    </div>
-                </div>
-
-                <div class="identify_middle col-md-12">
-                    <p>登录黑名单设置</p>
-
-                    <p>黑名单手机号无法连接wi-fi</p>
-
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="options" id="option17" autocomplete="off" checked> 开
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="options" id="option18" autocomplete="off"> 关
-                        </label>
-                    </div>
-                    <div class="form-inline">
-                        <span>现白名单有</span><span>x</span><span>个号码</span>
-                        <button class="btn btn-success">添加号码</button>
-                    </div>
-                </div>
-
-                <div class="col-md-12 identify_bottom">
-                    <p>WI-FI推广</p>
-
-                    <p>认证前即可访问设置网站和APP</p>
-
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="options" id="option17" autocomplete="off" checked> 开
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="options" id="option18" autocomplete="off"> 关
-                        </label>
-                    </div>
-                    <ul class="nav nav-tabs nav_se" role="tablist">
-                        <li role="presentation" class="active"><a href="#white1" aria-controls="white1" role="tab"
-                                                                  data-toggle="tab">App白名单</a></li>
-                        <li role="presentation"><a href="#black1" aria-controls="black1" role="tab"
-                                                   data-toggle="tab">网址黑名单</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active form-inline" id="white1">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="">网易
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">微信
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">QQ
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">土豆
-                                </label>
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane form-inline" id="black1">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="">微信
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">QQ
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">凤凰新闻客户端
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox_se">
-                                <label>
-                                    <input type="checkbox" value="">优酷
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-primary" style="margin: 10px 0 0 15px">保存</button>
+            <span style="margin-left: 50px">运行状态：</span>
+            <div class="radio">
+                <input type="radio" id="normal" name="run_status">
+                <label for="normal"><span>正常</span></label>
             </div>
+            <div class="radio">
+                <input type="radio" id="stop" name="run_status">
+                <label for="stop"><span>停用</span></label>
+            </div>
+            <div class="radio">
+                <input type="radio" id="pause" name="run_status">
+                <label for="pause"><span>暂停</span></label>
+            </div>
+
+            <button class="chazhao" ng-click="chazhao()" style="margin-left: 50px">按地区查找</button>
+            <button class="chazhao" ng-click="chazhao()">按入库时间查找</button>
+            <button class="chazhao" ng-click="chazhao()">按行业查找</button>
         </div>
     </div>
+    <div style="margin-top: 20px">
+        <span>所有路由器数量：</span><span class="text-muted">5</span>
+        <span style="margin-left: 20px">已使用：</span><span class="text-muted">2</span>
+        <span style="margin-left: 20px">未使用：</span><span class="text-muted">3</span>
+    </div>
+
+    <table class="table table-bordered text-center table-striped" style="margin-top: 20px" id="table-eq">
+        <thead>
+        <tr>
+            <td>
+                <a href="javascript:" ng-click="checkAll()">全选</a>
+                <a href="javascript:" ng-click="checkInverse()">反选</a>
+            </td>
+            <td>MAC码</td>
+            <td>入库时间</td>
+            <td>商铺名称</td>
+            <td>行业</td>
+            <td>地区</td>
+            <td>认证方式</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>四川 成都 锦江区</td>
+            <td>一键上网</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>四川 成都 锦江区</td>
+            <td>一键上网</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>四川 成都 锦江区</td>
+            <td>一键上网</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>四川 成都 锦江区</td>
+            <td>一键上网</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>四川 成都 锦江区</td>
+            <td>一键上网</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>XXX</td>
+            <td>2015-8-15</td>
+            <td>丽锦茶楼</td>
+            <td>服务</td>
+            <td>四川 成都 锦江区</td>
+            <td>一键上网</td>
+        </tr>
+        </tbody>
+    </table>
+        <div class="text-right">
+            <button class="btn btn-info">回收权限</button>
+            <button class="btn btn-info">免认证登录</button>
+            <button class="btn btn-info">认证登录</button>
+        </div>
+    <div ng-include="'/template/partial/pagination.html'" style="margin-top: 20px"></div>
 </div>

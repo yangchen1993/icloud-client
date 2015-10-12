@@ -1,7 +1,7 @@
 /**
  * Created by chen on 2015/10/8.
  */
-iCloudController.controller("EqManagementController", ['$scope','$checkBox', function ($scope,$checkBox) {
+iCloudController.controller("EqManagementController", ['$scope', '$checkBox', function ($scope, $checkBox) {
     $scope.chazhao = function () {
         var data = prompt("请输入查找内容", "");
         if (data) {
@@ -15,7 +15,7 @@ iCloudController.controller("VersionManagementController", ['$scope', function (
 
 }])
 
-iCloudController.controller("FirmwareUpdateController", ['$scope','$checkBox', function ($scope,$checkBox) {
+iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', function ($scope, $checkBox) {
     $scope.update = function () {
         if (confirm("升级过程中路由器将会停止运行，升级完成后路由器将自动重启。请确认是否升级所选路由器固件版本？")) {
 
@@ -31,8 +31,8 @@ iCloudController.controller("FirmwareUpdateController", ['$scope','$checkBox', f
 }])
 
 iCloudController.controller("DetailsController", ['$scope', function ($scope) {
-    $scope.jiebang =function(){
-        if(confirm("解除绑定后，该设备将停止运行，请确定是否需解除绑定")){
+    $scope.jiebang = function () {
+        if (confirm("解除绑定后，该设备将停止运行，请确定是否需解除绑定")) {
 
         }
     }

@@ -1,7 +1,7 @@
 /**
  * Created by chen on 2015/10/8.
  */
-iCloudController.controller("EqManagementController", ['$scope', '$checkBox', function ($scope, $checkBox) {
+iCloudController.controller("EqManagementController", ['$scope', '$checkBox',$grid, function ($scope, $checkBox,$grid) {
     $scope.chazhao = function () {
         var data = prompt("请输入查找内容", "");
         if (data) {

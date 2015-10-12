@@ -2,42 +2,47 @@
     <ol class="breadcrumb">
         <li class="active">设备管理</li>
     </ol>
-
     <div class="eq_m">
         <div class="form-inline">
-            <input class="form-control" placeholder="请输入关键字搜索">
-            <button class="btn btn-info">搜索</button>
-        </div>
-        <hr>
-        <div class="form-inline">
-            <select class="form-control">
-                <option>所有路由器</option>
-                <option>已激活</option>
-                <option>未激活</option>
+            <span>店铺：</span>
+            <input type="text" class="form-control" placeholder="商铺名称" style="width: 15% !important;" ng-model="search.groups__name__icontains">
+            <select class="form-control" ng-model="search.groups__category" style="width: 15% !important;" ng-options="v.name as v.name for v in category">
+                <option value="">选择行业</option>
             </select>
-            <select class="form-control">
-                <option>运行状态</option>
-                <option>正常</option>
-                <option>停用</option>
-                <option>暂停</option>
-            </select>
-            <select class="form-control">
-                <option>访问量</option>
-                <option>从高到低</option>
-                <option>从低到高</option>
-            </select>
-            <button class="chazhao" ng-click="chazhao()">按地区查找</button>
-            <button class="chazhao" ng-click="chazhao()">按发货时间查找</button>
-            <button class="chazhao" ng-click="chazhao()">按行业查找</button>
-            <button class="btn btn-info btn-mg" ui-sref="main.version_manage">版本管理</button>
+            <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
+            <!--<input type="date" class="form-control" style="width: 15% !important;" ng-model="search.create_time__gte">-->
+            <!--<button class="btn btn-info" ng-click="eq_search(search)">查询</button>-->
+            <div>
+                <span>地区：</span>
+                <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__province" ng-options="v.id as v.name for v in province1" ng-change="select_p(search.groups__trade__province)">
+                    <option value="">省</option>
+                </select>
+                <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city" ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">
+                    <option value="">市</option>
+                </select>
+                <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area" ng-options="v.id as v.name for v in area1">
+                    <option value="">区/县</option>
+                </select>
+            </div>
+            <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
+            <div>
+                <span>路由：</span>
+                <input class="form-control" placeholder="MAC码" ng-model="search.mac__icontains">
+            </div>
+            <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
+            <div>
+                <span>时间：</span>
+                <input type="date" class="form-control" ng-model="search.create_time__gte"><span style="margin-left:5px">到</span>
+                <input type="date" class="form-control" ng-model="search.create_time__lte">
+                <button class="btn btn-info pull-right" ng-click="eq_reset()">重置</button>
+                <button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="eq_search(search)">搜索</button>
+            </div>
         </div>
     </div>
-
     <div style="margin-top: 20px">
         <span>数量：</span>
-        <span>5</span>
+        <span ng-bind="grid.count"></span>
     </div>
-
     <table class="table table-bordered text-center table-striped" style="margin-top: 20px" id="table-eq">
         <thead>
         <tr>
@@ -45,88 +50,27 @@
                 <a href="javascript:" ng-click="checkAll()">全选</a>
                 <a href="javascript:" ng-click="checkInverse()">反选</a>
             </td>
-            <td>MAC码</td>
-            <td>入库时间</td>
             <td>商铺名称</td>
             <td>行业</td>
             <td>地区</td>
-            <td>总访问量</td>
-            <td>运行状态</td>
+            <td>认证方式</td>
+            <td>MAC码</td>
+            <td>入库时间</td>
             <td>操作</td>
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr ng-repeat="p in grid.results">
             <td><input type="checkbox"></td>
-            <td>XXX</td>
-            <td>2015-8-15</td>
-            <td>丽锦茶楼</td>
-            <td>服务</td>
-            <td>锦江区</td>
-            <td>22385</td>
-            <td>正常</td>
-            <td><a ui-sref="main.details">查看</a><a style="margin-left: 10px" href="">删除</a><a style="margin-left: 10px" ui-sref="main.binding">绑定店铺</a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox"></td>
-            <td>XXX</td>
-            <td>2015-8-15</td>
-            <td>丽锦茶楼</td>
-            <td>服务</td>
-            <td>锦江区</td>
-            <td>22385</td>
-            <td>正常</td>
-            <td><a ui-sref="main.details">查看</a><a style="margin-left: 10px" href="">删除</a><a style="margin-left: 10px" ui-sref="main.binding">绑定店铺</a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox"></td>
-            <td>XXX</td>
-            <td>2015-8-15</td>
-            <td>丽锦茶楼</td>
-            <td>服务</td>
-            <td>锦江区</td>
-            <td>22385</td>
-            <td>正常</td>
-            <td><a ui-sref="main.details">查看</a><a style="margin-left: 10px" href="">删除</a><a style="margin-left: 10px" ui-sref="main.binding">绑定店铺</a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox"></td>
-            <td>XXX</td>
-            <td>2015-8-15</td>
-            <td>丽锦茶楼</td>
-            <td>服务</td>
-            <td>锦江区</td>
-            <td>22385</td>
-            <td>正常</td>
-            <td><a ui-sref="main.details">查看</a><a style="margin-left: 10px" href="">删除</a><a style="margin-left: 10px" ui-sref="main.binding">绑定店铺</a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox"></td>
-            <td>XXX</td>
-            <td>2015-8-15</td>
-            <td>丽锦茶楼</td>
-            <td>服务</td>
-            <td>锦江区</td>
-            <td>22385</td>
-            <td>正常</td>
-            <td><a ui-sref="main.details">查看</a><a style="margin-left: 10px" href="">删除</a><a style="margin-left: 10px" ui-sref="main.binding">绑定店铺</a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox"></td>
-            <td>XXX</td>
-            <td>2015-8-15</td>
-            <td>丽锦茶楼</td>
-            <td>服务</td>
-            <td>锦江区</td>
-            <td>22385</td>
-            <td>正常</td>
-            <td><a ui-sref="main.details">查看</a><a style="margin-left: 10px" href="">删除</a><a style="margin-left: 10px" ui-sref="main.binding">绑定店铺</a></td>
+            <td ng-bind="p.router_group.name"></td>
+            <td ng-bind="p.router_group.category"></td>
+            <td ng-bind="p.router_group.trade_area.name"></td>
+            <td ng-bind="p.isonline"></td>
+            <td ng-bind="p.mac"></td>
+            <td ng-bind="p.create_time"></td>
+            <td><a ui-sref="main.details">查看</a><a style="margin-left: 10px" ui-sref="main.binding">解绑</a></td>
         </tr>
         </tbody>
     </table>
-    <div class="text-right">
-        <button class="btn btn-danger">删除</button>
-        <button class="btn btn-info">修改</button>
-    </div>
     <div ng-include="'/template/partial/pagination.html'" style="margin-top: 20px"></div>
 </div>

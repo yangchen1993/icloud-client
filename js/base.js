@@ -24,3 +24,9 @@ window.functions_url = [window.host, "/api/functions/"].join("");
 window.requestcategory = [window.host, "/api/business/category/"].join("");
 
 window.all_routers_url = [window.host, "/api/routers/"].join("");
+
+window.province_url = [window.host, "/api/system/cities/province/"].join("");
+
+window.city_url = [window.host, "/api/system/cities/city/"].join("");
+
+window.area_url = [window.host, "/api/system/cities/area/"].join("");

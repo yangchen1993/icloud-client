@@ -1,34 +1,91 @@
 /**
  * Created by chen on 2015/10/8.
  */
-iCloudController.controller("EqManagementController", ['$scope', '$checkBox', function ($scope, $checkBox) {
-    $scope.chazhao = function () {
-        var data = prompt("请输入查找内容", "");
-        if (data) {
-            alert("dvasv");
-        }
-    }
-    $checkBox.enableCheck("table-eq");
-}])
+iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$grid', '$window', '$category', '$filter', '$province', '$city', '$area',
+    function ($scope, $checkBox, $grid, $window, $category, $filter, $province, $city, $area) {
+        $scope.chazhao = function () {
+            var data = prompt("请输入查找内容", "");
+            if (data) {
+                alert("dvasv");
+            }
+        };
+        $scope.status = 1;
+        $scope.route = function (num) {
+            if (num == 1) {
+                $scope.status = 1;
+                angular.element("#use").checked = true;
+            }
+            else {
+                $scope.status = 2;
+                console.log(angular.element("#nouse1")[0].checked);
+            }
+        };
+        $scope.login_type = {
+            "0": "免认证",
+            "1": "手机登录",
+            "2": "微信登陆"
+        };
+        $checkBox.enableCheck("table-eq");
+        $grid.initial($scope, $window.all_routers_url);
+        var promise = $category.get();
+        promise.success(function (data) {
+            $scope.category = data.results;
+        });
+        $scope.eq_search = function (data) {
+            var tmp = angular.copy(data);
+            tmp.create_time__gte = $filter('date')(tmp.create_time__gte, 'yyyy-MM-dd HH:mm:ss');
+            tmp.create_time__lte = $filter('date')(tmp.create_time__lte, 'yyyy-MM-dd HH:mm:ss');
+            $scope.filtering(tmp);
+            console.log(tmp);
+        };
+        $scope.eq_reset = function () {
+            $scope.search.groups__name__icontains = "";
+            $scope.search.groups__category = "选择行业";
+            $scope.search.groups__trade__province = "省";
+            $scope.search.groups__trade__city = "市";
+            $scope.search.groups__trade__area = "区/县";
+            $scope.search.mac__icontains = "";
+            $scope.search.create_time__gte = "";
+            $scope.search.create_time__lte = "";
+        };
+        var province = $province.get();
+        province.success(function (data) {
+            //$scope.category = data.results;
+            $scope.province1 = data;
+        });
+        $scope.select_p = function (index) {
+            var city = $city.get(index);
+            city.success(function (data) {
+                $scope.city1 = data;
+            })
+        };
+        $scope.select_c = function (index) {
+            var area = $area.get(index);
+            area.success(function (data) {
+                $scope.area1 = data;
+            })
+        };
+
+    }]);
 
 iCloudController.controller("VersionManagementController", ['$scope', function ($scope) {
 
-}])
+}]);
 
 iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', function ($scope, $checkBox) {
     $scope.update = function () {
-        if (confirm("升级过程中路由器将会停止运行，升级完成后路由器将自动重启。请确认是否升级所选路由器固件版本？")) {
+        if (confirm("升级过程中将会重启路由器，请确定是否需要升级？")) {
 
         }
-    }
+    };
     $scope.chazhao = function () {
         var data = prompt("请输入查找内容", "");
         if (data) {
             alert("dvasv");
         }
-    }
+    };
     $checkBox.enableCheck("table-fireware");
-}])
+}]);
 
 iCloudController.controller("DetailsController", ['$scope', function ($scope) {
     $scope.jiebang = function () {
@@ -36,7 +93,7 @@ iCloudController.controller("DetailsController", ['$scope', function ($scope) {
 
         }
     }
-}])
+}]);
 
 iCloudController.controller("IdentifyConfController", ['$scope', function ($scope) {
     $scope.sele = function (data) {
@@ -44,8 +101,14 @@ iCloudController.controller("IdentifyConfController", ['$scope', function ($scop
         if (data == 2) $scope.status = 2;
         if (data == 3) $scope.status = 3;
     }
-}])
+}]);
+iCloudController.controller("ReleaseConfController", ['$scope', '$grid', function ($scope, $grid) {
+    $grid.initial($scope, window.all_routers_url);
+}]);
 
 iCloudController.controller("BindingController", ['$scope', function ($scope) {
 
-}])
+}]);
+iCloudController.controller("InSalesController", ['$scope', function ($scope) {
+
+}]);

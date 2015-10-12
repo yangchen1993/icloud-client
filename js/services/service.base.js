@@ -50,7 +50,6 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
                 $http.get(url).success(function (data) {
                     self.restPage = scope.grid = scope.pagination = data;
                     scope.headers = _.keys(data.results[0]);
-                    console.log(scope.headers);
                 })
             };
 
@@ -182,9 +181,28 @@ iCloudService.service("$checkBox", ["$rootScope",
         }
     }]);
 
-iCloudService.service("$category", ['$http', '$cookieStore', '$q', function ($http, $cookieStore, $q) {
+iCloudService.service("$category", ['$http', '$cookieStore', '$q', function ($http, $cookieStore) {
     var key = $cookieStore.get("key");
-    this.get = function(){
-       return  $http.get([window.requestcategory, "?key=", key].join(""));
+    this.get = function () {
+        return $http.get([window.requestcategory, "?key=", key].join(""));
+    }
+}]);
+
+iCloudService.service("$province", ['$http', '$cookieStore', function ($http, $cookieStore) {
+    var key = $cookieStore.get("key");
+    this.get = function () {
+        return $http.get([window.province_url, "?key=", key].join(""));
+    }
+}]);
+iCloudService.service("$city", ['$http', '$cookieStore', function ($http, $cookieStore) {
+    var key = $cookieStore.get("key");
+    this.get = function (data) {
+        return $http.get([window.city_url, "?key=", key, "&province=", data].join(""));
+    }
+}]);
+iCloudService.service("$area", ['$http', '$cookieStore', function ($http, $cookieStore) {
+    var key = $cookieStore.get("key");
+    this.get = function (data) {
+        return $http.get([window.area_url, "?key=", key, "&city=", data].join(""));
     }
 }]);

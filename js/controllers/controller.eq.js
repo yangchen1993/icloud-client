@@ -8,4 +8,4 @@ iCloudController.controller("EqManagementController", ['$scope', function ($scop
             alert("dvasv");
         }
     }
-}])
+}]);

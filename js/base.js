@@ -22,3 +22,5 @@ window.wemedia_url = [window.host, "/api/ads/"].join("");
 window.functions_url = [window.host, "/api/functions/"].join("");
 
 window.requestcategory = [window.host, "/api/business/category/"].join("");
+
+window.all_routers_url = [window.host, "/api/routers/"].join("");

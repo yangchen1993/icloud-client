@@ -1,78 +1,89 @@
-<div class="w_header">
-    <span class="h4">自媒体广告</span>
-</div>
-<div style="height: 500px;margin-top:50px">
-    <button class="btn btn-primary" ui-sref="main.wemedia_edit">新建</button>
-    <div class="pull-right">
-        <input type="text" ng-model="filter.title__icontains" placeholder="广告标题">
-        <button ng-click="filtering(filter)">查询</button>
-    </div>
-    <table id="table-wemedia" class="table table-hover table-bordered table-condensed table-selectable text-center">
-        <tr>
-            <td>
-                <a href="javascript:" ng-click="checkAll()">全选</a>
-                <a href="javascript:" ng-click="checkInverse()">反选</a>
-            </td>
-            <td id="{{ headers[1] }}" ng-click="sort(headers[1])" style="cursor: pointer">
-                标题
-                <span ng-show="currentSort[headers[1]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                <span ng-show="currentSort[headers[1]] === false" class="glyphicon glyphicon-triangle-bottom"></span>
-            </td>
-            <td id="{{ headers[2] }}" ng-click="sort(headers[2])" style="cursor: pointer">
-                简介
-                <span ng-show="currentSort[headers[2]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                <span ng-show="currentSort[headers[2]] === false" class="glyphicon glyphicon-triangle-bottom"></span>
-            </td>
-            <td id="{{ headers[10] }}" ng-click="sort(headers[10])" style="cursor: pointer">
-                行业类型
-                <span ng-show="currentSort[headers[10]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                <span ng-show="currentSort[headers[10]] === false" class="glyphicon glyphicon-triangle-bottom"></span>
-            </td>
-            <td>缩略图</td>
-            <td>链接地址</td>
-            <td id="{{ headers[5] }}" ng-click="sort(headers[5])" style="cursor: pointer">
-                创建时间
-                <span ng-show="currentSort[headers[5]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                <span ng-show="currentSort[headers[5]] === false" class="glyphicon glyphicon-triangle-bottom"></span>
-            </td>
-            <td id="{{ headers[6] }}" ng-click="sort(headers[6])" style="cursor: pointer">
-                修改时间
-                <span ng-show="currentSort[headers[6]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                <span ng-show="currentSort[headers[6]] === false" class="glyphicon glyphicon-triangle-bottom"></span>
-            </td>
-            <td>操作</td>
-        </tr>
-        <tr ng-repeat="p in grid.results" class="wemedia_table">
-            <td><input type="checkbox"></td>
-            <td ng-bind="p.title"></td>
-            <td ng-bind="p.brief"></td>
-            <td ng-bind="p.category.name"></td>
-            <td width="60px">
-                <a href="" data-toggle="modal" data-target="#myModal" ng-click="sendindex($index)"><img
-                        ng-src="{{ p.img }}" style="width:27px;height:48px"></a>
-            </td>
-            <td ng-bind="p.link"></td>
-            <td ng-bind="p.create_time"></td>
-            <td ng-bind="p.modified_time"></td>
-            <td>
-                <a ui-sref="main.wemedia_edit" ng-click="send(p)">修改</a>
-                <a href="" ng-click="delete(p.id)">删除</a>
-                <a href="" ng-click="under()">下架</a>
-            </td>
-        </tr>
-    </table>
-    <div ng-include="'/template/partial/pagination.html'"></div>
-</div>
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width: 260px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -12px">
-                    <span class="glyphicon glyphicon-remove"></span></button>
+<div style="padding:10px">
+    <ol class="breadcrumb">
+        <li class="active">自媒体广告</li>
+    </ol>
+    <div style="height: 500px;margin-top:50px">
+        <div class="ads_top">
+            <div class="form-inline">
+                <input type="text" ng-model="filter.title__icontains" placeholder="广告标题" class="form-control" style="width: 70%">
+                <button ng-click="filtering(filter)" class="btn btn-info">查询</button>
+                <button class="btn btn-info" ui-sref="main.wemedia_edit" style="margin-left: 230px">新建</button>
             </div>
-            <div class="modal-body">
-                <img ng-src="{{grid.results[number].img}}">
+
+        </div>
+        <table id="table-wemedia" class="table table-hover table-bordered table-condensed table-selectable text-center ads_table">
+            <tr>
+                <td>
+                    <a href="javascript:" ng-click="checkAll()">全选</a>
+                    <a href="javascript:" ng-click="checkInverse()">反选</a>
+                </td>
+                <td id="{{ headers[1] }}" ng-click="sort(headers[1])" style="cursor: pointer">
+                    标题
+                    <span ng-show="currentSort[headers[1]] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort[headers[1]] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="{{ headers[2] }}" ng-click="sort(headers[2])" style="cursor: pointer">
+                    简介
+                    <span ng-show="currentSort[headers[2]] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort[headers[2]] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="{{ headers[10] }}" ng-click="sort(headers[10])" style="cursor: pointer">
+                    行业类型
+                    <span ng-show="currentSort[headers[10]] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort[headers[10]] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td>缩略图</td>
+                <td>链接地址</td>
+                <td id="{{ headers[5] }}" ng-click="sort(headers[5])" style="cursor: pointer">
+                    创建时间
+                    <span ng-show="currentSort[headers[5]] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort[headers[5]] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="{{ headers[6] }}" ng-click="sort(headers[6])" style="cursor: pointer">
+                    修改时间
+                    <span ng-show="currentSort[headers[6]] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort[headers[6]] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td>操作</td>
+            </tr>
+            <tr ng-repeat="p in grid.results" class="wemedia_table">
+                <td><input type="checkbox"></td>
+                <td ng-bind="p.title"></td>
+                <td ng-bind="p.brief"></td>
+                <td ng-bind="p.category.name"></td>
+                <td width="60px">
+                    <a href="" data-toggle="modal" data-target="#myModal" ng-click="sendindex($index)"><img
+                            ng-src="{{ p.img }}" style="width:27px;height:48px"></a>
+                </td>
+                <td ng-bind="p.link"></td>
+                <td ng-bind="p.create_time"></td>
+                <td ng-bind="p.modified_time"></td>
+                <td>
+                    <a ui-sref="main.wemedia_edit" ng-click="send(p)">修改</a>
+                    <a href="" ng-click="delete(p.id)">删除</a>
+                    <a href="" ng-click="under()">下架</a>
+                </td>
+            </tr>
+        </table>
+        <div ng-include="'/template/partial/pagination.html'"></div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="width: 260px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            style="margin-top: -12px">
+                        <span class="glyphicon glyphicon-remove"></span></button>
+                </div>
+                <div class="modal-body">
+                    <img ng-src="{{grid.results[number].img}}">
+                </div>
             </div>
         </div>
     </div>

@@ -1,27 +1,113 @@
 .eq_m {
-    width:100%;
-    height:120px;
-    border:1px solid;
-    padding:10px;
+    width: 100%;
+    height: 120px;
+    border: 1px solid #cccccc;
+    padding: 10px;
 }
-.eq_m>.form-inline>input.form-control{
-    width:90% !important;
+
+.eq_m > .form-inline > input.form-control {
+    width: 90% !important;
 }
-.eq_m>hr{
+
+.eq_m > hr {
     margin-top: 10px;
     margin-bottom: 10px !important;
 }
-.eq_m>.form-inline>.form-control{
-    width:15% !important;
+
+.eq_m > .form-inline > .form-control {
+    width: 15% !important;
 }
-.chazhao{
-     background-color:#F2F2F2;
-     border: 0;
- }
-.chazhao:hover{
-    background-color:#00ffff;
+
+.chazhao {
+    background-color: #F2F2F2;
+    border: 0;
+}
+
+.chazhao:hover {
+    background-color: #00ffff;
     transition: 0.3s;
 }
-.btn-mg{
+
+.btn-mg {
     margin-left: 235px;
+}
+
+.eq_m1 {
+    width: 100%;
+    height: 280px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #F2F2F2;
+}
+
+.eq_m1 > hr {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.mac_back {
+    width: 100%;
+    line-height: 50px;
+    border: 1px solid #cccccc;
+    background-color: #F2F2F2;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.identify {
+    width: 100%;
+    height: 750px;
+    border: 1px solid #cccccc;
+    background-color: #F2F2F2;
+
+}
+
+.identify_top {
+    margin-top: 10px !important;
+    border-bottom: 1px dashed;
+    border-right: 1px dashed;
+    height: 110px;
+}
+
+.identify_middle{
+width: 100%;
+height: 150px;
+border-bottom: 1px dashed;
+padding-top: 10px;
+}
+
+.identify_bottom{
+    width: 100%;
+    height: 280px;
+    border-bottom: 1px dashed ;
+    padding-top: 10px;
+}
+.nav_se{
+    width:80%;
+    background-color: #F2F2F2;
+    margin-top: 20px ;
+}
+
+#white,#black,#white1,#black1{
+    border: 1px solid #cccccc;
+    padding: 20px;
+}
+.checkbox_se{
+    margin-left: 20px;
+}
+.phone_login{
+    width:100%;
+    height: 60px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    background-color: #f2f2f2;
+}
+.binding_shangjia{
+    width:100%;
+    height: 250px;
+    background-color: #f2f2f2 ;
+    border: 1px solid #cccccc;
+    margin-top: 20px;
+    padding:10px
 }

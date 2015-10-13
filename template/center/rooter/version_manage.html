@@ -3,67 +3,78 @@
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li class="active">版本管理</li>
     </ol>
-    <table class="table table-bordered table-striped text-center">
-        <thead>
-        <tr>
-            <td>最新版本</td>
-            <td>说明</td>
-            <td>发布日期</td>
-            <td>发布人</td>
-            <td>升级数量/路由器总数</td>
-            <td>操作</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>V3.0</td>
-            <td>修复掉线问题</td>
-            <td>2015-10-01</td>
-            <td>某某</td>
-            <td>100/1000</td>
-            <td><a ui-sref="main.firmware_update">升级</a></td>
-        </tr>
-        </tbody>
-    </table>
 
-    <hr>
+    <button class="btn btn-success" data-toggle="modal" data-target="#newVersionModal">发布新版本</button>
     <table class="table table-bordered table-striped text-center">
         <thead>
         <tr>
-            <td>历史版本</td>
+            <td>版本</td>
             <td>说明</td>
-            <td>发布日期</td>
+            <td>大小</td>
             <td>发布人</td>
-            <td>升级数量/路由器总数</td>
+            <td>发布时间</td>
             <td>操作</td>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>V2.1</td>
-            <td>修复掉线问题</td>
-            <td>2015-10-01</td>
-            <td>某某</td>
-            <td>100/1000</td>
-            <td><a href="">升级</a></td>
-        </tr>
-        <tr>
-            <td>V2.0</td>
-            <td>修复掉线问题</td>
-            <td>2015-10-01</td>
-            <td>某某</td>
-            <td>100/1000</td>
-            <td><a href="">升级</a></td>
-        </tr>
-        <tr>
-            <td>V1.0</td>
-            <td>修复掉线问题</td>
-            <td>2015-10-01</td>
-            <td>某某</td>
-            <td>100/1000</td>
-            <td><a href="">升级</a></td>
+        <tr ng-repeat="v in grid.results"  ng-class="{'background-red':$index===0}">
+            <td ng-bind="v.name"></td>
+            <td ng-bind="v.description"></td>
+            <td ng-bind="(v.size/(1024*1024) | number:2) + 'MB'"></td>
+            <td ng-bind="v.creator"></td>
+            <td ng-bind="v.create_time"></td>
+            <td>
+                <button class="btn btn-success">升级</button>
+                <button class="btn btn-danger" ng-click="remove(v.id)">删除</button>
+            </td>
         </tr>
         </tbody>
     </table>
-    <button class="btn btn-info pull-right">上传固件</button>
+</div>
+
+<div class="modal fade" id="newVersionModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">固件版本信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" ng-submit="newVersion($event,version)">
+                    <div class="form-group">
+                        <label for="inputVersion" class="col-sm-2 control-label">版本号:</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputVersion" ng-model="version.name"
+                                   placeholder="v1.0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc" class="col-sm-2 control-label">更新描述:</label>
+
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="desc" ng-model="version.description"
+                                      placeholder="更新细节内容"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="versionFile" class="col-sm-2 control-label">选择文件:</label>
+
+                        <div class="col-sm-10">
+                            <input id="versionFile" type="file" name="file">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-5">
+                            <button type="submit" class="btn btn-success">发布</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>

@@ -6,6 +6,7 @@ var iCloudApp = angular.module("iCloudApp", ["ui.router", "iCloudController", "i
 
 
 iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
+
     $urlRouterProvider.when("", "/login");
 
     $stateProvider
@@ -48,44 +49,44 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/wemedia_edit.html",
             controller: "WeMediaEditController"
         })
-        .state("main.eq_management",{
-            url:"/eq_management",
-            templateUrl:"template/center/rooter/eq_management.html",
-            controller:"EqManagementController"
+        .state("main.eq_management", {
+            url: "/eq_management",
+            templateUrl: "template/center/rooter/eq_management.html",
+            controller: "EqManagementController"
         })
-        .state("main.shop_management",{
-            url:"/shop_management",
-            templateUrl:"template/center/shop/shop_management.html",
-            controller:"ShopManagementController"
+        .state("main.shop_management", {
+            url: "/shop_management",
+            templateUrl: "template/center/shop/shop_management.html",
+            controller: "ShopManagementController"
         })
-        .state("main.version_manage",{
-            url:"/version_management",
-            templateUrl:"template/center/rooter/version_manage.html",
-            controller:"VersionManagementController"
+        .state("main.version_manage", {
+            url: "/version_management",
+            templateUrl: "template/center/rooter/version_manage.html",
+            controller: "VersionManagementController"
         })
-        .state("main.firmware_update",{
-            url:"/firmware_update",
-            templateUrl:"template/center/rooter/firmware_update.html",
-            controller:"FirmwareUpdateController"
+        .state("main.firmware_update", {
+            url: "/firmware_update",
+            templateUrl: "template/center/rooter/firmware_update.html",
+            controller: "FirmwareUpdateController"
         })
-        .state("main.details",{
-            url:"/details",
-            templateUrl:"template/center/rooter/details.html",
-            controller:"DetailsController"
+        .state("main.details", {
+            url: "/details",
+            templateUrl: "template/center/rooter/details.html",
+            controller: "DetailsController"
         })
-        .state("main.identify_conf",{
-            url:"/identify_conf",
-            templateUrl:"template/center/rooter/identify_conf.html",
-            controller:"IdentifyConfController"
+        .state("main.identify_conf", {
+            url: "/identify_conf",
+            templateUrl: "template/center/rooter/identify_conf.html",
+            controller: "IdentifyConfController"
         })
-        .state("main.binding",{
-            url:"/binding",
-            templateUrl:"template/center/rooter/binding.html",
-            controller:"BindingController"
+        .state("main.binding", {
+            url: "/binding",
+            templateUrl: "template/center/rooter/binding.html",
+            controller: "BindingController"
         })
-        .state("main.release_conf",{
-            url:"/release_conf",
-            templateUrl:"template/center/rooter/release_conf.html",
-            controller:"ReleaseConfController"
+        .state("main.release_conf", {
+            url: "/release_conf",
+            templateUrl: "template/center/rooter/release_conf.html",
+            controller: "ReleaseConfController"
         })
 });

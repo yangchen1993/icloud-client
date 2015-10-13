@@ -14,7 +14,8 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             };
         };
 
-        this.initial = function (scope, url) {
+        this.initial = function (scope, url, options) {
+            options = options || {};
             scope.pageSizes = [20, 30, 40, 50];
             scope.pageSize = 20;
 
@@ -22,6 +23,15 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             self.pageSize = 20;
             self.url = url;
             self.defaultParams = defaultParams();
+
+            if (!_.isEmpty(options)) {
+                angular.forEach(_.keys(options), function (value, key) {
+                    if (_.has(self.defaultParams, value)) {
+                        self.defaultParams[value] = options[value]
+                    }
+                })
+            }
+
             self.urlWithDefaultParams = function () {
                 var key = $cookieStore.get("key");
                 if (key) {

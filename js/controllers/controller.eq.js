@@ -68,9 +68,45 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
 
     }]);
 
-iCloudController.controller("VersionManagementController", ['$scope', function ($scope) {
+iCloudController.controller("VersionManagementController", ['$scope', '$window', '$http', '$cookieStore', '$grid',
+    function ($scope, $window, $http, $cookieStore, $grid) {
+        $grid.initial($scope, $window.version_url, {"ordering": "-create_time"});
 
-}]);
+        $scope.newVersion = function (e, data) {
+
+            var data_ = angular.copy(data);
+
+            var file_input = $(e.target[2]);
+            var file = file_input[0].files;
+            if (file.length == 0) {
+                $window.alert("请选择文件");
+                return false;
+            }
+            var formData = new FormData();
+
+            formData.append("file", file[0]);
+            formData.append("name", data_.name);
+            formData.append("description", data_.description);
+            var url = [$window.version_url, '?key=', $cookieStore.get('key')].join("");
+            $http.post(url, formData, {"headers": {"Content-Type": undefined}})
+                .success(function (data) {
+                    angular.element("#newVersionModal").modal("toggle");
+                    $scope.refresh();
+                })
+                .error(function (data) {
+                    $window.alert(data.msg)
+                })
+        };
+
+        $scope.remove = function (id) {
+            if (confirm("确定删除?删除后无法恢复!")) {
+                $http.delete([window.version_url, id, "/", "?key=", $cookieStore.get("key")].join(""))
+                    .finally(function () {
+                        $scope.refresh();
+                    })
+            }
+        }
+    }]);
 
 iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', function ($scope, $checkBox) {
     $scope.update = function () {
@@ -102,6 +138,7 @@ iCloudController.controller("IdentifyConfController", ['$scope', function ($scop
         if (data == 3) $scope.status = 3;
     }
 }]);
+
 iCloudController.controller("ReleaseConfController", ['$scope', '$grid', function ($scope, $grid) {
     $grid.initial($scope, window.all_routers_url);
 }]);

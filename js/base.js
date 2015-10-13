@@ -30,3 +30,13 @@ window.province_url = [window.host, "/api/system/cities/province/"].join("");
 window.city_url = [window.host, "/api/system/cities/city/"].join("");
 
 window.area_url = [window.host, "/api/system/cities/area/"].join("");
+
+window.version_url = [window.host, "/api/routers/versions/"].join("");
+
+
+var transform_error_message = function (msg) {
+    if (_.isObject(msg)){
+        _.forEach()
+    }
+    return msg
+};

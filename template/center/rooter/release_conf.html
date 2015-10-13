@@ -1,7 +1,6 @@
 <div style="padding: 10px">
     <ol class="breadcrumb">
         <li><a ui-sref="main.eq_management">设备管理</a></li>
-        <li><a ui-sref="main.details">路由器详情</a></li>
         <li class="active">放行设置</li>
     </ol>
     <div class="eq_m">
@@ -20,6 +19,7 @@
         <hr>
         <div class="form-inline">
             <span>使用状态：</span>
+
             <div class="radio">
                 <input type="radio" id="use" name="use_status" ng-click="route(1)">
                 <label for="use"><span>已使用路由器</span></label>
@@ -29,6 +29,7 @@
                 <label for="nouse"><span>未使用路由器</span></label>
             </div>
             <span style="margin-left: 50px">运行状态：</span>
+
             <div class="radio">
                 <input type="radio" id="normal" name="run_status">
                 <label for="normal"><span>正常</span></label>
@@ -70,7 +71,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="p in grid.results">
-            <td><input type="checkbox"></td>
+            <td><input type="checkbox" ng-click="addId(p.id,$index)"><span ng-bind="p.id" style="display: none"></span></td>
             <td ng-bind="p.mac"></td>
             <td ng-bind="p.create_time"></td>
             <td ng-bind="p.router_group.name"></td>
@@ -82,7 +83,98 @@
     </table>
     <div class="text-right">
         <button class="btn btn-info">回收权限</button>
-        <button class="btn btn-info">设置</button>
+        <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="conf(p)">设置</button>
     </div>
     <div ng-include="'/template/partial/pagination.html'" style="margin-top: 20px"></div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+
+                    <span>白名单：</span>
+                    <div style="border-top: 1px dotted #cccccc;margin-top: 10px;"></div>
+                    <div style="width:50%;border-right: 1px dotted #cccccc;display: inline-block">
+                        <p style="margin-top: 10px">设备MAC码</p>
+                        <p>设备不受登录次数限制</p>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-info active">
+                                <input type="radio" name="options" id="option1" autocomplete="off" ng-click="mac_open(false )"> 开
+                            </label>
+                            <label class="btn btn-info">
+                                <input type="radio" name="options" id="option2" autocomplete="off" ng-click="mac_down(false)"> 关
+                            </label>
+                        </div>
+                        <div>
+                            <span>现有</span><span ng-bind="white_mac"></span><span>个设备</span>
+                            <button class="btn btn-info" ng-click="addMac(false)">添加</button>
+                        </div>
+                    </div>
+                    <div style="display: inline-block">
+                        <p style="margin-top: 10px">域名</p>
+                        <p>认证前即可访问的域名</p>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-info active">
+                                <input type="radio" name="options" id="option3" autocomplete="off" ng-click="domain_open(false)"> 开
+                            </label>
+                            <label class="btn btn-info">
+                                <input type="radio" name="options" id="option4" autocomplete="off" ng-click="domain_down(false)"> 关
+                            </label>
+                        </div>
+                        <div>
+                            <span>现有</span><span ng-bind="white_domain"></span><span>个域名</span>
+                            <button class="btn btn-info" ng-click="addDomain(false)">添加</button>
+                        </div>
+                    </div>
+                    <div style="border-top: 1px dotted #cccccc;margin-top: 10px;"></div>
+
+                <p style="margin-top: 10px">黑名单：</p>
+                <div style="border-top: 1px dotted #cccccc;margin-top: 10px;"></div>
+                <div style="width:50%;border-right: 1px dotted #cccccc;display: inline-block">
+                    <p style="margin-top: 10px">设备MAC码</p>
+                    <p>设备不能上网</p>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-info active" ng-click="mac_open(true)">
+                            <input type="radio" name="options" id="option5" autocomplete="off"> 开
+                        </label>
+                        <label class="btn btn-info"  ng-click="mac_down(true)">
+                            <input type="radio" name="options" id="option6" autocomplete="off"> 关
+                        </label>
+                    </div>
+                    <div>
+                        <span>现有</span><span ng-bind="black_mac"></span><span>个设备</span>
+                        <button class="btn btn-info" ng-click="addMac(true)">添加</button>
+                    </div>
+                </div>
+                <div style="display: inline-block">
+                    <p style="margin-top: 10px">域名</p>
+                    <p>域名不可访问</p>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-info active">
+                            <input type="radio" name="options" id="option7" autocomplete="off" ng-click="domain_open(true)"> 开
+                        </label>
+                        <label class="btn btn-info">
+                            <input type="radio" name="options" id="option8" autocomplete="off" ng-click="domain_down(true)"> 关
+                        </label>
+                    </div>
+                    <div>
+                        <span>现有</span><span ng-bind="black_domain"></span><span>个域名</span>
+                        <button class="btn btn-info" ng-click="addDomain(true)">添加</button>
+                    </div>
+                </div>
+                <div style="border-top: 1px dotted #cccccc;margin-top: 10px;"></div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>

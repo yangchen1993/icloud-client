@@ -33,9 +33,12 @@ window.area_url = [window.host, "/api/system/cities/area/"].join("");
 
 window.version_url = [window.host, "/api/routers/versions/"].join("");
 
+window.release_url = [window.host, "/api/business/policies/"].join("");
+
+window.release_enable_url=[window.release_url,"/api/business/policies/enable/"].join("");
 
 var transform_error_message = function (msg) {
-    if (_.isObject(msg)){
+    if (_.isObject(msg)) {
         _.forEach()
     }
     return msg

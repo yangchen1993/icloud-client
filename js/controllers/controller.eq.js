@@ -3,12 +3,6 @@
  */
 iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$grid', '$window', '$category', '$filter', '$province', '$city', '$area',
     function ($scope, $checkBox, $grid, $window, $category, $filter, $province, $city, $area) {
-        $scope.chazhao = function () {
-            var data = prompt("请输入查找内容", "");
-            if (data) {
-                alert("dvasv");
-            }
-        };
         $scope.status = 1;
         $scope.route = function (num) {
             if (num == 1) {
@@ -138,31 +132,68 @@ iCloudController.controller("IdentifyConfController", ['$scope', function ($scop
         if (data == 3) $scope.status = 3;
     }
 }]);
-iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cookieStore', '$http', function ($scope, $grid, $cookieStore, $http) {
+
+iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cookieStore', '$http', '$checkBox', '$filter', '$province', '$city', '$area', function ($scope, $grid, $cookieStore, $http, $checkBox, $filter, $province, $city, $area) {
+    $checkBox.enableCheck("table-eq");
+    $scope.eq_search = function (data) {
+        var tmp = angular.copy(data);
+        tmp.create_time__gte = $filter('date')(tmp.create_time__gte, 'yyyy-MM-dd HH:mm:ss');
+        tmp.create_time__lte = $filter('date')(tmp.create_time__lte, 'yyyy-MM-dd HH:mm:ss');
+        $scope.filtering(tmp);
+        console.log(tmp);
+    };
+    $scope.eq_reset = function () {
+        $scope.search.groups__name__icontains = "";
+        $scope.search.groups__category = "选择行业";
+        $scope.search.groups__trade__province = "省";
+        $scope.search.groups__trade__city = "市";
+        $scope.search.groups__trade__area = "区/县";
+        $scope.search.mac__icontains = "";
+        $scope.search.create_time__gte = "";
+        $scope.search.create_time__lte = "";
+    };
+    var province = $province.get();
+    province.success(function (data) {
+        //$scope.category = data.results;
+        $scope.province1 = data;
+    });
+    $scope.select_p = function (index) {
+        var city = $city.get(index);
+        city.success(function (data) {
+            $scope.city1 = data;
+        })
+    };
+    $scope.select_c = function (index) {
+        var area = $area.get(index);
+        area.success(function (data) {
+            $scope.area1 = data;
+        })
+    };
     var idBox = [];
     $grid.initial($scope, window.all_routers_url);
-    $scope.addId = function (id, index) {
-        if (angular.element('input[type="checkbox"]')[index].checked) {
-            idBox.push(id);
-            console.log('添加后的数组:' + idBox);
-        } else {
-            idBox.splice(idBox.indexOf(id), 1);
-            console.log('删除后的数组:' + idBox);
-        }
-    };
     $scope.conf = function () {
+        idBox = [];
+        var selector = ["#table-eq", " :checkbox"].join("");
+        var checkBoxes = angular.element(selector);
+        angular.forEach(checkBoxes, function (v, k) {
+            if (angular.element(v)[0].checked) {
+                idBox.push(angular.element(v)[0].value);
+            }
+        });
+        $scope.idBoxs = idBox;
         if (idBox == "") {
             alert("请选择需要设置的路由器！");
             $scope.is_modal = false;
         }
         else {
+            console.log(idBox);
             $scope.is_modal = true;
             var white_mac = 0;
             var white_domain = 0;
             var black_mac = 0;
             var black_domain = 0;
             var key = $cookieStore.get("key");
-            $http.post(["http://192.168.0.112/api/business/policies/query/", "?key=", key].join(""), {"router_ids": idBox}).success(function (data) {
+            $http.get(["http://192.168.0.91:8000/api/business/policies/", "?key=", key, "&", $.param({"router_id__in": idBox})].join("")).success(function (data) {
                 console.log(data);
                 for (var i = 0; i < data.count; i++) {
                     if (data.results[i].is_black) {
@@ -185,6 +216,35 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             })
         }
     };
+    $scope.conf_s = function (idBox) {
+        $scope.is_modal = true;
+        var white_mac = 0;
+        var white_domain = 0;
+        var black_mac = 0;
+        var black_domain = 0;
+        var key = $cookieStore.get("key");
+        $http.get([window.release_url, "?key=", key, "&", $.param({"router_id": idBox})].join("")).success(function (data) {
+            console.log(data);
+            for (var i = 0; i < data.count; i++) {
+                if (data.results[i].is_black) {
+                    if (data.results[i].content_type == 0)
+                        black_mac++;
+                    if (data.results[i].content_type == 1)
+                        black_domain++;
+                }
+                else {
+                    if (data.results[i].content_type == 0)
+                        white_mac++;
+                    if (data.results[i].content_type == 1)
+                        white_domain++;
+                }
+            }
+            $scope.white_mac = white_mac;
+            $scope.white_domain = white_domain;
+            $scope.black_mac = black_mac;
+            $scope.black_domain = black_domain;
+        })
+    };
     $scope.mac_open = function (bool) {
         var key = $cookieStore.get("key");
         var postdata = {
@@ -193,7 +253,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             "is_black": bool,
             "enable": true
         };
-        $http.put(["http://192.168.0.91:8000/api/business/policies/enable/", "?key=", key].join(""), postdata)
+        $http.put([window.release_enable_url, "?key=", key].join(""), postdata)
     };
     $scope.mac_down = function (bool) {
         var key = $cookieStore.get("key");
@@ -203,7 +263,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             "is_black": bool,
             "enable": false
         };
-        $http.put(["http://192.168.0.91:8000/api/business/policies/enable/", "?key=", key].join(""), postdata)
+        $http.put([window.release_enable_url, "?key=", key].join(""), postdata)
     };
     $scope.domain_open = function (bool) {
         var key = $cookieStore.get("key");
@@ -213,7 +273,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             "is_black": bool,
             "enable": true
         };
-        $http.put(["http://192.168.0.91:8000/api/business/policies/enable/", "?key=", key].join(""), postdata)
+        $http.put([window.release_enable_url, "?key=", key].join(""), postdata)
     };
     $scope.domain_down = function (bool) {
         var key = $cookieStore.get("key");
@@ -223,7 +283,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             "is_black": bool,
             "enable": false
         };
-        $http.put(["http://192.168.0.91:8000/api/business/policies/enable/", "?key=", key].join(""), postdata)
+        $http.put([window.release_enable_url, "?key=", key].join(""), postdata)
     };
     $scope.addMac = function (bool) {
         var data = prompt("请输入设备MAC码", "");
@@ -237,7 +297,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             };
             console.log(postdata);
             var key = $cookieStore.get("key");
-            $http.post(["http://192.168.0.112/api/business/policies/", "?key=", key].join(""), postdata);
+            $http.post([window.release_enable_url, "?key=", key].join(""), postdata);
         }
 
     };
@@ -253,7 +313,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             };
             console.log(postdata);
             var key = $cookieStore.get("key");
-            $http.post(["http://192.168.0.91:8000/api/business/policies/", "?key=", key].join(""), postdata);
+            $http.post([window.release_enable_url, "?key=", key].join(""), postdata);
         }
     }
 }]);
@@ -261,6 +321,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
 iCloudController.controller("BindingController", ['$scope', function ($scope) {
 
 }]);
+
 iCloudController.controller("InSalesController", ['$scope', function ($scope) {
 
 }]);

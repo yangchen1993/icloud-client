@@ -151,34 +151,39 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
         }
     };
     $scope.conf = function () {
-        console.log(idBox);
-        var white_mac = 0;
-        var white_domain = 0;
-        var black_mac = 0;
-        var black_domain = 0;
-        var count;
-        var key = $cookieStore.get("key");
-        $http.post(["http://192.168.0.112/api/business/policies/query/", "?key=", key].join(""), {"router_ids": idBox}).success(function (data) {
-            console.log(data);
-            for (var i = 0; i < data.count; i++) {
-                if (data.results[i].is_black) {
-                    if (data.results[i].content_type == 0)
-                        black_mac++;
-                    if (data.results[i].content_type == 1)
-                        black_domain++;
+        if (idBox == "") {
+            alert("请选择需要设置的路由器！");
+            $scope.is_modal = false;
+        }
+        else {
+            $scope.is_modal = true;
+            var white_mac = 0;
+            var white_domain = 0;
+            var black_mac = 0;
+            var black_domain = 0;
+            var key = $cookieStore.get("key");
+            $http.post(["http://192.168.0.112/api/business/policies/query/", "?key=", key].join(""), {"router_ids": idBox}).success(function (data) {
+                console.log(data);
+                for (var i = 0; i < data.count; i++) {
+                    if (data.results[i].is_black) {
+                        if (data.results[i].content_type == 0)
+                            black_mac++;
+                        if (data.results[i].content_type == 1)
+                            black_domain++;
+                    }
+                    else {
+                        if (data.results[i].content_type == 0)
+                            white_mac++;
+                        if (data.results[i].content_type == 1)
+                            white_domain++;
+                    }
                 }
-                else {
-                    if (data.results[i].content_type == 0)
-                        white_mac++;
-                    if (data.results[i].content_type == 1)
-                        white_domain++;
-                }
-            }
-            $scope.white_mac = white_mac;
-            $scope.white_domain = white_domain;
-            $scope.black_mac = black_mac;
-            $scope.black_domain = black_domain;
-        })
+                $scope.white_mac = white_mac;
+                $scope.white_domain = white_domain;
+                $scope.black_mac = black_mac;
+                $scope.black_domain = black_domain;
+            })
+        }
     };
     $scope.mac_open = function (bool) {
         var key = $cookieStore.get("key");
@@ -188,7 +193,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             "is_black": bool,
             "enable": true
         };
-        $http.post(["http://192.168.0.112/api/business/enable/", "?key=", key].join(""), postdata)
+        $http.put(["http://192.168.0.91:8000/api/business/policies/enable/", "?key=", key].join(""), postdata)
     };
     $scope.mac_down = function (bool) {
         var key = $cookieStore.get("key");
@@ -196,9 +201,9 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             "router_ids": idBox,
             "content_type": 0,
             "is_black": bool,
-            "enable": true
+            "enable": false
         };
-        $http.post(["http://192.168.0.112/api/business/enable/", "?key=", key].join(""), postdata)
+        $http.put(["http://192.168.0.91:8000/api/business/policies/enable/", "?key=", key].join(""), postdata)
     };
     $scope.domain_open = function (bool) {
         var key = $cookieStore.get("key");
@@ -208,7 +213,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             "is_black": bool,
             "enable": true
         };
-        $http.post(["http://192.168.0.112/api/business/enable/", "?key=", key].join(""), postdata)
+        $http.put(["http://192.168.0.91:8000/api/business/policies/enable/", "?key=", key].join(""), postdata)
     };
     $scope.domain_down = function (bool) {
         var key = $cookieStore.get("key");
@@ -216,9 +221,9 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             "router_ids": idBox,
             "content_type": 1,
             "is_black": bool,
-            "enable": true
+            "enable": false
         };
-        $http.post(["http://192.168.0.112/api/business/enable/", "?key=", key].join(""), postdata)
+        $http.put(["http://192.168.0.91:8000/api/business/policies/enable/", "?key=", key].join(""), postdata)
     };
     $scope.addMac = function (bool) {
         var data = prompt("请输入设备MAC码", "");

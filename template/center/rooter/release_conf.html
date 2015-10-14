@@ -61,40 +61,40 @@
                 <a href="javascript:" ng-click="checkAll()">全选</a>
                 <a href="javascript:" ng-click="checkInverse()">反选</a>
             </td>
-            <td>MAC码</td>
-            <td>入库时间</td>
             <td>商铺名称</td>
             <td>行业</td>
             <td>地区</td>
             <td>认证方式</td>
+            <td>MAC码</td>
+            <td>入库时间</td>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="p in grid.results">
             <td><input type="checkbox" ng-click="addId(p.id,$index)"><span ng-bind="p.id" style="display: none"></span></td>
+            <td ng-bind="p.router_groups.name"></td>
+            <td ng-bind="p.router_groups.category"></td>
+            <td ng-bind="p.router_groups.trade_area.province+p.router_groups.trade_area.city+p.router_groups.trade_area.area+p.router_groups.trade_area.name"></td>
+            <td ng-bind="p.isonline"></td>
             <td ng-bind="p.mac"></td>
             <td ng-bind="p.create_time"></td>
-            <td ng-bind="p.router_group.name"></td>
-            <td ng-bind="p.router_group.category"></td>
-            <td ng-bind="p.router_group.trade_area.name"></td>
-            <td ng-bind="p.isonline"></td>
         </tr>
         </tbody>
     </table>
     <div class="text-right">
-        <button class="btn btn-info">回收权限</button>
+        <!--<button class="btn btn-info">回收权限</button>-->
         <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="conf(p)">设置</button>
     </div>
     <div ng-include="'/template/partial/pagination.html'" style="margin-top: 20px"></div>
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-if="is_modal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">放行设置</h4>
             </div>
             <div class="modal-body">
 
@@ -104,11 +104,11 @@
                         <p style="margin-top: 10px">设备MAC码</p>
                         <p>设备不受登录次数限制</p>
                         <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-info active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" ng-click="mac_open(false )"> 开
+                            <label class="btn btn-info active" ng-click="mac_open(false )">
+                                <input type="radio" name="options" id="option1" autocomplete="off"> 开
                             </label>
-                            <label class="btn btn-info">
-                                <input type="radio" name="options" id="option2" autocomplete="off" ng-click="mac_down(false)"> 关
+                            <label class="btn btn-info"  ng-click="mac_down(false)">
+                                <input type="radio" name="options" id="option2" autocomplete="off"> 关
                             </label>
                         </div>
                         <div>
@@ -120,11 +120,11 @@
                         <p style="margin-top: 10px">域名</p>
                         <p>认证前即可访问的域名</p>
                         <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-info active">
-                                <input type="radio" name="options" id="option3" autocomplete="off" ng-click="domain_open(false)"> 开
+                            <label class="btn btn-info active"  ng-click="domain_open(false)">
+                                <input type="radio" name="options" id="option3" autocomplete="off"> 开
                             </label>
-                            <label class="btn btn-info">
-                                <input type="radio" name="options" id="option4" autocomplete="off" ng-click="domain_down(false)"> 关
+                            <label class="btn btn-info"  ng-click="domain_down(false)">
+                                <input type="radio" name="options" id="option4" autocomplete="off"> 关
                             </label>
                         </div>
                         <div>
@@ -156,11 +156,11 @@
                     <p style="margin-top: 10px">域名</p>
                     <p>域名不可访问</p>
                     <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="options" id="option7" autocomplete="off" ng-click="domain_open(true)"> 开
+                        <label class="btn btn-info active"  ng-click="domain_open(true)">
+                            <input type="radio" name="options" id="option7" autocomplete="off"> 开
                         </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="options" id="option8" autocomplete="off" ng-click="domain_down(true)"> 关
+                        <label class="btn btn-info" ng-click="domain_down(true)">
+                            <input type="radio" name="options" id="option8" autocomplete="off"> 关
                         </label>
                     </div>
                     <div>
@@ -170,10 +170,6 @@
                 </div>
                 <div style="border-top: 1px dotted #cccccc;margin-top: 10px;"></div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

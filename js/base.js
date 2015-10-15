@@ -35,8 +35,12 @@ window.version_url = [window.host, "/api/routers/versions/"].join("");
 
 
 var transform_error_message = function (msg) {
-    if (_.isObject(msg)){
-        _.forEach()
+    if (_.isObject(msg)) {
+        var message = "";
+        _.each(_.keys(msg), function (value, key) {
+            message += msg[value] + "\n";
+        });
+        return message
     }
     return msg
 };

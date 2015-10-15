@@ -72,6 +72,10 @@ iCloudController.controller("VersionManagementController", ['$scope', '$window',
     function ($scope, $window, $http, $cookieStore, $grid) {
         $grid.initial($scope, $window.version_url, {"ordering": "-create_time"});
 
+        $scope.newVersionModal = function () {
+            angular.element("form")[0].reset();
+        };
+
         $scope.newVersion = function (e, data) {
 
             var data_ = angular.copy(data);
@@ -94,7 +98,7 @@ iCloudController.controller("VersionManagementController", ['$scope', '$window',
                     $scope.refresh();
                 })
                 .error(function (data) {
-                    $window.alert(data.msg)
+                    $window.alert(transform_error_message(data.msg))
                 })
         };
 

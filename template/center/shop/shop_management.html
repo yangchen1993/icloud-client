@@ -1,10 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div style="padding: 10px">
+    <button class="btn btn-success" data-toggle="modal" data-target="#storeModal" ng-click="newStoreModal()">添加店铺</button>
+</div>
 
-</body>
-</html>
+<div class="modal fade" id="newStoreModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">店铺信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" ng-model="group.id">
+                    <div class="form-group">
+                        <label for="inputGroupName" class="col-sm-2 control-label">店铺名称:</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputGroupName" ng-model="group.name"
+                                   placeholder="店铺名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">店铺地址:</label>
+
+                        <div class="col-sm-10">
+                            <select ng-options=""></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc" class="col-sm-2 control-label">更新描述:</label>
+
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="desc" ng-model="version.description"
+                                      placeholder="更新细节内容"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="versionFile" class="col-sm-2 control-label">选择文件:</label>
+
+                        <div class="col-sm-10">
+                            <input id="versionFile" type="file" name="file">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-5">
+                            <button type="submit" class="btn btn-success">发布</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

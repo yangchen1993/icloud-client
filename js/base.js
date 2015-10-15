@@ -35,7 +35,9 @@ window.version_url = [window.host, "/api/routers/versions/"].join("");
 
 window.release_url = [window.host, "/api/business/policies/"].join("");
 
-window.release_enable_url=[window.release_url,"/api/business/policies/enable/"].join("");
+window.release_enable_url = [window.host, "/api/business/policies/enable/"].join("");
+
+window.routers_groups_url = [window.host, "/api/routers/groups/"].join("");
 
 var transform_error_message = function (msg) {
     if (_.isObject(msg)) {

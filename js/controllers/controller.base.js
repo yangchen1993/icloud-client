@@ -10,5 +10,10 @@ iCloudController.controller("BaseController", ["$scope", "$timeout", function ($
         $timeout(function () {
             $scope.$broadcast('executeData', newscope);
         }, 100)
+    });
+    $scope.$on('sendRouters', function (e, newscope) {
+        $timeout(function () {
+            $scope.$broadcast('executeRouters', newscope);
+        }, 100)
     })
 }]);

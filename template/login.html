@@ -30,10 +30,10 @@
     <img src="../img/login_logo.png" class="img">
 </div>
 <div class="login_modal" ng-keypress="enterEvent()">
-    <img src="../img/person.png" style="margin-bottom: 5px">
+    <img src="../img/person.png" style="margin-bottom: 9px">
     <input type="text" placeholder="请输入用户名" ng-model="auth.username">
     <hr>
-    <img src="../img/eyes.png">
+    <img src="../img/eyes.png" style="margin-bottom: 5px">
     <input type="password" placeholder="请输入密码" ng-model="auth.password">
     <hr>
     <!--<div>-->
@@ -41,5 +41,5 @@
         <!--<label for="rememberId" class="text-muted">记住账号</label>-->
     <!--</div>-->
     <button class="btn btn-block btn-success" ng-click="login(auth)"><span class="h4">登录</span></button>
-    <span class="h4" ng-bind="errorMsg.msg"></span>
+    <p class="text-center msg"><span class="h4" ng-bind="errorMsg.msg"></span></p>
 </div>

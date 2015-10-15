@@ -60,6 +60,14 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
             })
         };
 
+        $scope.jiebang = function () {
+            if (confirm("解绑路由器会导致该路由器无法正常上网，请确定是否需要解绑路由器？")) {
+
+            }
+        };
+        $scope.search_details = function (data) {
+            $scope.$emit("sendRouters", data);
+        };
     }]);
 
 iCloudController.controller("VersionManagementController", ['$scope', '$window', '$http', '$cookieStore', '$grid',
@@ -117,12 +125,40 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
     $checkBox.enableCheck("table-fireware");
 }]);
 
-iCloudController.controller("DetailsController", ['$scope', function ($scope) {
-    $scope.jiebang = function () {
-        if (confirm("解除绑定后，该设备将停止运行，请确定是否需解除绑定")) {
+iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', function ($scope, $http, $cookieStore) {
+    $scope.update = function () {
+        if (confirm("升级过程中将会重启路由器，请确定是否需要升级？")) {
 
         }
-    }
+    };
+    $scope.modify = function () {
+        var data = prompt("当前WIFI名称：" + $scope.routers.router_groups.name);
+        if (data) {
+            var key = $cookieStore.get("key");
+            $http.patch(["http://192.168.0.91:8000/api/routers/groups/", $scope.routers.router_groups.id,"/","?key=",key].join(""),{"name":data});
+        }
+    };
+    $scope.jiebang = function () {
+        if (confirm("解绑路由器会导致该路由器无法正常上网，请确定是否需要解绑路由器？")) {
+
+        }
+    };
+    $scope.progress = function () {
+        var num = 1;
+        var timer = setInterval(function () {
+            if (angular.element('#progress_span')[0].textContent < 100) {
+                angular.element('#progress_span')[0].textContent = num;
+                angular.element('#progress')[0].style.width = num + '%';
+                num++;
+            }
+            else {
+                clearInterval(timer);
+            }
+        }, 1000)
+    };
+    $scope.$on("executeRouters", function (e, data) {
+        $scope.routers = data;
+    })
 }]);
 
 iCloudController.controller("IdentifyConfController", ['$scope', function ($scope) {
@@ -180,7 +216,6 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
                 idBox.push(angular.element(v)[0].value);
             }
         });
-        $scope.idBoxs = idBox;
         if (idBox == "") {
             alert("请选择需要设置的路由器！");
             $scope.is_modal = false;
@@ -193,7 +228,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
             var black_mac = 0;
             var black_domain = 0;
             var key = $cookieStore.get("key");
-            $http.get(["http://192.168.0.91:8000/api/business/policies/", "?key=", key, "&", $.param({"router_id__in": idBox})].join("")).success(function (data) {
+            $http.get([window.release_url, "?key=", key, "&router_id__in=", idBox].join("")).success(function (data) {
                 console.log(data);
                 for (var i = 0; i < data.count; i++) {
                     if (data.results[i].is_black) {
@@ -223,7 +258,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
         var black_mac = 0;
         var black_domain = 0;
         var key = $cookieStore.get("key");
-        $http.get([window.release_url, "?key=", key, "&", $.param({"router_id": idBox})].join("")).success(function (data) {
+        $http.get([window.release_url, "?key=", key, "&router_id__in=", idBox].join("")).success(function (data) {
             console.log(data);
             for (var i = 0; i < data.count; i++) {
                 if (data.results[i].is_black) {
@@ -286,7 +321,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
         $http.put([window.release_enable_url, "?key=", key].join(""), postdata)
     };
     $scope.addMac = function (bool) {
-        var data = prompt("请输入设备MAC码", "");
+        var data = prompt("请输入设备MAC码，如：00:00:00:00", "");
         if (data) {
             var postdata = {
                 "router_ids": idBox,
@@ -302,7 +337,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
 
     };
     $scope.addDomain = function (bool) {
-        var data = prompt("请输入域名", "");
+        var data = prompt("请输入域名，如：http://www.baidu.com", "");
         if (data) {
             var postdata = {
                 "router_ids": idBox,

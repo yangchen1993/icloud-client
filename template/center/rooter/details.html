@@ -3,120 +3,122 @@
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li class="active">路由器详情</li>
     </ol>
-    <div class="form-inline">
-        <button ui-sref="main.identify_conf" class="btn btn-info">认证设置</button>
-        <button ng-click="chazhao()" class="btn btn-info">放行设置</button>
-        <button ng-click="chazhao()" class="btn btn-info">删除</button>
+    <div class="details_panel">
+        <div class="details_panel_content">
+            <p>基本信息</p>
+            <div>
+                <p>
+                    <span>设备型号：</span>
+                    <span class="text-muted">MT7620A  V1</span>
+                </p>
+                <p>
+                    <span>绑定时间：</span>
+                    <span class="text-muted">2015-10-10 10：00</span>
+                </p>
+                <p>
+                    <span>MAC地址：</span>
+                    <span class="text-muted">xxx-xxx-xxx-xxx</span>
+                </p>
+                <p>
+                    <span>路由器SN码：</span>
+                    <span class="text-muted">xxx-xxx-xxx-xxx</span>
+                </p>
+                <p>
+                    <span>系统版本：</span>
+                    <span class="text-muted">V 1.0</span>
+                    <button class="btn btn-success" ng-click="update()">升级</button>
+                </p>
+            </div>
+        </div>
+        <div class="details_panel_content">
+            <p>运行状态</p>
+            <div>
+                <p>
+                    <span>连续运行时间：</span>
+                    <span class="text-muted">0天5小时18分</span>
+                </p>
+                <p>
+                    <span>接入人数：</span>
+                    <span class="text-muted">1234</span>
+                </p>
+                <p>
+                    <span>内存占比率：</span>
+                    <span class="text-muted">30%</span>
+                </p>
+                <p>
+                    <span>CPU负载率：</span>
+                    <span class="text-muted">30%</span>
+                </p>
+                <p>
+                    <button class="btn btn-success">查看流量统计</button>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#myModal" ng-click="progress()">重启路由器</button>
+                </p>
+            </div>
+        </div>
+        <div class="details_panel_content">
+            <p>设置</p>
+            <div>
+                <p>
+                    <span>WIFI名称：</span>
+                    <span class="text-muted" ng-bind="routers.router_groups.name"></span>
+                    <button class="btn btn-success" ng-click="modify()">修改</button>
+                </p>
+            </div>
+        </div>
     </div>
-    <div class="eq_m1">
-        <span class="h3">MAC码：</span>
-        <span class="h3">xxxx</span>
-        <hr>
-        <span>激活状态：</span> <span>已激活</span>
-        <span style="margin-left: 50px">激活时间：</span> <span>2015-10-15 17:50</span>
-        <hr>
-        <span>运行状态：</span> <span>正常运行</span>
-        <button class="btn btn-danger">停止</button>
-        <hr>
-        <span>所属商家：</span><span>张三</span>
-        <hr>
-        <span>所属店铺：</span><span>红旗连锁</span>
-        <span style="margin-left: 50px">店铺地址：</span><span>四川省 成都市 锦江区 春熙路123号</span>
-        <button class="btn btn-info" ng-click="jiebang()">解绑</button>
-        <hr>
-        <span>所属代理商：</span><span>大新前路商代</span>
+    <div class="details_panel1">
+        <p>商家信息</p>
+        <div>
+            <p>
+                <span>所属商家：</span>
+                <span class="text-muted">张三</span>
+            </p>
+            <p>
+                <span>所属店铺：</span>
+                <span class="text-muted">红旗连锁</span>
+                <button class="btn btn-success" ng-click="jiebang()">解绑</button>
+            </p>
+            <p>
+                <span>店铺所属行业：</span>
+                <span class="text-muted">零售</span>
+            </p>
+            <p>
+                <span>店铺地址：</span>
+                <span class="text-muted">四川省 成都市 春熙路</span>
+            </p>
+            <p>
+                <span>所属代理商：</span>
+                <span class="text-muted">李四</span>
+            </p>
+        </div>
     </div>
-    <div style="margin-top: 20px">
-        <span class="h3">运行情况:</span>
-    </div>
-    <hr style="margin-top: 10px">
-    <span>总访问量：</span><span>125445</span>
-    <span style="margin-left: 50px">今日访问量：</span><span>3356</span>
-    <hr style="margin-top: 10px">
-    <label for="meeting">日期：</label><input id="meeting" type="date" value="2014-01-01"/>
-    <span style="margin-left:10px">到</span>
-    <label for="meeting1" style="margin-left: 10px">日期：</label><input id="meeting1" type="date" value="2014-01-01"/>
-    <div id="main" style="height:400px"></div>
 </div>
-<script type="text/javascript">
-    // 路径配置
-    require.config({
-        paths: {
-            echarts: 'http://echarts.baidu.com/build/dist'
-        }
-    });
 
-    // 使用
-    require(
-            [
-                'echarts',
-                'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
-            ],
-            function (ec) {
-                // 基于准备好的dom，初始化echarts图表
-                var myChart = ec.init(document.getElementById('main'));
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">重启路由器</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <p>
+                        <span>完成进度：</span>
+                        <span id="progress_span">0</span>
+                        <span>%</span>
+                    </p>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="progress">
+                        <!--<span class="sr-only">40% Complete (success)</span>-->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 
-                var option = {
-                    tooltip : {
-                        trigger: 'axis'
-                    },
-                    legend: {
-                        data:['访问量']
-                    },
-                    calculable : true,
-                    xAxis : [
-                        {
-                            type : 'category',
-                            boundaryGap : false,
-                            data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
-                        }
-                    ],
-                    yAxis : [
-                        {
-                            type : 'value',
-                            axisLabel : {
-                                formatter: '{value} 次'
-                            }
-                        }
-                    ],
-                    series : [
-                        {
-                            name:'访问量',
-                            type:'line',
-                            data:[10305, 11254, 8896, 3325, 15421, 8999, 7677,5847,5589,8845,9987,6698],
-                            markPoint : {
-                                data : [
-                                    {type : 'max', name: '最大值'},
-                                    {type : 'min', name: '最小值'}
-                                ]
-                            },
-                            markLine : {
-                                data : [
-                                    {type : 'average', name: '平均值'}
-                                ]
-                            }
-                        },
-//                        {
-//                            name:'最低气温',
-//                            type:'line',
-//                            data:[1, -2, 2, 5, 3, 2, 0],
-//                            markPoint : {
-//                                data : [
-//                                    {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
-//                                ]
-//                            },
-//                            markLine : {
-//                                data : [
-//                                    {type : 'average', name : '平均值'}
-//                                ]
-//                            }
-//                        }
-                    ]
-                };
-
-
-                // 为echarts对象加载数据
-                myChart.setOption(option);
-            }
-    );
-</script>

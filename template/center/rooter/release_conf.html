@@ -5,47 +5,39 @@
     </ol>
     <div class="eq_m">
         <div class="form-inline">
-            <select class="form-control">
-                <option>MAC码</option>
-                <option>入库时间</option>
-                <option>商铺名称</option>
-                <option>行业</option>
-                <option>地区</option>
-                <option>运行状态</option>
+            <span>店铺：</span>
+            <input type="text" class="form-control" placeholder="商铺名称" style="width: 15% !important;" ng-model="search.groups__name__icontains">
+            <select class="form-control" ng-model="search.groups__category" style="width: 15% !important;" ng-options="v.name as v.name for v in category">
+                <option value="">选择行业</option>
             </select>
-            <input class="form-control" placeholder="请输入关键字搜索">
-            <button class="btn btn-info">搜索</button>
-        </div>
-        <hr>
-        <div class="form-inline">
-            <span>使用状态：</span>
-
-            <div class="radio">
-                <input type="radio" id="use" name="use_status" ng-click="route(1)">
-                <label for="use"><span>已使用路由器</span></label>
+            <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
+            <!--<input type="date" class="form-control" style="width: 15% !important;" ng-model="search.create_time__gte">-->
+            <!--<button class="btn btn-info" ng-click="eq_search(search)">查询</button>-->
+            <div>
+                <span>地区：</span>
+                <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__province" ng-options="v.id as v.name for v in province1" ng-change="select_p(search.groups__trade__province)">
+                    <option value="">省</option>
+                </select>
+                <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city" ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">
+                    <option value="">市</option>
+                </select>
+                <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area" ng-options="v.id as v.name for v in area1">
+                    <option value="">区/县</option>
+                </select>
             </div>
-            <div class="radio">
-                <input type="radio" id="nouse" name="use_status" ng-click="route(2)">
-                <label for="nouse"><span>未使用路由器</span></label>
+            <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
+            <div>
+                <span>路由：</span>
+                <input class="form-control" placeholder="MAC码" ng-model="search.mac__icontains">
             </div>
-            <span style="margin-left: 50px">运行状态：</span>
-
-            <div class="radio">
-                <input type="radio" id="normal" name="run_status">
-                <label for="normal"><span>正常</span></label>
+            <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
+            <div>
+                <span>时间：</span>
+                <input type="date" class="form-control" ng-model="search.create_time__gte"><span style="margin-left:5px">到</span>
+                <input type="date" class="form-control" ng-model="search.create_time__lte">
+                <button class="btn btn-info pull-right" ng-click="eq_reset()">重置</button>
+                <button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="eq_search(search)">搜索</button>
             </div>
-            <div class="radio">
-                <input type="radio" id="stop" name="run_status">
-                <label for="stop"><span>停用</span></label>
-            </div>
-            <div class="radio">
-                <input type="radio" id="pause" name="run_status">
-                <label for="pause"><span>暂停</span></label>
-            </div>
-
-            <button class="chazhao" ng-click="chazhao()" style="margin-left: 50px">按地区查找</button>
-            <button class="chazhao" ng-click="chazhao()">按入库时间查找</button>
-            <button class="chazhao" ng-click="chazhao()">按行业查找</button>
         </div>
     </div>
     <div style="margin-top: 20px">
@@ -67,23 +59,25 @@
             <td>认证方式</td>
             <td>MAC码</td>
             <td>入库时间</td>
+            <td>操作</td>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="p in grid.results">
-            <td><input type="checkbox" ng-click="addId(p.id,$index)"><span ng-bind="p.id" style="display: none"></span></td>
+            <td><input type="checkbox" value="{{p.id}}"></td>
             <td ng-bind="p.router_groups.name"></td>
             <td ng-bind="p.router_groups.category"></td>
             <td ng-bind="p.router_groups.trade_area.province+p.router_groups.trade_area.city+p.router_groups.trade_area.area+p.router_groups.trade_area.name"></td>
             <td ng-bind="p.isonline"></td>
             <td ng-bind="p.mac"></td>
             <td ng-bind="p.create_time"></td>
+            <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="conf_s(p.id)">设置</button></td>
         </tr>
         </tbody>
     </table>
     <div class="text-right">
         <!--<button class="btn btn-info">回收权限</button>-->
-        <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="conf(p)">设置</button>
+        <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="conf()">设置</button>
     </div>
     <div ng-include="'/template/partial/pagination.html'" style="margin-top: 20px"></div>
 </div>
@@ -97,7 +91,6 @@
                 <h4 class="modal-title" id="myModalLabel">放行设置</h4>
             </div>
             <div class="modal-body">
-
                     <span>白名单：</span>
                     <div style="border-top: 1px dotted #cccccc;margin-top: 10px;"></div>
                     <div style="width:50%;border-right: 1px dotted #cccccc;display: inline-block">

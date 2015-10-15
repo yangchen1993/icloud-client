@@ -185,7 +185,8 @@ iCloudService.service("$checkBox", ["$rootScope",
                 var selector = ["#", tableId, " :checkbox"].join("");
                 var checkBoxes = angular.element(selector);
                 angular.forEach(checkBoxes, function (v, k) {
-                    angular.element(v).prop("checked", !angular.element(v).prop("checked"))
+                    angular.element(v).prop("checked", !angular.element(v).prop("checked"));
+
                 })
             }
         }

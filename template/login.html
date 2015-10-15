@@ -1,28 +1,45 @@
 <link href="/css/login.css" rel="stylesheet">
-<div class="text-center" ng-keypress="enterEvent()">
-    <div class="log-panel">
-        <div class="title text-center">
-            <span class="h3">店家广告</span>
-        </div>
-        <hr>
-        <span class="h4" ng-bind="errorMsg.msg"></span>
+<!--<div class="text-center" ng-keypress="enterEvent()">-->
+    <!--<div class="log-panel">-->
+        <!--<div class="title text-center">-->
+            <!--<span class="h3">店家广告</span>-->
+        <!--</div>-->
+        <!--<hr>-->
+        <!--<span class="h4" ng-bind="errorMsg.msg"></span>-->
 
-        <div class="form-inline">
-            <input type="text" ng-model="auth.username">
-        </div>
-        <div class="form-inline">
-            <input type="password" ng-model="auth.password">
-        </div>
-        <div class="note text-right">
-            <label>
-                <a href="#">忘记密码</a>
-            </label>
-        </div>
-        <div ng-click="login(auth)" class="button text-center enter"<span class="h4">登录</span></div>
-    </div>
+        <!--<div class="form-inline">-->
+            <!--<input type="text" ng-model="auth.username">-->
+        <!--</div>-->
+        <!--<div class="form-inline">-->
+            <!--<input type="password" ng-model="auth.password">-->
+        <!--</div>-->
+        <!--<div class="note text-right">-->
+            <!--<label>-->
+                <!--<a href="#">忘记密码</a>-->
+            <!--</label>-->
+        <!--</div>-->
+        <!--<div ng-click="login(auth)" class="button text-center enter"><span class="h4">登录</span></div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<script>-->
+    <!--var height = $(window).height() - 100;-->
+    <!--$("body").css("height", height + "px")-->
+<!--</script>-->
+<div class="img_box text-center">
+    <img src="../img/login_logo.png" class="img">
 </div>
-
-<script>
-    var height = $(window).height() - 100;
-    $("body").css("height", height + "px")
-</script>
+<div class="login_modal" ng-keypress="enterEvent()">
+    <img src="../img/person.png" style="margin-bottom: 9px">
+    <input type="text" placeholder="请输入用户名" ng-model="auth.username">
+    <hr>
+    <img src="../img/eyes.png" style="margin-bottom: 5px">
+    <input type="password" placeholder="请输入密码" ng-model="auth.password">
+    <hr>
+    <!--<div>-->
+        <!--<input type="checkbox" id="rememberId">-->
+        <!--<label for="rememberId" class="text-muted">记住账号</label>-->
+    <!--</div>-->
+    <button class="btn btn-block btn-success" ng-click="login(auth)"><span class="h4">登录</span></button>
+    <p class="text-center msg"><span class="h4" ng-bind="errorMsg.msg"></span></p>
+</div>

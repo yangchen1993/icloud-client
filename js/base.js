@@ -31,13 +31,15 @@ window.city_url = [window.host, "/api/system/cities/city/"].join("");
 
 window.area_url = [window.host, "/api/system/cities/area/"].join("");
 
+window.trade_url = [window.host, "/api/system/cities/trades/"].join("");
+
 window.version_url = [window.host, "/api/routers/versions/"].join("");
 
 window.release_url = [window.host, "/api/business/policies/"].join("");
 
 window.release_enable_url = [window.host, "/api/business/policies/enable/"].join("");
 
-window.routers_groups_url = [window.host, "/api/routers/groups/"].join("");
+window.routers_groups_url = [window.host, "/api/groups/"].join("");
 
 var transform_error_message = function (msg) {
     if (_.isObject(msg)) {

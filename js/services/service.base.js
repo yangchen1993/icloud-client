@@ -217,3 +217,10 @@ iCloudService.service("$area", ['$http', '$cookieStore', function ($http, $cooki
         return $http.get([window.area_url, "?key=", key, "&city=", data].join(""));
     }
 }]);
+iCloudService.service("$trades", ["$http", "$cookieStore", "$window", function ($http, $cookieStore, $window) {
+
+    var key = $cookieStore.get("key");
+    this.get = function (data) {
+        return $http.get([$window.trade_url, "?key=", key, "&area=", data].join(""))
+    }
+}]);

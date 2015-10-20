@@ -1,22 +1,41 @@
 <div style="padding: 10px">
-    <button class="btn btn-success" data-toggle="modal" data-target="#storeModal" ng-click="storeModal()">添加店铺
+    <button class="btn btn-success" data-toggle="modal" data-target="#group-modal" ng-click="groupModal()">添加店铺
     </button>
 
     <div class="row">
-        <div class="col-sm-6" ng-repeat="group in group_pages.results">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+        <div class="col-sm-4">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="group in group_pages.results" ng-click="showRouter(group.id)">
                     <span ng-bind="group.name"></span>
-                </div>
-                <div class="panel-body">
-                    路由1....
-                </div>
-            </div>
+                    <button class="btn btn-success btn-sm" ng-click="groupEditModal(group.id)">编辑</button>
+                    <button class="btn btn-danger btn-sm" ng-click="groupDestroy(group.id)">删除</button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-8">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="router in router_pages.results" ng-mouseover="routerDetail()">
+                    <label class="label label-default" ng-bind="router.mac"></label>
+                    <label class="label label-default" ng-bind="router.ssid"></label>
+                    <label class="label label-default">
+                        <span ng-if="router.is_online == true" class="label">在线</span>
+                        <span ng-if="router.is_online == false" class="label">离线</span>
+                    </label>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#router-login-setup-modal"
+                            ng-click="setupModal(router.id)">
+                        认证设置
+                    </button>
+                    <button class="btn btn-success btn-sm" data-toggle="modal"
+                            data-target="#router-black-white-setup-modal">黑白名单设置
+                    </button>
+                    <button class="btn btn-danger btn-sm" ng-click="routerUnbind(router.id)">解绑</button>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="storeModal">
+<div class="modal fade" id="group-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -102,6 +121,70 @@
                     </div>
                 </form>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="router-login-setup-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">认证设置</h4>
+            </div>
+            <div class="modal-body">
+                <div class="btn-group">
+                    <label ng-class="{btn: true, 'btn-primary': true, active: auth == '0'}">
+                        <input type="radio" class="hidden" ng-model="auth" value="0"/>
+                        免认证
+                    </label>
+                    <label ng-class="{btn: true, 'btn-primary': true, active: auth == '1'}">
+                        <input type="radio" class="hidden" ng-model="auth" value="1"/>
+                        认证登录
+                    </label>
+                </div>
+                <div ng-show="auth == '1'" class="row" style="margin-top: 25px">
+                    <div class="col-md-6">
+                        <p title="连网时间超出认证有效期后需再次认证才能上网">认证有效时间</p>
+
+                        <div class="form-inline">
+                            <input type="text" class="form-control" ng-model="setup.hours" style="width:50px">
+                            <span>小时</span>
+                            <input type="text" class="form-control" ng-model="setup.mins" style="width:50px">
+                            <span>分</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p title="每个设备每天认证次数限制">认证限制</p>
+
+                        <div class="form-inline">
+                            <label>
+                                <select class="form-control" ng-model="setup.auth_limit_times" style="width: 80px !important">
+                                    <option value="0">关闭</option>
+                                    <option value="1">1次</option>
+                                    <option value="2">2次</option>
+                                    <option value="3">3次</option>
+                                    <option value="4">4次</option>
+                                    <option value="5">5次</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <span>认证方式</span>
+                        <div>
+                            <label><input type="checkbox" value="tel">手机号登录</label>
+                            <label><input type="checkbox" value="wechat">微信登录</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="saveSetup(setup)">保存</button>
+                <button class="btn btn-danger" data-dismiss="modal">取消</button>
             </div>
         </div>
     </div>

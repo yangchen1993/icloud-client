@@ -41,6 +41,8 @@ window.release_enable_url = [window.host, "/api/business/policies/enable/"].join
 
 window.routers_groups_url = [window.host, "/api/groups/"].join("");
 
+window.router_setup_url = [window.host, "/api/business/setup/"].join("");
+
 var transform_error_message = function (msg) {
     if (_.isObject(msg)) {
         var message = "";

@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.host = "http://mb.idianjia.cn:8000";
-window.host = "http://192.168.0.112";
+window.host = "http://mb.idianjia.cn:8801";
+//window.host = "http://192.168.0.112";
 
 window.media_host = "http://mb.idianjia.cn:10000";
 
@@ -42,6 +42,8 @@ window.release_enable_url = [window.host, "/api/business/policies/enable/"].join
 window.routers_groups_url = [window.host, "/api/groups/"].join("");
 
 window.router_setup_url = [window.host, "/api/business/setup/"].join("");
+
+window.router_policy_url = [window.host, "/api/business/policies/"].join("");
 
 var transform_error_message = function (msg) {
     if (_.isObject(msg)) {

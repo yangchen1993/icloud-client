@@ -1,0 +1,31 @@
+<div style="padding:10px">
+    <ol class="breadcrumb">
+        <li class="active">代理商管理</li>
+    </ol>
+
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+        <tr>
+            <td>代理商账号</td>
+            <td>代理商名称</td>
+            <td>代理商级别</td>
+            <td>管辖区域</td>
+            <td>路由器数量（已用/未用）</td>
+            <td>创建时间</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="p in grid.results">
+            <td ng-bind="p.username"></td>
+            <td ng-bind="p.legal_person_name"></td>
+            <td ng-bind="p.role.name"></td>
+            <td ng-bind="p.province+ ' '+p.city+' '+ p.area"></td>
+            <td>路由器数量（已用/未用）</td>
+            <td ng-bind="p.create_time"></td>
+            <td><a ui-sref="main.agent_message" ng-click="see(p.id)">查看</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div ng-include="'/template/partial/pagination.html'"></div>
+</div>

@@ -27,7 +27,7 @@ iCloudController.controller("IndexController", ["$scope", "$http", "$window", "$
 
             data.password = CryptoJS.SHA1(data.password).toString();
 
-            $auth.login(data)
+            $auth.login(data);
         };
     }]);
 

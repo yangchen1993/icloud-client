@@ -3,7 +3,7 @@
  */
 
 //window.host = "http://mb.idianjia.cn:8000";
-window.host = "http://192.168.0.112";
+window.host = "http://mb.idianjia.cn:8801";
 
 window.media_host = "http://mb.idianjia.cn:10000";
 
@@ -42,6 +42,10 @@ window.release_enable_url = [window.host, "/api/business/policies/enable/"].join
 window.routers_groups_url = [window.host, "/api/groups/"].join("");
 
 window.router_setup_url = [window.host, "/api/business/setup/"].join("");
+
+window.agent_message_url = [window.host, "/api/users/getCurrentUser/"].join("");
+
+window.agent_url = [window.host, "http://192.168.0.91:8000/api/admin/agent/"].join();
 
 var transform_error_message = function (msg) {
     if (_.isObject(msg)) {

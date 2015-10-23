@@ -44,7 +44,6 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
         };
         var province = $province.get();
         province.success(function (data) {
-            //$scope.category = data.results;
             $scope.province1 = data;
         });
         $scope.select_p = function (index) {
@@ -102,7 +101,7 @@ iCloudController.controller("VersionManagementController", ['$scope', '$window',
                 .error(function (data) {
                     $window.alert(transform_error_message(data.msg))
                 })
-        };
+        }
 
         $scope.remove = function (id) {
             if (confirm("确定删除?删除后无法恢复!")) {
@@ -139,7 +138,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         var data = prompt("当前WIFI名称：" + $scope.routers.router_groups.name);
         if (data) {
             var key = $cookieStore.get("key");
-            $http.patch(["http://192.168.0.91:8000/api/routers/groups/", $scope.routers.router_groups.id,"/","?key=",key].join(""),{"name":data});
+            $http.patch([window.routers_groups_url, $scope.routers.router_groups.id,"/","?key=",key].join(""),{"name":data});
         }
     };
     $scope.jiebang = function () {
@@ -173,8 +172,12 @@ iCloudController.controller("IdentifyConfController", ['$scope', function ($scop
     }
 }]);
 
-iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cookieStore', '$http', '$checkBox', '$filter', '$province', '$city', '$area', function ($scope, $grid, $cookieStore, $http, $checkBox, $filter, $province, $city, $area) {
+iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cookieStore', '$http', '$checkBox', '$filter','$category', '$province', '$city', '$area', function ($scope, $grid, $cookieStore, $http, $checkBox, $filter, $category, $province, $city, $area) {
     $checkBox.enableCheck("table-eq");
+    var promise = $category.get();
+    promise.success(function (data) {
+        $scope.category = data.results;
+    });
     $scope.eq_search = function (data) {
         var tmp = angular.copy(data);
         tmp.create_time__gte = $filter('date')(tmp.create_time__gte, 'yyyy-MM-dd HH:mm:ss');
@@ -194,7 +197,6 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
     };
     var province = $province.get();
     province.success(function (data) {
-        //$scope.category = data.results;
         $scope.province1 = data;
     });
     $scope.select_p = function (index) {

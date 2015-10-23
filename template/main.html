@@ -1,130 +1,140 @@
 <div ng-include="'/template/top/header.html'"></div>
-
-<script>
-    var full_h=$(window).height();
-    $(".nav").css("height",full_h+"px");
-    $(".content").css("height",full_h-60+"px")
-</script>
 <div>
     <div class="nav nav_yc">
         <div class="text-center">
-            <img src="/img/logo.png">
+            <img src="/img/login_logo.png">
+            <img src="img/face.png">
+
+            <p class="text-center">赵日天</p>
+
+            <p>Administrator</p>
         </div>
-        <hr>
         <ul class="list-group">
             <li>
-                <div></div>
-                <span class="glyphicon glyphicon-user"></span>
-                <a href="">权限列表</a>
+                <div class="menu_parents">
+                    <div class="out_lie"></div>
+                    <a href="">权限列表</a>
+                    <i class="glyphicon glyphicon-triangle-bottom icon_self"></i>
+                </div>
                 <ul>
                     <li>
-                        <div></div>
-                        <span class="glyphicon glyphicon-link"></span>
+                        <div class="in_lie"></div>
                         省级代理
                     </li>
                     <li>
-                        <span class="glyphicon glyphicon-link"></span>
-                        <div></div>
+                        <div class="in_lie"></div>
                         市级代理
                     </li>
                     <li>
-                        <span class="glyphicon glyphicon-link"></span>
-                        <div></div>
+                        <div class="in_lie"></div>
                         商圈代理
                     </li>
                     <li>
-                        <span class="glyphicon glyphicon-link"></span>
-                        <div></div>
+                        <div class="in_lie"></div>
                         商店
                     </li>
                     <li>
-                        <span class="glyphicon glyphicon-link"></span>
-                        <div></div>
+                        <div class="in_lie"></div>
                         <a ui-sref=".functions" href="#">功能列表</a>
                     </li>
                 </ul>
             </li>
+            <div style="border-top:1px solid #383840"></div>
             <li>
-                <div></div>
-                <span class="glyphicon glyphicon-download-alt"></span>
-                <a ui-sref=".ads">我的广告</a>
+                <div class="menu_parents">
+                    <div class="out_lie"></div>
+                    <a ui-sref=".ads">我的广告</a>
+                    <i class="glyphicon glyphicon-triangle-bottom icon_self"></i>
+                </div>
                 <ul>
                     <li>
-                        <span class="glyphicon glyphicon-link"></span>
-                        <div></div>
-                        <a ui-sref=".paid" href="">
-                        竞价广告
-                        </a>
+                        <div class="in_lie"></div>
+                        <a ui-sref=".paid" href="">竞价广告</a>
                     </li>
                 </ul>
             </li>
+            <div style="border-top: 1px solid #383840"></div>
             <li>
-                <div></div>
-                <span class="glyphicon glyphicon-usd"></span>
-                <a ui-sref=".m3" href="#">广告分账</a>
+                <div class="menu_parents">
+                    <div class="out_lie"></div>
+                    <a ui-sref=".m3" href="#">广告分账</a>
+                    <i class="glyphicon glyphicon-triangle-bottom icon_self"></i>
+                </div>
                 <ul>
                     <li>
-                        <div></div>
-                        <span class="glyphicon glyphicon-link"></span>
+                        <div class="in_lie"></div>
                         财务
                     </li>
                     <li>
-                        <span class="glyphicon glyphicon-link"></span>
-                        <div></div>
+                        <div class="in_lie"></div>
                         明细
                     </li>
                     <li>
-                        <span class="glyphicon glyphicon-link"></span>
-                        <div></div>
+                        <div class="in_lie"></div>
                         优惠活动
                     </li>
                 </ul>
             </li>
+            <div style="border-top: 1px solid #383840"></div>
             <li>
-                <div></div>
-                <span class="glyphicon glyphicon-screenshot"></span>
-                <a ui-sref=".eq_management">设备管理</a>
+                <div class="menu_parents">
+                    <div class="out_lie"></div>
+                    <a ui-sref=".eq_management">设备管理</a>
+                    <i class="glyphicon glyphicon-triangle-bottom icon_self"></i>
+                </div>
                 <ul>
                     <li>
-                        <div></div>
-                        <span class="glyphicon glyphicon-link"></span>
+                        <div class="in_lie"></div>
                         <a ui-sref=".m1">进销存</a>
                     </li>
                     <li>
-                        <span class="glyphicon glyphicon-link"></span>
-                        <div></div>
-                        <a ui-sref="main.version_manage">版本管理</a>
+                        <div class="in_lie"></div>
+                        <a ui-sref=".version_manage">版本管理</a>
                     </li>
                     <li>
-                        <span class="glyphicon glyphicon-link"></span>
-                        <div></div>
-                        <a ui-sref="main.identify_conf">认证设置</a>
+                        <div class="in_lie"></div>
+                        <a ui-sref=".identify_conf">认证设置</a>
                     </li>
                     <li>
-                        <span class="glyphicon glyphicon-link"></span>
-                        <div></div>
-                        <a ui-sref="main.release_conf">放行设置</a>
+                        <div class="in_lie"></div>
+                        <a ui-sref=".release_conf">放行设置</a>
                     </li>
                 </ul>
             </li>
+            <div style="border-top: 1px solid #383840"></div>
             <li>
-                <div></div>
-                <span class="glyphicon glyphicon-screenshot"></span>
-                <a ui-sref=".shop_management">店铺管理</a>
+                <div class="menu_parents">
+                    <div class="out_lie"></div>
+                    <a ui-sref=".shop_management">店铺管理</a>
+                    <i class="glyphicon glyphicon-triangle-bottom icon_self"></i>
+                </div>
+            </li>
+            <div style="border-top: 1px solid #383840"></div>
+            <li>
+                <div class="menu_parents">
+                    <div class="out_lie"></div>
+                    <a ui-sref=".agent_manage">代理商管理</a>
+                    <!--<i class="glyphicon glyphicon-triangle-bottom icon_self"></i>-->
+                </div>
+                <ul>
+                    <li>
+                        <div class="in_lie"></div>
+                        <a ui-sref=".create_agent">新增代理商</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
     <div ui-view="" class="content"></div>
+    <div style="float: left;background-color: #fe5722;width: 86%;height: 30px"></div>
 </div>
 <script>
-    $("li").mouseover(function () {
-        $(this).find("div").eq(0).css("display", "inline");
-    })
-    $("li").mouseout(function () {
-        $(this).find("div").eq(0).css("display", "none");
-    })
-    $(".list-group").find("a").click(function () {
+    var full_h = $(window).height() - 60;
+    $(".nav_yc").css("height", full_h + "px");
+    $(".content").css("height", full_h - 30 + "px");
+
+    $(".menu_parents").click(function () {
         $(this).siblings("ul").slideToggle("slow");
-        $(this).siblings("div").css("display", "inline");
-    })
+        $(this).siblings("ul").css("background-color", "#45454a")
+    });
 </script>

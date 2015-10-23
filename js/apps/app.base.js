@@ -89,4 +89,19 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/rooter/release_conf.html",
             controller: "ReleaseConfController"
         })
+        .state("main.agent_manage", {
+            url: "/agent_manage",
+            templateUrl: "template/center/agent_manage/eq_manage.html",
+            controller: "AgentManageController"
+        })
+        .state("main.create_agent", {
+            url: "/create_agent",
+            templateUrl: "template/center/agent_manage/create_agent.html",
+            controller: "CreateAgentController"
+        })
+        .state("main.agent_message", {
+            url: "/agent_message",
+            templateUrl: "template/center/agent_manage/agent_message.html",
+            controller: "AgentMessageController"
+        })
 });

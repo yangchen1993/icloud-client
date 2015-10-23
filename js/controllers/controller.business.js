@@ -13,7 +13,6 @@ iCloudController.controller("ShopManagementController",
         "$area",
         "$trades",
         "$cookieStore",
-        "$timeout",
         "$blackWhite",
         function ($scope,
                   $http,
@@ -159,13 +158,10 @@ iCloudController.controller("ShopManagementController",
                     })
             };
 
-
+            var whiteListCheckBox = angular.element(".white-list-checkbox");
+            var blackListCheckBox = angular.element(".black-list-checkbox");
             $scope.BlackWhiteModal = function (router_id) {
                 $scope.router_id = router_id;
-                var whiteListCheckBox = angular.element("#white-list-checkbox");
-                var blackListCheckBox = angular.element("#black-list-checkbox");
-
-                console.log($blackWhite);
 
                 $blackWhite.get(router_id).success(function (data) {
                     $scope.whiteList = data.results;
@@ -174,23 +170,74 @@ iCloudController.controller("ShopManagementController",
                 $blackWhite.get(router_id, true).success(function (data) {
                     $scope.blackList = data.results;
                 });
+
+                angular.forEach(whiteListCheckBox, function (value, key) {
+                    $(value).prop("checked", true);
+                })
+
             };
 
-            $scope.createWhite = function (white) {
+            $scope.createBlackWhite = function (content, is_black) {
+                is_black = is_black || false;
+
                 var data = {
-                    "content": white,
-                    "is_black": false,
-                    "enable": true
+                    "content": content,
+                    "is_black": 0,
+                    "enable": 1,
+                    "router_id": $scope.router_id
                 };
+
+                if (is_black) {
+                    data.is_black = 1;
+                }
+
                 $http.post([$window.router_policy_url, "?key=", $cookieStore.get("key")].join(""), data)
                     .success(function (data) {
-                        $blackWhite.get($scope.router_id).success(function (data) {
-                            $scope.whiteList = data.results;
-                        });
+                        if (is_black) {
+                            $blackWhite.get($scope.router_id, true).success(function (data) {
+                                $scope.blackList = data.results;
+                            })
+                        } else {
+                            $blackWhite.get($scope.router_id).success(function (data) {
+                                $scope.whiteList = data.results;
+                            });
+                        }
+                    })
+            };
+
+            $scope.destroyBlackWhite = function (id, is_black) {
+                is_black = is_black || false;
+
+                $http.delete([$window.router_policy_url, id, "/", "?key=", $cookieStore.get("key")].join(""))
+                    .success(function (data) {
+                        if (is_black) {
+                            $blackWhite.get($scope.router_id, true).success(function (data) {
+                                $scope.blackList = data.results;
+                            });
+                        } else {
+                            $blackWhite.get($scope.router_id).success(function (data) {
+                                $scope.whiteList = data.results;
+                            });
+                        }
+                    })
+            };
+
+            $scope.filteringBlackWhite = function (is_black) {
+                is_black = is_black || false;
+                if (is_black) {
+                    var blackCheckedContentType = [];
+                    angular.forEach(blackListCheckBox, function (value, kye) {
+                        var $value = angular.element(value);
+                        if ($value.prop("checked")) {
+                            blackCheckedContentType.push($value.val())
+                        }
+                    });
+                    if (blackCheckedContentType.length == blackListCheckBox.length) {
                         $blackWhite.get($scope.router_id, true).success(function (data) {
                             $scope.blackList = data.results;
                         })
-                    })
+                    }
+                }
             };
 
             $scope.groupEditModal = function () {

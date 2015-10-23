@@ -26,7 +26,7 @@
                         认证设置
                     </button>
                     <button class="btn btn-success btn-sm" data-toggle="modal"
-                            data-target="#router-black-white-setup-modal">黑白名单设置
+                            data-target="#router-black-white-setup-modal" ng-click="BlackWhiteModal(router.id)">黑白名单设置
                     </button>
                     <button class="btn btn-danger btn-sm" ng-click="routerUnbind(router.id)">解绑</button>
                 </li>
@@ -126,7 +126,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="router-login-setup-modal">
+<div class="modal animated pulse" id="router-login-setup-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -162,7 +162,8 @@
 
                         <div class="form-inline">
                             <label>
-                                <select class="form-control" ng-model="setup.auth_limit_times" style="width: 80px !important">
+                                <select class="form-control" ng-model="setup.auth_limit_times"
+                                        style="width: 80px !important">
                                     <option value="0">关闭</option>
                                     <option value="1">1次</option>
                                     <option value="2">2次</option>
@@ -175,10 +176,108 @@
                     </div>
                     <div class="col-md-12">
                         <span>认证方式</span>
+
                         <div>
-                            <label><input type="checkbox" value="tel">手机号登录</label>
-                            <label><input type="checkbox" value="wechat">微信登录</label>
+                            <label><input class="login-way" type="checkbox" value="tel">手机号登录</label>
+                            <label><input class="login-way" type="checkbox" value="wechat">微信登录</label>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="saveSetup(setup)">保存</button>
+                <button class="btn btn-danger" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal animated pulse" id="router-black-white-setup-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">黑白名单设置</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>白名单</h4>
+
+                        <div class="col-sm-5">
+                            <label>
+                                <input class="white-list-checkbox" type="checkbox" value="0">MAC地址
+                            </label>
+                            <label>
+                                <input class="white-list-checkbox" type="checkbox" value="1">域名
+                            </label>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" placeholder="mac或网址"
+                                       aria-describedby="sizing-addon3" ng-model="white">
+                                <span class="input-group-addon btn btn-sm" id="sizing-addon3" ng-click="createWhite(white)">添加</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <table class="table table-condensed table-hover">
+                                <tr ng-show="whiteList.length === 0">
+                                    <td align="center" colspan="3">
+                                        <label>没有白名单</label>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="w in whiteList">
+                                    <td>
+                                        <input class="white-item" type="checkbox" ng-value="w.id">
+                                    </td>
+                                    <td align="center" ng-bind="w.content"></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger" ng-click="destroyWhite(w.id)">删除</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <h4>黑名单</h4>
+
+                        <div class="col-sm-5">
+                            <label>
+                                <input class="white-list-checkbox" type="checkbox" value="0">MAC地址
+                            </label>
+                            <label>
+                                <input class="white-list-checkbox" type="checkbox" value="1">域名
+                            </label>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" placeholder="mac或网址"
+                                       aria-describedby="sizing-addon4">
+                                <span class="input-group-addon btn btn-sm" id="sizing-addon4">添加</span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <table class="table table-condensed table-hover">
+                                <tr ng-show="blackList.length === 0">
+                                    <td align="center" colspan="3">
+                                        <label>没有黑名单</label>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="b in blackList">
+                                    <td>
+                                        <input class="white-item" type="checkbox" ng-value="b.id">
+                                    </td>
+                                    <td align="center" ng-bind="b.content"></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger" ng-click="destroyBlack(b.id)">删除</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>

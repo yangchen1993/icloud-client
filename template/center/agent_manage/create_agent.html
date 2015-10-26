@@ -1,15 +1,15 @@
 <div style="padding:10px">
     <ol class="breadcrumb">
         <li><a ui-sref="main.agent_manage">代理商管理</a></li>
-        <li class="active">新增代理商</li>
+        <li class="active">新增代理商账号</li>
     </ol>
 
     <div style="padding-left:35%" class="agent_message">
         <p class="h3" style="margin-left: -100px">个人信息</p>
 
         <div class="form-inline">
-            <span>手机号码：</span>
-            <input class="form-control" type="text" style="margin-left: 16px" ng-model="agent.tel" ng-blur="check_tel()" id="tel">
+            <span>登录账号：</span>
+            <input class="form-control" type="text" style="margin-left: 16px" ng-model="agent.tel" ng-blur="check_tel()" id="tel" placeholder="手机号码">
         </div>
         <div class="form-inline">
             <span>登录密码：</span>

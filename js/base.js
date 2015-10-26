@@ -3,7 +3,7 @@
  */
 
 //window.host = "http://mb.idianjia.cn:8000";
-window.host = "http://192.168.0.112";
+window.host = "http://mb.idianjia.cn:8801";
 
 window.media_host = "http://mb.idianjia.cn:10000";
 

@@ -99,6 +99,11 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/agent_manage/create_agent.html",
             controller: "CreateAgentController"
         })
+        .state("main.create_business", {
+            url: "/create_business",
+            templateUrl: "template/center/agent_manage/create_business.html",
+            controller: "CreateBusinessController"
+        })
         .state("main.agent_message", {
             url: "/agent_message",
             templateUrl: "template/center/agent_manage/agent_message.html",

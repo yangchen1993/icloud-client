@@ -216,13 +216,14 @@
                         <div class="col-sm-7">
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" placeholder="mac或网址"
-                                       aria-describedby="sizing-addon3" ng-model="white">
-                                <span class="input-group-addon btn btn-sm" id="sizing-addon3" ng-click="createWhite(white)">添加</span>
+                                       aria-describedby="sizing-addon3" ng-model="whiteContent">
+                                <span class="input-group-addon btn btn-sm" id="sizing-addon3"
+                                      ng-click="createBlackWhite(whiteContent)">添加</span>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" style="height: 300px; overflow-y: auto">
                             <table class="table table-condensed table-hover">
-                                <tr ng-show="whiteList.length === 0">
+                                <tr ng-hide="whiteList.length > 0">
                                     <td align="center" colspan="3">
                                         <label>没有白名单</label>
                                     </td>
@@ -233,7 +234,8 @@
                                     </td>
                                     <td align="center" ng-bind="w.content"></td>
                                     <td>
-                                        <button class="btn btn-sm btn-danger" ng-click="destroyWhite(w.id)">删除</button>
+                                        <button class="btn btn-xs btn-danger" ng-click="destroyBlackWhite(w.id)">删除
+                                        </button>
                                     </td>
                                 </tr>
                             </table>
@@ -244,7 +246,7 @@
                         <h4>黑名单</h4>
 
                         <div class="col-sm-5">
-                            <label>
+                            <label ng-click="filteringBlackWhite()">
                                 <input class="white-list-checkbox" type="checkbox" value="0">MAC地址
                             </label>
                             <label>
@@ -254,14 +256,15 @@
                         <div class="col-sm-7">
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" placeholder="mac或网址"
-                                       aria-describedby="sizing-addon4">
-                                <span class="input-group-addon btn btn-sm" id="sizing-addon4">添加</span>
+                                       aria-describedby="sizing-addon4" ng-model="blackContent">
+                                <span class="input-group-addon btn btn-sm" id="sizing-addon4"
+                                      ng-click="createBlackWhite(blackContent,true)">添加</span>
                             </div>
                         </div>
 
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" style="height: 300px; overflow-y: auto">
                             <table class="table table-condensed table-hover">
-                                <tr ng-show="blackList.length === 0">
+                                <tr ng-hide="blackList.length > 0">
                                     <td align="center" colspan="3">
                                         <label>没有黑名单</label>
                                     </td>
@@ -272,7 +275,9 @@
                                     </td>
                                     <td align="center" ng-bind="b.content"></td>
                                     <td>
-                                        <button class="btn btn-sm btn-danger" ng-click="destroyBlack(b.id)">删除</button>
+                                        <button class="btn btn-xs btn-danger" ng-click="destroyBlackWhite(b.id, true)">
+                                            删除
+                                        </button>
                                     </td>
                                 </tr>
                             </table>

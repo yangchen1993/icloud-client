@@ -1,45 +1,75 @@
-<div style="padding:10px">
-    <ol class="breadcrumb">
+<div class="top_content">
+    <ol class="breadcrumb" style="background-color: #1fbba6">
         <li class="active">设备管理</li>
     </ol>
-    <a data-toggle="collapse" href="#advanced_search">高级搜索</a>
-    <div class="eq_m collapse well" id="advanced_search">
-        <div class="form-inline">
-            <span>店铺：</span>
-            <input type="text" class="form-control" placeholder="商铺名称" style="width: 15% !important;" ng-model="search.groups__name__icontains">
-            <select class="form-control" ng-model="search.groups__category" style="width: 15% !important;" ng-options="v.name as v.name for v in category">
-                <option value="">选择行业</option>
-            </select>
-            <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
-            <!--<input type="date" class="form-control" style="width: 15% !important;" ng-model="search.create_time__gte">-->
-            <!--<button class="btn btn-info" ng-click="eq_search(search)">查询</button>-->
-            <div>
-                <span>地区：</span>
-                <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__province" ng-options="v.id as v.name for v in province1" ng-change="select_p(search.groups__trade__province)">
-                    <option value="">省</option>
+    <div>
+        <div><span class="glyphicon glyphicon-map-marker"></span>全部<div></div>
+        </div>
+        <div><span class="glyphicon glyphicon-heart"></span>未查询<div></div>
+        </div>
+        <div><span class="glyphicon glyphicon-user"></span>已查询<div></div>
+        </div>
+        <div><span class="glyphicon glyphicon-cog"></span>未知<div></div>
+        </div>
+    </div>
+</div>
+
+<div class="form-inline search_panel">
+    <span>已使用路由：</span><input type="text" class="form-control" style="width: 150px">
+    <span>状态：</span><input type="text" class="form-control" style="width: 150px">
+    <span>地区：</span><input type="text" class="form-control" style="width: 150px">
+    <button class="btn btn-info">查询</button>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#advanced_search" aria-expanded="false" aria-controls="advanced_search">高级搜索 </button>
+    <div class="collapse" id="advanced_search">
+        <div class="well">
+            <div class="form-inline">
+                <span>店铺：</span>
+                <input type="text" class="form-control" placeholder="商铺名称" style="width: 15% !important;"
+                       ng-model="search.groups__name__icontains">
+                <select class="form-control" ng-model="search.groups__category" style="width: 15% !important;"
+                        ng-options="v.name as v.name for v in category">
+                    <option value="">选择行业</option>
                 </select>
-                <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city" ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">
-                    <option value="">市</option>
-                </select>
-                <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area" ng-options="v.id as v.name for v in area1">
-                    <option value="">区/县</option>
-                </select>
-            </div>
-            <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
-            <div>
-                <span>路由：</span>
-                <input class="form-control" placeholder="MAC码" ng-model="search.mac__icontains">
-            </div>
-            <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
-            <div>
-                <span>时间：</span>
-                <input type="date" class="form-control" ng-model="search.create_time__gte"><span style="margin-left:5px">到</span>
-                <input type="date" class="form-control" ng-model="search.create_time__lte">
-                <button class="btn btn-info pull-right" ng-click="eq_reset()">重置</button>
-                <button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="eq_search(search)">搜索</button>
+
+                <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
+                <!--<input type="date" class="form-control" style="width: 15% !important;" ng-model="search.create_time__gte">-->
+                <!--<button class="btn btn-info" ng-click="eq_search(search)">查询</button>-->
+                <div>
+                    <span>地区：</span>
+                    <select class="form-control" style="width: 15% !important;"
+                            ng-model="search.groups__trade__province" ng-options="v.id as v.name for v in province1"
+                            ng-change="select_p(search.groups__trade__province)">
+                        <option value="">省</option>
+                    </select>
+                    <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city"
+                            ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">
+                        <option value="">市</option>
+                    </select>
+                    <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area"
+                            ng-options="v.id as v.name for v in area1">
+                        <option value="">区/县</option>
+                    </select>
+                </div>
+                <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
+                <div>
+                    <span>路由：</span>
+                    <input class="form-control" placeholder="MAC码" ng-model="search.mac__icontains">
+                </div>
+                <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
+                <div>
+                    <span>时间：</span>
+                    <input type="date" class="form-control" ng-model="search.create_time__gte"><span
+                        style="margin-left:5px">到</span>
+                    <input type="date" class="form-control" ng-model="search.create_time__lte">
+                    <button class="btn btn-info pull-right" ng-click="eq_reset()">重置</button>
+                    <button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="eq_search(search)">搜索
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+</div>
+<div style="padding:10px">
     <div style="margin-top: 20px">
         <span>数量：</span>
         <span ng-bind="grid.count"></span>
@@ -69,7 +99,7 @@
             <td ng-bind="p.isonline"></td>
             <td ng-bind="p.mac"></td>
             <td ng-bind="p.create_time"></td>
-            <td><a ui-sref="main.details" ng-click="search_details(p)">查看</a><a style="margin-left: 10px" href="" ng-click="jiebang()">解绑</a></td>
+            <td><a ui-sref="main.details" ng-click="search_details(p)">查看</a><a style="margin-left: 10px" ng-click="jiebang()">解绑</a></td>
         </tr>
         </tbody>
     </table>

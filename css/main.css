@@ -1,5 +1,5 @@
 /*header*/
-p, ul {
+p, ul,ol,ul {
     margin: 0;
     padding: 0;
 }
@@ -152,7 +152,7 @@ p, ul {
 
 .warn {
     width: 80px;
-    background-color: green;
+    background-color: #00a551;
     border-radius: 5px;
     color: #fff;
     margin: -30px 0 0 170px;
@@ -183,7 +183,10 @@ p, ul {
     float: left;
     display: none;
 }
-
+.open_menu>i{
+    margin-left: 90px;
+    color: #949ea8;
+}
 .open_menu:hover div {
     display: inline;
 }
@@ -229,7 +232,6 @@ p, ul {
 .menu_child > li:hover a {
     margin-left: 25px
 }
-
 
 /*.menu_parents:hover {*/
 /*background: #1fb5ad 10px 0;*/
@@ -300,7 +302,10 @@ p, ul {
     float: left;
     overflow: scroll;
 }
-
+thead{
+    background-color: #eceeef;
+    font-family: "Microsoft YaHei";
+}
 .footer {
     width: 82%;
     height: 50px;

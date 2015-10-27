@@ -1,0 +1,79 @@
+                <h4 class="modal-title">店铺信息</h4>
+                <form class="form-horizontal" ng-submit="saveGroups(group)">
+                    <input type="hidden" ng-model="group.id">
+
+                    <div class="form-group">
+                        <label for="inputGroupName" class="col-sm-2 control-label">店铺名称:</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputGroupName" ng-model="group.name"
+                                   placeholder="店铺名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">联系电话:</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="group.tel"
+                                   placeholder="联系电话">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">行业:</label>
+
+                        <div class="col-sm-9">
+                            <select ng-model="group.category" ng-options="v.name as v.name for v in categories">
+                                <option value="">--选择行业--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">店铺地址:</label>
+
+                        <div class="col-sm-10">
+                            <select ng-model="group.province"
+                                    ng-options="v.id as v.name for v in province1"
+                                    ng-change="select_p(group.province)">
+                                <option value="">省</option>
+                            </select>
+                            <select ng-model="group.city" ng-options="v.id as v.name for v in city1"
+                                    ng-change="select_c(group.city)">
+                                <option value="">市</option>
+                            </select>
+                            <select ng-model="group.area" ng-options="v.id as v.name for v in area1"
+                                    ng-change="select_area(group.area)">
+                                <option value="">区/县</option>
+                            </select>
+                            <select ng-model="group.trade" ng-options="v.id as v.name for v in trades">
+                                <option value="">商圈</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">详细地址:</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="group.address"
+                                   placeholder="详细地址">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">描述:</label>
+
+                        <div class="col-sm-9">
+                            <textarea type="text" class="form-control" ng-model="group.description"
+                                      placeholder="细节描述">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-5">
+                            <button type="submit" class="btn btn-success">创建</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </form>
+
+

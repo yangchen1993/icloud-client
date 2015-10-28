@@ -40,6 +40,7 @@
                 </ul>
             </li>
             <div style="border-top:1px solid #383840"></div>
+            <div style="border-top:1px solid #416966"></div>
             <li>
                 <div class="open_menu">
                     <div></div>
@@ -54,6 +55,7 @@
                 </ul>
             </li>
             <div style="border-top:1px solid #383840"></div>
+            <div style="border-top:1px solid #416966"></div>
             <li>
                 <div class="open_menu">
                     <div></div>
@@ -76,6 +78,7 @@
                 </ul>
             </li>
             <div style="border-top:1px solid #383840"></div>
+            <div style="border-top:1px solid #416966"></div>
             <li>
                 <div class="open_menu">
                     <div></div>
@@ -102,6 +105,7 @@
                 </ul>
             </li>
             <div style="border-top:1px solid #383840"></div>
+            <div style="border-top:1px solid #416966"></div>
             <li>
                 <div class="open_menu">
                     <div></div>
@@ -110,6 +114,7 @@
                 </div>
             </li>
             <div style="border-top:1px solid #383840"></div>
+            <div style="border-top:1px solid #416966"></div>
             <li>
                 <div class="open_menu">
                     <div></div>
@@ -129,8 +134,9 @@
             </li>
         </ul>
         </li>
-        <div style="border-top:1px solid #383840"></div>
-        </ul>
+        <!--<div style="border-top:1px solid #383840"></div>-->
+        <div style="border-top:1px solid #416966"></div>
+    </ul>
     </div>
     <div ui-view="" class="content"></div>
     <div class="footer text-right">
@@ -152,4 +158,11 @@
     }, function () {
         clearInterval(time);
     });
+
+    $(".img_frame").click(function (){
+        $(this).append('<div class="radius" style="position:absolute;top:60px;left:60px"></div>');
+        setTimeout(function(){
+            $('.radius:first-of-type').remove();
+        }, 3000);
+    })
 </script>

@@ -101,7 +101,7 @@ iCloudController.controller("VersionManagementController", ['$scope', '$window',
                 .error(function (data) {
                     $window.alert(transform_error_message(data.msg))
                 })
-        }
+        };
 
         $scope.remove = function (id) {
             if (confirm("确定删除?删除后无法恢复!")) {

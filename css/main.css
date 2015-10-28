@@ -1,5 +1,5 @@
 /*header*/
-p, ul,ol,ul {
+p, ul, ol, ul {
     margin: 0;
     padding: 0;
 }
@@ -115,6 +115,24 @@ p, ul,ol,ul {
 
 }
 
+.radius {
+    height: 2px;
+    width: 2px;
+    border-radius: 50%;
+    animation: spread 3s;
+}
+
+@keyframes spread {
+    0% {
+        box-shadow: 0 0 0 0px rgba(125, 201, 245, 0.7);
+        background: rgba(125, 201, 245, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 0 100px rgba(125, 201, 245, 0);
+        background: rgba(125, 201, 245, 0);
+    }
+}
+
 .icon_3 > i {
     color: #fff;
     font-size: 20px;
@@ -183,10 +201,12 @@ p, ul,ol,ul {
     float: left;
     display: none;
 }
-.open_menu>i{
+
+.open_menu > i {
     margin-left: 90px;
     color: #949ea8;
 }
+
 .open_menu:hover div {
     display: inline;
 }
@@ -302,10 +322,12 @@ p, ul,ol,ul {
     float: left;
     overflow: scroll;
 }
-thead{
+
+thead {
     background-color: #eceeef;
     font-family: "Microsoft YaHei";
 }
+
 .footer {
     width: 82%;
     height: 50px;

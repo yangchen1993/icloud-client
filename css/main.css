@@ -1,36 +1,36 @@
 /*header*/
-p, ul, ol, ul {
+p, ul, ol, ul, .h3 {
     margin: 0;
     padding: 0;
 }
 
 .header {
     width: 33.3%;
-    height: 70px;
+    height: 60px;
     background-color: #181e2c;
     float: left;
 }
 
 .header > img {
-    width: 200px;
-    height: 90px;
-    margin: -10px 0 0 20px;
+    width: 170px;
+    height: 70px;
+    margin: -5px 0 0 20px;
     float: left;
 }
 
 .header > p {
     float: left;
-    margin-top: 40px;
+    margin-top: 35px;
     color: #D0D5DA;
-    font-size: 18px;
+    font-size: 16px;
     font-family: "Microsoft YaHei";
 }
 
 .header > span {
     color: #fff;
     width: 100px;
-    padding: 27px;
-    line-height: 70px;
+    padding:24px;
+    line-height: 55px;
     text-align: center;
 }
 
@@ -40,50 +40,13 @@ p, ul, ol, ul {
 }
 
 /*nav*/
-
-/*.font1 {*/
-/*line-height: 60px;*/
-/*width: 100px;*/
-/*float: left;*/
-/*color: #fff;*/
-/*}*/
-
-/*.font1:hover {*/
-/*background-color: #3F4961;*/
-/*}*/
-
-/*.font2 {*/
-/*line-height: 60px;*/
-/*width: 100px;*/
-/*float: left;*/
-/*color: #fff;*/
-/*}*/
-
-/*.font2:hover {*/
-/*background-color: #3F4961;*/
-/*}*/
-
-/*.off_tray {*/
-/*line-height: 60px;*/
-/*width: 60px;*/
-/*float: left;*/
-/*}*/
-
-/*.off_tray > i {*/
-/*font-size: 22px;*/
-/*color: #fff;*/
-/*}*/
-
-/*.off_tray:hover {*/
-/*background-color: #3F4961;*/
-/*}*/
-
-/*nav*/
 .nav_yc {
-    width: 18%;
+    width: 230px;
     height: 1000px;
     background-color: #32323a;
-    float: left;
+    position: fixed;
+    top:60px;
+
 }
 
 .info {
@@ -169,11 +132,11 @@ p, ul, ol, ul {
 }
 
 .warn {
-    width: 80px;
+    width: 65px;
     background-color: #00a551;
     border-radius: 5px;
     color: #fff;
-    margin: -30px 0 0 170px;
+    margin: -30px 0 0 160px;
 }
 
 .warn:hover {
@@ -203,7 +166,7 @@ p, ul, ol, ul {
 }
 
 .open_menu > i {
-    margin-left: 90px;
+    margin-left:40px;
     color: #949ea8;
 }
 
@@ -212,7 +175,7 @@ p, ul, ol, ul {
 }
 
 .open_menu > a {
-    font-size: 18px;
+    font-size: 16px;
     font-family: Microsoft YaHei;
     color: #95a0aa;
     text-decoration: none;
@@ -253,74 +216,53 @@ p, ul, ol, ul {
     margin-left: 25px
 }
 
-/*.menu_parents:hover {*/
-/*background: #1fb5ad 10px 0;*/
-/*transition: 0.5s;*/
-/*cursor: pointer;*/
-/*}*/
-
-/*.menu_parents:hover a {*/
-/*color: #fff;*/
-/*}*/
-
-/*.menu_parents > a {*/
-/*font-size: 20px;*/
-/*font-family: Microsoft YaHei;*/
-/*color: #95a0aa;*/
-/*text-decoration: none;*/
-/*margin-left: 40px;*/
-/*}*/
-
-/*.out_lie {*/
-/*width: 2%;*/
-/*height: 58px;*/
-/*background-color: #fe5722;*/
-/*float: left;*/
-/*display: none;*/
-/*}*/
-
-/*.menu_parents:hover .out_lie {*/
-/*display: inline;*/
-/*}*/
-
-/*.list-group > li > ul {*/
-/*list-style: none;*/
-/*display: none;*/
-/*margin-left: -1px;*/
-/*}*/
-
-/*.list-group > li > ul > li {*/
-/*line-height: 45px;*/
-/*padding-left: 5px;*/
-/*width: 100%;*/
-/*color: #fff;*/
-/*font-size: 15px;*/
-/*}*/
-
-/*.in_lie {*/
-/*width: 2%;*/
-/*height: 45px;*/
-/*background-color: #3cb371;*/
-/*float: left;*/
-/*margin-left: -20px;*/
-/*display: none;*/
-/*}*/
-
-/*.list-group > li > ul > li:hover .in_lie {*/
-/*display: inline;*/
-/*}*/
-
-/*.icon_self {*/
-/*margin-left: 50px;*/
-/*color: #95a0aa;*/
-/*}*/
+#bianqian{
+    width:15px;
+    height: 55px;
+    background-color:#1fbba6;
+    position: absolute;
+    top: 150px;
+    right: 17px;
+    border-right: 1px solid #cccccc;
+}
+#bianqian:hover{
+    cursor: pointer;
+}
+.time_show {
+    width:180px;
+    height: 55px;
+    border: 1px solid #1daa97;
+    position: absolute;
+    top: 80px;
+    right: 1px;
+    font-family: "Microsoft YaHei";
+    z-index: 9;
+}
+.time_show > div {
+    float: left;
+}
+.time_show > div:nth-child(1) {
+    width:45%;
+    height: 100%;
+    background-color: #1fbba6;
+    color: #fff;
+}
+.time_show > div:nth-child(2) {
+    width:55%;
+    height: 100%;
+    background-color: #ffffff;
+    color: #1fbba6;
+}
 
 /*content*/
 .content {
-    width: 82%;
+    width:auto;
     height: 950px;
-    float: left;
-    overflow: scroll;
+    position: absolute;
+    top: 60px;
+    left: 230px;
+    right: 0;
+    z-index: 1;
 }
 
 thead {
@@ -345,4 +287,7 @@ thead {
 .footer > i:hover {
     background-color: #3f4961;
     cursor: pointer;
+}
+.too{
+    width:15px;
 }

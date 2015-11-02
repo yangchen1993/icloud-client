@@ -1,143 +1,139 @@
 <div ng-include="'/template/top/header.html'"></div>
 <div>
-    <div class="nav_yc">
-        <div class="info text-center">
-            <div style="width: 100%;height: 100px;background-color:#E44D4D "></div>
-            <div class="img_frame"></div>
-            <img src="/img/guang.png" id="cycle">
-            <img src="img/face.png" id="face">
-            <div class="warn">我在线上</div>
-            <div class="icon_3">
-                <i class="glyphicon glyphicon-bell"></i>
-                <span class="badge">8</span>
-                <i class="glyphicon glyphicon-envelope"></i>
-                <span class="badge">8</span>
-                <i class="glyphicon glyphicon-tasks"></i>
-                <span class="badge">8</span>
+    <div class="nav_out">
+        <div class="nav_yc">
+            <div class="info text-center">
+                <div style="width: 100%;height: 100px;background-color:#E44D4D "></div>
+                <div class="img_frame"></div>
+                <img src="/img/guang.png" id="cycle">
+                <img src="img/face.png" id="face">
+
+                <div class="warn">我在线上</div>
+                <div class="icon_3">
+                    <i class="glyphicon glyphicon-bell"></i>
+                    <span class="badge">8</span>
+                    <i class="glyphicon glyphicon-envelope"></i>
+                    <span class="badge">8</span>
+                    <i class="glyphicon glyphicon-tasks"></i>
+                    <span class="badge">8</span>
+                </div>
+                <p class="text-center">赵日天</p>
+
+                <p>Administrator</p>
             </div>
-            <p class="text-center">赵日天</p>
-
-            <p>Administrator</p>
+            <div style="border-top:1px solid #383840;"></div>
+            <ul class="function_menu" style="color: #fff">
+                <li ng-show="auth_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a>权限列表</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                    <ul class="menu_child">
+                        <li>
+                            <div></div>
+                            <a ui-sref=".m1">省级代理</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a>省级代理</a>
+                        </li>
+                    </ul>
+                </li>
+                <div style="border-top:1px solid #416966" ng-show="auth_nav"></div>
+                <li ng-show="ads_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref=".ads">我的广告</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                    <ul class="menu_child">
+                        <li>
+                            <div></div>
+                            <a ui-sref=".paid" href="">竞价广告</a>
+                        </li>
+                    </ul>
+                </li>
+                <div style="border-top:1px solid #416966" ng-show="ads_nav"></div>
+                <li ng-show="account_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a>广告分账</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                    <ul class="menu_child">
+                        <li>
+                            <div></div>
+                            <a>财务</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a>明细</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a>优惠活动</a>
+                        </li>
+                    </ul>
+                </li>
+                <div style="border-top:1px solid #416966" ng-show="account_nav"></div>
+                <li ng-show="eq_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref=".eq_management">设备管理</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                    <ul class="menu_child">
+                        <li>
+                            <div></div>
+                            <a ui-sref=".m1">进销存</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a ui-sref=".version_manage">版本管理</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a ui-sref=".identify_conf">认证设置</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a ui-sref=".release_conf">放行设置</a>
+                        </li>
+                    </ul>
+                </li>
+                <div style="border-top:1px solid #416966" ng-show="eq_nav"></div>
+                <li ng-show="shop_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref=".shop_management">店铺管理</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                </li>
+                <div style="border-top:1px solid #416966" ng-show="shop_nav"></div>
+                <li ng-show="agent_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref=".agent_manage">代理商管理</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                    <ul class="menu_child">
+                        <li>
+                            <div></div>
+                            <a ui-sref=".create_agent">新增代理商账号</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a ui-sref=".create_business">新增商家账号</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </li>
+            <div style="border-top:1px solid #416966" ng-show="agent_nav"></div>
+            </ul>
         </div>
-        <div style="border-top:1px solid #383840;"></div>
-        <ul class="function_menu" style="color: #fff">
-            <li>
-                <div class="open_menu">
-                    <div></div>
-                    <a>权限列表</a>
-                    <i class="glyphicon glyphicon-triangle-right"></i>
-                </div>
-                <ul class="menu_child">
-                    <li>
-                        <div></div>
-                        <a>省级代理</a>
-                    </li>
-                    <li>
-                        <div></div>
-                        <a>省级代理</a>
-                    </li>
-                </ul>
-            </li>
-            <div style="border-top:1px solid #383840"></div>
-            <div style="border-top:1px solid #416966"></div>
-            <li>
-                <div class="open_menu">
-                    <div></div>
-                    <a ui-sref=".ads">我的广告</a>
-                    <i class="glyphicon glyphicon-triangle-right"></i>
-                </div>
-                <ul class="menu_child">
-                    <li>
-                        <div></div>
-                        <a ui-sref=".paid" href="">竞价广告</a>
-                    </li>
-                </ul>
-            </li>
-            <div style="border-top:1px solid #383840"></div>
-            <div style="border-top:1px solid #416966"></div>
-            <li>
-                <div class="open_menu">
-                    <div></div>
-                    <a>广告分账</a>
-                    <i class="glyphicon glyphicon-triangle-right"></i>
-                </div>
-                <ul class="menu_child">
-                    <li>
-                        <div></div>
-                        <a>财务</a>
-                    </li>
-                    <li>
-                        <div></div>
-                        <a>明细</a>
-                    </li>
-                    <li>
-                        <div></div>
-                        <a>优惠活动</a>
-                    </li>
-                </ul>
-            </li>
-            <div style="border-top:1px solid #383840"></div>
-            <div style="border-top:1px solid #416966"></div>
-            <li>
-                <div class="open_menu">
-                    <div></div>
-                    <a ui-sref=".eq_management">设备管理</a>
-                    <i class="glyphicon glyphicon-triangle-right"></i>
-                </div>
-                <ul class="menu_child">
-                    <li>
-                        <div></div>
-                        <a ui-sref=".m1">进销存</a>
-                    </li>
-                    <li>
-                        <div></div>
-                        <a ui-sref=".version_manage">版本管理</a>
-                    </li>
-                    <li>
-                        <div></div>
-                        <a ui-sref=".identify_conf">认证设置</a>
-                    </li>
-                    <li>
-                        <div></div>
-                        <a ui-sref=".release_conf">放行设置</a>
-                    </li>
-                </ul>
-            </li>
-            <div style="border-top:1px solid #383840"></div>
-            <div style="border-top:1px solid #416966"></div>
-            <li>
-                <div class="open_menu">
-                    <div></div>
-                    <a ui-sref=".shop_management">店铺管理</a>
-                    <i class="glyphicon glyphicon-triangle-right"></i>
-                </div>
-            </li>
-            <div style="border-top:1px solid #383840"></div>
-            <div style="border-top:1px solid #416966"></div>
-            <li>
-                <div class="open_menu">
-                    <div></div>
-                    <a ui-sref=".agent_manage">代理商管理</a>
-                    <i class="glyphicon glyphicon-triangle-right"></i>
-                </div>
-                <ul class="menu_child">
-                    <li>
-                        <div></div>
-                        <a ui-sref=".create_agent">新增代理商账号</a>
-                    </li>
-                    <li>
-                        <div></div>
-                        <a ui-sref=".create_business">新增商家账号</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        </li>
-        <!--<div style="border-top:1px solid #383840"></div>-->
-        <div style="border-top:1px solid #416966"></div>
-        </ul>
     </div>
-
     <!--<div id="bianqian"></div>-->
     <div class="time_show">
         <div>
@@ -148,28 +144,31 @@
         <div>
             <p class="text-center"></p>
 
-            <p class="text-center"><span class="h2" style="font-weight: 600"></span><span class="h2" style="font-weight: 600"></span></p>
+            <p class="text-center"><span class="h2" style="font-weight: 600"></span><span class="h2"
+                                                                                          style="font-weight: 600"></span>
+            </p>
         </div>
     </div>
 
     <div ui-view="" class="content"></div>
 
     <!--<div class="footer text-right">-->
-        <!--<i class="glyphicon glyphicon-question-sign"></i>-->
-        <!--<i class="glyphicon glyphicon-cog"></i>-->
+    <!--<i class="glyphicon glyphicon-question-sign"></i>-->
+    <!--<i class="glyphicon glyphicon-cog"></i>-->
     <!--</div>-->
 </div>
+
 <script>
-    $(".open_menu").click(function () {
-        $(this).siblings(".menu_child").slideToggle("fast");
-        $(this).siblings(".menu_child").css("background-color", "#45454a");
-        if( $(this).find("i").hasClass("glyphicon glyphicon-triangle-right")){
-            $(this).find("i").attr("class","glyphicon glyphicon-triangle-bottom");
-        }
-        else{
-            $(this).find("i").attr("class","glyphicon glyphicon-triangle-right");
-        }
-    });
+        $(".open_menu").click(function () {
+            $(this).siblings(".menu_child").slideToggle("fast");
+            $(this).siblings(".menu_child").css("background-color", "#45454a");
+            if ($(this).find("i").hasClass("glyphicon glyphicon-triangle-right")) {
+                $(this).find("i").attr("class", "glyphicon glyphicon-triangle-bottom");
+            }
+            else {
+                $(this).find("i").attr("class", "glyphicon glyphicon-triangle-right");
+            }
+        });
 
     //用户外边线条旋转
     var num = 0;
@@ -194,21 +193,21 @@
     var myDate = new Date();
     $(".time_show").find("span")[0].innerHTML = myDate.getDate();
     $(".time_show").find("span")[1].innerHTML = myDate.getMonth() + 1 + "月";
-    $(".time_show").find("span")[2].innerHTML = myDate.getHours()+":";
+    $(".time_show").find("span")[2].innerHTML = myDate.getHours() + ":";
     $(".time_show").find("span")[3].innerHTML = myDate.getMinutes();
     $(".time_show").find("p")[0].innerHTML = week[myDate.getDay()];
     $(".time_show").find("p")[2].innerHTML = myDate.toLocaleTimeString().substr(0, 2);
-    setInterval(function(){
+    window.time_self = setInterval(function () {
         var myDate = new Date();
         $(".time_show").find("span")[0].innerHTML = myDate.getDate();
         $(".time_show").find("span")[1].innerHTML = myDate.getMonth() + 1 + "月";
-        $(".time_show").find("span")[2].innerHTML = myDate.getHours()+":";
+        $(".time_show").find("span")[2].innerHTML = myDate.getHours() + ":";
         $(".time_show").find("span")[3].innerHTML = myDate.getMinutes();
         $(".time_show").find("p")[0].innerHTML = week[myDate.getDay()];
         $(".time_show").find("p")[2].innerHTML = myDate.toLocaleTimeString().substr(0, 2);
-    },1000);
+    }, 1000);
 
-    $("#bianqian").click(function(){
+    $("#bianqian").click(function () {
         $(".time_show").toggle();
     });
 

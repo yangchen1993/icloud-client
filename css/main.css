@@ -40,13 +40,19 @@ p, ul, ol, ul, .h3 {
 }
 
 /*nav*/
-.nav_yc {
-    width: 230px;
-    height: 1000px;
-    background-color: #32323a;
+.nav_out{
     position: fixed;
     top:60px;
-
+    bottom: 0;
+    width: 230px;
+    background-color: #32323a;
+    overflow-x: hidden;
+    z-index: 102;
+}
+.nav_yc {
+    width: 250px;
+    height:100%;
+    overflow-y: scroll;
 }
 
 .info {
@@ -262,7 +268,6 @@ p, ul, ol, ul, .h3 {
     top: 60px;
     left: 230px;
     right: 0;
-    z-index: 1;
 }
 
 thead {
@@ -287,7 +292,4 @@ thead {
 .footer > i:hover {
     background-color: #3f4961;
     cursor: pointer;
-}
-.too{
-    width:15px;
 }

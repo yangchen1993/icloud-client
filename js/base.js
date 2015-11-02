@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.host = "http://mb.idianjia.cn:8000";
-window.host = "http://mb.idianjia.cn:8801";
+window.host = "http://192.168.0.112";
+//window.host = "http://mb.idianjia.cn:8801";
 
 window.media_host = "http://mb.idianjia.cn:10000";
 
@@ -17,21 +17,21 @@ window.permissions_url = [window.host, "/api/permissions/"].join("");
 
 window.paidlisting_url = [window.host, "/api/bid/"].join("");
 
-window.wemedia_url = [window.host, "/api/ads/"].join("");
+window.ads_url = [window.host, "/api/ads/"].join("");
 
 window.functions_url = [window.host, "/api/functions/"].join("");
 
-window.requestcategory = [window.host, "/api/business/category/"].join("");
+window.requestcategory = [window.host, "/api/category/"].join("");
 
 window.all_routers_url = [window.host, "/api/routers/"].join("");
 
-window.province_url = [window.host, "/api/system/cities/province/"].join("");
+window.province_url = [window.host, "/api/cities/province/"].join("");
 
-window.city_url = [window.host, "/api/system/cities/city/"].join("");
+window.city_url = [window.host, "/api/cities/city/"].join("");
 
-window.area_url = [window.host, "/api/system/cities/area/"].join("");
+window.area_url = [window.host, "/api/cities/area/"].join("");
 
-window.trade_url = [window.host, "/api/system/cities/trades/"].join("");
+window.trade_url = [window.host, "/api/cities/trades/"].join("");
 
 window.version_url = [window.host, "/api/routers/versions/"].join("");
 
@@ -43,7 +43,7 @@ window.routers_groups_url = [window.host, "/api/groups/"].join("");
 
 window.router_setup_url = [window.host, "/api/business/setup/"].join("");
 
-window.agent_message_url = [window.host, "/api/users/getCurrentUser/"].join("");
+window.user_url = [window.host, "/api/users/get_current_user/"].join("");
 
 window.agent_url = [window.host, "http://192.168.0.91:8000/api/admin/agent/"].join();
 

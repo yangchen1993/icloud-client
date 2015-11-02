@@ -33,6 +33,8 @@ iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window"
             "logout": function () {
                 $http.get($window.logout_url + "?key=" + $cookieStore.get("key"))
                     .success(function (data) {
+                        clearInterval(window.time_self);
+                        $cookieStore.remove("key");
                         $window.location.href = "#/login";
                     })
                     .error(function (data) {

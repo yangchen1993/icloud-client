@@ -17,7 +17,8 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("main", {
             url: "/main",
-            templateUrl: "template/main.html"
+            templateUrl: "template/main.html",
+            controller:"MainController"
         })
         .state("main.functions", {
             url: "/functions",

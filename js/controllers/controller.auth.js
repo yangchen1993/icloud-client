@@ -34,7 +34,6 @@ iCloudController.controller("IndexController", ["$scope", "$http", "$window", "$
 iCloudController.controller("TopController", ["$scope", "$http", "$auth", "$cookieStore",
     function ($scope, $http, $auth, $cookieStore) {
         $scope.logout = function () {
-            $cookieStore.remove("key");
             $auth.logout();
         };
     }]);

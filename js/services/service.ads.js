@@ -25,14 +25,14 @@ iCloudService.service("$uploadImg", ["$http", "$cookieStore", "$window",
 
 
             if (data.hasOwnProperty("id")) {
-                $http.put([url, data.id, "/", "?", $.param(self.defaultParams())].join(""), data)
+                $http.put([url, "edit_media_ads/", "?", $.param(self.defaultParams())].join(""), data)
                     .success(function (data) {
                         alert("更新成功")
                     }).error(function (data) {
                         console.log(data);
                     })
             } else {
-                $http.post([url, "?", $.param(self.defaultParams())].join(""), data)
+                $http.post([url,"new_media_ads/", "?", $.param(self.defaultParams())].join(""), data)
                     .success(function (data) {
                         alert("添加成功")
                     }).error(function (data) {

@@ -110,4 +110,14 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/agent_manage/agent_message.html",
             controller: "AgentMessageController"
         })
+        .state("main.create_shop", {
+            url: "/create_shop",
+            templateUrl: "template/center/shop/create_shop.html",
+            controller: "CreateShopController"
+        })
+        .state("main.shop_management_routers", {
+            url: "/shop_management_routers",
+            templateUrl: "template/center/shop/shop_management_routers.html",
+            controller: "ShopManagementRoutersController"
+        })
 });

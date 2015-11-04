@@ -23,7 +23,7 @@ window.functions_url = [window.host, "/api/functions/"].join("");
 
 window.requestcategory = [window.host, "/api/category/"].join("");
 
-window.all_routers_url = [window.host, "/api/routers/"].join("");
+window.all_routers_url = [window.host, "/api/routers/get_all_routers/"].join("");
 
 window.province_url = [window.host, "/api/cities/province/"].join("");
 
@@ -45,8 +45,13 @@ window.router_setup_url = [window.host, "/api/business/setup/"].join("");
 
 window.user_url = [window.host, "/api/users/get_current_user/"].join("");
 
-window.agent_url = [window.host, "http://192.168.0.91:8000/api/admin/agent/"].join();
+window.groups_own = [window.host,"/api/groups/get_router_groups/"].join("");
 
+window.new_group = [window.host,"/api/groups/new_group/"].join("");
+
+window.agent_url = [window.host, "/api/admin/agent/"].join();
+
+window.get_router_by_group_url = [window.host, "/api/routers/get_routers_by_group/"].join("");
 var transform_error_message = function (msg) {
     if (_.isObject(msg)) {
         var message = "";

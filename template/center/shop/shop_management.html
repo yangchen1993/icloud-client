@@ -1,310 +1,19 @@
-<!--<div style="padding: 10px">-->
-    <!--<button class="btn btn-success" data-toggle="modal" data-target="#group-modal" ng-click="groupModal()">添加店铺-->
-    <!--</button>-->
-
-    <!--<div class="row">-->
-        <!--<div class="col-sm-4">-->
-            <!--<ul class="list-group">-->
-                <!--<li class="list-group-item" ng-repeat="group in group_pages.results" ng-click="showRouter(group.id)">-->
-                    <!--<span ng-bind="group.name"></span>-->
-                    <!--<button class="btn btn-success btn-sm" ng-click="groupEditModal(group.id)">编辑</button>-->
-                    <!--<button class="btn btn-danger btn-sm" ng-click="groupDestroy(group.id)">删除</button>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="col-sm-8">-->
-            <!--<ul class="list-group">-->
-                <!--<li class="list-group-item" ng-repeat="router in router_pages.results" ng-mouseover="routerDetail()">-->
-                    <!--<label class="label label-default" ng-bind="router.mac"></label>-->
-                    <!--<label class="label label-default" ng-bind="router.ssid"></label>-->
-                    <!--<label class="label label-default">-->
-                        <!--<span ng-if="router.is_online == true" class="label">在线</span>-->
-                        <!--<span ng-if="router.is_online == false" class="label">离线</span>-->
-                    <!--</label>-->
-                    <!--<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#router-login-setup-modal"-->
-                            <!--ng-click="setupModal(router.id)">-->
-                        <!--认证设置-->
-                    <!--</button>-->
-                    <!--<button class="btn btn-success btn-sm" data-toggle="modal"-->
-                            <!--data-target="#router-black-white-setup-modal" ng-click="BlackWhiteModal(router.id)">黑白名单设置-->
-                    <!--</button>-->
-                    <!--<button class="btn btn-danger btn-sm" ng-click="routerUnbind(router.id)">解绑</button>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<div class="modal fade" id="group-modal">-->
-    <!--<div class="modal-dialog">-->
-        <!--<div class="modal-content">-->
-            <!--<div class="modal-header">-->
-                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
-                        <!--aria-hidden="true">&times;</span></button>-->
-                <!--<h4 class="modal-title">店铺信息</h4>-->
-            <!--</div>-->
-            <!--<div class="modal-body">-->
-                <!--<form class="form-horizontal" ng-submit="saveGroups(group)">-->
-                    <!--<input type="hidden" ng-model="group.id">-->
-
-                    <!--<div class="form-group">-->
-                        <!--<label for="inputGroupName" class="col-sm-2 control-label">店铺名称:</label>-->
-
-                        <!--<div class="col-sm-9">-->
-                            <!--<input type="text" class="form-control" id="inputGroupName" ng-model="group.name"-->
-                                   <!--placeholder="店铺名称">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<label class="col-sm-2 control-label">联系电话:</label>-->
-
-                        <!--<div class="col-sm-9">-->
-                            <!--<input type="text" class="form-control" ng-model="group.tel"-->
-                                   <!--placeholder="联系电话">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<label class="col-sm-2 control-label">行业:</label>-->
-
-                        <!--<div class="col-sm-9">-->
-                            <!--<select ng-model="group.category" ng-options="v.name as v.name for v in categories">-->
-                                <!--<option value="">&#45;&#45;选择行业&#45;&#45;</option>-->
-                            <!--</select>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<label class="col-sm-2 control-label">店铺地址:</label>-->
-
-                        <!--<div class="col-sm-10">-->
-                            <!--<select ng-model="group.province"-->
-                                    <!--ng-options="v.id as v.name for v in province1"-->
-                                    <!--ng-change="select_p(group.province)">-->
-                                <!--<option value="">省</option>-->
-                            <!--</select>-->
-                            <!--<select ng-model="group.city" ng-options="v.id as v.name for v in city1"-->
-                                    <!--ng-change="select_c(group.city)">-->
-                                <!--<option value="">市</option>-->
-                            <!--</select>-->
-                            <!--<select ng-model="group.area" ng-options="v.id as v.name for v in area1"-->
-                                    <!--ng-change="select_area(group.area)">-->
-                                <!--<option value="">区/县</option>-->
-                            <!--</select>-->
-                            <!--<select ng-model="group.trade" ng-options="v.id as v.name for v in trades">-->
-                                <!--<option value="">商圈</option>-->
-                            <!--</select>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group">-->
-                        <!--<label class="col-sm-2 control-label">详细地址:</label>-->
-
-                        <!--<div class="col-sm-9">-->
-                            <!--<input type="text" class="form-control" ng-model="group.address"-->
-                                   <!--placeholder="详细地址">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<label class="col-sm-2 control-label">描述:</label>-->
-
-                        <!--<div class="col-sm-9">-->
-                            <!--<textarea type="text" class="form-control" ng-model="group.description"-->
-                                      <!--placeholder="细节描述">-->
-                            <!--</textarea>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group">-->
-                        <!--<div class="col-sm-offset-5">-->
-                            <!--<button type="submit" class="btn btn-success">创建</button>-->
-                            <!--<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</form>-->
-
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<div class="modal animated pulse" id="router-login-setup-modal">-->
-    <!--<div class="modal-dialog">-->
-        <!--<div class="modal-content">-->
-            <!--<div class="modal-header">-->
-                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
-                        <!--aria-hidden="true">&times;</span></button>-->
-                <!--<h4 class="modal-title">认证设置</h4>-->
-            <!--</div>-->
-            <!--<div class="modal-body">-->
-                <!--<div class="btn-group">-->
-                    <!--<label ng-class="{btn: true, 'btn-primary': true, active: auth == '0'}">-->
-                        <!--<input type="radio" class="hidden" ng-model="auth" value="0"/>-->
-                        <!--免认证-->
-                    <!--</label>-->
-                    <!--<label ng-class="{btn: true, 'btn-primary': true, active: auth == '1'}">-->
-                        <!--<input type="radio" class="hidden" ng-model="auth" value="1"/>-->
-                        <!--认证登录-->
-                    <!--</label>-->
-                <!--</div>-->
-                <!--<div ng-show="auth == '1'" class="row" style="margin-top: 25px">-->
-                    <!--<div class="col-md-6">-->
-                        <!--<p title="连网时间超出认证有效期后需再次认证才能上网">认证有效时间</p>-->
-
-                        <!--<div class="form-inline">-->
-                            <!--<input type="text" class="form-control" ng-model="setup.hours" style="width:50px">-->
-                            <!--<span>小时</span>-->
-                            <!--<input type="text" class="form-control" ng-model="setup.mins" style="width:50px">-->
-                            <!--<span>分</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<div class="col-md-6">-->
-                        <!--<p title="每个设备每天认证次数限制">认证限制</p>-->
-
-                        <!--<div class="form-inline">-->
-                            <!--<label>-->
-                                <!--<select class="form-control" ng-model="setup.auth_limit_times"-->
-                                        <!--style="width: 80px !important">-->
-                                    <!--<option value="0">关闭</option>-->
-                                    <!--<option value="1">1次</option>-->
-                                    <!--<option value="2">2次</option>-->
-                                    <!--<option value="3">3次</option>-->
-                                    <!--<option value="4">4次</option>-->
-                                    <!--<option value="5">5次</option>-->
-                                <!--</select>-->
-                            <!--</label>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="col-md-12">-->
-                        <!--<span>认证方式</span>-->
-
-                        <!--<div>-->
-                            <!--<label><input class="login-way" type="checkbox" value="tel">手机号登录</label>-->
-                            <!--<label><input class="login-way" type="checkbox" value="wechat">微信登录</label>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="modal-footer">-->
-                <!--<button class="btn btn-primary" ng-click="saveSetup(setup)">保存</button>-->
-                <!--<button class="btn btn-danger" data-dismiss="modal">取消</button>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<div class="modal animated pulse" id="router-black-white-setup-modal">-->
-    <!--<div class="modal-dialog modal-lg">-->
-        <!--<div class="modal-content">-->
-            <!--<div class="modal-header">-->
-                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
-                        <!--aria-hidden="true">&times;</span></button>-->
-                <!--<h4 class="modal-title">黑白名单设置</h4>-->
-            <!--</div>-->
-            <!--<div class="modal-body">-->
-                <!--<div class="row">-->
-                    <!--<div class="col-md-6">-->
-                        <!--<h4>白名单</h4>-->
-
-                        <!--<div class="col-sm-5">-->
-                            <!--<label>-->
-                                <!--<input class="white-list-checkbox" type="checkbox" value="0">MAC地址-->
-                            <!--</label>-->
-                            <!--<label>-->
-                                <!--<input class="white-list-checkbox" type="checkbox" value="1">域名-->
-                            <!--</label>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-7">-->
-                            <!--<div class="input-group input-group-sm">-->
-                                <!--<input type="text" class="form-control" placeholder="mac或网址"-->
-                                       <!--aria-describedby="sizing-addon3" ng-model="whiteContent">-->
-                                <!--<span class="input-group-addon btn btn-sm" id="sizing-addon3"-->
-                                      <!--ng-click="createBlackWhite(whiteContent)">添加</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-12" style="height: 300px; overflow-y: auto">-->
-                            <!--<table class="table table-condensed table-hover">-->
-                                <!--<tr ng-hide="whiteList.length > 0">-->
-                                    <!--<td align="center" colspan="3">-->
-                                        <!--<label>没有白名单</label>-->
-                                    <!--</td>-->
-                                <!--</tr>-->
-                                <!--<tr ng-repeat="w in whiteList">-->
-                                    <!--<td>-->
-                                        <!--<input class="white-item" type="checkbox" ng-value="w.id">-->
-                                    <!--</td>-->
-                                    <!--<td align="center" ng-bind="w.content"></td>-->
-                                    <!--<td>-->
-                                        <!--<button class="btn btn-xs btn-danger" ng-click="destroyBlackWhite(w.id)">删除-->
-                                        <!--</button>-->
-                                    <!--</td>-->
-                                <!--</tr>-->
-                            <!--</table>-->
-                        <!--</div>-->
-
-                    <!--</div>-->
-                    <!--<div class="col-md-6">-->
-                        <!--<h4>黑名单</h4>-->
-
-                        <!--<div class="col-sm-5">-->
-                            <!--<label ng-click="filteringBlackWhite()">-->
-                                <!--<input class="white-list-checkbox" type="checkbox" value="0">MAC地址-->
-                            <!--</label>-->
-                            <!--<label>-->
-                                <!--<input class="white-list-checkbox" type="checkbox" value="1">域名-->
-                            <!--</label>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-7">-->
-                            <!--<div class="input-group input-group-sm">-->
-                                <!--<input type="text" class="form-control" placeholder="mac或网址"-->
-                                       <!--aria-describedby="sizing-addon4" ng-model="blackContent">-->
-                                <!--<span class="input-group-addon btn btn-sm" id="sizing-addon4"-->
-                                      <!--ng-click="createBlackWhite(blackContent,true)">添加</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="col-sm-12" style="height: 300px; overflow-y: auto">-->
-                            <!--<table class="table table-condensed table-hover">-->
-                                <!--<tr ng-hide="blackList.length > 0">-->
-                                    <!--<td align="center" colspan="3">-->
-                                        <!--<label>没有黑名单</label>-->
-                                    <!--</td>-->
-                                <!--</tr>-->
-                                <!--<tr ng-repeat="b in blackList">-->
-                                    <!--<td>-->
-                                        <!--<input class="white-item" type="checkbox" ng-value="b.id">-->
-                                    <!--</td>-->
-                                    <!--<td align="center" ng-bind="b.content"></td>-->
-                                    <!--<td>-->
-                                        <!--<button class="btn btn-xs btn-danger" ng-click="destroyBlackWhite(b.id, true)">-->
-                                            <!--删除-->
-                                        <!--</button>-->
-                                    <!--</td>-->
-                                <!--</tr>-->
-                            <!--</table>-->
-                        <!--</div>-->
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="modal-footer">-->
-                <!--<button class="btn btn-primary" ng-click="saveSetup(setup)">保存</button>-->
-                <!--<button class="btn btn-danger" data-dismiss="modal">取消</button>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 <div class="top_content">
     <ol class="breadcrumb" style="background-color: #1fbba6">
         <li class="active">店铺管理</li>
     </ol>
     <div>
-        <div><span class="glyphicon glyphicon-map-marker"></span>全部<div></div>
+        <div><span class="glyphicon glyphicon-map-marker"></span>全部
+            <div></div>
         </div>
-        <div><span class="glyphicon glyphicon-heart"></span>未查询<div></div>
+        <div><span class="glyphicon glyphicon-heart"></span>未查询
+            <div></div>
         </div>
-        <div><span class="glyphicon glyphicon-user"></span>已查询<div></div>
+        <div><span class="glyphicon glyphicon-user"></span>已查询
+            <div></div>
         </div>
-        <div><span class="glyphicon glyphicon-cog"></span>未知<div></div>
+        <div><span class="glyphicon glyphicon-cog"></span>未知
+            <div></div>
         </div>
     </div>
 </div>
@@ -313,12 +22,16 @@
     <button class="btn btn-info" ui-sref="main.create_shop">新建</button>
 </div>
 <div style="padding: 10px">
-    <a href="javascript:" style="color:#000"><div style="width:33.3%;height:250px;background-color: #d5d5d5;float:left;border:1px solid #cccccc;padding:30px 0 0 40px;font-family: 'Microsoft YaHei';font-size: 18px;font-weight: 600" ng-repeat="p in shop" ng-click="see_routers(p.id)">
-        <div><span>店铺名称：</span><span ng-bind="p.name">东莞没有管</span></div>
-        <div style="margin-top:15px"><span>行业类型：</span><span ng-bind="p.category">大保健</span></div>
-        <div style="margin-top:15px"><span>手机号码：</span><span ng-bind="p.tel">13546254784</span></div>
-        <div style="margin-top:15px"><span>所属商圈：</span><span ng-bind="p.trade_area.province+' '+p.trade_area.city+' '+p.trade_area.area+' '+p.trade_area.name"></span></div>
-        <div style="margin-top:15px"><span>店铺地址：</span><span ng-bind="p.address">西沟头巷幼儿园</span></div>
-    </div>
+    <a href="javascript:" style="color:#000">
+        <div style="width:33.3%;height:250px;background-color: #d5d5d5;float:left;border:1px solid #cccccc;padding:30px 0 0 40px;font-family: 'Microsoft YaHei';font-size: 18px;font-weight: 600"
+             ng-repeat="p in shop" ng-click="see_routers(p.id)">
+            <div><span>店铺名称：</span><span ng-bind="p.name">东莞没有管</span></div>
+            <div style="margin-top:15px"><span>行业类型：</span><span ng-bind="p.category">大保健</span></div>
+            <div style="margin-top:15px"><span>手机号码：</span><span ng-bind="p.tel">13546254784</span></div>
+            <div style="margin-top:15px"><span>所属商圈：</span><span
+                    ng-bind="p.trade_area.province+' '+p.trade_area.city+' '+p.trade_area.area+' '+p.trade_area.name"></span>
+            </div>
+            <div style="margin-top:15px"><span>店铺地址：</span><span ng-bind="p.address">西沟头巷幼儿园</span></div>
+        </div>
     </a>
 </div>

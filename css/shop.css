@@ -1,0 +1,30 @@
+.shop_index {
+    width: 33.3%;
+    height: 300px;
+    border: 1px solid #cccccc;
+    float: left;
+    padding: 10px 0 0 50px;
+}
+.shop_index:nth-child(2) {
+    width: 33.3%;
+    height: 300px;
+    border-left: 0;
+    border-right:0;
+    float: left;
+    padding: 10px 0 0 50px;
+}
+.shop_index>div{
+    margin-top: 20px;
+}
+.shop_index>p{
+    margin-left: -50px;
+}
+#profile>div{
+    float: left;
+}
+#profile>div:nth-child(1){
+    width:40%;
+    height: 300px;
+    border: 1px solid #cccccc;
+    border-top: 0;
+}

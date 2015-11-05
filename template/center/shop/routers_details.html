@@ -1,0 +1,87 @@
+<div class="top_content">
+    <ol class="breadcrumb" style="background-color: #1fbba6">
+        <li><a ui-sref="main.shop_management">店铺管理</a></li>
+        <li><a ui-sref="main.shop_management_routers">店铺设备管理</a></li>
+        <li class="active">设备详情</li>
+    </ol>
+    <div>
+        <div><span class="glyphicon glyphicon-map-marker"></span>全部
+            <div></div>
+        </div>
+        <div><span class="glyphicon glyphicon-heart"></span>未查询
+            <div></div>
+        </div>
+        <div><span class="glyphicon glyphicon-user"></span>已查询
+            <div></div>
+        </div>
+        <div><span class="glyphicon glyphicon-cog"></span>未知
+            <div></div>
+        </div>
+    </div>
+</div>
+<div style="padding:10px">
+    <div class="shop_index">
+        <p class="text-center">基本信息</p>
+        <div><span>设备型号：</span><span>bsdf</span></div>
+        <div><span>启动时间：</span><span>bsdf</span></div>
+        <div><span>MAC地址：</span><span>bsdf</span></div>
+        <div><span>路由SN号：</span><span>bsdf</span></div>
+        <div><span>系统版本号：</span><span>bsdf</span></div>
+    </div>
+    <div class="shop_index">
+        <p class="text-center">运行状态</p>
+        <div><span>连续运行时间：</span><span>bsdf</span></div>
+        <div><span>接入人数：</span><span>bsdf</span></div>
+        <div><span>内存占用比率：</span><span>bsdf</span></div>
+        <div><span>CPU负载率：</span><span>bsdf</span></div>
+    </div>
+    <div class="shop_index">
+        <p class="text-center">WAN接入状态</p>
+        <div><span>外网IP：</span><span>bsdf</span></div>
+        <div><span>上行速度：</span><span>bsdf</span></div>
+        <div><span>下行速度：</span><span>bsdf</span></div>
+    </div>
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">认证设置</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">放行设置</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profile">
+                <div>
+                    <table class="table table-bordered table-striped text-center">
+                        <thead>
+                        <tr>
+                            <td>特征</td>
+                            <td>类型</td>
+                            <td>黑白名单</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="p in policy">
+                            <td ng-bind="p.content"></td>
+                            <td ng-bind="type[p.content_type]"></td>
+                            <td ng-bind="p.is_black"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>HJ,GUIK,G</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $('a[href="#home"]').click(function (e) {
+        e.preventDefault();
+    });
+    $(' a[href="#profile"]').click(function (e) {
+        e.preventDefault();
+    })
+</script>

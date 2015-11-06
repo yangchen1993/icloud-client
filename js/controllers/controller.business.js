@@ -86,5 +86,34 @@ iCloudController.controller("RoutersDetailsController",["$scope","$http","$cooki
                 $scope.policy[i].is_black = "白名单";
             }
         }
-    })
+    });
+    $scope.router = {
+        "is_black":"1"
+    };
+    $scope.router1 = {
+        "is_black":"1"
+    };
+    $scope.add_mac = function(data){
+        data.router = routers_id;
+        data.content_type = "0";
+        data.enable = "1";
+        $http.post([new_policy_url,"?key=",$cookieStore.get("key")].join(""),data).success(function(data){
+            alert("添加成功")
+        })
+    };
+    $scope.add_domain = function(data){
+        data.router = routers_id;
+        data.content_type = "1";
+        data.enable = "1";
+        $http.post([new_policy_url,"?key=",$cookieStore.get("key")].join(""),data).success(function(data){
+            alert("添加成功")
+        })
+    };
+    $scope.delete = function(id){
+        var ids = [id];
+        console.log(ids);
+        $http.delete([window.delete_policy,"?key=",$cookieStore.get("key")].join(""),ids).success(function(data){
+            console.log(data);
+        })
+    }
 }]);

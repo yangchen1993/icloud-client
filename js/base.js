@@ -56,6 +56,8 @@ window.get_router_by_group_url = [window.host, "/api/routers/get_routers_by_grou
 window.new_policy_url = [window.host, "/api/policy/new_policy/"].join("");
 
 window.get_router_policies = [window.host, "/api/policy/get_router_policies"].join("");
+
+window.delete_policy = [window.host ,"/api/policy/delete_policy/"].join("");
 var transform_error_message = function (msg) {
     if (_.isObject(msg)) {
         var message = "";

@@ -19,6 +19,11 @@
 .shop_index>p{
     margin-left: -50px;
 }
+#home>div{
+    width:100%;
+    height: 300px;
+    border: 1px solid #cccccc;
+}
 #profile>div{
     float: left;
 }
@@ -27,4 +32,25 @@
     height: 300px;
     border: 1px solid #cccccc;
     border-top: 0;
+}
+#profile i:hover{
+    cursor: pointer;
+}
+.shop_isBlack{
+    width:60%;
+    height:300px;
+    border: 1px solid #cccccc;
+    border: 0;
+}
+.shop_isBlack>div{
+    float:left;
+    width: 50%;
+    height: 100%;
+    border:1px solid #cccccc;
+    border-left: 0;
+    padding-top:30px
+}
+.shop_isBlack>div>div{
+    margin: 20px 0 0 30px;
+
 }

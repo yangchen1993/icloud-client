@@ -19,7 +19,15 @@ window.API = {
     },
 
     "AD": {
-        "GET_CURRENT_USER_ADS": [window.HOST, "ads/get_current_user_ads/"].join("") // 获取当前用户的广告
+        "GET_CURRENT_USER_ADS": [window.HOST, "ads/get_current_user_ads/"].join(""), // 获取当前用户的广告
+
+        "GET_AD_INFO": [window.HOST, "ads/get_ad_info/"].join(""), // 获取广告详细信息
+
+        "NEW_AD": [window.HOST, "ads/new_ad/"].join(""), // 新建广告
+
+        "EDIT_AD": [window.HOST, "ads/edit_ad/"].join(""), // 编辑广告
+
+        "REMOVE_AD": [window.HOST, "ads/remove_ad/"].join("") // 删除广告
     },
 
     "SYSTEM": {
@@ -41,29 +49,35 @@ window.API = {
 
         "GET_ALL_VERSIONS": [window.HOST, "routers/versions/get_all_versions/"].join(""), // 获取所有的固件
 
-        "GET_ROUTERS_BY_GROUP":[window.HOST, "routers"],
+        "GET_ROUTERS_BY_GROUP": [window.HOST, "routers/get_routers_by_group/"].join(""), // 根据组获取路由器
 
         "NEW_VERSION": [window.HOST, "routers/versions/new_version/"].join(""), // 发布新固件
 
         "REMOVE_VERSION": [window.HOST, "routers/versions/remove_version/"].join(""), // 发布新固件
 
-        "ROUTER_UNBIND": [window.HOST, "routers/unbind/"], // 路由器解绑
+        "ROUTER_UNBIND": [window.HOST, "routers/unbind/"].join(""), // 路由器解绑
 
-        "ROUTER_BIND": [window.HOST, "routers/bind/"], // 路由器绑定
+        "ROUTER_BIND": [window.HOST, "routers/bind/"].join(""), // 路由器绑定
 
-        "GET_ROUTER_BLACK_WHITES": [window.HOST, "policies/"].join(""), // 获取路由器的黑白名单
+        "NEW_BLACK_WHITE": [window.HOST, "blackwhite/new_black_white/"], // 新建黑白名单
 
-        "SET_ENABLE_BLACK_WHITES": [window.HOST, "policies/enable/"].join(""), // 启用黑白名单
+        "GET_ROUTER_BLACK_WHITES": [window.HOST, "blackwhite/get_router_black_whites"].join(""), // 获取路由器的黑白名单
+
+        "SET_ENABLE_BLACK_WHITES": [window.HOST, "blackwhite/enable/"].join(""), // 启用黑白名单
+
+        "REMOVE_BLACK_WHITE": [window.HOST, "blackwhite/remove_black_white"].join(""), // 删除黑白名单
 
         "GET_ROUTER_SETUP": [window.HOST, "setups/get_router_setup/"].join(""), // 获取路由器设置
 
-        "EDIT_ROUTER_SETUP": [window.HOST, "setups/edit_router_setup/"].join(""), // 修改路由器设置
+        "EDIT_ROUTER_SETUP": [window.HOST, "setups/edit_router_setup/"].join("") // 修改路由器设置
 
 
     },
 
     "GROUP": {
-        "GET_CURRENT_USER_ROUTER_GROUPS": [window.HOST, "groups/get_current_user_router_groups/"].join("") // 获取当前用户的路由器分组
+        "GET_CURRENT_USER_ROUTER_GROUPS": [window.HOST, "groups/get_current_user_router_groups/"].join(""), // 获取当前用户的路由器分组
+        "NEW_GROUP": [window.HOST, "groups/new_group/"].join("") // 新建路由器分组
+
     },
 
 

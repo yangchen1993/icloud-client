@@ -56,6 +56,20 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="profile">
                 <div style="overflow-y: auto">
+                    <div class="form-inline">
+                        <span>类型：</span>
+                        <select class="form-control" style="width: 100px" ng-change="blackwhite_filter(filter)" ng-model="filter.content_type">
+                            <option value="">全部</option>
+                            <option value="0">MAC</option>
+                            <option value="1">域名</option>
+                        </select>
+                        <span style="margin-left: 30px">黑白名单：</span>
+                        <select class="form-control" style="width: 100px" ng-change="blackwhite_filter(filter)" ng-model="filter.is_black">
+                            <option value="">全部</option>
+                            <option value="1">黑名单</option>
+                            <option value="0">白名单</option>
+                        </select>
+                    </div>
                     <table class="table table-bordered table-striped text-center">
                         <thead>
                         <tr>

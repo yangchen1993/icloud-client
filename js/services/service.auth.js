@@ -15,7 +15,7 @@ iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window"
         return {
             "login": function (data) {
                 if (data.username && data.password) {
-                    $http.post($window.USER.LOGIN, data)
+                    $http.post($window.API.USER.LOGIN, data)
                         .success(function (data) {
                             $cookieStore.put("key", data.key);
                             $window.location.href = "#/main";

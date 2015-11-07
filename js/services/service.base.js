@@ -193,10 +193,10 @@ iCloudService.service("$checkBox", ["$rootScope",
         }
     }]);
 
-iCloudService.service("$category", ['$http', '$cookieStore', '$q', '$window', function ($http, $cookieStore, $window) {
+iCloudService.service("$category", ['$http', '$cookieStore', function ($http, $cookieStore) {
     var key = $cookieStore.get("key");
     this.get = function () {
-        return $http.get([$window.API.SYSTEM.GET_CATEGORIES, "?key=", key].join(""));
+        return $http.get([window.API.SYSTEM.GET_CATEGORIES, "?key=", key].join(""));
     }
 }]);
 

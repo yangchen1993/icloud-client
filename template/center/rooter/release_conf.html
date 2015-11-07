@@ -3,8 +3,9 @@
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li class="active">放行设置</li>
     </ol>
-    <a data-toggle="collapse" href="#advanced_search">高级搜索</a>
-    <div class="eq_m collapse well" id="advanced_search">
+    <button class="btn btn-info" data-toggle="collapse" data-target="#advanced_search" aria-expanded="false"  aria-controls="advanced_search">高级搜索</button>
+    <div class=" collapse" id="advanced_search">
+        <div class=" well">
         <div class="form-inline">
             <span>店铺：</span>
             <input type="text" class="form-control" placeholder="商铺名称" style="width: 15% !important;" ng-model="search.groups__name__icontains">
@@ -39,6 +40,7 @@
                 <button class="btn btn-info pull-right" ng-click="eq_reset()">重置</button>
                 <button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="eq_search(search)">搜索</button>
             </div>
+        </div>
         </div>
     </div>
     <div style="margin-top: 20px">
@@ -168,3 +170,8 @@
         </div>
     </div>
 </div>
+<script>
+    $("#advanced_search").click(function(e){
+        e.preventDefault();
+    });
+</script>

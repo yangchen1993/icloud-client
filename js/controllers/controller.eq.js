@@ -20,10 +20,10 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
             "2": "微信登陆"
         };
         $checkBox.enableCheck("table-eq");
-        $grid.initial($scope, $window.all_routers_url);
+        $grid.initial($scope, window.API.ROUTER.GET_CURRENT_USER_ROUTERS);
         var promise = $category.get();
         promise.success(function (data) {
-            $scope.category = data.results;
+            $scope.category = data;
         });
         $scope.eq_search = function (data) {
             var tmp = angular.copy(data);
@@ -64,8 +64,8 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
 
             }
         };
-        $scope.search_details = function (data) {
-            $scope.$emit("sendRouters", data);
+        $scope.see_router = function (name) {
+            window.location.href = ["#/main/details?WIFI_name=",name].join("");
         };
     }]);
 
@@ -129,6 +129,12 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
 }]);
 
 iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', function ($scope, $http, $cookieStore) {
+    var get_param = function(href){
+        var search_start = href.indexOf("=");
+        return href.slice(search_start+1);
+    };
+    var WIFI_name = get_param(window.location.href);
+    $scope.WIFI_name = decodeURI(WIFI_name);
     $scope.update = function () {
         if (confirm("升级过程中将会重启路由器，请确定是否需要升级？")) {
 
@@ -159,9 +165,6 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             }
         }, 1000)
     };
-    $scope.$on("executeRouters", function (e, data) {
-        $scope.routers = data;
-    })
 }]);
 
 iCloudController.controller("IdentifyConfController", ['$scope', function ($scope) {
@@ -176,7 +179,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
     $checkBox.enableCheck("table-eq");
     var promise = $category.get();
     promise.success(function (data) {
-        $scope.category = data.results;
+        $scope.category = data;
     });
     $scope.eq_search = function (data) {
         var tmp = angular.copy(data);
@@ -212,7 +215,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
         })
     };
     var idBox = [];
-    $grid.initial($scope, window.all_routers_url);
+    $grid.initial($scope,window.API.ROUTER.GET_CURRENT_USER_ROUTERS);
     $scope.conf = function () {
         idBox = [];
         var selector = ["#table-eq", " :checkbox"].join("");

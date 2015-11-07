@@ -4,7 +4,7 @@
 
 iCloudController.controller("ShopManagementController", ["$scope", "$http", "$grid", "$window", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", "$blackWhite",
     function ($scope, $http, $grid, $window, $category, $province, $city, $area, $trades, $cookieStore, $blackWhite) {
-        $http.get([groups_own,"?key=",$cookieStore.get("key")].join("")).success(function(data){
+        $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS,"?key=",$cookieStore.get("key")].join("")).success(function(data){
             console.log(data.results);
             $scope.shop = data.results;
         });
@@ -61,9 +61,9 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope","$windo
         $window.location.href = ["#/main/routers_details?routers_id=",id].join("");
     };
 
-    $http.get([window.get_router_by_group_url,"?key=",$cookieStore.get("key"),"&group_id=",shop_id].join("")).success(function(data){
+    $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP,"?key=",$cookieStore.get("key"),"&group_id=",shop_id].join("")).success(function(data){
         $scope.shop_routers = data.results;
-        console.log(data.results)
+        console.log(data)
     });
 }]);
 
@@ -72,10 +72,10 @@ iCloudController.controller("RoutersDetailsController",["$scope","$http","$cooki
         var search_start = href.indexOf("=");
         return href.slice(search_start+1);
     };
-    var routers_id = get_param($window.location.href);
+    var router_id = get_param($window.location.href);
 
     $scope.type = ["MAC","域名"];
-    $http.get([get_router_policies,"?key=",$cookieStore.get("key"),"&router=",routers_id].join("")).success(function(data){
+    $http.get([window.API.ROUTER.GET_ROUTER_BLACK_WHITES,"?key=",$cookieStore.get("key"),"&router=",router_id].join("")).success(function(data){
         console.log(data);
         $scope.policy = data.results;
         for(var i=0;i<data.results.length;i++){
@@ -94,26 +94,45 @@ iCloudController.controller("RoutersDetailsController",["$scope","$http","$cooki
         "is_black":"1"
     };
     $scope.add_mac = function(data){
-        data.router = routers_id;
+        data.router = router_id;
         data.content_type = "0";
         data.enable = "1";
-        $http.post([new_policy_url,"?key=",$cookieStore.get("key")].join(""),data).success(function(data){
+        $http.post([window.API.ROUTER.NEW_BLACK_WHITES,"?key=",$cookieStore.get("key")].join(""),data).success(function(data){
             alert("添加成功")
         })
     };
     $scope.add_domain = function(data){
-        data.router = routers_id;
+        data.router = router_id;
         data.content_type = "1";
         data.enable = "1";
-        $http.post([new_policy_url,"?key=",$cookieStore.get("key")].join(""),data).success(function(data){
+        $http.post([window.API.ROUTER.NEW_BLACK_WHITES,"?key=",$cookieStore.get("key")].join(""),data).success(function(data){
             alert("添加成功")
         })
     };
     $scope.delete = function(id){
         var ids = [id];
         console.log(ids);
-        $http.delete([window.delete_policy,"?key=",$cookieStore.get("key")].join(""),ids).success(function(data){
+        $http.delete([window.API.ROUTER.REMOVE_BLACK_WHITES,"?key=",$cookieStore.get("key"),"&ids=",ids.join()].join("")).success(function(data){
             console.log(data);
+        })
+    };
+    $scope.filter = {
+        "content_type":"",
+        "is_black":""
+    };
+    $scope.blackwhite_filter = function(data){
+        var filter = angular.copy(data);
+        filter.router = router_id;
+        $http.get([window.API.ROUTER.GET_ROUTER_BLACK_WHITES,"?key=",$cookieStore.get("key"),"&", $.param(filter)].join("")).success(function(data){
+            $scope.policy = data.results;
+            for(var i=0;i<data.results.length;i++){
+                if(data.results[i].is_black){
+                    $scope.policy[i].is_black = "黑名单";
+                }
+                else{
+                    $scope.policy[i].is_black = "白名单";
+                }
+            }
         })
     }
 }]);

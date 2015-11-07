@@ -3,7 +3,7 @@
  */
 iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore", "$window", "$grid", "$checkBox", "$MyDelete",
     function ($scope, $http, $cookieStore, $window, $grid, $checkBox, $MyDelete) {
-        $grid.initial($scope, [$window.ads_url, "get_media_ads/"].join(""));
+        $grid.initial($scope, [$window.API.AD.GET_CURRENT_USER_ADS].join(""));
         $checkBox.enableCheck("table-wemedia");
         $scope.send = function (data) {
             $window.location.href = ["#main/wemedia_edit?id=", data.id].join("")
@@ -13,7 +13,7 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
         };
         //删除自媒体广告
         $scope.delete = function (id) {
-            $MyDelete.init(window.ads_url, id);
+            $MyDelete.init(window.API.AD.GET_CURRENT_USER_ADS, id);
         };
         //下架
         $scope.under = function (id) {

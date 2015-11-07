@@ -3,63 +3,78 @@
  */
 
 //window.host = "http://192.168.0.112/api/";
-window.host = "http://mb.idianjia.cn:8801/api/";
+window.HOST = "http://mb.idianjia.cn:8801/api/";
 
-window.media_host = "http://mb.idianjia.cn:10000";
+window.API = {
+    "USER": {
+        "LOGIN": [window.HOST, "users/login/"].join(""), // 登录
 
-window.user_url = [window.host, "users/"].join("");
+        "LOGOUT": [window.HOST, "users/logout/"].join(""), // 登出
 
-window.login_url = [window.host, "login/"].join("");
+        "GET_CURRENT_USER_INFO": [window.HOST, "users/get_current_user_info/"].join(""), // 获取当前用户信息
 
-window.logout_url = [window.host, "users/logout/"].join("");
+        "GET_SUB_USERS": [window.HOST, "users/get_sub_users/"].join(""), // 获取下属用户
 
-window.register_url = [window.host, "users/register/"].join("");
+        "REGISTER": [window.HOST, "users/register/"].join("") // 注册
+    },
 
-window.current_user_url = [window.host, "users/get_current_user/"].join("");
+    "AD": {
+        "GET_CURRENT_USER_ADS": [window.HOST, "ads/get_current_user_ads/"].join("") // 获取当前用户的广告
+    },
 
-window.permissions_url = [window.host, "permissions/"].join("");
+    "SYSTEM": {
+        "GET_CATEGORIES": [window.HOST, "categories/get_categories/"].join(""), // 获取所有行业
 
-window.paidlisting_url = [window.host, "bid/"].join("");
+        "NEW_CATEGORY": [window.HOST, "categories/new_category/"].join(""), // 新增行业
 
-window.ads_url = [window.host, "ads/"].join("");
+        "GET_PROVINCES": [window.HOST, "cities/get_provinces/"].join(""), // 获取所有的省
 
-window.functions_url = [window.host, "functions/"].join("");
+        "GET_CITIES_BY_PROVINCE": [window.HOST, "cities/get_cities_by_province/"].join(""), // 根据省获取市
 
-window.requestcategory = [window.host, "category/"].join("");
+        "GET_AREAS_BY_CITY": [window.HOST, "cities/get_areas_by_city/"].join(""), // 根据市获取区
 
-window.all_routers_url = [window.host, "routers/get_all_routers/"].join("");
+        "GET_TRADES": [window.HOST, "cities/get_trades/"].join("") // 按照省市区获取商圈
+    },
 
-window.province_url = [window.host, "cities/province/"].join("");
+    "ROUTER": {
+        "GET_ALL_ROUTERS": [window.HOST, "routers/get_all_routers/"].join(""), // 获取所有路由器
 
-window.city_url = [window.host, "cities/city/"].join("");
+        "GET_ALL_VERSIONS": [window.HOST, "routers/versions/get_all_versions/"].join(""), // 获取所有的固件
 
-window.area_url = [window.host, "cities/area/"].join("");
+        "GET_ROUTERS_BY_GROUP":[window.HOST, "routers"],
 
-window.trade_url = [window.host, "cities/trades/"].join("");
+        "NEW_VERSION": [window.HOST, "routers/versions/new_version/"].join(""), // 发布新固件
 
-window.version_url = [window.host, "routers/versions/"].join("");
+        "REMOVE_VERSION": [window.HOST, "routers/versions/remove_version/"].join(""), // 发布新固件
 
-window.release_url = [window.host, "business/policies/"].join("");
+        "ROUTER_UNBIND": [window.HOST, "routers/unbind/"], // 路由器解绑
 
-window.release_enable_url = [window.host, "business/policies/enable/"].join("");
+        "ROUTER_BIND": [window.HOST, "routers/bind/"], // 路由器绑定
 
-window.routers_groups_url = [window.host, "groups/"].join("");
+        "GET_ROUTER_BLACK_WHITES": [window.HOST, "policies/"].join(""), // 获取路由器的黑白名单
 
-window.router_setup_url = [window.host, "business/setup/"].join("");
+        "SET_ENABLE_BLACK_WHITES": [window.HOST, "policies/enable/"].join(""), // 启用黑白名单
 
-window.groups_own = [window.host, "groups/get_router_groups/"].join("");
+        "GET_ROUTER_SETUP": [window.HOST, "setups/get_router_setup/"].join(""), // 获取路由器设置
 
-window.new_group = [window.host, "groups/new_group/"].join("");
+        "EDIT_ROUTER_SETUP": [window.HOST, "setups/edit_router_setup/"].join(""), // 修改路由器设置
 
-window.agent_url = [window.host, "admin/agent/"].join("");
 
-window.get_router_by_group_url = [window.host, "routers/get_routers_by_group/"].join("");
+    },
 
-window.new_policy_url = [window.host, "policy/new_policy/"].join("");
+    "GROUP": {
+        "GET_CURRENT_USER_ROUTER_GROUPS": [window.HOST, "groups/get_current_user_router_groups/"].join("") // 获取当前用户的路由器分组
+    },
 
-window.get_router_policies = [window.host, "policy/get_router_policies"].join("");
 
-window.delete_policy = [window.host, "policy/delete_policy/"].join("");
+    "CMS": {
+        "NEW_RESOURCES": [window.HOST, "resources/new_resource/"].join(""), // 新建资源, 供CMS使用
+
+        "REMOVE_RESOURCE": [window.HOST, "resources/remove_resource/"].join("") // 删除资源， 供CMS使用
+    }
+};
+
+
 var transform_error_message = function (msg) {
     if (_.isObject(msg)) {
         var message = "";

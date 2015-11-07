@@ -29,18 +29,10 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
 
         $scope.agent = {};
         $scope.check_tel = function () {
-            if ($scope.agent.tel.length != 11) {
-                alert("手机号码位数不正确，请重新输入！");
-            }
         };
         $scope.check_password = function () {
-            if ($scope.pass != $scope.agent.password)
-                alert("两次输入密码不一致，请从新输入！");
         };
         $scope.check_idCard = function () {
-            if ($scope.agent.id_card.length != 16 && $scope.agent.id_card.length != 18) {
-                alert("身份证位数不正确，请从新输入！");
-            }
         };
         var key = $cookieStore.get("key");
         $http.get([$window.agent_url, "roles/", "?key=", key].join(""))
@@ -93,7 +85,7 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
 
         $scope.submit = function () {
             console.log($scope.agent);
-            $http.post([$window.agent_url, "?key=", key].join(""), $scope.agent).success(function (data) {
+            $http.post([$window.new_agent_url, "?key=", key].join(""), $scope.agent).success(function (data) {
                 console.log(data);
             });
         };
@@ -134,7 +126,7 @@ iCloudController.controller("CreateBusinessController", ['$scope', '$http', '$co
             }
         };
         var key = $cookieStore.get("key");
-        $http.get([$window.agent_url, "get_current_user/", "?key=", key].join(""))
+        $http.get([$window.current_user_url, "?key=", key].join(""))
             .success(function (data) {
                 var address = data;
                 $scope.business.province = address.province_id;
@@ -158,7 +150,7 @@ iCloudController.controller("CreateBusinessController", ['$scope', '$http', '$co
             });
         $scope.submit = function () {
             $scope.business.role = "商家";
-            $http.post([$window.agent_url, "?key=", key].join(""), $scope.business).success(function (data) {
+            $http.post([$window.new, "?key=", key].join(""), $scope.business).success(function (data) {
                 console.log(data);
             });
         };

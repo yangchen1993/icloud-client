@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-window.HOST = "http://192.168.0.112/api/";
-//window.HOST = "http://mb.idianjia.cn:8801/api/";
+//window.HOST = "http://192.168.0.112/api/";
+window.HOST = "http://mb.idianjia.cn:8801/api/";
 
 window.API = {
     "USER": {
@@ -53,9 +53,9 @@ window.API = {
 
         "GET_ROUTERS_BY_GROUP": [window.HOST, "routers/get_routers_by_group/"].join(""), // 根据组获取路由器
 
-        "NEW_VERSION": [window.HOST, "routers/versions/new_version/"].join(""), // 发布新固件
+        "NEW_VERSION": [window.HOST, "versions/new_version/"].join(""), // 发布新固件
 
-        "REMOVE_VERSION": [window.HOST, "routers/versions/remove_version/"].join(""), // 发布新固件
+        "REMOVE_VERSION": [window.HOST, "versions/remove_version/"].join(""), // 发布新固件
 
         "ROUTER_UNBIND": [window.HOST, "routers/unbind/"].join(""), // 路由器解绑
 
@@ -72,8 +72,6 @@ window.API = {
         "GET_ROUTER_SETUPS": [window.HOST, "setups/get_router_setup/"].join(""), // 获取路由器设置
 
         "EDIT_ROUTER_SETUPS": [window.HOST, "setups/edit_router_setup/"].join("") // 修改路由器设置
-
-
     },
 
     "GROUP": {

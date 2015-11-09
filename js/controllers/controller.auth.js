@@ -12,23 +12,32 @@ iCloudController.controller("IndexController", ["$scope", "$http", "$window", "$
         };
 
         $scope.login = function (data) {
-            if (!data.username) {
+
+            var data_ = angular.copy(data);
+
+            if (!data_.username) {
                 $scope.errorMsg = "用户名不能为空";
                 console.log($scope.errorMsg);
                 return false
             }
 
-            if (!data.password) {
+            if (!data_.password) {
                 $scope.errorMsg = "密码不能为空";
                 console.log($scope.errorMsg);
                 return false
             }
 
 
-            data.password = CryptoJS.SHA1(data.password).toString();
+            data_.password = CryptoJS.SHA1(data_.password).toString();
 
-            $auth.login(data);
+            $auth.login(data_);
         };
+
+        $scope.enterEvent = function (e) {
+            if (e.keyCode === 13){
+                $scope.login($scope.auth);
+            }
+        }
     }]);
 
 iCloudController.controller("TopController", ["$scope", "$http", "$auth", "$cookieStore",

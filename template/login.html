@@ -29,7 +29,7 @@
 <div class="img_box text-center">
     <img src="../img/login_logo.png" class="img">
 </div>
-<div class="login_modal" ng-keypress="enterEvent()">
+<div class="login_modal" ng-keypress="enterEvent($event)">
     <img src="../img/person.png" style="margin-bottom: 9px">
     <input type="text" placeholder="请输入用户名" ng-model="auth.username">
     <hr>
@@ -40,6 +40,6 @@
         <!--<input type="checkbox" id="rememberId">-->
         <!--<label for="rememberId" class="text-muted">记住账号</label>-->
     <!--</div>-->
-    <button class="btn btn-block btn-success" ng-click="login(auth)"><span class="h4">登录</span></button>
+    <button class="btn btn-block btn-success" id="enter" ng-click="login(auth)"><span class="h4">登录</span></button>
     <p class="text-center msg"><span class="h4" ng-bind="errorMsg.msg"></span></p>
 </div>

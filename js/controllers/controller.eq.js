@@ -65,7 +65,7 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
             }
         };
         $scope.see_router = function (name) {
-            window.location.href = ["#/main/details?WIFI_name=",name].join("");
+            window.location.href = ["#/main/details?WIFI_name=", name].join("");
         };
     }]);
 
@@ -92,7 +92,7 @@ iCloudController.controller("VersionManagementController", ['$scope', '$window',
             formData.append("file", file[0]);
             formData.append("name", data_.name);
             formData.append("description", data_.description);
-            var url = [$window.version_url, '?key=', $cookieStore.get('key')].join("");
+            var url = [$window.API.ROUTER.NEW_VERSION, '?key=', $cookieStore.get('key')].join("");
             $http.post(url, formData, {"headers": {"Content-Type": undefined}})
                 .success(function (data) {
                     angular.element("#newVersionModal").modal("toggle");
@@ -105,7 +105,7 @@ iCloudController.controller("VersionManagementController", ['$scope', '$window',
 
         $scope.remove = function (id) {
             if (confirm("确定删除?删除后无法恢复!")) {
-                $http.delete([window.version_url, id, "/", "?key=", $cookieStore.get("key")].join(""))
+                $http.delete([window.API.ROUTER.REMOVE_VERSION, "?id=", id, "&key=", $cookieStore.get("key")].join(""))
                     .finally(function () {
                         $scope.refresh();
                     })
@@ -129,9 +129,9 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
 }]);
 
 iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', function ($scope, $http, $cookieStore) {
-    var get_param = function(href){
+    var get_param = function (href) {
         var search_start = href.indexOf("=");
-        return href.slice(search_start+1);
+        return href.slice(search_start + 1);
     };
     var WIFI_name = get_param(window.location.href);
     $scope.WIFI_name = decodeURI(WIFI_name);
@@ -144,7 +144,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         var data = prompt("当前WIFI名称：" + $scope.routers.router_groups.name);
         if (data) {
             var key = $cookieStore.get("key");
-            $http.patch([window.routers_groups_url, $scope.routers.router_groups.id,"/","?key=",key].join(""),{"name":data});
+            $http.patch([window.routers_groups_url, $scope.routers.router_groups.id, "/", "?key=", key].join(""), {"name": data});
         }
     };
     $scope.jiebang = function () {
@@ -175,7 +175,7 @@ iCloudController.controller("IdentifyConfController", ['$scope', function ($scop
     }
 }]);
 
-iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cookieStore', '$http', '$checkBox', '$filter','$category', '$province', '$city', '$area', function ($scope, $grid, $cookieStore, $http, $checkBox, $filter, $category, $province, $city, $area) {
+iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cookieStore', '$http', '$checkBox', '$filter', '$category', '$province', '$city', '$area', function ($scope, $grid, $cookieStore, $http, $checkBox, $filter, $category, $province, $city, $area) {
     $checkBox.enableCheck("table-eq");
     var promise = $category.get();
     promise.success(function (data) {
@@ -215,7 +215,7 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
         })
     };
     var idBox = [];
-    $grid.initial($scope,window.API.ROUTER.GET_CURRENT_USER_ROUTERS);
+    $grid.initial($scope, window.API.ROUTER.GET_CURRENT_USER_ROUTERS);
     $scope.conf = function () {
         idBox = [];
         var selector = ["#table-eq", " :checkbox"].join("");
@@ -262,10 +262,10 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
     };
     $scope.conf_s = function (mac) {
         console.log(mac);
-        $http.get(["http://192.168.0.188:8000/routers/online_status/?key=",$cookieStore.get("key"),"&router_mac=",mac].join("")).success(function(data){
+        $http.get(["http://192.168.0.188:8000/routers/online_status/?key=", $cookieStore.get("key"), "&router_mac=", mac].join("")).success(function (data) {
             console.log(data);
         })
-            .error(function(data){
+            .error(function (data) {
                 console.log(data);
             });
         //$scope.is_modal = true;

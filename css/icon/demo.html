@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>IconFont</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="iconfont.css">
+</head>
+<body>
+    <div class="main">
+        <h1>IconFont 图标</h1>
+        <ul class="icon_lists clear">
+            
+                <li>
+                <i class="icon iconfont">&#xe789;</i>
+                    <div class="name">文字</div>
+                    <div class="code">&amp;#xe789;</div>
+                    <div class="fontclass">.wenzi</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe6be;</i>
+                    <div class="name">编辑</div>
+                    <div class="code">&amp;#xe6be;</div>
+                    <div class="fontclass">.bianji</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe636;</i>
+                    <div class="name">删除</div>
+                    <div class="code">&amp;#xe636;</div>
+                    <div class="fontclass">.shanchu</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe64c;</i>
+                    <div class="name">地图</div>
+                    <div class="code">&amp;#xe64c;</div>
+                    <div class="fontclass">.ditu</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe721;</i>
+                    <div class="name">菜单</div>
+                    <div class="code">&amp;#xe721;</div>
+                    <div class="fontclass">.caidan</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xf002c;</i>
+                    <div class="name">幻灯</div>
+                    <div class="code">&amp;#xf002c;</div>
+                    <div class="fontclass">.uislide</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe6d1;</i>
+                    <div class="name">图片</div>
+                    <div class="code">&amp;#xe6d1;</div>
+                    <div class="fontclass">.tupian</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe836;</i>
+                    <div class="name">导航</div>
+                    <div class="code">&amp;#xe836;</div>
+                    <div class="fontclass">.daohang</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe62c;</i>
+                    <div class="name">广告</div>
+                    <div class="code">&amp;#xe62c;</div>
+                    <div class="fontclass">.guanggao</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe64d;</i>
+                    <div class="name">活动</div>
+                    <div class="code">&amp;#xe64d;</div>
+                    <div class="fontclass">.huodong</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xf0007;</i>
+                    <div class="name">电话</div>
+                    <div class="code">&amp;#xf0007;</div>
+                    <div class="fontclass">.dianhua</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe6ec;</i>
+                    <div class="name">应用</div>
+                    <div class="code">&amp;#xe6ec;</div>
+                    <div class="fontclass">.yingyong</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe604;</i>
+                    <div class="name">添加</div>
+                    <div class="code">&amp;#xe604;</div>
+                    <div class="fontclass">.tianjia</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe684;</i>
+                    <div class="name">视频</div>
+                    <div class="code">&amp;#xe684;</div>
+                    <div class="fontclass">.ordinaryvideo</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe608;</i>
+                    <div class="name">返回</div>
+                    <div class="code">&amp;#xe608;</div>
+                    <div class="fontclass">.fanhui</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe63a;</i>
+                    <div class="name">预览</div>
+                    <div class="code">&amp;#xe63a;</div>
+                    <div class="fontclass">.yulan</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe61e;</i>
+                    <div class="name">链接</div>
+                    <div class="code">&amp;#xe61e;</div>
+                    <div class="fontclass">.lianjie</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe672;</i>
+                    <div class="name">网页配置</div>
+                    <div class="code">&amp;#xe672;</div>
+                    <div class="fontclass">.wangyepeizhi</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe673;</i>
+                    <div class="name">地址</div>
+                    <div class="code">&amp;#xe673;</div>
+                    <div class="fontclass">.address</div>
+                </li>
+            
+        </ul>
+
+
+        <div class="helps">
+            第一步：使用font-face声明字体
+            <pre>
+@font-face {font-family: 'iconfont';
+    src: url('iconfont.eot'); /* IE9*/
+    src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('iconfont.woff') format('woff'), /* chrome、firefox */
+    url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+</pre>
+第二步：定义使用iconfont的样式
+            <pre>
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
+</pre>
+第三步：挑选相应图标并获取字体编码，应用于页面
+<pre>
+&lt;i class="iconfont"&gt;&amp;#x33;&lt;/i&gt;
+</pre>
+        </div>
+
+    </div>
+</body>
+</html>

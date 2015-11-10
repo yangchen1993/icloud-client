@@ -1,0 +1,34 @@
+*{
+    margin:0;
+    padding: 0;
+    border:none;
+}
+ul{
+    list-style: none;
+}
+html{
+    min-width: 1000px;
+}
+body{
+    width: 100%;
+    min-height:100%;
+    color:#000;
+    background: darkgray;
+}
+header.top-bar{
+    position:fixed;
+    width: 100%;
+    height:50px;
+    z-index: 999;
+    background: #09C none repeat scroll 0% 0%;
+}
+.logo{
+    float: left;
+    display: block;
+    height:50px;
+    padding-left:35px;
+    color:#fff;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}

@@ -1,0 +1,257 @@
+<link rel="stylesheet" href="/css/phone_cms.css">
+<link rel="stylesheet" href="/bower_components/icon/iconfont.css">
+<link rel="stylesheet" href="/css/buttons.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/bower_components/jquery-minicolors/jquery.minicolors.css"/>
+
+<ol class="breadcrumb" style="background-color: #1fbba6">
+    <li><a ui-sref="main.shop_management">店铺管理</a></li>
+    <li class="active">店铺主页编辑</li>
+</ol>
+<div class="container-fluid">
+    <div class="row main">
+        <div class="col-xs-3 left">
+            <div class="panel panel-danger page">
+                <div class="panel-heading text-center">组件中心</div>
+                <div class="panel-body component">
+                    <div class=""   id="dj-text"  >
+                        <i class="icon iconfont font2x">&#xe789;</i>
+                        <div>文字</div>
+                    </div>
+
+                    <div class="" id="dj-img">
+                        <i class="icon iconfont font2x">&#xe6d1;</i>
+                        <div>图片</div>
+                    </div>
+
+                    <div class="">
+                        <i class="icon iconfont font2x">&#xf002c;</i>
+                        <div>幻灯片</div>
+                    </div>
+
+                    <div class="">
+                        <i class="icon iconfont font2x">&#xe721;</i>
+                        <div>菜单</div>
+                    </div>
+
+                    <!--<div class="">-->
+                        <!--<i class="icon iconfont font2x">&#xe836;</i>-->
+                        <!--<div>导航</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="">-->
+                        <!--<i class="icon iconfont font2x">&#xf0007;</i>-->
+                        <!--<div>电话</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="">-->
+                        <!--<i class="icon iconfont font2x">&#xe62c;</i>-->
+                        <!--<div>广告</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="">-->
+                        <!--<i class="icon iconfont font2x">&#xe64d;</i>-->
+                        <!--<div>活动</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="">-->
+                        <!--<i class="icon iconfont font2x">&#xe6ec;</i>-->
+                        <!--<div>应用</div>-->
+                    <!--</div>-->
+
+                    <div class="">
+                        <i class="icon iconfont font2x">&#xe673;</i>
+                        <div>地址</div>
+                    </div>
+
+                    <div class=""  id="dj-map" >
+                        <i class="icon iconfont font2x">&#xe64c;</i>
+                        <div>地图</div>
+                    </div>
+
+                    <!--<div class="">-->
+                        <!--<i class="icon iconfont font2x">&#xe684;</i>-->
+                        <!--<div>视频</div>-->
+                    <!--</div>-->
+
+                    <!--新添组件-->
+                    <div class="">
+                    </div>
+
+                    <div class="">
+                    </div>
+
+                    <div class="">
+                    </div>
+
+                    <div class="">
+                    </div>
+
+                </div>
+            </div>
+
+            <p class="text-center">店家网络&copy;2013-2015</p>
+        </div>
+        <div class="col-xs-9 right">
+            <div class="row">
+                <div class="col-xs-7">
+                    <div class="phone">
+                        <div class="phone-page">
+                            <!--手机装饰-->
+                            <div class="phone-ear">
+                                <span class="phone-camera"></span><span class="phone-sound"></span>
+                            </div>
+                            <!--以下的phone-warp是直接添加到数据库的部分-->
+                            <div class="phone-warp">
+                                <div class="phone-content">
+                                    <ul id="drag">
+                                    </ul>
+
+                                    <div><a href="http://www.idianjia.com">店家</a>提供技术支持</div>
+                                </div>
+                            </div>
+                            <div class="phone-button">
+                                <div class="circle-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt20">
+                        <div class="col-xs-12 text-center">
+                            <button class="button button-primary" id="savePage"><i class="icon iconfont">&#xe63a;</i>保存页面</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <span class="panel-title"><i class="icon iconfont">&#xe672;</i>&nbsp;图片编辑</span>
+                        </div>
+                        <div class="panel-body">
+                            <div><label class="button button-primary" for="upload">上传图片</label><input type="file" class="hidden" id="upload" accept="image/jpeg,image/gif,image/png"></div>
+                            <div>
+                                <div class="photoshow" style="display: inline-block;border:solid 1px gray;width:100px;height:100px;line-height: 100px;">
+                                    <img id="showImg" src="/img/test2.jpg">
+                                </div>
+
+                                <div style="display: inline-block;width:250px;">图片要求:<small>图片大小限制为:2MB以内，建议宽度640px
+                                    仅支持JPG、PNG格式，建议使用JPG格式</small>
+                                </div>
+                            </div>
+                            <div class="dod2">
+                                <img src="/img/test2.jpg">
+                            </div>
+                            <div class="btn-group" style="margin-top: 10px;">
+                                <div class="col-xs-12">链接方式:</div>
+                                <div class="col-xs-5">
+                                    <select class="form-control" style="padding:6px 5px;">
+                                        <option value="">内部网页</option>
+                                        <option value="">外部链接</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div class="input-group">
+                                        <label class="input-group-addon">http://</label><input class="form-control" type="text"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-footer text-center">
+                            <button class="button button-caution save">保存</button>
+                        </div>
+                    </div>
+
+                    <!--<div class="form-horizontal">-->
+                    <!--<div class="panel panel-primary">-->
+                    <!--<div class="panel-heading">-->
+                    <!--<span class="panel-title"><i class="icon iconfont">&#xe672;</i>&nbsp;菜单组件</span>-->
+                    <!--</div>-->
+                    <!--<div class="panel-body">-->
+                    <!--菜单设置:-->
+                    <!--<div class="input-group">-->
+                    <!--<div class="input-group-addon">背景色</div><input type="text" class="form-control color">-->
+                    <!--</div>-->
+                    <!--<div class="form-group" style="margin-top:15px;border-top:dashed 1px">-->
+                    <!--<div class="col-xs-5">-->
+                    <!--<div class="input-group">-->
+                    <!--<div class="input-group-addon">背景色</div><input type="text" class="form-control color">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-7">-->
+                    <!--<div class="input-group">-->
+                    <!--<div class="input-group-addon">文字色</div><input type="text" class="form-control color">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-12">-->
+                    <!--<div class="row">-->
+                    <!--<div class="col-xs-5">-->
+                    <!--<div class="input-group">-->
+                    <!--<div class="input-group-addon">链接</div>-->
+                    <!--<select class="form-control" style="width:130%;font-size: 12px;padding:6px 1px;">-->
+                    <!--<option value="">站内链接</option>-->
+                    <!--<option value="">站外链接</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-7">-->
+                    <!--<div class="input-group">-->
+                    <!--<div class="input-group-addon">http://</div><input class="form-control" type="text"/>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div></div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="hidden">
+    <!-- 下面是轮播~ -->
+
+    <div class="template">
+        <div class="menus">
+            <nav class="menu">
+                <ul>
+                    <li><a href="javascript:" class="active">首页</a></li>
+                    <li><a href="javascript:">新闻</a></li>
+                    <li><a href="javascript:">商城</a></li>
+                    <li><a href="javascript:">知识</a></li>
+                    <li><a href="javascript:">留言板</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="text">
+            <h4 class="title" style="margin:0;">标题</h4>
+            <div class="content">文字</div>
+        </div>
+        <div class="img">
+            <div class="img"><img src="/img/1.jpg"></div>
+            <!--<div class="lunbo">-->
+            <!--<ul>-->
+            <!--<li><img src="images/1.jpg"></li>-->
+            <!--<li><img src="images/2.jpg"></li>-->
+            <!--<li><img src="images/3.jpg"></li>-->
+            <!--</ul>-->
+            <!--</div>-->
+        </div>
+        <div class="map">
+        </div>
+    </div>
+
+<div class="showPage">
+
+</div>
+
+<script src="/bower_components/jquery-dragsort/jquery.dragsort-0.5.2.min.js"></script>
+<script src="/bower_components/jquery-minicolors/jquery.minicolors.min.js"></script>
+<script src="/bower_components/ckeditor/ckeditor.js"></script>
+<script src="/bower_components/unslider/src/unslider.min.js"></script>
+<script src="/js/cms/cms.js"></script>

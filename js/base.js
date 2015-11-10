@@ -4,6 +4,7 @@
 
 //window.HOST = "http://192.168.0.112/api/";
 window.HOST = "http://mb.idianjia.cn:8801/api/";
+window.HOST_WIFICAT = "http://112.124.125.145/";
 
 window.API = {
     "USER": {
@@ -53,9 +54,9 @@ window.API = {
 
         "GET_ROUTERS_BY_GROUP": [window.HOST, "routers/get_routers_by_group/"].join(""), // 根据组获取路由器
 
-        "NEW_VERSION": [window.HOST, "versions/new_version/"].join(""), // 发布新固件
+        "NEW_VERSION": [window.HOST, "routers/versions/new_version/"].join(""), // 发布新固件
 
-        "REMOVE_VERSION": [window.HOST, "versions/remove_version/"].join(""), // 发布新固件
+        "REMOVE_VERSION": [window.HOST, "routers/versions/remove_version/"].join(""), // 发布新固件
 
         "ROUTER_UNBIND": [window.HOST, "routers/unbind/"].join(""), // 路由器解绑
 
@@ -71,7 +72,9 @@ window.API = {
 
         "GET_ROUTER_SETUPS": [window.HOST, "setups/get_router_setup/"].join(""), // 获取路由器设置
 
-        "EDIT_ROUTER_SETUPS": [window.HOST, "setups/edit_router_setup/"].join("") // 修改路由器设置
+        "EDIT_ROUTER_SETUP": [window.HOST, "setups/edit_router_setup/"].join("") // 修改路由器设置
+
+
     },
 
     "GROUP": {
@@ -85,6 +88,11 @@ window.API = {
         "NEW_RESOURCES": [window.HOST, "resources/new_resource/"].join(""), // 新建资源, 供CMS使用
 
         "REMOVE_RESOURCE": [window.HOST, "resources/remove_resource/"].join("") // 删除资源， 供CMS使用
+    },
+
+
+    "WIFICAT":{
+        "ONLINE_STATUS":[window.HOST_WIFICAT,"routers/online_status/"].join("") //路由器实时信息
     }
 };
 

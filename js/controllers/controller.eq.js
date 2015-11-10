@@ -261,40 +261,34 @@ iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cooki
         }
     };
     $scope.conf_s = function (mac) {
-        console.log(mac);
-        $http.get(["http://192.168.0.188:8000/routers/online_status/?key=", $cookieStore.get("key"), "&router_mac=", mac].join("")).success(function (data) {
+
+        $scope.is_modal = true;
+        var white_mac = 0;
+        var white_domain = 0;
+        var black_mac = 0;
+        var black_domain = 0;
+        var key = $cookieStore.get("key");
+        $http.get([window.release_url, "?key=", key, "&router_id__in=", idBox].join("")).success(function (data) {
             console.log(data);
+            for (var i = 0; i < data.count; i++) {
+                if (data.results[i].is_black) {
+                    if (data.results[i].content_type == 0)
+                        black_mac++;
+                    if (data.results[i].content_type == 1)
+                        black_domain++;
+                }
+                else {
+                    if (data.results[i].content_type == 0)
+                        white_mac++;
+                    if (data.results[i].content_type == 1)
+                        white_domain++;
+                }
+            }
+            $scope.white_mac = white_mac;
+            $scope.white_domain = white_domain;
+            $scope.black_mac = black_mac;
+            $scope.black_domain = black_domain;
         })
-            .error(function (data) {
-                console.log(data);
-            });
-        //$scope.is_modal = true;
-        //var white_mac = 0;
-        //var white_domain = 0;
-        //var black_mac = 0;
-        //var black_domain = 0;
-        //var key = $cookieStore.get("key");
-        //$http.get([window.release_url, "?key=", key, "&router_id__in=", idBox].join("")).success(function (data) {
-        //    console.log(data);
-        //    for (var i = 0; i < data.count; i++) {
-        //        if (data.results[i].is_black) {
-        //            if (data.results[i].content_type == 0)
-        //                black_mac++;
-        //            if (data.results[i].content_type == 1)
-        //                black_domain++;
-        //        }
-        //        else {
-        //            if (data.results[i].content_type == 0)
-        //                white_mac++;
-        //            if (data.results[i].content_type == 1)
-        //                white_domain++;
-        //        }
-        //    }
-        //    $scope.white_mac = white_mac;
-        //    $scope.white_domain = white_domain;
-        //    $scope.black_mac = black_mac;
-        //    $scope.black_domain = black_domain;
-        //})
     };
     $scope.mac_open = function (bool) {
         var key = $cookieStore.get("key");

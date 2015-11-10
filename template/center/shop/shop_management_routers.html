@@ -18,18 +18,21 @@
         </div>
     </div>
 </div>
+<div class="search_panel form-inline">
+    <span style="font-family: 'Microsoft YaHei';font-size: 16px;font-weight: 500">绑定路由：</span>
+    <select class="form-control" style="width: 200px" ng-model="bang_router" ng-options="v.id as v.mac for v in router">
+        <option value="">MAC码</option>
+    </select>
+    <button class="btn btn-info" style="margin-left: 50px" ng-click="bang_submit()">确定</button>
+</div>
 <div style="padding: 10px">
     <a href="" style="color:#000">
-        <div style="width:33.3%;height:250px;background-color: #d5d5d5;float:left;border:1px solid #cccccc;padding:30px 0 0 40px;font-family: 'Microsoft YaHei';font-size: 18px;font-weight: 600"
+        <div style="width:33.3%;height:250px;background-color: #d5d5d5;float:left;border:1px solid #cccccc;padding:30px 0 0 40px;font-family: 'Microsoft YaHei';font-size: 18px;font-weight: 600;font-weight: 500"
              ng-repeat="p in shop_routers" ng-click="see_routers_details(p.id)">
             <div><span>设备MAC码：</span><span ng-bind="p.mac"></span></div>
             <div style="margin-top:15px"><span>SSID：</span><span ng-bind="p.ssid"></span></div>
             <div style="margin-top:15px"><span>是否在线：</span><span ng-bind="p.is_online"></span></div>
             <div style="margin-top:15px"><span>手机号码：</span><span ng-bind="p.tel">13546254784</span></div>
-            <div style="margin-top:15px">
-                <button class="btn btn-info">认证设置</button>
-                <button class="btn btn-info" style="margin-left: 50px">放行设置</button>
-            </div>
         </div>
     </a>
 </div>

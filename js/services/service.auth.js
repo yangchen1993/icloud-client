@@ -31,7 +31,7 @@ iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window"
                 }
             },
             "logout": function () {
-                $http.get($window.USER.LOGOUT + "?key=" + $cookieStore.get("key"))
+                $http.get($window.API.USER.LOGOUT + "?key=" + $cookieStore.get("key"))
                     .success(function (data) {
                         clearInterval(window.time_self);
                         $cookieStore.remove("key");

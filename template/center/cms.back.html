@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+    <title>编辑区</title>
+    <!--<link rel="stylesheet" href="css/style.css"/>-->
+    <!--<link rel="stylesheet" href="css/buttons.css"/>-->
+    <!--<link rel="stylesheet" href="css/icon/iconfont.css"/>-->
+    <!--<link rel="stylesheet" href="css/phone_cms.css"/>-->
+    <!--<link rel="stylesheet" href="js/cms/jquery-minicolors/jquery.minicolors.css"/>-->
+    <!--<link rel="stylesheet" href="bower_components/cropper/dist/cropper.min.css"/>-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=n1WHijd9nUZX0K6pMMGc1A6N&v=1.0"></script>
+    <style>
+    </style>
+</head>
+<body>
+
+    <div class="hidden">
+        <!-- 下面是轮播~ -->
+
+        <div class="template">
+            <div class="menus">
+                <nav class="menu">
+                    <ul>
+                        <li><a href="javascript:;" class="active">首页</a></li>
+                        <li><a href="javascript:;">新闻</a></li>
+                        <li><a href="javascript:;">商城</a></li>
+                        <li><a href="javascript:;">知识</a></li>
+                        <li><a href="javascript:;">留言板</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="text">
+                <h4 class="title" style="margin:0;">标题</h4>
+                <div class="content">文字</div>
+            </div>
+            <div class="img">
+                <div class="img"><img src="images/1.jpg"></div>
+                <!--<div class="lunbo">-->
+                <!--<ul>-->
+                <!--<li><img src="images/1.jpg"></li>-->
+                <!--<li><img src="images/2.jpg"></li>-->
+                <!--<li><img src="images/3.jpg"></li>-->
+                <!--</ul>-->
+                <!--</div>-->
+            </div>
+            <div class="map">
+            </div>
+        </div>
+
+    <!--</div>-->
+    <!--<div id="modaltt">sss</div>-->
+    <!-- Modal -->
+    <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+        <!--<div class="modal-dialog" role="document">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                    <!--<h4 class="modal-title" id="myModalLabel">图片裁剪</h4>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                        <!--<div class="dodo2">-->
+                            <!--<img id="imgsss">-->
+                        <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                    <!--<button type="button" class="btn btn-primary">保存</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="showPage">
+
+    </div>
+    <script src="js/cms/jquery.min.js"></script>
+    <script type="text/javascript" src="js/cms/jquery.min.js"></script>
+    <script type="text/javascript" src="js/cms/jquery.dragsort-0.5.2.min.js"></script>
+    <script type="text/javascript" src="js/cms/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/cms/jquery-minicolors/jquery.minicolors.min.js"></script>
+    <script type="text/javascript" src="js/cms/crop/cropper.min.js"></script>
+    <script src="js/cms/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="js/cms/unslider.min.js"></script>
+    <!--<script type="text/javascript" src="js/sample.js"></script>-->
+    <script type="text/javascript">
+//        $.get('http://192.168.10.200/api/cms/get_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13&id=4').success(function(data){
+//            $('.phone-content').html(data.div);
+//        });
+
+        //        initSample();
+    </script>
+    <script>
+        $('input[type="file"]').change(function(){
+            console.log($('input[type="file"]').prop('files'));
+        });
+        //文字编辑功能
+        (function(){
+            $('.color').minicolors({
+                animationSpeed: 50,
+                animationEasing: 'swing',
+                change: null,
+                changeDelay: 0,
+                control: 'hue',
+                defaultValue: '',
+                hide: null,
+                hideSpeed: 100,
+                inline: false,
+                letterCase: 'lowercase',
+                opacity: false,
+                position: 'bottom left',
+                show: null,
+                showSpeed: 100,
+                theme: 'bootstrap'
+            });
+            $(document).ready(function(){
+                $('.wback').on('blur',function(){
+                    $("#word1 .h3").css("background",$('.wback').val());
+                    console.log($('.wback').val());
+                });
+                $('.wcolor').on('blur',function(){
+                    $("#word1 .h3").css("color",$('.wcolor').val());
+                    console.log($('.wcolor').val());
+                });
+                $('#title').on('keyup',function(){
+                    $("#word1 .h3").text($(this).val());
+                })
+                CKEDITOR.replace( 'txtarea',{
+                    toolbar :
+                            [
+                                ['FontSize','-','Bold', 'Italic','-', 'NumberedList', 'BulletedList', '-','Link', '-','JustifyLeft','JustifyCenter','JustifyRight']
+                            ]
+                });
+                CKEDITOR.instances["txtarea"].on("instanceReady", function () {
+                    this.document.on("keyup", function(){
+                        validateText();
+                    });
+                });
+            });
+            function validateText(){
+                var numText=CKEDITOR.instances.txtarea.getData();
+                var numCounter=numText.length;
+                $("#textcount").text(3000-numCounter);
+                $("#word1 .content").html(numText);
+            }
+            $(document).ready(function(){
+                validateText();
+            });
+        })();
+    </script>
+
+</body>
+</html>

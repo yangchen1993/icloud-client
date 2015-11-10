@@ -70,7 +70,7 @@ window.API = {
 
         "REMOVE_BLACK_WHITES": [window.HOST, "blackwhites/remove_black_white/"].join(""), // 删除黑白名单
 
-        "GET_ROUTER_SETUPS": [window.HOST, "setups/get_router_setup/"].join(""), // 获取路由器设置
+        "GET_ROUTER_SETUP": [window.HOST, "setups/get_router_setup/"].join(""), // 获取路由器设置
 
         "EDIT_ROUTER_SETUP": [window.HOST, "setups/edit_router_setup/"].join("") // 修改路由器设置
 

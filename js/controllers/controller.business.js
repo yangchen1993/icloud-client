@@ -65,14 +65,9 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
         $scope.shop_routers = data.results;
     });
     $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS,"?key=",$cookieStore.get("key")].join("")).success(function(data){
-        console.log(data.results[0].ssid+"("+data.results[0].mac+")");
-        //$scope.router = data.results[0].ssid+"("+data.results[0].mac+")";
         $scope.router = data.results;
         console.log(data.results);
     });
-    //$scope.bang_submit = function(){
-    //    $http.post([window.API.ROUTER.ROUTER_BIND,"?key=",$cookieStore.get("key")].join(""),{""})
-    //}
 }]);
 
 iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", function ($scope, $http, $cookieStore, $window) {
@@ -82,19 +77,22 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     };
     var router_id = get_param($window.location.href);
     //放行设置
-    $scope.type = ["MAC", "域名"];
-    $http.get([window.API.ROUTER.GET_ROUTER_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&router=", router_id].join("")).success(function (data) {
-        console.log(data);
-        $scope.policy = data.results;
-        for (var i = 0; i < data.results.length; i++) {
-            if (data.results[i].is_black) {
-                $scope.policy[i].is_black = "黑名单";
+    var reload_blackwihit = function(){
+        $scope.type = ["MAC", "域名"];
+        $http.get([window.API.ROUTER.GET_ROUTER_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&router=", router_id].join("")).success(function (data) {
+            console.log(data);
+            $scope.policy = data.results;
+            for (var i = 0; i < data.results.length; i++) {
+                if (data.results[i].is_black) {
+                    $scope.policy[i].is_black = "黑名单";
+                }
+                else {
+                    $scope.policy[i].is_black = "白名单";
+                }
             }
-            else {
-                $scope.policy[i].is_black = "白名单";
-            }
-        }
-    });
+        });
+    };
+    reload_blackwihit();
     $scope.router = {
         "is_black": "1"
     };
@@ -106,7 +104,8 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         data.content_type = "0";
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            alert("添加成功")
+            alert("添加成功");
+            reload_blackwihit();
         })
     };
     $scope.add_domain = function (data) {
@@ -114,7 +113,8 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         data.content_type = "1";
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            alert("添加成功")
+            alert("添加成功");
+            reload_blackwihit();
         })
     };
     $scope.delete = function (id) {
@@ -122,6 +122,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         console.log(ids);
         $http.delete([window.API.ROUTER.REMOVE_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&ids=", ids.join()].join("")).success(function (data) {
             alert("删除成功");
+            reload_blackwihit();
         })
     };
     $scope.filter = {

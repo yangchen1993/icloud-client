@@ -40,6 +40,16 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/ads.html",
             controller: "AdsController"
         })
+        .state("main.device_delivery", {
+            url: "/device_delivery",
+            templateUrl: "template/center/router/device_delivery.html",
+            controller: "DeviceDeliveryController"
+        })
+        .state("main.new_delivery", {
+            url: "/new_delivery",
+            templateUrl: "template/center/router/new_delivery.html",
+            controller: "CreateDeviceDeliveryController"
+        })
         .state("main.wemedia", {
             url: "/wemedia",
             templateUrl: "template/center/wemedia.html",
@@ -52,7 +62,7 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("main.eq_management", {
             url: "/eq_management",
-            templateUrl: "template/center/rooter/eq_management.html",
+            templateUrl: "template/center/router/eq_management.html",
             controller: "EqManagementController"
         })
         .state("main.shop_management", {
@@ -62,32 +72,32 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("main.version_manage", {
             url: "/version_management",
-            templateUrl: "template/center/rooter/version_manage.html",
+            templateUrl: "template/center/router/version_manage.html",
             controller: "VersionManagementController"
         })
         .state("main.firmware_update", {
             url: "/firmware_update",
-            templateUrl: "template/center/rooter/firmware_update.html",
+            templateUrl: "template/center/router/firmware_update.html",
             controller: "FirmwareUpdateController"
         })
         .state("main.details", {
             url: "/details",
-            templateUrl: "template/center/rooter/details.html",
+            templateUrl: "template/center/router/details.html",
             controller: "DetailsController"
         })
         .state("main.identify_conf", {
             url: "/identify_conf",
-            templateUrl: "template/center/rooter/identify_conf.html",
+            templateUrl: "template/center/router/identify_conf.html",
             controller: "IdentifyConfController"
         })
         .state("main.binding", {
             url: "/binding",
-            templateUrl: "template/center/rooter/binding.html",
+            templateUrl: "template/center/router/binding.html",
             controller: "BindingController"
         })
         .state("main.release_conf", {
             url: "/release_conf",
-            templateUrl: "template/center/rooter/release_conf.html",
+            templateUrl: "template/center/router/release_conf.html",
             controller: "ReleaseConfController"
         })
         .state("main.agent_manage", {

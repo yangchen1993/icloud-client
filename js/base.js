@@ -72,8 +72,13 @@ window.API = {
 
         "GET_ROUTER_SETUP": [window.HOST, "setups/get_router_setup/"].join(""), // 获取路由器设置
 
-        "EDIT_ROUTER_SETUP": [window.HOST, "setups/edit_router_setup/"].join("") // 修改路由器设置
+        "EDIT_ROUTER_SETUP": [window.HOST, "setups/edit_router_setup/"].join(""), // 修改路由器设置
 
+        "GET_CURRENT_USER_DELIVERIES": [window.HOST, "deliveries/get_current_user_deliveries/"].join(""), // 获取当前用户的路由器发货信息
+
+        "REMOVE_DELIVERY": [window.HOST, "deliveries/remove_delivery/"].join(""), // 删除路由器发货信息
+
+        "NEW_DELIVERY": [window.HOST, "deliveries/new_delivery/"].join("") // 新建路由器发货信息
 
     },
 
@@ -91,8 +96,8 @@ window.API = {
     },
 
 
-    "WIFICAT":{
-        "ONLINE_STATUS":[window.HOST_WIFICAT,"routers/online_status/"].join("") //路由器实时信息
+    "WIFICAT": {
+        "ONLINE_STATUS": [window.HOST_WIFICAT, "routers/online_status/"].join("") //路由器实时信息
     }
 };
 

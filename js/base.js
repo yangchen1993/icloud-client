@@ -48,6 +48,8 @@ window.API = {
     "ROUTER": {
         "GET_ALL_ROUTERS": [window.HOST, "routers/get_all_routers/"].join(""), // 获取所有路由器
 
+        "GET_ROUTER_INFO_BY_MAC": [window.HOST, "routers/get_router_info_by_mac/"].join(""), // 根据MAC获取路由器信息
+
         "GET_CURRENT_USER_ROUTERS": [window.HOST, "routers/get_current_user_routers"].join(""), //获取当前用户路由
 
         "GET_ALL_VERSIONS": [window.HOST, "routers/versions/get_all_versions/"].join(""), // 获取所有的固件

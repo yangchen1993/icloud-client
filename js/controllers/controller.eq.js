@@ -382,7 +382,24 @@ iCloudController.controller("DeviceDeliveryController", ["$scope", "$http", "$wi
 
 iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
     function ($scope, $http, $window, $cookieStore, $grid) {
+        var checkRouterIsExists = function (mac) {
+            $http.get([$window.API.ROUTER.GET_ROUTER_INFO_BY_MAC, "?key=", $cookieStore.get("key"), "&mac=", mac].join(""))
+                .success(function (data) {
+                    $scope.deviceDeliveryList[data.id] = data;
+                })
+                .error(function (data) {
+                    console.log(data)
+                })
+        };
 
+        $scope.deviceDeliveryList = {};
+
+        $scope.addDeviceToDeliveryList = function (data) {
+            var data_ = angular.copy(data);
+            if (data_) {
+                checkRouterIsExists(data_);
+            }
+        }
     }]);
 
 iCloudController.controller("DeviceDeliveryDetailController"["$scope", "$http", "$window", "$cookieStore", "$grid",

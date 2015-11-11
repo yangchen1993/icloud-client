@@ -1,47 +1,59 @@
-<div style="padding:10px">
+<img src="/img/shop_create.png" style="width: 100%;height: 200px">
+<div style="padding:10px;background-color: #f9f9f9;height: 800px">
     <ol class="breadcrumb">
         <li><a ui-sref="main.shop_management">店铺管理</a></li>
         <li class="active">新增店铺</li>
     </ol>
 
-    <div style="padding-left:25%" class="shop_message">
+    <div class="shop_message">
+        <div style="margin: 0 auto;padding:50px 0 0 25%">
         <p class="h3" style="margin-left: -100px">店铺信息</p>
+
         <div class="form-inline">
             <span>店铺名称：</span>
             <input class="form-control" type="text" style="margin-left: 32px" ng-model="shop.name">
         </div>
         <div class="form-inline">
             <span>行业类型：</span>
-            <select class="form-control" type="text" style="margin-left: 32px;width: 150px" ng-model="shop.category" ng-options="v.name as v.name for v in category">
+            <select class="form-control" type="text" style="margin-left: 32px;width: 150px" ng-model="shop.category"
+                    ng-options="v.name as v.name for v in category">
             </select>
         </div>
         <div class="form-inline">
             <span>手机号码：</span>
-            <input class="form-control" type="text" style="margin-left: 32px"  ng-model="shop.tel">
+            <input class="form-control" type="text" style="margin-left: 32px" ng-model="shop.tel">
         </div>
         <div class="form-inline">
             <span>所属商圈：</span>
-            <select class="form-control" style="width: 150px;margin-left: 32px" ng-options="v.id as v.name for v in province" ng-model="shop.province" ng-change="select_p(shop.province)">
+            <select class="form-control" style="width: 150px;margin-left: 32px"
+                    ng-options="v.id as v.name for v in province" ng-model="shop.province"
+                    ng-change="select_p(shop.province)">
                 <option value="">省</option>
             </select>
-            <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in city" ng-model="shop.city" ng-change="select_c(shop.city)">
+            <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in city"
+                    ng-model="shop.city" ng-change="select_c(shop.city)">
                 <option value="">市</option>
             </select>
-            <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in area" ng-model="shop.area" ng-change="select_a(shop.area)">
+            <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in area"
+                    ng-model="shop.area" ng-change="select_a(shop.area)">
                 <option value="">区/县</option>
             </select>
-            <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in trades" ng-model="shop.trade_area_id">
+            <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in trades"
+                    ng-model="shop.trade_area_id">
                 <option value="">商圈</option>
             </select>
         </div>
         <div class="form-inline">
             <span>店铺地址：</span>
-            <input class="form-control" type="text" style="margin-left: 32px"  ng-model="shop.address">
+            <input class="form-control" type="text" style="margin-left: 32px" ng-model="shop.address">
         </div>
         <div class="form-inline">
             <span>描述：</span>
             <textarea class="form-control" style="margin-left: 60px;width:400px" ng-model="shop.details"></textarea>
         </div>
         <button class="btn btn-success " style="margin: 20px 0 0 150px;width: 100px" ng-click="submit(shop)">提交</button>
-</div>
+        </div>
+        <div  style="position: absolute;width: 100%;height:20px;bottom:-20px;background: url('/img/create_shop_bottom.png') no-repeat; background-size:100%;"></div>
+    </div>
+
 </div>

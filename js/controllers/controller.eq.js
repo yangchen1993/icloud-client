@@ -375,17 +375,18 @@ iCloudController.controller("InSalesController", ['$scope', function ($scope) {
 
 }]);
 
-iCloudController.controller("DeviceDeliveryController", ["$http", "$window", "$cookieStore", "$grid",
-    function ($http, $window, $cookieStore, $grid) {
+iCloudController.controller("DeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
+    function ($scope, $http, $window, $cookieStore, $grid) {
         $grid.initial($scope, [$window.API.ROUTER.GET_CURRENT_USER_DELIVERIES, "?key=", $cookieStore.get("key")].join(""));
     }]);
 
-iCloudController.controller("CreateDeviceDeliveryController", ["$http", "$window", "$cookieStore", "$grid",
-    function ($http, $window, $cookieStore, $grid) {
+iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
+    function ($scope, $http, $window, $cookieStore, $grid) {
 
     }]);
 
-iCloudController.controller("DeviceDeliveryDetailController"["$http", "$window", "$cookieStore", "$grid",
-    function ($http, $window, $cookieStore, $grid) {
+iCloudController.controller("DeviceDeliveryDetailController"["$scope", "$http", "$window", "$cookieStore", "$grid",
+    function ($scope, $http, $window, $cookieStore, $grid) {
 
     }]);
+

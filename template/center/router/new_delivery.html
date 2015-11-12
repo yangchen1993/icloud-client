@@ -1,7 +1,7 @@
 <div style="padding: 10px">
     <div class="form-inline">
         <label>收货人:</label>
-        <input class="form-control" type="text" value="" placeholder="收货人">
+        <input class="form-control" type="text" value="" placeholder="收货人" ng-model="receiver" ng-change="checkReceiver(receiver)">
     </div>
     <div class="form-inline">
         <label>收货地址:</label>
@@ -21,7 +21,7 @@
                 <td>型号</td>
                 <td>操作</td>
             </tr>
-            <tr>
+            <tr ng-repeat="">
                 <td>123456789123</td>
                 <td>x86</td>
                 <td>

@@ -14,6 +14,8 @@ window.API = {
 
         "GET_CURRENT_USER_INFO": [window.HOST, "users/get_current_user_info/"].join(""), // 获取当前用户信息
 
+        "GET_USER_INFO_BY_TEL":[window.HOST, "users/get_user_info_by_tel/"].join(""),
+
         "GET_SUB_USERS": [window.HOST, "users/get_sub_users/"].join(""), // 获取下属用户
 
         "REGISTER": [window.HOST, "users/register/"].join("") // 注册
@@ -50,7 +52,7 @@ window.API = {
 
         "GET_ROUTER_INFO_BY_MAC": [window.HOST, "routers/get_router_info_by_mac/"].join(""), // 根据MAC获取路由器信息
 
-        "GET_CURRENT_USER_ROUTERS": [window.HOST, "routers/get_current_user_routers"].join(""), //获取当前用户路由
+        "GET_CURRENT_USER_ROUTERS": [window.HOST, "routers/get_current_user_routers/"].join(""), //获取当前用户路由
 
         "GET_ALL_VERSIONS": [window.HOST, "routers/versions/get_all_versions/"].join(""), // 获取所有的固件
 

@@ -392,6 +392,16 @@ iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http"
                 })
         };
 
+        var checkReceiver = function (receiver) {
+            $http.get([$window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&tel=", receiver].join(""))
+                .success(function (data) {
+
+                })
+                .error(function (data) {
+                    
+                })
+        };
+
         $scope.deviceDeliveryList = {};
 
         $scope.addDeviceToDeliveryList = function (data) {

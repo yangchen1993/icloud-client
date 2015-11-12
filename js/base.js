@@ -14,6 +14,8 @@ window.API = {
 
         "GET_CURRENT_USER_INFO": [window.HOST, "users/get_current_user_info/"].join(""), // 获取当前用户信息
 
+        "GET_USER_INFO_BY_TEL":[window.HOST, "users/get_user_info_by_tel/"].join(""),
+
         "GET_SUB_USERS": [window.HOST, "users/get_sub_users/"].join(""), // 获取下属用户
 
         "REGISTER": [window.HOST, "users/register/"].join("") // 注册

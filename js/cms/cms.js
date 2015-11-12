@@ -138,7 +138,7 @@ $('#savePage').click(function(){
     console.log(items);
 //            $.post('http://192.168.10.200/api/cms/new_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13',{'items':items},{"dataType":"json"});
     $.ajax({
-        url:"http://192.168.10.200/api/ourshop/new_ourshop/?key=d6b55c1f-0e5b-4354-b686-2b2e0256d38b",
+        url:"http://192.168.2.104/api/ourshop/new_ourshop/?key=d6b55c1f-0e5b-4354-b686-2b2e0256d38b",
         type:"POST",
         "dataType":"json",
         'contentType':'application/json;charset=utf-8',

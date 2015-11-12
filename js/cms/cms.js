@@ -1,3 +1,132 @@
+var component=$(".component>div");//组件
+var pageArea=$("");//页面中部展示区
+var editArea=$(".editArea");//编辑区
+var editTemp=$(".editTemp")
+var conmponentItem=$("");
+//生成新Id
+function addId(){
+    var num=Math.random();
+    var newId='d'+''+num.toString().replace(".",'');
+    return newId;
+}
+//编辑函数
+
+function addItem(id,type){
+    //            获取组件模板
+    if(type=='map'){
+        var mapId=addId();
+        var mapArea='<div class="map" id="'+mapId+'"></div>'
+        var edit='<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
+        $('#drag').append('<li data-type="map" class="item-list" id="'+id+'">'+mapArea+edit+'</li>');
+        bbmap(mapId,user.j,user.w);
+    }else{
+        var itemTemp=$('.template .'+type).html();
+        var edit='<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
+        $('#drag').append('<li class="item-list" data-type="'+type+'" id="'+id+'"><div class="'+type+'">'+itemTemp+edit+'</div></li>');
+    }
+    //通用删除
+    function addEditItem(){
+        var _edit=$('#'+id+' .edit');
+        _edit.on('click',function(){
+            $('.editArea *').remove();
+            var editItem=$('.edit-items .'+type).html();
+            editArea.append('<div class="'+type+'" data-edit-id="'+id+'">'+editItem+'</div>');
+            //文字功能
+            (function(){
+                $('.color').minicolors({
+                    animationSpeed: 50,
+                    animationEasing: 'swing',
+                    change: null,
+                    changeDelay: 0,
+                    control: 'hue',
+                    defaultValue: '',
+                    hide: false,
+                    hideSpeed: 100,
+                    inline: false,
+                    letterCase: 'lowercase',
+                    opacity: false,
+                    position: 'bottom left',
+                    show: null,
+                    showSpeed: 100,
+                    theme: 'bootstrap'
+                });
+                $(document).ready(function(){
+                    $('div[data-edit-id='+id+']'+' .wback').on('blur',function(){
+                        $('#'+id+' .text-title').css("background",$(this).val());
+                        console.log($('[data-item-id='+id+']'+' .wback').val());
+                    });
+                    $('div[data-edit-id='+id+']'+' .wcolor').on('blur',function(){
+                        $('#'+id+' .text-title').css("color",$(this).val());
+                        console.log($('[data-item-id='+id+']'+' .wcolor').val());
+                    });
+                    $('div[data-edit-id='+id+']'+' .edit-title').on('keyup',function(){
+                        $('#'+id+' .text-title').text($(this).val());
+                    });
+                    $('div[data-edit-id='+id+']'+' .txtarea').attr('id','txtarea');
+                    CKEDITOR.replace( 'txtarea',{
+                        toolbar :
+                            [
+                                ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
+                            ]
+                    });
+                    CKEDITOR.instances["txtarea"].on("instanceReady", function () {
+                        this.document.on("keyup", function(){
+                            validateText();
+                        });
+                    });
+                });
+                function validateText(){
+                    var numText=CKEDITOR.instances.txtarea.getData();
+                    var numCounter=numText.length;
+                    $('div[data-edit-id='+id+']'+' .text-count').text(3000-numCounter);
+                    $("#"+id+" .text-content").html(numText);
+                }
+                $(document).ready(function(){
+                    validateText();
+                });
+            })();
+
+
+
+
+        });
+        $('#'+id+' .delete').on('click',function(){
+            if(confirm('点击确认将移除该组件,无法恢复')){
+                $('#'+id).remove();
+                if($('.editArea .'+type)){
+                    $('.editArea .'+type).remove();
+                }
+                //数组移除id为id的项
+            }
+        });
+    }
+    switch(type){
+        case 'text':
+            addEditItem();
+            break;
+        case 'img':
+            addEditItem();
+            break;
+        default:
+            break;
+    }
+}
+
+//组件添加先做成点击添加咯，后面再改成拖动吧^_^
+component.on('click',function(){
+    var _this=$(this);
+    var componentId=_this.attr('id');
+    //判断是否存在ID,不存在ID的表示功能暂时未添加
+    if(componentId){
+        var id=addId();
+        var thisType=componentId.split('-')[1];
+        addItem(id,thisType);
+    }else{
+        alert('组件正在开发中,感谢使用！');
+    }
+    console.log(thisType+'组件的ID为:'+id);
+});
+
 $('#savePage').click(function(){
     var component=$('.item-list');
     var length=component.length;
@@ -14,12 +143,9 @@ $('#savePage').click(function(){
         'contentType':'application/json;charset=utf-8',
         "data":JSON.stringify({"items":items}),
         success:function (data) {
-
-        },
-        error:function(data){
-
+            console.log('上传成功'+data);
         }
-    })
+    });
 });
 $('input[type="file"]').change(function(){
 //            var reader = new FileReader();
@@ -33,7 +159,9 @@ $('input[type="file"]').change(function(){
 var user={
     userId:'b0d9abc8-d416-4b1d-b9d4-2bc82e48f774',
     address:'四川省成都市锦江区',
-    telephone:18780283005
+    telephone:18780283005,
+    j:104.06792346,
+    w:30.67994285,
 //            经度、纬度
 }
 
@@ -51,66 +179,14 @@ $('.save').click(function(){
     });
 
 });
-//        组件id生成器
-function addId(){
-    var date=(new Date()).getTime();
-    var num=Math.random();
-    var newId='d'+''+num.toString().replace(".",'');
-    return newId;
-}
-//        添加组件
-var n=1
-$('.component>div').on('click',function(){
-    var ids=$(this).attr('id');
-    if(ids){
-        var thisType=ids.split('-')[1];
-        console.log(thisType);
-    }else{
-        console.log('ids未定义');
-    }
-    var id=addId();
-    console.log(id+'--->'+n);
-    n++;
-//            获取组件模板
-    if(thisType=='map'){
-        var mapId=addId();
-        var mapArea='<div class="map" id="'+mapId+'"></div>'
-        var edit='<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
-        $('#drag').append('<li data-type="map" class="item-list" id="'+id+'">'+mapArea+edit+'</li>');
-        bbmap(mapId);
-    }else{
-        var a=$('.template .'+thisType).html();
-        var edit='<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
-        $('#drag').append('<li class="item-list" data-type="'+thisType+'" id="'+id+'"><div class="'+thisType+'">'+a+edit+'</div></li>');
-    }
-    $('#'+id+' .delete').on('click',function(){
-        if(confirm('点击确认将移除该组件,无法恢复')){
-            console.log(id);
-            $(this).parent().parent().remove();
-        }
-    });
-});
-function bbmap(id){
-//                console.log(id);
-//            setTimeout(function(){
-//                //设置地图中心点。center除了可以为坐标点以外，还支持城市名
-//                map.setCenter("成都");
-//                //2秒后将视图切换到指定的缩放等级，中心点坐标不变
-//                map.setZoom(10);
-//            }, 2000);
+function bbmap(id,j,w){
     var map = new BMap.Map(id);
-    var point = new BMap.Point(104.06792346,30.67994285);
+    var point = new BMap.Point(j,w);
+    //var point = new BMap.Point(104.06792346,30.67994285);
     map.centerAndZoom(point, 18);
     var marker = new BMap.Marker(point);  // 创建标注
     map.addOverlay(marker);               // 将标注添加到地图中
 }
-//        $('#dj-img').on('click',function(){
-//            var id=addId();
-//            console.log(id);
-////            获取组件模板
-//            var a=$('.lunbos').html();
-//            $('#drag').append('<li id="'+id+'">'+a+'</li>');
-//        });
 
 $('#drag').dragsort({
     dragSelector: "li",
@@ -130,13 +206,3 @@ $(function() {
         fluid: false              //  Support responsive design. May break non-responsive designs
     });
 });
-$('.btn-modular').click(function(){
-    var tt=$(this).next('.dj-template').html();
-    $('#drag').append('<li>'+tt+'</li>');
-});
-// 百度地图API功能
-
-
-function removeThis(){
-    console.log($(this).val());
-}

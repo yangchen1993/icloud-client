@@ -107,3 +107,8 @@ var transform_error_message = function (msg) {
     }
     return msg
 };
+
+var get_param = function (href) {
+    var search_start = href.indexOf("=");
+    return href.slice(search_start + 1);
+};

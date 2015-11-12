@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/bower_components/icon/iconfont.css">
 <link rel="stylesheet" href="/css/buttons.css">
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/component.css">
 <link rel="stylesheet" href="/bower_components/jquery-minicolors/jquery.minicolors.css"/>
 
 <ol class="breadcrumb" style="background-color: #1fbba6">
@@ -107,7 +108,7 @@
                                     <ul id="drag">
                                     </ul>
 
-                                    <div><a href="http://www.idianjia.com">店家</a>提供技术支持</div>
+                                    <div class="text-center"><a href="http://www.idianjia.com">店家</a>提供技术支持</div>
                                 </div>
                             </div>
                             <div class="phone-button">
@@ -121,45 +122,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5">
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">
-                            <span class="panel-title"><i class="icon iconfont">&#xe672;</i>&nbsp;图片编辑</span>
-                        </div>
-                        <div class="panel-body">
-                            <div><label class="button button-primary" for="upload">上传图片</label><input type="file" class="hidden" id="upload" accept="image/jpeg,image/gif,image/png"></div>
-                            <div>
-                                <div class="photoshow" style="display: inline-block;border:solid 1px gray;width:100px;height:100px;line-height: 100px;">
-                                    <img id="showImg" src="/img/test2.jpg">
-                                </div>
+                <div class="col-xs-5 editArea">
 
-                                <div style="display: inline-block;width:250px;">图片要求:<small>图片大小限制为:2MB以内，建议宽度640px
-                                    仅支持JPG、PNG格式，建议使用JPG格式</small>
-                                </div>
-                            </div>
-                            <div class="dod2">
-                                <img src="/img/test2.jpg">
-                            </div>
-                            <div class="btn-group" style="margin-top: 10px;">
-                                <div class="col-xs-12">链接方式:</div>
-                                <div class="col-xs-5">
-                                    <select class="form-control" style="padding:6px 5px;">
-                                        <option value="">内部网页</option>
-                                        <option value="">外部链接</option>
-                                    </select>
-                                </div>
-                                <div class="col-xs-7">
-                                    <div class="input-group">
-                                        <label class="input-group-addon">http://</label><input class="form-control" type="text"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel-footer text-center">
-                            <button class="button button-caution save">保存</button>
-                        </div>
-                    </div>
 
                     <!--<div class="form-horizontal">-->
                     <!--<div class="panel panel-primary">-->
@@ -214,11 +178,10 @@
 
 </div>
 <div class="hidden">
-    <!-- 下面是轮播~ -->
-
+    <!--组件模板-->
     <div class="template">
-        <div class="menus">
-            <nav class="menu">
+        <div class="menu">
+            <nav class="menus">
                 <ul>
                     <li><a href="javascript:" class="active">首页</a></li>
                     <li><a href="javascript:">新闻</a></li>
@@ -229,8 +192,8 @@
             </nav>
         </div>
         <div class="text">
-            <h4 class="title" style="margin:0;">标题</h4>
-            <div class="content">文字</div>
+            <h4 class="text-title" style="margin:0;">标题</h4>
+            <div class="text-content">文字</div>
         </div>
         <div class="img">
             <div class="img"><img src="/img/1.jpg"></div>
@@ -245,9 +208,76 @@
         <div class="map">
         </div>
     </div>
+    <!--编辑模板-->
+    <div class="edit-items">
+        <div class="text">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <span class="panel-title"><i class="fa fa-cog"></i>文字编辑</span>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <p>
+                            <span class="h4">标题</span><small>(建议标题不长于12个字)</small>
+                            <span style="float:right"><input type="checkbox">是否显示</span>
+                            <input type="text" class="edit-title form-control">
+                        </p>
+                        <div class="form-group">
+                            <div class="col-xs-6">背景色:<input type="text" class="form-control color wback"></div>
+                            <div class="col-xs-6">文字色:<input type="text" class="form-control color wcolor"></div>
+                        </div>
+                        <div class="">
+                            内容:
+                            <textarea style="resize:none;" class="form-control txtarea" cols="30" rows="10"></textarea>
+                            <p>限输入3000字,你还可以输入<small style="color:red;" class="text-count">3000</small>字</p>
+                            <button class="button button-primary">保存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-<div class="showPage">
+        <div class="img">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <span class="panel-title"><i class="icon iconfont">&#xe672;</i>&nbsp;图片编辑</span>
+                </div>
+                <div class="panel-body">
+                    <div><label class="button button-primary" for="upload">上传图片</label><input type="file" class="hidden" id="upload" accept="image/jpeg,image/gif,image/png"></div>
+                    <div>
+                        <div class="photoshow" style="display: inline-block;border:solid 1px gray;width:100px;height:100px;line-height: 100px;">
+                            <img id="showImg" src="/img/test2.jpg">
+                        </div>
 
+                        <div style="display: inline-block;width:250px;">图片要求:<small>图片大小限制为:2MB以内，建议宽度640px
+                            仅支持JPG、PNG格式，建议使用JPG格式</small>
+                        </div>
+                    </div>
+                    <div class="dod2">
+                        <img src="/img/test2.jpg">
+                    </div>
+                    <div class="btn-group" style="margin-top: 10px;">
+                        <div class="col-xs-12">链接方式:</div>
+                        <div class="col-xs-5">
+                            <select class="form-control" style="padding:6px 5px;">
+                                <option value="">内部网页</option>
+                                <option value="">外部链接</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="input-group">
+                                <label class="input-group-addon">http://</label><input class="form-control" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-footer text-center">
+                    <button class="button button-caution save">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="/bower_components/jquery-dragsort/jquery.dragsort-0.5.2.min.js"></script>

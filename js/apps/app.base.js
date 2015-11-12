@@ -125,9 +125,9 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/shop/routers_details.html",
             controller: "RoutersDetailsController"
         })
-        .state("main.cms", {
-            url: "/cms",
-            templateUrl: "template/center/cms.html",
-            controller: "CmsController"
+        .state("main.ourshop", {
+            url: "/ourshop",
+            templateUrl: "template/center/ourshop.html",
+            controller: "OurShopController"
         })
 });

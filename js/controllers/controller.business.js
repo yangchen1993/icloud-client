@@ -10,6 +10,9 @@ iCloudController.controller("ShopManagementController", ["$scope", "$http", "$gr
         });
         $scope.see_routers = function (id) {
             $window.location.href = ["#/main/shop_management_routers?id=", id].join("");
+        };
+        $scope.editShopIndex = function (id) {
+            $window.location.href = ["#/main/ourshop?id=", id].join("");
         }
     }]);
 
@@ -52,10 +55,6 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
 }]);
 
 iCloudController.controller("ShopManagementRoutersController", ["$scope", "$window", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $window, $http, $category, $province, $city, $area, $trades, $cookieStore) {
-    var get_param = function (href) {
-        var search_start = href.indexOf("=");
-        return href.slice(search_start + 1);
-    };
     var shop_id = get_param($window.location.href);
     $scope.see_routers_details = function (id) {
         $window.location.href = ["#/main/routers_details?routers_id=", id].join("");
@@ -71,10 +70,6 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
 }]);
 
 iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", function ($scope, $http, $cookieStore, $window) {
-    var get_param = function (href) {
-        var search_start = href.indexOf("=");
-        return href.slice(search_start + 1);
-    };
     var router_id = get_param($window.location.href);
     //放行设置
     var reload_blackwihit = function(){

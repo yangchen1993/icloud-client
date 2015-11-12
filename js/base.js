@@ -48,6 +48,8 @@ window.API = {
     "ROUTER": {
         "GET_ALL_ROUTERS": [window.HOST, "routers/get_all_routers/"].join(""), // 获取所有路由器
 
+        "GET_ROUTER_INFO_BY_MAC": [window.HOST, "routers/get_router_info_by_mac/"].join(""), // 根据MAC获取路由器信息
+
         "GET_CURRENT_USER_ROUTERS": [window.HOST, "routers/get_current_user_routers"].join(""), //获取当前用户路由
 
         "GET_ALL_VERSIONS": [window.HOST, "routers/versions/get_all_versions/"].join(""), // 获取所有的固件
@@ -72,8 +74,13 @@ window.API = {
 
         "GET_ROUTER_SETUP": [window.HOST, "setups/get_router_setup/"].join(""), // 获取路由器设置
 
-        "EDIT_ROUTER_SETUP": [window.HOST, "setups/edit_router_setup/"].join("") // 修改路由器设置
+        "EDIT_ROUTER_SETUP": [window.HOST, "setups/edit_router_setup/"].join(""), // 修改路由器设置
 
+        "GET_CURRENT_USER_DELIVERIES": [window.HOST, "deliveries/get_current_user_deliveries/"].join(""), // 获取当前用户的路由器发货信息
+
+        "REMOVE_DELIVERY": [window.HOST, "deliveries/remove_delivery/"].join(""), // 删除路由器发货信息
+
+        "NEW_DELIVERY": [window.HOST, "deliveries/new_delivery/"].join("") // 新建路由器发货信息
 
     },
 
@@ -91,8 +98,8 @@ window.API = {
     },
 
 
-    "WIFICAT":{
-        "ONLINE_STATUS":[window.HOST_WIFICAT,"routers/online_status/"].join("") //路由器实时信息
+    "WIFICAT": {
+        "ONLINE_STATUS": [window.HOST_WIFICAT, "routers/online_status/"].join("") //路由器实时信息
     }
 };
 

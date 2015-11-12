@@ -64,8 +64,8 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
 
             }
         };
-        $scope.see_router = function (name) {
-            window.location.href = ["#/main/details?WIFI_name=", name].join("");
+        $scope.see_router = function (id) {
+            window.location.href = ["#/main/details?router_id=", id].join("");
         };
     }]);
 
@@ -133,8 +133,8 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         var search_start = href.indexOf("=");
         return href.slice(search_start + 1);
     };
-    var WIFI_name = get_param(window.location.href);
-    $scope.WIFI_name = decodeURI(WIFI_name);
+    var router_id = get_param(window.location.href);
+    console.log(router_id);
     $scope.update = function () {
         if (confirm("升级过程中将会重启路由器，请确定是否需要升级？")) {
 
@@ -165,6 +165,10 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             }
         }, 1000)
     };
+    $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
+        console.log(data.router);
+        $scope.router_basic = data.router;
+    });
 }]);
 
 iCloudController.controller("IdentifyConfController", ['$scope', function ($scope) {
@@ -370,3 +374,36 @@ iCloudController.controller("BindingController", ['$scope', function ($scope) {
 iCloudController.controller("InSalesController", ['$scope', function ($scope) {
 
 }]);
+
+iCloudController.controller("DeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
+    function ($scope, $http, $window, $cookieStore, $grid) {
+        $grid.initial($scope, [$window.API.ROUTER.GET_CURRENT_USER_DELIVERIES, "?key=", $cookieStore.get("key")].join(""));
+    }]);
+
+iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
+    function ($scope, $http, $window, $cookieStore, $grid) {
+        var checkRouterIsExists = function (mac) {
+            $http.get([$window.API.ROUTER.GET_ROUTER_INFO_BY_MAC, "?key=", $cookieStore.get("key"), "&mac=", mac].join(""))
+                .success(function (data) {
+                    $scope.deviceDeliveryList[data.id] = data;
+                })
+                .error(function (data) {
+                    console.log(data)
+                })
+        };
+
+        $scope.deviceDeliveryList = {};
+
+        $scope.addDeviceToDeliveryList = function (data) {
+            var data_ = angular.copy(data);
+            if (data_) {
+                checkRouterIsExists(data_);
+            }
+        }
+    }]);
+
+iCloudController.controller("DeviceDeliveryDetailController"["$scope", "$http", "$window", "$cookieStore", "$grid",
+    function ($scope, $http, $window, $cookieStore, $grid) {
+
+    }]);
+

@@ -1,0 +1,209 @@
+<div style="padding:10px">
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.eq_management">设备管理</a></li>
+        <li class="active">路由器详情</li>
+    </ol>
+    <!--<div class="details_panel">-->
+        <!--<div class="details_panel_content">-->
+            <!--<p>基本信息</p>-->
+            <!--<div>-->
+                <!--<p>-->
+                    <!--<span>设备型号：</span>-->
+                    <!--<span ng-bind="xinghao">MT7620A  V1</span>-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--<span>绑定时间：</span>-->
+                    <!--<span class="text-muted">2015-10-10 10：00</span>-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--<span>MAC地址：</span>-->
+                    <!--<span class="text-muted">xxx-xxx-xxx-xxx</span>-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--<span>路由器SN码：</span>-->
+                    <!--<span class="text-muted">xxx-xxx-xxx-xxx</span>-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--<span>系统版本：</span>-->
+                    <!--<span class="text-muted">V 1.0</span>-->
+                    <!--<button class="btn btn-success" ng-click="update()">升级</button>-->
+                <!--</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="details_panel_content">-->
+            <!--<p>运行状态</p>-->
+            <!--<div>-->
+                <!--<p>-->
+                    <!--<span>连续运行时间：</span>-->
+                    <!--<span class="text-muted">0天5小时18分</span>-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--<span>接入人数：</span>-->
+                    <!--<span class="text-muted">1234</span>-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--<span>内存占比率：</span>-->
+                    <!--<span class="text-muted">30%</span>-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--<span>CPU负载率：</span>-->
+                    <!--<span class="text-muted">30%</span>-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--<button class="btn btn-success">查看流量统计</button>-->
+                    <!--<button class="btn btn-success" data-toggle="modal" data-target="#myModal" ng-click="progress()">重启路由器</button>-->
+                <!--</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="details_panel_content">-->
+            <!--<p>设置</p>-->
+            <!--<div>-->
+                <!--<p>-->
+                    <!--<span>WIFI名称：</span>-->
+                    <!--<span class="text-muted" ng-bind="WIFI_name"></span>-->
+                    <!--<button class="btn btn-success" ng-click="modify()">修改</button>-->
+                <!--</p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="details_panel1">-->
+        <!--<p>商家信息</p>-->
+        <!--<div>-->
+            <!--<p>-->
+                <!--<span>所属商家：</span>-->
+                <!--<span class="text-muted">张三</span>-->
+            <!--</p>-->
+            <!--<p>-->
+                <!--<span>所属店铺：</span>-->
+                <!--<span class="text-muted">红旗连锁</span>-->
+                <!--<button class="btn btn-success" ng-click="jiebang()">解绑</button>-->
+            <!--</p>-->
+            <!--<p>-->
+                <!--<span>店铺所属行业：</span>-->
+                <!--<span class="text-muted">零售</span>-->
+            <!--</p>-->
+            <!--<p>-->
+                <!--<span>店铺地址：</span>-->
+                <!--<span class="text-muted">四川省 成都市 春熙路</span>-->
+            <!--</p>-->
+            <!--<p>-->
+                <!--<span>所属代理商：</span>-->
+                <!--<span class="text-muted">李四</span>-->
+            <!--</p>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="details_panel">
+        <p class="text-center">店铺信息</p>
+        <p>
+            <span>所属商家：</span>
+            <span>张三</span>
+        </p>
+        <p>
+            <span>所属店铺：</span>
+            <span>红旗连锁</span>
+        </p>
+        <p>
+            <span>店铺所属行业：</span>
+            <span>零售</span>
+        </p>
+        <p>
+            <span>店铺地址：</span>
+            <span>四川省 成都市 春熙路</span>
+        </p>
+        <p>
+            <span>所属代理商：</span>
+            <span>李四</span>
+        </p>
+        <div>
+            <button class="btn btn-primary" style="width:80%;height: 50px;"><span style="font-family: 'Microsoft YaHei';font-size: 16px;">解绑</span></button>
+        </div>
+    </div>
+    <div class="details_panel">
+        <p class="text-center">路由器基本信息</p>
+        <p>
+        <span>设备型号：</span>
+        <span ng-bind="xinghao">MT7620A  V1</span>
+        </p>
+        <p>
+        <span>绑定时间：</span>
+        <span>2015-10-10 10：00</span>
+        </p>
+        <p>
+        <span>MAC地址：</span>
+        <span ng-bind="router_basic.mac"></span>
+        </p>
+        <p>
+        <span>路由器SN码：</span>
+        <span>xxx-xxx-xxx-xxx</span>
+        </p>
+        <p>
+        <span>系统版本：</span>
+        <span>V 1.0</span>
+        </p>
+        <div>
+            <button class="btn btn-info" style="width:80%;height: 50px"><span style="font-family: 'Microsoft YaHei';font-size: 16px">版本升级</span></button>
+        </div>
+    </div>
+    <div class="details_panel">
+        <p class="text-center">运行状态</p>
+        <p>
+        <span>连续运行时间：</span>
+        <span>0天5小时18分</span>
+        </p>
+        <p>
+        <span>接入人数：</span>
+        <span>1234</span>
+        </p>
+        <p>
+        <span>内存占比率：</span>
+        <span>30%</span>
+        </p>
+        <p>
+        <span>CPU负载率：</span>
+        <span>30%</span>
+        </p>
+        <div>
+            <button class="btn btn-success" style="width:40%;height: 50px"><span style="font-family: 'Microsoft YaHei';font-size: 16px">查看流量统计</span></button>
+            <button class="btn btn-success" style="width:40%;height: 50px"><span style="font-family: 'Microsoft YaHei';font-size: 16px">重启路由器</span></button>
+        </div>
+    </div>
+    <div class="details_panel">
+        <p class="text-center">设置</p>
+        <p>
+            <span>WIFI名称：</span>
+            <span ng-bind="router_basic.ssid"></span>
+        </p>
+        <div style="border-radius: 0 3px">
+            <button class="btn btn-danger" style="width:80%;height: 50px;"><span style="font-family: 'Microsoft YaHei';font-size: 16px">修改WIFI名称</span></button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">重启路由器</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <p>
+                        <span>完成进度：</span>
+                        <span id="progress_span">0</span>
+                        <span>%</span>
+                    </p>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="progress">
+                        <!--<span class="sr-only">40% Complete (success)</span>-->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+

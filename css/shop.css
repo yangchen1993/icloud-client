@@ -39,10 +39,11 @@
 .identify_type{
     position:relative;
     left:50%;
-    width:230px;
-    margin:20px 0 0 -125px;
+    width:260px;
+    margin:20px 0 0 -130px;
 }
 .identify_type>div{
+    width:100px;
     float: left;
 }
 #profile>div{
@@ -74,4 +75,17 @@
 .shop_isBlack>div>div{
     margin: 20px 0 0 30px;
 
+}
+.shop_message{
+    position: relative;
+    margin: 0 auto;
+    width:80%;
+    height: 600px;
+    border: 1px solid #eeeeee;
+    border-top: 0;
+    border-bottom: 0;
+    background-color: #fff;
+}
+.shop_message>div>div{
+    margin-top: 10px;
 }

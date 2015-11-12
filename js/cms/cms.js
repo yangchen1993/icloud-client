@@ -3,6 +3,7 @@ var pageArea=$("");//页面中部展示区
 var editArea=$(".editArea");//编辑区
 var editTemp=$(".editTemp")
 var conmponentItem=$("");
+var ourShop=get_param(window.location.href);
 //生成新Id
 function addId(){
     var num=Math.random();
@@ -10,7 +11,6 @@ function addId(){
     return newId;
 }
 //编辑函数
-
 function addItem(id,type){
     //            获取组件模板
     if(type=='map'){
@@ -24,6 +24,7 @@ function addItem(id,type){
         var edit='<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
         $('#drag').append('<li class="item-list" data-type="'+type+'" id="'+id+'"><div class="'+type+'">'+itemTemp+edit+'</div></li>');
     }
+
     //通用删除
     function addEditItem(){
         var _edit=$('#'+id+' .edit');
@@ -137,11 +138,11 @@ $('#savePage').click(function(){
     console.log(items);
 //            $.post('http://192.168.10.200/api/cms/new_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13',{'items':items},{"dataType":"json"});
     $.ajax({
-        url:"http://192.168.10.200/api/cms/new_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13",
+        url:"http://192.168.10.200/api/ourshop/new_ourshop/?key=d6b55c1f-0e5b-4354-b686-2b2e0256d38b",
         type:"POST",
         "dataType":"json",
         'contentType':'application/json;charset=utf-8',
-        "data":JSON.stringify({"items":items}),
+        "data":JSON.stringify({"group_id":ourShop,"items":items}),
         success:function (data) {
             console.log('上传成功'+data);
         }

@@ -140,4 +140,9 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/ourshop.html",
             controller: "OurShopController"
         })
+        .state("main.weixin_config", {
+            url: "/weixin_config",
+            templateUrl: "template/center/shop/weixin_config.html",
+            controller: "WeiXinConfigController"
+        })
 });

@@ -5,7 +5,6 @@
 iCloudController.controller("ShopManagementController", ["$scope", "$http", "$grid", "$window", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", "$blackWhite",
     function ($scope, $http, $grid, $window, $category, $province, $city, $area, $trades, $cookieStore, $blackWhite) {
         $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
-            console.log(data.results);
             $scope.shop = data.results;
         });
         $scope.see_routers = function (id) {
@@ -59,14 +58,46 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     $scope.see_routers_details = function (id) {
         $window.location.href = ["#/main/routers_details?routers_id=", id].join("");
     };
+    var show_bindRouters = function(){
+        $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP, "?key=", $cookieStore.get("key"), "&group_id=", shop_id].join("")).success(function (data) {
+            $scope.shop_routers = data.results;
+        });
+    };
+    show_bindRouters();
 
-    $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP, "?key=", $cookieStore.get("key"), "&group_id=", shop_id].join("")).success(function (data) {
-        $scope.shop_routers = data.results;
-    });
-    $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS,"?key=",$cookieStore.get("key")].join("")).success(function(data){
-        $scope.router = data.results;
-        console.log(data.results);
-    });
+    var show_selectRouters = function(){
+        $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS,"?key=",$cookieStore.get("key")].join("")).success(function(data){
+            var unbingRouters = [],k=0;
+            for(var i=0;i<data.results.length;i++){
+                if(data.results[i].router_groups==null){
+                    unbingRouters[k] = data.results[i];
+                    k++;
+                }
+            }
+            $scope.router = unbingRouters;
+        });
+    };
+    show_selectRouters();
+
+    var bind = function(){
+        $http.put([window.API.ROUTER.ROUTER_BIND,"?key=",$cookieStore.get("key")].join(""),{"group":shop_id,"router":$scope.bind_router}).success(function(data){
+            alert(data.msg);
+            show_bindRouters();
+            show_selectRouters();
+        })
+    };
+
+    $scope.bind_submit = function(){
+        bind();
+    };
+
+    $scope.unbind_submit = function(mac){
+        $http.delete([window.API.ROUTER.ROUTER_UNBIND,"?key=",$cookieStore.get("key"),"&mac=",mac].join("")).success(function(data){
+            alert(data.msg);
+            show_bindRouters();
+            show_selectRouters();
+        })
+    }
 }]);
 
 iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", function ($scope, $http, $cookieStore, $window) {
@@ -143,9 +174,22 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
         console.log(data);
         //路由器实时信息
-        $http.get([window.API.WIFICAT.ONLINE_STATUS,"?key=",$cookieStore.get("key"),"&router_mac=",data.router.mac].join("")).success(function(data){
-            console.log(data);
-        });
+        //setInterval(function(){
+        //    $http.get([window.API.WIFICAT.STATUS,"?key=",$cookieStore.get("key"),"&router_mac=",data.router.mac].join("")).success(function(data){
+        //        console.log(data);
+        //        $scope.wificat = data;
+        //        $scope.upTime=parseInt(data.basicInformation.upTime/60);
+        //    });
+        //},1000);
+        //setTimeout(function requestRouter(){
+        //    $http.get([window.API.WIFICAT.STATUS,"?key=",$cookieStore.get("key"),"&router_mac=",data.router.mac].join("")).success(function(data){
+        //        console.log(data);
+        //        $scope.wificat = data;
+        //        $scope.upTime=parseInt(data.basicInformation.upTime/60);
+        //        requestRouter();
+        //    });
+        //},1000);
+
         //默认认证方式
         if (data.login_type == "手机号认证") {
             $scope.isActive_phone = 1;
@@ -202,4 +246,20 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         })
     };
 
+}]);
+
+iCloudController.controller("WeiXinConfigController",["$scope","$http","$cookieStore",function($scope,$http,$cookieStore){
+    $scope.submit = function(weixin){
+        $http.post([window.API.WEIXIN.NEW_WECHAT,"?key=",$cookieStore.get("key")].join(""),weixin).success(function(data){
+            alert(data.msg);
+        });
+    };
+    $http.get([window.API.WEIXIN.GET_WECHAT,"?key=",$cookieStore.get("key"),"&routergroup_id=1855"].join("")).success(function(data){
+        $scope.weixin_edit = data;
+    });
+    $scope.submit1 = function(weixin){
+        $http.put([window.API.WEIXIN.EDIT_WECHAT,"?key=",$cookieStore.get("key")].join(""),weixin).success(function(data){
+            alert(data.msg);
+        });
+    }
 }]);

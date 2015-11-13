@@ -86,6 +86,7 @@ $.get(window.API.CMS.GET_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group
         console.log(data.cms);
         for(var i=0;i<data.cms.length;i++){
             $('#drag').append(data.cms[i].div);
+            console.log('获取'+i)
             switch(data.cms[i].content_type){
                 case 'text':
                     addEditItem(data.cms[i].component_id,data.cms[i].content_type);
@@ -100,6 +101,8 @@ $.get(window.API.CMS.GET_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group
         }
         $('#savePage').html('更新页面');
         haveData=true;
+    }else{
+        console.log('可以新建');
     }
 });
 
@@ -158,8 +161,10 @@ $('#savePage').click(function(){
     var component=$('.item-list');
     var length=component.length;
     var items=[];
+    console.log(items.length);
     for(var i=0;i<length;i++){
         items.push({'component_id':$(component[i]).attr("id"),'content_type':$(component[i]).attr("data-type"),'div':$(component[i]).parent().html()});
+        console.log(i);
     }
     console.log(items);
 //            $.post('http://192.168.10.200/api/cms/new_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13',{'items':items},{"dataType":"json"});

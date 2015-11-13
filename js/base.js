@@ -97,7 +97,13 @@ window.API = {
     "CMS": {
         "NEW_RESOURCES": [window.HOST, "resources/new_resource/"].join(""), // 新建资源, 供CMS使用
 
-        "REMOVE_RESOURCE": [window.HOST, "resources/remove_resource/"].join("") // 删除资源， 供CMS使用
+        "REMOVE_RESOURCE": [window.HOST, "resources/remove_resource/"].join(""),// 删除资源， 供CMS使用
+
+        "GET_DATA":[window.HOST, "ourshop/get_ourshop_by_group/"].join(""),
+
+        "PUT_DATA":[window.HOST, "ourshop/edit_ourshop/"].join(""),
+
+        "SEND_DATA":[window.HOST, "ourshop/new_ourshop/"].join("")
     },
 
 

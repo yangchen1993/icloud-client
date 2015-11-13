@@ -3,16 +3,117 @@ var pageArea=$("");//页面中部展示区
 var editArea=$(".editArea");//编辑区
 var editTemp=$(".editTemp")
 var conmponentItem=$("");
+var haveData='';
 var ourShop=get_param(window.location.href);
+
+//通用删除
+function addEditItem(id,type){
+    var _edit=$('#'+id+' .edit');
+    _edit.on('click',function(){
+        $('.editArea *').remove();
+        var editItem=$('.edit-items .'+type).html();
+        editArea.append('<div class="'+type+'" data-edit-id="'+id+'">'+editItem+'</div>');
+        //文字功能
+        (function(){
+            $('.color').minicolors({
+                animationSpeed: 50,
+                animationEasing: 'swing',
+                change: null,
+                changeDelay: 0,
+                control: 'hue',
+                hide: false,
+                hideSpeed: 100,
+                inline: false,
+                letterCase: 'lowercase',
+                opacity: false,
+                position: 'bottom left',
+                show: null,
+                showSpeed: 100,
+                theme: 'bootstrap'
+            });
+            $(document).ready(function(){
+                $('div[data-edit-id='+id+']'+' .wback').on('blur',function(){
+                    $('#'+id+' .text-title').css("background",$(this).val());
+                    console.log($('[data-item-id='+id+']'+' .wback').val());
+                });
+                $('div[data-edit-id='+id+']'+' .wcolor').on('blur',function(){
+                    $('#'+id+' .text-title').css("color",$(this).val());
+                    console.log($('[data-item-id='+id+']'+' .wcolor').val());
+                });
+                $('div[data-edit-id='+id+']'+' .edit-title').on('keyup',function(){
+                    $('#'+id+' .text-title').text($(this).val());
+                });
+                $('div[data-edit-id='+id+']'+' .txtarea').attr('id','txtarea');
+                CKEDITOR.replace( 'txtarea',{
+                    toolbar :
+                        [
+                            ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
+                        ]
+                });
+                CKEDITOR.instances["txtarea"].on("instanceReady", function () {
+                    this.document.on("keyup", function(){
+                        validateText();
+                    });
+                });
+            });
+            function validateText(){
+                var numText=CKEDITOR.instances.txtarea.getData();
+                var numCounter=numText.length;
+                $('div[data-edit-id='+id+']'+' .text-count').text(3000-numCounter);
+                $("#"+id+" .text-content").html(numText);
+            }
+            $(document).ready(function(){
+                validateText();
+            });
+        })();
+
+    });
+    $('#'+id+' .delete').on('click',function(){
+        if(confirm('点击确认将移除该组件,无法恢复')){
+            $('#'+id).remove();
+            if($('.editArea .'+type)){
+                $('.editArea .'+type).remove();
+            }
+            //数组移除id为id的项
+        }
+    });
+}
+
+
+
+$.get(window.API.CMS.GET_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group_id='+ourShop).success(function(data){
+    if(data){
+        console.log(data.cms);
+        for(var i=0;i<data.cms.length;i++){
+            $('#drag').append(data.cms[i].div);
+            switch(data.cms[i].content_type){
+                case 'text':
+                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+                    break;
+                case 'img':
+                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+                    break;
+                case 'map':
+                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+                    break;
+            }
+        }
+        $('#savePage').html('更新页面');
+        haveData=true;
+    }
+});
+
 //生成新Id
 function addId(){
     var num=Math.random();
     var newId='d'+''+num.toString().replace(".",'');
     return newId;
 }
+
 //编辑函数
 function addItem(id,type){
     //            获取组件模板
+
     if(type=='map'){
         var mapId=addId();
         var mapArea='<div class="map" id="'+mapId+'"></div>'
@@ -25,92 +126,17 @@ function addItem(id,type){
         $('#drag').append('<li class="item-list" data-type="'+type+'" id="'+id+'"><div class="'+type+'">'+itemTemp+edit+'</div></li>');
     }
 
-    //通用删除
-    function addEditItem(){
-        var _edit=$('#'+id+' .edit');
-        _edit.on('click',function(){
-            $('.editArea *').remove();
-            var editItem=$('.edit-items .'+type).html();
-            editArea.append('<div class="'+type+'" data-edit-id="'+id+'">'+editItem+'</div>');
-            //文字功能
-            (function(){
-                $('.color').minicolors({
-                    animationSpeed: 50,
-                    animationEasing: 'swing',
-                    change: null,
-                    changeDelay: 0,
-                    control: 'hue',
-                    defaultValue: '',
-                    hide: false,
-                    hideSpeed: 100,
-                    inline: false,
-                    letterCase: 'lowercase',
-                    opacity: false,
-                    position: 'bottom left',
-                    show: null,
-                    showSpeed: 100,
-                    theme: 'bootstrap'
-                });
-                $(document).ready(function(){
-                    $('div[data-edit-id='+id+']'+' .wback').on('blur',function(){
-                        $('#'+id+' .text-title').css("background",$(this).val());
-                        console.log($('[data-item-id='+id+']'+' .wback').val());
-                    });
-                    $('div[data-edit-id='+id+']'+' .wcolor').on('blur',function(){
-                        $('#'+id+' .text-title').css("color",$(this).val());
-                        console.log($('[data-item-id='+id+']'+' .wcolor').val());
-                    });
-                    $('div[data-edit-id='+id+']'+' .edit-title').on('keyup',function(){
-                        $('#'+id+' .text-title').text($(this).val());
-                    });
-                    $('div[data-edit-id='+id+']'+' .txtarea').attr('id','txtarea');
-                    CKEDITOR.replace( 'txtarea',{
-                        toolbar :
-                            [
-                                ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
-                            ]
-                    });
-                    CKEDITOR.instances["txtarea"].on("instanceReady", function () {
-                        this.document.on("keyup", function(){
-                            validateText();
-                        });
-                    });
-                });
-                function validateText(){
-                    var numText=CKEDITOR.instances.txtarea.getData();
-                    var numCounter=numText.length;
-                    $('div[data-edit-id='+id+']'+' .text-count').text(3000-numCounter);
-                    $("#"+id+" .text-content").html(numText);
-                }
-                $(document).ready(function(){
-                    validateText();
-                });
-            })();
-
-
-
-
-        });
-        $('#'+id+' .delete').on('click',function(){
-            if(confirm('点击确认将移除该组件,无法恢复')){
-                $('#'+id).remove();
-                if($('.editArea .'+type)){
-                    $('.editArea .'+type).remove();
-                }
-                //数组移除id为id的项
-            }
-        });
-    }
     switch(type){
         case 'text':
-            addEditItem();
+            addEditItem(id,type);
             break;
         case 'img':
-            addEditItem();
+            addEditItem(id,type);
             break;
         default:
             break;
     }
+
 }
 
 //组件添加先做成点击添加咯，后面再改成拖动吧^_^
@@ -137,16 +163,29 @@ $('#savePage').click(function(){
     }
     console.log(items);
 //            $.post('http://192.168.10.200/api/cms/new_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13',{'items':items},{"dataType":"json"});
-    $.ajax({
-        url:"http://192.168.10.200/api/ourshop/new_ourshop/?key=d6b55c1f-0e5b-4354-b686-2b2e0256d38b",
-        type:"POST",
-        "dataType":"json",
-        'contentType':'application/json;charset=utf-8',
-        "data":JSON.stringify({"group_id":ourShop,"items":items}),
-        success:function (data) {
-            console.log('上传成功'+data);
-        }
-    });
+   if(haveData){
+       $.ajax({
+           url:window.API.CMS.PUT_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group_id='+ourShop,
+           type:"PUT",
+           "dataType":"json",
+           'contentType':'application/json;charset=utf-8',
+           "data":JSON.stringify({"group_id":ourShop,"items":items}),
+           success:function (data) {
+               console.log('上传成功'+data);
+           }
+       });
+   }else{
+       $.ajax({
+           url:window.API.CMS.SEND_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group_id='+ourShop,
+           type:"POST",
+           "dataType":"json",
+           'contentType':'application/json;charset=utf-8',
+           "data":JSON.stringify({"group_id":ourShop,"items":items}),
+           success:function (data) {
+               console.log('上传成功'+data);
+           }
+       });
+   }
 });
 $('input[type="file"]').change(function(){
 //            var reader = new FileReader();

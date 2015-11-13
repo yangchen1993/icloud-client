@@ -377,7 +377,7 @@ iCloudController.controller("InSalesController", ['$scope', function ($scope) {
 
 iCloudController.controller("DeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
     function ($scope, $http, $window, $cookieStore, $grid) {
-        $grid.initial($scope, [$window.API.ROUTER.GET_CURRENT_USER_DELIVERIES, "?key=", $cookieStore.get("key")].join(""));
+        $grid.initial($scope, $window.API.ROUTER.GET_CURRENT_USER_DELIVERIES);
     }]);
 
 iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
@@ -395,7 +395,7 @@ iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http"
         var checkReceiver = function (receiver) {
             $http.get([$window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&tel=", receiver].join(""))
                 .success(function (data) {
-
+                    $scope.receiverInfo = data;
                 })
                 .error(function (data) {
                     
@@ -408,6 +408,11 @@ iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http"
             var data_ = angular.copy(data);
             if (data_) {
                 checkRouterIsExists(data_);
+            }
+        };
+        $scope.checkReceiver = function (tel) {
+            if (tel){
+                checkReceiver(tel)
             }
         }
     }]);

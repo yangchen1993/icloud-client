@@ -163,6 +163,7 @@ $('#savePage').click(function(){
     }
     console.log(items);
 //            $.post('http://192.168.10.200/api/cms/new_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13',{'items':items},{"dataType":"json"});
+
    if(haveData){
        $.ajax({
            url:window.API.CMS.PUT_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group_id='+ourShop,
@@ -186,6 +187,7 @@ $('#savePage').click(function(){
            }
        });
    }
+
 });
 $('input[type="file"]').change(function(){
 //            var reader = new FileReader();

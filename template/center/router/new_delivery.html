@@ -2,6 +2,12 @@
     <div class="form-inline">
         <label>收货人:</label>
         <input class="form-control" type="text" value="" placeholder="收货人" ng-model="receiver" ng-change="checkReceiver(receiver)">
+        <p ng-bind="receiverInfo.username"></p>
+        <p ng-bind="receiverInfo.tel"></p>
+        <p ng-bind="receiverInfo.role.name"></p>
+        <span ng-bind="receiverInfo.province"></span>
+        <span ng-bind="receiverInfo.city"></span>
+        <span ng-bind="receiverInfo.area"></span>
     </div>
     <div class="form-inline">
         <label>收货地址:</label>
@@ -21,13 +27,13 @@
                 <td>型号</td>
                 <td>操作</td>
             </tr>
-            <tr ng-repeat="">
-                <td>123456789123</td>
-                <td>x86</td>
-                <td>
-                    <button class="btn btn-xs btn-danger">删除</button>
-                </td>
-            </tr>
+            <!--<tr ng-repeat="">-->
+                <!--<td>123456789123</td>-->
+                <!--<td>x86</td>-->
+                <!--<td>-->
+                    <!--<button class="btn btn-xs btn-danger">删除</button>-->
+                <!--</td>-->
+            <!--</tr>-->
         </table>
     </div>
 </div>

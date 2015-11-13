@@ -396,6 +396,7 @@ iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http"
             $http.get([$window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&tel=", receiver].join(""))
                 .success(function (data) {
                     $scope.receiverInfo = data;
+                    console.log($scope.receiverInfo);
                 })
                 .error(function (data) {
                     

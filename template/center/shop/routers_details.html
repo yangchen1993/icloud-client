@@ -30,20 +30,43 @@
     <!--</div>-->
     <div class="shop_index">
         <p class="text-center">运行状态</p>
-        <div><span>启动时间：</span><span>bsdf</span></div>
-        <div><span>连续运行时间：</span><span>bsdf</span></div>
-        <div><span>接入人数：</span><span>bsdf</span></div>
-        <div><span>内存占用比率：</span><span>bsdf</span></div>
-        <div><span>CPU负载率：</span><span>bsdf</span></div>
+        <div>
+            <span>连续运行时间：</span>
+            <span ng-bind="upTime+'分钟'"></span>
+        </div>
+        <div>
+            <span>接入人数：</span>
+            <span ng-bind="wificat.operatingStatus.accessNumber+'人'"></span>
+        </div>
+        <div>
+            <span>内存占用比率：</span>
+            <span ng-bind="wificat.operatingStatus.MemUsaged"></span>
+        </div>
+        <div>
+            <span>CPU负载率：</span>
+            <span ng-bind="wificat.operatingStatus.cpuUtil"></span>
+        </div>
+        <div>
+            <span>固件版本：</span>
+            <span ng-bind="wificat.basicInformation.softwareVersion"></span>
+        </div>
     </div>
     <div class="shop_index">
         <p class="text-center">WAN接入状态</p>
-
-        <div><span>外网IP：</span><span>bsdf</span></div>
-        <div><span>上行速度：</span><span>bsdf</span></div>
-        <div><span>下行速度：</span><span>bsdf</span></div>
+        <div>
+            <span>外网IP：</span>
+            <span ng-bind="wificat.wanStatus.wanip"></span>
+        </div>
+        <div>
+            <span>上行速度：</span>
+            <span ng-bind="wificat.wanStatus.speedUp"></span>
+        </div>
+        <div>
+            <span>下行速度：</span>
+            <span ng-bind="wificat.wanStatus.speedDown"></span>
+        </div>
     </div>
-    <div style="width: 100%;height: 500px">
+    <div style="width: 100%;height: 500px;">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">认证设置</a>
@@ -78,7 +101,7 @@
                         <div style="margin-left: 30px" class="text-center">
                             <img src="/img/weixinlogin.png">
 
-                            <p style="margin-left: 0">微信登陆<a>设置</a></p>
+                            <p style="margin-left: 0">微信登陆<a ui-sref="main.weixin_config">设置</a></p>
 
                             <div class="btn-group">
                                 <label class="btn btn-primary" ng-class="{'active': isActive_weixin==1}">

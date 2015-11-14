@@ -551,12 +551,16 @@ iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http"
                 $scope.deviceMacs = _.keys($scope.deviceDeliveryList);
             }
         };
-        $scope.createDeviceDelivery = function (receiver, addressDetail) {
+        $scope.createDeviceDelivery = function () {
             var data = {
-                receiver: receiver,
-                address: addressDetail
+                receiver: $scope.receiverInfo.id,
+                address: $scope.addressDetail,
+                deviceMacs: $scope.deviceMacs
             };
-            $http.post([$window.API.ROUTER.NEW_DELIVERY, "?key=", $cookieStore.get("key")].join(""))
+            $http.post([$window.API.ROUTER.NEW_DELIVERY, "?key=", $cookieStore.get("key")].join(""), data)
+                .success(function (data) {
+                    console.log(data)
+                })
         }
     }]);
 

@@ -167,7 +167,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
     };
 
     //放行设置
-    var reload_blackwihit = function(){
+    var reload_blackwihit = function () {
         $scope.type = ["MAC", "域名"];
         $http.get([window.API.ROUTER.GET_ROUTER_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&router=", router_id].join("")).success(function (data) {
             $scope.policy = data.results;
@@ -261,14 +261,14 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             $scope.identify_time = {
                 "hour": 0,
                 "minute": data.auth_period,
-                "num":data.auth_limit_times
+                "num": data.auth_limit_times
             };
         }
         else {
             $scope.identify_time = {
                 "hour": parseInt(data.auth_period / 60),
                 "minute": data.auth_period % 60,
-                "num":data.auth_limit_times
+                "num": data.auth_limit_times
             };
         }
     });
@@ -509,13 +509,17 @@ iCloudController.controller("DeviceDeliveryController", ["$scope", "$http", "$wi
 iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
     function ($scope, $http, $window, $cookieStore, $grid) {
         var checkRouterIsExists = function (mac) {
-            $http.get([$window.API.ROUTER.GET_ROUTER_INFO_BY_MAC, "?key=", $cookieStore.get("key"), "&mac=", mac].join(""))
-                .success(function (data) {
-                    $scope.deviceDeliveryList[data.id] = data;
-                })
-                .error(function (data) {
-                    console.log(data)
-                })
+            if (!_.has($scope.deviceDeliveryList, mac)) {
+                $http.get([$window.API.ROUTER.GET_ROUTER_INFO_BY_MAC, "?key=", $cookieStore.get("key"), "&mac=", mac].join(""))
+                    .success(function (data) {
+                        $scope.deviceDeliveryList[data.mac] = data;
+                        console.log($scope.deviceDeliveryList);
+                        $scope.deviceMacs = _.keys($scope.deviceDeliveryList);
+                    })
+                    .error(function (data) {
+                        $scope.checkRouterIsExistsErrorInfo = data.msg;
+                    });
+            }
         };
 
         var checkReceiver = function (receiver) {
@@ -524,7 +528,7 @@ iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http"
                     $scope.receiverInfo = data;
                 })
                 .error(function (data) {
-                    
+                    $scope.receiverInfo = "";
                 })
         };
 
@@ -537,9 +541,22 @@ iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http"
             }
         };
         $scope.checkReceiver = function (tel) {
-            if (tel){
-                checkReceiver(tel)
+            if (tel) {
+                checkReceiver(tel);
             }
+        };
+        $scope.removeDevice = function (mac) {
+            if (_.has($scope.deviceDeliveryList, mac)) {
+                delete $scope.deviceDeliveryList[mac];
+                $scope.deviceMacs = _.keys($scope.deviceDeliveryList);
+            }
+        };
+        $scope.createDeviceDelivery = function (receiver, addressDetail) {
+            var data = {
+                receiver: receiver,
+                address: addressDetail
+            };
+            $http.post([$window.API.ROUTER.NEW_DELIVERY, "?key=", $cookieStore.get("key")].join(""))
         }
     }]);
 

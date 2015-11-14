@@ -1,11 +1,22 @@
 <div style="padding: 10px">
     <div class="form-inline">
         <label>收货人:</label>
-        <input class="form-control" type="text" value="" placeholder="收货人" ng-model="receiver" ng-change="checkReceiver(receiver)">
+        <input class="form-control" type="text" value="" placeholder="收货人" ng-model="receiver" ng-blur="checkReceiver(receiver)">
+        <div ng-if="receiverInfo">
+            <p ng-bind="receiverInfo.username"></p>
+            <p ng-bind="receiverInfo.tel"></p>
+            <p ng-bind="receiverInfo.role.name"></p>
+            <span ng-bind="receiverInfo.province"></span>
+            <span ng-bind="receiverInfo.city"></span>
+            <span ng-bind="receiverInfo.area"></span>
+        </div>
+        <div ng-if="receiverInfo === ''">
+            <span>无收货人信息</span>
+        </div>
     </div>
     <div class="form-inline">
         <label>收货地址:</label>
-        <input class="form-control" type="text" value="" placeholder="详细地址">
+        <input class="form-control" type="text" value="" placeholder="详细地址" ng-model="addressDetail">
     </div>
     <div class="form-inline">
         <label>设备列表:</label>
@@ -13,6 +24,7 @@
     <div class="form-inline">
         <input type="text" class="form-control" value="" placeholder="mac" ng-model="mac">
         <button class="btn btn-info" ng-click="addDeviceToDeliveryList(mac)">添加</button>
+        <span ng-bind="checkRouterIsExistsErrorInfo"></span>
     </div>
     <div class="col-md-3">
         <table class="table table-hover table-condensed">
@@ -21,13 +33,14 @@
                 <td>型号</td>
                 <td>操作</td>
             </tr>
-            <tr ng-repeat="">
-                <td>123456789123</td>
-                <td>x86</td>
+            <tr ng-repeat="mac in deviceMacs">
+                <td ng-bind="deviceDeliveryList[mac].mac"></td>
+                <td ng-bind="deviceDeliveryList[mac].model"></td>
                 <td>
-                    <button class="btn btn-xs btn-danger">删除</button>
+                    <button class="btn btn-xs btn-danger" ng-click="removeDevice(mac)">删除</button>
                 </td>
             </tr>
         </table>
     </div>
+    <button class="btn btn-info" ng-click="createDeviceDelivery(receiver,addressDetail)">保存</button>
 </div>

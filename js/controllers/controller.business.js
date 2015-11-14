@@ -3,15 +3,28 @@
  */
 
 iCloudController.controller("ShopManagementController", ["$scope", "$http", "$grid", "$window", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", "$blackWhite",
-    function ($scope, $http, $grid, $window, $category, $province, $city, $area, $trades, $cookieStore, $blackWhite) {
-        $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
-            $scope.shop = data.results;
-        });
+    function ($scope, $http, $grid, $window, $category, $province, $city, $area, $trades, $cookieStore) {
+        var show_shop = function(){
+            $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+                $scope.shop = data.results;
+                console.log(data);
+            });
+        };
+        show_shop();
         $scope.see_routers = function (id) {
             $window.location.href = ["#/main/shop_management_routers?id=", id].join("");
         };
         $scope.editShopIndex = function (id) {
             $window.location.href = ["#/main/ourshop?id=", id].join("");
+        };
+        $scope.edit_shop = function(id){
+            $window.location.href = ["#/main/edit_shop?shop_id=",id].join("");
+        };
+        $scope.delete_shop = function(id){
+            $http.delete([window.API.GROUP.REMOVE_GROUP,"?key=",$cookieStore.get("key"),"&id=",id].join("")).success(function(data){
+                alert(data.msg);
+                show_shop();
+            })
         }
     }]);
 
@@ -46,6 +59,56 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
 
         $http.post([window.API.GROUP.NEW_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
             alert(data.msg);
+            location.href = "#/main/shop_management";
+        })
+            .error(function (data) {
+                console.log(data);
+            })
+    }
+}]);
+
+iCloudController.controller("EditShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore) {
+    var id = get_param(window.location.href);
+    $scope.edit_shop;
+    console.log(id);
+    $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+        for(var i=0;i<data.count;i++){
+            if(data.results[i].id==id){
+                $scope.edit_shop = data.results[i];
+            }
+        }
+        console.log($scope.edit_shop);
+    });
+    $category.get().success(function (data) {
+        $scope.category = data;
+    })
+        .error(function (data) {
+            console.log(data);
+        });
+    $province.get().success(function (data) {
+        $scope.province = data;
+        console.log($scope.province);
+    });
+    $scope.select_p = function (id) {
+        $city.get(id).success(function (data) {
+            $scope.city = data;
+        })
+    };
+    $scope.select_c = function (id) {
+        $area.get(id).success(function (data) {
+            $scope.area = data;
+        })
+    }
+    $scope.select_a = function (id) {
+        $trades.get(id).success(function (data) {
+            $scope.trades = data;
+        })
+    };
+    $scope.submit = function (shop) {
+
+        $http.post([window.API.GROUP.NEW_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
+            alert(data.msg);
+            location.href = "#/main/shop_management";
         })
             .error(function (data) {
                 console.log(data);
@@ -171,22 +234,16 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         })
     };
     //路由基本信息
+    var shop_id;
     $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
         console.log(data);
+        shop_id = data.router.router_groups.id;
         //路由器实时信息
-        //setInterval(function(){
+        //window.request_router = setInterval(function(){
         //    $http.get([window.API.WIFICAT.STATUS,"?key=",$cookieStore.get("key"),"&router_mac=",data.router.mac].join("")).success(function(data){
         //        console.log(data);
         //        $scope.wificat = data;
         //        $scope.upTime=parseInt(data.basicInformation.upTime/60);
-        //    });
-        //},1000);
-        //setTimeout(function requestRouter(){
-        //    $http.get([window.API.WIFICAT.STATUS,"?key=",$cookieStore.get("key"),"&router_mac=",data.router.mac].join("")).success(function(data){
-        //        console.log(data);
-        //        $scope.wificat = data;
-        //        $scope.upTime=parseInt(data.basicInformation.upTime/60);
-        //        requestRouter();
         //    });
         //},1000);
 
@@ -246,15 +303,20 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         })
     };
 
+    $scope.weixin_load = function(){
+        location.href = ["#/main/weixin_config?routergroup_id=",shop_id].join("");
+    }
+
 }]);
 
 iCloudController.controller("WeiXinConfigController",["$scope","$http","$cookieStore",function($scope,$http,$cookieStore){
+    var routergroup_id = get_param(window.location.href);
     $scope.submit = function(weixin){
         $http.post([window.API.WEIXIN.NEW_WECHAT,"?key=",$cookieStore.get("key")].join(""),weixin).success(function(data){
             alert(data.msg);
         });
     };
-    $http.get([window.API.WEIXIN.GET_WECHAT,"?key=",$cookieStore.get("key"),"&routergroup_id=1855"].join("")).success(function(data){
+    $http.get([window.API.WEIXIN.GET_WECHAT,"?key=",$cookieStore.get("key"),"&routergroup_id=",routergroup_id].join("")).success(function(data){
         $scope.weixin_edit = data;
     });
     $scope.submit1 = function(weixin){

@@ -89,8 +89,8 @@ window.API = {
 
     "GROUP": {
         "GET_CURRENT_USER_ROUTER_GROUPS": [window.HOST, "groups/get_current_user_router_groups/"].join(""), // 获取当前用户的路由器分组
-        "NEW_GROUP": [window.HOST, "groups/new_group/"].join("") // 新建路由器分组
-
+        "NEW_GROUP": [window.HOST, "groups/new_group/"].join(""), // 新建路由器分组
+        "REMOVE_GROUP": [window.HOST, "groups/remove_group/"].join("") // 新建路由器分组
     },
 
 

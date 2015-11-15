@@ -5,7 +5,123 @@ var editTemp=$(".editTemp")
 var conmponentItem=$("");
 var haveData='';
 var ourShop=get_param(window.location.href);
+function editText(id,type){
+    $('.color').minicolors({
+        animationSpeed: 50,
+        animationEasing: 'swing',
+        change: null,
+        changeDelay: 0,
+        control: 'hue',
+        hide: false,
+        hideSpeed: 100,
+        inline: false,
+        letterCase: 'lowercase',
+        opacity: false,
+        position: 'bottom left',
+        show: null,
+        showSpeed: 100,
+        theme: 'bootstrap'
+    });
+    $('div[data-edit-id='+id+']'+' .edit-title').val($('#'+id+' .text-title').text());
+    $(document).ready(function(){
+        $('div[data-edit-id='+id+']'+' .wback').on('change',function(){
+            $('#'+id+' .text-title').css("background",$(this).val());
+            console.log($('[data-item-id='+id+']'+' .wback').val());
+        });
+        $('div[data-edit-id='+id+']'+' .wcolor').on('change',function(){
+            $('#'+id+' .text-title').css("color",$(this).val());
+            console.log($('[data-item-id='+id+']'+' .wcolor').val());
+        });
+        $('div[data-edit-id='+id+']'+' .edit-title').on('keyup',function(){
+            $('#'+id+' .text-title').text($(this).val());
+        });
+        $('div[data-edit-id='+id+']'+' .txtarea').attr('id','txtarea');
 
+        CKEDITOR.document.getById( 'txtarea').setHtml(
+            $("#"+id+" .text-content").text()
+        );
+
+        CKEDITOR.replace( 'txtarea',{
+            toolbar :
+                [
+                    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
+                ]
+        });
+        CKEDITOR.instances["txtarea"].on("instanceReady", function () {
+            this.document.on("keyup", function(){
+                validateText();
+            });
+        });
+    });
+    function validateText(){
+        var numText=CKEDITOR.instances.txtarea.getData();
+        var numCounter=numText.length;
+        $('div[data-edit-id='+id+']'+' .text-count').text(3000-numCounter);
+        $("#"+id+" .text-content").html(numText);
+    }
+    $(document).ready(function(){
+        validateText();
+    });
+}
+function isImageFile(file){
+    if (file.type) {
+        return /^image\/\w+$/.test(file.type);
+    } else {
+        return /\.(jpg|jpeg|png|gif)$/.test(file);
+    }
+}
+function editImg(id,type){
+    $('div[data-edit-id='+id+']'+' #showImg').attr('src',$('#'+id+' .img .img img').attr('src'));
+    $('div[data-edit-id='+id+']'+' input[type="file"]').change(function(){
+        var files;
+        var file;
+        var img;
+
+        files = $(this).prop('files');
+
+        if (files.length > 0) {
+            file = files[0];
+
+            if (isImageFile(file)) {
+                if (this.url) {
+                    URL.revokeObjectURL(this.url); // Revoke the old one
+                }
+
+                this.url = URL.createObjectURL(file);
+            }
+        }
+        console.log($(this).val());
+        var imgData;
+        $('.img-modal').modal('show');
+        $('.avatar-wrapper').html("");
+        $('.avatar-wrapper').append('<img src="'+this.url+'">');
+        $('.avatar-wrapper > img').cropper();
+        $('.img-modal .save').on('click', function () {
+            imgData=$('.avatar-wrapper > img').cropper('getCroppedCanvas', {
+                width:640
+            }).toDataURL();
+            $('.img-modal').modal('hide');
+            $('div[data-edit-id='+id+']'+' #showImg').attr('src',imgData);
+            //上传图片
+
+        });
+        $('div[data-edit-id='+id+']'+' .saveImg').on('click',function(){
+            $.post(window.API.CMS.POST_IMG+'?key='+ $.cookie("key").replace(/\"/g,""),{img:imgData}).success(function(data){
+                var imgPostUrl=data.link;
+                var setLink=$('div[data-edit-id='+id+']'+' .img-link').val();
+                console.log(setLink);
+                if(!setLink){
+                    setLink=imgPostUrl;
+                }else{
+                    setLink='http://'+setLink;
+                }
+                $('#'+id+' .img .img').html("");
+                $('#'+id+' .img .img').append('<a href="'+setLink+'"><img style="width:100%;" src="'+imgPostUrl+'"></a>');
+            });
+
+        });
+    });
+}
 //通用删除
 function addEditItem(id,type){
     var _edit=$('#'+id+' .edit');
@@ -14,58 +130,20 @@ function addEditItem(id,type){
         var editItem=$('.edit-items .'+type).html();
         editArea.append('<div class="'+type+'" data-edit-id="'+id+'">'+editItem+'</div>');
         //文字功能
-        (function(){
-            $('.color').minicolors({
-                animationSpeed: 50,
-                animationEasing: 'swing',
-                change: null,
-                changeDelay: 0,
-                control: 'hue',
-                hide: false,
-                hideSpeed: 100,
-                inline: false,
-                letterCase: 'lowercase',
-                opacity: false,
-                position: 'bottom left',
-                show: null,
-                showSpeed: 100,
-                theme: 'bootstrap'
-            });
-            $(document).ready(function(){
-                $('div[data-edit-id='+id+']'+' .wback').on('blur',function(){
-                    $('#'+id+' .text-title').css("background",$(this).val());
-                    console.log($('[data-item-id='+id+']'+' .wback').val());
-                });
-                $('div[data-edit-id='+id+']'+' .wcolor').on('blur',function(){
-                    $('#'+id+' .text-title').css("color",$(this).val());
-                    console.log($('[data-item-id='+id+']'+' .wcolor').val());
-                });
-                $('div[data-edit-id='+id+']'+' .edit-title').on('keyup',function(){
-                    $('#'+id+' .text-title').text($(this).val());
-                });
-                $('div[data-edit-id='+id+']'+' .txtarea').attr('id','txtarea');
-                CKEDITOR.replace( 'txtarea',{
-                    toolbar :
-                        [
-                            ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
-                        ]
-                });
-                CKEDITOR.instances["txtarea"].on("instanceReady", function () {
-                    this.document.on("keyup", function(){
-                        validateText();
-                    });
-                });
-            });
-            function validateText(){
-                var numText=CKEDITOR.instances.txtarea.getData();
-                var numCounter=numText.length;
-                $('div[data-edit-id='+id+']'+' .text-count').text(3000-numCounter);
-                $("#"+id+" .text-content").html(numText);
-            }
-            $(document).ready(function(){
-                validateText();
-            });
-        })();
+        switch (type){
+            case 'text':
+                editText(id,type);
+                break;
+            case 'img':
+                editImg(id,type);
+                break;
+            //case 'map':
+            //    editImg(id,type);
+            //    break;
+            default :
+                break;
+
+        }
 
     });
     $('#'+id+' .delete').on('click',function(){
@@ -136,6 +214,8 @@ function addItem(id,type){
         case 'img':
             addEditItem(id,type);
             break;
+        case 'menu':
+            addEditItem(id,type);
         default:
             break;
     }
@@ -163,8 +243,8 @@ $('#savePage').click(function(){
     var items=[];
     console.log(items.length);
     for(var i=0;i<length;i++){
-        items.push({'component_id':$(component[i]).attr("id"),'content_type':$(component[i]).attr("data-type"),'div':$(component[i]).parent().html()});
-        console.log(i);
+        items.push({'component_id':$(component[i]).attr("id"),'content_type':$(component[i]).attr("data-type"),'div':$(component[i]).prop("outerHTML")});
+
     }
     console.log(items);
 //            $.post('http://192.168.10.200/api/cms/new_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13',{'items':items},{"dataType":"json"});
@@ -213,8 +293,8 @@ var user={
 }
 
 var t=$('.dod2 > img').cropper();
-$('.save').click(function(){
-    var URL='http://192.168.10.200/api/resources/new_img_resource/?key='+user.userId;
+$('.saveImg').click(function(){
+    //var URL='http://192.168.10.200/api/resources/new_img_resource/?key='+user.userId;
     var imgData=$('.dod2 > img').cropper('getCroppedCanvas', {
         width:640
     }).toDataURL();
@@ -224,6 +304,7 @@ $('.save').click(function(){
         $('#drag').append('<li><a href="'+imgUrl+'"><img style="width:100%;" src="'+imgUrl+'"></a></li>');
         $('#showImg').attr('src',imgUrl);
     });
+    alert('点击了额');
 
 });
 function bbmap(id,j,w){

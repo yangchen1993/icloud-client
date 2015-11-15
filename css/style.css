@@ -23,3 +23,17 @@ header.top-bar{
     text-align: center;
     cursor: pointer;
 }
+.avatar-wrapper {
+    height: 364px;
+    width: 100%;
+    margin-top: 15px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+    background-color: #fcfcfc;
+    overflow: hidden;
+}
+
+.avatar-wrapper img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}

@@ -504,6 +504,7 @@ iCloudController.controller("InSalesController", ['$scope', function ($scope) {
 iCloudController.controller("DeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
     function ($scope, $http, $window, $cookieStore, $grid) {
         $grid.initial($scope, $window.API.ROUTER.GET_CURRENT_USER_DELIVERIES);
+        $grid.enableCheck()
     }]);
 
 iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
@@ -559,7 +560,10 @@ iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http"
             };
             $http.post([$window.API.ROUTER.NEW_DELIVERY, "?key=", $cookieStore.get("key")].join(""), data)
                 .success(function (data) {
-                    console.log(data)
+                    $window.alert(data.msg)
+                })
+                .error(function (data) {
+                    $window.alert(data.msg)
                 })
         }
     }]);

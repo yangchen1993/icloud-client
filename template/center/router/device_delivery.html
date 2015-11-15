@@ -5,9 +5,13 @@
     </ol>
     <div>
         <button class="btn btn-info" ui-sref="main.new_delivery">新建</button>
-        <table class="table table-hover table-condensed table-bordered">
+        <table class="table table-hover table-condensed table-bordered" id="delivery-table">
             <tr>
-                <td></td>
+                <td id="{{ headers[1] }}" ng-click="sort(headers[1])">发货人
+                    <span ng-show="currentSort[headers[1]] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort[headers[1]] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
             </tr>
         </table>
     </div>

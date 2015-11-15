@@ -1,0 +1,45 @@
+<div style="padding: 10px;">
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.eq_management">设备管理</a></li>
+        <li class="active">设备分配</li>
+    </ol>
+    <div>
+        <button class="btn btn-info" ui-sref="main.delivery-new">新建</button>
+        <table class="table table-hover table-condensed table-bordered" id="delivery-table">
+            <tr>
+                <td id="receiver" ng-click="sort('receiver')">发货人
+                    <span ng-show="currentSort['receiver'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['receiver'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="sender" ng-click="sort('sender')">收货人
+                    <span ng-show="currentSort['sender'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['sender'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="address" ng-click="sort('address')">收货地址
+                    <span ng-show="currentSort['address'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['address'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="create_time" ng-click="sort('create_time')">创建时间
+                    <span ng-show="currentSort['create_time'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['create_time'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="d in grid.results">
+                <td ng-bind="d.receiver"></td>
+                <td ng-bind="d.sender"></td>
+                <td ng-bind="d.address"></td>
+                <td ng-bind="d.create_time"></td>
+                <td>
+                    <button class="btn btn-info btn-xs" ng-click="toDeliveryDetails(d.id)">查看详细</button>
+                    <button class="btn btn-danger btn-xs" ng-click="removeDelivery(d.id)">删除</button>
+                </td>
+            </tr>
+        </table>
+        <div ng-include="'/template/partial/pagination.html'"></div>
+    </div>
+</div>

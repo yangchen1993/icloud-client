@@ -501,13 +501,28 @@ iCloudController.controller("InSalesController", ['$scope', function ($scope) {
 
 }]);
 
-iCloudController.controller("DeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
+iCloudController.controller("DeliveriesController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
     function ($scope, $http, $window, $cookieStore, $grid) {
         $grid.initial($scope, $window.API.ROUTER.GET_CURRENT_USER_DELIVERIES);
-        $grid.enableCheck()
+
+        $scope.removeDelivery = function (id) {
+            if (confirm("确定删除?")) {
+                $http({
+                    method: "DELETE",
+                    url: [$window.API.ROUTER.REMOVE_DELIVERY, "?key=", $cookieStore.get("key"), "&id=", id].join("")
+                }).success(function (data) {
+                    $scope.refresh();
+                }).error(function (data) {
+                    $scope.refresh();
+                })
+            }
+        };
+        $scope.toDeliveryDetails = function (id) {
+            $window.location.href = ["#/main/delivery-details?deliveryID=", id].join("");
+        }
     }]);
 
-iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
+iCloudController.controller("CreateDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
     function ($scope, $http, $window, $cookieStore, $grid) {
         var checkRouterIsExists = function (mac) {
             if (!_.has($scope.deviceDeliveryList, mac)) {
@@ -565,11 +580,23 @@ iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http"
                 .error(function (data) {
                     $window.alert(data.msg)
                 })
-        }
+        };
     }]);
 
-iCloudController.controller("DeviceDeliveryDetailController"["$scope", "$http", "$window", "$cookieStore", "$grid",
+iCloudController.controller("DeliveryDetailsController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
     function ($scope, $http, $window, $cookieStore, $grid) {
+        var deliveryID = get_param($window.location.href);
+        var getDeliveryInfo = function () {
+            $http.get([$window.API.ROUTER.GET_CURRENT_USER_DELIVERIES, "?key=", $cookieStore.get("key"), "&id=", deliveryID].join(""))
+                .success(function (data) {
+                    if (data.results.length == 1){
+                        $scope.deliveryInfo = data.results[0];
+                    }else{
+                        $scope.deliveryInfo = ""
+                    }
+                })
+        };
 
+        getDeliveryInfo();
     }]);
 

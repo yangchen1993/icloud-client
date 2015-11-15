@@ -1,0 +1,33 @@
+<div style="padding: 10px">
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.eq_management">设备管理</a></li>
+        <li><a ui-sref="main.deliveries">设备分配</a></li>
+        <li class="active">发货单详情</li>
+    </ol>
+    <div class="form-inline">
+        <label>收货人:</label>
+        <span ng-bind="deliveryInfo.receiver"></span>
+    </div>
+    <div class="form-inline">
+        <label>收货地址:</label>
+        <span ng-bind="deliveryInfo.address"></span>
+    </div>
+    <div class="form-inline">
+        <label>设备列表:</label>
+    </div>
+    <div class="col-md-3">
+        <table class="table table-hover table-condensed">
+            <tr>
+                <td>MAC</td>
+                <td>型号</td>
+            </tr>
+            <tr ng-if="deliveryInfo.routers.length === 0">
+               <td colspan="2" align="center">没有设备</td>
+            </tr>
+            <tr ng-repeat="r in deliveryInfo.routers">
+                <td ng-bind="r.mac"></td>
+                <td ng-bind="r.model"></td>
+            </tr>
+        </table>
+    </div>
+</div>

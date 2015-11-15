@@ -102,7 +102,9 @@ window.API = {
 
         "PUT_DATA":[window.HOST, "ourshop/edit_ourshop/"].join(""),
 
-        "SEND_DATA":[window.HOST, "ourshop/new_ourshop/"].join("")
+        "SEND_DATA":[window.HOST, "ourshop/new_ourshop/"].join(""),
+
+        "POST_IMG":[window.HOST, "resources/new_img_resource/"].join("")
     },
 
 

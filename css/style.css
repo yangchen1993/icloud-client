@@ -37,3 +37,7 @@ header.top-bar{
     height: auto;
     max-width: 100%;
 }
+.dmap{
+    width:100%;
+    height:350px;
+}

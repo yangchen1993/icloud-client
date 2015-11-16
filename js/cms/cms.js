@@ -72,6 +72,9 @@ function isImageFile(file){
 }
 function editImg(id,type){
     $('div[data-edit-id='+id+']'+' #showImg').attr('src',$('#'+id+' .img .img img').attr('src'));
+    if($('#'+id+' .img a')){
+        $('div[data-edit-id='+id+']'+' .img-link').val($('#'+id+' .img a').attr('href').split('//')[1]);
+    }
     $('div[data-edit-id='+id+']'+' input[type="file"]').change(function(){
         var files;
         var file;
@@ -122,6 +125,18 @@ function editImg(id,type){
         });
     });
 }
+function editAdress(id,type){
+    $('div[data-edit-id='+id+']'+' .form-control').val($('#'+id+' .dizhi').text());
+    $('div[data-edit-id='+id+']'+' .form-control').on('keyup',function(){
+        $('#'+id+' .dizhi').text($(this).val())
+    })
+}
+function editMap(id,type){
+    var mapId=addId();
+    $('div[data-edit-id='+id+']'+' .dmap').attr('id',mapId);
+    console.log(mapId);
+    bbmap(mapId);
+}
 //通用删除
 function addEditItem(id,type){
     var _edit=$('#'+id+' .edit');
@@ -137,12 +152,14 @@ function addEditItem(id,type){
             case 'img':
                 editImg(id,type);
                 break;
-            //case 'map':
-            //    editImg(id,type);
-            //    break;
+            case 'address':
+                editAdress(id,type);
+                break;
+            case 'map':
+                editMap(id,type);
+                break;
             default :
                 break;
-
         }
 
     });
@@ -173,6 +190,9 @@ $.get(window.API.CMS.GET_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group
                     addEditItem(data.cms[i].component_id,data.cms[i].content_type);
                     break;
                 case 'map':
+                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+                    break;
+                case 'address':
                     addEditItem(data.cms[i].component_id,data.cms[i].content_type);
                     break;
             }
@@ -216,6 +236,13 @@ function addItem(id,type){
             break;
         case 'menu':
             addEditItem(id,type);
+            break;
+        case 'map':
+            addEditItem(id,type);
+            break;
+        case 'address':
+            addEditItem(id,type);
+            break;
         default:
             break;
     }
@@ -257,7 +284,7 @@ $('#savePage').click(function(){
            'contentType':'application/json;charset=utf-8',
            "data":JSON.stringify({"group_id":ourShop,"items":items}),
            success:function (data) {
-               console.log('上传成功'+data);
+               alert('上传成功');
            }
        });
    }else{
@@ -268,7 +295,7 @@ $('#savePage').click(function(){
            'contentType':'application/json;charset=utf-8',
            "data":JSON.stringify({"group_id":ourShop,"items":items}),
            success:function (data) {
-               console.log('上传成功'+data);
+               alert('上传成功');
            }
        });
    }
@@ -307,13 +334,22 @@ $('.saveImg').click(function(){
     alert('点击了额');
 
 });
-function bbmap(id,j,w){
+function bbmap(id){
+    //var map = new BMap.Map(id);
+    //var point = new BMap.Point(j,w);
+    //// 百度地图API功能
+    ////var point = new BMap.Point(104.06792346,30.67994285);
+    //map.centerAndZoom(point, 18);
+    //var marker = new BMap.Marker(point);  // 创建标注
+    //map.addOverlay(marker);               // 将标注添加到地图中
+
+
+    // 百度地图API功能
     var map = new BMap.Map(id);
-    var point = new BMap.Point(j,w);
-    //var point = new BMap.Point(104.06792346,30.67994285);
-    map.centerAndZoom(point, 18);
-    var marker = new BMap.Marker(point);  // 创建标注
-    map.addOverlay(marker);               // 将标注添加到地图中
+    var point = new BMap.Point(116.400244,39.92556);
+    map.centerAndZoom(point, 12);
+    var marker = new BMap.Marker(point);// 创建标注
+    map.addOverlay(marker);             // 将标注添加到地图中
 }
 
 $('#drag').dragsort({

@@ -1,0 +1,87 @@
+/*.w_header{*/
+    /*margin-top: 20px;*/
+    /*padding-left: 10px;*/
+    /*width:100%;*/
+    /*line-height:50px ;*/
+    /*background-color: #dcdcdc;*/
+
+/*}*/
+/*.w_content{*/
+    /*padding-left:10px*/
+/*}*/
+/*/!*span{*!/*/
+    /*/!*font-size:16px;*!/*/
+    /*/!*font-weight:400;*!/*/
+/*/!*}*!/*/
+/*.col-md-4{*/
+    /*margin-top:50px*/
+/*}*/
+/*.col-md-4>span{*/
+    /*display: block;*/
+    /*margin-top:20px;*/
+/*}*/
+/*.form-inline{*/
+    /*line-height: 40px;*/
+    /*vertical-align: middle;*/
+/*}*/
+/*.form-inline>.h4{*/
+    /*width:170px;*/
+/*}*/
+/*/!*input[type='text']{*/
+    /*width: 80%;*/
+/*}*!/*/
+/*/!*select{*!/*/
+    /*/!*width:60% !important;*!/*/
+/*/!*}*!/*/
+/*.images{*/
+    /*margin:30px 0 0 10px;*/
+/*}*/
+/*.images>span{*/
+    /*font-size: 16px;*/
+/*}*/
+/*#crop-avatar{*/
+    /*margin-top:50px;*/
+/*}*/
+/*textarea{*/
+    /*height:137px !important;*/
+/*}*/
+
+/*.wemedia_table>td{*/
+    /*line-height: 48px !important;*/
+/*}*/
+
+/*.ads_top{*/
+    /*width:100%;*/
+    /*height:60px;*/
+    /*border: 1px solid #cccccc;*/
+    /*padding:10px;*/
+/*}*/
+/*.ads_table{*/
+    /*margin-top: 50px;*/
+/*}*/
+
+.create_ads_panel{
+    padding-top: 100px;
+}
+.create_ads_panel>div{
+    margin-top: 10px;
+}
+.create_ads_panel span{
+    font-size: 16px;
+    font-family: "Microsoft YaHei";
+}
+.create_ads_panel div:nth-child(1) input,.create_ads_panel div:nth-child(3) select,.create_ads_panel div:last-child textarea{
+    width: 300px;
+    margin-left: 32px;
+}
+.create_ads_panel textarea{
+    height: 150px;
+}
+.create_ads_phone{
+    width: 290px;
+    height: 580px;
+    position: absolute;
+    top:50px;
+    left:650px;
+    z-index: 1;
+}

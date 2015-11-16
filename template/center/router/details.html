@@ -3,112 +3,27 @@
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li class="active">路由器详情</li>
     </ol>
-    <!--<div class="details_panel">-->
-        <!--<p class="text-center">店铺信息</p>-->
-        <!--<p>-->
-            <!--<span>所属商家：</span>-->
-            <!--<span>张三</span>-->
-        <!--</p>-->
-        <!--<p>-->
-            <!--<span>所属店铺：</span>-->
-            <!--<span ng-bind="router_basic.router_groups.name"></span>-->
-        <!--</p>-->
-        <!--<p>-->
-            <!--<span>店铺所属行业：</span>-->
-            <!--<span>零售</span>-->
-        <!--</p>-->
-        <!--<p>-->
-            <!--<span>店铺地址：</span>-->
-            <!--<span>四川省 成都市 春熙路</span>-->
-        <!--</p>-->
-        <!--<p>-->
-            <!--<span>所属代理商：</span>-->
-            <!--<span>李四</span>-->
-        <!--</p>-->
-        <!--<div>-->
-            <!--<button class="btn btn-primary" style="width:80%;height: 50px;"><span style="font-family: 'Microsoft YaHei';font-size: 16px;">解绑</span></button>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="details_panel">-->
-        <!--<p class="text-center">路由器基本信息</p>-->
-        <!--<p>-->
-        <!--<span>设备型号：</span>-->
-        <!--<span ng-bind="xinghao">MT7620A  V1</span>-->
-        <!--</p>-->
-        <!--<p>-->
-        <!--<span>绑定时间：</span>-->
-        <!--<span>2015-10-10 10：00</span>-->
-        <!--</p>-->
-        <!--<p>-->
-        <!--<span>MAC地址：</span>-->
-        <!--<span ng-bind="router_basic.mac"></span>-->
-        <!--</p>-->
-        <!--<p>-->
-        <!--<span>路由器SN码：</span>-->
-        <!--<span>xxx-xxx-xxx-xxx</span>-->
-        <!--</p>-->
-        <!--<p>-->
-        <!--<span>系统版本：</span>-->
-        <!--<span>V 1.0</span>-->
-        <!--</p>-->
-        <!--<div>-->
-            <!--<button class="btn btn-info" style="width:80%;height: 50px"><span style="font-family: 'Microsoft YaHei';font-size: 16px">版本升级</span></button>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="details_panel">-->
-        <!--<p class="text-center">运行状态</p>-->
-        <!--<p>-->
-        <!--<span>连续运行时间：</span>-->
-        <!--<span>0天5小时18分</span>-->
-        <!--</p>-->
-        <!--<p>-->
-        <!--<span>接入人数：</span>-->
-        <!--<span>1234</span>-->
-        <!--</p>-->
-        <!--<p>-->
-        <!--<span>内存占比率：</span>-->
-        <!--<span>30%</span>-->
-        <!--</p>-->
-        <!--<p>-->
-        <!--<span>CPU负载率：</span>-->
-        <!--<span>30%</span>-->
-        <!--</p>-->
-        <!--<div>-->
-            <!--<button class="btn btn-success" style="width:40%;height: 50px"><span style="font-family: 'Microsoft YaHei';font-size: 16px">查看流量统计</span></button>-->
-            <!--<button class="btn btn-success" style="width:40%;height: 50px"><span style="font-family: 'Microsoft YaHei';font-size: 16px">重启路由器</span></button>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="details_panel">-->
-        <!--<p class="text-center">设置</p>-->
-        <!--<p>-->
-            <!--<span>WIFI名称：</span>-->
-            <!--<span ng-bind="router_basic.ssid"></span>-->
-        <!--</p>-->
-        <!--<div style="border-radius: 0 3px">-->
-            <!--<button class="btn btn-danger" style="width:80%;height: 50px;"><span style="font-family: 'Microsoft YaHei';font-size: 16px">修改WIFI名称</span></button>-->
-        <!--</div>-->
-    <!--</div>-->
         <div class="details_panel">
             <p>店铺信息</p>
             <div style="width: 100%;height: 40px;background-color: #4daf7b"></div>
             <div class="details_content text-center">
                 <div>
+                    <p>店铺名称：</p>
+                    <p ng-bind="routers_all.router.router_groups.name" class="content_panel">零售</p>
+                </div>
+                <div>
                     <p>店铺所属行业：</p>
                     <p ng-bind="routers_all.router.router_groups.category" class="content_panel">零售</p>
                 </div>
-                <div>
+                <div style="float:none;margin-top: 120px" >
                     <p>店铺所在地址：</p>
                     <p ng-bind="routers_all.router.router_groups.trade_area.province+' '+routers_all.router.router_groups.trade_area.city+' '+routers_all.router.router_groups.trade_area.area+' '+routers_all.router.router_groups.trade_area.name" class="content_panel"></p>
-                </div>
-                <div style="float:none;margin-top: 120px" >
-                    <p>所属代理商：</p>
-                    <p class="content_panel">呢呵呵你让他</p>
                 </div>
                 <div style="background-color: #fff;line-height: 40px">
                     <img src="/img/tiaoma.png">
                 </div>
                 <div style="background-color: #fff;line-height: 40px">
-                    <button class="btn btn-success" style="width: 60%"><span>解绑</span></button>
+                    <button class="btn btn-success" style="width: 60%" ng-click="unbind()"><span>解绑</span></button>
                 </div>
             </div>
         </div>

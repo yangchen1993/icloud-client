@@ -35,7 +35,7 @@
         this.$avatarBtns = this.$avatarForm.find('.avatar-btns');
 
         this.$avatarWrapper = this.$avatarModal.find('.avatar-wrapper');
-        this.$avatarPreview = this.$avatarModal.find('.avatar-preview');
+        this.$avatarPreview = $('.avatar-preview');
 
         this.init();
     }

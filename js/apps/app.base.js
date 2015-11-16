@@ -50,10 +50,10 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/router/new_delivery.html",
             controller: "CreateDeviceDeliveryController"
         })
-        .state("main.wemedia", {
-            url: "/wemedia",
-            templateUrl: "template/center/wemedia.html",
-            controller: "WeMediaController"
+        .state("main.create_ads", {
+            url: "/create_ads",
+            templateUrl: "template/center/create_ads.html",
+            controller: "CreateAdsController"
         })
         .state("main.wemedia_edit", {
             url: "/wemedia_edit",
@@ -142,12 +142,17 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("main.ourshop", {
             url: "/ourshop",
-            templateUrl: "template/center/ourshop.html",
+            templateUrl: "template/center/shop/ourshop.html",
             controller: "OurShopController"
         })
         .state("main.weixin_config", {
             url: "/weixin_config",
             templateUrl: "template/center/shop/weixin_config.html",
             controller: "WeiXinConfigController"
+        })
+        .state("main.recharge", {
+            url: "/recharge",
+            templateUrl: "template/center/account/recharge.html",
+            controller: "RechargeController"
         })
 });

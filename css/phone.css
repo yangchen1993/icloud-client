@@ -92,14 +92,6 @@ body {
   left:547px;
   z-index: 2;
 }
-.model_p{
-  width: 290px;
-  height: 580px;
-  position: absolute;
-  top:50px;
-  left:510px;
-  z-index: 1;
-}
 .preview-md {
   height: 100px;
   width: 100px;

@@ -4,7 +4,7 @@
 
 iCloudController.controller("ShopManagementController", ["$scope", "$http", "$grid", "$window", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", "$blackWhite",
     function ($scope, $http, $grid, $window, $category, $province, $city, $area, $trades, $cookieStore) {
-        var show_shop = function(){
+        var show_shop = function () {
             $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
                 $scope.shop = data.results;
                 console.log(data);
@@ -17,11 +17,11 @@ iCloudController.controller("ShopManagementController", ["$scope", "$http", "$gr
         $scope.editShopIndex = function (id) {
             $window.location.href = ["#/main/ourshop?id=", id].join("");
         };
-        $scope.edit_shop = function(id){
-            $window.location.href = ["#/main/edit_shop?shop_id=",id].join("");
+        $scope.edit_shop = function (id) {
+            $window.location.href = ["#/main/edit_shop?shop_id=", id].join("");
         };
-        $scope.delete_shop = function(id){
-            $http.delete([window.API.GROUP.REMOVE_GROUP,"?key=",$cookieStore.get("key"),"&id=",id].join("")).success(function(data){
+        $scope.delete_shop = function (id) {
+            $http.delete([window.API.GROUP.REMOVE_GROUP, "?key=", $cookieStore.get("key"), "&id=", id].join("")).success(function (data) {
                 alert(data.msg);
                 show_shop();
             })
@@ -70,10 +70,9 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
 iCloudController.controller("EditShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore) {
     var id = get_param(window.location.href);
     $scope.edit_shop;
-    console.log(id);
     $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
-        for(var i=0;i<data.count;i++){
-            if(data.results[i].id==id){
+        for (var i = 0; i < data.count; i++) {
+            if (data.results[i].id == id) {
                 $scope.edit_shop = data.results[i];
             }
         }
@@ -90,6 +89,7 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
         console.log($scope.province);
     });
     $scope.select_p = function (id) {
+        console.log(id);
         $city.get(id).success(function (data) {
             $scope.city = data;
         })
@@ -106,7 +106,7 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
     };
     $scope.submit = function (shop) {
 
-        $http.post([window.API.GROUP.NEW_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
+        $http.put([window.API.GROUP.EDIT_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
             alert(data.msg);
             location.href = "#/main/shop_management";
         })
@@ -121,18 +121,18 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     $scope.see_routers_details = function (id) {
         $window.location.href = ["#/main/routers_details?routers_id=", id].join("");
     };
-    var show_bindRouters = function(){
+    var show_bindRouters = function () {
         $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP, "?key=", $cookieStore.get("key"), "&group_id=", shop_id].join("")).success(function (data) {
             $scope.shop_routers = data.results;
         });
     };
     show_bindRouters();
 
-    var show_selectRouters = function(){
-        $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS,"?key=",$cookieStore.get("key")].join("")).success(function(data){
-            var unbingRouters = [],k=0;
-            for(var i=0;i<data.results.length;i++){
-                if(data.results[i].router_groups==null){
+    var show_selectRouters = function () {
+        $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+            var unbingRouters = [], k = 0;
+            for (var i = 0; i < data.results.length; i++) {
+                if (data.results[i].router_groups == null) {
                     unbingRouters[k] = data.results[i];
                     k++;
                 }
@@ -142,20 +142,23 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     };
     show_selectRouters();
 
-    var bind = function(){
-        $http.put([window.API.ROUTER.ROUTER_BIND,"?key=",$cookieStore.get("key")].join(""),{"group":shop_id,"router":$scope.bind_router}).success(function(data){
+    var bind = function () {
+        $http.put([window.API.ROUTER.ROUTER_BIND, "?key=", $cookieStore.get("key")].join(""), {
+            "group": shop_id,
+            "router": $scope.bind_router
+        }).success(function (data) {
             alert(data.msg);
             show_bindRouters();
             show_selectRouters();
         })
     };
 
-    $scope.bind_submit = function(){
+    $scope.bind_submit = function () {
         bind();
     };
 
-    $scope.unbind_submit = function(mac){
-        $http.delete([window.API.ROUTER.ROUTER_UNBIND,"?key=",$cookieStore.get("key"),"&mac=",mac].join("")).success(function(data){
+    $scope.unbind_submit = function (mac) {
+        $http.delete([window.API.ROUTER.ROUTER_UNBIND, "?key=", $cookieStore.get("key"), "&mac=", mac].join("")).success(function (data) {
             alert(data.msg);
             show_bindRouters();
             show_selectRouters();
@@ -163,10 +166,10 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     }
 }]);
 
-iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", function ($scope, $http, $cookieStore, $window) {
+iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$interval", function ($scope, $http, $cookieStore, $window, $interval) {
     var router_id = get_param($window.location.href);
     //放行设置
-    var reload_blackwihit = function(){
+    var reload_blackwihit = function () {
         $scope.type = ["MAC", "域名"];
         $http.get([window.API.ROUTER.GET_ROUTER_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&router=", router_id].join("")).success(function (data) {
             console.log(data);
@@ -239,13 +242,17 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         console.log(data);
         shop_id = data.router.router_groups.id;
         //路由器实时信息
-        //window.request_router = setInterval(function(){
-        //    $http.get([window.API.WIFICAT.STATUS,"?key=",$cookieStore.get("key"),"&router_mac=",data.router.mac].join("")).success(function(data){
-        //        console.log(data);
-        //        $scope.wificat = data;
-        //        $scope.upTime=parseInt(data.basicInformation.upTime/60);
-        //    });
-        //},1000);
+        var routerStatusInterval = $interval(function () {
+            $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
+                console.log(data);
+                $scope.wificat = data;
+                $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+            });
+        }, 1000);
+
+        $scope.$on("$destroy", function () {
+           $interval.cancel(routerStatusInterval);
+        });
 
         //默认认证方式
         if (data.login_type == "手机号认证") {
@@ -269,14 +276,14 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             $scope.identify_time = {
                 "hour": 0,
                 "minute": data.auth_period,
-                "num":data.auth_limit_times
+                "num": data.auth_limit_times
             };
         }
         else {
             $scope.identify_time = {
                 "hour": parseInt(data.auth_period / 60),
                 "minute": data.auth_period % 60,
-                "num":data.auth_limit_times
+                "num": data.auth_limit_times
             };
         }
     });
@@ -303,24 +310,24 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         })
     };
 
-    $scope.weixin_load = function(){
-        location.href = ["#/main/weixin_config?routergroup_id=",shop_id].join("");
+    $scope.weixin_load = function () {
+        location.href = ["#/main/weixin_config?routergroup_id=", shop_id].join("");
     }
 
 }]);
 
-iCloudController.controller("WeiXinConfigController",["$scope","$http","$cookieStore",function($scope,$http,$cookieStore){
+iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
     var routergroup_id = get_param(window.location.href);
-    $scope.submit = function(weixin){
-        $http.post([window.API.WEIXIN.NEW_WECHAT,"?key=",$cookieStore.get("key")].join(""),weixin).success(function(data){
+    $scope.submit = function (weixin) {
+        $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key")].join(""), weixin).success(function (data) {
             alert(data.msg);
         });
     };
-    $http.get([window.API.WEIXIN.GET_WECHAT,"?key=",$cookieStore.get("key"),"&routergroup_id=",routergroup_id].join("")).success(function(data){
+    $http.get([window.API.WEIXIN.GET_WECHAT, "?key=", $cookieStore.get("key"), "&routergroup_id=", routergroup_id].join("")).success(function (data) {
         $scope.weixin_edit = data;
     });
-    $scope.submit1 = function(weixin){
-        $http.put([window.API.WEIXIN.EDIT_WECHAT,"?key=",$cookieStore.get("key")].join(""),weixin).success(function(data){
+    $scope.submit1 = function (weixin) {
+        $http.put([window.API.WEIXIN.EDIT_WECHAT, "?key=", $cookieStore.get("key")].join(""), weixin).success(function (data) {
             alert(data.msg);
         });
     }

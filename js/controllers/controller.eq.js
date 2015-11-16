@@ -21,6 +21,7 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
         };
         $checkBox.enableCheck("table-eq");
         $grid.initial($scope, window.API.ROUTER.GET_CURRENT_USER_ROUTERS);
+        //行业类型
         var promise = $category.get();
         promise.success(function (data) {
             $scope.category = data;
@@ -59,11 +60,6 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
             })
         };
 
-        $scope.jiebang = function () {
-            if (confirm("解绑路由器会导致该路由器无法正常上网，请确定是否需要解绑路由器？")) {
-
-            }
-        };
         $scope.see_router = function (id) {
             window.location.href = ["#/main/details?router_id=", id].join("");
         };
@@ -128,18 +124,9 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
     $checkBox.enableCheck("table-fireware");
 }]);
 
-iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', function ($scope, $http, $cookieStore) {
-    var get_param = function (href) {
-        var search_start = href.indexOf("=");
-        return href.slice(search_start + 1);
-    };
+iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore',"$interval", function ($scope, $http, $cookieStore,$interval) {
     var router_id = get_param(window.location.href);
     console.log(router_id);
-    $scope.update = function () {
-        if (confirm("升级过程中将会重启路由器，请确定是否需要升级？")) {
-
-        }
-    };
     $scope.modify = function () {
         var data = prompt("当前WIFI名称：" + $scope.routers.router_groups.name);
         if (data) {
@@ -147,9 +134,11 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             $http.patch([window.routers_groups_url, $scope.routers.router_groups.id, "/", "?key=", key].join(""), {"name": data});
         }
     };
-    $scope.jiebang = function () {
+    $scope.unbind = function () {
         if (confirm("解绑路由器会导致该路由器无法正常上网，请确定是否需要解绑路由器？")) {
-
+            $http.delete([window.API.ROUTER.ROUTER_UNBIND,"?key=",$cookieStore.get("key"),"&mac=",$scope.routers_all.router.mac].join("")).success(function(data){
+                alert(data.msg);
+            })
         }
     };
     $scope.progress = function () {
@@ -238,6 +227,16 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         console.log(data);
         $scope.routers_all = data;
         //路由器实时信息
+        var routerStatusInterval = $interval(function () {
+            $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
+                console.log(data);
+                $scope.wificat = data;
+                $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+            });
+        }, 1000);
+        $scope.$on("$destroy",function(){
+            $interval.cancel(routerStatusInterval);
+        });
 
         //默认认证方式
         if (data.login_type == "手机号认证") {

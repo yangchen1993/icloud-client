@@ -27,15 +27,15 @@
                 <span>所属商圈：</span>
                 <select class="form-control" style="width: 150px;margin-left: 32px"
                         ng-options="v.id as v.name for v in province" ng-model="edit_shop.trade_area.province_id"
-                        ng-change="select_p(shop.province)">
+                        ng-change="select_p(edit_shop.trade_area.province_id)">
                     <option value="">省</option>
                 </select>
                 <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in city"
-                        ng-model="edit_shop.trade_area.city_id" ng-change="select_c(shop.city)">
+                        ng-model="edit_shop.trade_area.city_id" ng-change="select_c(edit_shop.trade_area.city_id)">
                     <option value="">市</option>
                 </select>
                 <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in area"
-                        ng-model="edit_shop.trade_area.area_id" ng-change="select_a(shop.area)">
+                        ng-model="edit_shop.trade_area.area_id" ng-change="select_a(edit_shop.trade_area.area_id)">
                     <option value="">区/县</option>
                 </select>
                 <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in trades"

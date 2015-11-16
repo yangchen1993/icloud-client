@@ -52,6 +52,14 @@ iCloudController.controller("WeMediaEditController", ["$scope", "$http", "$cooki
         }
     }]);
 
+iCloudController.controller("CreateAdsController",["$scope","$http","$category",function($scope,$http,$category){
+    $category.get().success(function(data){
+        $scope.category = data;
+        $scope.ads = {
+            "id":data[0].id
+        }
+    })
+}]);
 
 iCloudController.controller("PaidController", ["$scope", "$http", "$cookieStore", "$window", "$grid", "$checkBox",
     function ($scope, $http, $cookieStore, $window, $grid, $checkBox) {

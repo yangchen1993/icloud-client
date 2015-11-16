@@ -1,4 +1,9 @@
 <div style="padding: 10px">
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.eq_management">设备管理</a></li>
+        <li><a ui-sref="main.deliveries">设备分配</a></li>
+        <li class="active">新建发货单</li>
+    </ol>
     <div class="form-inline">
         <label>收货人:</label>
         <input class="form-control" type="text" value="" placeholder="收货人" ng-model="receiver" ng-blur="checkReceiver(receiver)">
@@ -42,5 +47,5 @@
             </tr>
         </table>
     </div>
-    <button class="btn btn-info" ng-click="createDeviceDelivery(receiver,addressDetail)">保存</button>
+    <button class="btn btn-info" ng-click="createDeviceDelivery()">保存</button>
 </div>

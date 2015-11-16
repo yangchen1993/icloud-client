@@ -30,7 +30,7 @@
                         <div>幻灯片</div>
                     </div>
 
-                    <div class="">
+                    <div class="" id="dj-menu">
                         <i class="icon iconfont font2x">&#xe721;</i>
                         <div>菜单</div>
                     </div>
@@ -60,7 +60,7 @@
                         <!--<div>应用</div>-->
                     <!--</div>-->
 
-                    <div class="">
+                    <div class="" id="dj-address">
                         <i class="icon iconfont font2x">&#xe673;</i>
                         <div>地址</div>
                     </div>
@@ -193,10 +193,13 @@
         </div>
         <div class="text">
             <h4 class="text-title" style="margin:0;">标题</h4>
-            <div class="text-content">文字</div>
+            <div class="text-content">默认文字</div>
+        </div>
+        <div class="address">
+            <i class="icon iconfont">&#xe673;</i><span class="dizhi">成都市青羊区</span>
         </div>
         <div class="img">
-            <div class="img"><img src="/img/1.jpg"></div>
+            <div class="img"><img src="http://taolishuo.com/wp-content/uploads/2015/05/ban1.jpg"></div>
             <!--<div class="lunbo">-->
             <!--<ul>-->
             <!--<li><img src="images/1.jpg"></li>-->
@@ -230,9 +233,36 @@
                             内容:
                             <textarea style="resize:none;" class="form-control txtarea" cols="30" rows="10"></textarea>
                             <p>限输入3000字,你还可以输入<small style="color:red;" class="text-count">3000</small>字</p>
-                            <button class="button button-primary">保存</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="address">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <span class="panel-title"><i class="icon iconfont">&#xe672;</i>&nbsp;地址</span>
+                </div>
+                <div class="panel-body">
+                    <label>请输入地址:</label><input class="form-control" type="text">
+                    <p>输入地址更新页面可将地址数据传到服务器</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="map">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <span class="panel-title"><i class="icon iconfont">&#xe672;</i>&nbsp;地图编辑</span>
+                </div>
+                <div class="panel-body">
+                    <p>拖动红点选择您店铺的地址</p>
+                    <div class="dmap">
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button class="button button-caution saveMap">保存</button>
                 </div>
             </div>
         </div>
@@ -253,31 +283,47 @@
                             仅支持JPG、PNG格式，建议使用JPG格式</small>
                         </div>
                     </div>
-                    <div class="dod2">
-                        <img src="/img/test2.jpg">
-                    </div>
                     <div class="btn-group" style="margin-top: 10px;">
                         <div class="col-xs-12">链接方式:</div>
                         <div class="col-xs-5">
                             <select class="form-control" style="padding:6px 5px;">
-                                <option value="">内部网页</option>
+                                <!--<option value="">内部网页</option>-->
                                 <option value="">外部链接</option>
                             </select>
                         </div>
                         <div class="col-xs-7">
                             <div class="input-group">
-                                <label class="input-group-addon">http://</label><input class="form-control" type="text"/>
+                                <label class="input-group-addon">http://</label><input class="form-control img-link" type="text"/>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="panel-footer text-center">
-                    <button class="button button-caution save">保存</button>
+                    <button class="button button-caution saveImg">保存</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade img-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">图片编辑</h4>
+            </div>
+            <div class="modal-body">
+                <div class="avatar-wrapper" style="width:100%;">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary save">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
 <script src="/bower_components/jquery-dragsort/jquery.dragsort-0.5.2.min.js"></script>

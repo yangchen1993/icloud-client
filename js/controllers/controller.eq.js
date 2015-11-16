@@ -500,12 +500,28 @@ iCloudController.controller("InSalesController", ['$scope', function ($scope) {
 
 }]);
 
-iCloudController.controller("DeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
+iCloudController.controller("DeliveriesController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
     function ($scope, $http, $window, $cookieStore, $grid) {
         $grid.initial($scope, $window.API.ROUTER.GET_CURRENT_USER_DELIVERIES);
+
+        $scope.removeDelivery = function (id) {
+            if (confirm("确定删除?")) {
+                $http({
+                    method: "DELETE",
+                    url: [$window.API.ROUTER.REMOVE_DELIVERY, "?key=", $cookieStore.get("key"), "&id=", id].join("")
+                }).success(function (data) {
+                    $scope.refresh();
+                }).error(function (data) {
+                    $scope.refresh();
+                })
+            }
+        };
+        $scope.toDeliveryDetails = function (id) {
+            $window.location.href = ["#/main/delivery-details?deliveryID=", id].join("");
+        }
     }]);
 
-iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
+iCloudController.controller("CreateDeliveryController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
     function ($scope, $http, $window, $cookieStore, $grid) {
         var checkRouterIsExists = function (mac) {
             if (!_.has($scope.deviceDeliveryList, mac)) {
@@ -550,17 +566,36 @@ iCloudController.controller("CreateDeviceDeliveryController", ["$scope", "$http"
                 $scope.deviceMacs = _.keys($scope.deviceDeliveryList);
             }
         };
-        $scope.createDeviceDelivery = function (receiver, addressDetail) {
+        $scope.createDeviceDelivery = function () {
             var data = {
-                receiver: receiver,
-                address: addressDetail
+                receiver: $scope.receiverInfo.id,
+                address: $scope.addressDetail,
+                deviceMacs: $scope.deviceMacs
             };
-            $http.post([$window.API.ROUTER.NEW_DELIVERY, "?key=", $cookieStore.get("key")].join(""))
-        }
+            $http.post([$window.API.ROUTER.NEW_DELIVERY, "?key=", $cookieStore.get("key")].join(""), data)
+                .success(function (data) {
+                    $window.alert(data.msg)
+                })
+                .error(function (data) {
+                    $window.alert(data.msg)
+                })
+        };
     }]);
 
-iCloudController.controller("DeviceDeliveryDetailController"["$scope", "$http", "$window", "$cookieStore", "$grid",
+iCloudController.controller("DeliveryDetailsController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
     function ($scope, $http, $window, $cookieStore, $grid) {
+        var deliveryID = get_param($window.location.href);
+        var getDeliveryInfo = function () {
+            $http.get([$window.API.ROUTER.GET_CURRENT_USER_DELIVERIES, "?key=", $cookieStore.get("key"), "&id=", deliveryID].join(""))
+                .success(function (data) {
+                    if (data.results.length == 1){
+                        $scope.deliveryInfo = data.results[0];
+                    }else{
+                        $scope.deliveryInfo = ""
+                    }
+                })
+        };
 
+        getDeliveryInfo();
     }]);
 

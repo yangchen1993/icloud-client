@@ -40,15 +40,20 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/ads.html",
             controller: "AdsController"
         })
-        .state("main.device_delivery", {
-            url: "/device_delivery",
-            templateUrl: "template/center/router/device_delivery.html",
-            controller: "DeviceDeliveryController"
+        .state("main.deliveries", {
+            url: "/deliveries",
+            templateUrl: "template/center/router/deliveries.html",
+            controller: "DeliveriesController"
         })
-        .state("main.new_delivery", {
-            url: "/new_delivery",
-            templateUrl: "template/center/router/new_delivery.html",
-            controller: "CreateDeviceDeliveryController"
+        .state("main.delivery-new", {
+            url: "/delivery-new",
+            templateUrl: "template/center/router/delivery.new.html",
+            controller: "CreateDeliveryController"
+        })
+        .state("main.delivery-details", {
+            url: "/delivery-details",
+            templateUrl: "template/center/router/delivery.details.html",
+            controller: "DeliveryDetailsController"
         })
         .state("main.create_ads", {
             url: "/create_ads",

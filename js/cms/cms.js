@@ -5,7 +5,138 @@ var editTemp=$(".editTemp")
 var conmponentItem=$("");
 var haveData='';
 var ourShop=get_param(window.location.href);
+function editText(id,type){
+    $('.color').minicolors({
+        animationSpeed: 50,
+        animationEasing: 'swing',
+        change: null,
+        changeDelay: 0,
+        control: 'hue',
+        hide: false,
+        hideSpeed: 100,
+        inline: false,
+        letterCase: 'lowercase',
+        opacity: false,
+        position: 'bottom left',
+        show: null,
+        showSpeed: 100,
+        theme: 'bootstrap'
+    });
+    $('div[data-edit-id='+id+']'+' .edit-title').val($('#'+id+' .text-title').text());
+    $(document).ready(function(){
+        $('div[data-edit-id='+id+']'+' .wback').on('change',function(){
+            $('#'+id+' .text-title').css("background",$(this).val());
+            console.log($('[data-item-id='+id+']'+' .wback').val());
+        });
+        $('div[data-edit-id='+id+']'+' .wcolor').on('change',function(){
+            $('#'+id+' .text-title').css("color",$(this).val());
+            console.log($('[data-item-id='+id+']'+' .wcolor').val());
+        });
+        $('div[data-edit-id='+id+']'+' .edit-title').on('keyup',function(){
+            $('#'+id+' .text-title').text($(this).val());
+        });
+        $('div[data-edit-id='+id+']'+' .txtarea').attr('id','txtarea');
 
+        CKEDITOR.document.getById( 'txtarea').setHtml(
+            $("#"+id+" .text-content").text()
+        );
+
+        CKEDITOR.replace( 'txtarea',{
+            toolbar :
+                [
+                    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
+                ]
+        });
+        CKEDITOR.instances["txtarea"].on("instanceReady", function () {
+            this.document.on("keyup", function(){
+                validateText();
+            });
+        });
+    });
+    function validateText(){
+        var numText=CKEDITOR.instances.txtarea.getData();
+        var numCounter=numText.length;
+        $('div[data-edit-id='+id+']'+' .text-count').text(3000-numCounter);
+        $("#"+id+" .text-content").html(numText);
+    }
+    $(document).ready(function(){
+        validateText();
+    });
+}
+function isImageFile(file){
+    if (file.type) {
+        return /^image\/\w+$/.test(file.type);
+    } else {
+        return /\.(jpg|jpeg|png|gif)$/.test(file);
+    }
+}
+function editImg(id,type){
+    $('div[data-edit-id='+id+']'+' #showImg').attr('src',$('#'+id+' .img .img img').attr('src'));
+    if($('#'+id+' .img a')){
+        $('div[data-edit-id='+id+']'+' .img-link').val($('#'+id+' .img a').attr('href').split('//')[1]);
+    }
+    $('div[data-edit-id='+id+']'+' input[type="file"]').change(function(){
+        var files;
+        var file;
+        var img;
+
+        files = $(this).prop('files');
+
+        if (files.length > 0) {
+            file = files[0];
+
+            if (isImageFile(file)) {
+                if (this.url) {
+                    URL.revokeObjectURL(this.url); // Revoke the old one
+                }
+
+                this.url = URL.createObjectURL(file);
+            }
+        }
+        console.log($(this).val());
+        var imgData;
+        $('.img-modal').modal('show');
+        $('.avatar-wrapper').html("");
+        $('.avatar-wrapper').append('<img src="'+this.url+'">');
+        $('.avatar-wrapper > img').cropper();
+        $('.img-modal .save').on('click', function () {
+            imgData=$('.avatar-wrapper > img').cropper('getCroppedCanvas', {
+                width:640
+            }).toDataURL();
+            $('.img-modal').modal('hide');
+            $('div[data-edit-id='+id+']'+' #showImg').attr('src',imgData);
+            //上传图片
+
+        });
+        $('div[data-edit-id='+id+']'+' .saveImg').on('click',function(){
+            $.post(window.API.CMS.POST_IMG+'?key='+ $.cookie("key").replace(/\"/g,""),{img:imgData}).success(function(data){
+                var imgPostUrl=data.link;
+                var setLink=$('div[data-edit-id='+id+']'+' .img-link').val();
+                console.log(setLink);
+                if(!setLink){
+                    setLink=imgPostUrl;
+                }else{
+                    setLink='http://'+setLink;
+                }
+                $('#'+id+' .img .img').html("");
+                $('#'+id+' .img .img').append('<a href="'+setLink+'"><img style="width:100%;" src="'+imgPostUrl+'"></a>');
+            });
+
+        });
+    });
+}
+function editAdress(id,type){
+    $('div[data-edit-id='+id+']'+' .form-control').val($('#'+id+' .dizhi').text());
+    $('div[data-edit-id='+id+']'+' .form-control').on('keyup',function(){
+        $('#'+id+' .dizhi').text($(this).val())
+    })
+}
+function editMap(id,type){
+    var mapId=addId();
+    $('div[data-edit-id='+id+']'+' .dmap').attr('id',mapId);
+    console.log(mapId);
+    bbmap(mapId);
+}
 //通用删除
 function addEditItem(id,type){
     var _edit=$('#'+id+' .edit');
@@ -14,58 +145,22 @@ function addEditItem(id,type){
         var editItem=$('.edit-items .'+type).html();
         editArea.append('<div class="'+type+'" data-edit-id="'+id+'">'+editItem+'</div>');
         //文字功能
-        (function(){
-            $('.color').minicolors({
-                animationSpeed: 50,
-                animationEasing: 'swing',
-                change: null,
-                changeDelay: 0,
-                control: 'hue',
-                hide: false,
-                hideSpeed: 100,
-                inline: false,
-                letterCase: 'lowercase',
-                opacity: false,
-                position: 'bottom left',
-                show: null,
-                showSpeed: 100,
-                theme: 'bootstrap'
-            });
-            $(document).ready(function(){
-                $('div[data-edit-id='+id+']'+' .wback').on('blur',function(){
-                    $('#'+id+' .text-title').css("background",$(this).val());
-                    console.log($('[data-item-id='+id+']'+' .wback').val());
-                });
-                $('div[data-edit-id='+id+']'+' .wcolor').on('blur',function(){
-                    $('#'+id+' .text-title').css("color",$(this).val());
-                    console.log($('[data-item-id='+id+']'+' .wcolor').val());
-                });
-                $('div[data-edit-id='+id+']'+' .edit-title').on('keyup',function(){
-                    $('#'+id+' .text-title').text($(this).val());
-                });
-                $('div[data-edit-id='+id+']'+' .txtarea').attr('id','txtarea');
-                CKEDITOR.replace( 'txtarea',{
-                    toolbar :
-                        [
-                            ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
-                        ]
-                });
-                CKEDITOR.instances["txtarea"].on("instanceReady", function () {
-                    this.document.on("keyup", function(){
-                        validateText();
-                    });
-                });
-            });
-            function validateText(){
-                var numText=CKEDITOR.instances.txtarea.getData();
-                var numCounter=numText.length;
-                $('div[data-edit-id='+id+']'+' .text-count').text(3000-numCounter);
-                $("#"+id+" .text-content").html(numText);
-            }
-            $(document).ready(function(){
-                validateText();
-            });
-        })();
+        switch (type){
+            case 'text':
+                editText(id,type);
+                break;
+            case 'img':
+                editImg(id,type);
+                break;
+            case 'address':
+                editAdress(id,type);
+                break;
+            case 'map':
+                editMap(id,type);
+                break;
+            default :
+                break;
+        }
 
     });
     $('#'+id+' .delete').on('click',function(){
@@ -95,6 +190,9 @@ $.get(window.API.CMS.GET_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group
                     addEditItem(data.cms[i].component_id,data.cms[i].content_type);
                     break;
                 case 'map':
+                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+                    break;
+                case 'address':
                     addEditItem(data.cms[i].component_id,data.cms[i].content_type);
                     break;
             }
@@ -136,6 +234,15 @@ function addItem(id,type){
         case 'img':
             addEditItem(id,type);
             break;
+        case 'menu':
+            addEditItem(id,type);
+            break;
+        case 'map':
+            addEditItem(id,type);
+            break;
+        case 'address':
+            addEditItem(id,type);
+            break;
         default:
             break;
     }
@@ -163,8 +270,8 @@ $('#savePage').click(function(){
     var items=[];
     console.log(items.length);
     for(var i=0;i<length;i++){
-        items.push({'component_id':$(component[i]).attr("id"),'content_type':$(component[i]).attr("data-type"),'div':$(component[i]).parent().html()});
-        console.log(i);
+        items.push({'component_id':$(component[i]).attr("id"),'content_type':$(component[i]).attr("data-type"),'div':$(component[i]).prop("outerHTML")});
+
     }
     console.log(items);
 //            $.post('http://192.168.10.200/api/cms/new_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13',{'items':items},{"dataType":"json"});
@@ -177,7 +284,7 @@ $('#savePage').click(function(){
            'contentType':'application/json;charset=utf-8',
            "data":JSON.stringify({"group_id":ourShop,"items":items}),
            success:function (data) {
-               console.log('上传成功'+data);
+               alert('上传成功');
            }
        });
    }else{
@@ -188,7 +295,7 @@ $('#savePage').click(function(){
            'contentType':'application/json;charset=utf-8',
            "data":JSON.stringify({"group_id":ourShop,"items":items}),
            success:function (data) {
-               console.log('上传成功'+data);
+               alert('上传成功');
            }
        });
    }
@@ -213,8 +320,8 @@ var user={
 }
 
 var t=$('.dod2 > img').cropper();
-$('.save').click(function(){
-    var URL='http://192.168.10.200/api/resources/new_img_resource/?key='+user.userId;
+$('.saveImg').click(function(){
+    //var URL='http://192.168.10.200/api/resources/new_img_resource/?key='+user.userId;
     var imgData=$('.dod2 > img').cropper('getCroppedCanvas', {
         width:640
     }).toDataURL();
@@ -224,15 +331,25 @@ $('.save').click(function(){
         $('#drag').append('<li><a href="'+imgUrl+'"><img style="width:100%;" src="'+imgUrl+'"></a></li>');
         $('#showImg').attr('src',imgUrl);
     });
+    alert('点击了额');
 
 });
-function bbmap(id,j,w){
+function bbmap(id){
+    //var map = new BMap.Map(id);
+    //var point = new BMap.Point(j,w);
+    //// 百度地图API功能
+    ////var point = new BMap.Point(104.06792346,30.67994285);
+    //map.centerAndZoom(point, 18);
+    //var marker = new BMap.Marker(point);  // 创建标注
+    //map.addOverlay(marker);               // 将标注添加到地图中
+
+
+    // 百度地图API功能
     var map = new BMap.Map(id);
-    var point = new BMap.Point(j,w);
-    //var point = new BMap.Point(104.06792346,30.67994285);
-    map.centerAndZoom(point, 18);
-    var marker = new BMap.Marker(point);  // 创建标注
-    map.addOverlay(marker);               // 将标注添加到地图中
+    var point = new BMap.Point(116.400244,39.92556);
+    map.centerAndZoom(point, 12);
+    var marker = new BMap.Marker(point);// 创建标注
+    map.addOverlay(marker);             // 将标注添加到地图中
 }
 
 $('#drag').dragsort({

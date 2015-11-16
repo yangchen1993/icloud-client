@@ -72,7 +72,7 @@ function isImageFile(file){
 }
 function editImg(id,type){
     $('div[data-edit-id='+id+']'+' #showImg').attr('src',$('#'+id+' .img .img img').attr('src'));
-    if($('#'+id+' .img a')){
+    if($('#'+id+' .img>a').attr('href')){
         $('div[data-edit-id='+id+']'+' .img-link').val($('#'+id+' .img a').attr('href').split('//')[1]);
     }
     $('div[data-edit-id='+id+']'+' input[type="file"]').change(function(){
@@ -135,7 +135,7 @@ function editMap(id,type){
     var mapId=addId();
     $('div[data-edit-id='+id+']'+' .dmap').attr('id',mapId);
     console.log(mapId);
-    bbmap(mapId);
+    //bbmap(mapId);
 }
 //通用删除
 function addEditItem(id,type){
@@ -300,15 +300,6 @@ $('#savePage').click(function(){
        });
    }
 
-});
-$('input[type="file"]').change(function(){
-//            var reader = new FileReader();
-//            reader.onprogress=function(){
-//                console.log("onprogress");
-//            }
-    console.log($(this).val());
-    $('#myModal').modal('show');
-//            $('#imgsss').attr('src',url);
 });
 var user={
     userId:'b0d9abc8-d416-4b1d-b9d4-2bc82e48f774',

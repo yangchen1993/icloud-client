@@ -70,11 +70,8 @@
     font-size: 16px;
     font-family: "Microsoft YaHei";
 }
-.create_ads_panel div:nth-child(1) input,.create_ads_panel div:nth-child(3) select,.create_ads_panel div:last-child textarea{
-    width: 300px;
-    margin-left: 32px;
-}
 .create_ads_panel textarea{
+    width: 95%;
     height: 150px;
 }
 .create_ads_phone{

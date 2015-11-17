@@ -1,0 +1,27 @@
+<div style="padding:10px">
+    <ol class="breadcrumb">
+        <li><a>客户营销中心</a></li>
+        <li class="active">短信群发模板</li>
+    </ol>
+    <button class="btn btn-info" ui-sref="main.create_SMS">新建</button>
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+            <tr>
+                <td>短信名称</td>
+                <td>所属行业</td>
+                <td>创建时间</td>
+                <td>更新时间</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="p in ">
+                <td ng-bind="p."></td>
+                <td ng-bind="p."></td>
+                <td ng-bind="p."></td>
+                <td ng-bind="p."></td>
+                <td><a href="javascript:" ng-click="send_SMS(p.id)">发送</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

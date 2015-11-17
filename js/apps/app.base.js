@@ -160,4 +160,19 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/account/recharge.html",
             controller: "RechargeController"
         })
+        .state("main.Bulk_SMS", {
+            url: "/Bulk_SMS",
+            templateUrl: "template/center/marketing/Bulk_SMS.html",
+            controller: "BulkSMSController"
+        })
+        .state("main.create_SMS", {
+            url: "/create_SMS",
+            templateUrl: "template/center/marketing/create_SMS.html",
+            controller: "CreateSMSController"
+        })
+        .state("main.select_SMS_man", {
+            url: "/select_SMS_man",
+            templateUrl: "template/center/marketing/select_SMS_man.html",
+            controller: "SelectSMSManController"
+        })
 });

@@ -96,14 +96,6 @@
                             <div></div>
                             <a ui-sref=".version_manage">版本管理</a>
                         </li>
-                        <!--<li>-->
-                            <!--<div></div>-->
-                            <!--<a ui-sref=".identify_conf">认证设置</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<div></div>-->
-                            <!--<a ui-sref=".release_conf">放行设置</a>-->
-                        <!--</li>-->
                     </ul>
                 </li>
                 <div style="border-top:1px solid #416966" ng-show="eq_nav"></div>
@@ -132,9 +124,21 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
-            </li>
-            <div style="border-top:1px solid #416966" ng-show="agent_nav"></div>
+                <div style="border-top:1px solid #416966" ng-show="agent_nav"></div>
+                <li ng-show="marketing_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a>客户营销中心</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                    <ul class="menu_child">
+                        <li>
+                            <div></div>
+                            <a ui-sref="main.Bulk_SMS">短信群发</a>
+                        </li>
+                    </ul>
+                </li>
+                <div style="border-top:1px solid #416966" ng-show="marketing_nav"></div>
             </ul>
         </div>
     </div>

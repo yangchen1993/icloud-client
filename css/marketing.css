@@ -1,0 +1,21 @@
+.SMS_create_panel{
+    width: 80%;
+    height: 500px;
+    margin: 0 auto;
+}
+.SMS_create_panel>div{
+    position: absolute;
+    left:50%;
+    width:400px;
+    margin-left: -200px;
+}
+.SMS-create-panel>div>div{
+    margin-top: 15px;
+}
+.SMS_create_panel input,.SMS_create_panel select{
+    width:250px !important;
+}
+.SMS_create_panel textarea{
+    width: 300px !important;
+    height: 150px;
+}

@@ -1,0 +1,27 @@
+<div style="padding:10px">
+    <ol class="breadcrumb">
+        <li><a>客户营销中心</a></li>
+        <li class="active">新建短信模板</li>
+    </ol>
+
+    <div class="SMS_create_panel">
+        <div>
+            <div class="form-inline">
+                <span>短信名称：</span>
+                <input class="form-control" type="text" ng-model="SMS.name">
+            </div>
+            <div class="form-inline">
+                <span>行业类型：</span>
+                <select class="form-control" ng-options="v.id as v.name for v in category" ng-model="SMS.category"></select>
+            </div>
+            <div class="form-inline">
+                <span>短信内容：</span>
+                <textarea class="form-control" ng-model="SMS.content"></textarea>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-info" ng-click="create_SMS(SMS)">提交</button>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -118,6 +118,12 @@ window.API = {
         "NEW_WECHAT": [window.HOST, "wechat/new_wechat/"].join(""),
         "GET_WECHAT":[window.HOST,"wechat/get_wechat/"].join(""),
         "EDIT_WECHAT":[window.HOST,"wechat/edit_wechat/"].join("")
+    },
+
+
+    "MARKETING":{
+        "NEW_SMS":[window.HOST,"SMS/new_sms/"].join(""),
+        "GET_SMS":[window.HOST,"SMS/get_sms"].join(""),
     }
 };
 

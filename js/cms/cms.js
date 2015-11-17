@@ -178,25 +178,46 @@ function addEditItem(id,type){
 
 $.get(window.API.CMS.GET_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group_id='+ourShop).success(function(data){
     if(data){
-        console.log(data.cms);
-        for(var i=0;i<data.cms.length;i++){
-            $('#drag').append(data.cms[i].div);
-            console.log('获取'+i)
-            switch(data.cms[i].content_type){
-                case 'text':
-                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+        console.log(data);
+        for(var i=0;i<data.cms_ids.length;i++){
+            for(var j=0;j<=data.cms.length;j++){
+                if(data.cms[j].component_id==data.cms_ids[i]){
+                    $('#drag').append(data.cms[j].div);
+                    switch(data.cms[j].content_type){
+                        case 'text':
+                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            break;
+                        case 'img':
+                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            break;
+                        case 'map':
+                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            break;
+                        case 'address':
+                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            break;
+                    }
                     break;
-                case 'img':
-                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
-                    break;
-                case 'map':
-                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
-                    break;
-                case 'address':
-                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
-                    break;
+                }
             }
         }
+        //for(var i=0;i<data.cms.length;i++){
+        //    $('#drag').append(data.cms[i].div);
+        //    switch(data.cms[i].content_type){
+        //        case 'text':
+        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+        //            break;
+        //        case 'img':
+        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+        //            break;
+        //        case 'map':
+        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+        //            break;
+        //        case 'address':
+        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+        //            break;
+        //    }
+        //}
         $('#savePage').html('更新页面');
         haveData=true;
     }else{
@@ -268,8 +289,9 @@ $('#savePage').click(function(){
     var component=$('.item-list');
     var length=component.length;
     var items=[];
-    console.log(items.length);
+    console.log(items+'----');
     for(var i=0;i<length;i++){
+        console.log($(component[i]).prop("outerHTML"));
         items.push({'component_id':$(component[i]).attr("id"),'content_type':$(component[i]).attr("data-type"),'div':$(component[i]).prop("outerHTML")});
 
     }

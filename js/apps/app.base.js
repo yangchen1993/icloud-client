@@ -158,7 +158,7 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         .state("main.wallet", {
             url: "/wallet",
             templateUrl: "template/center/wallet/wallet.html",
-            controller: "WalletController"
+            controller: "WalletsController"
         })
         .state("main.recharge", {
             url: "/recharge",

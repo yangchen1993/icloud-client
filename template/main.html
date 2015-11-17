@@ -96,14 +96,6 @@
                             <div></div>
                             <a ui-sref=".version_manage">版本管理</a>
                         </li>
-                        <!--<li>-->
-                            <!--<div></div>-->
-                            <!--<a ui-sref=".identify_conf">认证设置</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<div></div>-->
-                            <!--<a ui-sref=".release_conf">放行设置</a>-->
-                        <!--</li>-->
                     </ul>
                 </li>
                 <div style="border-top:1px solid #416966" ng-show="eq_nav"></div>
@@ -132,9 +124,24 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
-            </li>
-            <div style="border-top:1px solid #416966" ng-show="agent_nav"></div>
+                <div style="border-top:1px solid #416966" ng-show="agent_nav"></div>
+                <li ng-show="wallet_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref=".wallet">我的钱包</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                    <ul class="menu_child">
+                        <li>
+                            <div></div>
+                            <a ui-sref=".recharge">充值</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a ui-sref=".trading-history">交易记录</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -163,16 +170,16 @@
 </div>
 
 <script>
-        $(".open_menu").click(function () {
-            $(this).siblings(".menu_child").slideToggle("fast");
-            $(this).siblings(".menu_child").css("background-color", "#45454a");
-            if ($(this).find("i").hasClass("glyphicon glyphicon-triangle-right")) {
-                $(this).find("i").attr("class", "glyphicon glyphicon-triangle-bottom");
-            }
-            else {
-                $(this).find("i").attr("class", "glyphicon glyphicon-triangle-right");
-            }
-        });
+    $(".open_menu").click(function () {
+        $(this).siblings(".menu_child").slideToggle("fast");
+        $(this).siblings(".menu_child").css("background-color", "#45454a");
+        if ($(this).find("i").hasClass("glyphicon glyphicon-triangle-right")) {
+            $(this).find("i").attr("class", "glyphicon glyphicon-triangle-bottom");
+        }
+        else {
+            $(this).find("i").attr("class", "glyphicon glyphicon-triangle-right");
+        }
+    });
 
     //用户外边线条旋转
     var num = 0;

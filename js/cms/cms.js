@@ -22,7 +22,7 @@ function editText(id,type){
         showSpeed: 100,
         theme: 'bootstrap'
     });
-    $('div[data-edit-id='+id+']'+' .edit-title').val($('#'+id+' .text-title').text());
+    $('div[data-edit-id='+id+']'+' .edit-title').val($('#'+id+' .text-title').text());-
     $(document).ready(function(){
         $('div[data-edit-id='+id+']'+' .wback').on('change',function(){
             $('#'+id+' .text-title').css("background",$(this).val());
@@ -72,14 +72,15 @@ function isImageFile(file){
 }
 function editImg(id,type){
     $('div[data-edit-id='+id+']'+' #showImg').attr('src',$('#'+id+' .img .img img').attr('src'));
-    if($('#'+id+' .img a')){
+    //$('div[data-edit-id='+id+']'+' .img-cropper img').attr('src',$('#'+id+' .img .img img').attr('src'));
+    if($('#'+id+' .img>a').attr('href')){
         $('div[data-edit-id='+id+']'+' .img-link').val($('#'+id+' .img a').attr('href').split('//')[1]);
     }
     $('div[data-edit-id='+id+']'+' input[type="file"]').change(function(){
         var files;
         var file;
         var img;
-
+        $('div[data-edit-id='+id+']'+' .img-cropper').css('display','block');
         files = $(this).prop('files');
 
         if (files.length > 0) {
@@ -93,22 +94,16 @@ function editImg(id,type){
                 this.url = URL.createObjectURL(file);
             }
         }
-        console.log($(this).val());
+        img=$('<img src="'+this.url+'">');
+        $('div[data-edit-id='+id+']'+' .img-cropper').html(img);
+        img.cropper();
         var imgData;
-        $('.img-modal').modal('show');
-        $('.avatar-wrapper').html("");
-        $('.avatar-wrapper').append('<img src="'+this.url+'">');
-        $('.avatar-wrapper > img').cropper();
-        $('.img-modal .save').on('click', function () {
-            imgData=$('.avatar-wrapper > img').cropper('getCroppedCanvas', {
+        $('.saveImg').on('click', function () {
+            imgData=img.cropper('getCroppedCanvas', {
                 width:640
             }).toDataURL();
-            $('.img-modal').modal('hide');
             $('div[data-edit-id='+id+']'+' #showImg').attr('src',imgData);
             //上传图片
-
-        });
-        $('div[data-edit-id='+id+']'+' .saveImg').on('click',function(){
             $.post(window.API.CMS.POST_IMG+'?key='+ $.cookie("key").replace(/\"/g,""),{img:imgData}).success(function(data){
                 var imgPostUrl=data.link;
                 var setLink=$('div[data-edit-id='+id+']'+' .img-link').val();
@@ -124,6 +119,7 @@ function editImg(id,type){
 
         });
     });
+
 }
 function editAdress(id,type){
     $('div[data-edit-id='+id+']'+' .form-control').val($('#'+id+' .dizhi').text());
@@ -135,8 +131,13 @@ function editMap(id,type){
     var mapId=addId();
     $('div[data-edit-id='+id+']'+' .dmap').attr('id',mapId);
     console.log(mapId);
-    bbmap(mapId);
+    //bbmap(mapId);
 }
+
+function editMenu(id,type){
+
+}
+
 //通用删除
 function addEditItem(id,type){
     var _edit=$('#'+id+' .edit');
@@ -158,6 +159,9 @@ function addEditItem(id,type){
             case 'map':
                 editMap(id,type);
                 break;
+            case 'menu':
+                editMenu(id,type);
+                break;
             default :
                 break;
         }
@@ -178,25 +182,48 @@ function addEditItem(id,type){
 
 $.get(window.API.CMS.GET_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group_id='+ourShop).success(function(data){
     if(data){
-        console.log(data.cms);
-        for(var i=0;i<data.cms.length;i++){
-            $('#drag').append(data.cms[i].div);
-            console.log('获取'+i)
-            switch(data.cms[i].content_type){
-                case 'text':
-                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+        console.log(data);
+        for(var i=0;i<data.cms_ids.length;i++){
+            for(var j=0;j<=data.cms.length;j++){
+                if(data.cms[j].component_id==data.cms_ids[i]){
+                    $('#drag').append(data.cms[j].div);
+                    switch(data.cms[j].content_type){
+                        case 'text':
+                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            break;
+                        case 'img':
+                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            break;
+                        case 'map':
+                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            break;
+                        case 'address':
+                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            break;
+                        case 'menu':
+                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                    }
                     break;
-                case 'img':
-                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
-                    break;
-                case 'map':
-                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
-                    break;
-                case 'address':
-                    addEditItem(data.cms[i].component_id,data.cms[i].content_type);
-                    break;
+                }
             }
         }
+        //for(var i=0;i<data.cms.length;i++){
+        //    $('#drag').append(data.cms[i].div);
+        //    switch(data.cms[i].content_type){
+        //        case 'text':
+        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+        //            break;
+        //        case 'img':
+        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+        //            break;
+        //        case 'map':
+        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+        //            break;
+        //        case 'address':
+        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
+        //            break;
+        //    }
+        //}
         $('#savePage').html('更新页面');
         haveData=true;
     }else{
@@ -243,6 +270,9 @@ function addItem(id,type){
         case 'address':
             addEditItem(id,type);
             break;
+        case 'menu':
+            addEditItem(id,type);
+            break;
         default:
             break;
     }
@@ -268,8 +298,9 @@ $('#savePage').click(function(){
     var component=$('.item-list');
     var length=component.length;
     var items=[];
-    console.log(items.length);
+    console.log(items+'----');
     for(var i=0;i<length;i++){
+        console.log($(component[i]).prop("outerHTML"));
         items.push({'component_id':$(component[i]).attr("id"),'content_type':$(component[i]).attr("data-type"),'div':$(component[i]).prop("outerHTML")});
 
     }
@@ -300,15 +331,6 @@ $('#savePage').click(function(){
        });
    }
 
-});
-$('input[type="file"]').change(function(){
-//            var reader = new FileReader();
-//            reader.onprogress=function(){
-//                console.log("onprogress");
-//            }
-    console.log($(this).val());
-    $('#myModal').modal('show');
-//            $('#imgsss').attr('src',url);
 });
 var user={
     userId:'b0d9abc8-d416-4b1d-b9d4-2bc82e48f774',

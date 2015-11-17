@@ -14,7 +14,7 @@ window.API = {
 
         "GET_CURRENT_USER_INFO": [window.HOST, "users/get_current_user_info/"].join(""), // 获取当前用户信息
 
-        "GET_USER_INFO_BY_TEL":[window.HOST, "users/get_user_info_by_tel/"].join(""),
+        "GET_USER_INFO_BY_TEL": [window.HOST, "users/get_user_info_by_tel/"].join(""),
 
         "GET_SUB_USERS": [window.HOST, "users/get_sub_users/"].join(""), // 获取下属用户
 
@@ -45,6 +45,13 @@ window.API = {
         "GET_AREAS_BY_CITY": [window.HOST, "cities/get_areas_by_city/"].join(""), // 根据市获取区
 
         "GET_TRADES": [window.HOST, "cities/get_trades/"].join("") // 按照省市区获取商圈
+    },
+    "WALLET": {
+        "GET_CURRENT_USER_WALLET_INFO": [window.HOST, "wallets/get_current_user_wallet/"].join(""), // 获取当前用户的钱包信息
+
+        "RECHARGE": [window.HOST, "wallets/recharge/"].join(""), // 充值
+
+        "TRADING_HISTORY": [window.HOST, "wallets/trading_history/"].join("") // 交易记录
     },
 
     "ROUTER": {
@@ -88,8 +95,11 @@ window.API = {
 
     "GROUP": {
         "GET_CURRENT_USER_ROUTER_GROUPS": [window.HOST, "groups/get_current_user_router_groups/"].join(""), // 获取当前用户的路由器分组
+
         "NEW_GROUP": [window.HOST, "groups/new_group/"].join(""), // 新建路由器分组
+
         "REMOVE_GROUP": [window.HOST, "groups/remove_group/"].join(""), // 删除路由器分组
+
         "EDIT_GROUP": [window.HOST, "groups/edit_group/"].join("") // 删除路由器分组
     },
 
@@ -99,13 +109,13 @@ window.API = {
 
         "REMOVE_RESOURCE": [window.HOST, "resources/remove_resource/"].join(""),// 删除资源， 供CMS使用
 
-        "GET_DATA":[window.HOST, "ourshop/get_ourshop_by_group/"].join(""),
+        "GET_DATA": [window.HOST, "ourshop/get_ourshop_by_group/"].join(""),
 
-        "PUT_DATA":[window.HOST, "ourshop/edit_ourshop/"].join(""),
+        "PUT_DATA": [window.HOST, "ourshop/edit_ourshop/"].join(""),
 
-        "SEND_DATA":[window.HOST, "ourshop/new_ourshop/"].join(""),
+        "SEND_DATA": [window.HOST, "ourshop/new_ourshop/"].join(""),
 
-        "POST_IMG":[window.HOST, "resources/new_img_resource/"].join("")
+        "POST_IMG": [window.HOST, "resources/new_img_resource/"].join("")
     },
 
 
@@ -124,6 +134,8 @@ window.API = {
     "MARKETING":{
         "NEW_SMS":[window.HOST,"SMS/new_sms/"].join(""),
         "GET_SMS":[window.HOST,"SMS/get_sms"].join(""),
+        "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
+        "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
     }
 };
 

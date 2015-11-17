@@ -155,9 +155,14 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/shop/weixin_config.html",
             controller: "WeiXinConfigController"
         })
+        .state("main.wallet", {
+            url: "/wallet",
+            templateUrl: "template/center/wallet/wallet.html",
+            controller: "WalletsController"
+        })
         .state("main.recharge", {
             url: "/recharge",
-            templateUrl: "template/center/account/recharge.html",
+            templateUrl: "template/center/wallet/recharge.html",
             controller: "RechargeController"
         })
         .state("main.Bulk_SMS", {

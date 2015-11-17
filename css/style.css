@@ -23,7 +23,8 @@ header.top-bar{
     text-align: center;
     cursor: pointer;
 }
-.avatar-wrapper {
+.img-cropper{
+    position: relative;
     height: 364px;
     width: 100%;
     margin-top: 15px;
@@ -32,7 +33,7 @@ header.top-bar{
     overflow: hidden;
 }
 
-.avatar-wrapper img {
+.img-cropper img {
     display: block;
     height: auto;
     max-width: 100%;

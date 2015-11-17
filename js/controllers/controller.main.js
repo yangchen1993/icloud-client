@@ -15,6 +15,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.shop_nav = true;
             $scope.agent_nav = true;
             $scope.marketing_nav = false;
+            $scope.wallet_nav = true;
         }
         else if (data.role.name == "商家") {
             $scope.auth_nav = false;
@@ -24,6 +25,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.shop_nav = true;
             $scope.agent_nav = false;
             $scope.marketing_nav = true;
+            $scope.wallet_nav = true;
         }
         else{
             $scope.auth_nav = false;
@@ -33,6 +35,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.shop_nav = false;
             $scope.agent_nav = true;
             $scope.marketing_nav = true;
+            $scope.wallet_nav = true;
         }
     });
 }]);

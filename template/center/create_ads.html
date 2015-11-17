@@ -1,3 +1,13 @@
+<link rel="stylesheet" href="/css/buttons.css">
+<link rel="stylesheet" href="/css/phone_cms.css">
+<style>
+    #edit{
+        margin-top:10px;
+        width:100%;
+        height:450px;
+        background: #f0f0f0;
+    }
+</style>
 <!--<div class="w_header">-->
 <!--<span class="h4">自媒体广告</span>-->
 <!--</div>-->
@@ -59,6 +69,49 @@
         <li class="active">新建广告</li>
     </ol>
     <div class="row">
+
+
+        <div class="col-md-4">
+        <!--<div class="avatar-preview preview-lg"></div>-->
+            <div class="phone">
+                <div class="phone-page">
+                    <!--手机装饰-->
+                    <div class="phone-ear">
+                        <span class="phone-camera"></span><span class="phone-sound"></span>
+                    </div>
+                    <!--以下的phone-warp是直接添加到数据库的部分-->
+                    <div class="phone-warp">
+                        <div class="phone-content">
+                            <!-- 预览区-->
+                        </div>
+                    </div>
+                    <div class="phone-button">
+                        <div class="circle-button"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!--<div id="crop-avatar">-->
+            <!--<div id="avatar-modal" role="dialog" tabindex="-1">-->
+            <!--<div class="avatar-upload">-->
+            <!--<div class="form-inline">-->
+            <!--<label class="h4">请选择一个图像文件</label>-->
+            <!--<input type="file" class="avatar-input" id="avatarInput" name="avatar_file">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="avatar-wrapper"></div>-->
+            <!--&lt;!&ndash;<img src="/img/phone.png" class="create_ads_phone">&ndash;&gt;-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="form-inline">
+                <label for="imgUpload" class="button button-primary">上传图片</label>
+                <input type="file" class="hidden" id="imgUpload">
+            </div>
+            <div id="edit">
+
+            </div>
+        </div>
         <div class="col-md-4 create_ads_panel">
             <div class="form-inline">
                 <span>广告标题：</span>
@@ -77,30 +130,10 @@
                 <span>广告简介：</span>
                 <textarea class="form-control" type="text"></textarea>
             </div>
-        </div>
-        <div class="col-md-4">
-            <!--<div id="crop-avatar">-->
-                <!--<div id="avatar-modal" role="dialog" tabindex="-1">-->
-                        <!--<div class="avatar-upload">-->
-                            <!--<div class="form-inline">-->
-                                <!--<label class="h4">请选择一个图像文件</label>-->
-                                <!--<input type="file" class="avatar-input" id="avatarInput" name="avatar_file">-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="avatar-wrapper"></div>-->
-                        <!--&lt;!&ndash;<img src="/img/phone.png" class="create_ads_phone">&ndash;&gt;-->
-                <!--</div>-->
-            <!--</div>-->
-            <div class="form-inline">
-                <label for="imgUpload" class="btn btn-primary">上传图片</label>
-                <input type="file" class="hidden" id="imgUpload">
-            </div>
-            <div id="aaa">
 
+            <div>
+                <button class="button button-primary" id="save-ad">保存广告</button>
             </div>
-        </div>
-        <div class="col-md-4">
-        <!--<div class="avatar-preview preview-lg"></div>-->
         </div>
     </div>
 
@@ -120,10 +153,24 @@
             this.url=URL.createObjectURL(file);
             console.log(this.url);
         }
-        $('#aaa').append('<img id="showImg" src="'+this.url+'">');
-        $('#showImg').cropper();
-        $().on('click',function(){
-            var imgData=$('#showImg').cropper('getCroppedCanvas',{
+        var img=$('<img id="showImg" src="'+this.url+'">');
+        $('#edit').html(img);
+        img.cropper({
+            aspectRatio: 640/960,
+            strict: false,
+            crop: function (e) {
+                var json = [
+                    '{"x":' + e.x,
+                    '"y":' + e.y,
+                    '"height":' + e.height,
+                    '"width":' + e.width,
+                    '"rotate":' + e.rotate + '}'
+                ].join();
+                console.log(json)
+            }
+        });
+        $("#save-ad").on('click',function(){
+            var imgData=img.cropper('getCroppedCanvas',{
                 width:640
             }).toDataURL();
         })

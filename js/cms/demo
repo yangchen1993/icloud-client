@@ -1,0 +1,26 @@
+var _this = this;
+
+        if (this.active) {
+        this.$img.cropper('replace', this.url);
+        } else {
+        this.$img = $('<img src="' + this.url + '">');
+    this.$avatarWrapper.empty().html(this.$img);
+    this.$img.cropper({
+    aspectRatio: 1,
+    preview: this.$avatarPreview.selector,
+    strict: false,
+    crop: function (e) {
+    var json = [
+    '{"x":' + e.x,
+    '"y":' + e.y,
+    '"height":' + e.height,
+    '"width":' + e.width,
+    '"rotate":' + e.rotate + '}'
+    ].join();
+
+    _this.$avatarData.val(json);
+    }
+    });
+
+    this.active = true;
+    }

@@ -18,7 +18,9 @@ window.API = {
 
         "GET_SUB_USERS": [window.HOST, "users/get_sub_users/"].join(""), // 获取下属用户
 
-        "REGISTER": [window.HOST, "users/register/"].join("") // 注册
+        "REGISTER": [window.HOST, "users/register/"].join(""), // 注册
+
+        "CREATE_AGENT":[window.HOST,""]//
     },
 
     "AD": {
@@ -89,7 +91,9 @@ window.API = {
 
         "REMOVE_DELIVERY": [window.HOST, "deliveries/remove_delivery/"].join(""), // 删除路由器发货信息
 
-        "NEW_DELIVERY": [window.HOST, "deliveries/new_delivery/"].join("") // 新建路由器发货信息
+        "NEW_DELIVERY": [window.HOST, "deliveries/new_delivery/"].join(""), // 新建路由器发货信息
+
+        "ROUTERS_SSID":[window.HOST,"routers/ssid/"].join("") //设置路由器SSID
 
     },
 

@@ -107,7 +107,7 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("main.agent_manage", {
             url: "/agent_manage",
-            templateUrl: "template/center/agent_manage/eq_manage.html",
+            templateUrl: "template/center/agent_manage/agent_manage.html",
             controller: "AgentManageController"
         })
         .state("main.create_agent", {

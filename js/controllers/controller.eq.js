@@ -127,34 +127,13 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
 iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore',"$interval", function ($scope, $http, $cookieStore,$interval) {
     var router_id = get_param(window.location.href);
     console.log(router_id);
-    $scope.modify = function () {
-        var data = prompt("当前WIFI名称：" + $scope.routers.router_groups.name);
+    $scope.modify_ssid = function (ssid) {
+        var data = prompt("当前WIFI名称：" + ssid);
         if (data) {
             var key = $cookieStore.get("key");
-            $http.patch([window.routers_groups_url, $scope.routers.router_groups.id, "/", "?key=", key].join(""), {"name": data});
+            $http.patch([window.routers_groups_url, $scope.routers.router_groups.id, "/", "?key=", key].join(""), {"ssid": data});
         }
     };
-    $scope.unbind = function () {
-        if (confirm("解绑路由器会导致该路由器无法正常上网，请确定是否需要解绑路由器？")) {
-            $http.delete([window.API.ROUTER.ROUTER_UNBIND,"?key=",$cookieStore.get("key"),"&mac=",$scope.routers_all.router.mac].join("")).success(function(data){
-                alert(data.msg);
-            })
-        }
-    };
-    $scope.progress = function () {
-        var num = 1;
-        var timer = setInterval(function () {
-            if (angular.element('#progress_span')[0].textContent < 100) {
-                angular.element('#progress_span')[0].textContent = num;
-                angular.element('#progress')[0].style.width = num + '%';
-                num++;
-            }
-            else {
-                clearInterval(timer);
-            }
-        }, 1000)
-    };
-
     //放行设置
     var reload_blackwihit = function () {
         $scope.type = ["MAC", "域名"];
@@ -226,12 +205,21 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
     $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
         console.log(data);
         $scope.routers_all = data;
+
         //路由器实时信息
         var routerStatusInterval = $interval(function () {
             $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
-                console.log(data);
-                $scope.wificat = data;
-                $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                console.log(data.msg);
+                if(data.msg=="Router offline"){
+                    $scope.routers_status = {
+                        "run_time":"未连接",
+                        "people_num":"未连接",
+                        "MemUsaged":"未连接",
+                        "CPU_util":"未连接"
+                    }
+                }
+                //$scope.wificat = data;
+                //$scope.upTime = parseInt(data.basicInformation.upTime / 60);
             });
         }, 1000);
         $scope.$on("$destroy",function(){

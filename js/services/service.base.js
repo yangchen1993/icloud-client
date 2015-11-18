@@ -60,6 +60,7 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
                 $http.get(url).success(function (data) {
                     self.restPage = scope.grid = scope.pagination = data;
                     scope.headers = _.keys(data.results[0]);
+                    console.log(scope.grid);
                 })
             };
 

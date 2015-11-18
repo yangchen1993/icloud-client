@@ -60,11 +60,11 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/create_ads.html",
             controller: "CreateAdsController"
         })
-        .state("main.wemedia_edit", {
-            url: "/wemedia_edit",
-            templateUrl: "template/center/wemedia_edit.html",
-            controller: "WeMediaEditController"
-        })
+        //.state("main.edit_ads", {
+        //    url: "/edit_ads",
+        //    templateUrl: "template/center/edit_ads.html",
+        //    controller: "EditAdsController"
+        //})
         .state("main.eq_management", {
             url: "/eq_management",
             templateUrl: "template/center/router/eq_management.html",

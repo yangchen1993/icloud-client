@@ -7,74 +7,51 @@
     <div style="padding-left:35%" class="agent_message">
         <p class="h3" style="margin-left: -100px">个人信息</p>
 
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>登录账号：</span>
-            <input class="form-control" type="text" style="margin-left: 16px" ng-model="agent.tel" ng-blur="check_tel()" id="tel" placeholder="手机号码">
+            <input class="form-control" type="text" style="margin-left: 14px" ng-model="agent.tel"id="tel" placeholder="手机号码">
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>登录密码：</span>
-            <input class="form-control" type="password" style="margin-left: 16px" ng-model="pass">
+            <input class="form-control" type="password" style="margin-left: 14px" ng-model="pass">
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>确认密码：</span>
-            <input class="form-control" type="password" style="margin-left: 16px" ng-model="agent.password" ng-blur="check_password()">
+            <input class="form-control" type="password" style="margin-left: 14px" ng-model="agent.password" ng-blur="check_password()">
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>姓名：</span>
-            <input class="form-control" type="text" style="margin-left: 48px" ng-model="agent.legal_person_name">
+            <input class="form-control" type="text" style="margin-left: 42px" ng-model="agent.legal_person_name">
         </div>
-        <!--<div class="form-inline">-->
-            <!--<span>性别：</span>-->
-            <!--<input class="radio" type="radio" id="man" name="sex" style="margin-left: 48px">-->
-            <!--<label for="man"><span>男</span></label>-->
-            <!--<input class="radio" type="radio" id="woman" name="sex" style="margin-left: 10px">-->
-            <!--<label for="woman"><span>女</span></label>-->
-        <!--</div>-->
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>身份证号：</span>
-            <input class="form-control" type="text" style="margin-left: 16px"  ng-model="agent.id_card" ng-blur="check_idCard()">
+            <input class="form-control" type="text" style="margin-left: 14px"  ng-model="agent.id_card">
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>地址：</span>
-            <input class="form-control" type="text" style="margin-left: 48px"  ng-model="agent.address_additional">
+            <input class="form-control" type="text" style="margin-left: 42px"  ng-model="agent.address_additional">
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>代理商级别：</span>
-            <select class="form-control" style="width: 200px !important;" ng-options="v for v in agent_grade" ng-model="agent.role">
+            <select class="form-control" ng-options="v for v in agent_grade" ng-model="agent.role" style="width: 196px">
             </select>
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>管辖区域：</span>
-            <select class="form-control" style="width: 150px !important;margin-left: 16px" ng-options="v.id as v.name for v in province1" ng-model="agent.province" ng-change="select_p(agent.province)">
+            <select class="form-control" style="margin-left: 14px;width:196px" ng-options="v.id as v.name for v in province1" ng-model="agent.province" ng-change="select_p(agent.province)">
             </select>
-            <select class="form-control" style="width: 150px !important;" ng-options="v.id as v.name for v in city1" ng-model="agent.city" ng-change="select_c(agent.city)">
+            <select class="form-control" style="width: 196px" ng-options="v.id as v.name for v in city1" ng-model="agent.city" ng-change="select_c(agent.city)">
             </select>
-            <select class="form-control" style="width: 150px !important;" ng-options="v.id as v.name for v in area1" ng-model="agent.area">
+            <select class="form-control" style="width: 196px" ng-options="v.id as v.name for v in area1" ng-model="agent.area">
             </select>
         </div>
 
         <p class="h3" style="margin-left: -100px">公司信息</p>
 
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>公司名称：</span>
-            <input class="form-control" type="text" style="margin-left: 16px" placeholder="可填"  ng-model="agent.name">
+            <input class="form-control" type="text" style="margin-left: 14px" placeholder="可填"  ng-model="agent.name">
         </div>
-        <!--<div class="form-inline">-->
-            <!--<span>企业法人：</span>-->
-            <!--<input class="form-control" type="text" style="margin-left: 16px">-->
-        <!--</div>-->
-        <!--<div class="form-inline">-->
-            <!--<span>工商注册号：</span>-->
-            <!--<input class="form-control" type="text">-->
-        <!--</div>-->
-        <!--<div class="form-inline">-->
-            <!--<span>公司地址：</span>-->
-            <!--<input class="form-control" type="text" style="margin-left: 16px">-->
-        <!--</div>-->
-        <!--<div class="form-inline">-->
-            <!--<span>经营范围：</span>-->
-            <!--<input class="form-control" type="text" style="margin-left: 16px">-->
-        <!--</div>-->
         <button class="btn btn-success " style="margin: 20px 0 0 150px;width: 100px" ng-click="submit()">提交</button>
     </div>
 </div>

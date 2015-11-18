@@ -1,6 +1,10 @@
-
+@media screen and (max-width: 1000px) {
+    .img_box{
+        margin-top: 50px;
+    }
+}
 body {
-     background-image: url("../img/login.png");
+     background: url("../img/login.png") no-repeat;
     background-size:cover;
 }
 

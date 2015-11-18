@@ -19,7 +19,7 @@ iCloudController.controller("RechargeController", ["$scope", "$http", "$cookieSt
     function ($scope, $http, $cookieStore, $window) {
         $scope.rechargeOrder = {
             amount: 1,
-            channel: "alipay"
+            channel: "alipay_pc_direct"
         };
 
         $scope.recharge = function (data) {
@@ -28,7 +28,7 @@ iCloudController.controller("RechargeController", ["$scope", "$http", "$cookieSt
             if (data_.amount) {
                 $http.post([$window.API.WALLET.RECHARGE, "?key=", $cookieStore.get("key")].join(""), data_)
                     .success(function (data) {
-                        pingpp.createPayment(data, function (result, msg) {
+                        pingppPc.createPayment(data, function (result, msg) {
                             console.log(result);
                             if (result == "success") {
                                 console.log(msg);

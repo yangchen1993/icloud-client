@@ -17,11 +17,20 @@ iCloudController.controller("WalletsController", ["$scope", "$http", "$cookieSto
 
 iCloudController.controller("RechargeController", ["$scope", "$http", "$cookieStore", "$window",
     function ($scope, $http, $cookieStore, $window) {
-        $scope.recharge = function (amount) {
-            $http.post([$window.API.WALLET.RECHARGE, "?key=", $cookieStore.get("key")].join(""), {amount: amount})
-                .success(function (data) {
+        $scope.rechargeOrder = {
+            amount: 1,
+            channel: "alipay"
+        };
 
-                })
+        $scope.recharge = function (data) {
+            var data_ = angular.copy(data);
+            console.log(data_);
+            if (data_.amount) {
+                $http.post([$window.API.WALLET.RECHARGE, "?key=", $cookieStore.get("key")].join(""), data_)
+                    .success(function (data) {
+
+                    })
+            }
         }
 
     }]);

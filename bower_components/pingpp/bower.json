@@ -1,0 +1,11 @@
+{
+  "name": "pingpp",
+  "version": "2.0.6",
+  "main": [
+    "./pingpp.js",
+    "./pingpp.css"
+  ],
+  "ignore": [],
+  "dependencies": {
+  }
+}

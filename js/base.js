@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.10.200/api/";
-window.HOST = "http://mb.idianjia.cn:8801/api/";
+window.HOST = "http://192.168.10.233:8001/api/";
+//window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://112.124.125.145/";
 
 window.API = {
@@ -89,7 +89,9 @@ window.API = {
 
         "REMOVE_DELIVERY": [window.HOST, "deliveries/remove_delivery/"].join(""), // 删除路由器发货信息
 
-        "NEW_DELIVERY": [window.HOST, "deliveries/new_delivery/"].join("") // 新建路由器发货信息
+        "NEW_DELIVERY": [window.HOST, "deliveries/new_delivery/"].join(""), // 新建路由器发货信息
+
+        "ROUTERS_SSID":[window.HOST,"routers/ssid/"].join("") //设置路由器SSID
 
     },
 

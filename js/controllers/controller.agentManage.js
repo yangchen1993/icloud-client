@@ -2,7 +2,7 @@
  * Created by chen on 2015/10/21.
  */
 iCloudController.controller("AgentManageController", ['$scope', '$grid', '$window', function ($scope, $grid, $window) {
-    $grid.initial($scope, $window.agent_url);
+    $grid.initial($scope, window.API.USER.GET_SUB_USERS);
     $scope.see = function (user_id) {
         $scope.$emit("send_agentId", user_id);
     }
@@ -26,16 +26,7 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
                 $scope.area1 = data;
             })
         };
-
-        $scope.agent = {};
-        $scope.check_tel = function () {
-        };
-        $scope.check_password = function () {
-        };
-        $scope.check_idCard = function () {
-        };
-        var key = $cookieStore.get("key");
-        $http.get([$window.agent_url, "roles/", "?key=", key].join(""))
+        $http.get([$window.agent_url, "roles/", "?key=", $cookieStore.get("key")].join(""))
             .success(function (data) {
                 $scope.agent_grade = data.msg;
                 $scope.agent.role = data.msg[0];
@@ -45,43 +36,28 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
             });
 
 
-        $http.get([$window.agent_url, "get_current_user/", "?key=", key].join(""))
-            .success(function (data) {
-                var address = data;
-                $scope.agent.province = address.province_id;
-
-                //$scope.$watch("agent", function (newValues, oldValues) {
-                //    console.log(newValues, oldValues);
-                //        $city.get(newValues.province).success(function(data) {
-                //            $scope.city1 = data;
-                //            $scope.agent.city =address.city_id;
-                //        });
-                //    if(newValues.city){
-                //        $area.get(newValues.city).success(function(data){
-                //            $scope.area1 =data;
-                //            $scope.agent.area =address.area_id;
-                //        });
-                //    }
-                //},true);
-
-                $scope.$watch("agent.province", function (data) {
-                    $city.get(data).success(function (data) {
-                        $scope.city1 = data;
-                        $scope.agent.city = address.city_id;
-                    });
-                });
-                $scope.$watch("agent.city", function (data) {
-                    if (data) {
-                        $area.get(data).success(function (data) {
-                            $scope.area1 = data;
-                            $scope.agent.area = address.area_id;
-                        });
-                    }
-                })
-            })
-            .error(function (data) {
-                console.log(data);
-            });
+        //$http.get([$window.agent_url, "get_current_user/", "?key=", key].join(""))
+        //    .success(function (data) {
+        //        var address = data;
+        //        $scope.agent.province = address.province_id;
+        //        $scope.$watch("agent.province", function (data) {
+        //            $city.get(data).success(function (data) {
+        //                $scope.city1 = data;
+        //                $scope.agent.city = address.city_id;
+        //            });
+        //        });
+        //        $scope.$watch("agent.city", function (data) {
+        //            if (data) {
+        //                $area.get(data).success(function (data) {
+        //                    $scope.area1 = data;
+        //                    $scope.agent.area = address.area_id;
+        //                });
+        //            }
+        //        })
+        //    })
+        //    .error(function (data) {
+        //        console.log(data);
+        //    });
 
         $scope.submit = function () {
             console.log($scope.agent);

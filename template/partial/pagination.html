@@ -1,22 +1,22 @@
-<div class="row text-center">
-    <div class="col-lg-2">
+<div class="text-center">
+    <div style="width: 16%;float: left">
         <a href="javascript:" ng-click="first()">首页</a>
     </div>
-    <div class="col-lg-2">
+    <div style="width: 16%;float: left">
         <a href="javascript:" ng-click="pre()">上一页</a>
     </div>
-    <div class="col-lg-2">
+    <div style="width: 16%;float: left">
         <input type="text" style="width: 50px" ng-model="pagination.pageNumber"
                ng-change="pageNumberChanged(pagination.pageNumber)">
         / <span ng-bind="pagination.totalPage"></span>
     </div>
-    <div class="col-lg-2">
+    <div style="width: 16%;float: left">
         <a href="javascript:" ng-click="next()">下一页</a>
     </div>
-    <div class="col-lg-2">
+    <div style="width: 16%;float: left">
         <a href="javascript:" ng-click="last()">末页</a>
     </div>
-    <div class="col-lg-2">
+    <div style="width: 16%;float: left">
         <select ng-model="pageSize" ng-change="pageSizeChanged(pageSize)" ng-options="op for op in pageSizes"></select>
     </div>
 </div>

@@ -23,18 +23,6 @@ window.API = {
         "CREATE_AGENT":[window.HOST,""]//
     },
 
-    "AD": {
-        "GET_CURRENT_USER_ADS": [window.HOST, "ads/get_current_user_ads/"].join(""), // 获取当前用户的广告
-
-        "GET_AD_INFO": [window.HOST, "ads/get_ad_info/"].join(""), // 获取广告详细信息
-
-        "NEW_AD": [window.HOST, "ads/new_ad/"].join(""), // 新建广告
-
-        "EDIT_AD": [window.HOST, "ads/edit_ad/"].join(""), // 编辑广告
-
-        "REMOVE_AD": [window.HOST, "ads/remove_ad/"].join("") // 删除广告
-    },
-
     "SYSTEM": {
         "GET_CATEGORIES": [window.HOST, "categories/get_categories/"].join(""), // 获取所有行业
 
@@ -123,6 +111,17 @@ window.API = {
     },
 
 
+    "AD": {
+        "GET_CURRENT_USER_ADS": [window.HOST, "ads/get_current_user_ads/"].join(""), // 获取当前用户的广告
+
+        "GET_AD_INFO": [window.HOST, "ads/get_ad_info/"].join(""), // 获取广告详细信息
+
+        "NEW_AD": [window.HOST, "ads/new_ad/"].join(""), // 新建广告
+
+        "EDIT_AD": [window.HOST, "ads/edit_ad/"].join(""), // 编辑广告
+
+        "REMOVE_AD": [window.HOST, "ads/remove_ad/"].join("") // 删除广告
+    },
     "WIFICAT": {
         "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息
     },

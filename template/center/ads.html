@@ -17,26 +17,12 @@
                     <a href="javascript:" ng-click="checkAll()">全选</a>
                     <a href="javascript:" ng-click="checkInverse()">反选</a>
                 </td>
-                <td id="{{ headers[1] }}" ng-click="sort(headers[1])" style="cursor: pointer">
-                    标题
-                    <span ng-show="currentSort[headers[1]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                    <span ng-show="currentSort[headers[1]] === false"
-                          class="glyphicon glyphicon-triangle-bottom"></span>
-                </td>
-                <td id="{{ headers[2] }}" ng-click="sort(headers[2])" style="cursor: pointer">
-                    简介
-                    <span ng-show="currentSort[headers[2]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                    <span ng-show="currentSort[headers[2]] === false"
-                          class="glyphicon glyphicon-triangle-bottom"></span>
-                </td>
                 <td id="{{ headers[10] }}" ng-click="sort(headers[10])" style="cursor: pointer">
                     行业类型
                     <span ng-show="currentSort[headers[10]] === true" class="glyphicon glyphicon-triangle-top"></span>
                     <span ng-show="currentSort[headers[10]] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
                 </td>
-                <td>缩略图</td>
-                <td>链接地址</td>
                 <td id="{{ headers[5] }}" ng-click="sort(headers[5])" style="cursor: pointer">
                     创建时间
                     <span ng-show="currentSort[headers[5]] === true" class="glyphicon glyphicon-triangle-top"></span>
@@ -53,18 +39,11 @@
             </tr>
             <tr ng-repeat="p in grid.results" class="wemedia_table">
                 <td><input type="checkbox"></td>
-                <td ng-bind="p.title"></td>
-                <td ng-bind="p.brief"></td>
                 <td ng-bind="p.category"></td>
-                <td width="60px">
-                    <a href="" data-toggle="modal" data-target="#myModal1" ng-click="sendindex($index)"><img
-                            ng-src="{{ p.img }}" style="width:27px;height:48px"></a>
-                </td>
-                <td ng-bind="p.link"></td>
                 <td ng-bind="p.create_time"></td>
                 <td ng-bind="p.modified_time"></td>
                 <td>
-                    <a href="javascript:" ng-click="send(p)">修改</a>
+                    <a href="javascript:" ng-click="editAds(p.id)">修改</a>
                     <a href="" ng-click="delete(p.id)">删除</a>
                     <a href="" ng-click="under()">下架</a>
                 </td>

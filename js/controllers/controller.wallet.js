@@ -28,7 +28,16 @@ iCloudController.controller("RechargeController", ["$scope", "$http", "$cookieSt
             if (data_.amount) {
                 $http.post([$window.API.WALLET.RECHARGE, "?key=", $cookieStore.get("key")].join(""), data_)
                     .success(function (data) {
-
+                        pingpp.createPayment(data, function (result, msg) {
+                            console.log(result);
+                            if (result == "success") {
+                                console.log(msg);
+                            } else if (result == "fail") {
+                                console.log(msg);
+                            } else if (result == "cancel") {
+                                console.log(msg);
+                            }
+                        })
                     })
             }
         }

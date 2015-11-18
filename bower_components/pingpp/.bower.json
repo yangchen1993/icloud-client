@@ -1,0 +1,21 @@
+{
+  "name": "pingpp",
+  "version": "2.0.6",
+  "main": [
+    "./pingpp.js",
+    "./pingpp.css"
+  ],
+  "ignore": [],
+  "dependencies": {},
+  "homepage": "https://github.com/young-py/pingpp",
+  "_release": "2.0.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.0.6",
+    "commit": "147a82ad1abac97f9ae12ae25906897a842640b3"
+  },
+  "_source": "git://github.com/young-py/pingpp.git",
+  "_target": "~2.0.6",
+  "_originalSource": "pingpp",
+  "_direct": true
+}

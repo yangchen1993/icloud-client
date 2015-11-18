@@ -28,7 +28,7 @@ iCloudController.controller("RechargeController", ["$scope", "$http", "$cookieSt
             if (data_.amount) {
                 $http.post([$window.API.WALLET.RECHARGE, "?key=", $cookieStore.get("key")].join(""), data_)
                     .success(function (data) {
-                           
+
                     })
             }
         }

@@ -1,0 +1,52 @@
+<div style="padding: 10px">
+    <div class="col-md-6">
+        <ol class="breadcrumb">
+            <li><a ui-sref="main.wallet">我的钱包</a></li>
+            <li class="active">交易记录</li>
+        </ol>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-bordered table-hover table-condensed">
+            <tr>
+                <td id="order_no" ng-click="sort('order_no')">
+                    流水号
+                    <span ng-show="currentSort['order_no'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['order_no'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="amount" ng-click="sort('amount')">
+                    金额
+                    <span ng-show="currentSort['amount'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['amount'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="trade_type" ng-click="sort('trade_type')">
+                    交易类型
+                    <span ng-show="currentSort['trade_type'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['trade_type'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="create_time" ng-click="sort('create_time')">
+                    交易时间
+                    <span ng-show="currentSort['create_time'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['create_time'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="status" ng-click="sort('status')">
+                    交易状态
+                    <span ng-show="currentSort['status'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['status'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+            </tr>
+            <tr ng-repeat="t in grid.results">
+                <td ng-bind="t.order_no"></td>
+                <td ng-bind="t.amount | currency: '￥'"></td>
+                <td ng-bind="t.trade_type"></td>
+                <td ng-bind="t.create_time"></td>
+                <td ng-bind="t.status"></td>
+            </tr>
+        </table>
+        <div ng-include="'/template/partial/pagination.html'"></div>
+    </div>
+</div>

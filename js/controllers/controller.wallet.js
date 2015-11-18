@@ -43,3 +43,8 @@ iCloudController.controller("RechargeController", ["$scope", "$http", "$cookieSt
         }
 
     }]);
+
+iCloudController.controller("TradingHistoryController", ["$scope", "$http", "$window", "$grid",
+    function ($scope, $http, $window, $grid) {
+        $grid.initial($scope, $window.API.WALLET.TRADING_HISTORY);
+    }]);

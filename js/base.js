@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.10.200/api/";
+//window.HOST = "http://127.0.0.1/api/";
 window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://112.124.125.145/";
 
@@ -20,7 +20,7 @@ window.API = {
 
         "REGISTER": [window.HOST, "users/register/"].join(""), // 注册
 
-        "CREATE_AGENT":[window.HOST,""]//
+        "CREATE_AGENT": [window.HOST, ""]//
     },
 
     "SYSTEM": {
@@ -81,7 +81,7 @@ window.API = {
 
         "NEW_DELIVERY": [window.HOST, "deliveries/new_delivery/"].join(""), // 新建路由器发货信息
 
-        "ROUTERS_SSID":[window.HOST,"routers/ssid/"].join("") //设置路由器SSID
+        "ROUTERS_SSID": [window.HOST, "routers/ssid/"].join("") //设置路由器SSID
 
     },
 
@@ -129,14 +129,16 @@ window.API = {
 
     "WEIXIN": {
         "NEW_WECHAT": [window.HOST, "wechat/new_wechat/"].join(""),
-        "GET_WECHAT":[window.HOST,"wechat/get_wechat/"].join(""),
-        "EDIT_WECHAT":[window.HOST,"wechat/edit_wechat/"].join("")
+        "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
+        "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
     },
 
 
-    "MARKETING":{
-        "NEW_SMS":[window.HOST,"SMS/new_sms/"].join(""),
-        "GET_SMS":[window.HOST,"SMS/get_sms"].join(""),
+    "MARKETING": {
+        "NEW_MSG_TEMPLATE": [window.HOST, "msg_templates/new_msg_template/"].join(""), // 新建群发短信模板
+        "REMOVE_MSG_TEMPLATE": [window.HOST, "msg_templates/remove_msg_template/"].join(""), // 删除群发短信模板
+        "GET_CURRENT_USER_MSG_TEMPLATES": [window.HOST, "sms_templates/get_current_user_msg_templates/"].join(""), // 获取当前用户的群发模板
+        "GET_CURRENT_USER_MEMBERS": [window.HOST, "sms_targets/get_current_user_members/"].join(""),
         "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
     }

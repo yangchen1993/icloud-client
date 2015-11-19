@@ -1,0 +1,35 @@
+<div style="padding:10px">
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.sms-templates">客户营销中心</a></li>
+        <li class="active">选择用户</li>
+    </ol>
+
+    <div class="col-md-4" id="sms-targets">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <td align="center">
+                    <a href="javascript:" ng-click="checkAll()">全选</a>
+                </td>
+                <td>手机号</td>
+            </tr>
+            <tr ng-repeat="m in members">
+                <td align="center"><input type="checkbox" ng-value="m"></td>
+                <td ng-bind="m"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-4" id="sms-targets-selected">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <td align="center">
+                    <a href="javascript:" ng-click="checkAll()">全选</a>
+                </td>
+                <td>手机号</td>
+            </tr>
+            <tr ng-repeat="m in members">
+                <td align="center"><input type="checkbox" ng-value="m"></td>
+                <td ng-bind="m"></td>
+            </tr>
+        </table>
+    </div>
+</div>

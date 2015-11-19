@@ -165,6 +165,11 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/wallet/recharge.html",
             controller: "RechargeController"
         })
+        .state("main.trading-history", {
+            url: "/trading-history",
+            templateUrl: "template/center/wallet/trading.history.html",
+            controller: "TradingHistoryController"
+        })
         .state("main.Bulk_SMS", {
             url: "/Bulk_SMS",
             templateUrl: "template/center/marketing/Bulk_SMS.html",

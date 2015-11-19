@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-window.HOST = "http://192.168.10.233:8001/api/";
-//window.HOST = "http://mb.idianjia.cn:8801/api/";
+//window.HOST = "http://192.168.10.200/api/";
+window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://112.124.125.145/";
 
 window.API = {
@@ -41,7 +41,7 @@ window.API = {
 
         "RECHARGE": [window.HOST, "wallets/recharge/"].join(""), // 充值
 
-        "TRADING_HISTORY": [window.HOST, "wallets/trading_history/"].join("") // 交易记录
+        "TRADING_HISTORY": [window.HOST, "tradings/get_current_user_tradings/"].join("") // 获取当前用户的交易记录
     },
 
     "ROUTER": {

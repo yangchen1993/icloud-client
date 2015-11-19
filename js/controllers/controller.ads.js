@@ -1,7 +1,7 @@
 /**
  * Created by chen on 2015/9/16.
  */
-//���ع���б�
+//加载广告列表
 iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore", "$window", "$grid", "$checkBox", "$MyDelete",
     function ($scope, $http, $cookieStore, $window, $grid, $checkBox, $MyDelete) {
         $grid.initial($scope, [$window.API.AD.GET_CURRENT_USER_ADS,].join(""));
@@ -15,6 +15,14 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
         $scope.editAds = function (id) {
             $window.location.href = ["#/main/create_ads?id=", id].join("");
         };
+        $scope.deleteAds = function (id){
+            if(confirm('确认要删除吗？')){
+                $http.delete(window.API.AD.REMOVE_AD+'?key='+ $.cookie("key").replace(/\"/g,"")+'&id='+id).success(function(){
+                    $(this).parent().parent().remove();
+                    console.log('删除成功');
+                });
+            }
+        }
     }]);
 
 

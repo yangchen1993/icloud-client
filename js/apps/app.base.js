@@ -170,19 +170,19 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/wallet/trading.history.html",
             controller: "TradingHistoryController"
         })
-        .state("main.Bulk_SMS", {
-            url: "/Bulk_SMS",
-            templateUrl: "template/center/marketing/Bulk_SMS.html",
-            controller: "BulkSMSController"
+        .state("main.sms-templates", {
+            url: "/sms-templates",
+            templateUrl: "template/center/marketing/sms-templates.html",
+            controller: "SmsTemplatesController"
         })
-        .state("main.create_SMS", {
-            url: "/create_SMS",
-            templateUrl: "template/center/marketing/create_SMS.html",
-            controller: "CreateSMSController"
+        .state("main.new-sms-template", {
+            url: "/new-sms-template",
+            templateUrl: "template/center/marketing/new-sms-template.html",
+            controller: "NewSmsTemplateController"
         })
-        .state("main.select_SMS_man", {
-            url: "/select_SMS_man",
-            templateUrl: "template/center/marketing/select_SMS_man.html",
-            controller: "SelectSMSManController"
+        .state("main.sms-target", {
+            url: "/sms-target",
+            templateUrl: "template/center/marketing/sms-target.html",
+            controller: "SmsTargetController"
         })
 });

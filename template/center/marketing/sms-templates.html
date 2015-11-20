@@ -1,0 +1,48 @@
+<div style="padding:10px">
+    <ol class="breadcrumb">
+        <li class="active">短信群发模板</li>
+    </ol>
+    <button class="btn btn-info" ui-sref="main.new-sms-template">新建</button>
+    <table class="table table-bordered table-striped text-center">
+        <tr ng-if="grid.results.length === 0">
+            <td colspan="4">
+                <span>没有模板, <a href="#/main/new-sms-template">立即创建</a></span>
+            </td>
+        </tr>
+        <thead>
+        <tr>
+            <td id="name" ng-click="sort('name')">
+                模板名称
+                <span ng-show="currentSort['name'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                <span ng-show="currentSort['name'] === false"
+                      class="glyphicon glyphicon-triangle-bottom"></span>
+            </td>
+            <td id="template" ng-click="sort('template')">
+                内容
+                <span ng-show="currentSort['template'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                <span ng-show="currentSort['template'] === false"
+                      class="glyphicon glyphicon-triangle-bottom"></span>
+            </td>
+            <td id="create_time" ng-click="sort('create_time')">
+                创建时间
+                <span ng-show="currentSort['create_time'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                <span ng-show="currentSort['create_time'] === false"
+                      class="glyphicon glyphicon-triangle-bottom"></span>
+            </td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="t in grid.results">
+            <td ng-bind="t.name"></td>
+            <td ng-bind="t.template"></td>
+            <td ng-bind="t.create_time"></td>
+            <td>
+                <button class="btn btn-xs btn-info" ng-click="sendTemplate(t.id)">群发</button>
+                <button class="btn btn-xs btn-danger" ng-click="removeTemplate(t.id)">删除</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div ng-include="'/template/partial/pagination.html'"></div>
+</div>

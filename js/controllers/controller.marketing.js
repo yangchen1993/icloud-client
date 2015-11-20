@@ -39,4 +39,28 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
         getTargets();
 
         $checkBox.enableCheck("sms-targets");
+
+        var template_id = get_param($window.location.href);
+
+        $scope.send = function () {
+            var numbers = [];
+            var c = angular.element("#sms-targets :checkbox");
+            angular.forEach(c, function (v, k) {
+                if (angular.element(v).prop("checked")) {
+                    numbers.push(angular.element(v).val())
+                }
+            });
+            var data = {
+                "template_id": template_id,
+                "phone_numbers": numbers
+            };
+
+            $http.post([$window.API.MARKETING.SEND_SMS_TEMPLATE, "?key=", $cookieStore.get("key")].join(""), data)
+                .success(function (data) {
+                    $window.alert(data.msg);
+                })
+                .error(function (data) {
+                    $window.alert(data.msg);
+                })
+        }
     }]);

@@ -47,30 +47,19 @@
                         <a ui-sref=".ads">我的广告</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
-                    <ul class="menu_child">
-                        <li>
-                            <div></div>
-                            <a ui-sref=".paid" href="">竞价广告</a>
-                        </li>
-                    </ul>
+                    <!--<ul class="menu_child">-->
+                        <!--<li>-->
+                            <!--<div></div>-->
+                            <!--<a ui-sref=".paid" href="">竞价广告</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
                 </li>
                 <div style="border-top:1px solid #416966" ng-show="ads_nav"></div>
                 <li ng-show="account_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a>广告分账</a>
-                        <i class="glyphicon glyphicon-triangle-right"></i>
+                        <a ui-sref="main.account-details">广告分账</a>
                     </div>
-                    <ul class="menu_child">
-                        <li>
-                            <div></div>
-                            <a>财务</a>
-                        </li>
-                        <li>
-                            <div></div>
-                            <a>明细</a>
-                        </li>
-                    </ul>
                 </li>
                 <div style="border-top:1px solid #416966" ng-show="account_nav"></div>
                 <li ng-show="eq_nav">

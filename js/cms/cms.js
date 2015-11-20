@@ -1,11 +1,11 @@
-var component=$(".component>div");//组件
-var pageArea=$("");//页面中部展示区
-var editArea=$(".editArea");//编辑区
-var editTemp=$(".editTemp")
-var conmponentItem=$("");
-var haveData='';
-var ourShop=get_param(window.location.href);
-function editText(id,type){
+var component = $(".component>div");//组件
+var pageArea = $("");//页面中部展示区
+var editArea = $(".editArea");//编辑区
+var editTemp = $(".editTemp")
+var conmponentItem = $("");
+var haveData = '';
+var ourShop = get_param(window.location.href);
+function editText(id, type) {
     $('.color').minicolors({
         animationSpeed: 50,
         animationEasing: 'swing',
@@ -22,65 +22,66 @@ function editText(id,type){
         showSpeed: 100,
         theme: 'bootstrap'
     });
-    $('div[data-edit-id='+id+']'+' .edit-title').val($('#'+id+' .text-title').text());-
-    $(document).ready(function(){
-        $('div[data-edit-id='+id+']'+' .wback').on('change',function(){
-            $('#'+id+' .text-title').css("background",$(this).val());
-            console.log($('[data-item-id='+id+']'+' .wback').val());
-        });
-        $('div[data-edit-id='+id+']'+' .wcolor').on('change',function(){
-            $('#'+id+' .text-title').css("color",$(this).val());
-            console.log($('[data-item-id='+id+']'+' .wcolor').val());
-        });
-        $('div[data-edit-id='+id+']'+' .edit-title').on('keyup',function(){
-            $('#'+id+' .text-title').text($(this).val());
-        });
-        $('div[data-edit-id='+id+']'+' .txtarea').attr('id','txtarea');
+    $('div[data-edit-id=' + id + ']' + ' .edit-title').val($('#' + id + ' .text-title').text());
+    -
+        $(document).ready(function () {
+            $('div[data-edit-id=' + id + ']' + ' .wback').on('change', function () {
+                $('#' + id + ' .text-title').css("background", $(this).val());
+                console.log($('[data-item-id=' + id + ']' + ' .wback').val());
+            });
+            $('div[data-edit-id=' + id + ']' + ' .wcolor').on('change', function () {
+                $('#' + id + ' .text-title').css("color", $(this).val());
+                console.log($('[data-item-id=' + id + ']' + ' .wcolor').val());
+            });
+            $('div[data-edit-id=' + id + ']' + ' .edit-title').on('keyup', function () {
+                $('#' + id + ' .text-title').text($(this).val());
+            });
+            $('div[data-edit-id=' + id + ']' + ' .txtarea').attr('id', 'txtarea');
 
-        CKEDITOR.document.getById( 'txtarea').setHtml(
-            $("#"+id+" .text-content").text()
-        );
+            CKEDITOR.document.getById('txtarea').setHtml(
+                $("#" + id + " .text-content").text()
+            );
 
-        CKEDITOR.replace( 'txtarea',{
-            toolbar :
-                [
+            CKEDITOR.replace('txtarea', {
+                toolbar: [
                     ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
                 ]
-        });
-        CKEDITOR.instances["txtarea"].on("instanceReady", function () {
-            this.document.on("keyup", function(){
-                validateText();
+            });
+            CKEDITOR.instances["txtarea"].on("instanceReady", function () {
+                this.document.on("keyup", function () {
+                    validateText();
+                });
             });
         });
-    });
-    function validateText(){
-        var numText=CKEDITOR.instances.txtarea.getData();
-        var numCounter=numText.length;
-        $('div[data-edit-id='+id+']'+' .text-count').text(3000-numCounter);
-        $("#"+id+" .text-content").html(numText);
+    function validateText() {
+        var numText = CKEDITOR.instances.txtarea.getData();
+        var numCounter = numText.length;
+        $('div[data-edit-id=' + id + ']' + ' .text-count').text(3000 - numCounter);
+        $("#" + id + " .text-content").html(numText);
     }
-    $(document).ready(function(){
+
+    $(document).ready(function () {
         validateText();
     });
 }
-function isImageFile(file){
+function isImageFile(file) {
     if (file.type) {
         return /^image\/\w+$/.test(file.type);
     } else {
         return /\.(jpg|jpeg|png|gif)$/.test(file);
     }
 }
-function editImg(id,type){
-    $('div[data-edit-id='+id+']'+' #showImg').attr('src',$('#'+id+' .img .img img').attr('src'));
+function editImg(id, type) {
+    $('div[data-edit-id=' + id + ']' + ' #showImg').attr('src', $('#' + id + ' .img .img img').attr('src'));
     //$('div[data-edit-id='+id+']'+' .img-cropper img').attr('src',$('#'+id+' .img .img img').attr('src'));
-    if($('#'+id+' .img>a').attr('href')){
-        $('div[data-edit-id='+id+']'+' .img-link').val($('#'+id+' .img a').attr('href').split('//')[1]);
+    if ($('#' + id + ' .img>a').attr('href')) {
+        $('div[data-edit-id=' + id + ']' + ' .img-link').val($('#' + id + ' .img a').attr('href').split('//')[1]);
     }
-    $('div[data-edit-id='+id+']'+' input[type="file"]').change(function(){
+    $('div[data-edit-id=' + id + ']' + ' input[type="file"]').change(function () {
         var files;
         var file;
         var img;
-        $('div[data-edit-id='+id+']'+' .img-cropper').css('display','block');
+        $('div[data-edit-id=' + id + ']' + ' .img-cropper').css('display', 'block');
         files = $(this).prop('files');
 
         if (files.length > 0) {
@@ -94,84 +95,84 @@ function editImg(id,type){
                 this.url = URL.createObjectURL(file);
             }
         }
-        img=$('<img src="'+this.url+'">');
-        $('div[data-edit-id='+id+']'+' .img-cropper').html(img);
+        img = $('<img src="' + this.url + '">');
+        $('div[data-edit-id=' + id + ']' + ' .img-cropper').html(img);
         img.cropper();
         var imgData;
         $('.saveImg').on('click', function () {
-            imgData=img.cropper('getCroppedCanvas', {
-                width:640
+            imgData = img.cropper('getCroppedCanvas', {
+                width: 640
             }).toDataURL();
-            $('div[data-edit-id='+id+']'+' #showImg').attr('src',imgData);
+            $('div[data-edit-id=' + id + ']' + ' #showImg').attr('src', imgData);
             //上传图片
-            $.post(window.API.CMS.POST_IMG+'?key='+ $.cookie("key").replace(/\"/g,""),{img:imgData}).success(function(data){
-                var imgPostUrl=data.link;
-                var setLink=$('div[data-edit-id='+id+']'+' .img-link').val();
+            $.post(window.API.CMS.POST_IMG + '?key=' + $.cookie("key").replace(/\"/g, ""), {img: imgData}).success(function (data) {
+                var imgPostUrl = data.link;
+                var setLink = $('div[data-edit-id=' + id + ']' + ' .img-link').val();
                 console.log(setLink);
-                if(!setLink){
-                    setLink=imgPostUrl;
-                }else{
-                    setLink='http://'+setLink;
+                if (!setLink) {
+                    setLink = imgPostUrl;
+                } else {
+                    setLink = 'http://' + setLink;
                 }
-                $('#'+id+' .img .img').html("");
-                $('#'+id+' .img .img').append('<a href="'+setLink+'"><img style="width:100%;" src="'+imgPostUrl+'"></a>');
+                $('#' + id + ' .img .img').html("");
+                $('#' + id + ' .img .img').append('<a href="' + setLink + '"><img style="width:100%;" src="' + imgPostUrl + '"></a>');
             });
 
         });
     });
 
 }
-function editAdress(id,type){
-    $('div[data-edit-id='+id+']'+' .form-control').val($('#'+id+' .dizhi').text());
-    $('div[data-edit-id='+id+']'+' .form-control').on('keyup',function(){
-        $('#'+id+' .dizhi').text($(this).val())
+function editAdress(id, type) {
+    $('div[data-edit-id=' + id + ']' + ' .form-control').val($('#' + id + ' .dizhi').text());
+    $('div[data-edit-id=' + id + ']' + ' .form-control').on('keyup', function () {
+        $('#' + id + ' .dizhi').text($(this).val())
     })
 }
-function editMap(id,type){
-    var mapId=addId();
-    $('div[data-edit-id='+id+']'+' .dmap').attr('id',mapId);
+function editMap(id, type) {
+    var mapId = addId();
+    $('div[data-edit-id=' + id + ']' + ' .dmap').attr('id', mapId);
     console.log(mapId);
     //bbmap(mapId);
 }
 
-function editMenu(id,type){
+function editMenu(id, type) {
 
 }
 
 //通用删除
-function addEditItem(id,type){
-    var _edit=$('#'+id+' .edit');
-    _edit.on('click',function(){
+function addEditItem(id, type) {
+    var _edit = $('#' + id + ' .edit');
+    _edit.on('click', function () {
         $('.editArea *').remove();
-        var editItem=$('.edit-items .'+type).html();
-        editArea.append('<div class="'+type+'" data-edit-id="'+id+'">'+editItem+'</div>');
+        var editItem = $('.edit-items .' + type).html();
+        editArea.append('<div class="' + type + '" data-edit-id="' + id + '">' + editItem + '</div>');
         //文字功能
-        switch (type){
+        switch (type) {
             case 'text':
-                editText(id,type);
+                editText(id, type);
                 break;
             case 'img':
-                editImg(id,type);
+                editImg(id, type);
                 break;
             case 'address':
-                editAdress(id,type);
+                editAdress(id, type);
                 break;
             case 'map':
-                editMap(id,type);
+                editMap(id, type);
                 break;
             case 'menu':
-                editMenu(id,type);
+                editMenu(id, type);
                 break;
             default :
                 break;
         }
 
     });
-    $('#'+id+' .delete').on('click',function(){
-        if(confirm('点击确认将移除该组件,无法恢复')){
-            $('#'+id).remove();
-            if($('.editArea .'+type)){
-                $('.editArea .'+type).remove();
+    $('#' + id + ' .delete').on('click', function () {
+        if (confirm('点击确认将移除该组件,无法恢复')) {
+            $('#' + id).remove();
+            if ($('.editArea .' + type)) {
+                $('.editArea .' + type).remove();
             }
             //数组移除id为id的项
         }
@@ -179,29 +180,28 @@ function addEditItem(id,type){
 }
 
 
-
-$.get(window.API.CMS.GET_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group_id='+ourShop).success(function(data){
-    if(data){
+$.get(window.API.CMS.GET_DATA + '?key=' + $.cookie("key").replace(/\"/g, "") + '&group_id=' + ourShop).success(function (data) {
+    if (data) {
         console.log(data);
-        for(var i=0;i<data.cms_ids.length;i++){
-            for(var j=0;j<=data.cms.length;j++){
-                if(data.cms[j].component_id==data.cms_ids[i]){
+        for (var i = 0; i < data.cms_ids.length; i++) {
+            for (var j = 0; j <= data.cms.length; j++) {
+                if (data.cms[j].component_id == data.cms_ids[i]) {
                     $('#drag').append(data.cms[j].div);
-                    switch(data.cms[j].content_type){
+                    switch (data.cms[j].content_type) {
                         case 'text':
-                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            addEditItem(data.cms[j].component_id, data.cms[j].content_type);
                             break;
                         case 'img':
-                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            addEditItem(data.cms[j].component_id, data.cms[j].content_type);
                             break;
                         case 'map':
-                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            addEditItem(data.cms[j].component_id, data.cms[j].content_type);
                             break;
                         case 'address':
-                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            addEditItem(data.cms[j].component_id, data.cms[j].content_type);
                             break;
                         case 'menu':
-                            addEditItem(data.cms[j].component_id,data.cms[j].content_type);
+                            addEditItem(data.cms[j].component_id, data.cms[j].content_type);
                     }
                     break;
                 }
@@ -225,53 +225,53 @@ $.get(window.API.CMS.GET_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group
         //    }
         //}
         $('#savePage').html('更新页面');
-        haveData=true;
-    }else{
+        haveData = true;
+    } else {
         console.log('可以新建');
     }
 });
 
 //生成新Id
-function addId(){
-    var num=Math.random();
-    var newId='d'+''+num.toString().replace(".",'');
+function addId() {
+    var num = Math.random();
+    var newId = 'd' + '' + num.toString().replace(".", '');
     return newId;
 }
 
 //编辑函数
-function addItem(id,type){
+function addItem(id, type) {
     //            获取组件模板
 
-    if(type=='map'){
-        var mapId=addId();
-        var mapArea='<div class="map" id="'+mapId+'"></div>'
-        var edit='<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
-        $('#drag').append('<li data-type="map" class="item-list" id="'+id+'">'+mapArea+edit+'</li>');
-        bbmap(mapId,user.j,user.w);
-    }else{
-        var itemTemp=$('.template .'+type).html();
-        var edit='<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
-        $('#drag').append('<li class="item-list" data-type="'+type+'" id="'+id+'"><div class="'+type+'">'+itemTemp+edit+'</div></li>');
+    if (type == 'map') {
+        var mapId = addId();
+        var mapArea = '<div class="map" id="' + mapId + '"></div>'
+        var edit = '<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
+        $('#drag').append('<li data-type="map" class="item-list" id="' + id + '">' + mapArea + edit + '</li>');
+        bbmap(mapId, user.j, user.w);
+    } else {
+        var itemTemp = $('.template .' + type).html();
+        var edit = '<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
+        $('#drag').append('<li class="item-list" data-type="' + type + '" id="' + id + '"><div class="' + type + '">' + itemTemp + edit + '</div></li>');
     }
 
-    switch(type){
+    switch (type) {
         case 'text':
-            addEditItem(id,type);
+            addEditItem(id, type);
             break;
         case 'img':
-            addEditItem(id,type);
+            addEditItem(id, type);
             break;
         case 'menu':
-            addEditItem(id,type);
+            addEditItem(id, type);
             break;
         case 'map':
-            addEditItem(id,type);
+            addEditItem(id, type);
             break;
         case 'address':
-            addEditItem(id,type);
+            addEditItem(id, type);
             break;
         case 'menu':
-            addEditItem(id,type);
+            addEditItem(id, type);
             break;
         default:
             break;
@@ -280,83 +280,87 @@ function addItem(id,type){
 }
 
 //组件添加先做成点击添加咯，后面再改成拖动吧^_^
-component.on('click',function(){
-    var _this=$(this);
-    var componentId=_this.attr('id');
+component.on('click', function () {
+    var _this = $(this);
+    var componentId = _this.attr('id');
     //判断是否存在ID,不存在ID的表示功能暂时未添加
-    if(componentId){
-        var id=addId();
-        var thisType=componentId.split('-')[1];
-        addItem(id,thisType);
-    }else{
+    if (componentId) {
+        var id = addId();
+        var thisType = componentId.split('-')[1];
+        addItem(id, thisType);
+    } else {
         alert('组件正在开发中,感谢使用！');
     }
-    console.log(thisType+'组件的ID为:'+id);
+    console.log(thisType + '组件的ID为:' + id);
 });
 
-$('#savePage').click(function(){
-    var component=$('.item-list');
-    var length=component.length;
-    var items=[];
-    console.log(items+'----');
-    for(var i=0;i<length;i++){
+$('#savePage').click(function () {
+    var component = $('.item-list');
+    var length = component.length;
+    var items = [];
+    console.log(items + '----');
+    for (var i = 0; i < length; i++) {
         console.log($(component[i]).prop("outerHTML"));
-        items.push({'component_id':$(component[i]).attr("id"),'content_type':$(component[i]).attr("data-type"),'div':$(component[i]).prop("outerHTML")});
+        items.push({
+            'component_id': $(component[i]).attr("id"),
+            'content_type': $(component[i]).attr("data-type"),
+            'div': $(component[i]).prop("outerHTML")
+        });
 
     }
     console.log(items);
 //            $.post('http://192.168.10.200/api/cms/new_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13',{'items':items},{"dataType":"json"});
 
-   if(haveData){
-       $.ajax({
-           url:window.API.CMS.PUT_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group_id='+ourShop,
-           type:"PUT",
-           "dataType":"json",
-           'contentType':'application/json;charset=utf-8',
-           "data":JSON.stringify({"group_id":ourShop,"items":items}),
-           success:function (data) {
-               alert('上传成功');
-           }
-       });
-   }else{
-       $.ajax({
-           url:window.API.CMS.SEND_DATA+'?key='+ $.cookie("key").replace(/\"/g,"")+'&group_id='+ourShop,
-           type:"POST",
-           "dataType":"json",
-           'contentType':'application/json;charset=utf-8',
-           "data":JSON.stringify({"group_id":ourShop,"items":items}),
-           success:function (data) {
-               alert('上传成功');
-           }
-       });
-   }
+    if (haveData) {
+        $.ajax({
+            url: window.API.CMS.PUT_DATA + '?key=' + $.cookie("key").replace(/\"/g, "") + '&group_id=' + ourShop,
+            type: "PUT",
+            "dataType": "json",
+            'contentType': 'application/json;charset=utf-8',
+            "data": JSON.stringify({"group_id": ourShop, "items": items}),
+            success: function (data) {
+                alert('上传成功');
+            }
+        });
+    } else {
+        $.ajax({
+            url: window.API.CMS.SEND_DATA + '?key=' + $.cookie("key").replace(/\"/g, "") + '&group_id=' + ourShop,
+            type: "POST",
+            "dataType": "json",
+            'contentType': 'application/json;charset=utf-8',
+            "data": JSON.stringify({"group_id": ourShop, "items": items}),
+            success: function (data) {
+                alert('上传成功');
+            }
+        });
+    }
 
 });
-var user={
-    userId:'b0d9abc8-d416-4b1d-b9d4-2bc82e48f774',
-    address:'四川省成都市锦江区',
-    telephone:18780283005,
-    j:104.06792346,
-    w:30.67994285,
+var user = {
+    userId: 'b0d9abc8-d416-4b1d-b9d4-2bc82e48f774',
+    address: '四川省成都市锦江区',
+    telephone: 18780283005,
+    j: 104.06792346,
+    w: 30.67994285,
 //            经度、纬度
 }
 
-var t=$('.dod2 > img').cropper();
-$('.saveImg').click(function(){
+var t = $('.dod2 > img').cropper();
+$('.saveImg').click(function () {
     //var URL='http://192.168.10.200/api/resources/new_img_resource/?key='+user.userId;
-    var imgData=$('.dod2 > img').cropper('getCroppedCanvas', {
-        width:640
+    var imgData = $('.dod2 > img').cropper('getCroppedCanvas', {
+        width: 640
     }).toDataURL();
-    $.post(URL,{img:imgData}).success(function(data){
+    $.post(URL, {img: imgData}).success(function (data) {
         console.log(data);
-        var imgUrl=data.link;
-        $('#drag').append('<li><a href="'+imgUrl+'"><img style="width:100%;" src="'+imgUrl+'"></a></li>');
-        $('#showImg').attr('src',imgUrl);
+        var imgUrl = data.link;
+        $('#drag').append('<li><a href="' + imgUrl + '"><img style="width:100%;" src="' + imgUrl + '"></a></li>');
+        $('#showImg').attr('src', imgUrl);
     });
     alert('点击了额');
 
 });
-function bbmap(id){
+function bbmap(id) {
     //var map = new BMap.Map(id);
     //var point = new BMap.Point(j,w);
     //// 百度地图API功能
@@ -368,7 +372,7 @@ function bbmap(id){
 
     // 百度地图API功能
     var map = new BMap.Map(id);
-    var point = new BMap.Point(116.400244,39.92556);
+    var point = new BMap.Point(116.400244, 39.92556);
     map.centerAndZoom(point, 12);
     var marker = new BMap.Marker(point);// 创建标注
     map.addOverlay(marker);             // 将标注添加到地图中
@@ -377,16 +381,17 @@ function bbmap(id){
 $('#drag').dragsort({
     dragSelector: "li",
     dragBetween: true,
-    dragEnd: function(){
+    dragEnd: function () {
     },
     placeHolderTemplate: "<li><div class='placeHolder'>松开手放到此处</div></li>",
     scrollSpeed: 5
 });
-$(function() {
+$(function () {
     $('.lunbo').unslider({
         speed: 500,               //  The speed to animate each slide (in milliseconds)
         delay: 5000,              //  The delay between slide animations (in milliseconds)
-        complete: function() {},  //  A function that gets called after every slide animation
+        complete: function () {
+        },  //  A function that gets called after every slide animation
         keys: true,               //  Enable keyboard (left, right) arrow shortcuts
         dots: true,               //  Display dot navigation
         fluid: false              //  Support responsive design. May break non-responsive designs

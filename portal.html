@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/icons/iconfont.css">
+    <style>
+        body{
+            font-family: '微软雅黑' , Arial, Helvetica, Verdana;
+        }
+        .container-fluid{
+            background: #f0f0f0;
+        }
+        a,a:hover{
+            text-decoration: none;
+        }
+        .menu {
+            position: fixed;
+            width:100%;
+            height:50px;
+            bottom: 0;
+            border-top:solid 1px #f0f0f0;
+            /*background: #f0f0f0;*/
+            text-align: center;
+        }
+        .menu a{
+            float:left;
+            width:25%;
+        }
+        .address{
+            font-size:16px;
+            padding:10px;
+        }
+        .top .icon-tubiao{
+            position: absolute;
+            padding:5px 3px;
+            margin-left:10px;
+        }
+        .top{
+            height:40px;
+            line-height:40px;
+            margin-bottom:5px;
+            color:dimgrey;
+            background:#fff;
+            text-align: center;
+        }
+        .portal-title{
+            font-size: 16px;
+            font-weight:bold;
+        }
+        #search{
+            padding-left:10px;
+        }
+        .cate-list{
+            padding:10px 0;
+            margin-bottom:5px;
+            background: #fff;
+        }
+        .cate-list .iconfont{
+            display: block;
+            color:#fff;
+            margin:auto;
+            width:40px;
+            height:40px;
+            border-radius: 50%;
+            font-size: 25px;
+        }
+        .cate-item{
+            float:left;
+            width: 25%;
+        }
+        .icon-meishi,.icon-liren{
+            background:#ffb700;
+        }
+        .icon-dianying,.icon-liuxingfushi{
+            background:#ff67b9;
+        }
+        .icon-lvyou,.icon-yangsheng{
+            background:#928dff;
+        }
+        .icon-jiudian,.icon-qiche{
+            background:#56b2ff;
+        }
+        .icon-yule,.icon-xuelijiaoyu{
+            background:#48d9cf;
+        }
+        .icon-fangchan,.icon-tubiao{
+            background:#a3cb5c;
+        }
+
+        .swipe-wrap {
+            overflow: hidden;
+            position: relative;
+            padding-top: 10px;
+        }
+        .swipe-row{
+            position: relative;
+            width:100%;
+            float: left;
+        }
+        .list{
+            position: relative;
+            width:80px !important;
+            height:8px;
+            margin:10px auto 10px auto;
+            text-align: center;
+        }
+        .list ul{
+            margin:0;
+            padding: 0;
+        }
+        .list li{
+            display: inline-block;
+            width: 8px;
+            height:8px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+            background-color: #ccc;
+        }
+        .list .on{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row top">
+            <!--<div class="cate-item address">-->
+                <!--<i class="iconfont icon-dingwei"></i><span>成都</span>-->
+            <!--</div>-->
+            <!--<div class="col-xs-9">-->
+                <!--<div><i class="iconfont icon-tubiao"></i><input class="form-control" id="search" type="search" placeholder="搜索您感兴趣的内容"></div>-->
+            <!--</div>-->
+            <div class="col-xs-12">
+                <span class="portal-title">同城</span>
+            </div>
+        </div>
+        <!-- 分类菜单-->
+        <div class="row cate-list text-center">
+            <div class="col-xs-12 col-md-12" id="slider">
+                <div class="swipe-wrap">
+                    <div class="swipe-row">
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-meishi"></i>
+                                <div>美食</div>
+                            </a>
+                        </div>
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-dianying"></i>
+                                <div>电影</div>
+                            </a>
+                        </div>
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-liren"></i>
+                                <div>丽人</div>
+                            </a>
+                        </div>
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-yule"></i>
+                                <div>娱乐</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swipe-row">
+                        <!--这是一个分隔符，哈哈哈哈-->
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-fangchan"></i>
+                                <div>房产</div>
+                            </a>
+                        </div>
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-qiche"></i>
+                                <div>汽车</div>
+                            </a>
+                        </div>
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-jiudian"></i>
+                                <div>酒店</div>
+                            </a>
+                        </div>
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-lvyou"></i>
+                                <div>旅游</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swipe-row">
+                        <!--这是一个分隔符，哈哈哈哈-->
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-xuelijiaoyu"></i>
+                                <div>教育</div>
+                            </a>
+                        </div>
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-liuxingfushi"></i>
+                                <div>服饰</div>
+                            </a>
+                        </div>
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-yangsheng"></i>
+                                <div>养生</div>
+                            </a>
+                        </div>
+                        <div class="cate-item">
+                            <a href="">
+                                <i class="iconfont icon-tubiao"></i>
+                                <div>家具</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <div class="list">
+                    <ul>
+                        <li class="on"></li>
+                        <li class=""></li>
+                        <li class=""></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu">
+        <a herf=""><i class="iconfont icon-wifi"></i><div>免费</div></a>
+        <a href=""><i class="iconfont icon-gerenshangpu"></i><div>本店</div></a>
+        <a href=""><i class="iconfont icon-faxian"></i><div>同城</div></a>
+        <a href=""><i class="iconfont icon-gerenzhongxin"></i><div>我的</div></a>
+    </div>
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/js/swipe.min.js"></script>
+<script>
+    var slider =Swipe(document.getElementById('slider'), {
+        startSlide: 1,  //起始图片切换的索引位置
+        auto: 6000, //设置自动切换时间，单位毫秒
+        continuous: true,
+        stopPropagation: false,  //停止滑动事件
+        callback: function(){
+
+        }
+    });
+</script>
+</body>
+</html>

@@ -119,7 +119,7 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
 iCloudController.controller("ShopManagementRoutersController", ["$scope", "$window", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $window, $http, $category, $province, $city, $area, $trades, $cookieStore) {
     var shop_id = get_param($window.location.href);
     $scope.see_routers_details = function (id) {
-        $window.location.href = ["#/main/routers_details?routers_id=", id].join("");
+        $window.location.href = ["#/main/routers_details?router=", id].join("");
     };
     var show_bindRouters = function () {
         $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP, "?key=", $cookieStore.get("key"), "&group_id=", shop_id].join("")).success(function (data) {
@@ -246,7 +246,9 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
                 console.log(data);
                 $scope.wificat = data;
-                $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                if (_.has(data, "basicInformation")){
+                    $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                }
             });
         }, 1000);
 

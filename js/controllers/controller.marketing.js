@@ -3,13 +3,13 @@
  */
 iCloudController.controller("SmsTemplatesController", ["$scope", "$http", "$cookieStore", "$grid", "$window",
     function ($scope, $http, $cookieStore, $grid, $window) {
-        $grid.initial($scope, $window.API.MARKETING.GET_CURRENT_USER_MSG_TEMPLATES);
+        $grid.initial($scope, $window.API.MARKETING.GET_CURRENT_USER_SMS_TEMPLATES);
         $scope.sendTemplate = function (id) {
             $window.location.href = ["#/main/sms-target?id=", id].join("");
         };
         $scope.removeTemplate = function (id) {
             if (confirm("确定删除?")) {
-                $http.delete([$window.API.MARKETING.REMOVE_MSG_TEMPLATE, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
+                $http.delete([$window.API.MARKETING.REMOVE_SMS_TEMPLATE, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
                     .success(function (data) {
                         $scope.refresh();
                     })
@@ -20,7 +20,7 @@ iCloudController.controller("SmsTemplatesController", ["$scope", "$http", "$cook
 iCloudController.controller("NewSmsTemplateController", ["$scope", "$http", "$cookieStore", "$window",
     function ($scope, $http, $cookieStore, $window) {
         $scope.createTemplate = function (data) {
-            $http.post([window.API.MARKETING.NEW_MSG_TEMPLATE, "?key=", $cookieStore.get("key")].join(""), data)
+            $http.post([window.API.MARKETING.NEW_SMS_TEMPLATE, "?key=", $cookieStore.get("key")].join(""), data)
                 .success(function (data) {
                     $window.location.href = "#/main/sms-templates";
                 })

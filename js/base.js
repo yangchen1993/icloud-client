@@ -135,9 +135,9 @@ window.API = {
 
 
     "MARKETING": {
-        "NEW_MSG_TEMPLATE": [window.HOST, "msg_templates/new_msg_template/"].join(""), // 新建群发短信模板
-        "REMOVE_MSG_TEMPLATE": [window.HOST, "msg_templates/remove_msg_template/"].join(""), // 删除群发短信模板
-        "GET_CURRENT_USER_MSG_TEMPLATES": [window.HOST, "sms_templates/get_current_user_msg_templates/"].join(""), // 获取当前用户的群发模板
+        "NEW_SMS_TEMPLATE": [window.HOST, "sms_templates/new_msg_template/"].join(""), // 新建群发短信模板
+        "REMOVE_SMS_TEMPLATE": [window.HOST, "sms_templates/remove_msg_template/"].join(""), // 删除群发短信模板
+        "GET_CURRENT_USER_SMS_TEMPLATES": [window.HOST, "sms_templates/get_current_user_msg_templates/"].join(""), // 获取当前用户的群发模板
         "GET_CURRENT_USER_MEMBERS": [window.HOST, "sms_targets/get_current_user_members/"].join(""),
         "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")

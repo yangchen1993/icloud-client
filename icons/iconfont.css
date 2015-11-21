@@ -16,6 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 .icon-dingwei:before { content: "\e600"; }
+.icon-address:before { content: "\e609"; }
 .icon-tubiao:before { content: "\e601"; }
 .icon-tubiao1:before { content: "\e602"; }
 .icon-biaoqian:before { content: "\e603"; }
@@ -24,6 +25,7 @@
 .icon-zan:before { content: "\e606"; }
 .icon-liuxingfushi:before { content: "\e607"; }
 .icon-gerenshangpu:before { content: "\e608"; }
+.icon-dianhua:before { content: "\e60a"; }
 .icon-qiche:before { content: "\e618"; }
 .icon-lvyou:before { content: "\e60b"; }
 .icon-fangchan:before { content: "\e60c"; }

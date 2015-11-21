@@ -7,45 +7,45 @@
     <div style="padding-left:35%" class="agent_message">
         <p class="h3" style="margin-left: -100px">个人信息</p>
 
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>登录账号：</span>
-            <input class="form-control" type="text" style="margin-left: 16px" ng-model="business.tel" ng-blur="check_tel()" id="tel" placeholder="手机号码">
+            <input class="form-control" type="text" ng-model="business.tel" ng-blur="check_tel()" id="tel" placeholder="手机号码">
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>登录密码：</span>
-            <input class="form-control" type="password" style="margin-left: 16px" ng-model="pass">
+            <input class="form-control" type="password" ng-model="pass">
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>确认密码：</span>
-            <input class="form-control" type="password" style="margin-left: 16px" ng-model="business.password" ng-blur="check_password()">
+            <input class="form-control" type="password" ng-model="business.password" ng-blur="check_password()">
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>姓名：</span>
-            <input class="form-control" type="text" style="margin-left: 48px" ng-model="business.legal_person_name">
+            <input class="form-control" type="text" style="margin-left: 28px" ng-model="business.legal_person_name">
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>身份证号：</span>
-            <input class="form-control" type="text" style="margin-left: 16px"  ng-model="business.id_card" ng-blur="check_idCard()">
+            <input class="form-control" type="text" ng-model="business.id_card" ng-blur="check_idCard()">
         </div>
-        <div class="form-inline">
-            <span>地址：</span>
-            <input class="form-control" type="text" style="margin-left: 48px"  ng-model="business.address_additional">
+        <div class="form-inline" style="margin-top: 15px">
+            <span>居住地址：</span>
+            <input class="form-control" type="text" ng-model="business.address_additional">
         </div>
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>管辖区域：</span>
-            <select class="form-control" style="width: 150px !important;margin-left: 16px" ng-options="v.id as v.name for v in province1" ng-model="business.province" ng-change="select_p(business.province)">
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in province1" ng-model="business.province" ng-change="select_p(business.province)">
             </select>
-            <select class="form-control" style="width: 150px !important;" ng-options="v.id as v.name for v in city1" ng-model="business.city" ng-change="select_c(business.city)">
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in city1" ng-model="business.city" ng-change="select_c(business.city)">
             </select>
-            <select class="form-control" style="width: 150px !important;" ng-options="v.id as v.name for v in area1" ng-model="business.area">
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in area1" ng-model="business.area">
             </select>
         </div>
 
         <p class="h3" style="margin-left: -100px">公司信息</p>
 
-        <div class="form-inline">
+        <div class="form-inline" style="margin-top: 15px">
             <span>公司名称：</span>
-            <input class="form-control" type="text" style="margin-left: 16px" placeholder="可填"  ng-model="business.name">
+            <input class="form-control" type="text" placeholder="可填"  ng-model="business.name">
         </div>
         <button class="btn btn-success " style="margin: 20px 0 0 150px;width: 100px" ng-click="submit()">提交</button>
     </div>

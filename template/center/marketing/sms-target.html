@@ -1,22 +1,26 @@
-<div style="padding:10px">
+<div class="table_outside">
     <ol class="breadcrumb">
         <li><a ui-sref="main.sms-templates">客户营销中心</a></li>
         <li class="active">选择用户</li>
     </ol>
-
-    <div class="col-md-4" id="sms-targets">
-        <table class="table table-bordered table-hover">
+    <button class="btn btn-sm btn-info" ng-click="send()">发送</button>
+    <div class=" table_inside" id="sms-targets">
+        <table class="table table-bordered text-center table-hover">
+            <thead>
             <tr>
                 <td align="center">
                     <a href="javascript:" ng-click="checkAll()">全选</a>
                 </td>
                 <td>手机号</td>
             </tr>
-            <tr ng-repeat="m in members">
-                <td align="center"><input type="checkbox" ng-value="m"></td>
-                <td ng-bind="m"></td>
-            </tr>
+            </thead>
+        <tbody>
+        <tr ng-repeat="m in members">
+            <td align="center"><input type="checkbox" ng-value="m"></td>
+            <td ng-bind="m"></td>
+        </tr>
+        </tbody>
         </table>
-        <button class="btn btn-sm btn-info" ng-click="send()">发送</button>
     </div>
+    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #D9D9D9"></div>
 </div>

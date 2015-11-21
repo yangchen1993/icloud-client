@@ -1,35 +1,37 @@
-<div style="padding:10px">
+<div class="table_outside">
     <ol class="breadcrumb">
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li class="active">版本管理</li>
     </ol>
-
     <button class="btn btn-success" data-toggle="modal" data-target="#newVersionModal" ng-click="newVersionModal()">发布新版本</button>
-    <table class="table table-bordered table-striped text-center">
-        <thead>
-        <tr>
-            <td>版本</td>
-            <td>说明</td>
-            <td>大小</td>
-            <td>发布人</td>
-            <td>发布时间</td>
-            <td>操作</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="v in grid.results"  ng-class="{'background-red':$index===0}">
-            <td ng-bind="v.name"></td>
-            <td ng-bind="v.description"></td>
-            <td ng-bind="(v.size/(1024*1024) | number:2) + 'MB'"></td>
-            <td ng-bind="v.creator"></td>
-            <td ng-bind="v.create_time"></td>
-            <td>
-                <button class="btn btn-success">升级</button>
-                <button class="btn btn-danger" ng-click="remove(v.id)">删除</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="table_inside">
+        <table class="table table-bordered text-center">
+            <thead>
+            <tr>
+                <td>版本</td>
+                <td>说明</td>
+                <td>大小</td>
+                <td>发布人</td>
+                <td>发布时间</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="v in grid.results"  ng-class="{'background-red':$index===0}">
+                <td ng-bind="v.name"></td>
+                <td ng-bind="v.description"></td>
+                <td ng-bind="(v.size/(1024*1024) | number:2) + 'MB'"></td>
+                <td ng-bind="v.creator"></td>
+                <td ng-bind="v.create_time"></td>
+                <td>
+                    <button class="btn btn-success">升级</button>
+                    <button class="btn btn-danger" ng-click="remove(v.id)">删除</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #D9D9D9"></div>
 </div>
 
 <div class="modal fade" id="newVersionModal">

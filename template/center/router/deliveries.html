@@ -1,11 +1,12 @@
-<div style="padding: 10px;">
+<div class="table_outside">
     <ol class="breadcrumb">
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li class="active">设备分配</li>
     </ol>
-    <div>
-        <button class="btn btn-info" ui-sref="main.delivery-new">新建</button>
-        <table class="table table-hover table-condensed table-bordered" id="delivery-table">
+    <button class="btn btn-info" ui-sref="main.delivery-new">新建</button>
+    <div class="table_inside">
+        <table class="table table-bordered text-center table-hover" id="delivery-table">
+            <thead>
             <tr>
                 <td id="receiver" ng-click="sort('receiver')">发货人
                     <span ng-show="currentSort['receiver'] === true" class="glyphicon glyphicon-triangle-top"></span>
@@ -29,6 +30,8 @@
                 </td>
                 <td></td>
             </tr>
+            </thead>
+            <tbody>
             <tr ng-repeat="d in grid.results">
                 <td ng-bind="d.receiver"></td>
                 <td ng-bind="d.sender"></td>
@@ -39,7 +42,8 @@
                     <button class="btn btn-danger btn-xs" ng-click="removeDelivery(d.id)">删除</button>
                 </td>
             </tr>
+            </tbody>
         </table>
-        <div ng-include="'/template/partial/pagination.html'"></div>
     </div>
+    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #D9D9D9"></div>
 </div>

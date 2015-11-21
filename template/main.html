@@ -41,38 +41,6 @@
                     </ul>
                 </li>
                 <div style="border-top:1px solid #416966" ng-show="auth_nav"></div>
-                <li ng-show="ads_nav">
-                    <div class="open_menu">
-                        <div></div>
-                        <a ui-sref=".ads">我的广告</a>
-                        <i class="glyphicon glyphicon-triangle-right"></i>
-                    </div>
-                    <ul class="menu_child">
-                        <li>
-                            <div></div>
-                            <a ui-sref=".paid" href="">竞价广告</a>
-                        </li>
-                    </ul>
-                </li>
-                <div style="border-top:1px solid #416966" ng-show="ads_nav"></div>
-                <li ng-show="account_nav">
-                    <div class="open_menu">
-                        <div></div>
-                        <a>广告分账</a>
-                        <i class="glyphicon glyphicon-triangle-right"></i>
-                    </div>
-                    <ul class="menu_child">
-                        <li>
-                            <div></div>
-                            <a>财务</a>
-                        </li>
-                        <li>
-                            <div></div>
-                            <a>明细</a>
-                        </li>
-                    </ul>
-                </li>
-                <div style="border-top:1px solid #416966" ng-show="account_nav"></div>
                 <li ng-show="eq_nav">
                     <div class="open_menu">
                         <div></div>
@@ -91,14 +59,7 @@
                     </ul>
                 </li>
                 <div style="border-top:1px solid #416966" ng-show="eq_nav"></div>
-                <li ng-show="shop_nav">
-                    <div class="open_menu">
-                        <div></div>
-                        <a ui-sref=".shop_management">店铺管理</a>
-                        <i class="glyphicon glyphicon-triangle-right"></i>
-                    </div>
-                </li>
-                <div style="border-top:1px solid #416966" ng-show="shop_nav"></div>
+
                 <li ng-show="agent_nav">
                     <div class="open_menu">
                         <div></div>
@@ -117,10 +78,11 @@
                     </ul>
                 </li>
                 <div style="border-top:1px solid #416966" ng-show="agent_nav"></div>
+
                 <li ng-show="marketing_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a>客户营销中心</a>
+                        <a>营销中心</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
@@ -131,8 +93,7 @@
                     </ul>
                 </li>
                 <div style="border-top:1px solid #416966" ng-show="marketing_nav"></div>
-            </ul>
-                <div style="border-top:1px solid #416966" ng-show="agent_nav"></div>
+
                 <li ng-show="wallet_nav">
                     <div class="open_menu">
                         <div></div>
@@ -150,6 +111,32 @@
                         </li>
                     </ul>
                 </li>
+                <div style="border-top:1px solid #416966" ng-show="wallet_nav"></div>
+
+
+                <li ng-show="shop_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref=".shop_management">店铺管理</a>
+                    </div>
+                </li>
+                <div style="border-top:1px solid #416966" ng-show="shop_nav"></div>
+
+                <li ng-show="ads_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref=".ads">我的广告</a>
+                    </div>
+                </li>
+                <div style="border-top:1px solid #416966" ng-show="ads_nav"></div>
+
+                <li ng-show="account_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref="main.account-details">广告分账</a>
+                    </div>
+                </li>
+                <div style="border-top:1px solid #416966" ng-show="account_nav"></div>
             </ul>
         </div>
     </div>

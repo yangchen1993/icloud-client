@@ -185,4 +185,9 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/marketing/sms-target.html",
             controller: "SmsTargetController"
         })
+        .state("main.account-details", {
+            url: "/account-details",
+            templateUrl: "template/center/account/details.html",
+            controller: "AccountDetailsController"
+        })
 });

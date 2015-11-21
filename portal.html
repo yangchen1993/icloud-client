@@ -54,8 +54,25 @@
             font-size: 16px;
             font-weight:bold;
         }
+        .search-row {
+            margin:5px -15px 5px -15px;
+            padding:5px 0;
+            background: orangered;
+        }
+        .top-address{
+            text-align: center;
+            height: 35px;
+            line-height: 35px;
+        }
+        .search{
+            position: relative;
+        }
         #search{
-            padding-left:10px;
+            padding-left:23px;
+        }
+        .search .icon-tubiao1{
+            position: absolute;
+            margin:5px 5px;
         }
         .cate-list{
             padding:10px 0;
@@ -289,14 +306,16 @@
         </div>
         <div id="faxian">
             <div class="row top">
-                <!--<div class="cate-item address">-->
-                <!--<i class="iconfont icon-dingwei"></i><span>成都</span>-->
-                <!--</div>-->
-                <!--<div class="col-xs-9">-->
-                <!--<div><i class="iconfont icon-tubiao"></i><input class="form-control" id="search" type="search" placeholder="搜索您感兴趣的内容"></div>-->
-                <!--</div>-->
                 <div class="col-xs-12">
                     <span class="portal-title">发现</span>
+                </div>
+            </div>
+            <div class="row search-row">
+                <div class="col-xs-3 top-address">
+                    <i class="iconfont icon-dingwei"></i><span>成都</span>
+                </div>
+                <div class="col-xs-9 search">
+                    <i class="iconfont icon-tubiao1"></i><input class="form-control" id="search" type="search" placeholder="搜索您感兴趣的内容">
                 </div>
             </div>
             <!-- 分类菜单-->
@@ -306,82 +325,58 @@
                         <div class="swipe-wrap">
                             <div class="swipe-row">
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-meishi"></i>
-                                        <div>美食</div>
-                                    </a>
+                                    <i class="iconfont icon-meishi"></i>
+                                    <div>美食</div>
                                 </div>
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-dianying"></i>
-                                        <div>电影</div>
-                                    </a>
+                                    <i class="iconfont icon-dianying"></i>
+                                    <div>电影</div>
                                 </div>
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-liren"></i>
-                                        <div>丽人</div>
-                                    </a>
+                                    <i class="iconfont icon-liren"></i>
+                                    <div>丽人</div>
                                 </div>
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-yule"></i>
-                                        <div>娱乐</div>
-                                    </a>
+                                    <i class="iconfont icon-yule"></i>
+                                    <div>娱乐</div>
                                 </div>
                             </div>
                             <div class="swipe-row">
                                 <!--这是一个分隔符，哈哈哈哈-->
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-fangchan"></i>
-                                        <div>房产</div>
-                                    </a>
+                                    <i class="iconfont icon-fangchan"></i>
+                                    <div>房产</div>
                                 </div>
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-qiche"></i>
-                                        <div>汽车</div>
-                                    </a>
+                                    <i class="iconfont icon-qiche"></i>
+                                    <div>汽车</div>
                                 </div>
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-jiudian"></i>
-                                        <div>酒店</div>
-                                    </a>
+                                    <i class="iconfont icon-jiudian"></i>
+                                    <div>酒店</div>
                                 </div>
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-lvyou"></i>
-                                        <div>旅游</div>
-                                    </a>
+                                    <i class="iconfont icon-lvyou"></i>
+                                    <div>旅游</div>
                                 </div>
                             </div>
                             <div class="swipe-row">
                                 <!--这是一个分隔符，哈哈哈哈-->
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-xuelijiaoyu"></i>
-                                        <div>教育</div>
-                                    </a>
+                                    <i class="iconfont icon-xuelijiaoyu"></i>
+                                    <div>教育</div>
                                 </div>
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-liuxingfushi"></i>
-                                        <div>服饰</div>
-                                    </a>
+                                    <i class="iconfont icon-liuxingfushi"></i>
+                                    <div>服饰</div>
                                 </div>
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-yangsheng"></i>
-                                        <div>养生</div>
-                                    </a>
+                                    <i class="iconfont icon-yangsheng"></i>
+                                    <div>养生</div>
                                 </div>
                                 <div class="cate-item">
-                                    <a href="">
-                                        <i class="iconfont icon-tubiao"></i>
-                                        <div>家具</div>
-                                    </a>
+                                    <i class="iconfont icon-tubiao"></i>
+                                    <div>家具</div>
                                 </div>
                             </div>
                         </div>
@@ -401,7 +396,7 @@
 
             <div class="shops">
                 <div class="row shop-item">
-                    <a class="" href="">
+                    <a class="" href="http://baidu.com">
                         <div class="col-xs-5 col-sm-3 img-wrapper">
                             <div class="img-placeholder">
                                 <img style="visibility: visible;" src="http://taolishuo.com/wp-content/uploads/2015/05/u34697107801813638680fm58.jpg" data-role="deal-img" data-src="http://e.hiphotos.baidu.com/bainuo/crop%3D0%2C0%2C684%2C415%3Bw%3D230%3Bq%3D79/sign=2c15ffc42e381f308a56d7e994316038/bd3eb13533fa828b1424501ffb1f4134960a5ac3.jpg" height="72" width="120">
@@ -472,6 +467,7 @@
         <a href="javascript:;" data-menu-item="faxian"><i class="iconfont icon-faxian"></i><div>发现</div></a>
         <a href="javascript:;" data-menu-item="myzone"><i class="iconfont icon-gerenzhongxin"></i><div>我的</div></a>
     </div>
+
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/js/swipe.min.js"></script>
 <script>

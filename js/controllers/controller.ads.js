@@ -16,9 +16,10 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
             $window.location.href = ["#/main/create_ads?id=", id].join("");
         };
         $scope.deleteAds = function (id){
+            var _this=$(this);
             if(confirm('确认要删除吗？')){
                 $http.delete(window.API.AD.REMOVE_AD+'?key='+ $.cookie("key").replace(/\"/g,"")+'&id='+id).success(function(){
-                    $(this).parent().parent().remove();
+                    _this.parent().parent().remove();
                     console.log('删除成功');
                 });
             }

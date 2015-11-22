@@ -5,25 +5,58 @@
 
     <div class="row" style="margin-top: 50px; padding: 20px">
         <div class="col-md-4">
-            结算:<span ng-bind="'100'| currency: '￥'"></span>
+            结算总额:<span ng-bind="totalCash| currency: '￥'"></span>
         </div>
         <div class="col-md-4">
-            设备数量:<span ng-bind="'100'| currency: '￥'"></span>
+            设备数量:<span ng-bind="grid.results.length"></span>
         </div>
         <div class="col-md-4">
-            广告数量:<span ng-bind="'100'| currency: '￥'"></span>
+            广告数量:<span ng-bind="grid.results.length"></span>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover text-center">
                 <tr>
-                    <td>设备SSID</td>
-                    <td>设备MAC</td>
-                    <td>店铺名称</td>
+                    <td id="ssid" ng-click="sort('ssid')">
+                        设备SSID
+                        <span ng-show="currentSort['ssid'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['ssid'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="mac" ng-click="sort('mac')">
+                        设备MAC
+                        <span ng-show="currentSort['mac'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['mac'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="router_groups__name" ng-click="sort('router_groups__name')">
+                        店铺名称
+                        <span ng-show="currentSort['router_groups__name'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['router_groups__name'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="cash" ng-click="sort('cash')">
+                        结算分成
+                        <span ng-show="currentSort['cash'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['cash'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                </tr>
+                <tr ng-repeat="i in grid.results">
+                    <td ng-bind="i.ssid"></td>
+                    <td ng-bind="i.mac"></td>
+                    <td><a href="#/main/shop_management_routers?id={{i.router_groups.id}}"><span
+                            ng-bind="i.router_groups.name"></span></a></td>
+                    <td ng-bind="i.cash"></td>
                 </tr>
             </table>
+            <div ng-include="'/template/partial/pagination.html'"></div>
         </div>
     </div>
 </div>

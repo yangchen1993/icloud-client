@@ -20,9 +20,9 @@ window.API = {
 
         "REGISTER": [window.HOST, "users/register/"].join(""), // 注册
 
-        "SUB_USER_ROLES":[window.HOST, "users/sub_user_roles/"].join(""),  //请求代理商可创建的代理商级别
+        "SUB_USER_ROLES": [window.HOST, "users/sub_user_roles/"].join(""),  //请求代理商可创建的代理商级别
 
-        "CREATE_AGENT":[window.HOST, "users/new_user/"].join("")  //创建代理商
+        "CREATE_AGENT": [window.HOST, "users/new_user/"].join("")  //创建代理商
     },
 
     "SYSTEM": {
@@ -139,15 +139,16 @@ window.API = {
     "MARKETING": {
         "NEW_SMS_TEMPLATE": [window.HOST, "sms_templates/new_sms_template/"].join(""), // 新建群发短信模板
         "REMOVE_SMS_TEMPLATE": [window.HOST, "sms_templates/remove_sms_template/"].join(""), // 删除群发短信模板
-        "SEND_SMS_TEMPLATE":[window.HOST, "sms_templates/send_sms_template/"].join(""), // 发送短信
+        "SEND_SMS_TEMPLATE": [window.HOST, "sms_templates/send_sms_template/"].join(""), // 发送短信
         "GET_CURRENT_USER_SMS_TEMPLATES": [window.HOST, "sms_templates/get_current_user_sms_templates/"].join(""), // 获取当前用户的群发模板
         "GET_CURRENT_USER_MEMBERS": [window.HOST, "sms_targets/get_current_user_members/"].join(""),
         "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
     },
 
-    "ACCOUNT":{
-        "GET_CURRENT_USER_ROUTERS": [window.HOST, "account/get_current_user_routers/"].join("")
+    "ACCOUNT": {
+        "GET_CURRENT_USER_ROUTERS": [window.HOST, "account/get_current_user_routers/"].join(""),
+        "GET_CURRENT_USER_TOTAL_CASH": [window.HOST, "account/get_current_user_total_cash/"].join("")
     }
 };
 

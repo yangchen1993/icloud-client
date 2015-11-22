@@ -15,10 +15,10 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
         $scope.editAds = function (id) {
             $window.location.href = ["#/main/create_ads?id=", id].join("");
         };
-        $scope.deleteAds = function (id){
-            var _this=$(this);
-            if(confirm('确认要删除吗？')){
-                $http.delete(window.API.AD.REMOVE_AD+'?key='+ $.cookie("key").replace(/\"/g,"")+'&id='+id).success(function(){
+        $scope.deleteAds = function (id) {
+            var _this = $(this);
+            if (confirm('确认要删除吗？')) {
+                $http.delete(window.API.AD.REMOVE_AD + '?key=' + $.cookie("key").replace(/\"/g, "") + '&id=' + id).success(function () {
                     _this.parent().parent().remove();
                     console.log('删除成功');
                     $(this).parent().parent().remove();
@@ -61,17 +61,15 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
 //        }
 //    }]);
 
-iCloudController.controller("CreateAdsController",["$scope","$http","$category",function($scope,$http,$category){
-    $category.get().success(function(data){
+iCloudController.controller("CreateAdsController", ["$scope", "$http", "$category", function ($scope, $http, $category) {
+    $category.get().success(function (data) {
         $scope.category = data;
         $scope.ads = {
-            "id":data[0].id
+            "id": data[0].id
         };
     })
 }]);
 
-iCloudController.controller("PaidController", ["$scope", "$http", "$cookieStore", "$window", "$grid", "$checkBox",
-    function ($scope, $http, $cookieStore, $window, $grid, $checkBox) {
-        $grid.initial($scope, $window.paidlisting_url);
-        $checkBox.enableCheck("table-paidlisting");
-    }]);
+iCloudController.controller("PutAdController", ["$scope", "$http", function ($scope, $http) {
+
+}]);

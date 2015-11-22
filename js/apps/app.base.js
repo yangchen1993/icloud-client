@@ -35,11 +35,6 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/paid.html",
             controller: "PaidController"
         })
-        .state("main.ads", {
-            url: "/ads",
-            templateUrl: "template/center/ads.html",
-            controller: "AdsController"
-        })
         .state("main.deliveries", {
             url: "/deliveries",
             templateUrl: "template/center/router/deliveries.html",
@@ -55,16 +50,21 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/router/delivery.details.html",
             controller: "DeliveryDetailsController"
         })
+        .state("main.ads", {
+            url: "/ads",
+            templateUrl: "template/center/ads/ads.html",
+            controller: "AdsController"
+        })
         .state("main.create_ads", {
             url: "/create_ads",
-            templateUrl: "template/center/create_ads.html",
+            templateUrl: "template/center/ads/create_ads.html",
             controller: "CreateAdsController"
         })
-        //.state("main.edit_ads", {
-        //    url: "/edit_ads",
-        //    templateUrl: "template/center/edit_ads.html",
-        //    controller: "EditAdsController"
-        //})
+        .state("main.put_ad", {
+            url: "/put_ad",
+            templateUrl: "template/center/ads/put_ad.html",
+            controller: "PutAdController"
+        })
         .state("main.eq_management", {
             url: "/eq_management",
             templateUrl: "template/center/router/eq_management.html",

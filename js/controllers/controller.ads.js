@@ -21,6 +21,8 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
                 $http.delete(window.API.AD.REMOVE_AD+'?key='+ $.cookie("key").replace(/\"/g,"")+'&id='+id).success(function(){
                     _this.parent().parent().remove();
                     console.log('删除成功');
+                    $(this).parent().parent().remove();
+                    $scope.refresh();
                 });
             }
         }
@@ -45,7 +47,9 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
 //            return result
 //        };
 //        var ads_id = get_param($window.location.href, "id");
-//        $http.get([ads_url, "get_media_ad?id=", ads_id, "&key=", $cookieStore.get("key")].join("")).success(function (data) {
+//        $http.get([ads_url, "get_media_ad?id=", ads_id, "&key=", $cookieStore.g
+//
+// et("key")].join("")).success(function (data) {
 //            $scope.adToEdit = data;
 //        });
 //        var promise = $category.get();

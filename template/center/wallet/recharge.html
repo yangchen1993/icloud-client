@@ -1,22 +1,73 @@
-<div style="padding: 10px">
-    <ol class="breadcrumb">
+<style>
+    .zhifubao{
+        position: relative;
+        padding: 5px;
+        border:dashed 2px darkgray;
+        cursor: pointer;
+    }
+    .zfb-logo{
+        width:114px;
+        height:40px;
+        /*outline: dashed 1px;*/
+        background: url(/img/zfb_logo.png);
+
+    }
+    .zhifubao b{
+        display: none;
+        position: absolute;
+        bottom: -2px;
+        right: -2px;
+        width: 12px;
+        height: 12px;
+        overflow: hidden;
+        background: transparent url("//static.360buyimg.com/item/main/1.0.9/css/i/newicon20140910.png") no-repeat scroll -202px -224px;
+    }
+</style>
+<div class="row" style="padding:0;border:solid 1px; padding: 10px">
+    <ol class="col-md-12 breadcrumb">
         <li><a ui-sref="main.wallet">我的钱包</a></li>
         <li class="active">充值</li>
     </ol>
-
+    <div class="col-md-12" style="padding:0;margin:0 0 10px 0 !important;height:50px;line-height:50px;background: #68CCFE;">
+        <div class="row">
+            <div class="col-md-3">1、选择支付方式</div>
+            <div class="col-md-3">2、网上付款</div>
+            <div class="col-md-3">3、支付成功</div>
+        </div>
+    </div>
     <div class="col-md-12">
-        <label>充值金额:</label>
-        <div class="input-group" style="width: 100px">
-            <input class="form-control" type="text" ng-model="rechargeOrder.amount">
-            <span class="input-group-addon">元</span>
+        <div class="form-group">
+            <label>充值金额:</label><input type="text" ng-model="rechargeOrder.amount">元
         </div>
 
         <div class="form-group">
-            <label>支付方式:</label>
-            <label>
-                <input type="radio" name="pay" value="alipay_pc_direct" ng-model="rechargeOrder.channel">支付宝
-            </label>
+            <label>请选择支付方式:</label>
+            <div>
+                <label class="zhifubao">
+                    <b></b>
+                    <div class="zfb-logo"></div>
+                </label>
+                <input id="zhifubao" class="hidden" type="radio" name="pay" value="alipay_pc_direct" ng-model="rechargeOrder.channel">
+            </div>
         </div>
         <button class="btn btn-sm btn-info" ng-click="recharge(rechargeOrder)">立即充值</button>
     </div>
 </div>
+<script>
+    var toSelect=false;
+    $('.zhifubao').on('click',function(){
+        if(toSelect==false){
+            $('#zhifubao').prop('checked',"checked");
+            $('.zhifubao').css('border','solid 2px #E4393C');
+            $('.zhifubao b').css('display','block');
+            toSelect=true;
+            console.log($('#zhifubao').prop('checked'));
+        }else{
+            $('#zhifubao').prop('checked',"");
+            $('.zhifubao').css('border','dashed 2px darkgray');
+            $('.zhifubao b').css('display','none');
+            toSelect=false;
+            console.log($('#zhifubao').prop('checked'));
+        }
+    })
+</script>

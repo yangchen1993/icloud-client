@@ -77,7 +77,6 @@
     <!--组件模板-->
     <div class="template">
         <div class="text">
-            <h4 class="text-title" style="margin:0;">标题</h4>
             <div class="text-content">默认文字</div>
         </div>
         <div class="img">
@@ -94,11 +93,6 @@
                 </div>
                 <div class="panel-body">
                     <form class="form-horizontal">
-                        <p>
-                            <span class="h4">标题</span><small>(建议标题不长于12个字)</small>
-                            <span style="float:right"><input type="checkbox">是否显示</span>
-                            <input type="text" class="edit-title form-control">
-                        </p>
                         <div class="form-group">
                             <div class="col-xs-6">背景色:<input type="text" class="form-control color wback"></div>
                             <div class="col-xs-6">文字色:<input type="text" class="form-control color wcolor"></div>
@@ -184,37 +178,33 @@
             showSpeed: 100,
             theme: 'bootstrap'
         });
-        $('div[data-edit-id='+id+']'+' .edit-title').val($('#'+id+' .text-title').text());-
-                $(document).ready(function(){
-                    $('div[data-edit-id='+id+']'+' .wback').on('change',function(){
-                        $('#'+id+' .text-title').css("background",$(this).val());
-                        console.log($('[data-item-id='+id+']'+' .wback').val());
-                    });
-                    $('div[data-edit-id='+id+']'+' .wcolor').on('change',function(){
-                        $('#'+id+' .text-title').css("color",$(this).val());
-                        console.log($('[data-item-id='+id+']'+' .wcolor').val());
-                    });
-                    $('div[data-edit-id='+id+']'+' .edit-title').on('keyup',function(){
-                        $('#'+id+' .text-title').text($(this).val());
-                    });
-                    $('div[data-edit-id='+id+']'+' .txtarea').attr('id','txtarea');
+        $(document).ready(function(){
+            $('div[data-edit-id='+id+']'+' .wback').on('change',function(){
+                $("#"+id+" .text-content").css("background",$(this).val());
+                console.log($('[data-item-id='+id+']'+' .wback').val());
+            });
+            $('div[data-edit-id='+id+']'+' .wcolor').on('change',function(){
+                $("#"+id+" .text-content").css("color",$(this).val());
+                console.log($('[data-item-id='+id+']'+' .wcolor').val());
+            });
+            $('div[data-edit-id='+id+']'+' .txtarea').attr('id','txtarea');
 
-                    CKEDITOR.document.getById( 'txtarea').setHtml(
-                            $("#"+id+" .text-content").text()
-                    );
+            CKEDITOR.document.getById( 'txtarea').setHtml(
+                    $("#"+id+" .text-content").text()
+            );
 
-                    CKEDITOR.replace( 'txtarea',{
-                        toolbar :
-                                [
-                                    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
-                                ]
-                    });
-                    CKEDITOR.instances["txtarea"].on("instanceReady", function () {
-                        this.document.on("keyup", function(){
-                            validateText();
-                        });
-                    });
+            CKEDITOR.replace( 'txtarea',{
+                toolbar :
+                        [
+                            ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
+                        ]
+            });
+            CKEDITOR.instances["txtarea"].on("instanceReady", function () {
+                this.document.on("keyup", function(){
+                    validateText();
                 });
+            });
+        });
         function validateText(){
             var numText=CKEDITOR.instances.txtarea.getData();
             var numCounter=numText.length;
@@ -271,7 +261,7 @@
                     var setLink=$('div[data-edit-id='+id+']'+' .img-link').val();
                     console.log(setLink);
                     if(!setLink){
-                        setLink=imgPostUrl;
+                        setLink='javascript:;';
                     }else{
                         setLink='http://'+setLink;
                     }

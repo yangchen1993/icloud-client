@@ -169,7 +169,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
 iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$interval", function ($scope, $http, $cookieStore, $window, $interval) {
     var router_id = get_param($window.location.href);
     //放行设置
-    var reload_blackwihit = function () {
+    var reload_blackwhite = function () {
         $scope.type = ["MAC", "域名"];
         $http.get([window.API.ROUTER.GET_ROUTER_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&router=", router_id].join("")).success(function (data) {
             console.log(data);
@@ -184,7 +184,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             }
         });
     };
-    reload_blackwihit();
+    reload_blackwhite();
     $scope.router = {
         "is_black": "1"
     };
@@ -197,7 +197,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
             alert("添加成功");
-            reload_blackwihit();
+            reload_blackwhite();
         })
     };
     $scope.add_domain = function (data) {
@@ -206,7 +206,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
             alert("添加成功");
-            reload_blackwihit();
+            reload_blackwhite();
         })
     };
     $scope.delete = function (id) {
@@ -214,7 +214,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         console.log(ids);
         $http.delete([window.API.ROUTER.REMOVE_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&ids=", ids.join()].join("")).success(function (data) {
             alert("删除成功");
-            reload_blackwihit();
+            reload_blackwhite();
         })
     };
     $scope.filter = {
@@ -244,14 +244,31 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         //路由器实时信息
         var routerStatusInterval = $interval(function () {
             $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
-                console.log(data);
-                $scope.wificat = data;
-                if (_.has(data, "basicInformation")){
+                console.log(data.msg);
+                if(data.msg=="Router offline"){
+                    $scope.wificat = {
+                        "operatingStatus":{
+                            "accessNumber":"未连接",
+                            "MemUsaged":"未连接",
+                            "cpuUtil":"未连接"
+                        },
+                        "basicInformation":{
+                            "softwareVersion":"未连接"
+                        },
+                        "wanStatus":{
+                            "wanip":"未连接",
+                            "speedUp":"未连接",
+                            "speedDown":"未连接"
+                        }
+                    };
+                    $scope.upTime = "未连接"
+                }
+                else{
+                    $scope.wificat = data;
                     $scope.upTime = parseInt(data.basicInformation.upTime / 60);
                 }
             });
         }, 1000);
-
         $scope.$on("$destroy", function () {
            $interval.cancel(routerStatusInterval);
         });

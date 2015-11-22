@@ -3,9 +3,27 @@
         <li class="active">广告分账</li>
     </ol>
 
+    <div class="row" style="margin-top: 50px; padding: 20px">
+        <div class="col-md-4">
+            结算:<span ng-bind="'100'| currency: '￥'"></span>
+        </div>
+        <div class="col-md-4">
+            设备数量:<span ng-bind="'100'| currency: '￥'"></span>
+        </div>
+        <div class="col-md-4">
+            广告数量:<span ng-bind="'100'| currency: '￥'"></span>
+        </div>
+    </div>
+
     <div class="row">
-        <div class="col-md-3">
-            结算:<span ng-bind=""></span>
+        <div class="col-md-12">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <td>设备SSID</td>
+                    <td>设备MAC</td>
+                    <td>店铺名称</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

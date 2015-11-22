@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://127.0.0.1/api/";
+//window.HOST = "http://192.168.10.233:8001/api/";
 window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://112.124.125.145/";
 
@@ -20,7 +20,9 @@ window.API = {
 
         "REGISTER": [window.HOST, "users/register/"].join(""), // 注册
 
-        "CREATE_AGENT": [window.HOST, ""]//
+        "SUB_USER_ROLES":[window.HOST, "users/sub_user_roles/"].join(""),  //请求代理商可创建的代理商级别
+
+        "CREATE_AGENT":[window.HOST, "users/new_user/"].join("")  //创建代理商
     },
 
     "SYSTEM": {
@@ -142,6 +144,10 @@ window.API = {
         "GET_CURRENT_USER_MEMBERS": [window.HOST, "sms_targets/get_current_user_members/"].join(""),
         "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
+    },
+
+    "ACCOUNT":{
+        "GET_CURRENT_USER_ROUTERS": [window.HOST, "account/get_current_user_routers/"].join("")
     }
 };
 

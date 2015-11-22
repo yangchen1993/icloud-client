@@ -144,6 +144,10 @@ window.API = {
         "GET_CURRENT_USER_MEMBERS": [window.HOST, "sms_targets/get_current_user_members/"].join(""),
         "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
+    },
+
+    "ACCOUNT":{
+        "GET_CURRENT_USER_ROUTERS": [window.HOST, "account/get_current_user_routers/"].join("")
     }
 };
 

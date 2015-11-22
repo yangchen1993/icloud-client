@@ -19,7 +19,7 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
             if(confirm('确认要删除吗？')){
                 $http.delete(window.API.AD.REMOVE_AD+'?key='+ $.cookie("key").replace(/\"/g,"")+'&id='+id).success(function(){
                     $(this).parent().parent().remove();
-                    console.log('删除成功');
+                    $scope.refresh();
                 });
             }
         }

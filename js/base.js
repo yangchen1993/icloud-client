@@ -122,7 +122,11 @@ window.API = {
 
         "EDIT_AD": [window.HOST, "ads/edit_ad/"].join(""), // 编辑广告
 
-        "REMOVE_AD": [window.HOST, "ads/remove_ad/"].join("") // 删除广告
+        "REMOVE_AD": [window.HOST, "ads/remove_ad/"].join(""),// 删除广告
+
+        "PUT_AD_IN": [window.HOST,"audits/new_audit/"].join(""),
+
+        "PUT_AD_UP":[window.HOST,"audits/edit_audit/"].join("")
     },
     "WIFICAT": {
         "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息

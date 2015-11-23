@@ -26,9 +26,10 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
             }
         };
         $scope.role=$cookieStore.get("role");
+        //代理商投放
         $scope.dlTouFang=function(id){
             $.ajax({
-                "url": "http://host:port/api/audits/new_audit/?key="+ $.cookie("key").replace(/\"/g, "") + '&id=' + id,
+                "url": $window.API.AD.PUT_AD_IN+"?key="+$.cookie("key").replace(/\"/g,"")+"&id="+id,
                 "type":"POST",
                 "dataType":"json",
                 "data": {
@@ -36,53 +37,19 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
                 },
                 "success":function(data){
                     alert("投放成功");
+                    $scope.refresh();
                 }
             })
         }
         //上架
-        $scope.putInAd=function(id){
-            $http.get(window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS+'?key='+ $.cookie("key").replace(/\"/g,"")).success(function(data){
-                console.log(data);
-            });
-            //$.ajax({
-            //    "url": "http://host:port/api/audits/edit_audit/?key="+ $.cookie("key").replace(/\"/g,"")+'&id='+id,
-            //    "type":"PUT",
-            //    "dataType":"json",
-            //    "data": {
-            //        "status": 2,
-            //        "comments": "failed reason"
-            //    }
-            //});
-        };
-        //上架
-        $scope.putAwayAd=function(id){
+        $scope.putAwayAd =function(id,way){
             $.ajax({
-                "url": "http://host:port/api/audits/edit_audit/?key="+ $.cookie("key").replace(/\"/g,"")+'&id='+id,
+                "url": $window.API.AD.PUT_AD_UP+"?key="+ $.cookie("key").replace(/\"/g,"")+'&id='+id,
                 "type":"PUT",
                 "dataType":"json",
                 "data": {
-                    "status": 2,
+                    "status": way,
                     "comments": "failed reason"
-                },
-                "success":function(data){
-                    $scope.refresh();
-                    alert("上架成功");
-                }
-            });
-        };
-        //下架
-        $scope.takeOffAd=function(id){
-            $.ajax({
-                "url": "http://host:port/api/audits/edit_audit/?key="+ $.cookie("key").replace(/\"/g,"")+'&id='+id,
-                "type":"PUT",
-                "dataType":"json",
-                "data": {
-                    "status": 3,
-                    "comments": "failed reason"
-                },
-                "success":function(data){
-                    $scope.refresh();
-                    alert("下架成功");
                 }
             });
         };
@@ -132,10 +99,11 @@ iCloudController.controller("CreateAdsController", ["$scope", "$http", "$categor
 
 iCloudController.controller("PutAdController", ["$scope", "$http","$window","$grid","$checkBox",function ($scope, $http,$window,$grid,$checkBox) {
     $grid.initial($scope, [$window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS,].join(""));
-    $checkBox.enableCheck("table-wemedia");
+    $checkBox.enableCheck("table-ad");
     $scope.sjTouFang=function(){
+        var id = get_param(window.location.href);
         var group_id=[];
-        var c = angular.element(".table-wemedia :checkbox");
+        var c = angular.element("#table-wemedia :checkbox");
         console.log(c.length);
         group_id=[];
         if((angular.element(":checked").length-1 )==0){
@@ -144,9 +112,21 @@ iCloudController.controller("PutAdController", ["$scope", "$http","$window","$gr
         }
         angular.forEach(c, function (v, k) {
             if (angular.element(v).prop("checked")) {
-                group_id.push(angular.element(v).value);
+                group_id.push(angular.element(v).val());
             }
         });
         console.log(group_id);
+        $.ajax({
+            "url": $window.API.AD.PUT_AD_IN+"?key="+$.cookie("key").replace(/\"/g,"")+"&id="+id,
+            "type":"POST",
+            "dataType":"json",
+            "data": {
+                "space_id": 1,
+                "group_id": group_id
+            },
+            "success":function(data){
+                console.log(data);
+            }
+        })
     }
 }]);

@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-window.HOST = "http://192.168.10.200:8801/api/";
-//window.HOST = "http://mb.idianjia.cn:8801/api/";
+//window.HOST = "http://192.168.2.103:8801/api/";
+window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://112.124.125.145/";
 
 window.API = {

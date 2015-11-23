@@ -41,7 +41,7 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
                 }
             })
         }
-        //上架
+        //上下架
         $scope.putAwayAd =function(id,way){
             $.ajax({
                 "url": $window.API.AD.PUT_AD_UP+"?key="+ $.cookie("key").replace(/\"/g,"")+'&id='+id,
@@ -100,21 +100,18 @@ iCloudController.controller("CreateAdsController", ["$scope", "$http", "$categor
 iCloudController.controller("PutAdController", ["$scope", "$http","$window","$grid","$checkBox",function ($scope, $http,$window,$grid,$checkBox) {
     $grid.initial($scope, [$window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS,].join(""));
     $checkBox.enableCheck("table-ad");
-    $scope.sjTouFang=function(){
+    $scope.sjTouFang=function(group_id){
         var id = get_param(window.location.href);
-        var group_id=[];
-        var c = angular.element("#table-wemedia :checkbox");
-        console.log(c.length);
-        group_id=[];
-        if((angular.element(":checked").length-1 )==0){
-            alert("请至少选择一个店铺");
-            return;
-        }
-        angular.forEach(c, function (v, k) {
-            if (angular.element(v).prop("checked")) {
-                group_id.push(angular.element(v).val());
-            }
-        });
+        //var c = angular.element("#table-ad :checkbox");
+        //if((angular.element(":checked").length-1 )==0){
+        //    alert("请至少选择一个店铺");
+        //    return;
+        //}
+        //angular.forEach(c, function (v, k) {
+        //    if (angular.element(v).prop("checked")) {
+        //        group_id.push(angular.element(v).val());
+        //    }
+        //});
         console.log(group_id);
         $.ajax({
             "url": $window.API.AD.PUT_AD_IN+"?key="+$.cookie("key").replace(/\"/g,"")+"&id="+id,
@@ -125,8 +122,7 @@ iCloudController.controller("PutAdController", ["$scope", "$http","$window","$gr
                 "group_id": group_id
             },
             "success":function(data){
-                console.log(data);
-            }
+                alert("投放成功，请返回广告中心查看");            }
         })
     }
 }]);

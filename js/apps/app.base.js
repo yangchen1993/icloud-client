@@ -20,16 +20,16 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/main.html",
             controller:"MainController"
         })
-        .state("main.functions", {
-            url: "/functions",
-            templateUrl: "template/center/functions.html",
-            controller: "FunctionsController"
-        })
-        .state("main.permissions", {
-            url: "/permissions",
-            templateUrl: "template/center/permissions.html",
-            controller: "PermissionController"
-        })
+        //.state("main.functions", {
+        //    url: "/functions",
+        //    templateUrl: "template/center/functions.html",
+        //    controller: "FunctionsController"
+        //})
+        //.state("main.permissions", {
+        //    url: "/permissions",
+        //    templateUrl: "template/center/permissions.html",
+        //    controller: "PermissionController"
+        //})
         .state("main.paid", {
             url: "/paid",
             templateUrl: "template/center/paid.html",

@@ -29,45 +29,75 @@ iCloudController.controller("ShopManagementController", ["$scope", "$http", "$gr
         }
     }]);
 
-iCloudController.controller("CreateShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", "$window",
-    function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore, $window) {
-        $scope.shop = {};
-        $category.get().success(function (data) {
-            $scope.shop.category = data[0].name;
-            $scope.category = data;
+iCloudController.controller("CreateShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore) {
+    $scope.shop = {};
+    $category.get().success(function (data) {
+        $scope.shop.category = data[0].name;
+        $scope.category = data;
+    })
+        .error(function (data) {
+            console.log(data);
+        });
+    $province.get().success(function (data) {
+        $scope.province = data;
+    });
+    $scope.select_p = function (id) {
+        $city.get(id).success(function (data) {
+            $scope.city = data;
+        })
+    };
+    $scope.select_c = function (id) {
+        $area.get(id).success(function (data) {
+            $scope.area = data;
+        })
+    }
+    $scope.select_a = function (id) {
+        $trades.get(id).success(function (data) {
+            $scope.trades = data;
+        })
+    };
+
+    function isImageFile(file) {
+        if (file.type) {
+            return /^image\/\w+$/.test(file.type);
+        } else {
+            return /\.(jpg|jpeg|png|gif)$/.test(file);
+        }
+    }
+
+    var imgData;
+    $('input[type = "file"]').change(function(){
+        var files;
+        var img;
+        files = $(this).prop('files');
+        if(isImageFile(files[0]))
+            this.url = URL.createObjectURL(files[0]);
+        img = $('<img src="' + this.url + '" style="width:100%;height:100%">');
+        $("#img_frame").html(img);
+        img.cropper({
+            aspectRatio:120/72
+        });
+
+        $("#save").click(function(){
+            imgData = img.cropper('getCroppedCanvas', {
+                width: 640
+            }).toDataURL();
+            console.log(imgData);
+            $("#show_img").attr('src',imgData);
+        });
+    });
+
+    $scope.submit = function (shop) {
+        shop.img=imgData;
+        $http.post([window.API.GROUP.NEW_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
+            alert(data.msg);
+            location.href = "#/main/shop_management";
         })
             .error(function (data) {
                 console.log(data);
-            });
-        $province.get().success(function (data) {
-            $scope.province = data;
-        });
-        $scope.select_p = function (id) {
-            $city.get(id).success(function (data) {
-                $scope.city = data;
             })
-        };
-        $scope.select_c = function (id) {
-            $area.get(id).success(function (data) {
-                $scope.area = data;
-            })
-        };
-        $scope.select_a = function (id) {
-            $trades.get(id).success(function (data) {
-                $scope.trades = data;
-            })
-        };
-        $scope.submit = function (shop) {
-
-            $http.post([window.API.GROUP.NEW_GROUP, "?key=", $cookieStore.get("key")].join(""), shop)
-                .success(function (data) {
-                    $window.location.href = "#/main/shop_management";
-                })
-                .error(function (data) {
-                    $window.alert("创建失败");
-                })
-        }
-    }]);
+    }
+}]);
 
 iCloudController.controller("EditShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore) {
     var id = get_param(window.location.href);
@@ -105,18 +135,48 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
             $scope.trades = data;
         })
     };
-    $scope.submit = function (shop) {
+    function isImageFile(file) {
+        if (file.type) {
+            return /^image\/\w+$/.test(file.type);
+        } else {
+            return /\.(jpg|jpeg|png|gif)$/.test(file);
+        }
+    }
 
-        $http.put([window.API.GROUP.EDIT_GROUP, "?key=", $cookieStore.get("key")].join(""), shop)
-            .success(function (data) {
-                alert(data.msg);
-                location.href = "#/main/shop_management";
-            })
+    var imgData;
+    $('input[type = "file"]').change(function(){
+        var files;
+        var img;
+        files = $(this).prop('files');
+        if(isImageFile(files[0]))
+            this.url = URL.createObjectURL(files[0]);
+        img = $('<img src="' + this.url + '" style="width:100%;height:100%">');
+        $("#img_frame").html(img);
+        img.cropper({
+            aspectRatio:120/72
+        });
+
+        $("#save").click(function(){
+            imgData = img.cropper('getCroppedCanvas', {
+                width: 640
+            }).toDataURL();
+            console.log(imgData);
+            $("#show_img").attr('src',imgData);
+        });
+    });
+
+    $scope.submit = function (shop) {
+        shop.img = imgData;
+        $http.put([window.API.GROUP.EDIT_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
+            alert(data.msg);
+            location.href = "#/main/shop_management";
+        })
             .error(function (data) {
                 console.log(data);
             })
     }
 }]);
+
 
 iCloudController.controller("ShopManagementRoutersController", ["$scope", "$window", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $window, $http, $category, $province, $city, $area, $trades, $cookieStore) {
     var shop_id = get_param($window.location.href);
@@ -130,8 +190,8 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     };
     show_bindRouters();
 
-
     var show_selectRouters = function () {
+        $scope.router = [];
         $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
             var unbingRouters = [], k = 0;
             for (var i = 0; i < data.results.length; i++) {
@@ -141,6 +201,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
                 }
             }
             $scope.router = unbingRouters;
+            //$scope.bind_router = unbingRouters[0].id;
         });
     };
     show_selectRouters();
@@ -154,6 +215,9 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
             show_bindRouters();
             show_selectRouters();
         })
+            .error(function(data){
+                alert(data.msg);
+            })
     };
 
     $scope.bind_submit = function () {
@@ -187,11 +251,6 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             }
         });
     };
-
-    $scope.goToShopManagement = function () {
-        $window.location.href = ["#/main/shop_management_routers?id=", shop_id].join("")
-    };
-
     reload_blackwhite();
     $scope.router = {
         "is_black": "1"
@@ -255,23 +314,23 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
                 console.log(data.msg);
                 if (data.msg == "Router offline") {
                     $scope.wificat = {
-                        "operatingStatus": {
-                            "accessNumber": "未连接",
-                            "MemUsaged": "未连接",
-                            "cpuUtil": "未连接"
+                        "operatingStatus":{
+                            "accessNumber":"未连接",
+                            "MemUsaged":"未连接",
+                            "cpuUtil":"未连接"
                         },
-                        "basicInformation": {
-                            "softwareVersion": "未连接"
+                        "basicInformation":{
+                            "softwareVersion":"未连接"
                         },
-                        "wanStatus": {
-                            "wanip": "未连接",
-                            "speedUp": "未连接",
-                            "speedDown": "未连接"
+                        "wanStatus":{
+                            "wanip":"未连接",
+                            "speedUp":"未连接",
+                            "speedDown":"未连接"
                         }
                     };
                     $scope.upTime = "未连接"
                 }
-                else {
+                else{
                     $scope.wificat = data;
                     $scope.upTime = parseInt(data.basicInformation.upTime / 60);
                 }

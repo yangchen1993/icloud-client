@@ -29,16 +29,13 @@
         </div>
         <div class="form-inline" style="margin-top: 15px">
             <span>居住地址：</span>
-            <input class="form-control" type="text" ng-model="business.address_additional">
-        </div>
-        <div class="form-inline" style="margin-top: 15px">
-            <span>管辖区域：</span>
-            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in province1" ng-model="business.province" ng-change="select_p(business.province)">
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in province1" ng-model="business.province_live" ng-change="select_p(business.province_live)">
             </select>
-            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in city1" ng-model="business.city" ng-change="select_c(business.city)">
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in city1" ng-model="business.city_live" ng-change="select_c(business.city_live   )">
             </select>
-            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in area1" ng-model="business.area">
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in area1" ng-model="business.area_live">
             </select>
+            <input class="form-control" type="text" placeholder="街道地址" ng-model="business.address_additional">
         </div>
 
         <p class="h3" style="margin-left: -100px">公司信息</p>

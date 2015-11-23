@@ -7,7 +7,7 @@
 <div class="form-inline">
     <span style="font-family: 'Microsoft YaHei';font-size: 16px;font-weight: 500">选择路由器：</span>
     <select class="form-control" style="width: 200px" ng-model="bind_router" ng-options="v.id as v.mac for v in router">
-        <option value="">MAC码</option>
+        <option value="" disabled>MAC码</option>
     </select>
     <button class="btn btn-info" style="margin-left: 50px" ng-click="bind_submit()">绑定</button>
 </div>

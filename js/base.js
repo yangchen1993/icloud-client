@@ -22,6 +22,8 @@ window.API = {
 
         "SUB_USER_ROLES": [window.HOST, "users/sub_user_roles/"].join(""),  //请求代理商可创建的代理商级别
 
+        "SUB_USER_SCOPES":[window.HOST,"users/sub_user_scopes"].join(""),
+
         "CREATE_AGENT": [window.HOST, "users/new_user/"].join("")  //创建代理商
     },
 

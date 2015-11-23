@@ -335,7 +335,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
                     $scope.upTime = parseInt(data.basicInformation.upTime / 60);
                 }
             });
-        }, 3000);
+        }, 30000);
         $scope.$on("$destroy", function () {
             $interval.cancel(routerStatusInterval);
         });

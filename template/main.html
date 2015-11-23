@@ -45,10 +45,10 @@
                     <div class="open_menu">
                         <div></div>
                         <a ui-sref=".eq_management">设备管理</a>
-                        <i class="glyphicon glyphicon-triangle-right"></i>
+                        <i class="glyphicon glyphicon-triangle-right" ng-if="delivery_nav"></i>
                     </div>
                     <ul class="menu_child">
-                        <li>
+                        <li ng-if="delivery_nav">
                             <div></div>
                             <a ui-sref=".deliveries">设备分配</a>
                         </li>

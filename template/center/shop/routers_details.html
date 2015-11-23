@@ -55,7 +55,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
-                <div>
+                <div style="background-color: #fff">
                     <p style="padding: 30px 0 ">认证方式：</p>
                     <p class="text-muted" style="margin-left: 30px">全部选择关闭则为免认证方式</p>
                     <div class="identify_type">
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="border-left: 0">
+                <div style="border-left: 0;background-color: #fff">
                     <p style="padding: 30px 0">认证有效期：</p>
 
                     <p class="text-muted" style="margin-left: 30px">连网时间超出认证有效期后需再次认证才能上网(默认5小时)</p>
@@ -115,8 +115,8 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="profile">
-                <div style="overflow-y: auto">
-                    <div class="form-inline">
+                <div style="overflow-y: auto;background-color: #fff">
+                    <div class="form-inline text-center" style="margin: 10px 0">
                         <span>类型：</span>
                         <select class="form-control" style="width: 100px" ng-change="blackwhite_filter(filter)"
                                 ng-model="filter.content_type">
@@ -151,7 +151,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="shop_isBlack">
+                <div class="shop_isBlack" style="background-color: #fff">
                     <div>
                         <p class="text-center" style="font-family: 'Microsoft YaHei';font-size: 16px">新增MAC码</p>
 

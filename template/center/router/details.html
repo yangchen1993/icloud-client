@@ -1,5 +1,5 @@
 <div style="padding:10px" class="row">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" style="background-color: #1ed1bf">
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li class="active">路由器详情</li>
     </ol>
@@ -8,27 +8,23 @@
     <div class="col-md-4 col-xs-12">
         <div class="details_panel">
             <p>店铺信息</p>
-
             <div class="row text-center">
                 <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:30px 0 0 20px;background-color: #f6f0ec;width:80%;">
+                    <div style="margin:20px 0 0 40px;background-color: #f6f0ec;width:80%;height: 75%">
                         <p style="font-size: 18px;padding: 10px 0">店铺名称：</p>
-
                         <p ng-bind="routers_all.router.router_groups.name" style="font-size:16px"></p>
                     </div>
 
                 </div>
                 <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:30px 0 0 20px;background-color: #f6f0ec;width:80%;">
+                    <div style="margin:20px 0 0 0;background-color: #f6f0ec;width:80%;height: 75%">
                         <p style="font-size: 18px;padding: 10px 0">店铺所属行业：</p>
-
                         <p ng-bind="routers_all.router.router_groups.category" style="font-size:16px"></p>
                     </div>
                 </div>
-                <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:30px 0 0 20px;background-color: #f6f0ec;width:80%;">
+                <div class="col-md-12 col-xs-12" style="height: 120px">
+                    <div style="margin:20px 0 0 45px;background-color: #f6f0ec;width:80%;height: 75%">
                         <p style="font-size: 18px;padding: 10px 0">店铺所在地址：</p>
-
                         <p ng-bind="routers_all.router.router_groups.trade_area.province+' '+routers_all.router.router_groups.trade_area.city+' '+routers_all.router.router_groups.trade_area.area+' '+routers_all.router.router_groups.trade_area.name"
                            style="font-size: 16px"></p>
                     </div>
@@ -43,26 +39,22 @@
 
             <div class="row text-center">
                 <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <p style="font-size: 18px;padding: 10px 0">WIFI名称：<a href="javascript:"
-                                                                         ng-click="modify_ssid(routers_all.router.ssid)">设置</a>
-                    </p>
-
+                    <div style="margin:20px 0 0 40px;background-color: #f6f0ec;width:80%;height: 75%">
+                    <p style="font-size: 18px;padding: 10px 0">WIFI名称：<a href="javascript:"ng-click="modify_ssid(routers_all.router.ssid)">设置</a></p>
                     <p class="content_panel" ng-bind="routers_all.router.ssid" style="font-size: 16px"></p>
+                    </div>
                 </div>
                 <div class="col-md-6 col-xs-12" style="height: 120px">
+                    <div style="margin:20px 0 0 0;background-color: #f6f0ec;width:80%;height: 75%">
                     <p style="font-size: 18px;padding: 10px 0">MAC地址：</p>
-
                     <p class="content_panel" ng-bind="routers_all.router.mac" style="font-size: 16px">></p>
+                    </div>
                 </div>
-                <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <p style="font-size: 18px;padding: 10px 0">路由器SN码：</p>
-
-                    <p class="content_panel" style="font-size: 16px">车山地车山地车</p>
-                </div>
-                <div class="col-md-6 col-xs-12" style="height: 120px">
+                <div class="col-md-12 col-xs-12" style="height: 120px">
+                    <div style="margin:20px 0 0 45px;background-color: #f6f0ec;width:80%;height: 75%">
                     <p style="font-size: 18px;padding: 10px 0">系统版本：</p>
-
-                    <p class="content_panel" style="font-size: 16px">呢呵呵你让他</p>
+                    <p class="content_panel" style="font-size: 16px" ng-bind="wificat.basicInformation.softwareVersion"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,24 +66,32 @@
 
             <div class="row text-center">
                 <div class="col-md-6 col-xs-12" style="height: 120px">
+                    <div style="margin:20px 0 0 40px;background-color: #f6f0ec;width:80%;height: 75%">
                     <p style="font-size: 18px;padding: 10px 0">连续运行时间：</p>
 
                     <p class="content_panel" style="font-size: 16px" ng-bind="upTime"></p>
+                        </div>
                 </div>
                 <div class="col-md-6 col-xs-12" style="height: 120px">
+                    <div style="margin:20px 0 0 0;background-color: #f6f0ec;width:80%;height: 75%">
                     <p style="font-size: 18px;padding: 10px 0">接入人数：</p>
 
                     <p class="content_panel" style="font-size: 16px" ng-bind="wificat.operatingStatus.accessNumber"></p>
+                        </div>
                 </div>
                 <div class="col-md-6 col-xs-12" style="height: 120px">
+                    <div style="margin:20px 0 0 40px;background-color: #f6f0ec;width:80%;height: 75%">
                     <p style="font-size: 18px;padding: 10px 0">内存占用比率：</p>
 
                     <p class="content_panel" style="font-size: 16px" ng-bind="wificat.operatingStatus.MemUsaged"></p>
+                        </div>
                 </div>
                 <div class="col-md-6 col-xs-12" style="height: 120px">
+                    <div style="margin:20px 0 0 0;background-color: #f6f0ec;width:80%;height: 75%">
                     <p style="font-size: 18px;padding: 10px 0">CPU负载率：</p>
 
                     <p class="content_panel" style="font-size: 16px" ng-bind="wificat.operatingStatus.cpuUtil"></p>
+                        </div>
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
                 <div style="background-color: #fff">
-                    <p style="padding: 30px 0 ">认证方式：</p>
+                    <p style="padding: 30px">认证方式：</p>
 
                     <p class="text-muted" style="margin-left: 30px">全部选择关闭则为免认证方式</p>
 
@@ -157,7 +157,7 @@
                     </div>
                 </div>
                 <div style="border-left: 0;background-color: #fff">
-                    <p style="padding: 30px 0">认证有效期：</p>
+                    <p style="padding: 30px">认证有效期：</p>
 
                     <p class="text-muted" style="margin-left: 30px">连网时间超出认证有效期后需再次认证才能上网(默认5小时)</p>
 
@@ -180,7 +180,7 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="profile">
                 <div style="overflow-y: auto;background-color: #fff">
-                    <div class="form-inline">
+                    <div class="form-inline text-center" style="margin:10px 0">
                         <span>类型：</span>
                         <select class="form-control" style="width: 100px" ng-change="blackwhite_filter(filter)"
                                 ng-model="filter.content_type">
@@ -260,33 +260,6 @@
 
 </div>
 
-<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
-<!--<div class="modal-dialog">-->
-<!--<div class="modal-content">-->
-<!--<div class="modal-header">-->
-<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-<!--<h4 class="modal-title">重启路由器</h4>-->
-<!--</div>-->
-<!--<div class="modal-body">-->
-<!--<div>-->
-<!--<p>-->
-<!--<span>完成进度：</span>-->
-<!--<span id="progress_span">0</span>-->
-<!--<span>%</span>-->
-<!--</p>-->
-<!--</div>-->
-<!--<div class="progress">-->
-<!--<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="progress">-->
-<!--&lt;!&ndash;<span class="sr-only">40% Complete (success)</span>&ndash;&gt;-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="modal-footer">-->
-<!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-<!--</div>-->
-<!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
-<!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
-<!--</div>-->
 <script>
     $('a[href="#home"]').click(function (e) {
         e.preventDefault();

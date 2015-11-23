@@ -133,7 +133,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         var data = prompt("当前WIFI名称：" + ssid);
         if (data) {
             var key = $cookieStore.get("key");
-            $http.patch([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, $scope.routers_all.router.router_groups.id, "/", "?key=", key].join(""), {"ssid": data});
+            $http.put([window.API.ROUTER.ROUTERS_SSID,"?key=", key,"&id=", $scope.routers_all.router.router_groups.id].join(""), {"ssid": data});
         }
     };
     //放行设置
@@ -166,6 +166,9 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             alert("添加成功");
             reload_blackwihit();
         })
+            .error(function(data){
+                alert(data.msg);
+            })
     };
     $scope.add_domain = function (data) {
         data.router = router_id;
@@ -175,6 +178,9 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             alert("添加成功");
             reload_blackwihit();
         })
+            .error(function(data){
+                alert(data.msg);
+            })
     };
     $scope.delete = function (id) {
         var ids = [id];
@@ -211,7 +217,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         //路由器实时信息
         var routerStatusInterval = $interval(function () {
             $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
-                console.log(data.msg);
+                console.log(data);
                 if (data.msg == "Router offline") {
                     $scope.wificat = {
                         "operatingStatus":{

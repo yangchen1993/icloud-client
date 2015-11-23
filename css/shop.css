@@ -1,3 +1,6 @@
+.shop_index{
+    background-color: #fff;
+}
 .shop_index:nth-child(1) {
     width: 70%;
     height: 300px;
@@ -39,11 +42,11 @@
 .identify_type{
     position:relative;
     left:50%;
-    width:260px;
-    margin:20px 0 0 -130px;
+    width:280px;
+    margin:20px 0 0 -140px;
 }
 .identify_type>div{
-    width:100px;
+    width:110px;
     float: left;
 }
 #profile>div{

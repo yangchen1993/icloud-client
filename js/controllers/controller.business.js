@@ -405,7 +405,8 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
 iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
     var routergroup_id = get_param(window.location.href);
     $scope.submit = function (weixin) {
-        $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key")].join(""), weixin).success(function (data) {
+        console.log(weixin);
+        $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key"),"&routergroup_id=",routergroup_id].join(""), weixin).success(function (data) {
             alert(data.msg);
         });
     };

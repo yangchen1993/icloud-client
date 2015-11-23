@@ -51,7 +51,7 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
             $area.get(id).success(function (data) {
                 $scope.area = data;
             })
-        }
+        };
         $scope.select_a = function (id) {
             $trades.get(id).success(function (data) {
                 $scope.trades = data;
@@ -130,6 +130,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     };
     show_bindRouters();
 
+
     var show_selectRouters = function () {
         $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
             var unbingRouters = [], k = 0;
@@ -186,6 +187,11 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             }
         });
     };
+
+    $scope.goToShopManagement = function () {
+        $window.location.href = ["#/main/shop_management_routers?id=", shop_id].join("")
+    };
+
     reload_blackwhite();
     $scope.router = {
         "is_black": "1"
@@ -270,7 +276,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
                     $scope.upTime = parseInt(data.basicInformation.upTime / 60);
                 }
             });
-        }, 1000);
+        }, 3000);
         $scope.$on("$destroy", function () {
             $interval.cancel(routerStatusInterval);
         });

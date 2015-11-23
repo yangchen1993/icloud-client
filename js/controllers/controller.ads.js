@@ -21,11 +21,71 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
                 $http.delete(window.API.AD.REMOVE_AD + '?key=' + $.cookie("key").replace(/\"/g, "") + '&id=' + id).success(function () {
                     _this.parent().parent().remove();
                     console.log('删除成功');
-                    $(this).parent().parent().remove();
                     $scope.refresh();
                 });
             }
+        };
+        $scope.role=$cookieStore.get("role");
+        $scope.dlTouFang=function(id){
+            $.ajax({
+                "url": "http://host:port/api/audits/new_audit/?key="+ $.cookie("key").replace(/\"/g, "") + '&id=' + id,
+                "type":"POST",
+                "dataType":"json",
+                "data": {
+                    "space_id": 2,
+                },
+                "success":function(data){
+                    alert("投放成功");
+                }
+            })
         }
+        //上架
+        $scope.putInAd=function(id){
+            $http.get(window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS+'?key='+ $.cookie("key").replace(/\"/g,"")).success(function(data){
+                console.log(data);
+            });
+            //$.ajax({
+            //    "url": "http://host:port/api/audits/edit_audit/?key="+ $.cookie("key").replace(/\"/g,"")+'&id='+id,
+            //    "type":"PUT",
+            //    "dataType":"json",
+            //    "data": {
+            //        "status": 2,
+            //        "comments": "failed reason"
+            //    }
+            //});
+        };
+        //上架
+        $scope.putAwayAd=function(id){
+            $.ajax({
+                "url": "http://host:port/api/audits/edit_audit/?key="+ $.cookie("key").replace(/\"/g,"")+'&id='+id,
+                "type":"PUT",
+                "dataType":"json",
+                "data": {
+                    "status": 2,
+                    "comments": "failed reason"
+                },
+                "success":function(data){
+                    $scope.refresh();
+                    alert("上架成功");
+                }
+            });
+        };
+        //下架
+        $scope.takeOffAd=function(id){
+            $.ajax({
+                "url": "http://host:port/api/audits/edit_audit/?key="+ $.cookie("key").replace(/\"/g,"")+'&id='+id,
+                "type":"PUT",
+                "dataType":"json",
+                "data": {
+                    "status": 3,
+                    "comments": "failed reason"
+                },
+                "success":function(data){
+                    $scope.refresh();
+                    alert("下架成功");
+                }
+            });
+        };
     }]);
 
 
@@ -70,6 +130,23 @@ iCloudController.controller("CreateAdsController", ["$scope", "$http", "$categor
     })
 }]);
 
-iCloudController.controller("PutAdController", ["$scope", "$http", function ($scope, $http) {
-
+iCloudController.controller("PutAdController", ["$scope", "$http","$window","$grid","$checkBox",function ($scope, $http,$window,$grid,$checkBox) {
+    $grid.initial($scope, [$window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS,].join(""));
+    $checkBox.enableCheck("table-wemedia");
+    $scope.sjTouFang=function(){
+        var group_id=[];
+        var c = angular.element(".table-wemedia :checkbox");
+        console.log(c.length);
+        group_id=[];
+        if((angular.element(":checked").length-1 )==0){
+            alert("请至少选择一个店铺");
+            return;
+        }
+        angular.forEach(c, function (v, k) {
+            if (angular.element(v).prop("checked")) {
+                group_id.push(angular.element(v).value);
+            }
+        });
+        console.log(group_id);
+    }
 }]);

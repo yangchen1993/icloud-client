@@ -3,7 +3,7 @@
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li class="active">版本管理</li>
     </ol>
-    <button class="btn btn-success" data-toggle="modal" data-target="#newVersionModal" ng-click="newVersionModal()">发布新版本</button>
+    <button ng-if="role == '系统管理员'" class="btn btn-success" data-toggle="modal" data-target="#newVersionModal" ng-click="newVersionModal()">发布新版本</button>
     <div class="table_inside">
         <table class="table table-bordered text-center">
             <thead>

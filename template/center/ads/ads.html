@@ -14,26 +14,26 @@
             <table id="table-wemedia" class="table table-hover table-bordered table-selectable text-center ads_table">
                 <thead>
                 <tr>
-                    <td>
-                        <a href="javascript:" ng-click="checkAll()">全选</a>
-                        <a href="javascript:" ng-click="checkInverse()">反选</a>
-                    </td>
-                    <td id="{{ headers[10] }}" ng-click="sort(headers[10])" style="cursor: pointer">
+                    <!--<td>-->
+                        <!--<a href="javascript:" ng-click="checkAll()">全选</a>-->
+                        <!--<a href="javascript:" ng-click="checkInverse()">反选</a>-->
+                    <!--</td>-->
+                    <td id="category" ng-click="sort('category')" style="cursor: pointer">
                         行业类型
-                        <span ng-show="currentSort[headers[10]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                    <span ng-show="currentSort[headers[10]] === false"
+                        <span ng-show="currentSort['category'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['category'] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
-                    <td id="{{ headers[5] }}" ng-click="sort(headers[5])" style="cursor: pointer">
+                    <td id="create_time" ng-click="sort('create_time')" style="cursor: pointer">
                         创建时间
-                        <span ng-show="currentSort[headers[5]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                    <span ng-show="currentSort[headers[5]] === false"
+                        <span ng-show="currentSort['create_time'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['create_time'] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
-                    <td id="{{ headers[6] }}" ng-click="sort(headers[6])" style="cursor: pointer">
+                    <td id="modified_time" ng-click="sort('modified_time')" style="cursor: pointer">
                         修改时间
-                        <span ng-show="currentSort[headers[6]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                    <span ng-show="currentSort[headers[6]] === false"
+                        <span ng-show="currentSort['modified_time'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['modified_time'] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
                     <td>操作</td>
@@ -41,14 +41,14 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="p in grid.results" class="wemedia_table">
-                    <td><input type="checkbox"></td>
+                    <!--<td><input type="checkbox"></td>-->
                     <td ng-bind="p.category"></td>
                     <td ng-bind="p.create_time"></td>
                     <td ng-bind="p.modified_time"></td>
                     <td>
                         <a href="javascript:" ng-click="editAds(p.id)">修改</a>
-                        <a href="" ng-click="deleteAds(p.id)">删除</a>
-                        <a href="" ng-click="under()">下架</a>
+                        <a href="javascript:" ng-click="deleteAds(p.id)">删除</a>
+                        <a href="javascript:" ng-click="under()">下架</a>
                     </td>
                 </tr>
                 </tbody>

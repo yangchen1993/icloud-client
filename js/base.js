@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.10.233:8001/api/";
+//window.HOST = "http://192.168.2.103:8801/api/";
 window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://112.124.125.145/";
 
@@ -167,4 +167,9 @@ var transform_error_message = function (msg) {
 var get_param = function (href) {
     var search_start = href.indexOf("=");
     return href.slice(search_start + 1);
+};
+
+var replaceString = function (str, start, end, rep) {
+    var replaceStartIndex = str.indexOf(start);
+    var replaceEndIndex = str.substring(replaceStartIndex).indexOf(end)
 };

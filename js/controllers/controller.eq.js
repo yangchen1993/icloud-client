@@ -67,7 +67,9 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
 
 iCloudController.controller("VersionManagementController", ['$scope', '$window', '$http', '$cookieStore', '$grid',
     function ($scope, $window, $http, $cookieStore, $grid) {
-        $grid.initial($scope, $window.version_url, {"ordering": "-create_time"});
+        $grid.initial($scope, $window.API.ROUTER.GET_ALL_VERSIONS, {"ordering": "-create_time"});
+
+        $scope.role = $cookieStore.get("role");
 
         $scope.newVersionModal = function () {
             angular.element("form")[0].reset();
@@ -131,7 +133,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         var data = prompt("当前WIFI名称：" + ssid);
         if (data) {
             var key = $cookieStore.get("key");
-            $http.patch([window.routers_groups_url, $scope.routers.router_groups.id, "/", "?key=", key].join(""), {"ssid": data});
+            $http.patch([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, $scope.routers.router_groups.id, "/", "?key=", key].join(""), {"ssid": data});
         }
     };
     //放行设置

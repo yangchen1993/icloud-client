@@ -2,7 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.2.103:8801/api/";
+//window.HOST = "http://192.168.2.200:8801/api/";
+//window.HOST = "http://192.168.10.233:8001/api/";
 window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://112.124.125.145/";
 
@@ -138,9 +139,8 @@ window.API = {
     "WEIXIN": {
         "NEW_WECHAT": [window.HOST, "wechat/new_wechat/"].join(""),
 
-        "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
+        "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join("")
 
-        "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
     },
 
 

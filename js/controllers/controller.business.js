@@ -94,7 +94,7 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
             location.href = "#/main/shop_management";
         })
             .error(function (data) {
-                console.log(data);
+                alert(data.msg);
             })
     }
 }]);
@@ -403,19 +403,25 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
 }]);
 
 iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
-    var routergroup_id = get_param(window.location.href);
+    //$scope.submit = function (weixin) {
+    //    console.log(weixin);
+    //    $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key"),].join(""), weixin).success(function (data) {
+    //        alert(data.msg);
+    //        //location.href = "#/main/routers_details";
+    //    });
+    //};
+    $http.get([window.API.WEIXIN.GET_WECHAT, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+        console.log(data);
+        $scope.weixin = data;
+    });
+    $scope.isShow = true;
     $scope.submit = function (weixin) {
         console.log(weixin);
-        $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key"),"&routergroup_id=",routergroup_id].join(""), weixin).success(function (data) {
+        $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key")].join(""), weixin).success(function (data) {
             alert(data.msg);
-        });
-    };
-    $http.get([window.API.WEIXIN.GET_WECHAT, "?key=", $cookieStore.get("key"), "&routergroup_id=", routergroup_id].join("")).success(function (data) {
-        $scope.weixin_edit = data;
-    });
-    $scope.submit1 = function (weixin) {
-        $http.put([window.API.WEIXIN.EDIT_WECHAT, "?key=", $cookieStore.get("key")].join(""), weixin).success(function (data) {
-            alert(data.msg);
-        });
+        })
+            .error(function(data){
+                alert(data.msg);
+            })
     }
 }]);

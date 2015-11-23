@@ -7,11 +7,12 @@
 
     <div class="shop_message">
         <div style="margin: 0 auto;padding:50px 0 0 30%">
-        <p class="h3">店铺信息</p>
-            <span style="position: absolute;left: 50px;">店铺图片</span>
-            <div style="position: absolute;left: 50px;width: 300px;height: 200px;border: 1px dashed #cccccc;cursor: pointer" data-toggle="modal" data-target="#myModal">
-                <img id="show_img" style="width: 100%;height: 100%">
+        <p class="h3" style="position: absolute;left: 10px;top:10px">店铺信息</p>
+
+            <div style="position: absolute;left: 50px;top:150px;width: 300px;height: 200px;border: 1px dashed #cccccc;cursor: pointer" data-toggle="modal" data-target="#myModal">
+                <img id="show_img" style="width: 100%;height: 100%" src="/img/update_shopimg.jpg">
             </div>
+            <span style="position: absolute;left: 160px;top:370px;font-size: 18px;font-family: 'Microsoft YaHei'">上传店铺图片</span>
 
         <div class="form-inline">
             <span>店铺名称：</span>
@@ -19,7 +20,7 @@
         </div>
         <div class="form-inline">
             <span>行业类型：</span>
-            <select class="form-control" type="text" style="margin-left: 32px;width: 150px" ng-model="shop.category"
+            <select class="form-control" type="text" style="margin-left: 32px;width: 196px" ng-model="shop.category"
                     ng-options="v.name as v.name for v in category">
             </select>
         </div>
@@ -29,16 +30,16 @@
         </div>
         <div class="form-inline">
             <span>所属商圈：</span>
-            <select class="form-control" style="width: 150px;margin-left: 32px"
+            <select class="form-control" style="width: 196px;margin-left: 32px"
                     ng-options="v.id as v.name for v in province" ng-model="shop.province"
                     ng-change="select_p(shop.province)">
                 <option value="">省</option>
             </select>
-            <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in city"
+            <select class="form-control" style="width: 196px;" ng-options="v.id as v.name for v in city"
                     ng-model="shop.city" ng-change="select_c(shop.city)">
                 <option value="">市</option>
             </select>
-            <select class="form-control" style="width: 150px;" ng-options="v.id as v.name for v in area"
+            <select class="form-control" style="width: 196px;" ng-options="v.id as v.name for v in area"
                     ng-model="shop.area" ng-change="select_a(shop.area)">
                 <option value="">区/县</option>
             </select>

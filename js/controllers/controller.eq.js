@@ -133,7 +133,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         var data = prompt("当前WIFI名称：" + ssid);
         if (data) {
             var key = $cookieStore.get("key");
-            $http.patch([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, $scope.routers.router_groups.id, "/", "?key=", key].join(""), {"ssid": data});
+            $http.patch([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, $scope.routers_all.router.router_groups.id, "/", "?key=", key].join(""), {"ssid": data});
         }
     };
     //放行设置
@@ -212,16 +212,28 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         var routerStatusInterval = $interval(function () {
             $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
                 console.log(data.msg);
-                if(data.msg=="Router offline"){
-                    $scope.routers_status = {
-                        "run_time":"未连接",
-                        "people_num":"未连接",
-                        "MemUsaged":"未连接",
-                        "CPU_util":"未连接"
-                    }
+                if (data.msg == "Router offline") {
+                    $scope.wificat = {
+                        "operatingStatus":{
+                            "accessNumber":"未连接",
+                            "MemUsaged":"未连接",
+                            "cpuUtil":"未连接"
+                        },
+                        "basicInformation":{
+                            "softwareVersion":"未连接"
+                        },
+                        "wanStatus":{
+                            "wanip":"未连接",
+                            "speedUp":"未连接",
+                            "speedDown":"未连接"
+                        }
+                    };
+                    $scope.upTime = "未连接"
                 }
-                $scope.wificat = data;
-                $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                else{
+                    $scope.wificat = data;
+                    $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                }
             });
         }, 3000);
         $scope.$on("$destroy",function(){

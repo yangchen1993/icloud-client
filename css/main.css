@@ -262,7 +262,7 @@ p, ul, ol, ul, .h3 {
 
 .content {
     width:auto;
-    height: 950px;
+    height: 1050px;
     position: absolute;
     top: 60px;
     left: 230px;
@@ -293,7 +293,6 @@ thead {
     background-color: #3f4961;
     cursor: pointer;
 }
-
 
 .table_outside{
     background-color: #fff;

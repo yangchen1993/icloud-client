@@ -33,7 +33,7 @@
                 <td ng-bind="p.province+ ' '+p.city+' '+ p.area+' '+p.address_additional"></td>
                 <td ng-if="isAgent ==1">路由器数量（已用/未用）</td>
                 <td ng-bind="p.create_time"></td>
-                <td><a href="#/main/agent_message?agent_id={{ p.id }}">查看</a></td>
+                <td><a href="#/main/agent_message?tel={{ p.tel }}">查看</a></td>
             </tr>
             </tbody>
         </table>

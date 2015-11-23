@@ -22,7 +22,7 @@ window.API = {
 
         "SUB_USER_ROLES": [window.HOST, "users/sub_user_roles/"].join(""),  //请求代理商可创建的代理商级别
 
-        "SUB_USER_SCOPES":[window.HOST,"users/sub_user_scopes"].join(""),
+        "SUB_USER_SCOPES": [window.HOST, "users/sub_user_scopes"].join(""),
 
         "CREATE_AGENT": [window.HOST, "users/new_user/"].join("")  //创建代理商
     },
@@ -126,9 +126,9 @@ window.API = {
 
         "REMOVE_AD": [window.HOST, "ads/remove_ad/"].join(""),// 删除广告
 
-        "PUT_AD_IN": [window.HOST,"audits/new_audit/"].join(""),
+        "PUT_AD_IN": [window.HOST, "audits/new_audit/"].join(""),
 
-        "PUT_AD_UP":[window.HOST,"audits/edit_audit/"].join("")
+        "PUT_AD_UP": [window.HOST, "audits/edit_audit/"].join("")
     },
     "WIFICAT": {
         "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息
@@ -137,23 +137,32 @@ window.API = {
 
     "WEIXIN": {
         "NEW_WECHAT": [window.HOST, "wechat/new_wechat/"].join(""),
+
         "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
+
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
     },
 
 
     "MARKETING": {
         "NEW_SMS_TEMPLATE": [window.HOST, "sms_templates/new_sms_template/"].join(""), // 新建群发短信模板
+
         "REMOVE_SMS_TEMPLATE": [window.HOST, "sms_templates/remove_sms_template/"].join(""), // 删除群发短信模板
+
         "SEND_SMS_TEMPLATE": [window.HOST, "sms_templates/send_sms_template/"].join(""), // 发送短信
+
         "GET_CURRENT_USER_SMS_TEMPLATES": [window.HOST, "sms_templates/get_current_user_sms_templates/"].join(""), // 获取当前用户的群发模板
+
         "GET_CURRENT_USER_MEMBERS": [window.HOST, "sms_targets/get_current_user_members/"].join(""),
+
         "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
+
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
     },
 
     "ACCOUNT": {
         "GET_CURRENT_USER_ROUTERS": [window.HOST, "account/get_current_user_routers/"].join(""),
+
         "GET_CURRENT_USER_TOTAL_CASH": [window.HOST, "account/get_current_user_total_cash/"].join("")
     }
 };

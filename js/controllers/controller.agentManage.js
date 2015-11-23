@@ -167,12 +167,12 @@ iCloudController.controller("CreateBusinessController", ['$scope', '$http', '$co
 
 
     }]);
-iCloudController.controller("AgentMessageController", ['$scope', '$grid', '$http', '$cookieStore', '$window',
-    function ($scope, $grid, $http, $cookieStore, $window) {
-        $scope.$on("executeAgentId", function (e, agentId) {
-            $http.get([$window.current_user_url, agentId, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+iCloudController.controller("AgentMessageController", ['$scope', '$grid', '$http', '$cookieStore', '$window',function ($scope, $grid, $http, $cookieStore, $window) {
+        //$scope.$on("executeAgentId", function (e, agentId) {
+            var tel = get_param(location.href);
+            $http.get([window.API.USER.GET_USER_INFO_BY_TEL,"?key=", $cookieStore.get("key"),"&tel=",tel].join("")).success(function (data) {
                 console.log(data);
                 $scope.agent = data;
             })
-        })
+        //})
     }]);

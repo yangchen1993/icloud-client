@@ -21,10 +21,11 @@ iCloudController.controller("ShopManagementController", ["$scope", "$http", "$gr
             $window.location.href = ["#/main/edit_shop?shop_id=", id].join("");
         };
         $scope.delete_shop = function (id) {
-            $http.delete([window.API.GROUP.REMOVE_GROUP, "?key=", $cookieStore.get("key"), "&id=", id].join("")).success(function (data) {
-                alert(data.msg);
-                show_shop();
-            })
+            if (confirm("确定删除?")) {
+                $http.delete([window.API.GROUP.REMOVE_GROUP, "?key=", $cookieStore.get("key"), "&id=", id].join("")).success(function (data) {
+                    show_shop();
+                })
+            }
         }
     }]);
 
@@ -100,7 +101,6 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
 
 iCloudController.controller("EditShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore) {
     var id = get_param(window.location.href);
-    $scope.edit_shop;
     $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
         for (var i = 0; i < data.count; i++) {
             if (data.results[i].id == id) {
@@ -177,6 +177,7 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
     }
 }]);
 
+
 iCloudController.controller("ShopManagementRoutersController", ["$scope", "$window", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $window, $http, $category, $province, $city, $area, $trades, $cookieStore) {
     var shop_id = get_param($window.location.href);
     $scope.see_routers_details = function (id) {
@@ -220,8 +221,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     };
 
     $scope.bind_submit = function () {
-        console.log($scope.bind_router);
-            bind();
+        bind();
     };
 
     $scope.unbind_submit = function (mac) {
@@ -312,7 +312,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         var routerStatusInterval = $interval(function () {
             $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
                 console.log(data.msg);
-                if(data.msg=="Router offline"){
+                if (data.msg == "Router offline") {
                     $scope.wificat = {
                         "operatingStatus":{
                             "accessNumber":"未连接",

@@ -103,6 +103,11 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
                     } else {
                         ordering = ["-", colName].join("");
                     }
+                    //var orderingStart = self.restPage.current.indexOf("ordering=");
+                    //var orderingEnd = self.restPage.current.substring(orderingStart).indexof("&");
+                    //orderingEnd = orderingEnd ? orderingEnd : 1;
+                    //
+
                     var url = self.restPage.current.replace(/(ordering=)(-?[a-z]+_?[a-z]*)/, ["ordering=", ordering
                     ].join(""));
                     scope.currentSort = self.currentSort;

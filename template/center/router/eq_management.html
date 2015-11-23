@@ -4,10 +4,6 @@
         </ol>
 
     <div class="form-inline search_panel">
-        <span>已使用路由：</span><input type="text" class="form-control" style="width: 150px">
-        <span>状态：</span><input type="text" class="form-control" style="width: 150px">
-        <span>地区：</span><input type="text" class="form-control" style="width: 150px">
-        <button class="btn btn-info">查询</button>
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#advanced_search" aria-expanded="false" aria-controls="advanced_search">高级搜索 </button>
         <div class="collapse" id="advanced_search">
             <div class="well">
@@ -60,12 +56,12 @@
         <table class="table table-bordered text-center" id="table-eq">
             <thead>
             <tr>
-                <td>
-                    <a href="javascript:" ng-click="checkAll()">全选</a>
-                    <a href="javascript:" ng-click="checkInverse()">反选</a>
-                </td>
-                <td>商铺名称</td>
-                <td>行业</td>
+                <!--<td>-->
+                    <!--<a href="javascript:" ng-click="checkAll()">全选</a>-->
+                    <!--<a href="javascript:" ng-click="checkInverse()">反选</a>-->
+                <!--</td>-->
+                <td id="router_groups__name">商铺名称</td>
+                <td id="router_groups_category">行业</td>
                 <td>地区</td>
                 <td>认证方式</td>
                 <td>MAC码</td>
@@ -75,7 +71,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="p in grid.results">
-                <td><input type="checkbox"></td>
+                <!--<td><input type="checkbox"></td>-->
                 <td ng-bind="p.router_groups.name"></td>
                 <td ng-bind="p.router_groups.category"></td>
                 <td ng-bind="p.router_groups.trade_area.province+p.router_groups.trade_area.city+p.router_groups.trade_area.area+p.router_groups.trade_area.name"></td>

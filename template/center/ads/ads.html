@@ -14,10 +14,13 @@
             <table id="table-wemedia" class="table table-hover table-bordered table-selectable text-center ads_table table-striped">
                 <thead>
                 <tr>
-                    <td>
-                        <a href="javascript:" ng-click="checkAll()">全选</a>
-                        <a href="javascript:" ng-click="checkInverse()">反选</a>
-                    </td>
+                    <!--<td>-->
+                    <!--<a href="javascript:" ng-click="checkAll()">全选</a>-->
+                    <!--<a href="javascript:" ng-click="checkInverse()">反选</a>-->
+                    <!--</td>-->
+                    <!--<td style="cursor: pointer">-->
+                    <!--缩略图-->
+                    <!--</td>-->
                     <td id="{{ headers[10] }}" ng-click="sort(headers[10])" style="cursor: pointer">
                         行业类型
                         <span ng-show="currentSort[headers[10]] === true" class="glyphicon glyphicon-triangle-top"></span>
@@ -27,8 +30,8 @@
                     <td id="{{ headers[5] }}" ng-click="sort(headers[5])" style="cursor: pointer">
                         创建时间
                         <span ng-show="currentSort[headers[5]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                    <span ng-show="currentSort[headers[5]] === false"
-                          class="glyphicon glyphicon-triangle-bottom"></span>
+                        <span ng-show="currentSort[headers[5]] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
                     <td id="{{ headers[6] }}" ng-click="sort(headers[6])" style="cursor: pointer">
                         修改时间
@@ -40,15 +43,46 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="p in grid.results" class="wemedia_table">
-                    <td><input type="checkbox"></td>
+                <tr ng-if="role=='商家'" ng-repeat="p in grid.results" class="wemedia_table">
+                    <!--<td><input type="checkbox"></td>-->
+                    <!--<td style="cursor: pointer">-->
+                    <!--<div style="width:100px;height:100px">-->
+                    <!--{{p.}}-->
+                    <!--</div>-->
+                    <!--</td>-->
                     <td ng-bind="p.category"></td>
                     <td ng-bind="p.create_time"></td>
                     <td ng-bind="p.modified_time"></td>
                     <td>
                         <a href="javascript:" ng-click="editAds(p.id)">修改</a>
-                        <a href="" ng-click="deleteAds(p.id)">删除</a>
-                        <a href="" ng-click="under()">下架</a>
+                        <a href="javascript:" ng-click="deleteAds(p.id)">删除</a>
+                        <a href="#/main/put_ad?ad_id={{p.id}}" ng-if="p.audit_status==-1" style="color:red;">投放</a>
+                        <a href="javascript:" ng-if="p.audit_status==0" style="color:red;">审核未通过</a>
+                        <a href="javascript:" ng-if="p.audit_status==1" style="color:orangered">审核中……</a>
+                        <a href="javascript:" ng-if="p.audit_status==2" ng-click="putAwayAd(p.id,2)">下架</a>
+                        <a href="javascript:" ng-if="p.audit_status==3"  ng-click="putAwayAd(p.id,3)">上架</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody ng-if="role!='商家'&& role!='系统管理员'">
+                <tr ng-repeat="p in grid.results" class="wemedia_table">
+                    <!--<td><input type="checkbox"></td>-->
+                    <!--<td style="cursor: pointer">-->
+                    <!--<div style="width:100px;height:100px">-->
+                    <!--{{p.}}-->
+                    <!--</div>-->
+                    <!--</td>-->
+                    <td ng-bind="p.category"></td>
+                    <td ng-bind="p.create_time"></td>
+                    <td ng-bind="p.modified_time"></td>
+                    <td>
+                        <a href="javascript:" ng-click="editAds(p.id)">修改</a>
+                        <a href="javascript:" ng-click="deleteAds(p.id)">删除</a>
+                        <a href="javascript:" ng-click="dlTouFang(p.id)" ng-if="p.audit_status==-1" style="color:red;">投放</a>
+                        <a href="javascript:" ng-if="p.audit_status==0" style="color:red;">审核未通过</a>
+                        <a href="javascript:" ng-if="p.audit_status==1" style="color:orangered">审核中……</a>
+                        <a href="javascript:" ng-if="p.audit_status==2" ng-click="putAwayAd(p.id,2)">下架</a>
+                        <a href="javascript:" ng-if="p.audit_status==3"  ng-click="putAwayAd(p.id,3)">上架</a>
                     </td>
                 </tr>
                 </tbody>
@@ -57,21 +91,4 @@
         </div>
         <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #D9D9D9"></div>
     </div>
-
-    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document" style="width: 260px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                            style="margin-top: -12px">
-                        <span class="glyphicon glyphicon-remove"></span></button>
-                </div>
-                <div class="modal-body">
-                    <img ng-src="{{grid.results[number].img}}">
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-
-

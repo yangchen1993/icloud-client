@@ -8,21 +8,28 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             "name":data.legal_person_name,
             "identity": data.role.name
         };
+
+        $cookieStore.put("role", data.role.name);
+
         if(data.role.name=="系统管理员"){
-            $scope.auth_nav = true;
-            $scope.ads_nav = true;
+            $scope.auth_nav = false;
+            $scope.ads_nav = false;
             $scope.account_nav = true;
             $scope.eq_nav = true;
-            $scope.shop_nav = true;
+            $scope.delivery_nav = true;
+            $scope.version_nav = true;
+            $scope.shop_nav = false;
             $scope.agent_nav = true;
+            $scope.agent_add = true;
             $scope.marketing_nav = false;
-            $scope.wallet_nav = true;
+            $scope.wallet_nav = false;
         }
         else if (data.role.name == "商家") {
             $scope.auth_nav = false;
             $scope.ads_nav = true;
             $scope.account_nav = true;
             $scope.eq_nav = true;
+            $scope.delivery_nav = false;
             $scope.shop_nav = true;
             $scope.agent_nav = false;
             $scope.marketing_nav = true;
@@ -33,9 +40,10 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.ads_nav = true;
             $scope.account_nav = true;
             $scope.eq_nav = true;
+            $scope.delivery_nav = true;
             $scope.shop_nav = false;
             $scope.agent_nav = true;
-            $scope.marketing_nav = true;
+            $scope.marketing_nav = false;
             $scope.wallet_nav = true;
             if(data.role.name == "省级代理商"){
                 $scope.create_agent_nav = true;

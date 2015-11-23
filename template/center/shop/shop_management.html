@@ -1,21 +1,7 @@
-<div class="top_content">
-    <ol class="breadcrumb" style="background-color: #1fbba6">
+<div>
+    <ol class="breadcrumb">
         <li class="active">店铺管理</li>
     </ol>
-    <div>
-        <div><span class="glyphicon glyphicon-map-marker"></span>全部
-            <div></div>
-        </div>
-        <div><span class="glyphicon glyphicon-heart"></span>未查询
-            <div></div>
-        </div>
-        <div><span class="glyphicon glyphicon-user"></span>已查询
-            <div></div>
-        </div>
-        <div><span class="glyphicon glyphicon-cog"></span>未知
-            <div></div>
-        </div>
-    </div>
 </div>
 
 <div class="form-inline search_panel">
@@ -34,7 +20,7 @@
                 </div>
                 <div style="margin-top:15px"><span>店铺地址：</span><span ng-bind="p.address">西沟头巷幼儿园</span></div>
             </div>
-            <button class="btn btn-info" style="margin-top:15px" ng-click="editShopIndex(p.id   )">店铺主页编辑</button>
+            <button class="btn btn-info" style="margin-top:15px" ng-click="editShopIndex(p.id)">店铺主页编辑</button>
             <button class="btn btn-info" style="margin-top:15px" ng-click="edit_shop(p.id)">修改店铺信息</button>
             <button class="btn btn-info" style="margin-top:15px" ng-click="delete_shop(p.id)">删除店铺</button>
         </div>

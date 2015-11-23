@@ -5,13 +5,10 @@
 
     <div class="row" style="margin-top: 50px; padding: 20px">
         <div class="col-md-4">
-            结算总额:<span ng-bind="totalCash| currency: '￥'"></span>
+            上月结算总额:<span ng-bind="totalCash| currency: '￥'"></span>
         </div>
         <div class="col-md-4">
-            设备数量:<span ng-bind="grid.results.length"></span>
-        </div>
-        <div class="col-md-4">
-            广告数量:<span ng-bind="grid.results.length"></span>
+            设备数量:<span ng-bind="grid.count"></span>
         </div>
     </div>
 
@@ -41,7 +38,7 @@
                               class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
                     <td id="cash" ng-click="sort('cash')">
-                        结算分成
+                        上月结算分成
                         <span ng-show="currentSort['cash'] === true"
                               class="glyphicon glyphicon-triangle-top"></span>
                         <span ng-show="currentSort['cash'] === false"
@@ -51,11 +48,17 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="i in grid.results">
-                    <td ng-bind="i.ssid"></td>
-                    <td ng-bind="i.mac"></td>
+                    <td>
+                        <a href="#/main/routers_details?id={{i.id}}"><span
+                                ng-bind="i.ssid"></span></a>
+                    </td>
+                    <td>
+                        <a href="#/main/routers_details?id={{i.id}}"><span
+                                ng-bind="i.mac"></span></a>
+                    </td>
                     <td><a href="#/main/shop_management_routers?id={{i.router_groups.id}}"><span
                             ng-bind="i.router_groups.name"></span></a></td>
-                    <td ng-bind="i.cash"></td>
+                    <td ng-bind="i.cash | currency: '￥'"></td>
                 </tr>
                 </tbody>
             </table>

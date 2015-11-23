@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.10.200:8801/api/";
+//window.HOST = "http://192.168.10.233:8001/api/";
 window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://112.124.125.145/";
 
@@ -124,7 +124,11 @@ window.API = {
 
         "EDIT_AD": [window.HOST, "ads/edit_ad/"].join(""), // 编辑广告
 
-        "REMOVE_AD": [window.HOST, "ads/remove_ad/"].join("") // 删除广告
+        "REMOVE_AD": [window.HOST, "ads/remove_ad/"].join(""),// 删除广告
+
+        "PUT_AD_IN": [window.HOST,"audits/new_audit/"].join(""),
+
+        "PUT_AD_UP":[window.HOST,"audits/edit_audit/"].join("")
     },
     "WIFICAT": {
         "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息
@@ -169,4 +173,9 @@ var transform_error_message = function (msg) {
 var get_param = function (href) {
     var search_start = href.indexOf("=");
     return href.slice(search_start + 1);
+};
+
+var replaceString = function (str, start, end, rep) {
+    var replaceStartIndex = str.indexOf(start);
+    var replaceEndIndex = str.substring(replaceStartIndex).indexOf(end)
 };

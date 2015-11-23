@@ -294,15 +294,17 @@ thead {
     cursor: pointer;
 }
 
+
 .table_outside{
     background-color: #fff;
     padding:20px;
 }
 .table_inside{
+    margin-top: 10px;
     padding:20px;
     background-color: #D9D9D9
 }
-.table_inside{
-    padding:20px;
-    background-color: #D9D9D9
+.table_inside>table{
+    margin-top: 20px;
+    background-color: #fff
 }

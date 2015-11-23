@@ -3,20 +3,20 @@
     <div class="nav_out">
         <div class="nav_yc">
             <div class="info text-center">
-                <div style="width: 100%;height: 100px;background-color:#E44D4D "></div>
-                <div class="img_frame"></div>
-                <img src="/img/guang.png" id="cycle">
-                <img src="img/face.png" id="face">
+                <!--<div style="width: 100%;height: 100px;background-color:#E44D4D "></div>-->
+                <!--<div class="img_frame"></div>-->
+                <!--<img src="/img/guang.png" id="cycle">-->
+                <!--<img src="img/face.png" id="face">-->
 
-                <div class="warn">我在线上</div>
-                <div class="icon_3">
-                    <i class="glyphicon glyphicon-bell"></i>
-                    <span class="badge">8</span>
-                    <i class="glyphicon glyphicon-envelope"></i>
-                    <span class="badge">8</span>
-                    <i class="glyphicon glyphicon-tasks"></i>
-                    <span class="badge">8</span>
-                </div>
+                <!--<div class="warn">我在线上</div>-->
+                <!--<div class="icon_3">-->
+                    <!--<i class="glyphicon glyphicon-bell"></i>-->
+                    <!--<span class="badge">8</span>-->
+                    <!--<i class="glyphicon glyphicon-envelope"></i>-->
+                    <!--<span class="badge">8</span>-->
+                    <!--<i class="glyphicon glyphicon-tasks"></i>-->
+                    <!--<span class="badge">8</span>-->
+                <!--</div>-->
                 <p class="text-center" ng-bind="user.name"></p>
 
                 <p ng-bind="user.identity"></p>
@@ -67,11 +67,11 @@
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
-                        <li>
-                            <div></div>
-                            <a ui-sref=".create_agent">新增代理商账号</a>
-                        </li>
-                        <li>
+                        <!--<li ng-show="create_agent_nav">-->
+                            <!--<div></div>-->
+                            <!--<a ui-sref=".create_agent">新增代理商账号</a>-->
+                        <!--</li>-->
+                        <li ng-show="create_business_nav">
                             <div></div>
                             <a ui-sref=".create_business">新增商家账号</a>
                         </li>

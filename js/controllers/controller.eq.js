@@ -218,10 +218,10 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
                         "CPU_util":"未连接"
                     }
                 }
-                //$scope.wificat = data;
-                //$scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                $scope.wificat = data;
+                $scope.upTime = parseInt(data.basicInformation.upTime / 60);
             });
-        }, 1000);
+        }, 3000);
         $scope.$on("$destroy",function(){
             $interval.cancel(routerStatusInterval);
         });

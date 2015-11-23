@@ -55,8 +55,39 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
             $scope.trades = data;
         })
     };
-    $scope.submit = function (shop) {
 
+    function isImageFile(file) {
+        if (file.type) {
+            return /^image\/\w+$/.test(file.type);
+        } else {
+            return /\.(jpg|jpeg|png|gif)$/.test(file);
+        }
+    }
+
+    var imgData;
+    $('input[type = "file"]').change(function(){
+        var files;
+        var img;
+        files = $(this).prop('files');
+        if(isImageFile(files[0]))
+            this.url = URL.createObjectURL(files[0]);
+        img = $('<img src="' + this.url + '" style="width:100%;height:100%">');
+        $("#img_frame").html(img);
+        img.cropper({
+            aspectRatio:120/72
+        });
+
+        $("#save").click(function(){
+            imgData = img.cropper('getCroppedCanvas', {
+                width: 640
+            }).toDataURL();
+            console.log(imgData);
+            $("#show_img").attr('src',imgData);
+        });
+    });
+
+    $scope.submit = function (shop) {
+        shop.img=imgData;
         $http.post([window.API.GROUP.NEW_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
             alert(data.msg);
             location.href = "#/main/shop_management";
@@ -98,14 +129,44 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
         $area.get(id).success(function (data) {
             $scope.area = data;
         })
-    }
+    };
     $scope.select_a = function (id) {
         $trades.get(id).success(function (data) {
             $scope.trades = data;
         })
     };
-    $scope.submit = function (shop) {
+    function isImageFile(file) {
+        if (file.type) {
+            return /^image\/\w+$/.test(file.type);
+        } else {
+            return /\.(jpg|jpeg|png|gif)$/.test(file);
+        }
+    }
 
+    var imgData;
+    $('input[type = "file"]').change(function(){
+        var files;
+        var img;
+        files = $(this).prop('files');
+        if(isImageFile(files[0]))
+            this.url = URL.createObjectURL(files[0]);
+        img = $('<img src="' + this.url + '" style="width:100%;height:100%">');
+        $("#img_frame").html(img);
+        img.cropper({
+            aspectRatio:120/72
+        });
+
+        $("#save").click(function(){
+            imgData = img.cropper('getCroppedCanvas', {
+                width: 640
+            }).toDataURL();
+            console.log(imgData);
+            $("#show_img").attr('src',imgData);
+        });
+    });
+
+    $scope.submit = function (shop) {
+        shop.img = imgData;
         $http.put([window.API.GROUP.EDIT_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
             alert(data.msg);
             location.href = "#/main/shop_management";
@@ -129,6 +190,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     show_bindRouters();
 
     var show_selectRouters = function () {
+        $scope.router = [];
         $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
             var unbingRouters = [], k = 0;
             for (var i = 0; i < data.results.length; i++) {
@@ -137,7 +199,8 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
                     k++;
                 }
             }
-            $scope.router = unbingRouters;
+                $scope.router = unbingRouters;
+                //$scope.bind_router = unbingRouters[0].id;
         });
     };
     show_selectRouters();
@@ -151,10 +214,14 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
             show_bindRouters();
             show_selectRouters();
         })
+            .error(function(data){
+            alert(data.msg);
+        })
     };
 
     $scope.bind_submit = function () {
-        bind();
+        console.log($scope.bind_router);
+            bind();
     };
 
     $scope.unbind_submit = function (mac) {
@@ -268,7 +335,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
                     $scope.upTime = parseInt(data.basicInformation.upTime / 60);
                 }
             });
-        }, 1000);
+        }, 3000);
         $scope.$on("$destroy", function () {
            $interval.cancel(routerStatusInterval);
         });

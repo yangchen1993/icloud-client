@@ -1,4 +1,4 @@
-<div style="padding: 10px;">
+<div class="table_outside">
     <ol class="breadcrumb">
         <li class="active">广告分账</li>
     </ol>
@@ -15,9 +15,9 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-bordered table-hover text-center">
+        <div class="table_inside">
+            <table class="table table-bordered table-hover text-center table-striped">
+                <thead>
                 <tr>
                     <td id="ssid" ng-click="sort('ssid')">
                         设备SSID
@@ -48,6 +48,8 @@
                               class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
                 </tr>
+                </thead>
+                <tbody>
                 <tr ng-repeat="i in grid.results">
                     <td ng-bind="i.ssid"></td>
                     <td ng-bind="i.mac"></td>
@@ -55,8 +57,8 @@
                             ng-bind="i.router_groups.name"></span></a></td>
                     <td ng-bind="i.cash"></td>
                 </tr>
+                </tbody>
             </table>
-            <div ng-include="'/template/partial/pagination.html'"></div>
         </div>
-    </div>
+        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #D9D9D9"></div>
 </div>

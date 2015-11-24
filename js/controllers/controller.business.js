@@ -252,6 +252,11 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         });
     };
     reload_blackwhite();
+
+    $scope.goToShopManagement = function () {
+        $window.location.href = ["#/main/shop_management_routers?id=", shop_id].join("")
+    };
+
     $scope.router = {
         "is_black": "1"
     };

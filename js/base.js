@@ -59,13 +59,13 @@ window.API = {
 
         "GET_CURRENT_USER_ROUTERS": [window.HOST, "routers/get_current_user_routers/"].join(""), //获取当前用户路由
 
-        "GET_ALL_VERSIONS": [window.HOST, "routers/versions/get_all_versions/"].join(""), // 获取所有的固件
+        "GET_ALL_VERSIONS": [window.HOST, "versions/get_all_versions/"].join(""), // 获取所有的固件
 
         "GET_ROUTERS_BY_GROUP": [window.HOST, "routers/get_routers_by_group/"].join(""), // 根据组获取路由器
 
-        "NEW_VERSION": [window.HOST, "routers/versions/new_version/"].join(""), // 发布新固件
+        "NEW_VERSION": [window.HOST, "versions/new_version/"].join(""), // 发布新固件
 
-        "REMOVE_VERSION": [window.HOST, "routers/versions/remove_version/"].join(""), // 发布新固件
+        "REMOVE_VERSION": [window.HOST, "versions/remove_version/"].join(""), // 发布新固件
 
         "ROUTER_UNBIND": [window.HOST, "routers/unbind/"].join(""), // 路由器解绑
 

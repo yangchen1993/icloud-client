@@ -47,11 +47,11 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             };
 
             self.replacePageNumber = function (newPage) {
-                return self.restPage.current.replace(/page=(\d)+/, ["page=", newPage].join(""))
+                return replaceString(self.restPage.current, "page=", "&", ["page=", newPage].join(""));
             };
 
             self.replacePageSize = function (newSize) {
-                return self.restPage.current.replace(/pageSize=(\d)+/, ["pageSize=", newSize].join(""))
+                return replaceString(self.restPage.current, "pageSize=", "&", ["pageSize=", newSize].join(""));
             };
 
             self.restPage = {};
@@ -103,13 +103,7 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
                     } else {
                         ordering = ["-", colName].join("");
                     }
-                    //var orderingStart = self.restPage.current.indexOf("ordering=");
-                    //var orderingEnd = self.restPage.current.substring(orderingStart).indexof("&");
-                    //orderingEnd = orderingEnd ? orderingEnd : 1;
-                    //
-
-                    var url = self.restPage.current.replace(/(ordering=)(-?[a-z]+_?[a-z]*)/, ["ordering=", ordering
-                    ].join(""));
+                    var url = replaceString(self.restPage.current, "ordering=", "&", ["ordering=", ordering].join(""));
                     scope.currentSort = self.currentSort;
                     self.restGet(url);
                 }
@@ -198,33 +192,28 @@ iCloudService.service("$checkBox", ["$rootScope",
     }]);
 
 iCloudService.service("$category", ['$http', '$cookieStore', function ($http, $cookieStore) {
-    var key = $cookieStore.get("key");
     this.get = function () {
-        return $http.get([window.API.SYSTEM.GET_CATEGORIES, "?key=", key].join(""));
+        return $http.get([window.API.SYSTEM.GET_CATEGORIES, "?key=", $cookieStore.get("key")].join(""));
     }
 }]);
 
 iCloudService.service("$province", ['$http', '$cookieStore', function ($http, $cookieStore) {
-    var key = $cookieStore.get("key");
     this.get = function () {
-        return $http.get([window.API.SYSTEM.GET_PROVINCES, "?key=", key].join(""));
+        return $http.get([window.API.SYSTEM.GET_PROVINCES, "?key=",  $cookieStore.get("key")].join(""));
     }
 }]);
 iCloudService.service("$city", ['$http', '$cookieStore', function ($http, $cookieStore) {
-    var key = $cookieStore.get("key");
     this.get = function (data) {
-        return $http.get([window.API.SYSTEM.GET_CITIES_BY_PROVINCE, "?key=", key, "&province=", data].join(""));
+        return $http.get([window.API.SYSTEM.GET_CITIES_BY_PROVINCE, "?key=", $cookieStore.get("key"), "&province=", data].join(""));
     }
 }]);
 iCloudService.service("$area", ['$http', '$cookieStore', function ($http, $cookieStore) {
-    var key = $cookieStore.get("key");
     this.get = function (data) {
-        return $http.get([window.API.SYSTEM.GET_AREAS_BY_CITY, "?key=", key, "&city=", data].join(""));
+        return $http.get([window.API.SYSTEM.GET_AREAS_BY_CITY, "?key=", $cookieStore.get("key"), "&city=", data].join(""));
     }
 }]);
 iCloudService.service("$trades", ["$http", "$cookieStore", "$window", function ($http, $cookieStore, $window) {
-    var key = $cookieStore.get("key");
     this.get = function (data) {
-        return $http.get([$window.API.SYSTEM.GET_TRADES, "?key=", key, "&area=", data].join(""));
+        return $http.get([$window.API.SYSTEM.GET_TRADES, "?key=", $cookieStore.get("key"), "&area=", data].join(""));
     }
 }]);

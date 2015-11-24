@@ -1,0 +1,46 @@
+<div style="padding: 10px">
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.business-manage">商家管理</a></li>
+        <li class="active">商家详情</li>
+    </ol>
+    <div class="details_panel">
+        <div class="details_panel_content">
+            <h2>基本信息</h2>
+            <div>
+                <p>
+                    <span>商家账号：</span>
+                    <span class="text-muted" ng-bind="business.tel"></span>
+                </p>
+                <p>
+                    <span>商家姓名：</span>
+                    <span class="text-muted" ng-bind="business.legal_person_name"></span>
+                </p>
+                <p>
+                    <span>身份证号：</span>
+                    <span class="text-muted" ng-bind="business.id_card"></span>
+                </p>
+                <p>
+                    <span>居住地址：</span>
+                    <span class="text-muted" ng-bind="business.province+' '+business.city+' '+business.area+' '+business.address_additional"></span>
+                </p>
+            </div>
+        </div>
+        <div class="details_panel_content">
+            <div>
+                <p>
+                    <span>级别：</span>
+                    <span class="text-muted" ng-bind="business.role.name"></span>
+                </p>
+                <p>
+                    <span>创建时间：</span>
+                    <span class="text-muted" ng-bind="business.create_time"></span>
+                </p>
+                <p>
+                    <span>上级代理：</span>
+                    <span class="text-muted" ng-bind="business.parent_legal_person_name"></span>
+                    <span class="text-muted" ng-bind="business.parent_role_name"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

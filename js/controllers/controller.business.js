@@ -66,29 +66,29 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
     }
 
     var imgData;
-    $('input[type = "file"]').change(function(){
+    $('input[type = "file"]').change(function () {
         var files;
         var img;
         files = $(this).prop('files');
-        if(isImageFile(files[0]))
+        if (isImageFile(files[0]))
             this.url = URL.createObjectURL(files[0]);
         img = $('<img src="' + this.url + '" style="width:100%;height:100%">');
         $("#img_frame").html(img);
         img.cropper({
-            aspectRatio:120/72
+            aspectRatio: 120 / 72
         });
 
-        $("#save").click(function(){
+        $("#save").click(function () {
             imgData = img.cropper('getCroppedCanvas', {
                 width: 640
             }).toDataURL();
             console.log(imgData);
-            $("#show_img").attr('src',imgData);
+            $("#show_img").attr('src', imgData);
         });
     });
 
     $scope.submit = function (shop) {
-        shop.img=imgData;
+        shop.img = imgData;
         $http.post([window.API.GROUP.NEW_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
             alert(data.msg);
             location.href = "#/main/shop_management";
@@ -144,24 +144,24 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
     }
 
     var imgData;
-    $('input[type = "file"]').change(function(){
+    $('input[type = "file"]').change(function () {
         var files;
         var img;
         files = $(this).prop('files');
-        if(isImageFile(files[0]))
+        if (isImageFile(files[0]))
             this.url = URL.createObjectURL(files[0]);
         img = $('<img src="' + this.url + '" style="width:100%;height:100%">');
         $("#img_frame").html(img);
         img.cropper({
-            aspectRatio:120/72
+            aspectRatio: 120 / 72
         });
 
-        $("#save").click(function(){
+        $("#save").click(function () {
             imgData = img.cropper('getCroppedCanvas', {
                 width: 640
             }).toDataURL();
             console.log(imgData);
-            $("#show_img").attr('src',imgData);
+            $("#show_img").attr('src', imgData);
         });
     });
 
@@ -215,7 +215,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
             show_bindRouters();
             show_selectRouters();
         })
-            .error(function(data){
+            .error(function (data) {
                 alert(data.msg);
             })
     };
@@ -314,28 +314,28 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
                 console.log(data.msg);
                 if (data.msg == "Router offline") {
                     $scope.wificat = {
-                        "operatingStatus":{
-                            "accessNumber":"未连接",
-                            "MemUsaged":"未连接",
-                            "cpuUtil":"未连接"
+                        "operatingStatus": {
+                            "accessNumber": "未连接",
+                            "MemUsaged": "未连接",
+                            "cpuUtil": "未连接"
                         },
-                        "basicInformation":{
-                            "softwareVersion":"未连接"
+                        "basicInformation": {
+                            "softwareVersion": "未连接"
                         },
-                        "wanStatus":{
-                            "wanip":"未连接",
-                            "speedUp":"未连接",
-                            "speedDown":"未连接"
+                        "wanStatus": {
+                            "wanip": "未连接",
+                            "speedUp": "未连接",
+                            "speedDown": "未连接"
                         }
                     };
                     $scope.upTime = "未连接"
                 }
-                else{
+                else {
                     $scope.wificat = data;
                     $scope.upTime = parseInt(data.basicInformation.upTime / 60);
                 }
             });
-        }, 30000);
+        }, 1000);
         $scope.$on("$destroy", function () {
             $interval.cancel(routerStatusInterval);
         });
@@ -425,3 +425,49 @@ iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cook
             })
     }
 }]);
+
+
+iCloudController.controller("BusinessManageController", ["$scope", "$http", "$cookieStore", "$window", "$grid",
+    function ($scope, $http, $cookieStore, $window, $grid) {
+        $grid.initial($scope, window.API.USER.GET_SUB_BUSINESSES);
+    }]);
+
+iCloudController.controller("BusinessInfoController", ["$scope", "$http", "$cookieStore", "$window",
+    function ($scope, $http, $cookieStore, $window) {
+        var tel = get_param($window.location.href);
+        $http.get([window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&tel=", tel].join("")).success(function (data) {
+            $scope.business = data;
+        });
+    }]);
+
+
+iCloudController.controller("CreateBusinessController", ["$scope", "$http", "$cookieStore", "$window", "$province", "$city", "$area",
+    function ($scope, $http, $cookieStore, $window, $province, $city, $area) {
+        var province = $province.get();
+        province.success(function (data) {
+            $scope.province1 = data;
+        });
+        $scope.select_p = function (index) {
+            var city = $city.get(index);
+            city.success(function (data) {
+                $scope.city1 = data;
+            })
+        };
+        $scope.select_c = function (index) {
+            var area = $area.get(index);
+            area.success(function (data) {
+                $scope.area1 = data;
+            })
+        };
+
+        $scope.submit = function () {
+            console.log($scope.business);
+            $http.post([window.API.USER.CREATE_BUSINESS, "?key=", $cookieStore.get("key")].join(""), $scope.business)
+                .success(function (data) {
+                    alert(data.msg);
+                    location.href = "#/main/agent_manage";
+                }).error(function (data) {
+                    $window.alert(data.msg)
+                });
+        };
+    }]);

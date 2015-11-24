@@ -1,0 +1,51 @@
+<div class="table_outside">
+    <ol class="breadcrumb">
+        <li class="active">代理商管理</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-md-12 table_inside">
+            <table class="table table-bordered table-striped table-hover text-center">
+                <tr>
+                    <td id="username" ng-click="sort('username')">
+                        代理商账号
+                        <span ng-show="currentSort['username'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['username'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="legal_person_name" ng-click="sort('legal_person_name')">
+                        代理商名称
+                        <span ng-show="currentSort['legal_person_name'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['legal_person_name'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="role__name" ng-click="sort('role__name')">
+                        级别
+                        <span ng-show="currentSort['role__name'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['role__name'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td>管辖区域</td>
+                    <td>路由器数量（已用/未用）</td>
+                    <td>操作</td>
+                </tr>
+                <tr ng-repeat="agent in grid.results">
+                    <td ng-bind="agent.username"></td>
+                    <td ng-bind="agent.legal_person_name"></td>
+                    <td ng-bind="agent.role.name"></td>
+                    <td ng-bind="agent.province+ ' '+agent.city+' '+ agent.area+' '+agent.address_additional"></td>
+                    <td>
+                        <span ng-bind="agent.router_used"></span>/<span ng-bind="agent.router_unused"></span>
+                    </td>
+                    <td>
+                        <a href="#/main/agent-info?agent_id={{ agent.id }}">查看信息</a>
+                    </td>
+                </tr>
+            </table>
+            <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #D9D9D9"></div>
+        </div>
+    </div>
+</div>

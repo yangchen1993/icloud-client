@@ -241,7 +241,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
                     $scope.upTime = parseInt(data.basicInformation.upTime / 60);
                 }
             });
-        }, 3000);
+        }, 1000);
         $scope.$on("$destroy",function(){
             $interval.cancel(routerStatusInterval);
         });

@@ -105,25 +105,35 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/router/release_conf.html",
             controller: "ReleaseConfController"
         })
-        .state("main.agent_manage", {
-            url: "/agent_manage",
-            templateUrl: "template/center/agent_manage/agent_manage.html",
+        .state("main.agent-manage", {
+            url: "/agent-manage",
+            templateUrl: "template/center/agent/agent-manage.html",
             controller: "AgentManageController"
         })
-        .state("main.create_agent", {
-            url: "/create_agent",
-            templateUrl: "template/center/agent_manage/create_agent.html",
+        .state("main.agent-info", {
+            url: "/agent-info",
+            templateUrl: "template/center/agent/agent-info.html",
+            controller: "AgentInfoController"
+        })
+        .state("main.create-agent", {
+            url: "/create-agent",
+            templateUrl: "template/center/agent/create-agent.html",
             controller: "CreateAgentController"
         })
-        .state("main.create_business", {
-            url: "/create_business",
-            templateUrl: "template/center/agent_manage/create_business.html",
-            controller: "CreateBusinessController"
+        .state("main.business-manage", {
+            url: "/business-manage",
+            templateUrl: "template/center/business/business-manage.html",
+            controller: "BusinessManageController"
         })
-        .state("main.agent_message", {
-            url: "/agent_message",
-            templateUrl: "template/center/agent_manage/agent_message.html",
-            controller: "AgentMessageController"
+        .state("main.business-info", {
+            url: "/business-info",
+            templateUrl: "template/center/business/business-info.html",
+            controller: "BusinessInfoController"
+        })
+        .state("main.create-business", {
+            url: "/create-business",
+            templateUrl: "template/center/business/create-business.html",
+            controller: "CreateBusinessController"
         })
         .state("main.create_shop", {
             url: "/create_shop",

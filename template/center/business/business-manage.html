@@ -1,0 +1,41 @@
+<div class="table_outside">
+    <ol class="breadcrumb">
+        <li class="active">商家管理</li>
+    </ol>
+
+    <div class="table_inside">
+        <table class="table table-bordered table-striped text-center table-hover">
+            <tr>
+                <td id="username" ng-click="sort('username')">
+                    商家账号
+                    <span ng-show="currentSort['username'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['username'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="legal_person_name" ng-click="sort('legal_person_name')">
+                    商家名称
+                    <span ng-show="currentSort['legal_person_name'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['legal_person_name'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td>居住地址</td>
+                <td>级别</td>
+                <td>路由器数量（已用/未用）</td>
+                <td>操作</td>
+            </tr>
+            <tbody>
+            <tr ng-repeat="p in grid.results">
+                <td ng-bind="p.username"></td>
+                <td ng-bind="p.legal_person_name"></td>
+                <td ng-bind="p.province+ ' '+p.city+' '+ p.area+' '+p.address_additional"></td>
+                <td ng-bind="p.role.name"></td>
+                <td>
+                    <span ng-bind="p.router_used"></span>/<span ng-bind="p.router_unused"></span>
+                </td>
+                <td><a href="#/main/business-info?tel={{ p.tel }}">查看</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #D9D9D9"></div>
+</div>

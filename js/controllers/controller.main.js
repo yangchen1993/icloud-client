@@ -20,7 +20,9 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.version_nav = true;
             $scope.shop_nav = false;
             $scope.agent_nav = true;
-            $scope.agent_add = true;
+            $scope.create_agent_nav = true;
+            $scope.business_nav = true;
+            $scope.create_business_nav = true;
             $scope.marketing_nav = false;
             $scope.wallet_nav = false;
         }
@@ -32,6 +34,9 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.delivery_nav = false;
             $scope.shop_nav = true;
             $scope.agent_nav = false;
+            $scope.create_agent_nav=false;
+            $scope.business_nav = false;
+            $scope.create_business_nav = false;
             $scope.marketing_nav = true;
             $scope.wallet_nav = true;
         }
@@ -42,20 +47,12 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.eq_nav = true;
             $scope.delivery_nav = true;
             $scope.shop_nav = false;
-            $scope.agent_nav = true;
+            $scope.agent_nav = false;
+            $scope.create_agent_nav=false;
+            $scope.business_nav = true;
+            $scope.create_business_nav = true;
             $scope.marketing_nav = false;
             $scope.wallet_nav = true;
-            if(data.role.name == "省级代理商"){
-                $scope.create_agent_nav = true;
-                $scope.create_business_nav = true;
-                $rootScope.isAgent = 1;
-            }
-            else{
-                $scope.create_agent_nav = false;
-                $scope.create_business_nav = true;
-                $rootScope.isAgent = 0;
-            }
-
         }
     });
 }]);

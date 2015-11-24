@@ -10,12 +10,12 @@
 
                 <!--<div class="warn">我在线上</div>-->
                 <!--<div class="icon_3">-->
-                    <!--<i class="glyphicon glyphicon-bell"></i>-->
-                    <!--<span class="badge">8</span>-->
-                    <!--<i class="glyphicon glyphicon-envelope"></i>-->
-                    <!--<span class="badge">8</span>-->
-                    <!--<i class="glyphicon glyphicon-tasks"></i>-->
-                    <!--<span class="badge">8</span>-->
+                <!--<i class="glyphicon glyphicon-bell"></i>-->
+                <!--<span class="badge">8</span>-->
+                <!--<i class="glyphicon glyphicon-envelope"></i>-->
+                <!--<span class="badge">8</span>-->
+                <!--<i class="glyphicon glyphicon-tasks"></i>-->
+                <!--<span class="badge">8</span>-->
                 <!--</div>-->
                 <p class="text-center" ng-bind="user.name"></p>
 
@@ -60,24 +60,36 @@
                 </li>
                 <div style="border-top:1px solid #416966" ng-show="eq_nav"></div>
 
+
                 <li ng-show="agent_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".agent_manage">代理商管理</a>
+                        <a ui-sref=".agent-manage">代理商管理</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
-                        <!--<li ng-show="create_agent_nav">-->
-                            <!--<div></div>-->
-                            <!--<a ui-sref=".create_agent">新增代理商账号</a>-->
-                        <!--</li>-->
-                        <li ng-show="create_business_nav">
+                        <li ng-show="create_agent_nav">
                             <div></div>
-                            <a ui-sref=".create_business">新增商家账号</a>
+                            <a ui-sref=".create-agent">新增代理商账号</a>
                         </li>
                     </ul>
                 </li>
                 <div style="border-top:1px solid #416966" ng-show="agent_nav"></div>
+
+                <li ng-show="business_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref=".business-manage">商家管理</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                    <ul class="menu_child">
+                        <li ng-show="create_business_nav">
+                            <div></div>
+                            <a ui-sref=".create-business">新增商家账号</a>
+                        </li>
+                    </ul>
+                </li>
+                <div style="border-top:1px solid #416966" ng-show="business_nav"></div>
 
                 <li ng-show="marketing_nav">
                     <div class="open_menu">
@@ -150,7 +162,8 @@
         <div>
             <p class="text-center"></p>
 
-            <p class="text-center"><span class="h2" style="font-weight: 600"></span><span class="h2" style="font-weight: 600"></span>
+            <p class="text-center"><span class="h2" style="font-weight: 600"></span><span class="h2"
+                                                                                          style="font-weight: 600"></span>
             </p>
         </div>
     </div>

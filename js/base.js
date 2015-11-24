@@ -2,10 +2,9 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.2.200:8801/api/";
-//window.HOST = "http://192.168.10.233:8001/api/";
+//window.HOST = "http://192.168.2.103:8801/api/";
 window.HOST = "http://mb.idianjia.cn:8801/api/";
-window.HOST_WIFICAT = "http://112.124.125.145/";
+window.HOST_WIFICAT = "http://r.idianjia.com/";
 
 window.API = {
     "USER": {
@@ -17,7 +16,9 @@ window.API = {
 
         "GET_USER_INFO_BY_TEL": [window.HOST, "users/get_user_info_by_tel/"].join(""),
 
-        "GET_SUB_USERS": [window.HOST, "users/get_sub_users/"].join(""), // 获取下属用户
+        "GET_SUB_AGENTS": [window.HOST, "users/get_sub_agents/"].join(""), // 获取代理商
+
+        "GET_SUB_BUSINESSES": [window.HOST, "users/get_sub_businesses"].join(""),
 
         "REGISTER": [window.HOST, "users/register/"].join(""), // 注册
 
@@ -25,7 +26,9 @@ window.API = {
 
         "SUB_USER_SCOPES": [window.HOST, "users/sub_user_scopes"].join(""),
 
-        "CREATE_AGENT": [window.HOST, "users/new_user/"].join("")  //创建代理商
+        "CREATE_AGENT": [window.HOST, "users/new_agent/"].join(""),  //创建代理商
+
+        "CREATE_BUSINESS": [window.HOST, "users/new_business/"].join("") // 新建商家
     },
 
     "SYSTEM": {
@@ -139,7 +142,9 @@ window.API = {
     "WEIXIN": {
         "NEW_WECHAT": [window.HOST, "wechat/new_wechat/"].join(""),
 
-        "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join("")
+        "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
+        
+        "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
 
     },
 
@@ -186,5 +191,12 @@ var get_param = function (href) {
 
 var replaceString = function (str, start, end, rep) {
     var replaceStartIndex = str.indexOf(start);
-    var replaceEndIndex = str.substring(replaceStartIndex).indexOf(end)
+    var replaceEndIndex = str.substring(replaceStartIndex).indexOf(end);
+
+    if (replaceEndIndex >= 0) {
+        return str.replace(str.substr(replaceStartIndex, replaceEndIndex), rep)
+    } else {
+        return str.replace(str.substring(replaceStartIndex), rep)
+    }
+
 };

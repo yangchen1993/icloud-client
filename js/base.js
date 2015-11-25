@@ -137,7 +137,7 @@ window.API = {
         "PUT_AD_UP": [window.HOST, "audits/edit_audit/"].join("")
     },
     "WIFICAT": {
-        "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息
+        "STATUS": [window.HOST_WIFICAT, "ws/routers/status/"].join("") //路由器实时信息
     },
 
 

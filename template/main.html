@@ -18,10 +18,11 @@
                 <!--<span class="badge">8</span>-->
                 <!--</div>-->
                 <p class="text-center" ng-bind="user.name"></p>
-
                 <p ng-bind="user.identity"></p>
             </div>
-            <div style="border-top:1px solid #383840;"></div>
+            <div style="border-top:1px solid #2c303b"></div>
+            <div style="border-top:1px solid #535a69"></div>
+
             <ul class="function_menu" style="color: #fff">
                 <li ng-show="auth_nav">
                     <div class="open_menu">
@@ -40,31 +41,33 @@
                         </li>
                     </ul>
                 </li>
-                <div style="border-top:1px solid #416966" ng-show="auth_nav"></div>
+                <div style="border-top:1px solid #2c303b" ng-show="auth_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="auth_nav"></div>
+
                 <li ng-show="eq_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".eq_management">设备管理</a>
-                        <i class="glyphicon glyphicon-triangle-right" ng-if="delivery_nav"></i>
+                        <a ui-sref=".eq_management"><span class="glyphicon glyphicon-cog" style="margin-right: 10px"></span>设备管理</a>
+                        <i class="glyphicon glyphicon-triangle-right" ng-if="delivery_nav || version_nav"></i>
                     </div>
                     <ul class="menu_child">
-                        <li ng-if="delivery_nav">
+                        <li ng-show="delivery_nav">
                             <div></div>
                             <a ui-sref=".deliveries">设备分配</a>
                         </li>
-                        <li ng-if="version_nav">
+                        <li ng-show="version_nav">
                             <div></div>
                             <a ui-sref=".version_manage">版本管理</a>
                         </li>
                     </ul>
                 </li>
-                <div style="border-top:1px solid #416966" ng-show="eq_nav"></div>
-
+                <div style="border-top:1px solid #2c303b" ng-show="eq_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="eq_nav"></div>
 
                 <li ng-show="agent_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".agent-manage">代理商管理</a>
+                        <a ui-sref=".agent-manage"><span class="icon-group" style="margin-right: 10px"></span>代理商管理</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
@@ -74,12 +77,13 @@
                         </li>
                     </ul>
                 </li>
-                <div style="border-top:1px solid #416966" ng-show="agent_nav"></div>
+                <div style="border-top:1px solid #2c303b" ng-show="agent_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="agent_nav"></div>
 
                 <li ng-show="business_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".business-manage">商家管理</a>
+                        <a ui-sref=".business-manage"><span class="glyphicon glyphicon-user" style="margin-right: 10px"></span>商家管理</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
@@ -89,12 +93,13 @@
                         </li>
                     </ul>
                 </li>
-                <div style="border-top:1px solid #416966" ng-show="business_nav"></div>
+                <div style="border-top:1px solid #2c303b" ng-show="business_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="business_nav"></div>
 
                 <li ng-show="marketing_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a href="javascript:">营销中心</a>
+                        <a href="javascript:"><span class="icon-bullhorn" style="margin-right: 10px"></span>营销中心</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
@@ -104,12 +109,13 @@
                         </li>
                     </ul>
                 </li>
-                <div style="border-top:1px solid #416966" ng-show="marketing_nav"></div>
+                <div style="border-top:1px solid #2c303b" ng-show="marketing_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="marketing_nav"></div>
 
                 <li ng-show="wallet_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".wallet">我的钱包</a>
+                        <a ui-sref=".wallet"><span class="glyphicon glyphicon-usd" style="margin-right: 10px"></span>我的钱包</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
@@ -123,32 +129,35 @@
                         </li>
                     </ul>
                 </li>
-                <div style="border-top:1px solid #416966" ng-show="wallet_nav"></div>
-
+                <div style="border-top:1px solid #2c303b" ng-show="wallet_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="wallet_nav"></div>
 
                 <li ng-show="shop_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".shop_management">店铺管理</a>
+                        <a ui-sref=".shop_management"><span class="icon-cogs" style="margin-right: 10px"></span>店铺管理</a>
                     </div>
                 </li>
-                <div style="border-top:1px solid #416966" ng-show="shop_nav"></div>
+                <div style="border-top:1px solid #2c303b" ng-show="shop_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="shop_nav"></div>
 
                 <li ng-show="ads_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".ads">我的广告</a>
+                        <a ui-sref=".ads"><span class="glyphicon glyphicon-text-background" style="margin-right: 10px"></span>我的广告</a>
                     </div>
                 </li>
-                <div style="border-top:1px solid #416966" ng-show="ads_nav"></div>
+                <div style="border-top:1px solid #2c303b" ng-show="ads_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="ads_nav"></div>
 
                 <li ng-show="account_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref="main.account-details">广告分账</a>
+                        <a ui-sref="main.account-details"><span class="icon-credit-card" style="margin-right: 10px"></span>广告分账</a>
                     </div>
                 </li>
-                <div style="border-top:1px solid #416966" ng-show="account_nav"></div>
+                <div style="border-top:1px solid #2c303b" ng-show="account_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="account_nav"></div>
             </ul>
         </div>
     </div>
@@ -168,16 +177,14 @@
         </div>
     </div>
 
-    <div ui-view="" class="content" style="background-color: #e6e6e6">
-
-    </div>
+    <div ui-view="" class="content" style="background-color: #e6e6e6"></div>
 
 </div>
 
 <script>
     $(".open_menu").click(function () {
         $(this).siblings(".menu_child").slideToggle("fast");
-        $(this).siblings(".menu_child").css("background-color", "#45454a");
+        $(this).siblings(".menu_child").css("background-color", "#2a2f38");
         if ($(this).find("i").hasClass("glyphicon glyphicon-triangle-right")) {
             $(this).find("i").attr("class", "glyphicon glyphicon-triangle-bottom");
         }

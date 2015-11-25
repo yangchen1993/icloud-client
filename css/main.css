@@ -7,7 +7,7 @@ p, ul, ol, ul, .h3 {
 .header {
     width: 33.3%;
     height: 60px;
-    background-color: #181e2c;
+    background-color: #2DC2E8;
     float: left;
 }
 
@@ -34,8 +34,8 @@ p, ul, ol, ul, .h3 {
     text-align: center;
 }
 
-.header > span:hover {
-    background-color: #3f4961;
+.header:nth-child(3) > span:hover {
+    background-color: #50acfa;
     cursor: pointer;
 }
 
@@ -45,7 +45,7 @@ p, ul, ol, ul, .h3 {
     top:60px;
     bottom: 0;
     width: 230px;
-    background-color: #32323a;
+    background-color: #383e4b;
     overflow-x: hidden;
     z-index: 102;
 }
@@ -133,7 +133,7 @@ p, ul, ol, ul, .h3 {
 .info > p {
     color: #cccccc;
     font-size: 20px;
-    background-color: #181E2C;
+    background-color: #2a2f38;
     line-height: 35px;
 }
 
@@ -159,17 +159,19 @@ p, ul, ol, ul, .h3 {
 }
 
 .open_menu:hover {
-    background-color: #e44d4d;
+    background-color: #2dc3e8;
     transition: 0.5s;
 }
-
-.open_menu > div {
-    width: 2%;
-    height: 56px;
-    background-color: #fe5722;
-    float: left;
-    display: none;
+.open_menu:hover>a{
+    color: #fff;
 }
+/*.open_menu > div {*/
+    /*width: 2%;*/
+    /*height: 56px;*/
+    /*background-color: #fe5722;*/
+    /*float: left;*/
+    /*display: none;*/
+/*}*/
 
 .open_menu > i {
     margin-left:40px;
@@ -200,7 +202,7 @@ p, ul, ol, ul, .h3 {
 .menu_child > li > div {
     width: 2%;
     height: 40px;
-    background-color: #3cb371;
+    background-color: #2dc3e8;
     float: left;
     margin-left: 50px;
     display: none !important;
@@ -250,14 +252,14 @@ p, ul, ol, ul, .h3 {
 .time_show > div:nth-child(1) {
     width:45%;
     height: 100%;
-    background-color: #1fbba6;
+    background-color: #2dc3e8;
     color: #fff;
 }
 .time_show > div:nth-child(2) {
     width:55%;
     height: 100%;
     background-color: #ffffff;
-    color: #1fbba6;
+    color: #2dc3e8;
 }
 
 .content {

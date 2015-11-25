@@ -25,6 +25,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.create_business_nav = true;
             $scope.marketing_nav = false;
             $scope.wallet_nav = false;
+            $rootScope.add_device_menu = true;
         }
         else if (data.role.name == "商家") {
             $scope.auth_nav = false;

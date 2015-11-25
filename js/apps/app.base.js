@@ -35,6 +35,11 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/paid.html",
             controller: "PaidController"
         })
+        .state("main.new-device", {
+            url: "/new-device",
+            templateUrl: "template/center/router/new-device.html",
+            controller: "NewDeviceController"
+        })
         .state("main.deliveries", {
             url: "/deliveries",
             templateUrl: "template/center/router/deliveries.html",

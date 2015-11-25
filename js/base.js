@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.2.103:8801/api/";
-window.HOST = "http://mb.idianjia.cn:8801/api/";
+//window.HOST = "http://192.168.10.200:8801/api/";
+window.HOST = "http://mb.idianjia.cn:8802/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/";
 
 window.API = {
@@ -53,6 +53,8 @@ window.API = {
     },
 
     "ROUTER": {
+        "NEW_ROUTER": [window.HOST, "routers/new_router/"].join(""), // 新增路由器
+
         "GET_ALL_ROUTERS": [window.HOST, "routers/get_all_routers/"].join(""), // 获取所有路由器
 
         "GET_ROUTER_INFO_BY_MAC": [window.HOST, "routers/get_router_info_by_mac/"].join(""), // 根据MAC获取路由器信息

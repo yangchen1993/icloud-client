@@ -1,0 +1,27 @@
+<div style="padding: 10px">
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.eq_management">设备管理</a></li>
+        <li class="active">添加设备</li>
+    </ol>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="device-model" class="col-md-1 control-label">设备型号:</label>
+
+            <div class="col-md-3">
+                <input class="form-control" id="device-model" placeholder="设备型号" ng-model="router.model">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="device-mac" class="col-md-1 control-label">设备MAC:</label>
+
+            <div class="col-md-3">
+                <input class="form-control" id="device-mac" placeholder="设备MAC" ng-model="router.mac">
+            </div>
+        </div>
+
+        <div class="col-md-offset-1 col-md-3">
+            <button class="btn btn-info" ng-click="saveDevice(router)">添加</button>
+        </div>
+    </div>
+</div>

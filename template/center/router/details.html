@@ -1,106 +1,41 @@
-<div style="padding:10px" class="row">
+<div class="table_outside row">
     <ol class="breadcrumb" style="background-color: #1ed1bf">
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li class="active">路由器详情</li>
     </ol>
 
-
     <div class="col-md-4 col-xs-12">
         <div class="details_panel">
             <p>店铺信息</p>
-            <div class="row text-center">
-                <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:20px 0 0 40px;background-color: #f6f0ec;width:80%;height: 75%">
-                        <p style="font-size: 18px;padding: 10px 0">店铺名称：</p>
-                        <p ng-bind="routers_all.router.router_groups.name" style="font-size:16px"></p>
-                    </div>
-
-                </div>
-                <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:20px 0 0 0;background-color: #f6f0ec;width:80%;height: 75%">
-                        <p style="font-size: 18px;padding: 10px 0">店铺所属行业：</p>
-                        <p ng-bind="routers_all.router.router_groups.category" style="font-size:16px"></p>
-                    </div>
-                </div>
-                <div class="col-md-12 col-xs-12" style="height: 120px">
-                    <div style="margin:20px 0 0 45px;background-color: #f6f0ec;width:80%;height: 75%">
-                        <p style="font-size: 18px;padding: 10px 0">店铺所在地址：</p>
-                        <p ng-bind="routers_all.router.router_groups.trade_area.province+' '+routers_all.router.router_groups.trade_area.city+' '+routers_all.router.router_groups.trade_area.area+' '+routers_all.router.router_groups.trade_area.name"
-                           style="font-size: 16px"></p>
-                    </div>
-                </div>
-            </div>
+            <div style="line-height: 80px"><span>店铺名称：</span><span ng-bind="routers_all.router.router_groups.name"></span></div>
+            <div style="line-height: 80px"><span>所属行业：</span><sapn ng-bind="routers_all.router.router_groups.category"></sapn></div>
+            <div style="line-height: 100px;border: 0"><span>所在地址：</span><span ng-bind="routers_all.router.router_groups.trade_area.province+' '+routers_all.router.router_groups.trade_area.city+' '+routers_all.router.router_groups.trade_area.area+' '+routers_all.router.router_groups.trade_area.name"></span></div>
         </div>
     </div>
 
     <div class="col-md-4 col-xs-12">
         <div class="details_panel">
-            <p>路由器基本信息</p>
-
-            <div class="row text-center">
-                <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:20px 0 0 40px;background-color: #f6f0ec;width:80%;height: 75%">
-                    <p style="font-size: 18px;padding: 10px 0">WIFI名称：<a href="javascript:"ng-click="modify_ssid(routers_all.router.ssid)">设置</a></p>
-                    <p class="content_panel" ng-bind="routers_all.router.ssid" style="font-size: 16px"></p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:20px 0 0 0;background-color: #f6f0ec;width:80%;height: 75%">
-                    <p style="font-size: 18px;padding: 10px 0">MAC地址：</p>
-                    <p class="content_panel" ng-bind="routers_all.router.mac" style="font-size: 16px">></p>
-                    </div>
-                </div>
-                <div class="col-md-12 col-xs-12" style="height: 120px">
-                    <div style="margin:20px 0 0 45px;background-color: #f6f0ec;width:80%;height: 75%">
-                    <p style="font-size: 18px;padding: 10px 0">系统版本：</p>
-                    <p class="content_panel" style="font-size: 16px" ng-bind="wificat.basicInformation.softwareVersion"></p>
-                    </div>
-                </div>
-            </div>
+            <p style="background-color: #43d8e0">路由器基本信息</p>
+            <div style="line-height: 80px"><span>WIFI名称：</span><span ng-bind="routers_all.router.ssid"></span><a style="position:absolute;right:30px" href="javascript:"ng-click="modify_ssid(routers_all.router.ssid)">设置</a></div>
+            <div style="line-height: 80px"><span>MAC地址：</span><span ng-bind="routers_all.router.mac"></span></div>
+            <div style="line-height: 100px;border: 0"><span>系统版本：</span><span ng-bind="wificat.basicInformation.softwareVersion"></span></div>
         </div>
     </div>
 
     <div class="col-md-4 col-xs-12">
         <div class="details_panel">
-            <p>运行状态</p>
-
-            <div class="row text-center">
-                <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:20px 0 0 40px;background-color: #f6f0ec;width:80%;height: 75%">
-                    <p style="font-size: 18px;padding: 10px 0">连续运行时间：</p>
-
-                    <span class="content_panel" style="font-size: 16px" ng-bind="upTime"></span><span>（分钟）</span>
-                        </div>
-                </div>
-                <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:20px 0 0 0;background-color: #f6f0ec;width:80%;height: 75%">
-                    <p style="font-size: 18px;padding: 10px 0">接入人数：</p>
-
-                    <span class="content_panel" style="font-size: 16px" ng-bind="wificat.operatingStatus.accessNumber"></span><span>（人）</span>
-                        </div>
-                </div>
-                <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:20px 0 0 40px;background-color: #f6f0ec;width:80%;height: 75%">
-                    <p style="font-size: 18px;padding: 10px 0">内存占用比率：</p>
-
-                    <p class="content_panel" style="font-size: 16px" ng-bind="wificat.operatingStatus.MemUsaged"></p>
-                        </div>
-                </div>
-                <div class="col-md-6 col-xs-12" style="height: 120px">
-                    <div style="margin:20px 0 0 0;background-color: #f6f0ec;width:80%;height: 75%">
-                    <p style="font-size: 18px;padding: 10px 0">CPU负载率：</p>
-
-                    <p class="content_panel" style="font-size: 16px" ng-bind="wificat.operatingStatus.cpuUtil"></p>
-                        </div>
-                </div>
-            </div>
+            <p style="background-color: #f4d462">运行状态</p>
+            <div style="line-height: 65px"><span>连续运行时间：</span><span ng-bind="upTime"></span></div>
+            <div style="line-height: 65px"><span>接入人数：</span><span ng-bind="wificat.operatingStatus.accessNumber"></span></div>
+            <div style="line-height: 65px"><span>内存占用比率：</span><span ng-bind="wificat.operatingStatus.MemUsaged"></span></div>
+            <div style="line-height: 65px;border: 0"><span>CPU负载率：</span><span ng-bind="wificat.operatingStatus.cpuUtil"></span></div>
         </div>
 
     </div>
 
 
-    <div class="col-md-12" style="margin-top: 20px">
-        <!-- Nav tabs -->
+<div class="col-md-12" style="margin-top: 20px">
+<!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">认证设置</a>
             </li>

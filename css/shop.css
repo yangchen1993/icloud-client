@@ -92,3 +92,73 @@
 .shop_message>div>div{
     margin-top: 10px;
 }
+.top-daohang li{
+    color:#fff;
+}
+.top-daohang a{
+    color:#fff;
+}
+.breadcrumb > li + li:before{
+    color:#fff;
+}
+.panel-dj {
+    height: 345px;
+    border-color: #f7f8f8;
+}
+.panel-dj > .panel-heading {
+    font-size: 24px;
+    height:88px;
+    line-height: 88px;
+    color: #fff;
+    background-color: #5ae9d4;
+    border-color: #f7f8f8;
+}
+.panel-dj > .panel-heading + .panel-collapse > .panel-body {
+    padding-left:30px;
+    font-family: "ºÚÌå";
+    font-size:14px;
+    border-top-color: #5ae9d4;
+}
+.panel-dj > .panel-heading .badge {
+    color: #337ab7;
+    background-color: #fff;
+}
+.panel-dj > .panel-footer + .panel-collapse > .panel-body {
+    font-family: "ºÚÌå";
+    font-size:14px;
+    border-bottom-color: #5ae9d4;
+}
+.panel-dj >.panel-body{
+    padding-left:30px;
+}
+.panel-dj > .panel-body div{
+    height:48px;
+    line-height: 48px;
+}
+.router-tab .nav-tabs{
+    height:64px;
+    background: #2ecc71;
+}
+.router-tab .nav-tabs li a{
+    font-family:"Î¢ÈíÑÅºÚ";
+    font-size:20px;
+    font-weight: bold;
+    width:154px;
+    height:63px;
+    line-height:50px;
+    text-align: center;
+    color:#fff;
+}
+.router-tab .nav-tabs a:hover{
+    background: red !important;
+}
+.router-tab .nav-tabs a:visited{
+    background: red !important;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    color: #fff;
+    cursor:pointer;
+    background-color: #28ab6f;
+    border: 0;
+    border-bottom-color: transparent;
+}

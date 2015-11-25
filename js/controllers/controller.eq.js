@@ -65,6 +65,19 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
         };
     }]);
 
+iCloudController.controller("NewDeviceController", ["$scope", "$http", "$cookieStore", "$window",
+    function ($scope, $http, $cookieStore, $window) {
+        $scope.saveDevice = function (device) {
+            $http.post([$window.API.ROUTER.NEW_ROUTER, "?key=", $cookieStore.get("key")].join(""), device)
+                .success(function (data) {
+
+                })
+                .error(function (data) {
+
+                })
+        }
+    }]);
+
 iCloudController.controller("VersionManagementController", ['$scope', '$window', '$http', '$cookieStore', '$grid',
     function ($scope, $window, $http, $cookieStore, $grid) {
         $grid.initial($scope, $window.API.ROUTER.GET_ALL_VERSIONS, {"ordering": "-create_time"});
@@ -126,14 +139,14 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
     $checkBox.enableCheck("table-fireware");
 }]);
 
-iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore',"$interval", function ($scope, $http, $cookieStore,$interval) {
+iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', "$interval", function ($scope, $http, $cookieStore, $interval) {
     var router_id = get_param(window.location.href);
     console.log(router_id);
     $scope.modify_ssid = function (ssid) {
         var data = prompt("当前WIFI名称：" + ssid);
         if (data) {
             var key = $cookieStore.get("key");
-            $http.put([window.API.ROUTER.ROUTERS_SSID,"?key=", key,"&id=", $scope.routers_all.router.router_groups.id].join(""), {"ssid": data});
+            $http.put([window.API.ROUTER.ROUTERS_SSID, "?key=", key, "&id=", $scope.routers_all.router.router_groups.id].join(""), {"ssid": data});
         }
     };
     //放行设置
@@ -166,7 +179,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             alert("添加成功");
             reload_blackwihit();
         })
-            .error(function(data){
+            .error(function (data) {
                 alert(data.msg);
             })
     };
@@ -178,7 +191,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             alert("添加成功");
             reload_blackwihit();
         })
-            .error(function(data){
+            .error(function (data) {
                 alert(data.msg);
             })
     };
@@ -220,29 +233,29 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
                 console.log(data);
                 if (data.msg == "Router offline") {
                     $scope.wificat = {
-                        "operatingStatus":{
-                            "accessNumber":"未连接",
-                            "MemUsaged":"未连接",
-                            "cpuUtil":"未连接"
+                        "operatingStatus": {
+                            "accessNumber": "未连接",
+                            "MemUsaged": "未连接",
+                            "cpuUtil": "未连接"
                         },
-                        "basicInformation":{
-                            "softwareVersion":"未连接"
+                        "basicInformation": {
+                            "softwareVersion": "未连接"
                         },
-                        "wanStatus":{
-                            "wanip":"未连接",
-                            "speedUp":"未连接",
-                            "speedDown":"未连接"
+                        "wanStatus": {
+                            "wanip": "未连接",
+                            "speedUp": "未连接",
+                            "speedDown": "未连接"
                         }
                     };
                     $scope.upTime = "未连接"
                 }
-                else{
+                else {
                     $scope.wificat = data;
                     $scope.upTime = parseInt(data.basicInformation.upTime / 60);
                 }
             });
         }, 1000);
-        $scope.$on("$destroy",function(){
+        $scope.$on("$destroy", function () {
             $interval.cancel(routerStatusInterval);
         });
 
@@ -596,9 +609,9 @@ iCloudController.controller("DeliveryDetailsController", ["$scope", "$http", "$w
         var getDeliveryInfo = function () {
             $http.get([$window.API.ROUTER.GET_CURRENT_USER_DELIVERIES, "?key=", $cookieStore.get("key"), "&id=", deliveryID].join(""))
                 .success(function (data) {
-                    if (data.results.length == 1){
+                    if (data.results.length == 1) {
                         $scope.deliveryInfo = data.results[0];
-                    }else{
+                    } else {
                         $scope.deliveryInfo = ""
                     }
                 })

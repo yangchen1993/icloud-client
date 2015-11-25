@@ -201,7 +201,6 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
                 }
             }
             $scope.router = unbingRouters;
-            //$scope.bind_router = unbingRouters[0].id;
         });
     };
     show_selectRouters();
@@ -408,13 +407,6 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
 }]);
 
 iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
-    //$scope.submit = function (weixin) {
-    //    console.log(weixin);
-    //    $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key"),].join(""), weixin).success(function (data) {
-    //        alert(data.msg);
-    //        //location.href = "#/main/routers_details";
-    //    });
-    //};
     $http.get([window.API.WEIXIN.GET_WECHAT, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
         console.log(data);
         $scope.weixin = data;

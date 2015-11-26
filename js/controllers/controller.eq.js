@@ -126,14 +126,14 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
     $checkBox.enableCheck("table-fireware");
 }]);
 
-iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore',"$interval", function ($scope, $http, $cookieStore,$interval) {
+iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore',"$timeout","$q", function ($scope, $http, $cookieStore,$timeout,$q) {
     var router_id = get_param(window.location.href);
     console.log(router_id);
     $scope.modify_ssid = function (ssid) {
         var data = prompt("当前WIFI名称：" + ssid);
         if (data) {
             var key = $cookieStore.get("key");
-            $http.put([window.API.ROUTER.ROUTERS_SSID,"?key=", key,"&id=", $scope.routers_all.router.router_groups.id].join(""), {"ssid": data});
+            $http.put([window.API.ROUTER.ROUTERS_SSID,"?key=", key,"&id=", router_id].join(""), {"ssid": data});
         }
     };
     //放行设置
@@ -215,35 +215,57 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         $scope.routers_all = data;
 
         //路由器实时信息
-        var routerStatusInterval = $interval(function () {
+        //var routerStatusTimeout = $timeout(function ss() {
+        //    $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
+        //        console.log("成功");
+        //        ss();
+        //    //    console.log(data);
+        //    //    if (data.msg == "Router offline") {
+        //    //        $scope.wificat = {
+        //    //            "operatingStatus":{
+        //    //                "accessNumber":"未连接",
+        //    //                "MemUsaged":"未连接",
+        //    //                "cpuUtil":"未连接"
+        //    //            },
+        //    //            "basicInformation":{
+        //    //                "softwareVersion":"未连接"
+        //    //            },
+        //    //            "wanStatus":{
+        //    //                "wanip":"未连接",
+        //    //                "speedUp":"未连接",
+        //    //                "speedDown":"未连接"
+        //    //            }
+        //    //        };
+        //    //        $scope.upTime = "未连接"
+        //    //    }
+        //    //    else{
+        //    //        $scope.wificat = data;
+        //    //        $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+        //    //    }
+        //    })
+        //        .error(function(data){
+        //            console.log("失败");
+        //            ss();
+        //        })
+        //}, 30000);
+        //$timeout(function ss(){
+        //        $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
+        //            ss();
+        //        })
+        //    ss();
+        //},3000);
+        function ss(){
             $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
-                console.log(data);
-                if (data.msg == "Router offline") {
-                    $scope.wificat = {
-                        "operatingStatus":{
-                            "accessNumber":"未连接",
-                            "MemUsaged":"未连接",
-                            "cpuUtil":"未连接"
-                        },
-                        "basicInformation":{
-                            "softwareVersion":"未连接"
-                        },
-                        "wanStatus":{
-                            "wanip":"未连接",
-                            "speedUp":"未连接",
-                            "speedDown":"未连接"
-                        }
-                    };
-                    $scope.upTime = "未连接"
-                }
-                else{
-                    $scope.wificat = data;
-                    $scope.upTime = parseInt(data.basicInformation.upTime / 60);
-                }
-            });
-        }, 1000);
+                $timeout(ss(),3000);
+
+            })
+                .error(function(data){
+                    $timeout(ss(),3000);
+                })
+        };
+        ss();
         $scope.$on("$destroy",function(){
-            $interval.cancel(routerStatusInterval);
+            $interval.cancel(routerStatusTimeout);
         });
 
         //默认认证方式

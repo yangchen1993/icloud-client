@@ -26,7 +26,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.marketing_nav = false;
             $scope.wallet_nav = false;
         }
-        else if (data.role.name == "商家") {
+        else if (data.role.name == "商户") {
             $scope.auth_nav = false;
             $scope.ads_nav = true;
             $scope.account_nav = true;

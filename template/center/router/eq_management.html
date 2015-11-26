@@ -4,7 +4,7 @@
         </ol>
 
     <div class="form-inline search_panel">
-        <a href="#/main/new-device" ng-if="add_device_menu" class="btn btn-info">添加设备</a>
+        <a href="#/main/new-device" ng-if="deviceManage.addRouterMenu" class="btn btn-info">添加设备</a>
         <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#advanced_search" aria-expanded="false" aria-controls="advanced_search">高级搜索 </button>
         <div class="collapse" id="advanced_search">
             <div class="well">
@@ -12,7 +12,7 @@
                     <span>店铺：</span>
                     <input type="text" class="form-control" placeholder="商铺名称" style="width: 15% !important;"
                            ng-model="search.groups__name__icontains">
-                    <select class="form-control" ng-model="search.groups__category" style="width: 15% !important;"
+                    <select class="form-control" ng-model="search.router_groups__category" style="width: 15% !important;"
                             ng-options="v.name as v.name for v in category">
                         <option value="">选择行业</option>
                     </select>
@@ -21,15 +21,15 @@
                     <div>
                         <span>地区：</span>
                         <select class="form-control" style="width: 15% !important;"
-                                ng-model="search.groups__trade__province" ng-options="v.id as v.name for v in province1"
-                                ng-change="select_p(search.groups__trade__province)">
+                                ng-model="search.router_groups__trade__province" ng-options="v.id as v.name for v in province1"
+                                ng-change="select_p(search.router_groups__trade__province)">
                             <option value="">省</option>
                         </select>
-                        <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city"
-                                ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">
+                        <select class="form-control" style="width: 15% !important;" ng-model="search.router_groups__trade__city"
+                                ng-options="v.id as v.name for v in city1" ng-change="select_c(search.router_groups__trade__city)">
                             <option value="">市</option>
                         </select>
-                        <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area"
+                        <select class="form-control" style="width: 15% !important;" ng-model="search.router_groups__trade__area"
                                 ng-options="v.id as v.name for v in area1">
                             <option value="">区/县</option>
                         </select>
@@ -42,9 +42,9 @@
                     <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
                     <div>
                         <span>时间：</span>
-                        <input type="date" class="form-control" ng-model="search.create_time__gte"><span
+                        <input type="date" class="form-control" ng-model="search.create_time_start__gte"><span
                             style="margin-left:5px">到</span>
-                        <input type="date" class="form-control" ng-model="search.create_time__lte">
+                        <input type="date" class="form-control" ng-model="search.create_time_end__lte">
                         <button class="btn btn-info pull-right" ng-click="eq_reset()">重置</button>
                         <button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="eq_search(search)">搜索
                         </button>
@@ -79,7 +79,11 @@
                 <td ng-bind="p.isonline"></td>
                 <td ng-bind="p.mac"></td>
                 <td ng-bind="p.create_time"></td>
-                <td><a href="" ng-click="see_router(p.id)">查看</a></td>
+                <td>
+                    <a class="btn btn-xs btn-info" href="javascript:" ng-click="see_router(p.id)">查看</a>
+                    <a ng-if="deviceManage.editRouterMenu" class="btn btn-xs btn-info" href="#/main/edit-device?router_id={{ p.id }}">编辑</a>
+                    <a ng-if="deviceManage.removeRouterMenu" class="btn btn-xs btn-danger" href="javascript:" ng-click="removeRouter(p.id)">删除</a>
+                </td>
             </tr>
             </tbody>
         </table>

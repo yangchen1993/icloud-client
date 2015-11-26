@@ -1,17 +1,17 @@
 /**
  * Created by chen on 2015/10/31.
  */
-iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore","$rootScope",function ($scope, $http, $cookieStore,$rootScope) {
+iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore", "$rootScope", function ($scope, $http, $cookieStore, $rootScope) {
     $http.get([window.API.USER.GET_CURRENT_USER_INFO, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
         console.log(data);
         $scope.user = {
-            "name":data.legal_person_name,
+            "name": data.legal_person_name,
             "identity": data.role.name
         };
 
         $cookieStore.put("role", data.role.name);
 
-        if(data.role.name=="系统管理员"){
+        if (data.role.name == "系统管理员") {
             $scope.auth_nav = false;
             $scope.ads_nav = false;
             $scope.account_nav = true;
@@ -25,7 +25,11 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.create_business_nav = true;
             $scope.marketing_nav = false;
             $scope.wallet_nav = false;
-            $rootScope.add_device_menu = true;
+            $rootScope.deviceManage = {
+                "addRouterMenu": true,
+                "editRouterMenu": true,
+                "removeRouterMenu": true
+            }
         }
         else if (data.role.name == "商家") {
             $scope.auth_nav = false;
@@ -35,13 +39,13 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.delivery_nav = false;
             $scope.shop_nav = true;
             $scope.agent_nav = false;
-            $scope.create_agent_nav=false;
+            $scope.create_agent_nav = false;
             $scope.business_nav = false;
             $scope.create_business_nav = false;
             $scope.marketing_nav = true;
             $scope.wallet_nav = true;
         }
-        else{
+        else {
             $scope.auth_nav = false;
             $scope.ads_nav = true;
             $scope.account_nav = true;
@@ -49,7 +53,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.delivery_nav = true;
             $scope.shop_nav = false;
             $scope.agent_nav = false;
-            $scope.create_agent_nav=false;
+            $scope.create_agent_nav = false;
             $scope.business_nav = true;
             $scope.create_business_nav = true;
             $scope.marketing_nav = false;

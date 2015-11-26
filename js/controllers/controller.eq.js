@@ -1,8 +1,8 @@
 /**
  * Created by chen on 2015/10/8.
  */
-iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$grid', '$window', '$category', '$filter', '$province', '$city', '$area',
-    function ($scope, $checkBox, $grid, $window, $category, $filter, $province, $city, $area) {
+iCloudController.controller("EqManagementController", ['$scope', '$http', '$checkBox', '$grid', '$window', '$category', '$filter', '$province', '$city', '$area',
+    function ($scope, $http, $checkBox, $grid, $window, $category, $filter, $province, $city, $area) {
         $scope.status = 1;
         $scope.route = function (num) {
             if (num == 1) {
@@ -28,20 +28,20 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
         });
         $scope.eq_search = function (data) {
             var tmp = angular.copy(data);
-            tmp.create_time__gte = $filter('date')(tmp.create_time__gte, 'yyyy-MM-dd HH:mm:ss');
-            tmp.create_time__lte = $filter('date')(tmp.create_time__lte, 'yyyy-MM-dd HH:mm:ss');
+            tmp.create_time_start__gte = $filter('date')(tmp.create_time_start__gte, 'yyyy-MM-dd HH:mm:ss');
+            tmp.create_time_end__lte = $filter('date')(tmp.create_time_end__lte, 'yyyy-MM-dd HH:mm:ss');
             $scope.filtering(tmp);
             console.log(tmp);
         };
         $scope.eq_reset = function () {
-            $scope.search.groups__name__icontains = "";
-            $scope.search.groups__category = "选择行业";
-            $scope.search.groups__trade__province = "省";
-            $scope.search.groups__trade__city = "市";
-            $scope.search.groups__trade__area = "区/县";
+            $scope.search.router_groups__name__icontains = "";
+            $scope.search.router_groups__category = "选择行业";
+            $scope.search.router_groups__trade__province = "省";
+            $scope.search.router_groups__trade__city = "市";
+            $scope.search.router_groups__trade__area = "区/县";
             $scope.search.mac__icontains = "";
-            $scope.search.create_time__gte = "";
-            $scope.search.create_time__lte = "";
+            $scope.search.create_time_start__gte = "";
+            $scope.search.create_time_end__lte = "";
         };
         var province = $province.get();
         province.success(function (data) {
@@ -63,6 +63,14 @@ iCloudController.controller("EqManagementController", ['$scope', '$checkBox', '$
         $scope.see_router = function (id) {
             window.location.href = ["#/main/details?router_id=", id].join("");
         };
+
+        $scope.removeRouter = function (id) {
+            $http.delete([$window.API.ROUTER.REMOVE_ROUTER, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
+                .success(function (data) {
+                    $window.alert(data.msg);
+                })
+        };
+
     }]);
 
 iCloudController.controller("NewDeviceController", ["$scope", "$http", "$cookieStore", "$window",
@@ -70,13 +78,36 @@ iCloudController.controller("NewDeviceController", ["$scope", "$http", "$cookieS
         $scope.saveDevice = function (device) {
             $http.post([$window.API.ROUTER.NEW_ROUTER, "?key=", $cookieStore.get("key")].join(""), device)
                 .success(function (data) {
-
+                    $window.alert(data.msg)
                 })
                 .error(function (data) {
-
+                    $window.alert(data.msg)
                 })
         }
     }]);
+
+iCloudController.controller("EditDeviceController", ["$scope", "$http", "$cookieStore", "$window",
+    function ($scope, $http, $cookieStore, $window) {
+        var id = get_param($window.location.href);
+        $http.get([$window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
+            .success(function (data) {
+                if (data.results.length > 0){
+                    $scope.router = data.results[0]
+                }
+            });
+
+        $scope.editRouter = function (router) {
+            $http.put([$window.API.ROUTER.EDIT_ROUTER, "?key=", $cookieStore.get("key")].join(""), router)
+                .success(function (data) {
+                    $window.alert(data.msg)
+                })
+                .error(function (data) {
+                    $window.alert(data.msg)
+                })
+        }
+
+    }]);
+
 
 iCloudController.controller("VersionManagementController", ['$scope', '$window', '$http', '$cookieStore', '$grid',
     function ($scope, $window, $http, $cookieStore, $grid) {
@@ -546,15 +577,16 @@ iCloudController.controller("CreateDeliveryController", ["$scope", "$http", "$wi
     function ($scope, $http, $window, $cookieStore, $grid) {
         var checkRouterIsExists = function (mac) {
             if (!_.has($scope.deviceDeliveryList, mac)) {
-                $http.get([$window.API.ROUTER.GET_ROUTER_INFO_BY_MAC, "?key=", $cookieStore.get("key"), "&mac=", mac].join(""))
+                $http.get([$window.API.ROUTER.GET_CURRENT_USER_UNUSED_ROUTER_INFO, "?key=", $cookieStore.get("key"), "&mac=", mac, "&"].join(""))
                     .success(function (data) {
                         $scope.deviceDeliveryList[data.mac] = data;
-                        console.log($scope.deviceDeliveryList);
                         $scope.deviceMacs = _.keys($scope.deviceDeliveryList);
                     })
                     .error(function (data) {
                         $scope.checkRouterIsExistsErrorInfo = data.msg;
                     });
+            }else{
+                $window.alert("该设备已在列表中");
             }
         };
 

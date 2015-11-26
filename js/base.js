@@ -61,7 +61,7 @@ window.API = {
 
         "GET_ALL_ROUTERS": [window.HOST, "routers/get_all_routers/"].join(""), // 获取所有路由器
 
-        "GET_CURRENT_USER_UNUSED_ROUTER_INFO": [window.HOST, "routers/get_current_user_unused_router_info"],
+        "GET_CURRENT_USER_UNUSED_ROUTER_INFO": [window.HOST, "routers/get_current_user_unused_router_info"].join(""),
 
         "GET_UNUSED_ROUTER_INFO_BY_MAC": [window.HOST, "routers/get_unused_router_info_by_mac/"].join(""), // 根据MAC获取路由器信息
 
@@ -143,7 +143,7 @@ window.API = {
         "PUT_AD_UP": [window.HOST, "audits/edit_audit/"].join("")
     },
     "WIFICAT": {
-        "STATUS": [window.HOST_WIFICAT, "ws/routers/status/"].join("") //路由器实时信息
+        "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息
     },
 
 

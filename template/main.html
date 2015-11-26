@@ -23,6 +23,26 @@
             <div style="border-top:1px solid #2c303b"></div>
             <div style="border-top:1px solid #535a69"></div>
 
+            <li>
+                <div class="open_menu">
+                    <div></div>
+                    <a ui-sref=".eq_management"><span class="glyphicon glyphicon-cog" style="margin-right: 10px"></span>个人信息</a>
+                    <i class="glyphicon glyphicon-triangle-right"></i>
+                </div>
+                <ul class="menu_child">
+                    <li>
+                        <div></div>
+                        <a ui-sref=".deliveries">基本信息</a>
+                    </li>
+                    <li>
+                        <div></div>
+                        <a ui-sref=".version_manage">密码管理</a>
+                    </li>
+                </ul>
+            </li>
+            <div style="border-top:1px solid #2c303b" ng-show="eq_nav"></div>
+            <div style="border-top:1px solid #535a69" ng-show="eq_nav"></div>
+
             <ul class="function_menu" style="color: #fff">
                 <li ng-show="auth_nav">
                     <div class="open_menu">

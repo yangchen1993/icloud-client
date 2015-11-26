@@ -41,8 +41,7 @@
 }
 .identify_type{
     position:relative;
-    left:50%;
-    margin:20px 0 0 -140px;
+    margin-top:20px;
 }
 .identify_type>div{
     width:110px;

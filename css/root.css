@@ -197,3 +197,31 @@ padding-top: 10px;
 .content_panel{
     height: 60px !important;
 }
+.identify_type .btn-primary{
+    display: inline-block;
+    width:35px;
+    height:30px;
+    text-align: center;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.route-active{
+    display: inline-block;
+    width:35px;
+    height:30px;
+    text-align: center;
+    font-size:20px;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: orangered;
+    border:solid 1px orangered;
+}
+.route-active:before{
+    content: "\f00c";
+}

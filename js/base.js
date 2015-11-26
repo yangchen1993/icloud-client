@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.2.103:8801/api/";
+//window.HOST = "http://192.168.2.104:8802/api/";
 window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
@@ -53,9 +53,17 @@ window.API = {
     },
 
     "ROUTER": {
+        "NEW_ROUTER": [window.HOST, "routers/new_router/"].join(""), // 新增路由器
+
+        "REMOVE_ROUTER": [window.HOST, "routers/remove_router/"].join(""), //删除路由器
+
+        "EDIT_ROUTER":[window.HOST, "routers/edit_router/"].join(""), // 编辑路由器
+
         "GET_ALL_ROUTERS": [window.HOST, "routers/get_all_routers/"].join(""), // 获取所有路由器
 
-        "GET_ROUTER_INFO_BY_MAC": [window.HOST, "routers/get_router_info_by_mac/"].join(""), // 根据MAC获取路由器信息
+        "GET_CURRENT_USER_UNUSED_ROUTER_INFO": [window.HOST, "routers/get_current_user_unused_router_info"],
+
+        "GET_UNUSED_ROUTER_INFO_BY_MAC": [window.HOST, "routers/get_unused_router_info_by_mac/"].join(""), // 根据MAC获取路由器信息
 
         "GET_CURRENT_USER_ROUTERS": [window.HOST, "routers/get_current_user_routers/"].join(""), //获取当前用户路由
 
@@ -135,7 +143,7 @@ window.API = {
         "PUT_AD_UP": [window.HOST, "audits/edit_audit/"].join("")
     },
     "WIFICAT": {
-        "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息
+        "STATUS": [window.HOST_WIFICAT, "ws/routers/status/"].join("") //路由器实时信息
     },
 
 
@@ -143,7 +151,7 @@ window.API = {
         "NEW_WECHAT": [window.HOST, "wechat/new_wechat/"].join(""),
 
         "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
-        
+
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
 
     },

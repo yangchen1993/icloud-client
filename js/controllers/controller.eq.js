@@ -292,20 +292,15 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
 
         //默认认证方式
         if (data.login_type == "手机号认证") {
-            $scope.isActive_phone = 1;
-            $scope.isActive_weixin = 0;
+            $scope.login_type=1;
         }
         else if (data.login_type == "微信认证") {
-            $scope.isActive_phone = 0;
-            $scope.isActive_weixin = 1;
+            $scope.login_type=2;
         }
-        else if (data.login_type == "手机号认证;微信认证") {
-            $scope.isActive_phone = 1;
-            $scope.isActive_weixin = 1;
-        }
-        else {
-            $scope.isActive_phone = 0;
-            $scope.isActive_weixin = 0;
+        else if(data.login_type == "免认证") {
+            $scope.login_type=3;
+        }else{
+            ;
         }
         //默认认证时间
         if (data.auth_period <= 60) {
@@ -323,16 +318,27 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             };
         }
     });
-    $scope.identify_type = function () {
-        var identify_type = [];
-        if ($scope.isActive_phone == 1) {
-            identify_type.push("手机号认证");
+    var loginType;
+    $scope.changeLoginType = function () {
+        //var identify_type = "";
+        //if ($scope.isActive_phone == 1) {
+        //    identify_type="手机号认证";
+        //    $scope.isActive_weixin=0;
+        //}else if ($scope.isActive_weixin == 1) {
+        //    identify_type="微信认证";
+        //    $scope.isActive_phone=0;
+        //}else{
+        //    identify_type="免认证";
+        //}
+        console.log($scope.login_type);
+        if($scope.login_type==1){
+            loginType="手机号认证";
+        }else if($scope.login_type==2){
+            loginType="微信认证";
+        }else{
+            loginType="";
         }
-        if ($scope.isActive_weixin == 1) {
-            identify_type.push("微信认证");
-        }
-        console.log(identify_type);
-        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": identify_type.join(";")});
+        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType});
     };
     $scope.identify_submit = function (data) {
         console.log(data);
@@ -345,6 +351,10 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             alert(data.msg);
         })
     };
+
+    $scope.weixin_load = function () {
+        location.href = ["#/main/weixin_config?routergroup_id=", shop_id].join("");
+    }
 
 }]);
 

@@ -28,8 +28,8 @@ iCloudController.controller("EqManagementController", ['$scope', '$http', '$chec
         });
         $scope.eq_search = function (data) {
             var tmp = angular.copy(data);
-            tmp.create_time_start__gte = $filter('date')(tmp.create_time_start__gte, 'yyyy-MM-dd HH:mm:ss');
-            tmp.create_time_end__lte = $filter('date')(tmp.create_time_end__lte, 'yyyy-MM-dd HH:mm:ss');
+            tmp.create_time_gte = $filter('date')(tmp.create_time_gte, 'yyyy-MM-dd HH:mm:ss');
+            tmp.create_time_lte = $filter('date')(tmp.create_time_lte, 'yyyy-MM-dd HH:mm:ss');
             $scope.filtering(tmp);
             console.log(tmp);
         };
@@ -40,8 +40,8 @@ iCloudController.controller("EqManagementController", ['$scope', '$http', '$chec
             $scope.search.router_groups__trade__city = "市";
             $scope.search.router_groups__trade__area = "区/县";
             $scope.search.mac__icontains = "";
-            $scope.search.create_time_start__gte = "";
-            $scope.search.create_time_end__lte = "";
+            $scope.search.create_time_gte = "";
+            $scope.search.create_time_lte = "";
         };
         var province = $province.get();
         province.success(function (data) {

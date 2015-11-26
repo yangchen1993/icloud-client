@@ -170,14 +170,14 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
     $checkBox.enableCheck("table-fireware");
 }]);
 
-iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', "$interval", function ($scope, $http, $cookieStore, $interval) {
+iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore',"$timeout","$q", function ($scope, $http, $cookieStore,$timeout,$q) {
     var router_id = get_param(window.location.href);
     console.log(router_id);
     $scope.modify_ssid = function (ssid) {
         var data = prompt("当前WIFI名称：" + ssid);
         if (data) {
             var key = $cookieStore.get("key");
-            $http.put([window.API.ROUTER.ROUTERS_SSID, "?key=", key, "&id=", $scope.routers_all.router.router_groups.id].join(""), {"ssid": data});
+            $http.put([window.API.ROUTER.ROUTERS_SSID,"?key=", key,"&id=", router_id].join(""), {"ssid": data});
         }
     };
     //放行设置
@@ -259,53 +259,67 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         $scope.routers_all = data;
 
         //路由器实时信息
-        var routerStatusInterval = $interval(function () {
+        //var routerStatusTimeout = $timeout(function ss() {
+        //    $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
+        //        console.log(data);
+        //        if (data.msg == "Router offline") {
+        //            $scope.wificat = {
+        //                "operatingStatus":{
+        //                    "accessNumber":"未连接",
+        //                    "MemUsaged":"未连接",
+        //                    "cpuUtil":"未连接"
+        //                },
+        //                "basicInformation":{
+        //                    "softwareVersion":"未连接"
+        //                },
+        //                "wanStatus":{
+        //                    "wanip":"未连接",
+        //                    "speedUp":"未连接",
+        //                    "speedDown":"未连接"
+        //                }
+        //            };
+        //            $scope.upTime = "未连接"
+        //        }
+        //        else{
+        //            $scope.wificat = data;
+        //            $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+        //        }
+        //    })
+        //        .error(function(data){
+        //            console.log("失败");
+        //        })
+        //}, 3000);
+        //$scope.$on("$destroy",function(){
+        //    $interval.cancel(routerStatusTimeout);
+        //});
+
+
+        function ss(){
             $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
-                console.log(data);
-                if (data.msg == "Router offline") {
-                    $scope.wificat = {
-                        "operatingStatus": {
-                            "accessNumber": "未连接",
-                            "MemUsaged": "未连接",
-                            "cpuUtil": "未连接"
-                        },
-                        "basicInformation": {
-                            "softwareVersion": "未连接"
-                        },
-                        "wanStatus": {
-                            "wanip": "未连接",
-                            "speedUp": "未连接",
-                            "speedDown": "未连接"
-                        }
-                    };
-                    $scope.upTime = "未连接"
-                }
-                else {
-                    $scope.wificat = data;
-                    $scope.upTime = parseInt(data.basicInformation.upTime / 60);
-                }
-            });
-        }, 1000);
-        $scope.$on("$destroy", function () {
-            $interval.cancel(routerStatusInterval);
-        });
+                console.log("成功");
+                setTimeout(ss(),3000);
+
+            })
+                .error(function(data){
+                    console.log("失败");
+                    setTimeout(ss(),3000);
+                })
+        }
+
+        ss();
+
 
         //默认认证方式
         if (data.login_type == "手机号认证") {
-            $scope.isActive_phone = 1;
-            $scope.isActive_weixin = 0;
+            $scope.login_type=1;
         }
         else if (data.login_type == "微信认证") {
-            $scope.isActive_phone = 0;
-            $scope.isActive_weixin = 1;
+            $scope.login_type=2;
         }
-        else if (data.login_type == "手机号认证;微信认证") {
-            $scope.isActive_phone = 1;
-            $scope.isActive_weixin = 1;
-        }
-        else {
-            $scope.isActive_phone = 0;
-            $scope.isActive_weixin = 0;
+        else if(data.login_type == "免认证") {
+            $scope.login_type=3;
+        }else{
+            ;
         }
         //默认认证时间
         if (data.auth_period <= 60) {
@@ -323,16 +337,27 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             };
         }
     });
-    $scope.identify_type = function () {
-        var identify_type = [];
-        if ($scope.isActive_phone == 1) {
-            identify_type.push("手机号认证");
+    var loginType;
+    $scope.changeLoginType = function () {
+        //var identify_type = "";
+        //if ($scope.isActive_phone == 1) {
+        //    identify_type="手机号认证";
+        //    $scope.isActive_weixin=0;
+        //}else if ($scope.isActive_weixin == 1) {
+        //    identify_type="微信认证";
+        //    $scope.isActive_phone=0;
+        //}else{
+        //    identify_type="免认证";
+        //}
+        console.log($scope.login_type);
+        if($scope.login_type==1){
+            loginType="手机号认证";
+        }else if($scope.login_type==2){
+            loginType="微信认证";
+        }else{
+            loginType="";
         }
-        if ($scope.isActive_weixin == 1) {
-            identify_type.push("微信认证");
-        }
-        console.log(identify_type);
-        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": identify_type.join(";")});
+        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType});
     };
     $scope.identify_submit = function (data) {
         console.log(data);
@@ -345,6 +370,10 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             alert(data.msg);
         })
     };
+
+    $scope.weixin_load = function () {
+        location.href = ["#/main/weixin_config?routergroup_id=", shop_id].join("");
+    }
 
 }]);
 

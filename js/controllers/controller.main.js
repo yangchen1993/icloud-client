@@ -31,7 +31,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 "removeRouterMenu": true
             }
         }
-        else if (data.role.name == "商家") {
+        else if (data.role.name == "商户") {
             $scope.auth_nav = false;
             $scope.ads_nav = true;
             $scope.account_nav = true;
@@ -44,6 +44,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.create_business_nav = false;
             $scope.marketing_nav = true;
             $scope.wallet_nav = true;
+            $scope.info_nav = true;
         }
         else {
             $scope.auth_nav = false;
@@ -58,6 +59,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.create_business_nav = true;
             $scope.marketing_nav = false;
             $scope.wallet_nav = true;
+            $scope.info_nav = true;
         }
     });
 }]);

@@ -68,37 +68,63 @@
                 <p style="padding: 30px 0  30px 30px;">认证方式：</p>
                 <p class="text-muted" style="margin-left: 30px">全部选择关闭则为免认证方式</p>
                 <div class="identify_type">
-                    <div style="margin-right: 30px" class="text-center">
+                    <div style="margin-left:150px;float: left;margin-right:30px;" class="text-center">
                         <img src="/img/phonelogin.png">
 
                         <p>手机登录</p>
 
                         <div class="btn-group" style="margin-top: 10px;">
-                            <label class="btn btn-primary" ng-class="{'active': isActive_phone==1}">
-                                <input class="hidden" type="radio" name="options_phone" id="phone_on" ng-model="isActive_phone"
-                                       value="1" ng-change="identify_type()">开
-                            </label>
+                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_phone==1}">-->
+                                <!--<input class="hidden" type="radio" name="options_phone" id="phone_on" ng-model="isActive_phone"-->
+                                       <!--value="1" ng-change="identify_type()">开-->
+                            <!--</label>-->
 
-                            <label class="btn btn-primary" ng-class="{'active': isActive_phone==0}">
-                                <input class="hidden" type="radio" name="options_phone" id="phone_off" ng-model="isActive_phone"
-                                       value="0" ng-change="identify_type()">关
+                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_phone==0}">-->
+                                <!--<input class="hidden" type="radio" name="options_phone" id="phone_off" ng-model="isActive_phone"-->
+                                       <!--value="0" ng-change="identify_type()">关-->
+                            <!--</label>-->
+                            <label class="btn btn-primary" ng-class="{'route-active': login_type==1}">
+                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type" value="1"   ng-change="changeLoginType()">
                             </label>
                         </div>
                     </div>
-                    <div style="margin-left: 30px" class="text-center">
+                    <div style="float: left;margin-right:30px;" class="text-center">
                         <img src="/img/weixinlogin.png">
 
                         <p style="margin-left: 0">微信登陆<a href="javascript:" ng-click="weixin_load()">设置</a></p>
 
                         <div class="btn-group" style="margin-top: 10px;">
-                            <label class="btn btn-primary" ng-class="{'active': isActive_weixin==1}">
-                                <input class="hidden" type="radio" name="options_phone" id="weixin_on" ng-model="isActive_weixin"
-                                       value="1" ng-change="identify_type()">开
-                            </label>
+                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==1}">-->
+                                <!--<input class="hidden" type="radio" name="options_phone" id="weixin_on" ng-model="isActive_weixin"-->
+                                       <!--value="1" ng-change="identify_type()">开-->
+                            <!--</label>-->
 
-                            <label class="btn btn-primary" ng-class="{'active': isActive_weixin==0}">
-                                <input class="hidden" type="radio" name="options_phone" id="weixin_off" ng-model="isActive_weixin"
-                                       value="0" ng-change="identify_type()">关
+                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==0}">-->
+                                <!--<input class="hidden" type="radio" name="options_phone" id="weixin_off" ng-model="isActive_weixin"-->
+                                       <!--value="0" ng-change="identify_type()">关-->
+                            <!--</label>-->
+                            <label class="btn btn-primary" ng-class="{'route-active': login_type==2}">
+                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type" value="2" ng-change="changeLoginType()">
+                            </label>
+                        </div>
+                    </div>
+                    <div style="float: left;margin-right:30px;" class="text-center">
+                        <img src="/img/none.png">
+
+                        <p style="margin-left: 0">免认证</p>
+
+                        <div class="btn-group" style="margin-top: 10px;">
+                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==1}">-->
+                            <!--<input class="hidden" type="radio" name="options_phone" id="weixin_on" ng-model="isActive_weixin"-->
+                            <!--value="1" ng-change="identify_type()">开-->
+                            <!--</label>-->
+
+                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==0}">-->
+                            <!--<input class="hidden" type="radio" name="options_phone" id="weixin_off" ng-model="isActive_weixin"-->
+                            <!--value="0" ng-change="identify_type()">关-->
+                            <!--</label>-->
+                            <label class="btn btn-primary" ng-class="{'route-active': login_type==3}">
+                                <input class="hidden" type="radio" name="options_phone"  ng-model="login_type" value="3"  ng-change="changeLoginType()">
                             </label>
                         </div>
                     </div>

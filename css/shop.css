@@ -146,12 +146,13 @@
     line-height:50px;
     text-align: center;
     color:#fff;
+    outline: none;
 }
 .router-tab .nav-tabs a:hover{
-    background: red !important;
+    background:#28ab6f !important;
 }
 .router-tab .nav-tabs a:visited{
-    background: red !important;
+    background:#28ab6f !important;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
     color: #fff;

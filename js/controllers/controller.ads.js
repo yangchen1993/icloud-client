@@ -101,7 +101,7 @@ iCloudController.controller("PutAdController", ["$scope", "$http","$window","$gr
     $grid.initial($scope, [$window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS,].join(""));
     $checkBox.enableCheck("table-ad");
     $scope.sjTouFang=function(group_id){
-        var id = get_param(window.location.href);
+        var ad_id = get_param(window.location.href);
         //var c = angular.element("#table-ad :checkbox");
         //if((angular.element(":checked").length-1 )==0){
         //    alert("请至少选择一个店铺");
@@ -112,9 +112,8 @@ iCloudController.controller("PutAdController", ["$scope", "$http","$window","$gr
         //        group_id.push(angular.element(v).val());
         //    }
         //});
-        console.log(group_id);
         $.ajax({
-            "url": $window.API.AD.PUT_AD_IN+"?key="+$.cookie("key").replace(/\"/g,"")+"&id="+id,
+            "url": $window.API.AD.PUT_AD_IN+"?key="+$.cookie("key").replace(/\"/g,"")+"&id="+ad_id,
             "type":"POST",
             "dataType":"json",
             "data": {

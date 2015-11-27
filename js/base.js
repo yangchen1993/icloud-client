@@ -28,7 +28,7 @@ window.API = {
 
         "CREATE_AGENT": [window.HOST, "users/new_agent/"].join(""),  //创建代理商
 
-        "CREATE_BUSINESS": [window.HOST, "users/new_business/"].join("") // 新建商家
+        "CREATE_BUSINESS": [window.HOST, "users/new_business/"].join("") // 新建商户
     },
 
     "SYSTEM": {

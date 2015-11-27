@@ -177,7 +177,9 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         var data = prompt("当前WIFI名称：" + ssid);
         if (data) {
             var key = $cookieStore.get("key");
-            $http.put([window.API.ROUTER.ROUTERS_SSID,"?key=", key,"&id=", router_id].join(""), {"ssid": data});
+            $http.put([window.API.ROUTER.ROUTERS_SSID,"?key=", key,"&id=", router_id].join(""), {"ssid": data}).success(function(results){
+                $scope.routers_all.router.ssid=data;
+            });
         }
     };
     //放行设置
@@ -294,19 +296,19 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         //});
 
 
-        function ss(){
-            $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
-                console.log("成功");
-                setTimeout(ss(),3000);
-
-            })
-                .error(function(data){
-                    console.log("失败");
-                    setTimeout(ss(),3000);
-                })
-        }
-
-        ss();
+        //function ss(){
+        //    $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
+        //        console.log("成功");
+        //        setTimeout(ss(),3000);
+        //
+        //    })
+        //        .error(function(data){
+        //            console.log("失败");
+        //            setTimeout(ss(),3000);
+        //        })
+        //}
+        //
+        //ss();
 
 
         //默认认证方式

@@ -42,7 +42,7 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
             .success(function (data) {
                 $scope.agent_grade = [];
                 for (var i = 0; i < data.length; i++) {
-                    if (data[i].name != "商家")
+                    if (data[i].name != "商户")
                         $scope.agent_grade.push(data[i]);
                 }
                 $scope.agent = {

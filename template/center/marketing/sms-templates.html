@@ -15,20 +15,26 @@
                 <td id="name" ng-click="sort('name')">
                     模板名称
                     <span ng-show="currentSort['name'] === true" class="glyphicon glyphicon-triangle-top"></span>
-                <span ng-show="currentSort['name'] === false"
-                      class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="currentSort['name'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
                 </td>
                 <td id="template" ng-click="sort('template')">
                     内容
                     <span ng-show="currentSort['template'] === true" class="glyphicon glyphicon-triangle-top"></span>
-                <span ng-show="currentSort['template'] === false"
-                      class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="currentSort['template'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="sign" ng-click="sort('sign')">
+                    签名
+                    <span ng-show="currentSort['sign'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['sign'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
                 </td>
                 <td id="create_time" ng-click="sort('create_time')">
                     创建时间
                     <span ng-show="currentSort['create_time'] === true" class="glyphicon glyphicon-triangle-top"></span>
-                <span ng-show="currentSort['create_time'] === false"
-                      class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="currentSort['create_time'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
                 </td>
                 <td>操作</td>
             </tr>
@@ -37,6 +43,7 @@
             <tr ng-repeat="t in grid.results">
                 <td ng-bind="t.name"></td>
                 <td ng-bind="t.template"></td>
+                <td ng-bind="t.sign"></td>
                 <td ng-bind="t.create_time"></td>
                 <td>
                     <button class="btn btn-xs btn-info" ng-click="sendTemplate(t.id)">群发</button>

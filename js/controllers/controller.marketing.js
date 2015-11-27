@@ -24,6 +24,9 @@ iCloudController.controller("NewSmsTemplateController", ["$scope", "$http", "$co
                 .success(function (data) {
                     $window.location.href = "#/main/sms-templates";
                 })
+                .error(function (data) {
+                    $window.alert(transform_error_message(data.msg))
+                })
         };
     }]);
 

@@ -26,6 +26,12 @@
                     <span ng-show="currentSort['trade_type'] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
                 </td>
+                <td id="description" ng-click="sort('description')">
+                    详情
+                    <span ng-show="currentSort['description'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['description'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
                 <td id="create_time" ng-click="sort('create_time')">
                     交易时间
                     <span ng-show="currentSort['create_time'] === true" class="glyphicon glyphicon-triangle-top"></span>
@@ -45,6 +51,7 @@
                 <td ng-bind="t.order_no"></td>
                 <td ng-bind="t.amount | currency: '￥'"></td>
                 <td ng-bind="t.trade_type"></td>
+                <td ng-bind="t.description"></td>
                 <td ng-bind="t.create_time"></td>
                 <td ng-bind="t.status"></td>
             </tr>

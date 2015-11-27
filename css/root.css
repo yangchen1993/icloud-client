@@ -225,3 +225,16 @@ padding-top: 10px;
 .route-active:before{
     content: "\f00c";
 }
+.login-icon{
+    width: 85px;
+    height:85px;
+    margin:0 auto;
+    line-height: 85px;
+    border-radius: 50%;
+    text-align: center;
+    color:#fff;
+    background: #42d17f;
+}
+.login-icon img{
+    width: 65%;
+}

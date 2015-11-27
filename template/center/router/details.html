@@ -8,7 +8,7 @@
         <div class="details_panel">
             <p>店铺信息</p>
             <div style="line-height: 80px"><span>店铺名称：</span><span ng-bind="routers_all.router.router_groups.name"></span></div>
-            <div style="line-height: 80px"><span>所属行业：</span><sapn ng-bind="routers_all.router.router_groups.category"></sapn></div>
+            <div style="line-height: 80px"><span>所属行业：</span><span ng-bind="routers_all.router.router_groups.category"></span></div>
             <div style="height: 100px;border: 0;margin-top:20px"><span>所在地址：</span><span ng-bind="routers_all.router.router_groups.trade_area.province+' '+routers_all.router.router_groups.trade_area.city+' '+routers_all.router.router_groups.trade_area.area+' '+routers_all.router.router_groups.trade_area.name"></span></div>
         </div>
     </div>
@@ -48,8 +48,9 @@
                     <p class="text-muted" style="margin-left: 30px">全部选择关闭则为免认证方式</p>
                     <div class="identify_type">
                         <div style="margin-left:150px;float: left;margin-right:30px;" class="text-center">
-                            <img src="/img/phonelogin.png">
-
+                            <div class="login-icon">
+                                <img src="/img/iconfont-shouji.png">
+                            </div>
                             <p>手机登录</p>
 
                             <div class="btn-group" style="margin-top: 10px;">
@@ -68,8 +69,9 @@
                             </div>
                         </div>
                         <div style="float: left;margin-right:30px;" class="text-center">
-                            <img src="/img/weixinlogin.png">
-
+                            <div class="login-icon">
+                                <img src="/img/iconfont-weixin.png">
+                            </div>
                             <p style="margin-left: 0">微信登陆<a href="javascript:" ng-click="weixin_load()">设置</a></p>
 
                             <div class="btn-group" style="margin-top: 10px;">
@@ -88,8 +90,9 @@
                             </div>
                         </div>
                         <div style="float: left;margin-right:30px;" class="text-center">
-                            <img src="/img/none.png">
-
+                            <div class="login-icon">
+                                <img src="/img/iconfont-wuxuqueren.png">
+                            </div>
                             <p style="margin-left: 0">免认证</p>
 
                             <div class="btn-group" style="margin-top: 10px;">

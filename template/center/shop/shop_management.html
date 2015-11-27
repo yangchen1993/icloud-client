@@ -1,6 +1,4 @@
 <div class="panel_outside" style="overflow: scroll">
-
-
 <div>
     <ol class="breadcrumb" style="background-color: #4DDBC5">
         <li class="active">店铺管理</li>
@@ -11,23 +9,6 @@
     <button class="btn btn-info" ui-sref="main.create_shop" style="background-color: #5AE9D5;border-color: #5AE9D5">新建</button>
 </div>
 <div style="padding: 10px" class="row">
-
-        <!--<div style="width:33.3%;height:300px;background-color: #d5d5d5;float:left;border:1px solid #cccccc;padding:30px 0 0 40px;font-family: 'Microsoft YaHei';font-size: 18px;font-weight: 600;font-weight:500"-->
-             <!--ng-repeat="p in shop">-->
-            <!--<div ng-click="see_routers(p.id)">-->
-                <!--<div><span>店铺名称：</span><span ng-bind="p.name">东莞没有管</span></div>-->
-                <!--<div style="margin-top:15px"><span>行业类型：</span><span ng-bind="p.category">大保健</span></div>-->
-                <!--<div style="margin-top:15px"><span>手机号码：</span><span ng-bind="p.tel">13546254784</span></div>-->
-                <!--<div style="margin-top:15px"><span>所属商圈：</span><span-->
-                        <!--ng-bind="p.trade_area.province+' '+p.trade_area.city+' '+p.trade_area.area+' '+p.trade_area.name"></span>-->
-                <!--</div>-->
-                <!--<div style="margin-top:15px"><span>店铺地址：</span><span ng-bind="p.address">西沟头巷幼儿园</span></div>-->
-            <!--</div>-->
-            <!--<button class="btn btn-info" style="margin-top:15px" ng-click="editShopIndex(p.id)">店铺主页编辑</button>-->
-            <!--<button class="btn btn-info" style="margin-top:15px" ng-click="edit_shop(p.id)">修改店铺信息</button>-->
-            <!--<button class="btn btn-info" style="margin-top:15px" ng-click="delete_shop(p.id)">删除店铺</button>-->
-        <!--</div>-->
-
         <div class="col-md-3" ng-repeat="p in shop" style="color:#fff;font-family: 'Microsoft YaHei';font-size: 18px;margin-top: 20px">
             <a href="javascript:" style="color:#fff">
             <div ng-click="see_routers(p.id)" style="background-color: #67728D;box-shadow: 0 0 10px #dedede;border-radius: 5px;width:93%;height: 450px;float: left">
@@ -55,7 +36,6 @@
                     删除店铺
                 </div>
             </div>
-
         </div>
 
 </div>

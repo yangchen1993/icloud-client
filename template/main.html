@@ -44,6 +44,26 @@
                 <div style="border-top:1px solid #2c303b" ng-show="auth_nav"></div>
                 <div style="border-top:1px solid #535a69" ng-show="auth_nav"></div>
 
+                <li>
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref=""><span class="icon-user" style="margin-right: 10px"></span>个人信息</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                    <ul class="menu_child">
+                        <li>
+                            <div></div>
+                            <a ui-sref=".base_info">基本信息</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a ui-sref=".pass_manage">密码管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <div style="border-top:1px solid #2c303b"></div>
+                <div style="border-top:1px solid #535a69"></div>
+
                 <li ng-show="eq_nav">
                     <div class="open_menu">
                         <div></div>
@@ -83,13 +103,13 @@
                 <li ng-show="business_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".business-manage"><span class="glyphicon glyphicon-user" style="margin-right: 10px"></span>商家管理</a>
+                        <a ui-sref=".business-manage"><span class="glyphicon glyphicon-user" style="margin-right: 10px"></span>商户管理</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
                         <li ng-show="create_business_nav">
                             <div></div>
-                            <a ui-sref=".create-business">新增商家账号</a>
+                            <a ui-sref=".create-business">新增商户账号</a>
                         </li>
                     </ul>
                 </li>
@@ -233,9 +253,5 @@
     $("#bianqian").click(function () {
         $(".time_show").toggle();
     });
-
-    $.ajax(
-
-    )
 
 </script>

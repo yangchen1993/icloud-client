@@ -113,7 +113,7 @@
 }
 .panel-dj > .panel-heading + .panel-collapse > .panel-body {
     padding-left:30px;
-    font-family: "ºÚÌå";
+    font-family: "ï¿½ï¿½ï¿½ï¿½";
     font-size:14px;
     border-top-color: #5ae9d4;
 }
@@ -122,7 +122,7 @@
     background-color: #fff;
 }
 .panel-dj > .panel-footer + .panel-collapse > .panel-body {
-    font-family: "ºÚÌå";
+    font-family: "ï¿½ï¿½ï¿½ï¿½";
     font-size:14px;
     border-bottom-color: #5ae9d4;
 }
@@ -138,7 +138,7 @@
     background: #2ecc71;
 }
 .router-tab .nav-tabs li a{
-    font-family:"Î¢ÈíÑÅºÚ";
+    font-family:"Î¢ï¿½ï¿½ï¿½Åºï¿½";
     font-size:20px;
     font-weight: bold;
     width:154px;
@@ -160,4 +160,12 @@
     background-color: #28ab6f;
     border: 0;
     border-bottom-color: transparent;
+}
+
+.shop_panel{
+    padding: 30px 30px 10px
+}
+.shop_panel>p{
+    margin: 5px 0;
+    border-bottom: 1px dashed #728093;
 }

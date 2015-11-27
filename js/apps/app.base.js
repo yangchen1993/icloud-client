@@ -210,4 +210,12 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/account/details.html",
             controller: "AccountDetailsController"
         })
+
+        //个人信息
+        .state("main.base_info", {
+            url: "/base_info",
+            templateUrl: "template/center/info/base_info.html",
+            controller: "BaseInfoController"
+        })
+
 });

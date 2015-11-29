@@ -26,9 +26,9 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
 
             if (!_.isEmpty(options)) {
                 angular.forEach(_.keys(options), function (value, key) {
-                    if (_.has(self.defaultParams, value)) {
-                        self.defaultParams[value] = options[value]
-                    }
+                    //if (_.has(self.defaultParams, value)) {
+                    self.defaultParams[value] = options[value];
+                    //}
                 })
             }
 

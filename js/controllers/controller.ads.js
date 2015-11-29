@@ -50,6 +50,10 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
                 "data": {
                     "status": way,
                     "comments": "failed reason"
+                },
+                "success": function (data) {
+                    alert("上架成功");
+                    $scope.refresh();
                 }
             });
         };
@@ -98,10 +102,27 @@ iCloudController.controller("CreateAdsController", ["$scope", "$http", "$categor
 }]);
 
 iCloudController.controller("PutAdController", ["$scope", "$http","$window","$grid","$checkBox",function ($scope, $http,$window,$grid,$checkBox) {
-    $grid.initial($scope, [$window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS,].join(""));
+    var ad_id = get_param(window.location.href);
+    var sl_router=[];
+    $grid.initial($scope, [$window.API.ROUTER.GET_CURRENT_USER_ROUTERS,].join(""),{"groups__isnull":false});
     $checkBox.enableCheck("table-ad");
-    $scope.sjTouFang=function(group_id){
-        var ad_id = get_param(window.location.href);
+    $scope.sjTouFang=function(){
+        sl_router=[];
+        var selector=angular.element("input:checked");
+        if(selector.length==0){
+            alert("请至少选择一个路由器");
+            return;
+        }
+        for(var i=0;i<selector.length;i++){
+            sl_router.push(selector[i].value);
+        }
+        //$http.get([$window.API.GROUP.GET_ROUTER_BY_GROUP,"?key=",$.cookie("key").replace(/\"/g,""),"&groups__id=",group_id].join("")).success(function(data){
+        //
+        //});
+        //$http.get([$window.API.GROUP.GET_ROUTER_BY_GROUP,"?key=",$.cookie("key").replace(/\"/g,""),"&groups__id=",group_id].join("")).success(function(data){
+        //    $scope.routers=data;
+        //    console.log(data);
+        //});
         //var c = angular.element("#table-ad :checkbox");
         //if((angular.element(":checked").length-1 )==0){
         //    alert("请至少选择一个店铺");
@@ -112,16 +133,9 @@ iCloudController.controller("PutAdController", ["$scope", "$http","$window","$gr
         //        group_id.push(angular.element(v).val());
         //    }
         //});
-        $.ajax({
-            "url": $window.API.AD.PUT_AD_IN+"?key="+$.cookie("key").replace(/\"/g,"")+"&id="+ad_id,
-            "type":"POST",
-            "dataType":"json",
-            "data": {
-                "space_id": 1,
-                "group_id": group_id
-            },
-            "success":function(data){
-                alert("投放成功，请返回广告中心查看");            }
+        console.log(sl_router);
+        $http.post($window.API.AD.PUT_AD_IN+"?key="+$.cookie("key").replace(/\"/g,"")+"&id="+ad_id,{"space_id": 1, "router_ids": sl_router}).success(function(){
+            alert("投放成功");
         })
     }
 }]);

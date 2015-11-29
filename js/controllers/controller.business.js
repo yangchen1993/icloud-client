@@ -312,31 +312,31 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         console.log(data);
         //路由器实时信息
         var routerStatusInterval = $interval(function () {
-            //$http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
-            //    console.log(data.msg);
-            //    if (data.msg == "Router offline") {
-            //        $scope.wificat = {
-            //            "operatingStatus": {
-            //                "accessNumber": "未连接",
-            //                "MemUsaged": "未连接",
-            //                "cpuUtil": "未连接"
-            //            },
-            //            "basicInformation": {
-            //                "softwareVersion": "未连接"
-            //            },
-            //            "wanStatus": {
-            //                "wanip": "未连接",
-            //                "speedUp": "未连接",
-            //                "speedDown": "未连接"
-            //            }
-            //        };
-            //        $scope.upTime = "未连接"
-            //    }
-            //    else {
-            //        $scope.wificat = data;
-            //        $scope.upTime = parseInt(data.basicInformation.upTime / 60);
-            //    }
-            //});
+            $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
+                console.log(data.msg);
+                if (data.msg == "Router offline") {
+                    $scope.wificat = {
+                        "operatingStatus": {
+                            "accessNumber": "未连接",
+                            "MemUsaged": "未连接",
+                            "cpuUtil": "未连接"
+                        },
+                        "basicInformation": {
+                            "softwareVersion": "未连接"
+                        },
+                        "wanStatus": {
+                            "wanip": "未连接",
+                            "speedUp": "未连接",
+                            "speedDown": "未连接"
+                        }
+                    };
+                    $scope.upTime = "未连接"
+                }
+                else {
+                    $scope.wificat = data;
+                    $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                }
+            });
         },3000);
         $scope.$on("$destroy", function () {
             $interval.cancel(routerStatusInterval);

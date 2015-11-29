@@ -2,33 +2,39 @@
     <ol class="breadcrumb">
         <li class="active">投放广告</li>
     </ol>
+    <!--<div>筛选</div>-->
     <div style="margin-top:50px">
         <div class="table_inside">
             <table id="table-ad" class="table table-hover table-bordered table-selectable text-center ads_table">
                 <thead>
-                <!--<tr>-->
-                    <!--<td>-->
-                        <!--<a href="javascript:" ng-click="checkAll()">全选</a>-->
-                        <!--<a href="javascript:" ng-click="checkInverse()">反选</a>-->
-                    <!--</td>-->
-                    <td>店铺名称</td>
-                    <td>店铺地址</td>
-                    <td>所属商圈</td>
-                    <td>操作</td>
+                <tr>
+                    <td>
+                        <a href="javascript:" ng-click="checkAll()">全选</a>
+                        <a href="javascript:" ng-click="checkInverse()">反选</a>
+                    </td>
+                    <td>路由器名称</td>
+                    <td>路由器MAC</td>
+                    <td>所属商铺</td>
+                    <td>是否在线</td>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="p in grid.results" class="wemedia_table">
-                    <td ng-bind="p.name"></td>
-                    <td ng-bind="p.address"></td>
-                    <td ng-bind="p.trade_area.province+' '+p.trade_area.city+' '+p.trade_area.area+' '+p.trade_area.name"></td>
-                    <td><a href="javascript:;" ng-click="sjTouFang(p.audit_id)">投放</a></td>
-                </tr>
+                    <tr ng-repeat="p in grid.results" class="wemedia_table">
+                        <td><input type="checkbox" value="{{p.id}}"/></td>
+                        <td ng-bind="p.ssid"></td>
+                        <td ng-bind="p.mac"></td>
+                        <td>{{p.router_groups.name}}</td>
+                        <td ng-bind="p.is_online"></td>
+                    </tr>
+                    <tfoot>
+                        <button class="btn btn-success" ng-click="sjTouFang()">确认投放</button>
+                    </tfoot>
                 </tbody>
             </table>
         </div>
         <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
     </div>
 </div>
+
 
 

@@ -104,7 +104,7 @@ iCloudController.controller("CreateAdsController", ["$scope", "$http", "$categor
 iCloudController.controller("PutAdController", ["$scope", "$http","$window","$grid","$checkBox",function ($scope, $http,$window,$grid,$checkBox) {
     var ad_id = get_param(window.location.href);
     var sl_router=[];
-    $grid.initial($scope, [$window.API.ROUTER.GET_CURRENT_USER_ROUTERS,].join(""),{"groups__isnull":false});
+    $grid.initial($scope, [$window.API.ROUTER.GET_CURRENT_USER_ROUTERS,].join(""),{"groups__id__isnull":"False"});
     $checkBox.enableCheck("table-ad");
     $scope.sjTouFang=function(){
         sl_router=[];

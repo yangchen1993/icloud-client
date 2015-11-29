@@ -165,13 +165,14 @@ padding-top: 10px;
     font-family: "Microsoft YaHei";
     background-color: #fff;
 }
-.details_panel>p{
+.details_panel>div:nth-child(1){
     width: 100%;
-    line-height: 90px;
+    height: 90px;
     text-align: center;
     font-size: 22px;
     color: #fff;
     background-color: #42dabf;
+    padding: 30px 0 0 0;
 }
 .details_panel span{
     font-size: 18px;

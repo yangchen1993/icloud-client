@@ -80,7 +80,7 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
 
         $("#save").click(function () {
             imgData = img.cropper('getCroppedCanvas', {
-                width: 640
+                width: 256
             }).toDataURL();
             console.log(imgData);
             $("#show_img").attr('src', imgData);
@@ -232,7 +232,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     }
 }]);
 
-iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$interval", function ($scope, $http, $cookieStore, $window, $interval) {
+iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$timeout", function ($scope, $http, $cookieStore, $window, $timeout) {
     var router_id = get_param($window.location.href);
     //放行设置
     var reload_blackwhite = function () {
@@ -311,36 +311,19 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
         console.log(data);
         //路由器实时信息
-        var routerStatusInterval = $interval(function () {
-            //$http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
-            //    console.log(data.msg);
-            //    if (data.msg == "Router offline") {
-            //        $scope.wificat = {
-            //            "operatingStatus": {
-            //                "accessNumber": "未连接",
-            //                "MemUsaged": "未连接",
-            //                "cpuUtil": "未连接"
-            //            },
-            //            "basicInformation": {
-            //                "softwareVersion": "未连接"
-            //            },
-            //            "wanStatus": {
-            //                "wanip": "未连接",
-            //                "speedUp": "未连接",
-            //                "speedDown": "未连接"
-            //            }
-            //        };
-            //        $scope.upTime = "未连接"
-            //    }
-            //    else {
-            //        $scope.wificat = data;
-            //        $scope.upTime = parseInt(data.basicInformation.upTime / 60);
-            //    }
-            //});
-        },3000);
-        $scope.$on("$destroy", function () {
-            $interval.cancel(routerStatusInterval);
-        });
+        var routerStatus = function() {
+            $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
+                $scope.wificat = data;
+                $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                $timeout(function(){
+                    routerStatus();
+                },3000)
+            })
+                .error(function(data){
+                    $scope.error_msg = data.msg;
+                });
+        };
+        routerStatus();
 
         //默认认证方式
         if (data.login_type == "手机号认证") {

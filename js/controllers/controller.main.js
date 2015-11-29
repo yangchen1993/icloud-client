@@ -5,7 +5,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
     $http.get([window.API.USER.GET_CURRENT_USER_INFO, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
         console.log(data);
         $scope.user = {
-            "name": data.legal_person_name,
+            "name": data.name,
             "identity": data.role.name
         };
 

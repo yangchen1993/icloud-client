@@ -310,12 +310,15 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     //路由基本信息
     $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
         console.log(data);
+
+        var timer;
+
         //路由器实时信息
         var routerStatus = function() {
             $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
                 $scope.wificat = data;
                 $scope.upTime = parseInt(data.basicInformation.upTime / 60);
-                $timeout(function(){
+                timer = $timeout(function(){
                     routerStatus();
                 },3000)
             })
@@ -324,6 +327,11 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
                 });
         };
         routerStatus();
+
+        $scope.$on('$destroy', function () {
+            $timeout.cancel(timer)
+        });
+
 
         //默认认证方式
         if (data.login_type == "手机号认证") {

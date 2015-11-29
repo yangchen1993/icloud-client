@@ -182,20 +182,20 @@
         </div>
     </div>
     <!--<div id="bianqian"></div>-->
-    <div class="time_show">
-        <div>
-            <p class="text-center"></p>
+    <!--<div class="time_show">-->
+        <!--<div>-->
+            <!--<p class="text-center"></p>-->
 
-            <p class="text-center"><span class="h2" style="font-weight: 600"></span><span class="pull-right"></span></p>
-        </div>
-        <div>
-            <p class="text-center"></p>
+            <!--<p class="text-center"><span class="h2" style="font-weight: 600"></span><span class="pull-right"></span></p>-->
+        <!--</div>-->
+        <!--<div>-->
+            <!--<p class="text-center"></p>-->
 
-            <p class="text-center"><span class="h2" style="font-weight: 600"></span><span class="h2"
-                                                                                          style="font-weight: 600"></span>
-            </p>
-        </div>
-    </div>
+            <!--<p class="text-center"><span class="h2" style="font-weight: 600"></span><span class="h2"-->
+                                                                                          <!--style="font-weight: 600"></span>-->
+            <!--</p>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <div ui-view="" class="content" style="background-color: #ebebed"></div>
 
@@ -232,26 +232,26 @@
         }, 3000);
     });
 
-    var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    var myDate = new Date();
-    $(".time_show").find("span")[0].innerHTML = myDate.getDate();
-    $(".time_show").find("span")[1].innerHTML = myDate.getMonth() + 1 + "月";
-    $(".time_show").find("span")[2].innerHTML = myDate.getHours() + ":";
-    $(".time_show").find("span")[3].innerHTML = myDate.getMinutes();
-    $(".time_show").find("p")[0].innerHTML = week[myDate.getDay()];
-    $(".time_show").find("p")[2].innerHTML = myDate.toLocaleTimeString().substr(0, 2);
-    window.time_self = setInterval(function () {
-        var myDate = new Date();
-        $(".time_show").find("span")[0].innerHTML = myDate.getDate();
-        $(".time_show").find("span")[1].innerHTML = myDate.getMonth() + 1 + "月";
-        $(".time_show").find("span")[2].innerHTML = myDate.getHours() + ":";
-        $(".time_show").find("span")[3].innerHTML = myDate.getMinutes();
-        $(".time_show").find("p")[0].innerHTML = week[myDate.getDay()];
-        $(".time_show").find("p")[2].innerHTML = myDate.toLocaleTimeString().substr(0, 2);
-    }, 1000);
-
-    $("#bianqian").click(function () {
-        $(".time_show").toggle();
-    });
+//    var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+//    var myDate = new Date();
+//    $(".time_show").find("span")[0].innerHTML = myDate.getDate();
+//    $(".time_show").find("span")[1].innerHTML = myDate.getMonth() + 1 + "月";
+//    $(".time_show").find("span")[2].innerHTML = myDate.getHours() + ":";
+//    $(".time_show").find("span")[3].innerHTML = myDate.getMinutes();
+//    $(".time_show").find("p")[0].innerHTML = week[myDate.getDay()];
+//    $(".time_show").find("p")[2].innerHTML = myDate.toLocaleTimeString().substr(0, 2);
+//    window.time_self = setInterval(function () {
+//        var myDate = new Date();
+//        $(".time_show").find("span")[0].innerHTML = myDate.getDate();
+//        $(".time_show").find("span")[1].innerHTML = myDate.getMonth() + 1 + "月";
+//        $(".time_show").find("span")[2].innerHTML = myDate.getHours() + ":";
+//        $(".time_show").find("span")[3].innerHTML = myDate.getMinutes();
+//        $(".time_show").find("p")[0].innerHTML = week[myDate.getDay()];
+//        $(".time_show").find("p")[2].innerHTML = myDate.toLocaleTimeString().substr(0, 2);
+//    }, 1000);
+//
+//    $("#bianqian").click(function () {
+//        $(".time_show").toggle();
+//    });
 
 </script>

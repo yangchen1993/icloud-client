@@ -264,7 +264,7 @@ p, ul, ol, ul, .h3 {
 
 .content {
     width:auto;
-    height: 1050px;
+    /*height: 1050px;*/
     position: absolute;
     top: 60px;
     left: 230px;

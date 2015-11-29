@@ -51,8 +51,8 @@
                     <!--</div>-->
                     <!--</td>-->
                     <td ng-bind="p.category"></td>
-                    <td ng-bind="p.create_time | date:'yyyy-MM-dd'"></td>
-                    <td ng-bind="p.modified_time | date:'yyyy-MM-dd'"></td>
+                    <td ng-bind="p.create_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
+                    <td ng-bind="p.modified_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
                     <td>
                         <a href="javascript:" ng-click="editAds(p.id)">修改</a>
                         <a href="javascript:" ng-click="deleteAds(p.id)">删除</a>

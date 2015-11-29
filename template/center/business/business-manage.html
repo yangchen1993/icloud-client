@@ -1,10 +1,11 @@
 <div class="table_outside">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" style="background-color: #4edcc6">
         <li class="active">商户管理</li>
     </ol>
 
     <div class="table_inside">
         <table class="table table-bordered table-striped text-center table-hover">
+            <thead style="background-color: #8a8bc4;color:#fff">
             <tr>
                 <td id="username" ng-click="sort('username')">
                     商户账号
@@ -23,6 +24,7 @@
                 <td>路由器数量（已用/未用）</td>
                 <td>操作</td>
             </tr>
+            </thead>
             <tbody>
             <tr ng-repeat="p in grid.results">
                 <td ng-bind="p.username"></td>

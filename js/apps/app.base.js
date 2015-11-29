@@ -212,10 +212,14 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
         })
 
         //个人信息
-        .state("main.base_info", {
-            url: "/base_info",
-            templateUrl: "template/center/info/base_info.html",
-            controller: "BaseInfoController"
+        .state("main.personal-info", {
+            url: "/personal-info",
+            templateUrl: "template/center/personal/info.html",
+            controller: "PersonalInfoController"
         })
-
+        .state("main.personal-safe", {
+            url: "/personal-safe",
+            templateUrl: "template/center/personal/safe.html",
+            controller: "PersonalSafeController"
+        })
 });

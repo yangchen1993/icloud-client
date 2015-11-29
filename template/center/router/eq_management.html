@@ -12,7 +12,7 @@
                     <span>店铺：</span>
                     <input type="text" class="form-control" placeholder="商铺名称" style="width: 15% !important;"
                            ng-model="search.groups__name__icontains">
-                    <select class="form-control" ng-model="search.router_groups__category" style="width: 15% !important;"
+                    <select class="form-control" ng-model="search.groups__category" style="width: 15% !important;"
                             ng-options="v.name as v.name for v in category">
                         <option value="">选择行业</option>
                     </select>
@@ -22,14 +22,14 @@
                         <span>地区：</span>
                         <select class="form-control" style="width: 15% !important;"
                                 ng-model="search.router_groups__trade__province" ng-options="v.id as v.name for v in province1"
-                                ng-change="select_p(search.router_groups__trade__province)">
+                                ng-change="select_p(search.groups__trade__province)">
                             <option value="">省</option>
                         </select>
-                        <select class="form-control" style="width: 15% !important;" ng-model="search.router_groups__trade__city"
-                                ng-options="v.id as v.name for v in city1" ng-change="select_c(search.router_groups__trade__city)">
+                        <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city"
+                                ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">
                             <option value="">市</option>
                         </select>
-                        <select class="form-control" style="width: 15% !important;" ng-model="search.router_groups__trade__area"
+                        <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area"
                                 ng-options="v.id as v.name for v in area1">
                             <option value="">区/县</option>
                         </select>
@@ -42,9 +42,9 @@
                     <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
                     <div>
                         <span>时间：</span>
-                        <input type="date" class="form-control" ng-model="search.create_time_gte"><span
+                        <input type="date" class="form-control" ng-model="search.create_time__gte"><span
                             style="margin-left:5px">到</span>
-                        <input type="date" class="form-control" ng-model="search.create_time_lte">
+                        <input type="date" class="form-control" ng-model="search.create_time__lte">
                         <button class="btn btn-info pull-right" ng-click="eq_reset()">重置</button>
                         <button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="eq_search(search)">搜索
                         </button>

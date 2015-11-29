@@ -15,6 +15,10 @@ window.API = {
 
         "GET_CURRENT_USER_INFO": [window.HOST, "users/get_current_user_info/"].join(""), // 获取当前用户信息
 
+        "EDIT_CURRENT_USER_INFO": [window.HOST, "users/edit_current_user_info/"].join(""), //修改当前用户信息
+
+        "CHANGE_CURRENT_USER_PASSWORD":[window.HOST, "users/change_current_user_password/"].join(""), //修改当前用户的密码
+
         "GET_USER_INFO_BY_TEL": [window.HOST, "users/get_user_info_by_tel/"].join(""),
 
         "GET_SUB_AGENTS": [window.HOST, "users/get_sub_agents/"].join(""), // 获取代理商
@@ -58,7 +62,7 @@ window.API = {
 
         "REMOVE_ROUTER": [window.HOST, "routers/remove_router/"].join(""), //删除路由器
 
-        "EDIT_ROUTER":[window.HOST, "routers/edit_router/"].join(""), // 编辑路由器
+        "EDIT_ROUTER": [window.HOST, "routers/edit_router/"].join(""), // 编辑路由器
 
         "GET_ALL_ROUTERS": [window.HOST, "routers/get_all_routers/"].join(""), // 获取所有路由器
 

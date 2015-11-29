@@ -1,0 +1,70 @@
+<div style="padding: 10px;">
+    <ol class="breadcrumb">
+        <li class="active">基本信息</li>
+    </ol>
+
+    <div class="col-md-12">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="username" class="col-md-1 form-label">用户名:</label>
+                <div class="col-md-11">
+                    <span id="username" ng-if="!isEdit" ng-bind="userInfoReadOnly.username"></span>
+                    <input style="width: 200px" id="username-model" class="form-control" ng-if="isEdit" ng-model="userInfo.username" placeholder="用户名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="business-name" class="col-md-1 form-label">名称:</label>
+                <div class="col-md-11">
+                    <span id="business-name" ng-if="!isEdit" ng-bind="userInfoReadOnly.name"></span>
+                    <input style="width: 200px" class="form-control" ng-if="isEdit" ng-model="userInfo.name" placeholder="名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="role" class="col-md-1 form-label">身份:</label>
+                <div class="col-md-11">
+                    <span id="role" ng-bind="userInfoReadOnly.role.name"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="legal_person_name" class="col-md-1 form-label">法人名称:</label>
+                <div class="col-md-11">
+                    <span id="legal_person_name" ng-bind="userInfoReadOnly.legal_person_name"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id-card" class="col-md-1 form-label">身份证:</label>
+                <div class="col-md-11">
+                    <span id="id-card" ng-bind="userInfoReadOnly.id_card"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tel" class="col-md-1 form-label">手机号:</label>
+                <div class="col-md-11">
+                    <span id="tel" ng-if="!isEdit" ng-bind="userInfoReadOnly.tel"></span>
+                    <input style="width: 200px" class="form-control" ng-if="isEdit" ng-model="userInfo.tel" placeholder="手机号">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-md-1 form-label">邮箱:</label>
+                <div class="col-md-11">
+                    <span id="email" ng-if="!isEdit" ng-bind="userInfoReadOnly.email"></span>
+                    <input style="width: 200px" class="form-control" ng-if="isEdit" ng-model="userInfo.email" placeholder="邮箱">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address" class="col-md-1 form-label">地址:</label>
+                <div class="col-md-11">
+                    <span id="address" ng-bind="userInfoReadOnly.province + ' ' + userInfoReadOnly.city+' '+userInfoReadOnly.area+' '+ userInfoReadOnly.address_additional"></span>
+                </div>
+            </div>
+
+            <div class="col-md-2" ng-if="!isEdit">
+                <button class="btn btn-info" style="width: 45%" ng-click="editInfo()">修改</button>
+            </div>
+            <div class="col-md-2" ng-if="isEdit">
+                <button class="btn btn-info" style="width: 45%" ng-click="saveInfo(userInfo)">保存</button>
+                <button class="btn btn-info" style="width: 45%" ng-click="cancelEditInfo()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

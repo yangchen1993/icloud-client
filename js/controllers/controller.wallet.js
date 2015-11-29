@@ -17,6 +17,9 @@ iCloudController.controller("WalletsController", ["$scope", "$http", "$cookieSto
 
 iCloudController.controller("RechargeController", ["$scope", "$http", "$cookieStore", "$window",
     function ($scope, $http, $cookieStore, $window) {
+        $http.get([window.API.USER.GET_CURRENT_USER_INFO,"?key=",$cookieStore.get("key")].join("")).success(function(data){
+            $scope.recharge_tel = data.tel;
+        });
         $scope.active = 0;
 
         $scope.rechargeOrder = {

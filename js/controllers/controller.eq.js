@@ -180,7 +180,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
                 $scope.update_ssid = 1;
             })
                 .error(function(data){
-                    console.log(data)
+                    alert(data.msg);
                 });
 
     };

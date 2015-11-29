@@ -295,20 +295,19 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         //    $interval.cancel(routerStatusTimeout);
         //});
 
-
+        //ss();
         //function ss(){
         //    $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
         //        console.log("成功");
-        //        setTimeout(ss(),3000);
+        //        ss()
         //
         //    })
         //        .error(function(data){
         //            console.log("失败");
-        //            setTimeout(ss(),3000);
+        //
         //        })
         //}
-        //
-        //ss();
+
 
 
         //默认认证方式
@@ -374,7 +373,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
     };
 
     $scope.weixin_load = function () {
-        location.href = ["#/main/weixin_config?routergroup_id=", shop_id].join("");
+        location.href = ["#/main/weixin_config?router_id=",router_id].join("");
     }
 
 }]);

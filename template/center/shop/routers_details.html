@@ -1,238 +1,251 @@
-<div class="row">
-    <div class="col-xs-12">
-        <ol class="breadcrumb top-daohang" style="border-radius: 1px;background-color: #4edbc6;">
-            <li><a ui-sref="main.shop_management">店铺管理</a></li>
-            <li><a ui-sref="main.shop_management_routers">店铺设备管理</a></li>
-            <li>设备详情</li>
-        </ol>
+<div class="panel_outside">
+    <div class="row ">
+        <div class="col-xs-12">
+            <ol class="breadcrumb top-daohang" style="border-radius: 1px;background-color: #4edbc6;">
+                <li><a ui-sref="main.shop_management">店铺管理</a></li>
+                <li><a ui-sref="main.shop_management_routers">店铺设备管理</a></li>
+                <li>设备详情</li>
+            </ol>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-xs-7">
-        <div class="panel panel-dj">
-            <div class="panel-heading text-center">运行状态</div>
-            <div class="panel-body">
-                <div>
-                    <span>连续运行时间：</span>
-                    <span ng-bind="upTime"></span>
+
+    <div class="row">
+        <div class="col-xs-7">
+            <div class="panel panel-dj">
+                <div class="panel-heading text-center">运行状态</div>
+                <div class="panel-body">
+                    <div>
+                        <span>连续运行时间：</span>
+                        <span ng-bind="upTime"></span>
+                    </div>
+                    <div>
+                        <span>接入人数：</span>
+                        <span ng-bind="wificat.operatingStatus.accessNumber"></span>
+                    </div>
+                    <div>
+                        <span>内存占用比率：</span>
+                        <span ng-bind="wificat.operatingStatus.MemUsaged"></span>
+                    </div>
+                    <div>
+                        <span>CPU负载率：</span>
+                        <span ng-bind="wificat.operatingStatus.cpuUtil"></span>
+                    </div>
+                    <div>
+                        <span>固件版本：</span>
+                        <span ng-bind="wificat.basicInformation.softwareVersion"></span>
+                    </div>
                 </div>
-                <div>
-                    <span>接入人数：</span>
-                    <span ng-bind="wificat.operatingStatus.accessNumber"></span>
-                </div>
-                <div>
-                    <span>内存占用比率：</span>
-                    <span ng-bind="wificat.operatingStatus.MemUsaged"></span>
-                </div>
-                <div>
-                    <span>CPU负载率：</span>
-                    <span ng-bind="wificat.operatingStatus.cpuUtil"></span>
-                </div>
-                <div>
-                    <span>固件版本：</span>
-                    <span ng-bind="wificat.basicInformation.softwareVersion"></span>
+            </div>
+        </div>
+        <div class="col-xs-5">
+            <div class="panel panel-dj">
+                <div class="panel-heading text-center" style="background-color:#efcc51;">WAN接入状态</div>
+                <div class="panel-body">
+                    <div>
+                        <span>外网IP：</span>
+                        <span ng-bind="wificat.wanStatus.wanip"></span>
+                    </div>
+                    <div>
+                        <span>上行速度：</span>
+                        <span ng-bind="wificat.wanStatus.speedUp"></span>
+                    </div>
+                    <div>
+                        <span>下行速度：</span>
+                        <span ng-bind="wificat.wanStatus.speedDown"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-xs-5">
-        <div class="panel panel-dj">
-            <div class="panel-heading text-center" style="background-color:#efcc51;">WAN接入状态</div>
-            <div class="panel-body">
-                <div>
-                    <span>外网IP：</span>
-                    <span ng-bind="wificat.wanStatus.wanip"></span>
-                </div>
-                <div>
-                    <span>上行速度：</span>
-                    <span ng-bind="wificat.wanStatus.speedUp"></span>
-                </div>
-                <div>
-                    <span>下行速度：</span>
-                    <span ng-bind="wificat.wanStatus.speedDown"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row router-tab" style="padding-left:15px;">
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">认证设置</a>
-        </li>
-        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">放行设置</a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="home">
-            <div>
-                <p style="padding: 30px 0  30px 30px;">认证方式：</p>
-                <p class="text-muted" style="margin-left: 30px">全部选择关闭则为免认证方式</p>
-                <div class="identify_type">
-                    <div style="margin-left:150px;float: left;margin-right:30px;" class="text-center">
-                        <div class="login-icon">
-                            <img src="/img/iconfont-shouji.png">
-                        </div>
 
-                        <p>手机登录</p>
+    <div class="row router-tab" style="padding-left:15px;">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">认证设置</a>
+            </li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">放行设置</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+                <div>
+                    <p style="padding: 30px 0  30px 30px;">认证方式：</p>
 
-                        <div class="btn-group" style="margin-top: 10px;">
-                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_phone==1}">-->
+                    <p class="text-muted" style="margin-left: 30px">全部选择关闭则为免认证方式</p>
+
+                    <div class="identify_type">
+                        <div style="margin-left:150px;float: left;margin-right:30px;" class="text-center">
+                            <div class="login-icon">
+                                <img src="/img/iconfont-shouji.png">
+                            </div>
+
+                            <p>手机登录</p>
+
+                            <div class="btn-group" style="margin-top: 10px;">
+                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_phone==1}">-->
                                 <!--<input class="hidden" type="radio" name="options_phone" id="phone_on" ng-model="isActive_phone"-->
-                                       <!--value="1" ng-change="identify_type()">开-->
-                            <!--</label>-->
+                                <!--value="1" ng-change="identify_type()">开-->
+                                <!--</label>-->
 
-                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_phone==0}">-->
+                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_phone==0}">-->
                                 <!--<input class="hidden" type="radio" name="options_phone" id="phone_off" ng-model="isActive_phone"-->
-                                       <!--value="0" ng-change="identify_type()">关-->
-                            <!--</label>-->
-                            <label class="btn btn-primary" ng-class="{'route-active': login_type==1}">
-                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type" value="1"   ng-change="changeLoginType()">
-                            </label>
+                                <!--value="0" ng-change="identify_type()">关-->
+                                <!--</label>-->
+                                <label class="btn btn-primary" ng-class="{'route-active': login_type==1}">
+                                    <input class="hidden" type="radio" name="options_phone" ng-model="login_type"
+                                           value="1" ng-change="changeLoginType()">
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div style="float: left;margin-right:30px;" class="text-center">
-                        <div class="login-icon">
-                            <img src="/img/iconfont-weixin.png">
-                        </div>
-                        <p style="margin-left: 0">微信登陆<a href="javascript:" ng-click="weixin_load()">设置</a></p>
+                        <div style="float: left;margin-right:30px;" class="text-center">
+                            <div class="login-icon">
+                                <img src="/img/iconfont-weixin.png">
+                            </div>
+                            <p style="margin-left: 0">微信登陆<a href="javascript:" ng-click="weixin_load()">设置</a></p>
 
-                        <div class="btn-group" style="margin-top: 10px;">
-                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==1}">-->
+                            <div class="btn-group" style="margin-top: 10px;">
+                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==1}">-->
                                 <!--<input class="hidden" type="radio" name="options_phone" id="weixin_on" ng-model="isActive_weixin"-->
-                                       <!--value="1" ng-change="identify_type()">开-->
-                            <!--</label>-->
+                                <!--value="1" ng-change="identify_type()">开-->
+                                <!--</label>-->
 
-                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==0}">-->
+                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==0}">-->
                                 <!--<input class="hidden" type="radio" name="options_phone" id="weixin_off" ng-model="isActive_weixin"-->
-                                       <!--value="0" ng-change="identify_type()">关-->
-                            <!--</label>-->
-                            <label class="btn btn-primary" ng-class="{'route-active': login_type==2}">
-                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type" value="2" ng-change="changeLoginType()">
-                            </label>
+                                <!--value="0" ng-change="identify_type()">关-->
+                                <!--</label>-->
+                                <label class="btn btn-primary" ng-class="{'route-active': login_type==2}">
+                                    <input class="hidden" type="radio" name="options_phone" ng-model="login_type"
+                                           value="2" ng-change="changeLoginType()">
+                                </label>
+                            </div>
+                        </div>
+                        <div style="float: left;margin-right:30px;" class="text-center">
+                            <div class="login-icon">
+                                <img src="/img/iconfont-wuxuqueren.png">
+                            </div>
+
+                            <p style="margin-left: 0">免认证</p>
+
+                            <div class="btn-group" style="margin-top: 10px;">
+                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==1}">-->
+                                <!--<input class="hidden" type="radio" name="options_phone" id="weixin_on" ng-model="isActive_weixin"-->
+                                <!--value="1" ng-change="identify_type()">开-->
+                                <!--</label>-->
+
+                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==0}">-->
+                                <!--<input class="hidden" type="radio" name="options_phone" id="weixin_off" ng-model="isActive_weixin"-->
+                                <!--value="0" ng-change="identify_type()">关-->
+                                <!--</label>-->
+                                <label class="btn btn-primary" ng-class="{'route-active': login_type==3}">
+                                    <input class="hidden" type="radio" name="options_phone" ng-model="login_type"
+                                           value="3" ng-change="changeLoginType()">
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <div style="float: left;margin-right:30px;" class="text-center">
-                        <div class="login-icon">
-                            <img src="/img/iconfont-wuxuqueren.png">
-                        </div>
+                </div>
+                <div style="border-left: 0">
+                    <p style="padding: 30px 0  30px 30px;">认证有效期：</p>
 
-                        <p style="margin-left: 0">免认证</p>
+                    <p class="text-muted" style="margin-left: 30px">连网时间超出认证有效期后需再次认证才能上网(默认5小时)</p>
 
-                        <div class="btn-group" style="margin-top: 10px;">
-                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==1}">-->
-                            <!--<input class="hidden" type="radio" name="options_phone" id="weixin_on" ng-model="isActive_weixin"-->
-                            <!--value="1" ng-change="identify_type()">开-->
-                            <!--</label>-->
-
-                            <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==0}">-->
-                            <!--<input class="hidden" type="radio" name="options_phone" id="weixin_off" ng-model="isActive_weixin"-->
-                            <!--value="0" ng-change="identify_type()">关-->
-                            <!--</label>-->
-                            <label class="btn btn-primary" ng-class="{'route-active': login_type==3}">
-                                <input class="hidden" type="radio" name="options_phone"  ng-model="login_type" value="3"  ng-change="changeLoginType()">
-                            </label>
-                        </div>
+                    <div class="form-inline" style="margin:30px 0 0 30px">
+                        <input type="text" class="form-control" ng-model="identify_time.hour">
+                        <span>小时</span>
+                        <input type="text" class="form-control" style="margin-left: 50px"
+                               ng-model="identify_time.minute">
+                        <span>分</span>
                     </div>
-                </div>
-            </div>
-            <div style="border-left: 0">
-                <p style="padding: 30px 0  30px 30px;">认证有效期：</p>
-
-                <p class="text-muted" style="margin-left: 30px">连网时间超出认证有效期后需再次认证才能上网(默认5小时)</p>
-
-                <div class="form-inline" style="margin:30px 0 0 30px">
-                    <input type="text" class="form-control" ng-model="identify_time.hour">
-                    <span>小时</span>
-                    <input type="text" class="form-control" style="margin-left: 50px" ng-model="identify_time.minute">
-                    <span>分</span>
-                </div>
-                <div class="form-inline"style="margin:30px 0 0 30px">
-                    <span class="text-muted" >每天连网认证最多次数</span>
-                    <input type="text" class="form-control" style="margin-left: 30px" ng-model="identify_time.num">次
-                </div>
-                <button class="btn btn-info" style="margin: 10px 0 0 30px" ng-click="identify_submit(identify_time)">确认</button>
-            </div>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="profile">
-            <div style="overflow-y: auto">
-                <div class="form-inline">
-                    <span>类型：</span>
-                    <select class="form-control" style="width: 100px" ng-change="blackwhite_filter(filter)"
-                            ng-model="filter.content_type">
-                        <option value="">全部</option>
-                        <option value="0">MAC</option>
-                        <option value="1">域名</option>
-                    </select>
-                    <span style="margin-left: 30px">黑白名单：</span>
-                    <select class="form-control" style="width: 100px" ng-change="blackwhite_filter(filter)"
-                            ng-model="filter.is_black">
-                        <option value="">全部</option>
-                        <option value="1">黑名单</option>
-                        <option value="0">白名单</option>
-                    </select>
-                </div>
-                <table class="table table-bordered table-striped text-center">
-                    <thead>
-                    <tr>
-                        <td>特征</td>
-                        <td>类型</td>
-                        <td>黑白名单</td>
-                        <td>操作</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="p in policy">
-                        <td ng-bind="p.content"></td>
-                        <td ng-bind="type[p.content_type]"></td>
-                        <td ng-bind="p.is_black"></td>
-                        <td><i class="glyphicon glyphicon-trash" ng-click="delete(p.id)"></i></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="shop_isBlack">
-                <div>
-                    <p class="text-center" style="font-family: 'Microsoft YaHei';font-size: 16px">新增MAC码</p>
-
-                    <div class="form-inline">
-                        <span>MAC码：</span>
-                        <input class="form-control" type="text" ng-model="router.content" placeholder="例如：000000000000">
+                    <div class="form-inline" style="margin:30px 0 0 30px">
+                        <span class="text-muted">每天连网认证最多次数</span>
+                        <input type="text" class="form-control" style="margin-left: 30px" ng-model="identify_time.num">次
                     </div>
+                    <button class="btn btn-info" style="margin: 10px 0 0 30px"
+                            ng-click="identify_submit(identify_time)">确认
+                    </button>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profile">
+                <div style="overflow-y: auto">
                     <div class="form-inline">
                         <span>类型：</span>
-                        <select class="form-control" style="margin-left:20px" ng-model="router.is_black">
+                        <select class="form-control" style="width: 100px" ng-change="blackwhite_filter(filter)"
+                                ng-model="filter.content_type">
+                            <option value="">全部</option>
+                            <option value="0">MAC</option>
+                            <option value="1">域名</option>
+                        </select>
+                        <span style="margin-left: 30px">黑白名单：</span>
+                        <select class="form-control" style="width: 100px" ng-change="blackwhite_filter(filter)"
+                                ng-model="filter.is_black">
+                            <option value="">全部</option>
                             <option value="1">黑名单</option>
                             <option value="0">白名单</option>
                         </select>
                     </div>
-                    <p class="text-center" style="margin-top: 50px">
-                        <button class="btn btn-info" ng-click="add_mac(router)">确定</button>
-                    </p>
+                    <table class="table table-bordered table-striped text-center">
+                        <thead>
+                        <tr>
+                            <td>特征</td>
+                            <td>类型</td>
+                            <td>黑白名单</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="p in policy">
+                            <td ng-bind="p.content"></td>
+                            <td ng-bind="type[p.content_type]"></td>
+                            <td ng-bind="p.is_black"></td>
+                            <td><i class="glyphicon glyphicon-trash" ng-click="delete(p.id)"></i></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div>
-                    <p class="text-center" style="font-family: 'Microsoft YaHei';font-size: 16px">新增域名</p>
+                <div class="shop_isBlack">
+                    <div>
+                        <p class="text-center" style="font-family: 'Microsoft YaHei';font-size: 16px">新增MAC码</p>
 
-                    <div class="form-inline">
-                        <span>域名：</span>
-                        <input class="form-control" type="text" ng-model="router1.content" placeholder="例如：www.baidu.com">
+                        <div class="form-inline">
+                            <span>MAC码：</span>
+                            <input class="form-control" type="text" ng-model="router.content"
+                                   placeholder="例如：000000000000">
+                        </div>
+                        <div class="form-inline">
+                            <span>类型：</span>
+                            <select class="form-control" style="margin-left:20px" ng-model="router.is_black">
+                                <option value="1">黑名单</option>
+                                <option value="0">白名单</option>
+                            </select>
+                        </div>
+                        <p class="text-center" style="margin-top: 50px">
+                            <button class="btn btn-info" ng-click="add_mac(router)">确定</button>
+                        </p>
                     </div>
-                    <div class="form-inline">
-                        <span>类型：</span>
-                        <select class="form-control" ng-model="router1.is_black">
-                            <option value="1">黑名单</option>
-                            <option value="0">白名单</option>
-                        </select>
+                    <div>
+                        <p class="text-center" style="font-family: 'Microsoft YaHei';font-size: 16px">新增域名</p>
+
+                        <div class="form-inline">
+                            <span>域名：</span>
+                            <input class="form-control" type="text" ng-model="router1.content"
+                                   placeholder="例如：www.baidu.com">
+                        </div>
+                        <div class="form-inline">
+                            <span>类型：</span>
+                            <select class="form-control" ng-model="router1.is_black">
+                                <option value="1">黑名单</option>
+                                <option value="0">白名单</option>
+                            </select>
+                        </div>
+                        <p class="text-center" style="margin-top: 50px">
+                            <button class="btn btn-info" ng-click="add_domain(router1)">确定</button>
+                        </p>
                     </div>
-                    <p class="text-center" style="margin-top: 50px">
-                        <button class="btn btn-info" ng-click="add_domain(router1)">确定</button>
-                    </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-</div>
+
 <script>
     $('a[href="#home"]').click(function (e) {
         e.preventDefault();

@@ -308,10 +308,8 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         })
     };
     //路由基本信息
-    var shop_id;
     $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
         console.log(data);
-        shop_id = data.router.router_groups.id;
         //路由器实时信息
         var routerStatusInterval = $interval(function () {
             //$http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
@@ -339,7 +337,6 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             //        $scope.upTime = parseInt(data.basicInformation.upTime / 60);
             //    }
             //});
-            console.log($http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")));
         },3000);
         $scope.$on("$destroy", function () {
             $interval.cancel(routerStatusInterval);
@@ -408,21 +405,22 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     };
 
     $scope.weixin_load = function () {
-        location.href = ["#/main/weixin_config?routergroup_id=", shop_id].join("");
+        location.href = ["#/main/weixin_config?router_id=", router_id].join("");
     }
 
 }]);
 
 iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
+    var router_id = get_param(location.href);
     $http.get([window.API.WEIXIN.GET_WECHAT, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
         console.log(data);
         $scope.weixin = data;
     });
-    $scope.isShow = true;
     $scope.submit = function (weixin) {
         console.log(weixin);
         $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key")].join(""), weixin).success(function (data) {
             alert(data.msg);
+            location.href = ["#/main/details?router_id=",router_id].join("");
         })
             .error(function(data){
                 alert(data.msg);

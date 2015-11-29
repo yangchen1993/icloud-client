@@ -1,18 +1,17 @@
-<div style="width: 50%;margin: 0 auto">
+<div style="width: 50%;margin: 0 auto" class="text-center">
     <div class="form-inline">
         <span>AppID:</span>
-        <input type="text" class="form-control" ng-model="weixin.app_id"style="width: 300px;margin-left: 51px" ng-disabled="isShow">
+        <input type="text" class="form-control" ng-model="weixin.app_id"style="width: 300px;margin-left: 51px" >
     </div>
     <div class="form-inline">
         <span>AppSecretKey:</span>
-        <input type="text" class="form-control" ng-model="weixin.app_secret_key" style="width: 300px" ng-disabled="isShow">
+        <input type="text" class="form-control" ng-model="weixin.app_secret_key" style="width: 300px;margin-top: 10px" >
     </div>
     <div class="form-inline">
         <span>原始ID:</span>
-        <input type="text" class="form-control" ng-model="weixin.origin_id" style="width: 300px;margin-left: 48px" ng-disabled="isShow">
+        <input type="text" class="form-control" ng-model="weixin.origin_id" style="width: 300px;margin:10px 0 0 48px" >
     </div>
-    <div style="margin-left: -25%;padding-top: 30px" class="text-center">
-        <button class="btn btn-info" ng-click="isShow=false">编辑</button>
+    <div style="padding-top: 30px" class="text-center">
         <button class="btn btn-info" ng-click="submit(weixin)">提交</button>
     </div>
 </div>

@@ -1,12 +1,12 @@
 <div class="table_outside">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" style="background-color: #4edcc6">
             <li><a ui-sref="main.wallet">我的钱包</a></li>
             <li class="active">交易记录</li>
         </ol>
 
     <div class=" table_inside">
         <table class="table table-bordered table-hover text-center table-striped">
-            <thead>
+            <thead style="background-color: #8a8bc4;color:#fff">
             <tr>
                 <td id="order_no" ng-click="sort('order_no')">
                     流水号
@@ -58,5 +58,5 @@
             </tbody>
         </table>
     </div>
-    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #D9D9D9"></div>
+    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
 </div>

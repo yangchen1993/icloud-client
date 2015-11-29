@@ -1,16 +1,17 @@
 <div class="table_outside">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" style="background-color: #4edcc6">
         <li class="active">短信群发模板</li>
     </ol>
-    <button class="btn btn-info" ui-sref="main.new-sms-template">新建</button>
+
     <div class="table_inside">
+        <button class="btn btn-info" ui-sref="main.new-sms-template" style="background-color: #5ae9d5;border-color: #5ae9d5">新建</button>
         <table class="table table-bordered text-center table-hover table-striped">
             <tr ng-if="grid.results.length === 0">
                 <td colspan="4">
                     <span>没有模板, <a href="#/main/new-sms-template">立即创建</a></span>
                 </td>
             </tr>
-            <thead>
+            <thead style="background-color: #8a8bc4;color:#fff">
             <tr>
                 <td id="name" ng-click="sort('name')">
                     模板名称
@@ -44,7 +45,7 @@
                 <td ng-bind="t.name"></td>
                 <td ng-bind="t.template"></td>
                 <td ng-bind="t.sign"></td>
-                <td ng-bind="t.create_time"></td>
+                <td ng-bind="t.create_time | date:'yyyy-MM-dd'"></td>
                 <td>
                     <button class="btn btn-xs btn-info" ng-click="sendTemplate(t.id)">群发</button>
                     <button class="btn btn-xs btn-danger" ng-click="removeTemplate(t.id)">删除</button>
@@ -53,5 +54,5 @@
             </tbody>
         </table>
     </div>
-    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #D9D9D9"></div>
+    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
 </div>

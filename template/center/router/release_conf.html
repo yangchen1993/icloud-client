@@ -73,7 +73,7 @@
             <td ng-bind="p.router_groups.trade_area.province+p.router_groups.trade_area.city+p.router_groups.trade_area.area+p.router_groups.trade_area.name"></td>
             <td ng-bind="p.isonline"></td>
             <td ng-bind="p.mac"></td>
-            <td ng-bind="p.create_time"></td>
+            <td ng-bind="p.create_time | date:'yyyy-MM-dd'"></td>
             <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="conf_s(p.id)">设置</button></td>
         </tr>
         </tbody>

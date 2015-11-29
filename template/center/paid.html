@@ -30,8 +30,8 @@
                 <input type="checkbox">
             </td>
             <td ng-bind="p.bid_price"></td>
-            <td ng-bind="p.time_range_start"></td>
-            <td ng-bind="p.time_range_end"></td>
+            <td ng-bind="p.time_range_start | date:'yyyy-MM-dd'"></td>
+            <td ng-bind="p.time_range_end | date:'yyyy-MM-dd'"></td>
         </tr>
     </table>
     <div ng-include="'/template/partial/pagination.html'"></div>

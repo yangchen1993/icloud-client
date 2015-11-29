@@ -2,7 +2,7 @@
     .zhifubao{
         position: relative;
         padding: 5px;
-        solid 2px #E4393C
+        border:dashed 2px darkgray;
         cursor: pointer;
     }
     .zfb-logo{
@@ -13,7 +13,7 @@
 
     }
     .zhifubao b{
-        display: block;
+        display: none;
         position: absolute;
         bottom: -2px;
         right: -2px;
@@ -54,7 +54,7 @@
     </div>
 </div>
 <script>
-    var toSelect=true;
+    var toSelect=false;
     $('.zhifubao').on('click',function(){
         if(toSelect==false){
             $('#zhifubao').prop('checked',"checked");

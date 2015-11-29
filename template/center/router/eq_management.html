@@ -78,7 +78,7 @@
                 <td ng-bind="p.router_groups.trade_area.province+p.router_groups.trade_area.city+p.router_groups.trade_area.area+p.router_groups.trade_area.name"></td>
                 <td ng-bind="p.isonline"></td>
                 <td ng-bind="p.mac"></td>
-                <td ng-bind="p.create_time"></td>
+                <td ng-bind="p.create_time | date:'yyyy-MM-dd'"></td>
                 <td>
                     <a class="btn btn-xs btn-info" href="javascript:" ng-click="see_router(p.id)">查看</a>
                     <a ng-if="deviceManage.editRouterMenu" class="btn btn-xs btn-info" href="#/main/edit-device?router_id={{ p.id }}">编辑</a>

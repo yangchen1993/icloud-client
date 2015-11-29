@@ -3,7 +3,8 @@
  */
 
 //window.HOST = "http://192.168.10.200:8802/api/";
-window.HOST = "http://mb.idianjia.cn:8802/api/";
+window.HOST = "http://192.168.10.233:8001/api/";
+//window.HOST = "http://mb.idianjia.cn:8802/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -108,7 +109,9 @@ window.API = {
 
         "REMOVE_GROUP": [window.HOST, "groups/remove_group/"].join(""), // 删除路由器分组
 
-        "EDIT_GROUP": [window.HOST, "groups/edit_group/"].join("") // 删除路由器分组
+        "EDIT_GROUP": [window.HOST, "groups/edit_group/"].join(""), // 删除路由器分组
+
+        "GET_ROUTER_BY_GROUP": [window.HOST, "routers/get_current_user_routers/"].join("")//获取当前店铺所有路由器
     },
 
 
@@ -140,7 +143,9 @@ window.API = {
 
         "PUT_AD_IN": [window.HOST, "audits/new_audit/"].join(""),
 
-        "PUT_AD_UP": [window.HOST, "audits/edit_audit/"].join("")
+        "PUT_AD_UP": [window.HOST, "audits/edit_audit/"].join(""),
+
+        "GET_SHOP_AD": [window.HOST,"audits/audit_status/"].join("")
     },
     "WIFICAT": {
         "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息

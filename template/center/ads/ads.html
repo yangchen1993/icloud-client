@@ -56,11 +56,11 @@
                     <td>
                         <a href="javascript:" ng-click="editAds(p.id)">修改</a>
                         <a href="javascript:" ng-click="deleteAds(p.id)">删除</a>
-                        <a href="#/main/put_ad?ad_id={{p.id}}" ng-if="p.audit_status==-1" style="color:red;">投放</a>
+                        <a href="#/main/put_ad?ad_id={{p.id}}" ng-if="p.audit_status==-1" style="color:blue;">投放</a>
                         <a href="javascript:" ng-if="p.audit_status==0" style="color:red;">审核未通过</a>
                         <a href="javascript:" ng-if="p.audit_status==1" style="color:orangered">审核中……</a>
-                        <a href="javascript:" ng-if="p.audit_status==2" ng-click="putAwayAd(p.audit_id,2)">下架</a>
-                        <a href="javascript:" ng-if="p.audit_status==3"  ng-click="putAwayAd(p.audit_id,3)">上架</a>
+                        <a href="javascript:" style="color:orangered;"  ng-if="p.audit_status==2" ng-click="putAwayAd(p.audit_id,3)">下架</a>
+                        <a href="javascript:" ng-if="p.audit_status==3"  ng-click="putAwayAd(p.audit_id,2)">上架</a>
                     </td>
                 </tr>
                 </tbody>
@@ -78,11 +78,11 @@
                     <td>
                         <a href="javascript:" ng-click="editAds(p.id)">修改</a>
                         <a href="javascript:" ng-click="deleteAds(p.id)">删除</a>
-                        <a href="javascript:" ng-click="dlTouFang(p.id)" ng-if="p.audit_status==-1" style="color:red;">投放</a>
+                        <a href="javascript:" ng-click="dlTouFang(p.id)" ng-if="p.audit_status==-1" style="color:blue;">投放</a>
                         <a href="javascript:" ng-if="p.audit_status==0" style="color:red;">审核未通过</a>
                         <a href="javascript:" ng-if="p.audit_status==1" style="color:orangered">审核中……</a>
-                        <a href="javascript:" ng-if="p.audit_status==2" ng-click="putAwayAd(p.audit_id,2)">下架</a>
-                        <a href="javascript:" ng-if="p.audit_status==3"  ng-click="putAwayAd(p.audit_id,3)">上架</a>
+                        <a href="javascript:" style="color:orangered;" ng-if="p.audit_status==2" ng-click="putAwayAd(p.audit_id,3)">下架</a>
+                        <a href="javascript:" ng-if="p.audit_status==3"  ng-click="putAwayAd(p.audit_id,2)">上架</a>
                     </td>
                 </tr>
                 </tbody>

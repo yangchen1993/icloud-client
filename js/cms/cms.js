@@ -48,7 +48,7 @@ function editText(id, type) {
                 ]
             });
             CKEDITOR.instances["txtarea"].on("instanceReady", function () {
-                this.document.on("keyup", function () {
+                this.document.on("input propertychange", function () {
                     validateText();
                 });
             });

@@ -129,10 +129,13 @@ function editAdress(id, type) {
     })
 }
 function editMap(id, type) {
-    var mapId = addId();
-    $('div[data-edit-id=' + id + ']' + ' .dmap').attr('id', mapId);
-    console.log(mapId);
-    //bbmap(mapId);
+    var editMapId = addId();
+    $('div[data-edit-id=' + id + ']' + ' .dmap').attr('id', editMapId);
+    if($(id).attr("data-address")){
+        freshMap(id,editMapId,$(id).attr("data-address").split(","));
+    }else{
+        freshMap(id,editMapId,"");
+    }
 }
 
 function editMenu(id, type) {
@@ -247,7 +250,7 @@ function addItem(id, type) {
         var mapArea = '<div class="map" id="' + mapId + '"></div>'
         var edit = '<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
         $('#drag').append('<li data-type="map" class="item-list" id="' + id + '">' + mapArea + edit + '</li>');
-        bbmap(mapId, user.j, user.w);
+        loadMap(mapId);
     } else {
         var itemTemp = $('.template .' + type).html();
         var edit = '<div class="deledit"><span class="edit">编辑</span><span class="delete">删除</span></div>';
@@ -340,8 +343,7 @@ var user = {
     userId: 'b0d9abc8-d416-4b1d-b9d4-2bc82e48f774',
     address: '四川省成都市锦江区',
     telephone: 18780283005,
-    j: 104.06792346,
-    w: 30.67994285,
+    area: [104.06792346,30.67994285]
 //            经度、纬度
 }
 
@@ -360,22 +362,52 @@ $('.saveImg').click(function () {
     alert('点击了额');
 
 });
-function bbmap(id) {
-    //var map = new BMap.Map(id);
-    //var point = new BMap.Point(j,w);
-    //// 百度地图API功能
-    ////var point = new BMap.Point(104.06792346,30.67994285);
-    //map.centerAndZoom(point, 18);
-    //var marker = new BMap.Marker(point);  // 创建标注
-    //map.addOverlay(marker);               // 将标注添加到地图中
+function loadMap(id){
+    var map = new AMap.Map(id,{
+        resizeEnable: true,
+        zoom: 13
+    });
+    AMap.plugin('AMap.Geocoder',function() {
+        var geocoder = new AMap.Geocoder({
+            city: "010"//城市，默认：“全国”
+        });
+        var marker = new AMap.Marker({
+            map: map,
+            bubble: true
+        })
+    });
+}
+function freshMap(id,editMapId,tlnglat) {
+    var map = new AMap.Map(editMapId,{
+        resizeEnable: true,
+        zoom: 13,
+        center: tlnglat
+    });
+    AMap.plugin('AMap.Geocoder',function(){
+        var geocoder = new AMap.Geocoder({
+            city: "010"//城市，默认：“全国”
+        });
+        var marker = new AMap.Marker({
+            map:map,
+            bubble:true
+        })
+        map.on('click',function(e){
+            marker.setPosition(e.lnglat);
+            geocoder.getAddress(e.lnglat,function(status,result){
+                if(status=='complete'){
+                    var area_position=[e.lnglat.q,e.lnglat.A];
+                    console.log(area_position);
+                    marker = new AMap.Marker({
+                        position:area_position,
+                        map: new AMap.Map(id,{resizeEnable: true,zoom:18, center:area_position})
+                    });
+                    $("#"+id).attr("data-address",area_position);
+                }
+            });
+        });
 
-
-    // 百度地图API功能
-    var map = new BMap.Map(id);
-    var point = new BMap.Point(116.400244, 39.92556);
-    map.centerAndZoom(point, 12);
-    var marker = new BMap.Marker(point);// 创建标注
-    map.addOverlay(marker);             // 将标注添加到地图中
+    });
+    // 将标注添加到地图中
 }
 
 $('#drag').dragsort({

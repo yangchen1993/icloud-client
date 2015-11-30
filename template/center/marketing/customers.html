@@ -1,0 +1,63 @@
+<div style="padding: 10px">
+    <ol class="breadcrumb">
+        <li class="active">客户列表</li>
+    </ol>
+
+    <div class="col-md-12">
+        <table class="table table-hover table-bordered table-striped">
+            <tr>
+                <td id="member__phone" ng-click="sort('member__phone')">
+                    会员手机号
+                    <span ng-show="currentSort['member__phone'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['member__phone'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="member__mac" ng-click="sort('member__mac')">
+                    设备MAC
+                    <span ng-show="currentSort['member__mac'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['member__mac'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="member__wechat" ng-click="sort('member__wechat')">
+                    微信ID
+                    <span ng-show="currentSort['member__wechat'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['member__wechat'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="times" ng-click="sort('times')">
+                    访问次数
+                    <span ng-show="currentSort['times'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['times'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="create_time" ng-click="sort('create_time')">
+                    首次访问时间
+                    <span ng-show="currentSort['create_time'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['create_time'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="modified_time" ng-click="sort('modified_time')">
+                    最后访问时间
+                    <span ng-show="currentSort['modified_time'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['modified_time'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+            </tr>
+            <tr ng-repeat="m in grid.results">
+                <td ng-bind="m.phone"></td>
+                <td ng-bind="m.mac"></td>
+                <td ng-bind="m.wechat"></td>
+                <td ng-bind="m.times"></td>
+                <td ng-bind="m.create_time"></td>
+                <td ng-bind="m.modified_time"></td>
+            </tr>
+        </table>
+    </div>
+    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
+</div>

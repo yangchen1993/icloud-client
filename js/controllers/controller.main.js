@@ -5,7 +5,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
     $http.get([window.API.USER.GET_CURRENT_USER_INFO, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
         console.log(data);
         $scope.user = {
-            "name": data.legal_person_name,
+            "name": data.name,
             "identity": data.role.name
         };
 
@@ -25,6 +25,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.create_business_nav = true;
             $scope.marketing_nav = false;
             $scope.wallet_nav = false;
+            $rootScope.isShow_balckwhite = false;
             $rootScope.deviceManage = {
                 "addRouterMenu": true,
                 "editRouterMenu": true,
@@ -45,6 +46,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.marketing_nav = true;
             $scope.wallet_nav = true;
             $scope.info_nav = true;
+            $rootScope.isShow_balckwhite = true;
         }
         else {
             $scope.auth_nav = false;
@@ -60,6 +62,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.marketing_nav = false;
             $scope.wallet_nav = true;
             $scope.info_nav = true;
+            $rootScope.isShow_balckwhite = false;
         }
     });
 }]);

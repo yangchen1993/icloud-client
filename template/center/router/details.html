@@ -6,35 +6,37 @@
 
     <div class="col-md-4 col-xs-12">
         <div class="details_panel">
-            <p>店铺信息</p>
+            <div>店铺信息</div>
             <div style="line-height: 80px"><span>店铺名称：</span><span ng-bind="routers_all.router.router_groups.name"></span></div>
             <div style="line-height: 80px"><span>所属行业：</span><span ng-bind="routers_all.router.router_groups.category"></span></div>
-            <div style="height: 100px;border: 0;margin-top:20px"><span>所在地址：</span><span ng-bind="routers_all.router.router_groups.trade_area.province+' '+routers_all.router.router_groups.trade_area.city+' '+routers_all.router.router_groups.trade_area.area+' '+routers_all.router.router_groups.trade_area.name"></span></div>
+            <div style="height: 100px;border: 0;padding-top:30px"><span>所在地址：</span><span ng-bind="routers_all.router.router_groups.trade_area.province+' '+routers_all.router.router_groups.trade_area.city+' '+routers_all.router.router_groups.trade_area.area+' '+routers_all.router.router_groups.trade_area.name"></span></div>
         </div>
     </div>
 
     <div class="col-md-4 col-xs-12">
         <div class="details_panel">
-            <p style="background-color: #43d8e0">路由器基本信息</p>
-            <div style="line-height: 80px"><span>WIFI名称：</span><span ng-bind="routers_all.router.ssid"></span><a style="position:absolute;right:30px" href="javascript:"ng-click="modify_ssid(routers_all.router.ssid)">设置</a></div>
-            <div style="line-height: 80px"><span>MAC地址：</span><span ng-bind="routers_all.router.mac"></span></div>
+            <div style="background-color: #43d8e0">路由器基本信息</div>
+            <div style="line-height: 80px" class="form-inline"><span>WIFI名称：</span><span ng-bind="routers_all.router.ssid" ng-show="update_ssid==1"></span><input ng-show="update_ssid==0" type="text" class="form-control" style="width: 200px" ng-model="ssid"><a href="javascript:" ng-show="update_ssid==0" ng-click="modify_ssid()">确定</a><a href="javascript:" ng-show="update_ssid==0" ng-click="update_ssid=1" >取消</a><a style="position:absolute;right:30px" href="javascript:"ng-click="update_ssid = 0">设置</a></div>
+            <div style="height: 80px;padding-top: 30px"><span>MAC地址：</span><span ng-bind="routers_all.router.mac"></span></div>
             <div style="line-height: 100px;border: 0"><span>系统版本：</span><span ng-bind="wificat.basicInformation.softwareVersion"></span></div>
         </div>
     </div>
 
     <div class="col-md-4 col-xs-12">
         <div class="details_panel">
-            <p style="background-color: #f4d462">运行状态</p>
+            <div style="background-color: #f4d462">
+                运行状态
+                <p ng-bind="error_msg" style="color: red;font-size: 18px"></p>
+            </div>
             <div style="line-height: 65px"><span>连续运行时间(分钟)：</span><span ng-bind="upTime"></span></div>
             <div style="line-height: 65px"><span>接入人数：</span><span ng-bind="wificat.operatingStatus.accessNumber"></span></div>
             <div style="line-height: 65px"><span>内存占用比率：</span><span ng-bind="wificat.operatingStatus.MemUsaged"></span></div>
             <div style="line-height: 65px;border: 0"><span>CPU负载率：</span><span ng-bind="wificat.operatingStatus.cpuUtil"></span></div>
         </div>
-
     </div>
 </div>
 
-    <div class="row router-tab table_outside" style="padding-left:15px;">
+    <div class="row router-tab table_outside" style="padding-left:15px;" ng-if="isShow_balckwhite">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">认证设置</a>
             </li>
@@ -54,15 +56,6 @@
                             <p>手机登录</p>
 
                             <div class="btn-group" style="margin-top: 10px;">
-                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_phone==1}">-->
-                                <!--<input class="hidden" type="radio" name="options_phone" id="phone_on" ng-model="isActive_phone"-->
-                                <!--value="1" ng-change="identify_type()">开-->
-                                <!--</label>-->
-
-                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_phone==0}">-->
-                                <!--<input class="hidden" type="radio" name="options_phone" id="phone_off" ng-model="isActive_phone"-->
-                                <!--value="0" ng-change="identify_type()">关-->
-                                <!--</label>-->
                                 <label class="btn btn-primary" ng-class="{'route-active': login_type==1}">
                                     <input class="hidden" type="radio" name="options_phone" ng-model="login_type" value="1"   ng-change="changeLoginType()">
                                 </label>
@@ -75,15 +68,7 @@
                             <p style="margin-left: 0">微信登陆<a href="javascript:" ng-click="weixin_load()">设置</a></p>
 
                             <div class="btn-group" style="margin-top: 10px;">
-                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==1}">-->
-                                <!--<input class="hidden" type="radio" name="options_phone" id="weixin_on" ng-model="isActive_weixin"-->
-                                <!--value="1" ng-change="identify_type()">开-->
-                                <!--</label>-->
 
-                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==0}">-->
-                                <!--<input class="hidden" type="radio" name="options_phone" id="weixin_off" ng-model="isActive_weixin"-->
-                                <!--value="0" ng-change="identify_type()">关-->
-                                <!--</label>-->
                                 <label class="btn btn-primary" ng-class="{'route-active': login_type==2}">
                                     <input class="hidden" type="radio" name="options_phone" ng-model="login_type" value="2" ng-change="changeLoginType()">
                                 </label>
@@ -96,15 +81,7 @@
                             <p style="margin-left: 0">免认证</p>
 
                             <div class="btn-group" style="margin-top: 10px;">
-                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==1}">-->
-                                <!--<input class="hidden" type="radio" name="options_phone" id="weixin_on" ng-model="isActive_weixin"-->
-                                <!--value="1" ng-change="identify_type()">开-->
-                                <!--</label>-->
 
-                                <!--<label class="btn btn-primary" ng-class="{'active': isActive_weixin==0}">-->
-                                <!--<input class="hidden" type="radio" name="options_phone" id="weixin_off" ng-model="isActive_weixin"-->
-                                <!--value="0" ng-change="identify_type()">关-->
-                                <!--</label>-->
                                 <label class="btn btn-primary" ng-class="{'route-active': login_type==3}">
                                     <input class="hidden" type="radio" name="options_phone"  ng-model="login_type" value="3"  ng-change="changeLoginType()">
                                 </label>

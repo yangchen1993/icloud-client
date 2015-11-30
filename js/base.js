@@ -2,7 +2,6 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.10.200:8802/api/";
 //window.HOST = "http://192.168.10.233:8001/api/";
 window.HOST = "http://mb.idianjia.cn:8802/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
@@ -14,6 +13,10 @@ window.API = {
         "LOGOUT": [window.HOST, "users/logout/"].join(""), // 登出
 
         "GET_CURRENT_USER_INFO": [window.HOST, "users/get_current_user_info/"].join(""), // 获取当前用户信息
+
+        "EDIT_CURRENT_USER_INFO": [window.HOST, "users/edit_current_user_info/"].join(""), //修改当前用户信息
+
+        "CHANGE_CURRENT_USER_PASSWORD": [window.HOST, "users/change_current_user_password/"].join(""), //修改当前用户的密码
 
         "GET_USER_INFO_BY_TEL": [window.HOST, "users/get_user_info_by_tel/"].join(""),
 
@@ -58,7 +61,7 @@ window.API = {
 
         "REMOVE_ROUTER": [window.HOST, "routers/remove_router/"].join(""), //删除路由器
 
-        "EDIT_ROUTER":[window.HOST, "routers/edit_router/"].join(""), // 编辑路由器
+        "EDIT_ROUTER": [window.HOST, "routers/edit_router/"].join(""), // 编辑路由器
 
         "GET_ALL_ROUTERS": [window.HOST, "routers/get_all_routers/"].join(""), // 获取所有路由器
 
@@ -145,7 +148,7 @@ window.API = {
 
         "PUT_AD_UP": [window.HOST, "audits/edit_audit/"].join(""),
 
-        "GET_SHOP_AD": [window.HOST,"audits/audit_status/"].join("")
+        "GET_SHOP_AD": [window.HOST, "audits/audit_status/"].join("")
     },
     "WIFICAT": {
         "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息
@@ -171,11 +174,13 @@ window.API = {
 
         "GET_CURRENT_USER_SMS_TEMPLATES": [window.HOST, "sms_templates/get_current_user_sms_templates/"].join(""), // 获取当前用户的群发模板
 
-        "GET_CURRENT_USER_MEMBERS": [window.HOST, "sms_targets/get_current_user_members/"].join(""),
+        "GET_SMS_TARGETS": [window.HOST, "sms_targets/get_current_user_members/"].join(""),
 
         "GET_WECHAT": [window.HOST, "wechat/get_wechat/"].join(""),
 
-        "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
+        "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join(""),
+
+        "GET_CURRENT_USER_MEMBERS": [window.HOST, "members/get_current_user_members/"].join("")
     },
 
     "ACCOUNT": {

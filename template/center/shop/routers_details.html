@@ -12,10 +12,12 @@
     <div class="row">
         <div class="col-xs-7">
             <div class="panel panel-dj">
-                <div class="panel-heading text-center">运行状态</div>
+                <div class="text-center" style="background-color:#5AE9D4;height: 88px;padding-top: 30px;font-size: 24px;color: #fff">运行状态
+                    <p style="color: red;font-size: 18px" ng-bind="error_msg"></p>
+                </div>
                 <div class="panel-body">
                     <div>
-                        <span>连续运行时间：</span>
+                        <span>连续运行时间(分钟)：</span>
                         <span ng-bind="upTime"></span>
                     </div>
                     <div>
@@ -39,7 +41,9 @@
         </div>
         <div class="col-xs-5">
             <div class="panel panel-dj">
-                <div class="panel-heading text-center" style="background-color:#efcc51;">WAN接入状态</div>
+                <div class="text-center" style="background-color:#efcc51;height: 88px;padding-top: 30px;font-size: 24px;color: #fff">WAN接入状态
+                <p style="color: red;font-size: 18px" ng-bind="error_msg"></p>
+                </div>
                 <div class="panel-body">
                     <div>
                         <span>外网IP：</span>
@@ -58,7 +62,7 @@
         </div>
     </div>
 
-    <div class="row router-tab" style="padding-left:15px;">
+    <div class="row router-tab" style="padding-left:15px;" ng-if="isShow_balckwhite">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">认证设置</a>
             </li>

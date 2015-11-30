@@ -1,5 +1,5 @@
 <div class="table_outside">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" style="background-color: #4edcc6">
             <li class="active">设备管理</li>
         </ol>
 
@@ -12,7 +12,7 @@
                     <span>店铺：</span>
                     <input type="text" class="form-control" placeholder="商铺名称" style="width: 15% !important;"
                            ng-model="search.groups__name__icontains">
-                    <select class="form-control" ng-model="search.router_groups__category" style="width: 15% !important;"
+                    <select class="form-control" ng-model="search.groups__category" style="width: 15% !important;"
                             ng-options="v.name as v.name for v in category">
                         <option value="">选择行业</option>
                     </select>
@@ -22,14 +22,14 @@
                         <span>地区：</span>
                         <select class="form-control" style="width: 15% !important;"
                                 ng-model="search.router_groups__trade__province" ng-options="v.id as v.name for v in province1"
-                                ng-change="select_p(search.router_groups__trade__province)">
+                                ng-change="select_p(search.groups__trade__province)">
                             <option value="">省</option>
                         </select>
-                        <select class="form-control" style="width: 15% !important;" ng-model="search.router_groups__trade__city"
-                                ng-options="v.id as v.name for v in city1" ng-change="select_c(search.router_groups__trade__city)">
+                        <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city"
+                                ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">
                             <option value="">市</option>
                         </select>
-                        <select class="form-control" style="width: 15% !important;" ng-model="search.router_groups__trade__area"
+                        <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area"
                                 ng-options="v.id as v.name for v in area1">
                             <option value="">区/县</option>
                         </select>
@@ -42,9 +42,9 @@
                     <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
                     <div>
                         <span>时间：</span>
-                        <input type="date" class="form-control" ng-model="search.create_time_gte"><span
+                        <input type="date" class="form-control" ng-model="search.create_time__gte"><span
                             style="margin-left:5px">到</span>
-                        <input type="date" class="form-control" ng-model="search.create_time_lte">
+                        <input type="date" class="form-control" ng-model="search.create_time__lte">
                         <button class="btn btn-info pull-right" ng-click="eq_reset()">重置</button>
                         <button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="eq_search(search)">搜索
                         </button>
@@ -55,7 +55,7 @@
     </div>
     <div class="table_inside">
         <table class="table table-bordered text-center table-striped table-hover" id="table-eq">
-            <thead>
+            <thead style="background-color: #8a8bc4;color: #fff">
             <tr>
                 <!--<td>-->
                     <!--<a href="javascript:" ng-click="checkAll()">全选</a>-->
@@ -78,7 +78,7 @@
                 <td ng-bind="p.router_groups.trade_area.province+p.router_groups.trade_area.city+p.router_groups.trade_area.area+p.router_groups.trade_area.name"></td>
                 <td ng-bind="p.isonline"></td>
                 <td ng-bind="p.mac"></td>
-                <td ng-bind="p.create_time | date:'yyyy-MM-dd'"></td>
+                <td ng-bind="p.create_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
                 <td>
                     <a class="btn btn-xs btn-info" href="javascript:" ng-click="see_router(p.id)">查看</a>
                     <a ng-if="deviceManage.editRouterMenu" class="btn btn-xs btn-info" href="#/main/edit-device?router_id={{ p.id }}">编辑</a>

@@ -17,31 +17,41 @@ iCloudController.controller("WalletsController", ["$scope", "$http", "$cookieSto
 
 iCloudController.controller("RechargeController", ["$scope", "$http", "$cookieStore", "$window",
     function ($scope, $http, $cookieStore, $window) {
+        $http.get([window.API.USER.GET_CURRENT_USER_INFO,"?key=",$cookieStore.get("key")].join("")).success(function(data){
+            $scope.recharge_tel = data.tel;
+        });
+        $scope.active = 0;
+
         $scope.rechargeOrder = {
             amount: 1,
             channel: "alipay_pc_direct"
         };
 
         $scope.recharge = function (data) {
-            var data_ = angular.copy(data);
-            console.log(data_);
-            if (data_.amount) {
-                $http.post([$window.API.WALLET.RECHARGE, "?key=", $cookieStore.get("key")].join(""), data_)
-                    .success(function (data) {
-                        pingppPc.createPayment(data, function (result, msg) {
-                            console.log(result);
-                            if (result == "success") {
-                                console.log(msg);
-                            } else if (result == "fail") {
-                                console.log(msg);
-                            } else if (result == "cancel") {
-                                console.log(msg);
-                            }
+            if(angular.element("#zhifubao").prop('checked')==true)
+            {
+                var data_ = angular.copy(data);
+                console.log(data_);
+                if (data_.amount) {
+                    $http.post([$window.API.WALLET.RECHARGE, "?key=", $cookieStore.get("key")].join(""), data_)
+                        .success(function (data) {
+                            pingppPc.createPayment(data, function (result, msg) {
+                                console.log(result);
+                                if (result == "success") {
+                                    console.log(msg);
+                                } else if (result == "fail") {
+                                    console.log(msg);
+                                } else if (result == "cancel") {
+                                    console.log(msg);
+                                }
+                            })
                         })
-                    })
+                }
+            }
+            else{
+                alert("请先选择支付方式")
             }
         }
-
     }]);
 
 iCloudController.controller("TradingHistoryController", ["$scope", "$http", "$window", "$grid",

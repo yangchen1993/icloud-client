@@ -216,7 +216,6 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: "AccountDetailsController"
         })
 
-        //个人信息
         .state("main.personal-info", {
             url: "/personal-info",
             templateUrl: "template/center/personal/info.html",

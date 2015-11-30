@@ -170,7 +170,9 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
     $checkBox.enableCheck("table-fireware");
 }]);
 
-iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', "$timeout", "$q", function ($scope, $http, $cookieStore, $timeout, $q) {
+iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', "$timeout","$rootScope", function ($scope, $http, $cookieStore, $timeout,$rootScope) {
+    $scope.isShow_balckwhite = $rootScope.isShow_balckwhite;
+
     var router_id = get_param(window.location.href);
     $scope.update_ssid = 1;
     $scope.modify_ssid = function () {
@@ -321,16 +323,6 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
 
     var loginType;
     $scope.changeLoginType = function () {
-        //var identify_type = "";
-        //if ($scope.isActive_phone == 1) {
-        //    identify_type="手机号认证";
-        //    $scope.isActive_weixin=0;
-        //}else if ($scope.isActive_weixin == 1) {
-        //    identify_type="微信认证";
-        //    $scope.isActive_phone=0;
-        //}else{
-        //    identify_type="免认证";
-        //}
         console.log($scope.login_type);
         if ($scope.login_type == 1) {
             loginType = "手机号认证";

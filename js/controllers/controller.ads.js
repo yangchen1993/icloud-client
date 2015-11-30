@@ -52,7 +52,7 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
                     "comments": "failed reason"
                 },
                 "success": function (data) {
-                    alert("上架成功");
+                    alert("操作成功");
                     $scope.refresh();
                 }
             });

@@ -200,7 +200,7 @@ padding-top: 10px;
 }
 .identify_type .btn-primary{
     display: inline-block;
-    width:40px;
+    width:30px;
     height:30px;
     text-align: center;
     font: normal normal normal 14px/1 FontAwesome;
@@ -208,6 +208,7 @@ padding-top: 10px;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    border-radius: 50%;
 }
 .route-active{
     display: inline-block;
@@ -225,6 +226,7 @@ padding-top: 10px;
 }
 .route-active:before{
     content: "\f00c";
+    margin-left: -5px;
 }
 .login-icon{
     width: 85px;

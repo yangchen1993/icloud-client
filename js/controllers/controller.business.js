@@ -7,7 +7,6 @@ iCloudController.controller("ShopManagementController", ["$scope", "$http", "$gr
         var show_shop = function () {
             $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
                 $scope.shop = data.results;
-                console.log(data);
             });
         };
         show_shop();
@@ -232,7 +231,9 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     }
 }]);
 
-iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$timeout", function ($scope, $http, $cookieStore, $window, $timeout) {
+iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$timeout","$rootScope", function ($scope, $http, $cookieStore, $window, $timeout,$rootScope) {
+    $scope.isShow_balckwhite = $rootScope.isShow_balckwhite;
+
     var router_id = get_param($window.location.href);
     //放行设置
     var reload_blackwhite = function () {
@@ -363,16 +364,6 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     });
     var loginType;
     $scope.changeLoginType = function () {
-        //var identify_type = "";
-        //if ($scope.isActive_phone == 1) {
-        //    identify_type="手机号认证";
-        //    $scope.isActive_weixin=0;
-        //}else if ($scope.isActive_weixin == 1) {
-        //    identify_type="微信认证";
-        //    $scope.isActive_phone=0;
-        //}else{
-        //    identify_type="免认证";
-        //}
         console.log($scope.login_type);
         if($scope.login_type==1){
             loginType="手机号认证";

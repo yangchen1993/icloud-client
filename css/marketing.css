@@ -12,8 +12,8 @@
 .SMS-create-panel>div>div{
     margin-top: 15px;
 }
-.SMS_create_panel input,.SMS_create_panel select{
-    width:250px !important;
+.SMS_create_panel input{
+    width:300px !important;
 }
 .SMS_create_panel textarea{
     width: 300px !important;

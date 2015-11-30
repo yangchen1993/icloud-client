@@ -18,7 +18,7 @@ iCloudService.service("$auth", ["$rootScope", "$http", "$cookieStore", "$window"
                     $http.post($window.API.USER.LOGIN, data)
                         .success(function (data) {
                             $cookieStore.put("key", data.key);
-                            $window.location.href = "#/main";
+                            $window.location.href = "#/main/personal-info";
                         })
                         .error(function (data) {
                             $rootScope.errorMsg = data;

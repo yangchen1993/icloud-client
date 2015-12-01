@@ -1,30 +1,32 @@
 <div class="panel_outside row">
-    <ol class="breadcrumb" style="background-color: #4edcc6">
-        <li class="active">修改密码</li>
+    <ol class="breadcrumb text-center" style="background-color: #4edcc6">
+        <li class="active" style="color:#fff;font-size: 20px;font-family: 'Microsoft YaHei'">修改密码</li>
     </ol>
 
-    <div class="col-md-12 table_inside">
+    <div class="col-md-12 table_inside" style="font-family: '黑体';font-size: 16px">
         <div class="form-horizontal">
-            <div class="form-group">
-                <label class="col-md-1">原密码:</label>
-                <div class="col-md-11">
+            <div class="form-group"style="border-bottom:1px dashed #dfdbdb;height: 50px">
+                <label class="col-md-5 text-right">原密码:</label>
+                <div class="col-md-7">
                     <input class="form-control" type="password" style="width: 200px" ng-model="changePwd.oldPassword">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-1">新密码:</label>
-                <div class="col-md-11">
+            <div class="form-group"style="border-bottom:1px dashed #dfdbdb;height: 50px">
+                <label class="col-md-5 text-right">新密码:</label>
+                <div class="col-md-7">
                     <input class="form-control" type="password" style="width: 200px" ng-model="changePwd.newPassword">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-1">新密码:</label>
-                <div class="col-md-11">
+            <div class="form-group"style="border-bottom:1px dashed #dfdbdb;height: 50px">
+                <label class="col-md-5 text-right">新密码:</label>
+                <div class="col-md-7">
                     <input class="form-control" type="password" style="width: 200px" ng-model="changePwd.repeatPassword">
                 </div>
             </div>
-            <div class="col-md-4">
-                <button class="btn btn-info" ng-click="changePassword()">修改密码</button>
+            <div class="col-md-12">
+                <div class="col-md-5"></div>
+                <div class="col-md-7"><button class="button button-primary" ng-click="changePassword()">修改密码</button></div>
+
             </div>
         </div>
     </div>

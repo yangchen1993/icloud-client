@@ -47,7 +47,7 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
         });
 
         //lsbMap.plugin('AMap.Geolocation', function () {
-        //    var geolocation = new AMap.Geolocation({
+        //    geolocation =  new AMap.Geolocation({
         //        enableHighAccuracy: true,//是否使用高精度定位，默认:true
         //        timeout: 10000,          //超过10秒后停止定位，默认：无穷大
         //        maximumAge: 0,           //定位结果缓存0毫秒，默认：0
@@ -66,12 +66,8 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
         //            raiseOnDrag: true
         //        }
         //    });
-        //    lsbMap.on("mouseover", function (e) {
-        //        console.log(e)
-        //    });
-        //    lsbMap.addControl(geolocation);
-        //    geolocation.getCurrentPosition();
         //
+        //    lsbMap.addControl(geolocation);
         //
         //    AMap.event.addListener(geolocation, 'complete', function (data) {
         //        console.log(data);
@@ -80,19 +76,9 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
         //        console.log(data);
         //    });      //返回定位出错信息
         //
-        //    console.log(geolocation);
         //});
-
-        var maker = new AMap.Marker({
-            map: lsbMap,
-            draggable: true,
-            cursor: 'move',
-            raiseOnDrag: true
-        });
-
-        maker.on("move", function (e) {
-            console.log(e)
-        })
+        //
+        //geolocation.getCurrentPosition();
 
     }]);
 

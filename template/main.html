@@ -168,8 +168,19 @@
                 <li ng-show="ads_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".ads"><span class="glyphicon glyphicon-text-background" style="margin-right: 10px"></span>我的广告</a>
+                        <a><span class="glyphicon glyphicon-text-background" style="margin-right: 10px"></span>我的广告</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
+                    <ul class="menu_child">
+                        <li ng-show="adsType_nav == 1">
+                            <div></div>
+                            <a ui-sref=".ads">自媒体广告</a>
+                        </li>
+                        <li ng-show="adsType_nav == 2">
+                            <div></div>
+                            <a ui-sref=".ads">倒计时广告</a>
+                        </li>
+                    </ul>
                 </li>
                 <div style="border-top:1px solid #2c303b" ng-show="ads_nav"></div>
                 <div style="border-top:1px solid #535a69" ng-show="ads_nav"></div>

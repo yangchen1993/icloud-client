@@ -80,12 +80,12 @@
 .shop_message{
     position: relative;
     margin: 0 auto;
-    width:80%;
+    width:90%;
     height: 600px;
     border: 1px solid #eeeeee;
     border-top: 0;
     border-bottom: 0;
-    background-color: #fff;
+    /*background-color: #F9F9F9;*/
 }
 .shop_message>div>div{
     margin-top: 10px;

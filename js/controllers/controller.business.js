@@ -231,9 +231,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     }
 }]);
 
-iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$timeout","$rootScope", function ($scope, $http, $cookieStore, $window, $timeout,$rootScope) {
-    $scope.isShow_balckwhite = $rootScope.isShow_balckwhite;
-
+iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$timeout", function ($scope, $http, $cookieStore, $window, $timeout) {
     var router_id = get_param($window.location.href);
     //放行设置
     var reload_blackwhite = function () {
@@ -363,11 +361,11 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         }
     });
     var loginType;
-    $scope.changeLoginType = function () {
-        console.log($scope.login_type);
-        if($scope.login_type==1){
+    $scope.changeLoginType = function (num) {
+        console.log(num);
+        if(num==1){
             loginType="手机号认证";
-        }else if($scope.login_type==2){
+        }else if(num==2){
             loginType="微信认证";
         }else{
             loginType="";

@@ -339,7 +339,12 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         } else {
             loginType = "";
         }
-        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType});
+        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType}).success(function(data){
+            alert(data.msg);
+        })
+            .error(function(data){
+                alert(data.msg)
+            });
     };
     $scope.identify_submit = function (data) {
         console.log(data);
@@ -351,6 +356,9 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         }).success(function (data) {
             alert(data.msg);
         })
+            .error(function(data){
+                alert(data.msg)
+            })
     };
 
     $scope.weixin_load = function () {

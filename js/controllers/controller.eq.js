@@ -175,6 +175,8 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
     var router_id = get_param(window.location.href);
     $scope.update_ssid = 1;
     $scope.modify_ssid = function () {
+        var reload = confirm("修改WIFI名称需要重启路由器后才能生效，是否确定重启路由器？");
+        if(reload==true){
             $http.put([window.API.ROUTER.ROUTERS_SSID, "?key=",$cookieStore.get("key"), "&id=", router_id].join(""), {"ssid": $scope.ssid}).success(function (data) {
                 console.log(data);
                 get_routerBase();
@@ -183,7 +185,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
                 .error(function(data){
                     alert(data.msg);
                 });
-
+        }
     };
     //放行设置
     var reload_blackwhite = function () {

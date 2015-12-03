@@ -320,6 +320,15 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
     get_routerBase();
 
 
+    $timeout(function(){
+        angular.element('a[href="#home"]').click(function(e){
+            e.preventDefault();
+        });
+        angular.element('a[href="#profile"]').click(function(e){
+            e.preventDefault();
+        });
+    },1000);
+
     var loginType;
     $scope.changeLoginType = function (num) {
         console.log($scope.login_type);

@@ -43,10 +43,6 @@
     position:relative;
     margin-top:20px;
 }
-.identify_type>div{
-    width:110px;
-    float: left;
-}
 #profile>div{
     float: left;
 }
@@ -132,6 +128,8 @@
 .panel-dj > .panel-body div{
     height:48px;
     line-height: 48px;
+    font-size: 16px;
+    font-family: "Microsoft YaHei";
 }
 .router-tab .nav-tabs{
     height:64px;

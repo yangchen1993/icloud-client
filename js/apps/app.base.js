@@ -226,4 +226,19 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/personal/safe.html",
             controller: "PersonalSafeController"
         })
+        .state("main.white-space", {
+            url: "/white-space",
+            templateUrl: "template/center/jsads/white-space.html",
+            controller: "WhiteSpaceController"
+        })
+        .state("main.open-area", {
+            url: "/open-area",
+            templateUrl: "template/center/jsads/open-area.html",
+            controller: "OpenAreaController"
+        })
+        .state("main.js-code", {
+            url: "/js-code",
+            templateUrl: "template/center/jsads/js-code.html",
+            controller: "JsCodeController"
+        })
 });

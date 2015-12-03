@@ -193,6 +193,29 @@
                 </li>
                 <div style="border-top:1px solid #2c303b" ng-show="account_nav"></div>
                 <div style="border-top:1px solid #535a69" ng-show="account_nav"></div>
+
+                <li ng-show="js_ad_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref="main.js-ad" style="cursor: pointer;"><span class="icon-credit-card" style="margin-right: 10px"></span>js广告管理</a>
+                    </div>
+                    <ul class="menu_child">
+                        <li>
+                            <div></div>
+                            <a ui-sref=".white-space">url白名单</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a ui-sref=".open-area">开放地区</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a ui-sref=".js-code">js代码</a>
+                        </li>
+                    </ul>
+                </li>
+                <div style="border-top:1px solid #2c303b" ng-show="js_ad_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="js_ad_nav"></div>
             </ul>
         </div>
     </div>
@@ -212,7 +235,7 @@
         <!--</div>-->
     <!--</div>-->
 
-    <div ui-view="" class="content container-fluid " style="background-color: #ebebed"></div>
+    <div ui-view="" class="container-fluid content" style="background-color: #ebebed"></div>
 
 </div>
 

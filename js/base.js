@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.10.233:8001/api/";
-window.HOST = "http://mb.idianjia.cn:8801/api/";
+window.HOST = "http://192.168.10.200:8801/api/";
+//window.HOST = "http://mb.idianjia.cn:8802/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -181,6 +181,12 @@ window.API = {
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join(""),
 
         "GET_CURRENT_USER_MEMBERS": [window.HOST, "members/get_current_user_members/"].join("")
+    },
+
+    "JSADS": {
+        "GET_JS_WHITE_URLS": [window.HOST, "js_white_url/get_js_white_urls/"].join(""),
+        "NEW_JS_WHITE_URL": [window.HOST, "js_white_url/new_js_white_url/"].join(""),
+        "REMOVE_JS_WHITE_URL": [window.HOST, "js_white_url/remove_js_white_url/"].join("")
     },
 
     "ACCOUNT": {

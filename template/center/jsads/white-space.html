@@ -1,27 +1,28 @@
 <div class="container-fluid">
-    <div class="row">
-        <input type="text"/><button>查询</button><button>新增</button>
-    </div>
-    <div class="row">
-        <table class="table table-striped">
+    <ol class="breadcrumb">
+        <li class="active">白名单域名</li>
+    </ol>
+    <div class="col-md-4">
+        <div class="form-horizontal">
+            <input type="text" ng-model="domain" class="form-control">
+            <a href="javascript:" class="btn btn-info btn-sm" ng-click="newDomain()">添加</a>
+        </div>
+
+        <table class="table table-striped table-hover table-bordered">
             <tr>
-                <td>url域名</td>
+                <td id="url" ng-click="sort('url')">
+                    url域名
+                    <span ng-show="currentSort['url'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['url'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
                 <td>操作</td>
             </tr>
-            <tr>
-                <td>baidu.com</td>
-                <td><button>删除</button></td>
-            </tr>
-            <tr>
-                <td>taobao.com</td>
-                <td><button>删除</button></td>
+            <tr ng-repeat="u in grid.results">
+                <td ng-bind="u.url"></td>
+                <td><a href="javascript:" ng-click="removeDomain(u.id)">删除</a></td>
             </tr>
         </table>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <p>查询为模糊查询</p>
-            <p>设置域名之后，该域名下的所有域名均为白名单</p>
-        </div>
+        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
     </div>
 </div>

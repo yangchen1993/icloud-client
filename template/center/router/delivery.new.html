@@ -1,41 +1,54 @@
-<div class="table_outside">
+<div class="table_outside row">
     <ol class="breadcrumb">
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li><a ui-sref="main.deliveries">设备分配</a></li>
         <li class="active">新建发货单</li>
     </ol>
-    <div class="form-inline">
+    <div class="form-inline col-md-3" style="font-family: 'Microsoft YaHei'">
         <label>收货人:</label>
-        <input class="form-control" type="text" value="" placeholder="收货人" ng-model="receiver" ng-blur="checkReceiver(receiver)">
+        <input class="form-control" type="text" value="" placeholder="收货人账号" ng-model="receiver"
+               ng-blur="checkReceiver(receiver)">
+
         <div ng-if="receiverInfo">
-            <p ng-bind="receiverInfo.username"></p>
-            <p ng-bind="receiverInfo.tel"></p>
-            <p ng-bind="receiverInfo.role.name"></p>
-            <span ng-bind="receiverInfo.province"></span>
-            <span ng-bind="receiverInfo.city"></span>
-            <span ng-bind="receiverInfo.area"></span>
+            <p class="row"><span class="col-md-4 text-right">用户名：</span><span ng-bind="receiverInfo.username" class="col-md-8"></span></p>
+
+            <p class="row"><span class="col-md-4 text-right">电话：</span><span ng-bind="receiverInfo.tel" class="col-md-8"></span></p>
+
+            <p class="row"><span class="col-md-4 text-right">身份：</span><span ng-bind="receiverInfo.role.name" class="col-md-8"></span></p>
+            <p class="row">
+                <span class="col-md-4 text-right">地址：</span>
+                <span class="col-md-8">
+                    <span ng-bind="receiverInfo.province"></span>
+                <span ng-bind="receiverInfo.city"></span>
+                <span ng-bind="receiverInfo.area"></span>
+                </span>
+
+            </p>
+
         </div>
         <div ng-if="receiverInfo === ''">
             <span>无收货人信息</span>
         </div>
     </div>
 
-        <div class="form-inline">
-            <label>收货地址:</label>
-            <input class="form-control" type="text" value="" placeholder="详细地址" ng-model="addressDetail">
-        </div>
-        <div class="form-inline">
-            <label>设备列表:</label>
+    <div class="form-inline col-md-3">
+        <label>地址:</label>
+        <input class="form-control" type="text" value="" placeholder="收货人详细地址" ng-model="addressDetail">
+    </div>
+    <div class="form-inline col-md-4">
+        <label>设备列表:</label>
 
-            <input type="text" class="form-control" value="" placeholder="mac" ng-model="mac">
-            <button class="btn btn-info" ng-click="addDeviceToDeliveryList(mac)">添加</button>
-            <span ng-bind="checkRouterIsExistsErrorInfo"></span>
-        </div>
+        <input type="text" class="form-control" value="" placeholder="mac" ng-model="mac">
+        <button class="btn btn-info" ng-click="addDeviceToDeliveryList(mac)">添加</button>
+        <p ng-bind="checkRouterIsExistsErrorInfo"></p>
+    </div>
+    <div class="col-md-2 text-center">
+        <button class="button button-royal" ng-click="createDeviceDelivery()">保存</button>
+    </div>
 
-
-    <div class="table_inside">
-        <table class="table table-hover table-condensed text-center">
-            <thead>
+    <div class="table_inside col-md-12">
+        <table class="table table-hover table-bordered text-center">
+            <thead style="background-color: #8a8bc4;color:#fff">
             <tr>
                 <td>MAC</td>
                 <td>型号</td>
@@ -54,5 +67,5 @@
         </table>
     </div>
 
-    <button class="btn btn-info" ng-click="createDeviceDelivery()">保存</button>
+
 </div>

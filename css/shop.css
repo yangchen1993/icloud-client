@@ -14,12 +14,12 @@
 .shop_index:nth-child(2) {
     width: 30%;
     height: 300px;
-    border:1px solid #cccccc;
+    border: 1px solid #cccccc;
     border-left: 0;
     float: left;
     padding: 10px 0 0 50px;
     font-size: 16px;
-    font-weight:500;
+    font-weight: 500;
 }
 .shop_index>div{
     margin-top: 20px;
@@ -42,10 +42,6 @@
 .identify_type{
     position:relative;
     margin-top:20px;
-}
-.identify_type>div{
-    width:110px;
-    float: left;
 }
 #profile>div{
     float: left;
@@ -80,12 +76,12 @@
 .shop_message{
     position: relative;
     margin: 0 auto;
-    width:80%;
+    width:90%;
     height: 600px;
     border: 1px solid #eeeeee;
     border-top: 0;
     border-bottom: 0;
-    background-color: #fff;
+    /*background-color: #F9F9F9;*/
 }
 .shop_message>div>div{
     margin-top: 10px;
@@ -113,7 +109,7 @@
 }
 .panel-dj > .panel-heading + .panel-collapse > .panel-body {
     padding-left:30px;
-    font-family: "����";
+    font-family: "Microsoft YaHei";
     font-size:14px;
     border-top-color: #5ae9d4;
 }
@@ -122,7 +118,7 @@
     background-color: #fff;
 }
 .panel-dj > .panel-footer + .panel-collapse > .panel-body {
-    font-family: "����";
+    font-family: "Microsoft YaHei";
     font-size:14px;
     border-bottom-color: #5ae9d4;
 }
@@ -132,13 +128,15 @@
 .panel-dj > .panel-body div{
     height:48px;
     line-height: 48px;
+    font-size: 16px;
+    font-family: "Microsoft YaHei";
 }
 .router-tab .nav-tabs{
     height:64px;
     background: #2ecc71;
 }
 .router-tab .nav-tabs li a{
-    font-family:"΢���ź�";
+    font-family: "Microsoft YaHei";
     font-size:20px;
     font-weight: bold;
     width:154px;

@@ -1,6 +1,6 @@
 <div class="panel_outside">
     <div>
-        <ol class="breadcrumb" style="background-color: #4DDBC5">
+        <ol class="breadcrumb">
             <li><a ui-sref="main.shop_management">店铺管理</a></li>
             <li class="active">店铺设备管理</li>
         </ol>
@@ -11,7 +11,7 @@
                 ng-options="v.id as v.mac for v in router">
             <option value="" disabled>MAC码</option>
         </select>
-        <button class="btn btn-info" style="margin-left: 50px;background-color: #5AE9D5;border-color: #5AE9D5" ng-click="bind_submit()">绑定</button>
+        <button class="button button-royal" style="margin-left: 50px" ng-click="bind_submit()">绑定</button>
     </div>
     <div style="padding: 10px" class="row">
         <div class="col-md-3" ng-repeat="p in shop_routers" style="font-family: 'Microsoft YaHei';font-size: 18px;margin-top: 20px">

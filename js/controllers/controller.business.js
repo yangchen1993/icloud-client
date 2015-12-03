@@ -231,9 +231,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     }
 }]);
 
-iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$timeout","$rootScope", function ($scope, $http, $cookieStore, $window, $timeout,$rootScope) {
-    $scope.isShow_balckwhite = $rootScope.isShow_balckwhite;
-
+iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$timeout", function ($scope, $http, $cookieStore, $window, $timeout) {
     var router_id = get_param($window.location.href);
     //放行设置
     var reload_blackwhite = function () {
@@ -362,17 +360,32 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             };
         }
     });
+
+    $timeout(function(){
+        angular.element('a[href="#home"]').click(function(e){
+            e.preventDefault();
+        });
+        angular.element('a[href="#profile"]').click(function(e){
+            e.preventDefault();
+        });
+    },1000);
+
     var loginType;
-    $scope.changeLoginType = function () {
-        console.log($scope.login_type);
-        if($scope.login_type==1){
+    $scope.changeLoginType = function (num) {
+        console.log(num);
+        if(num==1){
             loginType="手机号认证";
-        }else if($scope.login_type==2){
+        }else if(num==2){
             loginType="微信认证";
         }else{
             loginType="";
         }
-        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType});
+        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType}).success(function(data){
+            alert(data.msg);
+        })
+            .error(function(data){
+                alert(data.msg)
+            });
     };
     $scope.identify_submit = function (data) {
         console.log(data);
@@ -384,6 +397,9 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         }).success(function (data) {
             alert(data.msg);
         })
+            .error(function(data){
+                alert(data.msg);
+            })
     };
 
     $scope.weixin_load = function () {

@@ -3,10 +3,10 @@
         <li><a ui-sref="main.eq_management">设备管理</a></li>
         <li class="active">设备分配</li>
     </ol>
-    <button class="btn btn-info" ui-sref="main.delivery-new">新建</button>
+    <button class="button button-royal button-rounded" ui-sref="main.delivery-new"><i class="icon icon-plus"></i>新建</button>
     <div class="table_inside">
         <table class="table table-bordered text-center table-hover" id="delivery-table">
-            <thead>
+            <thead style="background-color: #8a8bc4;color:#fff">
             <tr>
                 <td id="receiver" ng-click="sort('receiver')">发货人
                     <span ng-show="currentSort['receiver'] === true" class="glyphicon glyphicon-triangle-top"></span>
@@ -28,7 +28,7 @@
                     <span ng-show="currentSort['create_time'] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
                 </td>
-                <td></td>
+                <td>操作</td>
             </tr>
             </thead>
             <tbody>

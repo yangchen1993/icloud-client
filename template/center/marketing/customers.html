@@ -1,10 +1,11 @@
-<div style="padding: 10px">
+<div class="panel_outside row">
     <ol class="breadcrumb">
         <li class="active">客户列表</li>
     </ol>
 
-    <div class="col-md-12">
-        <table class="table table-hover table-bordered table-striped">
+    <div class="col-md-12 table_inside">
+        <table class="table table-bordered text-center table-hover table-striped">
+            <thead style="background-color: #8a8bc4;color:#fff">
             <tr>
                 <td id="member__phone" ng-click="sort('member__phone')">
                     会员手机号
@@ -49,6 +50,8 @@
                           class="glyphicon glyphicon-triangle-bottom"></span>
                 </td>
             </tr>
+            </thead>
+            <tbody>
             <tr ng-repeat="m in grid.results">
                 <td ng-bind="m.phone"></td>
                 <td ng-bind="m.mac"></td>
@@ -57,6 +60,8 @@
                 <td ng-bind="m.create_time"></td>
                 <td ng-bind="m.modified_time"></td>
             </tr>
+            </tbody>
+
         </table>
     </div>
     <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>

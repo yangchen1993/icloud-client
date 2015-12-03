@@ -230,5 +230,13 @@ iCloudController.controller("PersonalSafeController", ["$scope", "$http", "$cook
                 .error(function (data) {
                     $window.alert(transform_error_message(data.msg))
                 })
+        };
+
+        $scope.reset = function(){
+            $scope.changePwd = {
+                "oldPassword":"",
+                "newPassword":"",
+                "repeatPassword":""
+            }
         }
     }]);

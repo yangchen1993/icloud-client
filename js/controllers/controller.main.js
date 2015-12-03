@@ -46,6 +46,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.marketing_nav = true;
             $scope.wallet_nav = true;
             $scope.info_nav = true;
+            $scope.adsType_nav = 1;
             $rootScope.isShow_balckwhite = true;
         }
         else {
@@ -62,6 +63,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.marketing_nav = false;
             $scope.wallet_nav = true;
             $scope.info_nav = true;
+            $scope.adsType_nav = 2;
             $rootScope.isShow_balckwhite = false;
         }
     });

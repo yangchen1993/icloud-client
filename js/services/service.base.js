@@ -238,6 +238,8 @@ iCloudService.service("$map", ["$window",
 
 
             self.addMarker = function (data) {
+                self.map.clearMap();
+
                 var marker = new AMap.Marker({
                     map: self.map,
                     position: [data.location.getLng(), data.location.getLat()]
@@ -259,6 +261,9 @@ iCloudService.service("$map", ["$window",
                     });
 
                     geocoder.getLocation(keywords, function (status, result) {
+
+                        console.log(result.geocodes);
+
                         self.addMarker(result.geocodes[0]);
                         self.map.setFitView();
                     })

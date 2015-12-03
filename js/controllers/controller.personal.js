@@ -71,25 +71,71 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
             $scope.isEdit = false;
         };
 
+        var changed_address = ["", "", "", ""];
+
         $scope.$watch('userInfo', function (newData, oldData) {
             if (newData && oldData) {
+
                 if (newData.province != oldData.province) {
-                    console.log(newData, oldData, "province changed");
+                    $scope.cities = {};
+                    $scope.areas = {};
 
                     $districts.get({id: newData.province})
                         .success(function (data) {
                             $scope.cities = data[0].subdistricts;
                         });
 
-                    map.getGeocoder(newData.province)
+                    var index_prov = _.findIndex($scope.provinces, {
+                        id: newData.province
+                    });
+
+                    if (index_prov != -1) {
+                        changed_address[0] = $scope.provinces[index_prov].name;
+                    }
+
+                    map.getGeocoder(changed_address.join(""))
 
                 }
                 if (newData.city != oldData.city) {
                     console.log(newData, oldData, "city changed");
+                    $scope.areas = {};
                     $districts.get({id: newData.city})
                         .success(function (data) {
                             $scope.areas = data[0].subdistricts;
-                        })
+                        });
+
+                    var index_city = _.findIndex($scope.cities, {
+                        id: newData.city
+                    });
+
+                    if (index_city != -1) {
+                        changed_address[1] = $scope.cities[index_city].name;
+                        changed_address[2] = "";
+                        changed_address[3] = "";
+                    }
+
+                    map.getGeocoder(changed_address.join(""))
+                }
+                if (newData.area != oldData.area) {
+                    console.log(newData, oldData, "area changed");
+
+                    var index_area = _.findIndex($scope.areas, {
+                        id: newData.area
+                    });
+
+                    if (index_area != -1) {
+                        changed_address[2] = $scope.areas[index_area].name;
+                        changed_address[3] = ""
+                    }
+
+                    map.getGeocoder(changed_address.join(""))
+                }
+                if (newData.address_additional != oldData.address_additional) {
+                    console.log(newData, oldData, "address_additional changed");
+
+                    changed_address[3] = newData.address_additional;
+
+                    map.getGeocoder(changed_address.join(""))
                 }
             }
         }, true);

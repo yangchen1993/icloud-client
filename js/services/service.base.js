@@ -233,7 +233,7 @@ iCloudService.service("$map", ["$window",
             self.map = new AMap.Map(container, {
                 resizeEnable: true,
                 zoom: 16,
-                dragEnable: false
+                dragEnable: true
             });
 
 
@@ -255,6 +255,8 @@ iCloudService.service("$map", ["$window",
 
 
             self.getGeocoder = function (keywords) {
+                console.log(keywords);
+
                 self.map.plugin(["AMap.Geocoder"], function () {
                     var geocoder = new AMap.Geocoder({
                         radius: 1000 //范围，默认：500

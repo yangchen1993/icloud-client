@@ -322,8 +322,8 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
 
 
     var loginType;
-    $scope.changeLoginType = function () {
-        console.log($scope.login_type);
+    $scope.changeLoginType = function (num) {
+        console.log(num);
         if ($scope.login_type == 1) {
             loginType = "手机号认证";
         } else if ($scope.login_type == 2) {

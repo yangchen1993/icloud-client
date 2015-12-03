@@ -25,6 +25,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             $scope.create_business_nav = true;
             $scope.marketing_nav = false;
             $scope.wallet_nav = false;
+            $scope.js_ad_nav=true;
             $rootScope.isShow_balckwhite = false;
             $rootScope.deviceManage = {
                 "addRouterMenu": true,

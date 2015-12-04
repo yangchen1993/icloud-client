@@ -187,8 +187,17 @@ window.API = {
 
     "JSADS": {
         "GET_JS_WHITE_URLS": [window.HOST, "js_white_url/get_js_white_urls/"].join(""),
+
         "NEW_JS_WHITE_URL": [window.HOST, "js_white_url/new_js_white_url/"].join(""),
-        "REMOVE_JS_WHITE_URL": [window.HOST, "js_white_url/remove_js_white_url/"].join("")
+
+        "REMOVE_JS_WHITE_URL": [window.HOST, "js_white_url/remove_js_white_url/"].join(""),
+
+        "JS_PUT_AREA":[window.HOST,"js_put_area/new_put_area/"].join(""),
+
+        "REMOVE_PUT_AREA":[window.HOST,"remove_put_area/"].join(""),
+
+        "GET_PUT_AREA":[window.HOST,"get_put_area/"].join("")
+
     },
 
     "ACCOUNT": {

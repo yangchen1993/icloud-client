@@ -6,9 +6,9 @@
     <div class="col-md-12 table_inside" style="font-family: '黑体';font-size: 16px">
         <div class="form-horizontal">
             <div class="form-group">
-                <label for="username" class="col-md-2 form-label">用户名:</label>
-                <div class="col-md-10">
-                    <span id="username" ng-if="!isEdit" ng-bind="userInfoReadOnly.username"></span>
+                <label class="col-md-5 text-right control-label">用户名:</label>
+                <div class="col-md-7">
+                    <label id="username" ng-if="!isEdit" ng-bind="userInfoReadOnly.username" class="control-label"></label>
                     <input style="width: 200px" id="username-model" class="form-control" ng-if="isEdit" ng-model="userInfo.username" placeholder="用户名">
                 </div>
             </div>

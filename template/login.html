@@ -1,18 +1,31 @@
 <link href="/css/login.css" rel="stylesheet">
 <div class="container-fluid">
+    <img src="/img/liuxing.png" width="2%" height="5%" id="liuxing" style="position: absolute;right: 0;top: 0;transform: rotate(30deg)">
     <div class="row lg-screen">
         <div class="img_box text-center">
             <img src="../img/login_logo.png" class="img">
         </div>
         <div class="login_modal" ng-keypress="enterEvent($event)">
-            <img src="../img/person.png" style="margin-bottom: 9px">
-            <input type="text" placeholder="请输入用户名" ng-model="auth.username">
-            <hr>
-            <img src="../img/eyes.png" style="margin-bottom: 5px">
-            <input type="password" placeholder="请输入密码" ng-model="auth.password">
-            <hr>
-            <button class="btn btn-block btn-success" id="enter" ng-click="login(auth)"><span class="h4">登录</span></button>
+
+        </div>
+        <div style="position:absolute;top:55%;left:50%;width: 420px;margin-left: -210px;z-index: 999">
+            <!--<img src="../img/person.png" style="margin-bottom: 9px">-->
+            <div class="form-inline" style="padding-left: 10%">
+                <i class="fa fa-user"></i>
+                <input type="text" placeholder="请输入用户名" ng-model="auth.username" class="form-control" style="width: 70%">
+            </div>
+
+            <div style="border-top: 1px solid #fff;margin: 20px 0"></div>
+            <div class="form-inline" style="padding-left: 9%">
+                <i class="fa fa-key"></i>
+                <input type="password" placeholder="请输入密码" ng-model="auth.password" class="form-control" style="width: 70%">
+            </div>
+            <!--<img src="../img/eyes.png" style="margin-bottom: 5px">-->
+
+            <div style="border-top: 1px solid #fff;margin: 20px 0"></div>
             <p class="text-center msg"><span class="h4" ng-bind="errorMsg.msg"></span></p>
+            <button class="btn btn-block btn-success" id="enter" ng-click="login(auth)" ><span class="h4">登录</span></button>
+
         </div>
     </div>
 
@@ -36,3 +49,13 @@
         <!--<button class="btn btn-lg btn-primary btn-block" ng-click="login(auth)">登 录</button>-->
     <!--</div>-->
 </div>
+<!--<script>-->
+    <!--var n=0;-->
+    <!--setInterval(function(){-->
+        <!--$("#liuxing").css(-->
+                <!--{"top":n/2+"px","right":n+"px"}-->
+        <!--);-->
+        <!--n++-->
+    <!--},10)-->
+
+<!--</script>-->

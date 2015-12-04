@@ -46,7 +46,9 @@ window.API = {
 
         "GET_AREAS_BY_CITY": [window.HOST, "cities/get_areas_by_city/"].join(""), // 根据市获取区
 
-        "GET_TRADES": [window.HOST, "cities/get_trades/"].join("") // 按照省市区获取商圈
+        "GET_TRADES": [window.HOST, "cities/get_trades/"].join(""), // 按照省市区获取商圈
+
+        "GET_DISTRICTS": [window.HOST, "districts/get_districts/"].join("")
     },
     "WALLET": {
         "GET_CURRENT_USER_WALLET_INFO": [window.HOST, "wallets/get_current_user_wallet/"].join(""), // 获取当前用户的钱包信息

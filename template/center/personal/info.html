@@ -62,12 +62,22 @@
                     <input style="width: 200px" class="form-control" ng-if="isEdit" ng-model="userInfo.email" placeholder="邮箱">
                 </div>
             </div>
-            <div style="border-top: 1px dashed #cccccc;margin-bottom: 12px"></div>
-
-            <div class="form-group">
-                <label class="col-xs-4 control-label text-right">地址:</label>
-                <div class="col-xs-8">
-                    <label class="control-label" ng-bind="userInfoReadOnly.province + ' ' + userInfoReadOnly.city+' '+userInfoReadOnly.area+' '+ userInfoReadOnly.address_additional"></label>
+            <div class="form-group" style="border-bottom:1px dashed #dfdbdb;height: 35px">
+                <label for="address" class="col-md-4 form-label text-right">地址:</label>
+                <div class="col-md-8" ng-if="!isEdit">
+                    <span id="address" ng-bind="userInfoReadOnly.province + ' ' + userInfoReadOnly.city+' '+userInfoReadOnly.area+' '+ userInfoReadOnly.address_additional"></span>
+                </div>
+                <div class="col-md-8" ng-if="isEdit">
+                    <select ng-model="userInfo.province" ng-options="p.id as p.name for p in provinces">
+                        <option value="">省</option>
+                    </select>
+                    <select ng-model="userInfo.city" ng-options="c.id as c.name for c in cities">
+                        <option value="">市</option>
+                    </select>
+                    <select ng-model="userInfo.area" ng-options="a.id as a.name for a in areas">
+                        <option value="">区</option>
+                    </select>
+                    <input type="text" ng-model="userInfo.address_additional" placeholder="详细地址">
                 </div>
             </div>
             <div style="border-top: 1px dashed #cccccc;margin-bottom: 12px"></div>
@@ -85,5 +95,5 @@
             </div>
         </div>
     </div>
-    <img src="/img/create_bottom.png" width="100%;" height="20px">
+    <img src="/img/create_bottom.png" width="100%" height="20px">
 </div>

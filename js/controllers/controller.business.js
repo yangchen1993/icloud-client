@@ -187,7 +187,7 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
         }
     }]);
 
-iCloudController.controller("EditShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore) {
+iCloudController.controller("EditShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore","$districts","$map", function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore,$districts,$map) {
     var id = get_param(window.location.href);
     $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
         for (var i = 0; i < data.count; i++) {
@@ -203,26 +203,133 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
         .error(function (data) {
             console.log(data);
         });
-    $province.get().success(function (data) {
-        $scope.province = data;
-        console.log($scope.province);
-    });
-    $scope.select_p = function (id) {
-        console.log(id);
-        $city.get(id).success(function (data) {
-            $scope.city = data;
-        })
+
+    var map = $map.initial("lbsMapContainer");
+    var changed_address = ["", "", "", "", ""];
+    var getDistrcits = function () {
+        $districts.get({adcode: "100000"})
+            .success(function (data) {
+                $scope.provinces = data[0].subdistricts;
+            })
     };
-    $scope.select_c = function (id) {
-        $area.get(id).success(function (data) {
-            $scope.area = data;
-        })
-    };
-    $scope.select_a = function (id) {
-        $trades.get(id).success(function (data) {
-            $scope.trades = data;
-        })
-    };
+
+    getDistrcits();
+
+    $scope.shop = {};
+
+    $scope.$watch('edit_shop', function (newData, oldData) {
+        if (newData && oldData) {
+
+            if (newData.province && newData.province != oldData.province) {
+                $scope.cities = {};
+                $scope.areas = {};
+
+                $districts.get({id: newData.province})
+                    .success(function (data) {
+                        $scope.cities = data[0].subdistricts;
+                    });
+
+                var index_prov = _.findIndex($scope.provinces, {
+                    id: newData.province
+                });
+
+                if (index_prov != -1) {
+                    changed_address[0] = $scope.provinces[index_prov].name;
+                    changed_address[1] = "";
+                    changed_address[2] = "";
+                    changed_address[3] = "";
+                    changed_address[4] = "";
+                }
+
+                map.getGeocoder(changed_address.join(""))
+
+            }
+            if (newData.city && newData.city != oldData.city) {
+                console.log(newData, oldData, "city changed");
+                $scope.areas = {};
+                $districts.get({id: newData.city})
+                    .success(function (data) {
+                        $scope.areas = data[0].subdistricts;
+                    });
+
+                var index_city = _.findIndex($scope.cities, {
+                    id: newData.city
+                });
+
+                if (index_city != -1) {
+                    changed_address[1] = $scope.cities[index_city].name;
+                    changed_address[2] = "";
+                    changed_address[3] = "";
+                    changed_address[4] = "";
+                }
+
+                map.getGeocoder(changed_address.join(""))
+            }
+            if (newData.area && newData.area != oldData.area) {
+                console.log(newData, oldData, "area changed");
+
+                var index_area = _.findIndex($scope.areas, {
+                    id: newData.area
+                });
+
+                $districts.get({id: newData.area})
+                    .success(function (data) {
+                        $scope.districts = data[0].subdistricts;
+                    });
+
+
+                if (index_area != -1) {
+                    changed_address[2] = $scope.areas[index_area].name;
+                    changed_address[3] = "";
+                    changed_address[4] = ""
+                }
+
+                map.getGeocoder(changed_address.join(""))
+            }
+
+            if (newData.district && newData.district != oldData.district) {
+                console.log(newData, oldData, "district changed");
+                var index_district = _.findIndex($scope.areas, {
+                    id: newData.area
+                });
+
+                if (index_area != -1) {
+                    changed_address[3] = $scope.districts[index_district].name;
+                    changed_address[4] = "";
+                }
+
+                map.getGeocoder(changed_address.join(""))
+            }
+
+            if (newData.address && newData.address != oldData.address) {
+                console.log(newData, oldData, "address changed");
+
+                changed_address[4] = newData.address;
+
+                map.getGeocoder(changed_address.join(""))
+            }
+        }
+    }, true);
+    //$province.get().success(function (data) {
+    //    $scope.province = data;
+    //    console.log($scope.province);
+    //});
+    //$scope.select_p = function (id) {
+    //    console.log(id);
+    //    $city.get(id).success(function (data) {
+    //        $scope.city = data;
+    //    })
+    //};
+    //$scope.select_c = function (id) {
+    //    $area.get(id).success(function (data) {
+    //        $scope.area = data;
+    //    })
+    //};
+    //$scope.select_a = function (id) {
+    //    $trades.get(id).success(function (data) {
+    //        $scope.trades = data;
+    //    })
+    //};
     function isImageFile(file) {
         if (file.type) {
             return /^image\/\w+$/.test(file.type);
@@ -533,23 +640,22 @@ iCloudController.controller("BusinessInfoController", ["$scope", "$http", "$cook
     }]);
 
 
-iCloudController.controller("CreateBusinessController", ["$scope", "$http", "$cookieStore", "$window", "$province", "$city", "$area",
-    function ($scope, $http, $cookieStore, $window, $province, $city, $area) {
-        var province = $province.get();
-        province.success(function (data) {
-            $scope.province1 = data;
-        });
-        $scope.select_p = function (index) {
-            var city = $city.get(index);
-            city.success(function (data) {
-                $scope.city1 = data;
-            })
+iCloudController.controller("CreateBusinessController", ["$scope", "$http", "$cookieStore", "$window", "$province", "$city", "$area","$districts",
+    function ($scope, $http, $cookieStore, $window, $province, $city, $area, $districts) {
+
+        $districts.get({adcode: "100000"}).success(function (data) {
+                $scope.provinces = data[0].subdistricts;
+            });
+
+        $scope.select_p = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.cities = data[0].subdistricts;
+            });
         };
-        $scope.select_c = function (index) {
-            var area = $area.get(index);
-            area.success(function (data) {
-                $scope.area1 = data;
-            })
+        $scope.select_c = function (id ){
+            $districts.get({id: id}).success(function (data) {
+                $scope.areas = data[0].subdistricts;
+            });
         };
 
         $scope.submit = function () {

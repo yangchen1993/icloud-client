@@ -30,15 +30,15 @@
         </div>
         <div class="form-inline" style="margin-top: 15px">
             <span>居住地址：</span>
-            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in province1"
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in provinces"
                     ng-model="business.province_live" ng-change="select_p(business.province_live)">
                 <option value="">--省--</option>
             </select>
-            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in city1"
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in cities"
                     ng-model="business.city_live" ng-change="select_c(business.city_live   )">
                 <option value="">--市--</option>
             </select>
-            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in area1"
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in areas"
                     ng-model="business.area_live">
                 <option value="">--区--</option>
             </select>

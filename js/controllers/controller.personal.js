@@ -5,40 +5,6 @@
 iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cookieStore", "$window", "$districts", "$map",
     function ($scope, $http, $cookieStore, $window, $districts, $map) {
 
-        /*var lsbMap = new AMap.Map('lbsMapContainer', {
-         resizeEnable: true,
-         zoom: 16,
-         dragEnable: false
-         });
-
-         var getGeocoder = function (keywords) {
-         lsbMap.plugin(["AMap.Geocoder"], function () {
-         var geocoder = new AMap.Geocoder({
-         radius: 1000 //范围，默认：500
-         });
-
-         geocoder.getLocation(keywords, function (status, result) {
-         addMarker(result.geocodes[0]);
-         lsbMap.setFitView();
-         })
-         });
-         };
-
-         var addMarker = function (data) {
-
-         var marker = new AMap.Marker({
-         map: lsbMap,
-         position: [data.location.getLng(), data.location.getLat()]
-         });
-         var infoWindow = new AMap.InfoWindow({
-         content: data.formattedAddress,
-         offset: {x: 0, y: -30}
-         });
-         marker.on("mouseover", function(e) {
-         infoWindow.open(lsbMap, marker.getPosition());
-         });
-         };*/
-
         var map = $map.initial("lbsMapContainer");
 
         var getCurrentUserInfo = function () {

@@ -9,140 +9,135 @@
     <li><a ui-sref="main.ads">我的广告</a></li>
     <li class="ad-active"></li>
 </ol>
-<div class="container-fluid">
-    <div class="row main">
-        <div class="col-xs-3 left" style="background: none">
-            <div class="panel panel-danger">
-                <div class="panel-heading text-center">广告功能</div>
-                <div class="panel-body component">
-                    <div class=""   id="dj-text" style="padding:0;" >
-                        <i class="icon iconfont">&#xe789;</i>
-                        <div>文字</div>
-                    </div>
-                    <div></div>
-                    <div class="" id="dj-img" style="padding:0;" >
-                        <i class="icon iconfont">&#xe6d1;</i>
-                        <div>图片</div>
-                    </div>
+<div class="row main">
+    <div class="col-xs-3 left" style="background: none">
+        <div class="panel panel-danger">
+            <div class="panel-heading text-center">广告功能</div>
+            <div class="panel-body component">
+                <div class=""   id="dj-text" style="padding:0;" >
+                    <i class="icon iconfont">&#xe789;</i>
+                    <div>文字</div>
                 </div>
-            </div>
-            <div class="panel panel-danger">
-                <div class="panel-heading text-center">广告设置</div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <span>广告行业：</span>
-                        <select class="form-control text-center category" ng-model="ads.id" ng-options="v.id as v.name for v in category">
-                        </select>
-                    </div>
-                    <div class="text-center">
-                        <button class="button button-primary" id="save-ad">保存广告</button>
-                    </div>
-
+                <div></div>
+                <div class="" id="dj-img" style="padding:0;" >
+                    <i class="icon iconfont">&#xe6d1;</i>
+                    <div>图片</div>
                 </div>
             </div>
         </div>
-        <div class="col-xs-9 right">
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="phone">
-                        <div class="phone-page">
-                            <!--手机装饰-->
-                            <div class="phone-ear">
-                                <span class="phone-camera"></span><span class="phone-sound"></span>
+        <div class="panel panel-danger">
+            <div class="panel-heading text-center">广告设置</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <span>广告行业：</span>
+                    <select class="form-control text-center category" ng-model="ads.id" ng-options="v.id as v.name for v in category">
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button class="button button-primary" id="save-ad">保存广告</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-9 right">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="phone">
+                    <div class="phone-page">
+                        <!--手机装饰-->
+                        <div class="phone-ear">
+                            <span class="phone-camera"></span><span class="phone-sound"></span>
+                        </div>
+                        <!--以下的phone-warp是直接添加到数据库的部分-->
+                        <div class="phone-warp">
+                            <div class="phone-content">
+                                <ul id="drag">
+                                </ul>
+                                <div class="text-center"><a href="http://www.idianjia.com">店家</a>提供技术支持</div>
                             </div>
-                            <!--以下的phone-warp是直接添加到数据库的部分-->
-                            <div class="phone-warp">
-                                <div class="phone-content">
-                                    <ul id="drag">
-                                    </ul>
-                                    <div class="text-center"><a href="http://www.idianjia.com">店家</a>提供技术支持</div>
-                                </div>
-                            </div>
-                            <div class="phone-button">
-                                <div class="circle-button"></div>
-                            </div>
+                        </div>
+                        <div class="phone-button">
+                            <div class="circle-button"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5 editArea">
-                    <!-- 编辑kuang-->
-                </div>
+            </div>
+            <div class="col-xs-6 editArea">
+                <!-- 编辑kuang-->
             </div>
         </div>
-
     </div>
 
 </div>
-<div class="hidden">
-    <!--组件模板-->
-    <div class="template">
-        <div class="text">
-            <div class="text-content">默认文字</div>
-        </div>
-        <div class="img">
-            <div class="img"><img src="http://7xokyz.com2.z0.glb.qiniucdn.com/AdPortal.jpg"></div>
-        </div>
-    </div>
-    <!--编辑模板-->
-    <div class="edit-items">
 
-        <div class="text">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <span class="panel-title"><i class="icon iconfont">&#xe672;</i>文字编辑</span>
-                </div>
-                <div class="panel-body">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <div class="col-xs-6">背景色:<input type="text" class="form-control color wback"></div>
-                            <div class="col-xs-6">文字色:<input type="text" class="form-control color wcolor"></div>
-                        </div>
-                        <div class="">
-                            内容:
-                            <textarea style="resize:none;" class="form-control txtarea" cols="30" rows="10"></textarea>
-                            <p>限输入3000字,你还可以输入<small style="color:red;" class="text-count">3000</small>字</p>
-                        </div>
-                    </form>
-                </div>
+</div>
+<div class="hidden">
+<!--组件模板-->
+<div class="template">
+    <div class="text">
+        <div class="text-content">默认文字</div>
+    </div>
+    <div class="img">
+        <div class="img"><img src="http://7xokyz.com2.z0.glb.qiniucdn.com/AdPortal.jpg"></div>
+    </div>
+</div>
+<!--编辑模板-->
+<div class="edit-items">
+
+    <div class="text">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <span class="panel-title"><i class="icon iconfont">&#xe672;</i>文字编辑</span>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-6">背景色:<input type="text" class="form-control color wback"></div>
+                        <div class="col-xs-6">文字色:<input type="text" class="form-control color wcolor"></div>
+                    </div>
+                    <div class="">
+                        内容:
+                        <textarea style="resize:none;" class="form-control txtarea" cols="30" rows="10"></textarea>
+                        <p>限输入3000字,你还可以输入<small style="color:red;" class="text-count">3000</small>字</p>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="img">
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <span class="panel-title"><i class="icon iconfont">&#xe672;</i>&nbsp;图片编辑</span>
-                </div>
-                <div class="panel-body">
-                    <div><label class="button button-primary" for="upload">上传图片</label><input type="file" class="hidden" id="upload" accept="image/jpeg,image/gif,image/png"></div>
-                    <div>
-                        <div class="photoshow" style="display: inline-block;border:solid 1px gray;width:100px;height:100px;line-height: 100px;overflow: hidden">
-                            <img id="showImg" src="/img/test2.jpg">
-                        </div>
-
-                        <div style="display: inline-block;width:250px;">图片要求:<small>图片大小限制为:2MB以内，建议宽度640px
-                            仅支持JPG、PNG格式，建议使用JPG格式</small>
-                        </div>
-                        <div class="img-cropper" style="display: none;margin-top:5px;width: 100%;height:365px;" >
-                        </div>
+    </div>
+    <div class="img">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <span class="panel-title"><i class="icon iconfont">&#xe672;</i>&nbsp;图片编辑</span>
+            </div>
+            <div class="panel-body">
+                <div><label class="button button-primary" for="upload">上传图片</label><input type="file" class="hidden" id="upload" accept="image/jpeg,image/gif,image/png"></div>
+                <div>
+                    <div class="photoshow" style="display: inline-block;border:solid 1px gray;width:100px;height:100px;line-height: 100px;overflow: hidden">
+                        <img id="showImg" src="/img/test2.jpg">
                     </div>
-                    <div class="btn-group" style="margin-top: 10px;">
-                        <div class="col-xs-12">链接方式:</div>
-                        <div class="col-xs-5">
-                            <select class="form-control" style="padding:6px 5px;">
-                                <!--<option value="">内部网页</option>-->
-                                <option value="">外部链接</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-7">
-                            <div class="input-group">
-                                <label class="input-group-addon">http://</label><input class="form-control img-link" type="text"/>
-                            </div>
+
+                    <div style="display: inline-block;width:250px;">图片要求:<small>图片大小限制为:2MB以内，建议宽度640px
+                        仅支持JPG、PNG格式，建议使用JPG格式</small>
+                    </div>
+                    <div class="img-cropper" style="display: none;margin-top:5px;width: 100%;height:365px;" >
+                    </div>
+                </div>
+                <div class="btn-group" style="margin-top: 10px;">
+                    <div class="col-xs-12">链接方式:</div>
+                    <div class="col-xs-12">
+                        <input type="radio">外部链接
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <label class="input-group-addon">http://</label><input class="form-control img-link" type="text"/>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="panel-footer text-center">
-                    <button class="button button-caution saveImg">保存图片</button>
-                </div>
+            <div class="panel-footer text-center">
+                <button class="button button-caution saveImg">保存图片</button>
             </div>
         </div>
     </div>

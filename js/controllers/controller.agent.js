@@ -5,38 +5,32 @@ iCloudController.controller("AgentManageController", ['$scope', '$grid', '$rootS
     $grid.initial($scope, window.API.USER.GET_SUB_AGENTS);
 }]);
 
-iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cookieStore', '$province', '$city', '$area',
-    function ($scope, $http, $cookieStore, $province, $city, $area) {
-        var province = $province.get();
-        province.success(function (data) {
-            $scope.province1 = data;
+iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cookieStore', '$province', '$city', '$area',"$districts",
+    function ($scope, $http, $cookieStore, $province, $city, $area, $districts) {
+        $districts.get({adcode: "100000"}).success(function (data) {
+            $scope.provinces = data[0].subdistricts;
         });
-        $scope.select_p = function (index) {
-            var city = $city.get(index);
-            city.success(function (data) {
-                $scope.city1 = data;
-            })
+
+        $scope.select_p = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.cities = data[0].subdistricts;
+            });
         };
-        $scope.select_c = function (index) {
-            var area = $area.get(index);
-            area.success(function (data) {
-                $scope.area1 = data;
-            })
+        $scope.select_c = function (id ){
+            $districts.get({id: id}).success(function (data) {
+                $scope.areas = data[0].subdistricts;
+            });
         };
-        province.success(function (data) {
-            $scope.province2 = data;
-        });
-        $scope.select_p_live = function (index) {
-            var city = $city.get(index);
-            city.success(function (data) {
-                $scope.city2 = data;
-            })
+
+        $scope.select_p_live = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.cities_live = data[0].subdistricts;
+            });
         };
-        $scope.select_c_live = function (index) {
-            var area = $area.get(index);
-            area.success(function (data) {
-                $scope.area2 = data;
-            })
+        $scope.select_c_live = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.areas_live = data[0].subdistricts;
+            });
         };
         $http.get([window.API.USER.SUB_USER_ROLES, "?key=", $cookieStore.get("key")].join(""))
             .success(function (data) {
@@ -50,9 +44,9 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
                 };
             });
 
-        $http.get([window.API.USER.SUB_USER_SCOPES, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
-            $scope.agent.province = data[0].province_id;
-        });
+        //$http.get([window.API.USER.SUB_USER_SCOPES, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+        //    $scope.agent.province = data[0].province_id;
+        //});
 
 
         $scope.submit = function () {

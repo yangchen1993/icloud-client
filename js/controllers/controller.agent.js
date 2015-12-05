@@ -22,14 +22,19 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
             });
         };
 
-        $scope.select_p_live = function (id) {
+        $scope.select_scopeP = function (id) {
             $districts.get({id: id}).success(function (data) {
-                $scope.cities_live = data[0].subdistricts;
+                $scope.scope_cities = data[0].subdistricts;
             });
         };
-        $scope.select_c_live = function (id) {
+        $scope.select_scopeC = function (id) {
             $districts.get({id: id}).success(function (data) {
-                $scope.areas_live = data[0].subdistricts;
+                $scope.scope_areas = data[0].subdistricts;
+            });
+        };
+        $scope.select_scopeA = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.scope_districts = data[0].subdistricts;
             });
         };
         $http.get([window.API.USER.SUB_USER_ROLES, "?key=", $cookieStore.get("key")].join(""))
@@ -43,7 +48,32 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
                     "role": data[0].id
                 };
             });
-
+        //$scope.agent_role = function(id){
+        //    console.log(id);
+        //};
+        $scope.$watch("agent.role",function(newData,oldData){
+            var a= newData;
+            if(a == 20){
+                $scope.isCity = false;
+                $scope.isArea = false;
+                $scope.isDistrict = false;
+            }
+            else if(a==21){
+                $scope.isCity = true;
+                $scope.isArea = false;
+                $scope.isDistrict = false;
+            }
+            else if(a==22){
+                $scope.isCity = true;
+                $scope.isArea = true;
+                $scope.isDistrict = false;
+            }
+            else if(a==23){
+                $scope.isCity = true;
+                $scope.isArea = true;
+                $scope.isDistrict = true;
+            }
+        });
         //$http.get([window.API.USER.SUB_USER_SCOPES, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
         //    $scope.agent.province = data[0].province_id;
         //});

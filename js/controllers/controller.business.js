@@ -115,8 +115,8 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
 
                 if (newData.district && newData.district != oldData.district) {
                     console.log(newData, oldData, "district changed");
-                    var index_district = _.findIndex($scope.areas, {
-                        id: newData.area
+                    var index_district = _.findIndex($scope.districts, {
+                        id: newData.district
                     });
 
                     if (index_area != -1) {
@@ -127,7 +127,9 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
                     map.getGeocoder(changed_address.join(""))
                 }
 
-                if (newData.address && newData.address != oldData.address) {
+                if (
+
+                    newData.address != oldData.address) {
                     console.log(newData, oldData, "address changed");
 
                     changed_address[4] = newData.address;

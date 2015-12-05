@@ -74,3 +74,7 @@ iCloudController.controller("CustomersController", ["$scope", "$http", "$cookieS
         $grid.initial($scope, $window.API.MARKETING.GET_CURRENT_USER_MEMBERS)
 
     }]);
+
+iCloudController.controller("CustomerFlow",['$scope','$http','$cookieStore','$window','$gird',function($scope,$http,$cookieStore,$window,$gird){
+
+}])

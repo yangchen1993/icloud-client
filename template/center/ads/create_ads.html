@@ -243,7 +243,9 @@
             }
             img=$('<img src="'+this.url+'">');
             $('div[data-edit-id='+id+']'+' .img-cropper').html(img);
-            img.cropper();
+            img.cropper({
+                aspectRatio: 640 / 960
+            });
             var imgData;
             $('.saveImg').on('click', function () {
                 imgData=img.cropper('getCroppedCanvas', {

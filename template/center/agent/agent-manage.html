@@ -37,8 +37,8 @@
                 <tr ng-repeat="agent in grid.results">
                     <td ng-bind="agent.username"></td>
                     <td ng-bind="agent.legal_person_name"></td>
-                    <td ng-bind="agent.role.name"></td>
-                    <td ng-bind="agent.province.name+ ' '+agent.city.name+' '+ agent.area.name+' '+agent.address_additional"></td>
+                    <td ng-bind="agent.role_object.name"></td>
+                    <td ng-bind="agent.province_object.name+ ' '+agent.city_object.name+' '+ agent.area_object.name+' '+agent.address_additional"></td>
                     <td>
                         <span ng-bind="agent.router_used"></span>/<span ng-bind="agent.router_unused"></span>
                     </td>

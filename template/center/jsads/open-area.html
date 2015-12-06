@@ -3,7 +3,7 @@
         <li>JS广告管理</li>
         <li class="active">开放地区</li>
     </ol>
-    <div class="table_inside col-md-12">
+    <div class="table_inside">
         <div class="form-inline">
             <label class="control-label">地区：</label>
             <select ng-options="v.id as v.name for v in provinces" ng-model="openArea.province"
@@ -35,7 +35,7 @@
                 <tr ng-repeat="p in grid.results">
                     <td ng-bind="p.province.name+' '+p.city.name+' '+p.area.name+' '+p.district.name"></td>
                     <td>
-                        <button class="btn btn-danger" ng-click="delete_area(p.id)">删除</button>
+                        <button class="btn btn-xs btn-danger" ng-click="delete_area(p.id)">删除</button>
                     </td>
                 </tr>
                 </tbody>

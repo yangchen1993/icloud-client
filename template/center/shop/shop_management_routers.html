@@ -1,3 +1,10 @@
+<style>
+    @media screen and (min-width:1680px){
+        .panel_lg{
+            width:25%
+        }
+    }
+</style>
 <div class="panel_outside">
     <div>
         <ol class="breadcrumb">
@@ -14,7 +21,7 @@
         <button class="button button-royal" style="margin-left: 50px" ng-click="bind_submit()">绑定</button>
     </div>
     <div style="padding: 10px" class="row">
-        <div class="col-md-3" ng-repeat="p in shop_routers"
+        <div class="col-md-4 panel_lg" ng-repeat="p in shop_routers"
              style="font-family: 'Microsoft YaHei';font-size: 18px;margin-top: 20px">
             <div ng-click="see_routers_details(p.id)" class="shop_panel"
                  style="background-color: #67728D;color: #fff;border-radius: 5px 5px 0 0;cursor: pointer">

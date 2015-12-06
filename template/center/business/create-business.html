@@ -31,11 +31,11 @@
         <div class="form-inline" style="margin-top: 15px">
             <span>居住地址：</span>
             <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in provinces"
-                    ng-model="business.province" ng-change="select_p(business.province_live)">
+                    ng-model="business.province" ng-change="select_p(business.province)">
                 <option value="">--省--</option>
             </select>
             <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in cities"
-                    ng-model="business.city" ng-change="select_c(business.city_live   )">
+                    ng-model="business.city" ng-change="select_c(business.city)">
                 <option value="">--市--</option>
             </select>
             <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in areas"

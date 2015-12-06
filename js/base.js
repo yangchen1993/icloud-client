@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.10.200:8801/api/";
-window.HOST = "http://mb.idianjia.cn:8802/api/";
+window.HOST = "http://192.168.10.101:8802/api/";
+//window.HOST = "http://mb.idianjia.cn:8802/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -192,11 +192,15 @@ window.API = {
 
         "REMOVE_JS_WHITE_URL": [window.HOST, "js_white_url/remove_js_white_url/"].join(""),
 
-        "JS_PUT_AREA":[window.HOST,"js_put_area/new_put_area/"].join(""),
+        "JS_PUT_AREA":[window.HOST,"js_put_area/new_put_area/"].join(""),//新增开放地区
 
-        "REMOVE_PUT_AREA":[window.HOST,"remove_put_area/"].join(""),
+        "REMOVE_PUT_AREA":[window.HOST,"remove_put_area/"].join(""),//删除开放地区
 
-        "GET_PUT_AREA":[window.HOST,"get_put_area/"].join("")
+        "GET_PUT_AREA":[window.HOST,"get_put_area/"].join(""),//获取开放地区
+
+        "EDIT_AD_CODE":[window.HOST,"js_ad_code/edit_ad_code/"].join(""), //新增JS代码
+
+        "GET_AD_CODE":[window.HOST,"js_ad_code/get_ad_code"].join("")//获取JS代码
 
     },
 

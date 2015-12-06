@@ -4,7 +4,7 @@
         <li class="active">新增代理商账号</li>
     </ol>
 
-    <div style="padding-left:25%" class="agent_message">
+    <div style="padding-left:10%">
         <p class="h3" style="margin-left: -100px">个人信息</p>
 
         <div class="form-inline" style="margin-top: 15px">
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-inline" style="margin-top: 15px">
-            <span>管辖区域：</span>
+            <span>居住地址：</span>
             <select class="form-control" style="margin-left: 14px;width:196px"
                     ng-options="v.id as v.name for v in provinces" ng-model="agent.province"
                     ng-change="select_p(agent.province)">
@@ -51,24 +51,28 @@
                     ng-model="agent.area">
                 <option value="">--区/县--</option>
             </select>
+            <input class="form-control" ng-model="agent.address_additional" placeholder="街道地址">
         </div>
 
         <div class="form-inline" style="margin-top: 15px">
-            <span>居住地址：</span>
+            <span>管辖区域：</span>
             <select class="form-control" style="margin-left: 14px;width:196px"
-                    ng-options="v.id as v.name for v in provinces" ng-model="agent.province_live"
-                    ng-change="select_p_live(agent.province_live)">
+                    ng-options="v.id as v.name for v in provinces" ng-model="agent.scope_province"
+                    ng-change="select_scopeP(agent.scope_province)" >
                 <option value="">--省--</option>
             </select>
-            <select class="form-control" style="width: 196px" ng-options="v.id as v.name for v in cities_live"
-                    ng-model="agent.city_live" ng-change="select_c_live(agent.city_live)">
+            <select class="form-control" style="width: 196px" ng-options="v.id as v.name for v in scope_cities"
+                    ng-model="agent.scope_city" ng-change="select_scopeC(agent.scope_city)" ng-if="isCity">
                 <option value="">--市--</option>
             </select>
-            <select class="form-control" style="width: 196px" ng-options="v.id as v.name for v in areas_live"
-                    ng-model="agent.area_live">
-                <option value="">--区/县--</option>
+            <select class="form-control" style="width: 196px" ng-options="v.id as v.name for v in scope_areas"
+                    ng-model="agent.scope_area" ng-change="select_scopeA(agent.scope_area)" ng-if="isArea">
+                <option value="">--区/县-- </option>
             </select>
-            <input class="form-control" type="text" ng-model="agent.address_additional" placeholder="街道地址">
+            <select class="form-control" style="width: 196px" ng-options="v.id as v.name for v in scope_districts"
+                    ng-model="agent.scope_district" ng-if="isDistrict">
+                <option value="">--商圈-- </option>
+            </select>
         </div>
         <p class="h3" style="margin-left: -100px">公司信息</p>
 

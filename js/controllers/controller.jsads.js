@@ -74,5 +74,20 @@ iCloudController.controller("OpenAreaController", ["$scope", "$http", "$cookieSt
 
 iCloudController.controller("JsCodeController", ["$scope", "$http", "$cookieStore", "$window",
     function ($scope, $http, $cookieStore, $window) {
+        $http.get([window.API.JSADS.GET_AD_CODE,"?key=",$cookieStore.get("key")].join("")).success(function(data){
+            console.log(data);
+            $scope.JS = data;
+        })
+            .error(function(data){
+                alert(data);
+            });
 
+        $scope.submit_JS = function(JS){
+            $http.post([window.API.JSADS.EDIT_AD_CODE,"?key=",$cookieStore.get("key")].join(""),JS).success(function(data){
+                alert(data.msg);
+            })
+                .error(function(data){
+                    alert(data.msg);
+                })
+        }
     }]);

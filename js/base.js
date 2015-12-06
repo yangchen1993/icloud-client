@@ -194,9 +194,9 @@ window.API = {
 
         "JS_PUT_AREA":[window.HOST,"js_put_area/new_put_area/"].join(""),//新增开放地区
 
-        "REMOVE_PUT_AREA":[window.HOST,"remove_put_area/"].join(""),//删除开放地区
+        "REMOVE_PUT_AREA":[window.HOST,"js_put_area/remove_put_area/"].join(""),//删除开放地区
 
-        "GET_PUT_AREA":[window.HOST,"get_put_area/"].join(""),//获取开放地区
+        "GET_PUT_AREA":[window.HOST,"js_put_area/get_put_areas/"].join(""),//获取开放地区
 
         "EDIT_AD_CODE":[window.HOST,"js_ad_code/edit_ad_code/"].join(""), //新增JS代码
 

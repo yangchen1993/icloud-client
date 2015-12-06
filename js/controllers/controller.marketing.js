@@ -76,6 +76,5 @@ iCloudController.controller("CustomersController", ["$scope", "$http", "$cookieS
     }]);
 
 iCloudController.controller("CustomersFlowController",['$scope',function($scope){
-    $scope.dataStart=(new Date()).toLocaleDateString().split("T")[0];
-    console.log($scope.dataStart);
+
 }]);

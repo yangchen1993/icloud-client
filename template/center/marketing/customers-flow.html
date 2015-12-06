@@ -6,19 +6,20 @@
             选择时间段
         </div>
         <div id="datetimepicker1" class="input-group input-append date">
-             <input class="form-control" data-format="dd/MM/yyyy" type="text">
+             <input class="form-control" value="2015-12-6" type="text">
             <span class="input-group-addon add-on">
               <i class="fa fa-calendar" data-date-icon="icon-calendar">
               </i>
             </span>
          </div><span>-</span>
         <div id="datetimepicker2" class="input-group input-append  date">
-            <input class="form-control" data-format="dd/MM/yyyy" type="text">
+            <input class="form-control" value="2015-12-6" type="text">
                 <span class="input-group-addon add-on">
                   <i class="fa fa-calendar" data-date-icon="icon-calendar">
                   </i>
                 </span>
         </div>
+        <button class="button button-primary  select-date" id="forSearch">确定</button>
     </div>
     <div class="col-xs-3">
 
@@ -32,16 +33,17 @@
 <script type="application/javascript" src="/bower_components/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <script type="application/javascript" src="/bower_components/echarts/build/dist/echarts-all.js"></script>
 <script>
-
     $(function() {
-        $('#datetimepicker1').datetimepicker({
-            format: "yyyy/MM/dd"
+            $('#datetimepicker1').datetimepicker({
+                format: "yyyy-MM-dd"
+            });
+            $('#datetimepicker2').datetimepicker({
+                format: "yyyy-MM-dd"
+            });
         });
-        $('#datetimepicker2').datetimepicker({
-            format: "yyyy/MM/dd"
-        });
+    $("#forSearch").on("click",function(){
+        console.log($('#datetimepicker1 input').val()+"--"+ $('#datetimepicker2 input').val());
     });
-
     var myChart = echarts.init(document.getElementById('charts'));
     option = {
         title : {
@@ -57,8 +59,8 @@
         toolbox: {
             show : true,
             feature : {
-                mark : {show: true},
-                dataView : {show: true, readOnly: false},
+                mark : {show: false},
+                dataView : {show: false, readOnly: false},
                 magicType : {show: true, type: ['line', 'bar']},
                 restore : {show: true},
                 saveAsImage : {show: true}

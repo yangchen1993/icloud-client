@@ -1,3 +1,11 @@
+<style>
+    @media screen and (min-width:1680px){
+        .panel_lg{
+            width:25%
+        }
+    }
+</style>
+
 <div class="panel_outside">
     <div>
         <ol class="breadcrumb">
@@ -9,7 +17,7 @@
     <button class="button button-royal button-rounded" ui-sref="main.create_shop"><i class="fa fa-plus"></i>&nbsp&nbsp新建</button>
 </div>
 <div style="padding: 10px" class="row">
-        <div class="col-md-3" ng-repeat="p in shop" style="color:#fff;font-family: 'Microsoft YaHei';font-size: 18px;margin-top: 20px">
+        <div class="col-md-4 panel_lg" ng-repeat="p in shop" style="color:#fff;font-family: 'Microsoft YaHei';font-size: 18px;margin-top: 20px">
             <a href="javascript:" style="color:#fff">
             <div ng-click="see_routers(p.id)" style="background-color: #67728D;box-shadow: 0 0 10px #dedede;border-radius: 5px;width:93%;height: 450px;float: left">
                 <p ng-bind="p.name" style="background-color: #52D0AB;padding: 10px 0;border-radius:5px 5px 0 0" class="text-center"></p>

@@ -28,7 +28,7 @@
                         <span ng-show="currentSort['role__name'] === false"
                               class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
-                    <td>管辖区域</td>
+                    <td>居住地址</td>
                     <td>路由器数量（已用/未用）</td>
                     <td>操作</td>
                 </tr>
@@ -38,12 +38,12 @@
                     <td ng-bind="agent.username"></td>
                     <td ng-bind="agent.legal_person_name"></td>
                     <td ng-bind="agent.role.name"></td>
-                    <td ng-bind="agent.province+ ' '+agent.city+' '+ agent.area+' '+agent.address_additional"></td>
+                    <td ng-bind="agent.province.name+ ' '+agent.city.name+' '+ agent.area.name+' '+agent.address_additional"></td>
                     <td>
                         <span ng-bind="agent.router_used"></span>/<span ng-bind="agent.router_unused"></span>
                     </td>
                     <td>
-                        <a href="#/main/agent-info?agent_id={{ agent.id }}">查看信息</a>
+                        <a href="#/main/agent-info?agent_tel={{ agent.tel }}">查看</a>
                     </td>
                 </tr>
                 </tbody>

@@ -67,7 +67,7 @@
             <div class="form-group" style="height: 35px">
                 <label for="address" class="col-xs-4 control-label text-right">地址:</label>
                 <div class="col-xs-8" ng-if="!isEdit">
-                    <p class="form-control-static" id="address" ng-bind="userInfoReadOnly.province + ' ' + userInfoReadOnly.city+' '+userInfoReadOnly.area+' '+ userInfoReadOnly.address_additional"></p>
+                    <p class="form-control-static" id="address" ng-bind="userInfoReadOnly.province_object.name + ' ' + userInfoReadOnly.city_object.name+' '+userInfoReadOnly.area_object.name+' '+ userInfoReadOnly.address_additional"></p>
                 </div>
                 <div class="col-xs-8" ng-if="isEdit">
                     <select ng-model="userInfo.province" ng-options="p.id as p.name for p in provinces">
@@ -77,7 +77,7 @@
                         <option value="">市</option>
                     </select>
                     <select ng-model="userInfo.area" ng-options="a.id as a.name for a in areas">
-                        <option value="">区</option>
+                        <option value="">区/县    </option>
                     </select>
                     <input type="text" ng-model="userInfo.address_additional" placeholder="详细地址">
                 </div>

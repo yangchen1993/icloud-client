@@ -192,11 +192,15 @@ window.API = {
 
         "REMOVE_JS_WHITE_URL": [window.HOST, "js_white_url/remove_js_white_url/"].join(""),
 
-        "JS_PUT_AREA": [window.HOST, "js_put_area/new_put_area/"].join(""),
+        "JS_PUT_AREA":[window.HOST,"js_put_area/new_put_area/"].join(""),//新增开放地区
 
-        "REMOVE_PUT_AREA": [window.HOST, "remove_put_area/"].join(""),
+        "REMOVE_PUT_AREA":[window.HOST,"js_put_area/remove_put_area/"].join(""),//删除开放地区
 
-        "GET_PUT_AREA": [window.HOST, "get_put_area/"].join("")
+        "GET_PUT_AREA":[window.HOST,"js_put_area/get_put_areas/"].join(""),//获取开放地区
+
+        "EDIT_AD_CODE":[window.HOST,"js_ad_code/edit_ad_code/"].join(""), //新增JS代码
+
+        "GET_AD_CODE":[window.HOST,"js_ad_code/get_ad_code"].join("")//获取JS代码
 
     },
 
@@ -234,9 +238,4 @@ var replaceString = function (str, start, end, rep) {
         return str.replace(str.substring(replaceStartIndex), rep)
     }
 
-};
-
-var sleep = function (sleepTime) {
-    for (var start = Date.now(); Date.now() - start <= sleepTime;) {
-    }
 };

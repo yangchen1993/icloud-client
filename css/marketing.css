@@ -19,3 +19,18 @@
     width: 300px !important;
     height: 150px;
 }
+.user-charts{
+    position: relative;
+    width:80%;
+    height:350px;
+    margin:0 auto;
+}
+.date{
+    width:160px;
+}
+.select-date{
+    padding:0;
+    width:100px;
+    height:34px;
+    line-height: 34px;
+}

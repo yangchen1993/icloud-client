@@ -75,6 +75,6 @@ iCloudController.controller("CustomersController", ["$scope", "$http", "$cookieS
 
     }]);
 
-iCloudController.controller("CustomerFlow",['$scope','$http','$cookieStore','$window','$gird',function($scope,$http,$cookieStore,$window,$gird){
+iCloudController.controller("CustomersFlowController",['$scope',function($scope){
 
-}])
+}]);

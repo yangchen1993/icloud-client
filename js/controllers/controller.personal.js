@@ -123,7 +123,6 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
         $districts.get({"adcode": 100000})
             .success(function (data) {
                 $scope.provinces = data[0].subdistricts;
-                console.log($scope.provinces)
             });
 
 

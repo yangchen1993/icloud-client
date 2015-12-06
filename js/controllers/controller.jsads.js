@@ -32,8 +32,10 @@ iCloudController.controller("WhiteSpaceController", ['$scope', '$http', '$cookie
 
 iCloudController.controller("OpenAreaController", ["$scope", "$http", "$cookieStore", "$window","$districts","$grid",
     function ($scope, $http, $cookieStore, $window, $districts ,$grid) {
-        $grid.initial($scope,window.API.JSADS.GET_PUT_AREA);
-
+        var get_put_areas = function(){
+            $grid.initial($scope,window.API.JSADS.GET_PUT_AREA);
+        };
+        get_put_areas();
         $districts.get({"adcode":"100000"}).success(function(data){
             $scope.provinces = data[0].subdistricts;
         });
@@ -50,21 +52,23 @@ iCloudController.controller("OpenAreaController", ["$scope", "$http", "$cookieSt
         };
         $scope.select_a = function(id){
             $districts.get({"id":id}).success(function(data){
-                $scope.trades = data[0].subdistricts;
+                $scope.districts = data[0].subdistricts;
             })
         };
         $scope.put_area = function(ids){
             console.log(ids);
             $http.post([window.API.JSADS.JS_PUT_AREA,"?key=",$cookieStore.get("key")].join(""),ids).success(function(data){
                 alert(data.msg);
+                get_put_areas();
             })
                 .error(function(data){
                     alert(data.msg);
                 })
         };
-        $scope.delete_area = function(){
-            $http.delete([window.API.JSADS.REMOVE_PUT_AREA,"?key=",$cookieStore.get("key")].join("")).success(function(data){
+        $scope.delete_area = function(id){
+            $http.delete([window.API.JSADS.REMOVE_PUT_AREA,"?id=",id,"&key=",$cookieStore.get("key")].join("")).success(function(data){
                 alert(data.msg);
+                get_put_areas();
             })
                 .error(function(data){
                     alert(data.msg);

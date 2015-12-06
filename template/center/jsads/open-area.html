@@ -19,10 +19,9 @@
                     ng-change="select_a(openArea.area)" class="form-control">
                 <option value="">--区--</option>
             </select>
-            <select ng-options="v.id as v.name for v in trades" ng-model="openArea.trade" class="form-control">
+            <select ng-options="v.id as v.name for v in districts" ng-model="openArea.district" class="form-control">
                 <option value="">--商圈--</option>
             </select>
-            <button class="button button-royal">查询</button>
             <button class="button button-royal" ng-click="put_area(openArea)">新增</button>
         </div>
             <table class="table text-center table-striped table-bordered">
@@ -34,7 +33,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="p in grid.results">
-                    <td>四川省成都市</td>
+                    <td ng-bind="p.province.name+' '+p.city.name+' '+p.area.name+' '+p.district.name"></td>
                     <td>
                         <button class="btn btn-danger" ng-click="delete_area(p.id)">删除</button>
                     </td>

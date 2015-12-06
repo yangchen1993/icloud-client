@@ -181,7 +181,11 @@ function addEditItem(id, type) {
         }
     });
 }
-
+$.get(window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS + '?key=' + $.cookie("key").replace(/\"/g, "")+"&id="+ourShop).success(function (data) {
+    var area=data.results[0].province_object.name+data.results[0].city_object.name+data.results[0].area_object.name+data.results[0].district_object.name;
+    console.log(area);
+    $('span[data-first-area="userShopArea"]').text(area);
+});
 
 $.get(window.API.CMS.GET_DATA + '?key=' + $.cookie("key").replace(/\"/g, "") + '&group_id=' + ourShop).success(function (data) {
     if (data) {

@@ -2,8 +2,8 @@
  * Created by lee on 2015/11/29.
  */
 
-iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cookieStore", "$window", "$districts", "$map",
-    function ($scope, $http, $cookieStore, $window, $districts, $map) {
+iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cookieStore", "$window", "$districts", "$map", "$q",
+    function ($scope, $http, $cookieStore, $window, $districts, $map, $q) {
 
         var map = $map.initial("lbsMapContainer");
 
@@ -39,12 +39,14 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
 
         var changed_address = ["", "", "", ""];
 
+        $scope.userInfo = {};
+
         $scope.$watch('userInfo', function (newData, oldData) {
             if (newData && oldData) {
 
-                if (newData.province && newData.province != oldData.province) {
-                    $scope.cities = {};
-                    $scope.areas = {};
+                if (newData.province != oldData.province) {
+                    $scope.cities = [];
+                    $scope.areas = [];
 
                     $districts.get({id: newData.province})
                         .success(function (data) {
@@ -55,52 +57,82 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
                         id: newData.province
                     });
 
+                    changed_address[0] = "";
+                    changed_address[1] = "";
+                    changed_address[2] = "";
+                    changed_address[3] = "";
+
                     if (index_prov != -1) {
                         changed_address[0] = $scope.provinces[index_prov].name;
-                        changed_address[1] = "";
-                        changed_address[2] = "";
-                        changed_address[3] = "";
                     }
 
                     map.getGeocoder(changed_address.join(""))
 
                 }
-                if (newData.city && newData.city != oldData.city) {
-                    console.log(newData, oldData, "city changed");
-                    $scope.areas = {};
+                if (newData.city != oldData.city) {
+                    $scope.areas = [];
                     $districts.get({id: newData.city})
                         .success(function (data) {
                             $scope.areas = data[0].subdistricts;
                         });
 
-                    var index_city = _.findIndex($scope.cities, {
-                        id: newData.city
-                    });
+                    var citiesPromise = function () {
+                        return $q(function (r, j) {
+                            var i = setInterval(function () {
+                                if ($scope.cities && $scope.cities.length > 0) {
+                                    clearInterval(i);
+                                    r($scope.cities);
+                                }
+                            }, 100)
+                        })
+                    };
 
-                    if (index_city != -1) {
-                        changed_address[1] = $scope.cities[index_city].name;
+                    citiesPromise().then(function (value) {
+                        var index_city = _.findIndex(value, {
+                            id: newData.city
+                        });
+
+                        changed_address[1] = "";
                         changed_address[2] = "";
                         changed_address[3] = "";
-                    }
 
-                    map.getGeocoder(changed_address.join(""))
+                        if (index_city != -1) {
+                            changed_address[1] = value[index_city].name;
+                        }
+
+                        map.getGeocoder(changed_address.join(""))
+                    })
                 }
-                if (newData.area && newData.area != oldData.area) {
-                    console.log(newData, oldData, "area changed");
+                if (newData.area != oldData.area) {
 
-                    var index_area = _.findIndex($scope.areas, {
-                        id: newData.area
-                    });
+                    var areasPromise = function () {
+                        return $q(function (r, j) {
+                            var i = setInterval(function () {
+                                if ($scope.areas && $scope.areas.length > 0) {
+                                    clearInterval(i);
+                                    r($scope.areas);
+                                }
+                            }, 100)
+                        })
+                    };
 
-                    if (index_area != -1) {
-                        changed_address[2] = $scope.areas[index_area].name;
-                        changed_address[3] = ""
-                    }
+                    areasPromise().then(function (value) {
+                        var index_area = _.findIndex(value, {
+                            id: newData.area
+                        });
 
-                    map.getGeocoder(changed_address.join(""))
+                        changed_address[2] = "";
+                        changed_address[3] = "";
+
+                        if (index_area != -1) {
+                            changed_address[2] = value[index_area].name;
+                        }
+
+                        map.getGeocoder(changed_address.join(""))
+                    })
+
                 }
-                if (newData.address_additional && newData.address_additional != oldData.address_additional) {
-                    console.log(newData, oldData, "address_additional changed");
+                if (newData.address_additional != oldData.address_additional) {
 
                     changed_address[3] = newData.address_additional;
 
@@ -198,11 +230,11 @@ iCloudController.controller("PersonalSafeController", ["$scope", "$http", "$cook
                 })
         };
 
-        $scope.reset = function(){
+        $scope.reset = function () {
             $scope.changePwd = {
-                "oldPassword":"",
-                "newPassword":"",
-                "repeatPassword":""
+                "oldPassword": "",
+                "newPassword": "",
+                "repeatPassword": ""
             }
         }
     }]);

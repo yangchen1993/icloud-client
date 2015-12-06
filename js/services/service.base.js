@@ -263,11 +263,10 @@ iCloudService.service("$map", ["$window",
                     });
 
                     geocoder.getLocation(keywords, function (status, result) {
-
-                        console.log(result.geocodes);
-
-                        self.addMarker(result.geocodes[0]);
-                        self.map.setFitView();
+                        if (status == "complete"){
+                            self.addMarker(result.geocodes[0]);
+                            self.map.setFitView();
+                        }
                     })
                 })
             };

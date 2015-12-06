@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-window.HOST = "http://192.168.10.101:8802/api/";
-//window.HOST = "http://mb.idianjia.cn:8802/api/";
+//window.HOST = "http://192.168.10.101:8802/api/";
+window.HOST = "http://mb.idianjia.cn:8802/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -192,11 +192,11 @@ window.API = {
 
         "REMOVE_JS_WHITE_URL": [window.HOST, "js_white_url/remove_js_white_url/"].join(""),
 
-        "JS_PUT_AREA":[window.HOST,"js_put_area/new_put_area/"].join(""),
+        "JS_PUT_AREA": [window.HOST, "js_put_area/new_put_area/"].join(""),
 
-        "REMOVE_PUT_AREA":[window.HOST,"remove_put_area/"].join(""),
+        "REMOVE_PUT_AREA": [window.HOST, "remove_put_area/"].join(""),
 
-        "GET_PUT_AREA":[window.HOST,"get_put_area/"].join("")
+        "GET_PUT_AREA": [window.HOST, "get_put_area/"].join("")
 
     },
 
@@ -234,4 +234,9 @@ var replaceString = function (str, start, end, rep) {
         return str.replace(str.substring(replaceStartIndex), rep)
     }
 
+};
+
+var sleep = function (sleepTime) {
+    for (var start = Date.now(); Date.now() - start <= sleepTime;) {
+    }
 };

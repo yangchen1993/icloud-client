@@ -20,7 +20,7 @@
                     <img src="/img/shop_lines.png" style="width: 100%;margin-top: -30px">
                     <p><span>行业类型：</span><span ng-bind="p.category"></span></p>
                     <p><span>手机号码：</span><span ng-bind="p.tel"></span></p>
-                    <p><span>所属商圈：</span><span ng-bind="p.trade_area.province+' '+p.trade_area.city+' '+p.trade_area.area+' '+p.trade_area.name"></span></p>
+                    <p><span>所属商圈：</span><span ng-bind="p.province_object.name+' '+p.city_object.name+' '+p.area_object.name+' '+p.district_object.name"></span></p>
                     <p style="border: 0"><span>店铺地址：</span><span ng-bind="p.address"></span></p>
                 </div>
             </div>

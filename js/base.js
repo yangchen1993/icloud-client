@@ -22,13 +22,13 @@ window.API = {
 
         "GET_SUB_AGENTS": [window.HOST, "users/get_sub_agents/"].join(""), // 获取代理商
 
-        "GET_SUB_BUSINESSES": [window.HOST, "users/get_sub_businesses"].join(""),
+        "GET_SUB_BUSINESSES": [window.HOST, "users/get_sub_businesses/"].join(""),
 
         "REGISTER": [window.HOST, "users/register/"].join(""), // 注册
 
         "SUB_USER_ROLES": [window.HOST, "users/sub_user_roles/"].join(""),  //请求代理商可创建的代理商级别
 
-        "SUB_USER_SCOPES": [window.HOST, "users/sub_user_scopes"].join(""),
+        "SUB_USER_SCOPES": [window.HOST, "users/sub_user_scopes/"].join(""),
 
         "CREATE_AGENT": [window.HOST, "users/new_agent/"].join(""),  //创建代理商
 
@@ -150,6 +150,8 @@ window.API = {
 
         "PUT_AD_UP": [window.HOST, "audits/edit_audit/"].join(""),
 
+        "PUT_AD_DOWN": [window.HOST, "audits/remove_audit/"].join(""),
+
         "GET_SHOP_AD": [window.HOST, "audits/audit_status/"].join("")
     },
     "WIFICAT": {
@@ -196,15 +198,15 @@ window.API = {
 
         "REMOVE_JS_WHITE_URL": [window.HOST, "js_white_url/remove_js_white_url/"].join(""),
 
-        "JS_PUT_AREA":[window.HOST,"js_put_area/new_put_area/"].join(""),//新增开放地区
+        "JS_PUT_AREA": [window.HOST, "js_put_area/new_put_area/"].join(""),//新增开放地区
 
-        "REMOVE_PUT_AREA":[window.HOST,"js_put_area/remove_put_area/"].join(""),//删除开放地区
+        "REMOVE_PUT_AREA": [window.HOST, "js_put_area/remove_put_area/"].join(""),//删除开放地区
 
-        "GET_PUT_AREA":[window.HOST,"js_put_area/get_put_areas/"].join(""),//获取开放地区
+        "GET_PUT_AREA": [window.HOST, "js_put_area/get_put_areas/"].join(""),//获取开放地区
 
-        "EDIT_AD_CODE":[window.HOST,"js_ad_code/edit_ad_code/"].join(""), //新增JS代码
+        "EDIT_AD_CODE": [window.HOST, "js_ad_code/edit_ad_code/"].join(""), //新增JS代码
 
-        "GET_AD_CODE":[window.HOST,"js_ad_code/get_ad_code"].join("")//获取JS代码
+        "GET_AD_CODE": [window.HOST, "js_ad_code/get_ad_code"].join("")//获取JS代码
 
     },
 

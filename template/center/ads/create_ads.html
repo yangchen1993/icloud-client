@@ -360,7 +360,7 @@
                 'contentType':'application/json;charset=utf-8',
                 "data":JSON.stringify({"category_id":$(".category").val().split(':')[1],"items":items}),
                 success:function (data) {
-                    alert('上传成功');
+                    window.location.href="http://mb.idianjia.cn:8800/#/main/ads";
                 }
             });
 

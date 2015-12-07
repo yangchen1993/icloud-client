@@ -157,7 +157,6 @@ p, ul, ol, ul, .h3 {
     width: 100%;
     line-height: 55px;
 }
-
 .open_menu:hover {
     background-color: #2dc3e8;
     transition: 0.5s;

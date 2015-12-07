@@ -179,14 +179,10 @@ padding-top: 10px;
     font-size: 18px;
 }
 .details_panel>div{
-    padding-left: 10%;
+    padding-left: 40px;
     border-bottom: 1px solid #f6f6f6;
 }
-@media screen and (max-width:1800px){
-    #wifi_dev{
-        padding: 5px 10% !important;
-    }
-}
+
 .details_content{
     padding: 10px;
 }

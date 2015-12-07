@@ -33,7 +33,7 @@ iCloudController.controller("NewSmsTemplateController", ["$scope", "$http", "$co
 iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieStore", "$window", "$checkBox",
     function ($scope, $http, $cookieStore, $window, $checkBox) {
         var getTargets = function () {
-            $http.get([$window.API.MARKETING.GET_CURRENT_USER_MEMBERS, "?key=", $cookieStore.get("key"), "&page_size=unlimited"].join(""))
+            $http.get([$window.API.MARKETING.GET_CURRENT_USER_MEMBERS, "?key=", $cookieStore.get("key"), "&pageSize=unlimited"].join(""))
                 .success(function (data) {
                     $scope.members = data;
                 })

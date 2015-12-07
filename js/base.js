@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.10.101:8802/api/";
+//window.HOST = "http://192.168.178.128:8802/api/";
 window.HOST = "http://mb.idianjia.cn:8802/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
@@ -152,7 +152,9 @@ window.API = {
 
         "PUT_AD_DOWN": [window.HOST, "audits/remove_audit/"].join(""),
 
-        "GET_SHOP_AD": [window.HOST, "audits/audit_status/"].join("")
+        "GET_SHOP_AD": [window.HOST, "audits/audit_status/"].join(""),
+
+        "":[window.HOST, "adspaces/get_ad_spaces/"].join("")
     },
     "WIFICAT": {
         "STATUS": [window.HOST_WIFICAT, "routers/status/"].join(""), //路由器实时信息

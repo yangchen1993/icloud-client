@@ -59,7 +59,12 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             self.restGet = function (url) {
                 $http.get(url).success(function (data) {
                     self.restPage = scope.grid = scope.pagination = data;
-                    console.log(scope.grid);
+                })
+            };
+
+            self.restPost = function (url, params) {
+                $http.post(url, params).success(function (data) {
+                    self.restPage = scope.grid = scope.pagination = data;
                 })
             };
 
@@ -86,6 +91,16 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
                 params.page = 1;
                 var url = [self.url, "?", $.param(params)].join("");
                 self.restGet(url);
+            };
+
+            scope.postFiltering = function (params) {
+                var pageParams = {};
+                pageParams.key = $cookieStore.get("key");
+                pageParams.ordering = "id";
+                pageParams.pageSize = self.pageSize;
+                pageParams.page = 1;
+                url = [self.url, "?", $.param(pageParams)].join("");
+                self.restPost(url, params)
             };
 
             scope.sort = function (colName) {

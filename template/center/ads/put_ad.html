@@ -6,7 +6,7 @@
     <div style="margin-top:50px">
         <div class="form-inline">
 
-            <div class="col-md-12 form-horizontal">
+            <div class="col-md-12 form-horizontal" ng-if="putAdSearch.showBusinessLabel">
                 <label class="col-md-1">商户:</label>
 
                 <div class="form-group col-md-11 business">
@@ -17,10 +17,21 @@
                 </div>
             </div>
 
+            <div class="col-md-12 form-horizontal" ng-if="putAdSearch.showShopLabel">
+                <label class="col-md-1">店铺:</label>
+
+                <div class="form-group col-md-11 shop">
+                    <label ng-repeat="s in subShop">
+                        <input type="checkbox" value="{{ s.id }}">
+                        <span ng-bind="s.name"></span>&nbsp;&nbsp;
+                    </label>
+                </div>
+            </div>
+
             <div class="col-md-12 form-horizontal">
                 <label class="col-md-1">行业:</label>
 
-                <div class="form-group col-md-11">
+                <div class="form-group col-md-11 category">
                     <label ng-repeat="c in categories">
                         <input type="checkbox" value="{{ c.name }}">
                         <span ng-bind="c.name"></span>&nbsp;&nbsp;
@@ -38,7 +49,7 @@
 
         <div class="table_inside" style="margin-top: 20px;">
             <div class="col-md-5">
-                <label>共<span ng-bind="grid.total"></span>台路由器</label>
+                <label>共<span ng-bind="grid.count"></span>台路由器</label>
             </div>
             <table id="table-ad" class="table table-hover table-bordered table-selectable text-center ads_table">
                 <thead>
@@ -46,6 +57,7 @@
                     <td>路由器名称</td>
                     <td>路由器MAC</td>
                     <td>所属商铺</td>
+                    <td>行业</td>
                     <td>是否在线</td>
                 </tr>
                 </thead>
@@ -54,6 +66,7 @@
                     <td ng-bind="p.ssid"></td>
                     <td ng-bind="p.mac"></td>
                     <td ng-bind="p.router_groups.name"></td>
+                    <td ng-bind="p.router_groups.category"></td>
                     <td>
                         <span ng-if="p.is_online">在线</span>
                         <span ng-if="!p.is_online">离线</span>

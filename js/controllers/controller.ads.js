@@ -77,35 +77,24 @@ iCloudController.controller("CreateAdsController", ["$scope", "$http", "$categor
 iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$grid", "$checkBox", "$category", "$cookieStore",
     function ($scope, $http, $window, $grid, $checkBox, $category, $cookieStore) {
         var ad_id = get_param(window.location.href);
-        var sl_router = [];
-        $grid.initial($scope, [$window.API.ROUTER.GET_CURRENT_USER_ROUTERS,].join(""), {"groups_id__isnull": "False"});
-        $checkBox.enableCheck("table-ad");
+        $grid.initial($scope, $window.API.ROUTER.GET_CURRENT_USER_ROUTERS, {"groups_id__isnull": "False"});
         $scope.sjTouFang = function () {
-            sl_router = [];
-            var selector = angular.element("input:checked");
-            if (selector.length == 0) {
-                alert("请至少选择一个路由器");
-                return;
+            var data = getPutConditions();
+
+            if ($cookieStore.get("role") == "商户") {
+                data.ad_space_id = 1
             }
-            for (var i = 0; i < selector.length; i++) {
-                sl_router.push(selector[i].value);
+            if ($cookieStore.get("role") != "商户" && $cookieStore.get("role") != "系统管理员") {
+                data.ad_space_id = 2
             }
-            $http.post($window.API.AD.PUT_AD_IN + "?key=" + $.cookie("key").replace(/\"/g, "") + "&id=" + ad_id, {
-                    "space_id": 1,
-                    "router_ids": sl_router
-                })
+
+            $http.post([$window.API.AD.PUT_AD_IN, "?key=", $cookieStore.get("key") + "&id=", ad_id].join(""), data)
                 .success(function () {
                     alert("投放成功");
                 })
                 .error(function (data) {
                     $window.alert(data.msg)
                 })
-        };
-
-        $scope.search = {
-            "groups__name__contains": "",
-            "groups_category": "",
-            "mac_contains": ""
         };
 
         $category.get()
@@ -116,27 +105,68 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
                 console.log(data)
             });
 
-        var getSubUser = function () {
-            $http.get([$window.API.USER.GET_SUB_BUSINESSES, "?key=", $cookieStore.get("key"), "&page_size=unlimited"].join(""))
+        var getSubUsers = function () {
+            $http.get([$window.API.USER.GET_SUB_BUSINESSES, "?pageSize=unlimited&key=", $cookieStore.get("key")].join(""))
                 .success(function (data) {
                     $scope.subBusinesses = data;
                 })
         };
 
-        getSubUser();
+        var getSubShop = function () {
+            $http.get([$window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?pageSize=unlimited&key=", $cookieStore.get("key")].join(""))
+                .success(function (data) {
+                    $scope.subShop = data;
+                })
+        };
 
-        $scope.routerSearch = function () {
+        getSubShop();
+
+        var getPutConditions = function () {
             var businessCheckbox = angular.element(".business :checkbox");
 
-            console.log(businessCheckbox.length);
+            var shopCheckbox = angular.element(".shop :checkbox");
+
+            var categoryCheckbox = angular.element(".category :checkbox");
 
             var checkedBusinesses = [];
+            var checkedCategory = [];
+            var checkedShop = [];
             angular.forEach(businessCheckbox, function (c) {
-                if ($(c).prop("checked")){
+                if ($(c).prop("checked")) {
                     checkedBusinesses.push($(c).val());
                 }
             });
 
-            $scope.filtering
+            angular.forEach(categoryCheckbox, function (c) {
+                if ($(c).prop("checked")) {
+                    checkedCategory.push($(c).val())
+                }
+            });
+
+            angular.forEach(shopCheckbox, function (s) {
+                if ($(s).prop("checked")){
+                    checkedShop.push($(s).val())
+                }
+            });
+
+            var data = {};
+
+            if (checkedBusinesses.length > 0) {
+                data.user__id__in = checkedBusinesses.join(",")
+            }
+            if (checkedCategory.length > 0) {
+                data.groups__category__in = checkedCategory.join(",");
+            }
+            if (checkedShop.length > 0){
+                data.groups__id__in = checkedShop.join(",");
+            }
+
+            return data;
+        };
+
+        getSubUsers();
+
+        $scope.routerSearch = function () {
+            $scope.postFiltering(getPutConditions())
         };
     }]);

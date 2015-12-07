@@ -30,17 +30,17 @@
             </div>
             <div class="form-inline">
                 <span>所属商圈：</span>
-                <select ng-model="shop.province" ng-options="p.id as p.name for p in provinces">
-                    <option value="">省</option>
+                <select class="form-control" style="width: 16%" ng-model="shop.province" ng-options="p.id as p.name for p in provinces">
+                    <option value="">--省--</option>
                 </select>
-                <select ng-model="shop.city" ng-options="c.id as c.name for c in cities">
-                    <option value="">市</option>
+                <select class="form-control" style="width: 16%;" ng-model="shop.city" ng-options="c.id as c.name for c in cities">
+                    <option value="">--市--</option>
                 </select>
-                <select ng-model="shop.area" ng-options="a.id as a.name for a in areas">
-                    <option value="">区</option>
+                <select class="form-control" style="width: 16%;" ng-model="shop.area" ng-options="a.id as a.name for a in areas">
+                    <option value="">--区/县--</option>
                 </select>
-                <select ng-model="shop.district" ng-options="d.id as d.name for d in districts">
-                    <option value="">商圈</option>
+                <select class="form-control" style="width: 16%;" ng-model="shop.district" ng-options="d.id as d.name for d in districts">
+                    <option value="">--商圈--</option>
                 </select>
                 <input class="form-control" type="text" style="width:20%" ng-model="shop.address">
             </div>

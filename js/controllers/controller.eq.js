@@ -36,28 +36,12 @@ iCloudController.controller("EqManagementController", ['$scope', '$http', '$chec
         $scope.eq_reset = function () {
             $scope.search.groups__name__icontains = "";
             $scope.search.groups__category = "";
-            $scope.search.groups__trade__province = "";
-            $scope.search.groups__trade__city = "";
-            $scope.search.groups__trade__area = "";
+            //$scope.search.groups__trade__province = "";
+            //$scope.search.groups__trade__city = "";
+            //$scope.search.groups__trade__area = "";
             $scope.search.mac__icontains = "";
             $scope.search.create_time__gte = "";
             $scope.search.create_time__lte = "";
-        };
-        var province = $province.get();
-        province.success(function (data) {
-            $scope.province1 = data;
-        });
-        $scope.select_p = function (index) {
-            var city = $city.get(index);
-            city.success(function (data) {
-                $scope.city1 = data;
-            })
-        };
-        $scope.select_c = function (index) {
-            var area = $area.get(index);
-            area.success(function (data) {
-                $scope.area1 = data;
-            })
         };
 
         $scope.see_router = function (id) {
@@ -185,6 +169,19 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
                 .error(function(data){
                     alert(data.msg);
                 });
+        }
+    };
+
+    //重启路由器
+    $scope.Restart = function(mac){
+      var Restart_msg = confirm("是否重启路由器？");
+        if(Restart_msg){
+            $http.get([window.API.WIFICAT.REBOOT,"?router_mac=",mac].join("")).success(function(data){
+                alert(data.msg);
+            })
+                .error(function(data){
+                    alert(data.msg);
+                })
         }
     };
     //放行设置

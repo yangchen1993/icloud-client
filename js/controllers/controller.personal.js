@@ -222,7 +222,9 @@ iCloudController.controller("PersonalSafeController", ["$scope", "$http", "$cook
 
             $http.put([$window.API.USER.CHANGE_CURRENT_USER_PASSWORD, "?key=", $cookieStore.get("key")].join(""), data)
                 .success(function (data) {
-                    $window.alert(data.msg)
+                    $window.alert(data.msg);
+                    $cookieStore.remove("key");
+                    $window.location.href = "#/login";
                 })
                 .error(function (data) {
                     $window.alert(transform_error_message(data.msg))

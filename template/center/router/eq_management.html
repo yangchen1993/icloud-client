@@ -17,23 +17,23 @@
                         <option value="">选择行业</option>
                     </select>
 
-                    <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
-                    <div>
-                        <span>地区：</span>
-                        <select class="form-control" style="width: 15% !important;"
-                                ng-model="search.router_groups__trade__province" ng-options="v.id as v.name for v in province1"
-                                ng-change="select_p(search.groups__trade__province)">
-                            <option value="">省</option>
-                        </select>
-                        <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city"
-                                ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">
-                            <option value="">市</option>
-                        </select>
-                        <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area"
-                                ng-options="v.id as v.name for v in area1">
-                            <option value="">区/县</option>
-                        </select>
-                    </div>
+                    <!--<div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>-->
+                    <!--<div>-->
+                        <!--<span>地区：</span>-->
+                        <!--<select class="form-control" style="width: 15% !important;"-->
+                                <!--ng-model="search.router_groups__trade__province" ng-options="v.id as v.name for v in province1"-->
+                                <!--ng-change="select_p(search.groups__trade__province)">-->
+                            <!--<option value="">省</option>-->
+                        <!--</select>-->
+                        <!--<select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city"-->
+                                <!--ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">-->
+                            <!--<option value="">市</option>-->
+                        <!--</select>-->
+                        <!--<select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area"-->
+                                <!--ng-options="v.id as v.name for v in area1">-->
+                            <!--<option value="">区/县</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
                     <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
                     <div>
                         <span>路由：</span>
@@ -62,6 +62,7 @@
                 <td>地区</td>
                 <td>认证方式</td>
                 <td>MAC码</td>
+                <td>注册用户数</td>
                 <td>入库时间</td>
                 <td>操作</td>
             </tr>
@@ -73,6 +74,7 @@
                 <td ng-bind="p.router_groups.province_object.name+' '+p.router_groups.city_object.name+' '+p.router_groups.area_object.name+' '+p.router_groups.district_object.name"></td>
                 <td ng-bind="p.auth_type"></td>
                 <td ng-bind="p.mac"></td>
+                <td ng-bind="p.register_member_numbers"></td>
                 <td ng-bind="p.create_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
                 <td>
                     <a class="btn btn-xs btn-info" href="javascript:" ng-click="see_router(p.id)">查看</a>

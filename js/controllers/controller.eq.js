@@ -201,10 +201,10 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
     };
     reload_blackwhite();
     $scope.router = {
-        "is_black": "1"
+        "is_black": "0"
     };
     $scope.router1 = {
-        "is_black": "1"
+        "is_black": "0"
     };
     $scope.add_mac = function (data) {
         data.router = router_id;

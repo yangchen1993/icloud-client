@@ -267,12 +267,12 @@ p, ul, ol, ul, .h3 {
 }
 
 .content {
-    /*width:auto;*/
-    /*height: 1050px;*/
     position: absolute;
     top: 60px;
     left: 230px;
     right: 0;
+    bottom: 0;
+    overflow-y: auto;
     padding:30px
 }
 
@@ -317,7 +317,7 @@ thead {
     font-weight: 100 !important;
 }
 .panel_outside{
-    height: 100%;
+    height: auto;
     background-color: #fff;
     padding: 20px;
 }

@@ -12,6 +12,8 @@
 <ol class="breadcrumb" style="background-color: #1fbba6">
     <li><a ui-sref="main.ads">我的广告</a></li>
     <li class="ad-active"></li>
+
+
 </ol>
 <div class="row main">
     <div class="col-xs-3 left" style="background: none">
@@ -37,11 +39,10 @@
                     <select class="form-control text-center category" ng-model="ads.id" ng-options="v.id as v.name for v in category">
                     </select>
                 </div>
-                <div class="text-center">
-                    <button class="button button-primary" id="save-ad">保存广告</button>
-                </div>
-
             </div>
+        </div>
+        <div class=" text-center" style="margin-top:165px;">
+            <button class="button button-primary" id="save-ad">保存广告</button>
         </div>
     </div>
     <div class="col-xs-9 right">
@@ -145,6 +146,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <script src="/bower_components/jquery-dragsort/jquery.dragsort-0.5.2.min.js"></script>
 <script src="/bower_components/jquery-minicolors/jquery.minicolors.min.js"></script>
@@ -278,8 +280,9 @@
         var _edit=$('#'+id+' .edit');
         _edit.on('click',function(){
             $('.editArea *').remove();
+            $('.editArea').show();
             var editItem=$('.edit-items .'+type).html();
-            editArea.append('<div class="'+type+'" data-edit-id="'+id+'">'+editItem+'</div>');
+            editArea.append('<a class="close" style="margin-top:10px;margin-right:10px;" href="javascript:;" onclick="$(this).parent().hide()">&times;</a><div class="'+type+'" data-edit-id="'+id+'">'+editItem+'</div>');
             //文字功能
             switch (type){
                 case 'text':

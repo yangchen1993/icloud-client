@@ -29,8 +29,8 @@
             <tr ng-repeat="p in grid.results">
                 <td ng-bind="p.username"></td>
                 <td ng-bind="p.legal_person_name"></td>
-                <td ng-bind="p.province+ ' '+p.city+' '+ p.area+' '+p.address_additional"></td>
-                <td ng-bind="p.role.name"></td>
+                <td ng-bind="p.province_object.name+ ' '+p.city_object.name+' '+ p.area_object.name+' '+p.address_additional"></td>
+                <td ng-bind="p.role_object.name"></td>
                 <td>
                     <span ng-bind="p.router_used"></span>/<span ng-bind="p.router_unused"></span>
                 </td>

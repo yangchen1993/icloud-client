@@ -153,7 +153,9 @@ window.API = {
         "GET_SHOP_AD": [window.HOST, "audits/audit_status/"].join("")
     },
     "WIFICAT": {
-        "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息
+        "STATUS": [window.HOST_WIFICAT, "routers/status/"].join(""), //路由器实时信息
+
+        "IS_ONLINE":[window.HOST_WIFICAT,"routers/online_status/"].join("") //路由器在线状态
     },
 
 

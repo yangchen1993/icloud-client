@@ -6,12 +6,12 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
         console.log(data);
         $scope.user = {
             "name": data.name,
-            "identity": data.role.name
+            "identity": data.role_object.name
         };
 
-        $cookieStore.put("role", data.role.name);
+        $cookieStore.put("role", data.role_object.name);
 
-        if (data.role.name == "系统管理员") {
+        if (data.role_object.name == "系统管理员") {
             $scope.auth_nav = false;
             $scope.ads_nav = false;
             $scope.account_nav = true;
@@ -33,7 +33,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 "removeRouterMenu": true
             }
         }
-        else if (data.role.name == "商户") {
+        else if (data.role_object.name == "商户") {
             $scope.auth_nav = false;
             $scope.ads_nav = true;
             $scope.account_nav = true;

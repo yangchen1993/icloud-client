@@ -2,7 +2,7 @@
         <ol class="breadcrumb">
             <li class="active">设备管理</li>
         </ol>
-
+    <div class="table_inside">
     <div class="form-inline search_panel">
         <a href="#/main/new-device" ng-if="deviceManage.addRouterMenu" class="button button-royal">添加设备</a>
         <button class="button button-royal" type="button" data-toggle="collapse" data-target="#advanced_search" aria-expanded="false" aria-controls="advanced_search">高级搜索 </button>
@@ -53,14 +53,10 @@
             </div>
         </div>
     </div>
-    <div class="table_inside">
+
         <table class="table table-bordered text-center table-striped table-hover" id="table-eq">
             <thead style="background-color: #8a8bc4;color: #fff">
             <tr>
-                <!--<td>-->
-                    <!--<a href="javascript:" ng-click="checkAll()">全选</a>-->
-                    <!--<a href="javascript:" ng-click="checkInverse()">反选</a>-->
-                <!--</td>-->
                 <td id="router_groups__name">商铺名称</td>
                 <td id="router_groups_category">行业</td>
                 <td>地区</td>
@@ -72,11 +68,10 @@
             </thead>
             <tbody>
             <tr ng-repeat="p in grid.results">
-                <!--<td><input type="checkbox"></td>-->
                 <td ng-bind="p.router_groups.name"></td>
                 <td ng-bind="p.router_groups.category"></td>
-                <td ng-bind="p.router_groups.trade_area.province+p.router_groups.trade_area.city+p.router_groups.trade_area.area+p.router_groups.trade_area.name"></td>
-                <td ng-bind="p.isonline"></td>
+                <td ng-bind="p.router_groups.province_object.name+' '+p.router_groups.city_object.name+' '+p.router_groups.area_object.name+' '+p.router_groups.district_object.name"></td>
+                <td ng-bind="p.auth_type"></td>
                 <td ng-bind="p.mac"></td>
                 <td ng-bind="p.create_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
                 <td>

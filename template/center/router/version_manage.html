@@ -5,8 +5,8 @@
     </ol>
     <button ng-if="role == '系统管理员'" class="btn btn-info" data-toggle="modal" data-target="#newVersionModal" ng-click="newVersionModal()">发布新版本</button>
     <div class="table_inside">
-        <table class="table table-bordered text-center">
-            <thead>
+        <table class="table text-center table-bordered table-striped">
+            <thead style="background-color: #8a8bc4;color:#fff">
             <tr>
                 <td>版本</td>
                 <td>说明</td>
@@ -31,7 +31,7 @@
             </tbody>
         </table>
     </div>
-    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #D9D9D9"></div>
+    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
 </div>
 
 <div class="modal fade" id="newVersionModal">

@@ -12,7 +12,7 @@
             <div style="line-height: 80px"><span>所属行业：</span><span
                     ng-bind="routers_all.router.router_groups.category"></span></div>
             <div style="height: 100px;border: 0;padding-top:30px"><span>所在地址：</span><span
-                    ng-bind="routers_all.router.router_groups.trade_area.province+' '+routers_all.router.router_groups.trade_area.city+' '+routers_all.router.router_groups.trade_area.area+' '+routers_all.router.router_groups.trade_area.name"></span>
+                    ng-bind="routers_all.router.router_groups.province_object.name+' '+routers_all.router.router_groups.city_object.name+' '+routers_all.router.router_groups.area_object.name+' '+routers_all.router.router_groups.district_object.name"></span>
             </div>
         </div>
     </div>
@@ -151,8 +151,8 @@
                         <select class="form-control" style="width: 80px" ng-change="blackwhite_filter(filter)"
                                 ng-model="filter.is_black">
                             <option value="">全部</option>
-                            <option value="1">黑名单</option>
                             <option value="0">白名单</option>
+                            <option value="1">黑名单</option>
                         </select>
                     </div>
                 </div>
@@ -186,8 +186,8 @@
                     <div class="form-inline">
                         <span>类型：</span>
                         <select class="form-control" style="margin-left:17px" ng-model="router.is_black">
-                            <option value="1">黑名单</option>
                             <option value="0">白名单</option>
+                            <option value="1">黑名单</option>
                         </select>
                     </div>
                     <p class="text-center" style="margin-top: 50px">
@@ -205,8 +205,8 @@
                     <div class="form-inline">
                         <span>类型：</span>
                         <select class="form-control" ng-model="router1.is_black">
-                            <option value="1">黑名单</option>
                             <option value="0">白名单</option>
+                            <option value="1">黑名单</option>
                         </select>
                     </div>
                     <p class="text-center" style="margin-top: 50px">

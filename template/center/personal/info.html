@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label class="col-xs-4 control-label text-right">身份:</label>
                 <div class="col-xs-8">
-                    <label ng-bind="userInfoReadOnly.role.name" class="control-label"></label>
+                    <label ng-bind="userInfoReadOnly.role_object.name" class="control-label"></label>
                 </div>
             </div>
             <div style="border-top: 1px dashed #cccccc;margin-bottom: 12px"></div>
@@ -69,17 +69,17 @@
                 <div class="col-xs-8" ng-if="!isEdit">
                     <p class="form-control-static" id="address" ng-bind="userInfoReadOnly.province_object.name + ' ' + userInfoReadOnly.city_object.name+' '+userInfoReadOnly.area_object.name+' '+ userInfoReadOnly.address_additional"></p>
                 </div>
-                <div class="col-xs-8" ng-if="isEdit">
-                    <select ng-model="userInfo.province" ng-options="p.id as p.name for p in provinces">
+                <div class="col-xs-8 form-inline" ng-if="isEdit">
+                    <select ng-model="userInfo.province" ng-options="p.id as p.name for p in provinces" class="form-control" style="width:16%">
                         <option value="">省</option>
                     </select>
-                    <select ng-model="userInfo.city" ng-options="c.id as c.name for c in cities">
+                    <select ng-model="userInfo.city" ng-options="c.id as c.name for c in cities" class="form-control" style="width:16%">
                         <option value="">市</option>
                     </select>
-                    <select ng-model="userInfo.area" ng-options="a.id as a.name for a in areas">
+                    <select ng-model="userInfo.area" ng-options="a.id as a.name for a in areas" class="form-control" style="width:16%">
                         <option value="">区/县    </option>
                     </select>
-                    <input type="text" ng-model="userInfo.address_additional" placeholder="详细地址">
+                    <input type="text" ng-model="userInfo.address_additional" placeholder="详细地址" class="form-control" style="width:16%">
                 </div>
             </div>
             <div style="border-top: 1px dashed #cccccc;margin-bottom: 12px"></div>

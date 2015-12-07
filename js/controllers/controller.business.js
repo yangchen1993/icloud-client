@@ -511,7 +511,18 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     var show_bindRouters = function () {
         $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP, "?key=", $cookieStore.get("key"), "&group_id=", shop_id].join("")).success(function (data) {
             $scope.shop_routers = data.results;
+
+                $http.get([window.API.WIFICAT.IS_ONLINE,"?router_mac=",data.results[0].mac].join("")).success(function(data){
+                    if(data.online_status == "online"){
+                        $scope.isonline = "在线"
+                    }
+                    else{
+                        $scope.isonline = "离线"
+                    }
+                })
         });
+
+
     };
     show_bindRouters();
 
@@ -642,7 +653,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
 
         //路由器实时信息
         var routerStatus = function () {
-            $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
+            $http.get([window.API.WIFICAT.STATUS, "?router_mac=", data.router.mac].join("")).success(function (data) {
                     $scope.wificat = data;
                     $scope.upTime = parseInt(data.basicInformation.upTime / 60);
                     timer = $timeout(function () {

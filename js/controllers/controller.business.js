@@ -606,6 +606,9 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             alert("添加成功");
             reload_blackwhite();
         })
+            .error(function (data) {
+                alert(data.msg);
+            })
     };
     $scope.add_domain = function (data) {
         data.router = router_id;
@@ -615,6 +618,9 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             alert("添加成功");
             reload_blackwhite();
         })
+            .error(function (data) {
+                alert(data.msg);
+            })
     };
     $scope.delete = function (id) {
         var ids = [id];
@@ -623,6 +629,9 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             alert("删除成功");
             reload_blackwhite();
         })
+            .error(function (data) {
+                alert(data.msg);
+            })
     };
     $scope.filter = {
         "content_type": "",

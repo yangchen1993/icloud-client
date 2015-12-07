@@ -173,26 +173,30 @@ p, ul, ol, ul, .h3 {
     /*display: none;*/
 /*}*/
 
+/*.open_menu:hover div {*/
+    /*display: inline;*/
+/*}*/
+
 .open_menu > i {
-    margin-left:40px;
-    color: #949ea8;
+    margin:  20px;
+    float:right;
+    color: #95a0aa;
 }
-
-.open_menu:hover div {
-    display: inline;
-}
-
 .open_menu > a {
     font-size: 16px;
     font-family: Microsoft YaHei;
     color: #95a0aa;
     text-decoration: none;
-    margin-left: 20%;
+    margin-left: 50px;
+    cursor: pointer;
 }
-
+.open_menu > a > span{
+    margin-right: 10px
+}
 .menu_child {
     display: none;
     list-style: none;
+    background-color: #2a2f38;
 }
 
 .menu_child > li {
@@ -200,16 +204,16 @@ p, ul, ol, ul, .h3 {
 }
 
 .menu_child > li > div {
-    width: 2%;
+    width: 5px;
     height: 40px;
     background-color: #2dc3e8;
     float: left;
-    margin-left: 50px;
-    display: none !important;
+    margin-left: 70px;
+    display: none
 }
 
 .menu_child > li:hover div {
-    display: inline !important;
+    display: inline
 }
 
 .menu_child > li > a {
@@ -217,11 +221,11 @@ p, ul, ol, ul, .h3 {
     font-family: Microsoft YaHei;
     color: #95a0aa;
     text-decoration: none;
-    margin-left: 30%;
+    margin-left: 80px;
 }
 
 .menu_child > li:hover a {
-    margin-left: 25px
+    margin-left: 20px
 }
 
 #bianqian{
@@ -263,7 +267,7 @@ p, ul, ol, ul, .h3 {
 }
 
 .content {
-    width:auto;
+    /*width:auto;*/
     /*height: 1050px;*/
     position: absolute;
     top: 60px;

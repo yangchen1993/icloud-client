@@ -5,8 +5,8 @@ iCloudController.controller("AgentManageController", ['$scope', '$grid', '$rootS
     $grid.initial($scope, window.API.USER.GET_SUB_AGENTS);
 }]);
 
-iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cookieStore', '$province', '$city', '$area', "$districts",
-    function ($scope, $http, $cookieStore, $province, $city, $area, $districts) {
+iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cookieStore', '$province', '$city', '$area', "$districts", "$window",
+    function ($scope, $http, $cookieStore, $province, $city, $area, $districts, $window) {
         $districts.get({adcode: "100000"}).success(function (data) {
             $scope.provinces = data[0].subdistricts;
         });
@@ -57,7 +57,11 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
                 id: newData
             });
 
-            var roleName = $scope.agent_grade[index].name;
+            var roleName = -1;
+
+            if (index > 0){
+                roleName = $scope.agent_grade[index].name;
+            }
 
             if (roleName == '省级代理商') {
                 $scope.isCity = false;
@@ -98,7 +102,7 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
 iCloudController.controller("AgentInfoController", ['$scope', '$grid', '$http', '$cookieStore', '$window',
     function ($scope, $grid, $http, $cookieStore, $window) {
         var tel = get_param(location.href);
-        $http.get([window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&tel=", tel].join("")).success(function (data) {
+        $http.get([$window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&tel=", tel].join("")).success(function (data) {
             $scope.agent = data;
         });
     }]);

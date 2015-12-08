@@ -1,11 +1,11 @@
-<div style="padding:10px">
+<div class="panel_outside">
     <ol class="breadcrumb">
         <li><a ui-sref="main.agent-manage">代理商管理</a></li>
         <li class="active">新增代理商账号</li>
     </ol>
 
-    <div style="padding-left:10%">
-        <p class="h3" style="margin-left: -100px">个人信息</p>
+    <div class="table_inside">
+        <p class="h3 text-center">个人信息</p>
 
         <div class="form-inline" style="margin-top: 15px">
             <span>登录账号：</span>
@@ -54,7 +54,7 @@
             <input class="form-control" ng-model="agent.address_additional" placeholder="街道地址">
         </div>
 
-        <div class="form-inline" style="margin-top: 15px">
+        <div class="form-inline" style="margin: 15px 0">
             <span>管辖区域：</span>
             <select class="form-control" style="margin-left: 14px;width:196px"
                     ng-options="v.id as v.name for v in provinces" ng-model="agent.scope_province"
@@ -74,12 +74,14 @@
                 <option value="">--商圈-- </option>
             </select>
         </div>
-        <p class="h3" style="margin-left: -100px">公司信息</p>
+        <p class="h3 text-center">公司信息</p>
 
         <div class="form-inline" style="margin-top: 15px">
             <span>公司名称：</span>
             <input class="form-control" type="text" style="margin-left: 14px" placeholder="可填" ng-model="agent.name">
         </div>
-        <button class="btn btn-success " style="margin: 20px 0 0 150px;width: 100px" ng-click="submit()">提交</button>
+        <p class="text-center">
+            <button class="button button-royal" ng-click="submit()">提交</button>
+        </p>
     </div>
 </div>

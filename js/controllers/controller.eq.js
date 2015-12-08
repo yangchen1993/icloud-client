@@ -157,16 +157,19 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
 iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', "$timeout","$rootScope", function ($scope, $http, $cookieStore, $timeout) {
 
     var router_id = get_param(window.location.href);
-    $scope.update_ssid = 1;
     $scope.modify_ssid = function () {
-            $http.put([window.API.ROUTER.ROUTERS_SSID, "?key=",$cookieStore.get("key"), "&id=", router_id].join(""), {"ssid": $scope.ssid}).success(function (data) {
-                console.log(data);
-                get_routerBase();
-                $scope.update_ssid = 1;
-            })
-                .error(function(data){
-                    alert(data.msg);
-                });
+            var name = prompt("请输入修改的WIFI名称", "");
+            if(name){
+                $http.put([window.API.ROUTER.ROUTERS_SSID, "?key=",$cookieStore.get("key"), "&id=", router_id].join(""), {"ssid": name}).success(function (data) {
+                    console.log(data);
+                    get_routerBase();
+                    $scope.update_ssid = 1;
+                })
+                    .error(function(data){
+                        alert(data.msg);
+                    });
+            }
+
     };
 
     //重启路由器

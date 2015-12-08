@@ -51,7 +51,7 @@ iCloudController.controller("EqManagementController", ['$scope', '$http', '$chec
         $scope.removeRouter = function (id) {
             $http.delete([$window.API.ROUTER.REMOVE_ROUTER, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
                 .success(function (data) {
-                    $window.alert(data.msg);
+                    $scope.refresh()
                 })
         };
 
@@ -301,8 +301,6 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             }
             else if (data.login_type == "免认证") {
                 $scope.login_type = 3;
-            } else {
-                ;
             }
             //默认认证时间
             if (data.auth_period <= 60) {

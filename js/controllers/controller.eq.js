@@ -160,14 +160,16 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
     $scope.modify_ssid = function () {
         var name = prompt("请输入修改的WIFI名称", "");
         if (name) {
-            $http.put([window.API.ROUTER.ROUTERS_SSID, "?key=", $cookieStore.get("key"), "&id=", router_id].join(""), {"ssid": name}).success(function (data) {
-                    console.log(data);
-                    get_routerBase();
-                    $scope.update_ssid = 1;
-                })
-                .error(function (data) {
-                    alert(data.msg);
-                });
+            if(confirm("修改SSID将重启路由器，确定修改？")){
+                $http.put([window.API.ROUTER.ROUTERS_SSID, "?key=", $cookieStore.get("key"), "&id=", router_id].join(""), {"ssid": name}).success(function (data) {
+                        console.log(data);
+                        get_routerBase();
+                        $scope.update_ssid = 1;
+                    })
+                    .error(function (data) {
+                        alert(data.msg);
+                    });
+            }
         }
 
     };

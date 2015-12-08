@@ -62,6 +62,7 @@
                 <td>地区</td>
                 <td>认证方式</td>
                 <td>MAC码</td>
+                <td>SSID</td>
                 <td>注册用户数</td>
                 <td>入库时间</td>
                 <td>操作</td>
@@ -74,6 +75,7 @@
                 <td ng-bind="p.router_groups.province_object.name+' '+p.router_groups.city_object.name+' '+p.router_groups.area_object.name+' '+p.router_groups.district_object.name"></td>
                 <td ng-bind="p.auth_type"></td>
                 <td ng-bind="p.mac"></td>
+                <td ng-bind="p.ssid"></td>
                 <td ng-bind="p.register_member_numbers"></td>
                 <td ng-bind="p.create_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
                 <td>

@@ -103,6 +103,9 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
                         map.getGeocoder(changed_address.join(""))
                     })
                 }
+
+                var districtLoadComplete = false;
+
                 if (newData.area != oldData.area) {
 
                     var areasPromise = function () {
@@ -128,15 +131,28 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
                             changed_address[2] = value[index_area].name;
                         }
 
-                        map.getGeocoder(changed_address.join(""))
+                        map.getGeocoder(changed_address.join(""));
+
+                        districtLoadComplete = true;
                     })
 
                 }
                 if (newData.address_additional != oldData.address_additional) {
 
-                    changed_address[3] = newData.address_additional;
+                    var districtsPromise = function () {
+                        return $q(function (r, j) {
+                            setInterval(function () {
+                                if (districtLoadComplete) {
+                                    r()
+                                }
+                            }, 200)
+                        })
+                    };
 
-                    map.getGeocoder(changed_address.join(""))
+                    districtsPromise().then(function () {
+                        changed_address[3] = newData.address_additional;
+                        map.getGeocoder(changed_address.join(""));
+                    })
                 }
             }
         }, true);

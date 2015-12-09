@@ -383,7 +383,7 @@
                 'contentType': 'application/json;charset=utf-8',
                 "data": JSON.stringify({"category_id": $(".category").val().split(':')[1], "items": items}),
                 success: function (data) {
-                    window.location.href = [window.HOST, "#/main/ads"].join("");
+                    window.location.href = "#/main/ads";
                 }
             });
 

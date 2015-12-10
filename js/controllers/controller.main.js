@@ -70,6 +70,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.agent_nav = false;
                 $scope.create_agent_nav = false;
                 $scope.business_nav = true;
+                $scope.helpfiles = true;
                 $scope.create_business_nav = true;
                 $scope.marketing_nav = false;
                 $scope.wallet_nav = true;

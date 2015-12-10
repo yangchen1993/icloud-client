@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.10.200:8801/api/";
+//window.HOST = "http://192.168.178.128:8802/api/";
 window.HOST = "http://mb.idianjia.cn:8802/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
@@ -22,13 +22,13 @@ window.API = {
 
         "GET_SUB_AGENTS": [window.HOST, "users/get_sub_agents/"].join(""), // 获取代理商
 
-        "GET_SUB_BUSINESSES": [window.HOST, "users/get_sub_businesses"].join(""),
+        "GET_SUB_BUSINESSES": [window.HOST, "users/get_sub_businesses/"].join(""),
 
         "REGISTER": [window.HOST, "users/register/"].join(""), // 注册
 
         "SUB_USER_ROLES": [window.HOST, "users/sub_user_roles/"].join(""),  //请求代理商可创建的代理商级别
 
-        "SUB_USER_SCOPES": [window.HOST, "users/sub_user_scopes"].join(""),
+        "SUB_USER_SCOPES": [window.HOST, "users/sub_user_scopes/"].join(""),
 
         "CREATE_AGENT": [window.HOST, "users/new_agent/"].join(""),  //创建代理商
 
@@ -46,7 +46,9 @@ window.API = {
 
         "GET_AREAS_BY_CITY": [window.HOST, "cities/get_areas_by_city/"].join(""), // 根据市获取区
 
-        "GET_TRADES": [window.HOST, "cities/get_trades/"].join("") // 按照省市区获取商圈
+        "GET_TRADES": [window.HOST, "cities/get_trades/"].join(""), // 按照省市区获取商圈
+
+        "GET_DISTRICTS": [window.HOST, "districts/get_districts/"].join("")
     },
     "WALLET": {
         "GET_CURRENT_USER_WALLET_INFO": [window.HOST, "wallets/get_current_user_wallet/"].join(""), // 获取当前用户的钱包信息
@@ -148,10 +150,18 @@ window.API = {
 
         "PUT_AD_UP": [window.HOST, "audits/edit_audit/"].join(""),
 
-        "GET_SHOP_AD": [window.HOST, "audits/audit_status/"].join("")
+        "PUT_AD_DOWN": [window.HOST, "audits/remove_audit/"].join(""),
+
+        "GET_SHOP_AD": [window.HOST, "audits/audit_status/"].join(""),
+
+        "":[window.HOST, "adspaces/get_ad_spaces/"].join("")
     },
     "WIFICAT": {
-        "STATUS": [window.HOST_WIFICAT, "routers/status/"].join("") //路由器实时信息
+        "STATUS": [window.HOST_WIFICAT, "routers/status/"].join(""), //路由器实时信息
+
+        "IS_ONLINE":[window.HOST_WIFICAT,"routers/online_status/"].join(""), //路由器在线状态
+
+        "REBOOT":[window.HOST_WIFICAT,"reboot/"].join("")//路由器重启
     },
 
 
@@ -185,8 +195,21 @@ window.API = {
 
     "JSADS": {
         "GET_JS_WHITE_URLS": [window.HOST, "js_white_url/get_js_white_urls/"].join(""),
+
         "NEW_JS_WHITE_URL": [window.HOST, "js_white_url/new_js_white_url/"].join(""),
-        "REMOVE_JS_WHITE_URL": [window.HOST, "js_white_url/remove_js_white_url/"].join("")
+
+        "REMOVE_JS_WHITE_URL": [window.HOST, "js_white_url/remove_js_white_url/"].join(""),
+
+        "JS_PUT_AREA": [window.HOST, "js_put_area/new_put_area/"].join(""),//新增开放地区
+
+        "REMOVE_PUT_AREA": [window.HOST, "js_put_area/remove_put_area/"].join(""),//删除开放地区
+
+        "GET_PUT_AREA": [window.HOST, "js_put_area/get_put_areas/"].join(""),//获取开放地区
+
+        "EDIT_AD_CODE": [window.HOST, "js_ad_code/edit_ad_code/"].join(""), //新增JS代码
+
+        "GET_AD_CODE": [window.HOST, "js_ad_code/get_ad_code"].join("")//获取JS代码
+
     },
 
     "ACCOUNT": {

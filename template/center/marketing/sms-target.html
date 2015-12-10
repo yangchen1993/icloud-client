@@ -10,14 +10,23 @@
             <tr>
                 <td align="center">
                     <a href="javascript:" ng-click="checkAll()">全选</a>
+                    <a href="javascript:" ng-click="checkInverse()">反选</a>
                 </td>
                 <td>手机号</td>
+                <td>访问次数</td>
+                <td>设备型号</td>
+                <td>首次访问时间</td>
+                <td>最近一次访问时间</td>
             </tr>
             </thead>
         <tbody>
         <tr ng-repeat="m in members">
-            <td align="center"><input type="checkbox" ng-value="m"></td>
-            <td ng-bind="m"></td>
+            <td align="center"><input type="checkbox" ng-value="m.member.phone"></td>
+            <td ng-bind="m.member.phone"></td>
+            <td ng-bind="m.times"></td>
+            <td ng-bind="m.member.brand"></td>
+            <td ng-bind="m.create_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
+            <td ng-bind="m.modified_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
         </tr>
         </tbody>
         </table>

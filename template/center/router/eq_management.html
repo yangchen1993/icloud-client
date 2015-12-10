@@ -2,7 +2,7 @@
         <ol class="breadcrumb">
             <li class="active">设备管理</li>
         </ol>
-
+    <div class="table_inside">
     <div class="form-inline search_panel">
         <a href="#/main/new-device" ng-if="deviceManage.addRouterMenu" class="button button-royal">添加设备</a>
         <button class="button button-royal" type="button" data-toggle="collapse" data-target="#advanced_search" aria-expanded="false" aria-controls="advanced_search">高级搜索 </button>
@@ -17,23 +17,23 @@
                         <option value="">选择行业</option>
                     </select>
 
-                    <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
-                    <div>
-                        <span>地区：</span>
-                        <select class="form-control" style="width: 15% !important;"
-                                ng-model="search.router_groups__trade__province" ng-options="v.id as v.name for v in province1"
-                                ng-change="select_p(search.groups__trade__province)">
-                            <option value="">省</option>
-                        </select>
-                        <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city"
-                                ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">
-                            <option value="">市</option>
-                        </select>
-                        <select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area"
-                                ng-options="v.id as v.name for v in area1">
-                            <option value="">区/县</option>
-                        </select>
-                    </div>
+                    <!--<div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>-->
+                    <!--<div>-->
+                        <!--<span>地区：</span>-->
+                        <!--<select class="form-control" style="width: 15% !important;"-->
+                                <!--ng-model="search.router_groups__trade__province" ng-options="v.id as v.name for v in province1"-->
+                                <!--ng-change="select_p(search.groups__trade__province)">-->
+                            <!--<option value="">省</option>-->
+                        <!--</select>-->
+                        <!--<select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city"-->
+                                <!--ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">-->
+                            <!--<option value="">市</option>-->
+                        <!--</select>-->
+                        <!--<select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area"-->
+                                <!--ng-options="v.id as v.name for v in area1">-->
+                            <!--<option value="">区/县</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
                     <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
                     <div>
                         <span>路由：</span>
@@ -53,31 +53,30 @@
             </div>
         </div>
     </div>
-    <div class="table_inside">
+
         <table class="table table-bordered text-center table-striped table-hover" id="table-eq">
             <thead style="background-color: #8a8bc4;color: #fff">
             <tr>
-                <!--<td>-->
-                    <!--<a href="javascript:" ng-click="checkAll()">全选</a>-->
-                    <!--<a href="javascript:" ng-click="checkInverse()">反选</a>-->
-                <!--</td>-->
                 <td id="router_groups__name">商铺名称</td>
                 <td id="router_groups_category">行业</td>
                 <td>地区</td>
                 <td>认证方式</td>
                 <td>MAC码</td>
+                <td>SSID</td>
+                <td>注册用户数</td>
                 <td>入库时间</td>
                 <td>操作</td>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="p in grid.results">
-                <!--<td><input type="checkbox"></td>-->
                 <td ng-bind="p.router_groups.name"></td>
                 <td ng-bind="p.router_groups.category"></td>
-                <td ng-bind="p.router_groups.trade_area.province+p.router_groups.trade_area.city+p.router_groups.trade_area.area+p.router_groups.trade_area.name"></td>
-                <td ng-bind="p.isonline"></td>
+                <td ng-bind="p.router_groups.province_object.name+' '+p.router_groups.city_object.name+' '+p.router_groups.area_object.name+' '+p.router_groups.district_object.name"></td>
+                <td ng-bind="p.auth_type"></td>
                 <td ng-bind="p.mac"></td>
+                <td ng-bind="p.ssid"></td>
+                <td ng-bind="p.register_member_numbers"></td>
                 <td ng-bind="p.create_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
                 <td>
                     <a class="btn btn-xs btn-info" href="javascript:" ng-click="see_router(p.id)">查看</a>

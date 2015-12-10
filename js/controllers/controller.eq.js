@@ -1,8 +1,8 @@
 /**
  * Created by chen on 2015/10/8.
  */
-iCloudController.controller("EqManagementController", ['$scope', '$http', '$checkBox', '$grid', '$window', '$category', '$filter', '$province', '$city', '$area',
-    function ($scope, $http, $checkBox, $grid, $window, $category, $filter, $province, $city, $area) {
+iCloudController.controller("EqManagementController", ['$scope', '$http', '$checkBox', '$grid', '$window', '$category', '$filter', '$province', '$city', '$area', "$cookieStore",
+    function ($scope, $http, $checkBox, $grid, $window, $category, $filter, $province, $city, $area, $cookieStore) {
         $scope.status = 1;
         $scope.route = function (num) {
             if (num == 1) {
@@ -36,28 +36,12 @@ iCloudController.controller("EqManagementController", ['$scope', '$http', '$chec
         $scope.eq_reset = function () {
             $scope.search.groups__name__icontains = "";
             $scope.search.groups__category = "";
-            $scope.search.groups__trade__province = "";
-            $scope.search.groups__trade__city = "";
-            $scope.search.groups__trade__area = "";
+            //$scope.search.groups__trade__province = "";
+            //$scope.search.groups__trade__city = "";
+            //$scope.search.groups__trade__area = "";
             $scope.search.mac__icontains = "";
             $scope.search.create_time__gte = "";
             $scope.search.create_time__lte = "";
-        };
-        var province = $province.get();
-        province.success(function (data) {
-            $scope.province1 = data;
-        });
-        $scope.select_p = function (index) {
-            var city = $city.get(index);
-            city.success(function (data) {
-                $scope.city1 = data;
-            })
-        };
-        $scope.select_c = function (index) {
-            var area = $area.get(index);
-            area.success(function (data) {
-                $scope.area1 = data;
-            })
         };
 
         $scope.see_router = function (id) {
@@ -67,7 +51,7 @@ iCloudController.controller("EqManagementController", ['$scope', '$http', '$chec
         $scope.removeRouter = function (id) {
             $http.delete([$window.API.ROUTER.REMOVE_ROUTER, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
                 .success(function (data) {
-                    $window.alert(data.msg);
+                    $scope.refresh()
                 })
         };
 
@@ -81,7 +65,7 @@ iCloudController.controller("NewDeviceController", ["$scope", "$http", "$cookieS
                     $window.alert(data.msg)
                 })
                 .error(function (data) {
-                    $window.alert(data.msg)
+                    $window.alert(transform_error_message(data.msg))
                 })
         }
     }]);
@@ -170,21 +154,36 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
     $checkBox.enableCheck("table-fireware");
 }]);
 
-iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', "$timeout","$rootScope", function ($scope, $http, $cookieStore, $timeout) {
+iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', "$timeout", "$rootScope", function ($scope, $http, $cookieStore, $timeout) {
 
     var router_id = get_param(window.location.href);
-    $scope.update_ssid = 1;
     $scope.modify_ssid = function () {
-        var reload = confirm("修改WIFI名称需要重启路由器后才能生效，是否确定重启路由器？");
-        if(reload==true){
-            $http.put([window.API.ROUTER.ROUTERS_SSID, "?key=",$cookieStore.get("key"), "&id=", router_id].join(""), {"ssid": $scope.ssid}).success(function (data) {
-                console.log(data);
-                get_routerBase();
-                $scope.update_ssid = 1;
-            })
-                .error(function(data){
+        var name = prompt("请输入修改的WIFI名称", "");
+        if (name) {
+            if(confirm("修改SSID将重启路由器，确定修改？")){
+                $http.put([window.API.ROUTER.ROUTERS_SSID, "?key=", $cookieStore.get("key"), "&id=", router_id].join(""), {"ssid": name}).success(function (data) {
+                        console.log(data);
+                        get_routerBase();
+                        $scope.update_ssid = 1;
+                    })
+                    .error(function (data) {
+                        alert(data.msg);
+                    });
+            }
+        }
+
+    };
+
+    //重启路由器
+    $scope.Restart = function (mac) {
+        var Restart_msg = confirm("是否重启路由器？");
+        if (Restart_msg) {
+            $http.get([window.API.WIFICAT.REBOOT, "?router_mac=", mac].join("")).success(function (data) {
                     alert(data.msg);
-                });
+                })
+                .error(function (data) {
+                    alert(data.msg);
+                })
         }
     };
     //放行设置
@@ -204,19 +203,19 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
     };
     reload_blackwhite();
     $scope.router = {
-        "is_black": "1"
+        "is_black": "0"
     };
     $scope.router1 = {
-        "is_black": "1"
+        "is_black": "0"
     };
     $scope.add_mac = function (data) {
         data.router = router_id;
         data.content_type = "0";
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            alert("添加成功");
-            reload_blackwhite();
-        })
+                alert("添加成功");
+                reload_blackwhite();
+            })
             .error(function (data) {
                 alert(data.msg);
             })
@@ -226,9 +225,9 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         data.content_type = "1";
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            alert("添加成功");
-            reload_blackwhite();
-        })
+                alert("添加成功");
+                reload_blackwhite();
+            })
             .error(function (data) {
                 alert(data.msg);
             })
@@ -237,9 +236,12 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         var ids = [id];
         console.log(ids);
         $http.delete([window.API.ROUTER.REMOVE_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&ids=", ids.join()].join("")).success(function (data) {
-            alert("删除成功");
-            reload_blackwhite();
-        })
+                alert("删除成功");
+                reload_blackwhite();
+            })
+            .error(function (data) {
+                alert(data.msg);
+            })
     };
     $scope.filter = {
         "content_type": "",
@@ -263,7 +265,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
 
 
     //路由基本信息
-    var get_routerBase = function(){
+    var get_routerBase = function () {
         $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
             console.log(data);
             $scope.routers_all = data;
@@ -272,15 +274,15 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             var timer;
 
             //路由器实时信息
-            var routerStatus = function(){
+            var routerStatus = function () {
                 $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
-                    $scope.wificat = data;
-                    $scope.upTime = parseInt(data.basicInformation.upTime / 60);
-                    timer = $timeout(function () {
-                        routerStatus();
-                    },3000);
-                })
-                    .error(function(data){
+                        $scope.wificat = data;
+                        $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                        timer = $timeout(function () {
+                            routerStatus();
+                        }, 3000);
+                    })
+                    .error(function (data) {
                         $scope.error_msg = data.msg;
                     })
             };
@@ -299,8 +301,6 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             }
             else if (data.login_type == "免认证") {
                 $scope.login_type = 3;
-            } else {
-                ;
             }
             //默认认证时间
             if (data.auth_period <= 60) {
@@ -322,14 +322,14 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
     get_routerBase();
 
 
-    $timeout(function(){
-        angular.element('a[href="#home"]').click(function(e){
+    $timeout(function () {
+        angular.element('a[href="#home"]').click(function (e) {
             e.preventDefault();
         });
-        angular.element('a[href="#profile"]').click(function(e){
+        angular.element('a[href="#profile"]').click(function (e) {
             e.preventDefault();
         });
-    },1000);
+    }, 1000);
 
     var loginType;
     $scope.changeLoginType = function (num) {
@@ -341,10 +341,10 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         } else {
             loginType = "";
         }
-        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType}).success(function(data){
-            alert(data.msg);
-        })
-            .error(function(data){
+        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType}).success(function (data) {
+                alert(data.msg);
+            })
+            .error(function (data) {
                 alert(data.msg)
             });
     };
@@ -356,9 +356,9 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             "auth_period": times,
             "auth_limit_times": data.num
         }).success(function (data) {
-            alert(data.msg);
-        })
-            .error(function(data){
+                alert(data.msg);
+            })
+            .error(function (data) {
                 alert(data.msg)
             })
     };

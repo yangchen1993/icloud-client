@@ -5,38 +5,37 @@ iCloudController.controller("AgentManageController", ['$scope', '$grid', '$rootS
     $grid.initial($scope, window.API.USER.GET_SUB_AGENTS);
 }]);
 
-iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cookieStore', '$province', '$city', '$area',
-    function ($scope, $http, $cookieStore, $province, $city, $area) {
-        var province = $province.get();
-        province.success(function (data) {
-            $scope.province1 = data;
+iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cookieStore', '$province', '$city', '$area', "$districts", "$window",
+    function ($scope, $http, $cookieStore, $province, $city, $area, $districts, $window) {
+        $districts.get({adcode: "100000"}).success(function (data) {
+            $scope.provinces = data[0].subdistricts;
         });
-        $scope.select_p = function (index) {
-            var city = $city.get(index);
-            city.success(function (data) {
-                $scope.city1 = data;
-            })
+
+        $scope.select_p = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.cities = data[0].subdistricts;
+            });
         };
-        $scope.select_c = function (index) {
-            var area = $area.get(index);
-            area.success(function (data) {
-                $scope.area1 = data;
-            })
+        $scope.select_c = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.areas = data[0].subdistricts;
+            });
         };
-        province.success(function (data) {
-            $scope.province2 = data;
-        });
-        $scope.select_p_live = function (index) {
-            var city = $city.get(index);
-            city.success(function (data) {
-                $scope.city2 = data;
-            })
+
+        $scope.select_scopeP = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.scope_cities = data[0].subdistricts;
+            });
         };
-        $scope.select_c_live = function (index) {
-            var area = $area.get(index);
-            area.success(function (data) {
-                $scope.area2 = data;
-            })
+        $scope.select_scopeC = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.scope_areas = data[0].subdistricts;
+            });
+        };
+        $scope.select_scopeA = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.scope_districts = data[0].subdistricts;
+            });
         };
         $http.get([window.API.USER.SUB_USER_ROLES, "?key=", $cookieStore.get("key")].join(""))
             .success(function (data) {
@@ -49,10 +48,46 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
                     "role": data[0].id
                 };
             });
+        //$scope.agent_role = function(id){
+        //    console.log(id);
+        //};
+        $scope.$watch("agent.role", function (newData, oldData) {
 
-        $http.get([window.API.USER.SUB_USER_SCOPES, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
-            $scope.agent.province = data[0].province_id;
+            var index = _.findIndex($scope.agent_grade, {
+                id: newData
+            });
+
+            var roleName = -1;
+
+            if (index > 0){
+                roleName = $scope.agent_grade[index].name;
+            }
+
+            if (roleName == '省级代理商') {
+                $scope.isCity = false;
+                $scope.isArea = false;
+                $scope.isDistrict = false;
+            }
+            else if (roleName == '市级代理商') {
+                $scope.isCity = true;
+                $scope.isArea = false;
+                $scope.isDistrict = false;
+            }
+            else if (roleName == '区级代理商') {
+                $scope.isCity = true;
+                $scope.isArea = true;
+                $scope.isDistrict = false;
+            }
+            else if (roleName == '商圈代理商') {
+                $scope.isCity = true;
+                $scope.isArea = true;
+                $scope.isDistrict = true;
+            }
+
         });
+        //$http.get([window.API.USER.SUB_USER_SCOPES, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+        //    $scope.agent.province = data[0].province_id;
+        //});
 
 
         $scope.submit = function () {
@@ -67,7 +102,7 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
 iCloudController.controller("AgentInfoController", ['$scope', '$grid', '$http', '$cookieStore', '$window',
     function ($scope, $grid, $http, $cookieStore, $window) {
         var tel = get_param(location.href);
-        $http.get([window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&tel=", tel].join("")).success(function (data) {
+        $http.get([$window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&tel=", tel].join("")).success(function (data) {
             $scope.agent = data;
         });
     }]);

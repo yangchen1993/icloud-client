@@ -5,7 +5,7 @@
     </ol>
 
     <div class="agent_message table_inside">
-        <p class="h3">个人信息</p>
+        <p class="h3 text-center">个人信息</p>
 
         <div class="form-inline" style="margin-top: 15px">
             <span>登录账号：</span>
@@ -30,21 +30,23 @@
         </div>
         <div class="form-inline" style="margin-top: 15px">
             <span>居住地址：</span>
-            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in province1"
-                    ng-model="business.province_live" ng-change="select_p(business.province_live)">
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in provinces"
+                    ng-model="business.province" ng-change="select_p(business.province)">
                 <option value="">--省--</option>
             </select>
-            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in city1"
-                    ng-model="business.city_live" ng-change="select_c(business.city_live   )">
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in cities"
+                    ng-model="business.city" ng-change="select_c(business.city)">
                 <option value="">--市--</option>
             </select>
-            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in area1"
-                    ng-model="business.area_live">
+            <select class="form-control" style="width:196px;" ng-options="v.id as v.name for v in areas"
+                    ng-model="business.area">
                 <option value="">--区--</option>
             </select>
             <input class="form-control" type="text" placeholder="街道地址" ng-model="business.address_additional">
         </div>
 
-        <button class="btn btn-success " style="margin: 20px 0 0 150px;width: 100px" ng-click="submit()">提交</button>
+        <p class="text-center" style="margin-top: 15px">
+            <button class="button button-royal" ng-click="submit()">提交</button>
+        </p>
     </div>
 </div>

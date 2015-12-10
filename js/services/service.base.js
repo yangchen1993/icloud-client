@@ -59,7 +59,12 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             self.restGet = function (url) {
                 $http.get(url).success(function (data) {
                     self.restPage = scope.grid = scope.pagination = data;
-                    console.log(scope.grid);
+                })
+            };
+
+            self.restPost = function (url, params) {
+                $http.post(url, params).success(function (data) {
+                    self.restPage = scope.grid = scope.pagination = data;
                 })
             };
 
@@ -86,6 +91,16 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
                 params.page = 1;
                 var url = [self.url, "?", $.param(params)].join("");
                 self.restGet(url);
+            };
+
+            scope.postFiltering = function (params) {
+                var pageParams = {};
+                pageParams.key = $cookieStore.get("key");
+                pageParams.ordering = "id";
+                pageParams.pageSize = self.pageSize;
+                pageParams.page = 1;
+                url = [self.url, "?", $.param(pageParams)].join("");
+                self.restPost(url, params)
             };
 
             scope.sort = function (colName) {
@@ -199,7 +214,7 @@ iCloudService.service("$category", ['$http', '$cookieStore', function ($http, $c
 
 iCloudService.service("$province", ['$http', '$cookieStore', function ($http, $cookieStore) {
     this.get = function () {
-        return $http.get([window.API.SYSTEM.GET_PROVINCES, "?key=",  $cookieStore.get("key")].join(""));
+        return $http.get([window.API.SYSTEM.GET_PROVINCES, "?key=", $cookieStore.get("key")].join(""));
     }
 }]);
 iCloudService.service("$city", ['$http', '$cookieStore', function ($http, $cookieStore) {
@@ -217,3 +232,60 @@ iCloudService.service("$trades", ["$http", "$cookieStore", "$window", function (
         return $http.get([$window.API.SYSTEM.GET_TRADES, "?key=", $cookieStore.get("key"), "&area=", data].join(""));
     }
 }]);
+
+iCloudService.service("$districts", ["$http", "$cookieStore", "$window",
+    function ($http, $cookieStore, $window) {
+        this.get = function (data) {
+            return $http.get([$window.API.SYSTEM.GET_DISTRICTS, "?key=", $cookieStore.get("key"), "&", $.param(data)].join(""));
+        }
+    }]);
+
+iCloudService.service("$map", ["$window",
+    function ($window) {
+        this.initial = function (container) {
+            var self = angular.copy({});
+
+            self.map = new AMap.Map(container, {
+                resizeEnable: true,
+                zoom: 16,
+                dragEnable: true
+            });
+
+
+            self.addMarker = function (data) {
+                self.map.clearMap();
+
+                var marker = new AMap.Marker({
+                    map: self.map,
+                    position: [data.location.getLng(), data.location.getLat()]
+                });
+                var infoWindow = new AMap.InfoWindow({
+                    content: data.formattedAddress,
+                    offset: {x: 0, y: -30}
+                });
+                marker.on("mouseover", function (e) {
+                    infoWindow.open(self.map, marker.getPosition());
+                });
+            };
+
+
+            self.getGeocoder = function (keywords) {
+                console.log(keywords);
+
+                self.map.plugin(["AMap.Geocoder"], function () {
+                    var geocoder = new AMap.Geocoder({
+                        radius: 1000 //范围，默认：500
+                    });
+
+                    geocoder.getLocation(keywords, function (status, result) {
+                        if (status == "complete"){
+                            self.addMarker(result.geocodes[0]);
+                            self.map.setFitView();
+                        }
+                    })
+                })
+            };
+            return self;
+        };
+
+    }]);

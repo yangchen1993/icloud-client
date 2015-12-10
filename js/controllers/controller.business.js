@@ -28,153 +28,512 @@ iCloudController.controller("ShopManagementController", ["$scope", "$http", "$gr
         }
     }]);
 
-iCloudController.controller("CreateShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore) {
-    $scope.shop = {};
-    $category.get().success(function (data) {
-        $scope.shop.category = data[0].name;
-        $scope.category = data;
-    })
-        .error(function (data) {
-            console.log(data);
-        });
-    $province.get().success(function (data) {
-        $scope.province = data;
-    });
-    $scope.select_p = function (id) {
-        $city.get(id).success(function (data) {
-            $scope.city = data;
-        })
-    };
-    $scope.select_c = function (id) {
-        $area.get(id).success(function (data) {
-            $scope.area = data;
-        })
-    }
-    $scope.select_a = function (id) {
-        $trades.get(id).success(function (data) {
-            $scope.trades = data;
-        })
-    };
+iCloudController.controller("CreateShopController", ["$scope", "$http", "$category", "$cookieStore", "$districts", "$map", "$q",
+    function ($scope, $http, $category, $cookieStore, $districts, $map, $q) {
+        var map = $map.initial("lbsMapContainer");
+        var changed_address = ["", "", "", "", ""];
+        var getDistrcits = function () {
+            $districts.get({adcode: "100000"})
+                .success(function (data) {
+                    $scope.provinces = data[0].subdistricts;
+                })
+        };
 
-    function isImageFile(file) {
-        if (file.type) {
-            return /^image\/\w+$/.test(file.type);
-        } else {
-            return /\.(jpg|jpeg|png|gif)$/.test(file);
-        }
-    }
+        getDistrcits();
 
-    var imgData;
-    $('input[type = "file"]').change(function () {
-        var files;
-        var img;
-        files = $(this).prop('files');
-        if (isImageFile(files[0]))
-            this.url = URL.createObjectURL(files[0]);
-        img = $('<img src="' + this.url + '" style="width:100%;height:100%">');
-        $("#img_frame").html(img);
-        img.cropper({
-            aspectRatio: 120 / 72
-        });
+        $scope.shop = {};
 
-        $("#save").click(function () {
-            imgData = img.cropper('getCroppedCanvas', {
-                width: 256
-            }).toDataURL();
-            console.log(imgData);
-            $("#show_img").attr('src', imgData);
-        });
-    });
+        var provinceWatcher = $scope.$watch('shop.province', function (data) {
+            if (data) {
+                $scope.cities = [];
+                $scope.areas = [];
+                $scope.districts = [];
 
-    $scope.submit = function (shop) {
-        shop.img = imgData;
-        $http.post([window.API.GROUP.NEW_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
-            alert(data.msg);
-            location.href = "#/main/shop_management";
-        })
-            .error(function (data) {
-                alert(data.msg);
-            })
-    }
-}]);
+                $districts.get({id: data})
+                    .success(function (data) {
+                        $scope.cities = data[0].subdistricts;
+                    });
 
-iCloudController.controller("EditShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore) {
-    var id = get_param(window.location.href);
-    $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
-        for (var i = 0; i < data.count; i++) {
-            if (data.results[i].id == id) {
-                $scope.edit_shop = data.results[i];
+
+                var index_prov = _.findIndex($scope.provinces, {
+                    id: data
+                });
+
+                changed_address[0] = "";
+                changed_address[1] = "";
+                changed_address[2] = "";
+                changed_address[3] = "";
+                changed_address[4] = "";
+
+                if (index_prov != -1) {
+                    changed_address[0] = $scope.provinces[index_prov].name;
+                }
+
+                map.getGeocoder(changed_address.join(""));
             }
-        }
-        console.log($scope.edit_shop);
-    });
-    $category.get().success(function (data) {
-        $scope.category = data;
-    })
-        .error(function (data) {
-            console.log(data);
-        });
-    $province.get().success(function (data) {
-        $scope.province = data;
-        console.log($scope.province);
-    });
-    $scope.select_p = function (id) {
-        console.log(id);
-        $city.get(id).success(function (data) {
-            $scope.city = data;
-        })
-    };
-    $scope.select_c = function (id) {
-        $area.get(id).success(function (data) {
-            $scope.area = data;
-        })
-    };
-    $scope.select_a = function (id) {
-        $trades.get(id).success(function (data) {
-            $scope.trades = data;
-        })
-    };
-    function isImageFile(file) {
-        if (file.type) {
-            return /^image\/\w+$/.test(file.type);
-        } else {
-            return /\.(jpg|jpeg|png|gif)$/.test(file);
-        }
-    }
 
-    var imgData;
-    $('input[type = "file"]').change(function () {
-        var files;
-        var img;
-        files = $(this).prop('files');
-        if (isImageFile(files[0]))
-            this.url = URL.createObjectURL(files[0]);
-        img = $('<img src="' + this.url + '" style="width:100%;height:100%">');
-        $("#img_frame").html(img);
-        img.cropper({
-            aspectRatio: 120 / 72
         });
 
-        $("#save").click(function () {
-            imgData = img.cropper('getCroppedCanvas', {
-                width: 640
-            }).toDataURL();
-            console.log(imgData);
-            $("#show_img").attr('src', imgData);
-        });
-    });
 
-    $scope.submit = function (shop) {
-        shop.img = imgData;
-        $http.put([window.API.GROUP.EDIT_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
-            alert(data.msg);
-            location.href = "#/main/shop_management";
-        })
+        var cityWatcher = $scope.$watch('shop.city', function (data) {
+            if (data) {
+                $scope.areas = [];
+                $scope.districts = [];
+
+                $districts.get({id: data})
+                    .success(function (data) {
+                        $scope.areas = data[0].subdistricts;
+                    });
+
+
+                var citiesPromise = function () {
+                    return $q(function (resolve, reject) {
+                        var i = setInterval(function () {
+                            if ($scope.cities && $scope.cities.length > 0) {
+                                clearInterval(i);
+                                resolve($scope.cities)
+                            }
+                        }, 100)
+                    })
+                };
+
+
+                citiesPromise().then(function (value) {
+                    console.log("promise resolve");
+
+                    var index_city = _.findIndex(value, {
+                        id: data
+                    });
+
+                    changed_address[1] = "";
+                    changed_address[2] = "";
+                    changed_address[3] = "";
+                    changed_address[4] = "";
+
+                    if (index_city != -1) {
+                        changed_address[1] = value[index_city].name;
+                    }
+
+                    console.log("city changed:", changed_address.join(""));
+
+                    map.getGeocoder(changed_address.join(""));
+                }, function () {
+                    console.log("promise reject")
+                })
+            }
+        });
+
+        var areaWatcher = $scope.$watch('shop.area', function (data) {
+            if (data) {
+                $scope.districts = [];
+
+                $districts.get({id: data})
+                    .success(function (data) {
+                        $scope.districts = data[0].subdistricts;
+                    });
+
+                var areasPromise = function () {
+                    return $q(function (r, j) {
+                        var i = setInterval(function () {
+                            if ($scope.areas && $scope.areas.length > 0) {
+                                clearInterval(i);
+                                r($scope.areas);
+                            }
+                        }, 100)
+                    })
+                };
+
+                areasPromise().then(function () {
+                    console.log("promise resolve");
+                    var index_area = _.findIndex($scope.areas, {
+                        id: data
+                    });
+
+                    changed_address[2] = "";
+                    changed_address[3] = "";
+                    changed_address[4] = "";
+
+                    if (index_area != -1) {
+                        changed_address[2] = $scope.areas[index_area].name;
+                    }
+
+                    console.log("area changed:", changed_address.join(""));
+
+                    map.getGeocoder(changed_address.join(""));
+                })
+
+            }
+        });
+
+        var distrcitLoadCompleted = false;
+
+
+        var districtWatcher = $scope.$watch('shop.district', function (data) {
+            if (data) {
+
+                var districtPromise = function () {
+                    return $q(function (r, j) {
+                        var i = setInterval(function () {
+                            if ($scope.districts && $scope.districts.length > 0) {
+                                clearInterval(i);
+                                r($scope.districts)
+                            }
+                        }, 100)
+                    })
+                };
+
+                districtPromise().then(function () {
+                    console.log("promise resolve");
+                    var index_district = _.findIndex($scope.districts, {
+                        id: data
+                    });
+
+                    changed_address[3] = "";
+                    changed_address[4] = "";
+
+                    if (index_district != -1) {
+                        changed_address[3] = $scope.districts[index_district].name;
+                    }
+
+                    console.log("district changed:", changed_address.join(""));
+
+                    map.getGeocoder(changed_address.join(""));
+
+                    distrcitLoadCompleted = true;
+                })
+            }
+        });
+
+        var addressWather = $scope.$watch('shop.address', function (data) {
+            if (data) {
+                var addressPromise = function () {
+                    return $q(function (r, j) {
+                        var i = setInterval(function () {
+                            clearInterval(i);
+                            r();
+                        }, 200)
+                    })
+                };
+
+                addressPromise.then(function () {
+                    changed_address[4] = "";
+
+                    changed_address[4] = data;
+
+                    console.log("address changed:", changed_address.join(""));
+                })
+            }
+        });
+
+
+        $category.get().success(function (data) {
+                $scope.shop.category = data[0].name;
+                $scope.category = data;
+            })
             .error(function (data) {
                 console.log(data);
+            });
+
+        function isImageFile(file) {
+            if (file.type) {
+                return /^image\/\w+$/.test(file.type);
+            } else {
+                return /\.(jpg|jpeg|png|gif)$/.test(file);
+            }
+        }
+
+        var imgData;
+        $('input[type = "file"]').change(function () {
+            var files;
+            var img;
+            files = $(this).prop('files');
+            if (isImageFile(files[0]))
+                this.url = URL.createObjectURL(files[0]);
+            img = $('<img src="' + this.url + '" style="width:100%;height:100%">');
+            $("#img_frame").html(img);
+            img.cropper({
+                aspectRatio: 120 / 72
+            });
+
+            $("#save").click(function () {
+                imgData = img.cropper('getCroppedCanvas', {
+                    width: 256
+                }).toDataURL();
+                console.log(imgData);
+                $("#show_img").attr('src', imgData);
+            });
+        });
+
+        $scope.submit = function (shop) {
+            shop.img = imgData;
+            $http.post([window.API.GROUP.NEW_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
+                    alert(data.msg);
+                    location.href = "#/main/shop_management";
+                })
+                .error(function (data) {
+                    alert(data.msg);
+                })
+        }
+    }]);
+
+iCloudController.controller("EditShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", "$districts", "$map", "$q",
+    function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore, $districts, $map, $q) {
+        var id = get_param(window.location.href);
+        $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
+            .success(function (data) {
+                $scope.edit_shop = data.results[0];
+
+            });
+        $category.get().success(function (data) {
+                $scope.category = data;
             })
-    }
-}]);
+            .error(function (data) {
+                console.log(data);
+            });
+
+        var map = $map.initial("lbsMapContainer");
+        var changed_address = ["", "", "", "", ""];
+        var getDistricts = function () {
+            $districts.get({adcode: "100000"})
+                .success(function (data) {
+                    $scope.provinces = data[0].subdistricts;
+                })
+        };
+
+        getDistricts();
+
+        $scope.edit_shop = {
+            "province_id": "",
+            "city_id": "",
+            "area_id": "",
+            "district_id": ""
+        };
+
+        var provinceWatcher = $scope.$watch('edit_shop.province', function (data) {
+            if (data) {
+                $scope.cities = [];
+                $scope.areas = [];
+                $scope.districts = [];
+
+                $districts.get({id: data})
+                    .success(function (data) {
+                        $scope.cities = data[0].subdistricts;
+                    });
+
+
+                var index_prov = _.findIndex($scope.provinces, {
+                    id: data
+                });
+
+                changed_address[0] = "";
+                changed_address[1] = "";
+                changed_address[2] = "";
+                changed_address[3] = "";
+                changed_address[4] = "";
+
+                if (index_prov != -1) {
+                    changed_address[0] = $scope.provinces[index_prov].name;
+                }
+
+                map.getGeocoder(changed_address.join(""));
+            }
+
+        });
+
+
+        var cityWatcher = $scope.$watch('edit_shop.city', function (data) {
+            if (data) {
+                $scope.areas = [];
+                $scope.districts = [];
+
+                $districts.get({id: data})
+                    .success(function (data) {
+                        $scope.areas = data[0].subdistricts;
+                    });
+
+
+                var citiesPromise = function () {
+                    return $q(function (resolve, reject) {
+                        var i = setInterval(function () {
+                            if ($scope.cities && $scope.cities.length > 0) {
+                                clearInterval(i);
+                                resolve($scope.cities)
+                            }
+                        }, 100)
+                    })
+                };
+
+
+                citiesPromise().then(function (value) {
+                    console.log("promise resolve");
+
+                    var index_city = _.findIndex(value, {
+                        id: data
+                    });
+
+                    changed_address[1] = "";
+                    changed_address[2] = "";
+                    changed_address[3] = "";
+                    changed_address[4] = "";
+
+                    if (index_city != -1) {
+                        changed_address[1] = value[index_city].name;
+                    }
+
+                    console.log("city changed:", changed_address.join(""));
+
+                    map.getGeocoder(changed_address.join(""));
+                }, function () {
+                    console.log("promise reject")
+                })
+            }
+        });
+
+        var areaWatcher = $scope.$watch('edit_shop.area', function (data) {
+            if (data) {
+                $scope.districts = [];
+
+                $districts.get({id: data})
+                    .success(function (data) {
+                        $scope.districts = data[0].subdistricts;
+                    });
+
+                var areasPromise = function () {
+                    return $q(function (r, j) {
+                        var i = setInterval(function () {
+                            if ($scope.areas && $scope.areas.length > 0) {
+                                clearInterval(i);
+                                r($scope.areas);
+                            }
+                        }, 100)
+                    })
+                };
+
+                areasPromise().then(function () {
+                    console.log("promise resolve");
+                    var index_area = _.findIndex($scope.areas, {
+                        id: data
+                    });
+
+                    changed_address[2] = "";
+                    changed_address[3] = "";
+                    changed_address[4] = "";
+
+                    if (index_area != -1) {
+                        changed_address[2] = $scope.areas[index_area].name;
+                    }
+
+                    console.log("area changed:", changed_address.join(""));
+
+                    map.getGeocoder(changed_address.join(""));
+                })
+
+            }
+        });
+
+        var districtLoadCompleted = false;
+
+
+        var districtWatcher = $scope.$watch('edit_shop.district', function (data) {
+            if (data) {
+
+                var districtPromise = function () {
+                    return $q(function (r, j) {
+                        var i = setInterval(function () {
+                            if ($scope.districts && $scope.districts.length > 0) {
+                                clearInterval(i);
+                                r($scope.districts)
+                            }
+                        }, 100)
+                    })
+                };
+
+                districtPromise().then(function () {
+                    console.log("promise resolve");
+                    var index_district = _.findIndex($scope.districts, {
+                        id: data
+                    });
+
+                    changed_address[3] = "";
+                    changed_address[4] = "";
+
+                    if (index_district != -1) {
+                        changed_address[3] = $scope.districts[index_district].name;
+                    }
+
+                    console.log("district changed:", changed_address.join(""));
+
+                    map.getGeocoder(changed_address.join(""));
+
+                    districtLoadCompleted = true;
+                })
+            }
+        });
+
+        var addressWather = $scope.$watch('edit_shop.address', function (data) {
+            if (data) {
+
+                var addressPromise = function () {
+                    return $q(function (j, c) {
+                        var i = setInterval(function () {
+                            if (districtLoadCompleted) {
+                                clearInterval(i);
+                                j()
+                            }
+                        }, 200)
+                    })
+                };
+
+                addressPromise.then(function () {
+                    changed_address[4] = "";
+
+                    changed_address[4] = data;
+
+                    console.log("address changed:", changed_address.join(""));
+                })
+            }
+        });
+
+        function isImageFile(file) {
+            if (file.type) {
+                return /^image\/\w+$/.test(file.type);
+            } else {
+                return /\.(jpg|jpeg|png|gif)$/.test(file);
+            }
+        }
+
+        var imgData;
+        $('input[type = "file"]').change(function () {
+            var files;
+            var img;
+            files = $(this).prop('files');
+            if (isImageFile(files[0]))
+                this.url = URL.createObjectURL(files[0]);
+            img = $('<img src="' + this.url + '" style="width:100%;height:100%">');
+            $("#img_frame").html(img);
+            img.cropper({
+                aspectRatio: 120 / 72
+            });
+
+            $("#save").click(function () {
+                imgData = img.cropper('getCroppedCanvas', {
+                    width: 640
+                }).toDataURL();
+                $("#show_img").attr('src', imgData);
+            });
+        });
+
+        $scope.submit = function (shop) {
+            shop.img = imgData;
+            $http.put([window.API.GROUP.EDIT_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
+                    alert(data.msg);
+                    location.href = "#/main/shop_management";
+                })
+                .error(function (data) {
+                    console.log(data);
+                })
+        }
+    }]);
 
 
 iCloudController.controller("ShopManagementRoutersController", ["$scope", "$window", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $window, $http, $category, $province, $city, $area, $trades, $cookieStore) {
@@ -185,7 +544,18 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     var show_bindRouters = function () {
         $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP, "?key=", $cookieStore.get("key"), "&group_id=", shop_id].join("")).success(function (data) {
             $scope.shop_routers = data.results;
+
+            $http.get([window.API.WIFICAT.IS_ONLINE, "?router_mac=", data.results[0].mac].join("")).success(function (data) {
+                if (data.online_status == "online") {
+                    $scope.isonline = "在线"
+                }
+                else {
+                    $scope.isonline = "离线"
+                }
+            })
         });
+
+
     };
     show_bindRouters();
 
@@ -209,10 +579,10 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
             "group": shop_id,
             "router": $scope.bind_router
         }).success(function (data) {
-            alert(data.msg);
-            show_bindRouters();
-            show_selectRouters();
-        })
+                alert(data.msg);
+                show_bindRouters();
+                show_selectRouters();
+            })
             .error(function (data) {
                 alert(data.msg);
             })
@@ -252,40 +622,49 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     reload_blackwhite();
 
     $scope.goToShopManagement = function () {
-        $window.location.href = ["#/main/shop_management_routers?id=", shop_id].join("")
+        $window.location.href = ["#/main/shop_management_routers?id=", $scope.group_id].join("")
     };
 
     $scope.router = {
-        "is_black": "1"
+        "is_black": "0"
     };
     $scope.router1 = {
-        "is_black": "1"
+        "is_black": "0"
     };
     $scope.add_mac = function (data) {
         data.router = router_id;
         data.content_type = "0";
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            alert("添加成功");
-            reload_blackwhite();
-        })
+                alert("添加成功");
+                reload_blackwhite();
+            })
+            .error(function (data) {
+                alert(data.msg);
+            })
     };
     $scope.add_domain = function (data) {
         data.router = router_id;
         data.content_type = "1";
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            alert("添加成功");
-            reload_blackwhite();
-        })
+                alert("添加成功");
+                reload_blackwhite();
+            })
+            .error(function (data) {
+                alert(data.msg);
+            })
     };
     $scope.delete = function (id) {
         var ids = [id];
         console.log(ids);
         $http.delete([window.API.ROUTER.REMOVE_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&ids=", ids.join()].join("")).success(function (data) {
-            alert("删除成功");
-            reload_blackwhite();
-        })
+                alert("删除成功");
+                reload_blackwhite();
+            })
+            .error(function (data) {
+                alert(data.msg);
+            })
     };
     $scope.filter = {
         "content_type": "",
@@ -310,18 +689,20 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
         console.log(data);
 
+        $scope.group_id = data.router.router_groups.id;
+
         var timer;
 
         //路由器实时信息
-        var routerStatus = function() {
-            $http.get([window.API.WIFICAT.STATUS, "?key=", $cookieStore.get("key"), "&router_mac=", data.router.mac].join("")).success(function (data) {
-                $scope.wificat = data;
-                $scope.upTime = parseInt(data.basicInformation.upTime / 60);
-                timer = $timeout(function(){
-                    routerStatus();
-                },3000)
-            })
-                .error(function(data){
+        var routerStatus = function () {
+            $http.get([window.API.WIFICAT.STATUS, "?router_mac=", data.router.mac].join("")).success(function (data) {
+                    $scope.wificat = data;
+                    $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                    timer = $timeout(function () {
+                        routerStatus();
+                    }, 3000)
+                })
+                .error(function (data) {
                     $scope.error_msg = data.msg;
                 });
         };
@@ -334,15 +715,13 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
 
         //默认认证方式
         if (data.login_type == "手机号认证") {
-            $scope.login_type=1;
+            $scope.login_type = 1;
         }
         else if (data.login_type == "微信认证") {
-            $scope.login_type=2;
+            $scope.login_type = 2;
         }
-        else if(data.login_type == "免认证") {
-            $scope.login_type=3;
-        }else{
-            ;
+        else if (data.login_type == "免认证") {
+            $scope.login_type = 3;
         }
         //默认认证时间
         if (data.auth_period <= 60) {
@@ -361,29 +740,29 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         }
     });
 
-    $timeout(function(){
-        angular.element('a[href="#home"]').click(function(e){
+    $timeout(function () {
+        angular.element('a[href="#home"]').click(function (e) {
             e.preventDefault();
         });
-        angular.element('a[href="#profile"]').click(function(e){
+        angular.element('a[href="#profile"]').click(function (e) {
             e.preventDefault();
         });
-    },1000);
+    }, 1000);
 
     var loginType;
     $scope.changeLoginType = function (num) {
         console.log(num);
-        if(num==1){
-            loginType="手机号认证";
-        }else if(num==2){
-            loginType="微信认证";
-        }else{
-            loginType="";
+        if (num == 1) {
+            loginType = "手机号认证";
+        } else if (num == 2) {
+            loginType = "微信认证";
+        } else {
+            loginType = "";
         }
-        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType}).success(function(data){
-            alert(data.msg);
-        })
-            .error(function(data){
+        $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType}).success(function (data) {
+                alert(data.msg);
+            })
+            .error(function (data) {
                 alert(data.msg)
             });
     };
@@ -395,9 +774,9 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             "auth_period": times,
             "auth_limit_times": data.num
         }).success(function (data) {
-            alert(data.msg);
-        })
-            .error(function(data){
+                alert(data.msg);
+            })
+            .error(function (data) {
                 alert(data.msg);
             })
     };
@@ -422,10 +801,15 @@ iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cook
         })
             .error(function(data){
                 alert(data.errmsg);
+                alert(data.msg);
+                location.href = ["#/main/details?router_id=", router_id].join("");
+            })
+            .error(function (data) {
+                alert(data.msg);
             })
     };
-    $scope.routerDetails = function(){
-        location.href = ["#/main/details?router_id=",router_id].join("");
+    $scope.routerDetails = function () {
+        location.href = ["#/main/details?router_id=", router_id].join("");
     }
 }]);
 
@@ -444,23 +828,22 @@ iCloudController.controller("BusinessInfoController", ["$scope", "$http", "$cook
     }]);
 
 
-iCloudController.controller("CreateBusinessController", ["$scope", "$http", "$cookieStore", "$window", "$province", "$city", "$area",
-    function ($scope, $http, $cookieStore, $window, $province, $city, $area) {
-        var province = $province.get();
-        province.success(function (data) {
-            $scope.province1 = data;
+iCloudController.controller("CreateBusinessController", ["$scope", "$http", "$cookieStore", "$window", "$province", "$city", "$area", "$districts",
+    function ($scope, $http, $cookieStore, $window, $province, $city, $area, $districts) {
+
+        $districts.get({adcode: "100000"}).success(function (data) {
+            $scope.provinces = data[0].subdistricts;
         });
-        $scope.select_p = function (index) {
-            var city = $city.get(index);
-            city.success(function (data) {
-                $scope.city1 = data;
-            })
+
+        $scope.select_p = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.cities = data[0].subdistricts;
+            });
         };
-        $scope.select_c = function (index) {
-            var area = $area.get(index);
-            area.success(function (data) {
-                $scope.area1 = data;
-            })
+        $scope.select_c = function (id) {
+            $districts.get({id: id}).success(function (data) {
+                $scope.areas = data[0].subdistricts;
+            });
         };
 
         $scope.submit = function () {
@@ -470,7 +853,7 @@ iCloudController.controller("CreateBusinessController", ["$scope", "$http", "$co
                     alert(data.msg);
                     location.href = "#/main/agent_manage";
                 }).error(function (data) {
-                    $window.alert(data.msg)
-                });
+                $window.alert(data.msg)
+            });
         };
     }]);

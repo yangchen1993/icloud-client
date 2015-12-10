@@ -200,6 +200,11 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/marketing/new-sms-template.html",
             controller: "NewSmsTemplateController"
         })
+        .state("main.customers-flow", {
+            url: "/customers-flow",
+            templateUrl: "template/center/marketing/customers-flow.html",
+            controller: "CustomersFlowController"
+        })
         .state("main.sms-target", {
             url: "/sms-target",
             templateUrl: "template/center/marketing/sms-target.html",
@@ -209,6 +214,11 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             url: "/customers",
             templateUrl: "template/center/marketing/customers.html",
             controller: "CustomersController"
+        })
+        .state("main.onlines", {
+            url: "/onlines",
+            templateUrl: "template/center/marketing/onlines.html",
+            controller: "OnlinesController"
         })
         .state("main.account-details", {
             url: "/account-details",
@@ -240,5 +250,10 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             url: "/js-code",
             templateUrl: "template/center/jsads/js-code.html",
             controller: "JsCodeController"
+        })
+        .state("main.help-files", {
+            url: "/help-files",
+            templateUrl: "template/center/help-files.html",
+            controller: "FileController"
         })
 });

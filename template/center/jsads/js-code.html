@@ -1,8 +1,11 @@
-<div class="container-fluid">
-    <div class="row">
+<div class="table_outside row">
+    <ol class="breadcrumb">
+        <li>JS广告管理</li>
+        <li class="active">JS代码</li>
+    </ol>
+
         <div class="col-xs-12">
-            <textarea name="" id="" cols="100" rows="10"></textarea><br/>
-            <button>保存</button>
+            <textarea class="form-control" style="width: 60%;height:200px;margin-bottom: 20px" ng-model="JS.code"></textarea>
+            <button class="button button-royal" ng-click="submit_JS(JS)">保存</button>
         </div>
-    </div>
 </div>

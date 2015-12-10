@@ -1,3 +1,8 @@
+<style>
+    .container-fluid{
+        min-width: 770px !important;
+    }
+</style>
 <div ng-include="'/template/top/header.html'"></div>
 <div>
     <div class="nav_out">
@@ -23,7 +28,7 @@
             <div style="border-top:1px solid #2c303b"></div>
             <div style="border-top:1px solid #535a69"></div>
 
-            <ul class="function_menu" style="color: #fff">
+            <ul class="function_menu">
                 <li ng-show="auth_nav">
                     <div class="open_menu">
                         <div></div>
@@ -47,7 +52,7 @@
                 <li>
                     <div class="open_menu">
                         <div></div>
-                        <a><span class="fa fa-user" style="margin-right: 10px"></span>个人信息</a>
+                        <a><span class="fa fa-user"></span>个人信息</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
@@ -67,7 +72,7 @@
                 <li ng-show="eq_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".eq_management"><span class="glyphicon glyphicon-cog" style="margin-right: 10px"></span>设备管理</a>
+                        <a ui-sref=".eq_management"><span class="glyphicon glyphicon-cog"></span>设备管理</a>
                         <i class="glyphicon glyphicon-triangle-right" ng-if="delivery_nav || version_nav"></i>
                     </div>
                     <ul class="menu_child">
@@ -87,7 +92,7 @@
                 <li ng-show="agent_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".agent-manage"><span class="fa fa-group" style="margin-right: 10px"></span>代理商管理</a>
+                        <a ui-sref=".agent-manage"><span class="fa fa-group"></span>代理商管理</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
@@ -103,7 +108,7 @@
                 <li ng-show="business_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".business-manage"><span class="glyphicon glyphicon-user" style="margin-right: 10px"></span>商户管理</a>
+                        <a ui-sref=".business-manage"><span class="glyphicon glyphicon-user"></span>商户管理</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
@@ -119,17 +124,25 @@
                 <li ng-show="marketing_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a href="javascript:"><span class="fa fa-bullhorn" style="margin-right: 10px"></span>营销中心</a>
+                        <a><span class="fa fa-bullhorn"></span>营销中心</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
                         <li>
                             <div></div>
-                            <a ui-sref="main.sms-templates">短信群发</a>
+                            <a ui-sref="main.customers">用户统计</a>
+                        </li>
+                        <li class="hidden">
+                            <div></div>
+                            <a ui-sref="main.onlines">在线用户</a>
                         </li>
                         <li>
                             <div></div>
-                            <a ui-sref="main.customers">用户统计</a>
+                            <a ui-sref="main.customers-flow">流量统计</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a ui-sref="main.sms-templates">短信群发</a>
                         </li>
                     </ul>
                 </li>
@@ -139,7 +152,7 @@
                 <li ng-show="wallet_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".wallet"><span class="glyphicon glyphicon-usd" style="margin-right: 10px"></span>我的钱包</a>
+                        <a ui-sref=".wallet"><span class="glyphicon glyphicon-usd"></span>我的钱包</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
@@ -159,7 +172,7 @@
                 <li ng-show="shop_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref=".shop_management"><span class="fa fa-cogs" style="margin-right: 10px"></span>店铺管理</a>
+                        <a ui-sref=".shop_management"><span class="fa fa-cogs"></span>店铺管理</a>
                     </div>
                 </li>
                 <div style="border-top:1px solid #2c303b" ng-show="shop_nav"></div>
@@ -168,7 +181,7 @@
                 <li ng-show="ads_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a><span class="glyphicon glyphicon-text-background" style="margin-right: 10px"></span>我的广告</a>
+                        <a><span class="glyphicon glyphicon-text-background"></span>我的广告</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
@@ -188,7 +201,7 @@
                 <li ng-show="account_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref="main.account-details"><span class="fa fa-credit-card" style="margin-right: 10px"></span>广告分账</a>
+                        <a ui-sref="main.account-details"><span class="fa fa-credit-card"></span>广告分账</a>
                     </div>
                 </li>
                 <div style="border-top:1px solid #2c303b" ng-show="account_nav"></div>
@@ -197,7 +210,8 @@
                 <li ng-show="js_ad_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a style="cursor: pointer;"><span class="fa fa-credit-card" style="margin-right: 10px"></span>JS广告管理</a>
+                        <a><span class="glyphicon glyphicon-pushpin"></span>JS广告管理</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
                         <li>
@@ -216,33 +230,21 @@
                 </li>
                 <div style="border-top:1px solid #2c303b" ng-show="js_ad_nav"></div>
                 <div style="border-top:1px solid #535a69" ng-show="js_ad_nav"></div>
+                <li ng-show="helpfiles">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref="main.help-files"><span class="fa fa-folder"></span>帮助文档</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
-    <!--<div id="bianqian"></div>-->
-    <!--<div class="time_show">-->
-        <!--<div>-->
-            <!--<p class="text-center"></p>-->
-
-            <!--<p class="text-center"><span class="h2" style="font-weight: 600"></span><span class="pull-right"></span></p>-->
-        <!--</div>-->
-        <!--<div>-->
-            <!--<p class="text-center"></p>-->
-
-            <!--<p class="text-center"><span class="h2" style="font-weight: 600"></span><span class="h2"-->
-                                                                                          <!--style="font-weight: 600"></span>-->
-            <!--</p>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <div ui-view="" class="container-fluid content" style="background-color: #ebebed"></div>
-
+        <div ui-view="" class="content container-fluid"></div>
 </div>
 
 <script>
     $(".open_menu").click(function () {
         $(this).siblings(".menu_child").slideToggle("fast");
-        $(this).siblings(".menu_child").css("background-color", "#2a2f38");
         if ($(this).find("i").hasClass("glyphicon glyphicon-triangle-right")) {
             $(this).find("i").attr("class", "glyphicon glyphicon-triangle-bottom");
         }
@@ -269,27 +271,5 @@
             $('.radius:first-of-type').remove();
         }, 3000);
     });
-
-//    var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-//    var myDate = new Date();
-//    $(".time_show").find("span")[0].innerHTML = myDate.getDate();
-//    $(".time_show").find("span")[1].innerHTML = myDate.getMonth() + 1 + "月";
-//    $(".time_show").find("span")[2].innerHTML = myDate.getHours() + ":";
-//    $(".time_show").find("span")[3].innerHTML = myDate.getMinutes();
-//    $(".time_show").find("p")[0].innerHTML = week[myDate.getDay()];
-//    $(".time_show").find("p")[2].innerHTML = myDate.toLocaleTimeString().substr(0, 2);
-//    window.time_self = setInterval(function () {
-//        var myDate = new Date();
-//        $(".time_show").find("span")[0].innerHTML = myDate.getDate();
-//        $(".time_show").find("span")[1].innerHTML = myDate.getMonth() + 1 + "月";
-//        $(".time_show").find("span")[2].innerHTML = myDate.getHours() + ":";
-//        $(".time_show").find("span")[3].innerHTML = myDate.getMinutes();
-//        $(".time_show").find("p")[0].innerHTML = week[myDate.getDay()];
-//        $(".time_show").find("p")[2].innerHTML = myDate.toLocaleTimeString().substr(0, 2);
-//    }, 1000);
-//
-//    $("#bianqian").click(function () {
-//        $(".time_show").toggle();
-//    });
 
 </script>

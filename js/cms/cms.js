@@ -147,8 +147,9 @@ function addEditItem(id, type) {
     var _edit = $('#' + id + ' .edit');
     _edit.on('click', function () {
         $('.editArea *').remove();
+        $('.editArea').show();
         var editItem = $('.edit-items .' + type).html();
-        editArea.append('<div class="' + type + '" data-edit-id="' + id + '">' + editItem + '</div>');
+        editArea.append('<a class="close" style="margin-top:10px;margin-right:10px;" href="javascript:;" onclick="$(this).parent().hide()">&times;</a><div class="' + type + '" data-edit-id="' + id + '">' + editItem + '</div>');
         //文字功能
         switch (type) {
             case 'text':
@@ -181,7 +182,11 @@ function addEditItem(id, type) {
         }
     });
 }
-
+$.get(window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS + '?key=' + $.cookie("key").replace(/\"/g, "")+"&id="+ourShop).success(function (data) {
+    var area=data.results[0].province_object.name+data.results[0].city_object.name+data.results[0].area_object.name+data.results[0].district_object.name;
+    console.log(area);
+    $('span[data-first-area="userShopArea"]').text(area);
+});
 
 $.get(window.API.CMS.GET_DATA + '?key=' + $.cookie("key").replace(/\"/g, "") + '&group_id=' + ourShop).success(function (data) {
     if (data) {

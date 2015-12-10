@@ -421,7 +421,7 @@ iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cook
             location.href = ["#/main/details?router_id=",router_id].join("");
         })
             .error(function(data){
-                alert(data.msg);
+                alert(data.errmsg);
             })
     };
     $scope.routerDetails = function(){

@@ -165,6 +165,8 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
             }
         });
 
+        var distrcitLoadCompleted = false;
+
 
         var districtWatcher = $scope.$watch('shop.district', function (data) {
             if (data) {
@@ -196,17 +198,30 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
                     console.log("district changed:", changed_address.join(""));
 
                     map.getGeocoder(changed_address.join(""));
+
+                    distrcitLoadCompleted = true;
                 })
             }
         });
 
         var addressWather = $scope.$watch('shop.address', function (data) {
             if (data) {
-                changed_address[4] = "";
+                var addressPromise = function () {
+                    return $q(function (r, j) {
+                        var i = setInterval(function () {
+                            clearInterval(i);
+                            r();
+                        }, 200)
+                    })
+                };
 
-                changed_address[4] = data;
+                addressPromise.then(function () {
+                    changed_address[4] = "";
 
-                console.log("address changed:", changed_address.join(""));
+                    changed_address[4] = data;
+
+                    console.log("address changed:", changed_address.join(""));
+                })
             }
         });
 
@@ -416,6 +431,8 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
             }
         });
 
+        var districtLoadCompleted = false;
+
 
         var districtWatcher = $scope.$watch('edit_shop.district', function (data) {
             if (data) {
@@ -447,17 +464,33 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
                     console.log("district changed:", changed_address.join(""));
 
                     map.getGeocoder(changed_address.join(""));
+
+                    districtLoadCompleted = true;
                 })
             }
         });
 
         var addressWather = $scope.$watch('edit_shop.address', function (data) {
             if (data) {
-                changed_address[4] = "";
 
-                changed_address[4] = data;
+                var addressPromise = function () {
+                    return $q(function (j, c) {
+                        var i = setInterval(function () {
+                            if (districtLoadCompleted) {
+                                clearInterval(i);
+                                j()
+                            }
+                        }, 200)
+                    })
+                };
 
-                console.log("address changed:", changed_address.join(""));
+                addressPromise.then(function () {
+                    changed_address[4] = "";
+
+                    changed_address[4] = data;
+
+                    console.log("address changed:", changed_address.join(""));
+                })
             }
         });
 
@@ -512,14 +545,14 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
         $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP, "?key=", $cookieStore.get("key"), "&group_id=", shop_id].join("")).success(function (data) {
             $scope.shop_routers = data.results;
 
-                $http.get([window.API.WIFICAT.IS_ONLINE,"?router_mac=",data.results[0].mac].join("")).success(function(data){
-                    if(data.online_status == "online"){
-                        $scope.isonline = "在线"
-                    }
-                    else{
-                        $scope.isonline = "离线"
-                    }
-                })
+            $http.get([window.API.WIFICAT.IS_ONLINE, "?router_mac=", data.results[0].mac].join("")).success(function (data) {
+                if (data.online_status == "online") {
+                    $scope.isonline = "在线"
+                }
+                else {
+                    $scope.isonline = "离线"
+                }
+            })
         });
 
 
@@ -603,9 +636,9 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         data.content_type = "0";
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            alert("添加成功");
-            reload_blackwhite();
-        })
+                alert("添加成功");
+                reload_blackwhite();
+            })
             .error(function (data) {
                 alert(data.msg);
             })
@@ -615,9 +648,9 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         data.content_type = "1";
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            alert("添加成功");
-            reload_blackwhite();
-        })
+                alert("添加成功");
+                reload_blackwhite();
+            })
             .error(function (data) {
                 alert(data.msg);
             })
@@ -626,9 +659,9 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         var ids = [id];
         console.log(ids);
         $http.delete([window.API.ROUTER.REMOVE_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&ids=", ids.join()].join("")).success(function (data) {
-            alert("删除成功");
-            reload_blackwhite();
-        })
+                alert("删除成功");
+                reload_blackwhite();
+            })
             .error(function (data) {
                 alert(data.msg);
             })

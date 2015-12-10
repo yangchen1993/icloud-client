@@ -141,8 +141,9 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
 
                     var districtsPromise = function () {
                         return $q(function (r, j) {
-                            setInterval(function () {
+                            var i = setInterval(function () {
                                 if (districtLoadComplete) {
+                                    clearInterval(i);
                                     r()
                                 }
                             }, 200)

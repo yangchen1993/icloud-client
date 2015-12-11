@@ -77,7 +77,7 @@
                 <td ng-bind="p.mac"></td>
                 <td ng-bind="p.ssid"></td>
                 <td ng-bind="p.register_member_numbers"></td>
-                <td ng-bind="p.create_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
+                <td ng-bind="p.create_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
                 <td>
                     <a class="btn btn-xs btn-info" href="javascript:" ng-click="see_router(p.id)">查看</a>
                     <a ng-if="deviceManage.editRouterMenu" class="btn btn-xs btn-info" href="#/main/edit-device?router_id={{ p.id }}">编辑</a>

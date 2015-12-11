@@ -26,7 +26,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.marketing_nav = false;
                 $scope.wallet_nav = false;
                 $scope.js_ad_nav = true;
-                $rootScope.update_ssid = false
+                $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;
                 $rootScope.deviceManage = {
                     "addRouterMenu": true,
@@ -53,7 +53,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.wallet_nav = true;
                 $scope.info_nav = true;
                 $scope.adsType_nav = 1;
-                $rootScope.update_ssid = true
+                $rootScope.update_ssid = true;
                 $rootScope.isShow_balckwhite = true;
                 $rootScope.putAdSearch = {
                     "showBusinessLabel": false,
@@ -76,11 +76,11 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.wallet_nav = true;
                 $scope.info_nav = true;
                 $scope.adsType_nav = 2;
-                $rootScope.update_ssid = false
+                $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;
                 $rootScope.putAdSearch = {
                     "showBusinessLabel": true,
-                    "showShopLabel": true
+                    "showShopLabel": false
                 }
             }
         });

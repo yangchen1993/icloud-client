@@ -49,15 +49,14 @@
                 <tbody>
                 <tr ng-repeat="i in grid.results">
                     <td>
-                        <a href="#/main/routers_details?id={{i.id}}"><span
-                                ng-bind="i.ssid"></span></a>
+                        <span ng-bind="i.ssid"></span>
                     </td>
                     <td>
-                        <a href="#/main/routers_details?id={{i.id}}"><span
-                                ng-bind="i.mac"></span></a>
+                        <span ng-bind="i.mac"></span>
                     </td>
-                    <td><a href="#/main/shop_management_routers?id={{i.router_groups.id}}"><span
-                            ng-bind="i.router_groups.name"></span></a></td>
+                    <td>
+                        <span ng-bind="i.router_groups.name"></span>
+                    </td>
                     <td ng-bind="i.cash | currency: '￥'"></td>
                 </tr>
                 </tbody>

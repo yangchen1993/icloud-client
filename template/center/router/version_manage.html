@@ -22,7 +22,7 @@
                 <td ng-bind="v.description"></td>
                 <td ng-bind="(v.size/(1024*1024) | number:2) + 'MB'"></td>
                 <td ng-bind="v.creator"></td>
-                <td ng-bind="v.create_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
+                <td ng-bind="v.create_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
                 <td>
                     <button class="btn btn-xs btn-info">升级</button>
                     <button class="btn btn-xs btn-danger" ng-click="remove(v.id)">删除</button>

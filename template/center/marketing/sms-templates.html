@@ -45,7 +45,7 @@
                 <td ng-bind="t.name"></td>
                 <td ng-bind="t.template"></td>
                 <td ng-bind="t.sign"></td>
-                <td ng-bind="t.create_time | date:'yyyy-MM-dd hh:mm:ss'"></td>
+                <td ng-bind="t.create_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
                 <td>
                     <button class="btn btn-xs btn-info" ng-click="sendTemplate(t.id)">群发</button>
                     <button class="btn btn-xs btn-danger" ng-click="removeTemplate(t.id)">删除</button>

@@ -76,11 +76,11 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.wallet_nav = true;
                 $scope.info_nav = true;
                 $scope.adsType_nav = 2;
-                $rootScope.update_ssid = false
+                $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;
                 $rootScope.putAdSearch = {
                     "showBusinessLabel": true,
-                    "showShopLabel": true
+                    "showShopLabel": false
                 }
             }
         });

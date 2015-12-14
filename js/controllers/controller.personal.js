@@ -160,13 +160,20 @@ iCloudController.controller("PersonalInfoController", ["$scope", "$http", "$cook
 
 
         $scope.saveInfo = function (data) {
-            $http.put([$window.API.USER.EDIT_CURRENT_USER_INFO, "?key=", $cookieStore.get("key")].join(""), data)
-                .success(function (data) {
-                    getCurrentUserInfo();
-                })
-                .error(function () {
-                    $window.alert(transform_error_message(data.msg));
-                })
+            if(!$scope.userInfo.username||!$scope.userInfo.name||!$scope.userInfo.tel||!$scope.userInfo.email||!$scope.userInfo.province||!$scope.userInfo.city||!$scope.userInfo.area){
+                alert("资料填写不完整！")
+            }
+            else{
+                $http.put([$window.API.USER.EDIT_CURRENT_USER_INFO, "?key=", $cookieStore.get("key")].join(""), data)
+                    .success(function (data) {
+                        alert(data.msg);
+                        getCurrentUserInfo();
+                    })
+                    .error(function () {
+                        $window.alert(transform_error_message(data.msg));
+                    })
+            }
+
         };
 
         $districts.get({"adcode": 100000})

@@ -164,18 +164,6 @@ p, ul, ol, ul, .h3 {
 .open_menu:hover>a{
     color: #fff;
 }
-/*.open_menu > div {*/
-    /*width: 2%;*/
-    /*height: 56px;*/
-    /*background-color: #fe5722;*/
-    /*float: left;*/
-    /*display: none;*/
-/*}*/
-
-/*.open_menu:hover div {*/
-    /*display: inline;*/
-/*}*/
-
 .open_menu > i {
     margin:  20px;
     float:right;
@@ -276,8 +264,9 @@ p, ul, ol, ul, .h3 {
 }
 
 thead {
-    background-color: #eceeef;
     font-family: "Microsoft YaHei";
+    background-color: #8a8bc4;
+    color: #fff
 }
 
 .footer {

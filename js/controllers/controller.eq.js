@@ -269,7 +269,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
             console.log(data);
             $scope.routers_all = data;
-
+            $scope.group_id = data.router.router_groups.id;
 
             var timer;
 
@@ -364,7 +364,7 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
     };
 
     $scope.weixin_load = function () {
-        location.href = ["#/main/weixin_config?router_id=", router_id].join("");
+        location.href = ["#/main/weixin_config?group_id=", $scope.group_id].join("");
     }
 
 }]);

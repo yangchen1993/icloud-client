@@ -35,6 +35,13 @@
                     <span ng-show="currentSort['times'] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
                 </td>
+                <td id="type_phone" ng-click="sort('type_phone')">
+                    手机型号
+                    <span ng-show="currentSort['type_phone'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['type_phone'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
                 <td id="create_time" ng-click="sort('create_time')">
                     首次访问时间
                     <span ng-show="currentSort['create_time'] === true"
@@ -57,6 +64,7 @@
                 <td ng-bind="m.member.mac"></td>
                 <td ng-bind="m.member.wechat"></td>
                 <td ng-bind="m.times + '次'"></td>
+                <td ng-bind="m.member.brand"></td>
                 <td ng-bind="m.create_time | date: 'yyyy-MM-dd HH:mm:ss'"></td>
                 <td ng-bind="m.modified_time | date: 'yyyy-MM-dd HH:mm:ss'"></td>
             </tr>

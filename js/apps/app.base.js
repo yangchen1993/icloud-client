@@ -200,10 +200,25 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/marketing/new-sms-template.html",
             controller: "NewSmsTemplateController"
         })
+        .state("main.customers-list", {
+            url: "/customers-list",
+            templateUrl: "template/center/marketing/customers-list.html",
+            controller: "CustomersListController"
+        })
         .state("main.customers-flow", {
             url: "/customers-flow",
             templateUrl: "template/center/marketing/customers-flow.html",
             controller: "CustomersFlowController"
+        })
+        .state("main.customers-loyalty", {
+            url: "/customers-loyalty",
+            templateUrl: "template/center/marketing/customers-loyalty.html",
+            controller: "CustomersLoyaltyController"
+        })
+        .state("main.customers-lost", {
+            url: "/customers-lost",
+            templateUrl: "template/center/marketing/customers-lost.html",
+            controller: "CustomersLostController"
         })
         .state("main.sms-target", {
             url: "/sms-target",

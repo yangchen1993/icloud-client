@@ -59,7 +59,7 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
 
             var roleName = -1;
 
-            if (index > 0){
+            if (index > 0) {
                 roleName = $scope.agent_grade[index].name;
             }
 
@@ -91,18 +91,24 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
 
 
         $scope.submit = function () {
-            console.log($scope.agent);
-            $http.post([window.API.USER.CREATE_AGENT, "?key=", $cookieStore.get("key")].join(""), $scope.agent).success(function (data) {
-                alert(data.msg);
-                $window.location.href = "#/main/agent-manage";
-            });
+            $http.post([window.API.USER.CREATE_AGENT, "?key=", $cookieStore.get("key")].join(""), $scope.agent)
+                .success(function (data) {
+                    $window.location.href = "#/main/agent-manage";
+                })
+                .error(function (data) {
+                    $window.alert(data.msg);
+                });
         };
     }]);
 
 iCloudController.controller("AgentInfoController", ['$scope', '$grid', '$http', '$cookieStore', '$window',
     function ($scope, $grid, $http, $cookieStore, $window) {
-        var tel = get_param(location.href);
-        $http.get([$window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&tel=", tel].join("")).success(function (data) {
-            $scope.agent = data;
-        });
+        var tel = get_param(location.href, "unique");
+        $http.get([$window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&unique=", tel].join(""))
+            .success(function (data) {
+                $scope.agent = data;
+            })
+            .error(function (data) {
+                $window.alert(data.msg)
+            });
     }]);

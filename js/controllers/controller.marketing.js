@@ -5,7 +5,7 @@ iCloudController.controller("SmsTemplatesController", ["$scope", "$http", "$cook
     function ($scope, $http, $cookieStore, $grid, $window) {
         $grid.initial($scope, $window.API.MARKETING.GET_CURRENT_USER_SMS_TEMPLATES);
         $scope.sendTemplate = function (id) {
-            $window.location.href = ["#/main/sms-target?id=", id].join("");
+            $window.location.href = ["#/main/sms-target?template_id=", id].join("");
         };
         $scope.removeTemplate = function (id) {
             if (confirm("确定删除?")) {
@@ -43,7 +43,7 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
 
         $checkBox.enableCheck("sms-targets");
 
-        var template_id = get_param($window.location.href);
+        var template_id = get_param($window.location.href, "template_id");
 
         $scope.send = function () {
             var numbers = [];
@@ -75,7 +75,7 @@ iCloudController.controller("CustomersController", ["$scope", "$http", "$cookieS
 
     }]);
 
-iCloudController.controller("CustomersListController",['$scope',function($scope){
+iCloudController.controller("CustomersListController", ['$scope', function ($scope) {
 
 }]);
 

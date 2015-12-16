@@ -76,7 +76,7 @@ iCloudController.controller("CreateAdsController", ["$scope", "$http", "$categor
 
 iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$grid", "$checkBox", "$category", "$cookieStore",
     function ($scope, $http, $window, $grid, $checkBox, $category, $cookieStore) {
-        var ad_id = get_param(window.location.href);
+        var ad_id = get_param(window.location.href, "ad_id");
         $grid.initial($scope, $window.API.ROUTER.GET_CURRENT_USER_ROUTERS, {"groups_id__isnull": "False"});
         $scope.sjTouFang = function () {
             var data = getPutConditions();
@@ -144,7 +144,7 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
             });
 
             angular.forEach(shopCheckbox, function (s) {
-                if ($(s).prop("checked")){
+                if ($(s).prop("checked")) {
                     checkedShop.push($(s).val())
                 }
             });
@@ -157,7 +157,7 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
             if (checkedCategory.length > 0) {
                 data.groups__category__in = checkedCategory.join(",");
             }
-            if (checkedShop.length > 0){
+            if (checkedShop.length > 0) {
                 data.groups__id__in = checkedShop.join(",");
             }
 

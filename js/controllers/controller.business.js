@@ -11,13 +11,13 @@ iCloudController.controller("ShopManagementController", ["$scope", "$http", "$gr
         };
         show_shop();
         $scope.see_routers = function (id) {
-            $window.location.href = ["#/main/shop_management_routers?id=", id].join("");
+            $window.location.href = ["#/main/shop_management_routers?group_id=", id].join("");
         };
         $scope.editShopIndex = function (id) {
-            $window.location.href = ["#/main/ourshop?id=", id].join("");
+            $window.location.href = ["#/main/ourshop?group_id=", id].join("");
         };
         $scope.edit_shop = function (id) {
-            $window.location.href = ["#/main/edit_shop?shop_id=", id].join("");
+            $window.location.href = ["#/main/edit_shop?group_id=", id].join("");
         };
         $scope.delete_shop = function (id) {
             if (confirm("确定删除?")) {
@@ -28,8 +28,8 @@ iCloudController.controller("ShopManagementController", ["$scope", "$http", "$gr
         }
     }]);
 
-iCloudController.controller("CreateShopController", ["$scope", "$http", "$category", "$cookieStore", "$districts", "$map", "$q",
-    function ($scope, $http, $category, $cookieStore, $districts, $map, $q) {
+iCloudController.controller("CreateShopController", ["$scope", "$http", "$category", "$cookieStore", "$districts", "$map", "$q", "$window",
+    function ($scope, $http, $category, $cookieStore, $districts, $map, $q, $window) {
         var map = $map.initial("lbsMapContainer");
         var changed_address = ["", "", "", "", ""];
         var getDistrcits = function () {
@@ -227,9 +227,9 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
 
 
         $category.get().success(function (data) {
-            $scope.shop.category = data[0].name;
-            $scope.category = data;
-        })
+                $scope.shop.category = data[0].name;
+                $scope.category = data;
+            })
             .error(function (data) {
                 console.log(data);
             });
@@ -267,26 +267,25 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
         $scope.submit = function (shop) {
             shop.img = imgData;
             $http.post([window.API.GROUP.NEW_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
-                alert(data.msg);
-                location.href = "#/main/shop_management";
-            })
+                    $window.location.href = "#/main/shop_management";
+                })
                 .error(function (data) {
-                    alert(data.msg);
+                    $window.alert(data.msg);
                 })
         }
     }]);
 
-iCloudController.controller("EditShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", "$districts", "$map", "$q",
-    function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore, $districts, $map, $q) {
-        var id = get_param(window.location.href);
-        $http.get([window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
+iCloudController.controller("EditShopController", ["$scope", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", "$districts", "$map", "$q", "$window",
+    function ($scope, $http, $category, $province, $city, $area, $trades, $cookieStore, $districts, $map, $q, $window) {
+        var id = get_param($window.location.href, "group_id");
+        $http.get([$window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
             .success(function (data) {
                 $scope.edit_shop = data.results[0];
 
             });
         $category.get().success(function (data) {
-            $scope.category = data;
-        })
+                $scope.category = data;
+            })
             .error(function (data) {
                 console.log(data);
             });
@@ -526,23 +525,22 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
         $scope.submit = function (shop) {
             shop.img = imgData;
             $http.put([window.API.GROUP.EDIT_GROUP, "?key=", $cookieStore.get("key")].join(""), shop).success(function (data) {
-                alert(data.msg);
-                location.href = "#/main/shop_management";
-            })
+                    $window.location.href = "#/main/shop_management";
+                })
                 .error(function (data) {
-                    console.log(data);
+                    $window.alert(data.msg);
                 })
         }
     }]);
 
 
 iCloudController.controller("ShopManagementRoutersController", ["$scope", "$window", "$http", "$category", "$province", "$city", "$area", "$trades", "$cookieStore", function ($scope, $window, $http, $category, $province, $city, $area, $trades, $cookieStore) {
-    var shop_id = get_param($window.location.href);
+    var group_id = get_param($window.location.href, "group_id");
     $scope.see_routers_details = function (id) {
-        $window.location.href = ["#/main/routers_details?router=", id].join("");
+        $window.location.href = ["#/main/routers_details?router_id=", id].join("");
     };
     var show_bindRouters = function () {
-        $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP, "?key=", $cookieStore.get("key"), "&group_id=", shop_id].join("")).success(function (data) {
+        $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP, "?key=", $cookieStore.get("key"), "&group_id=", group_id].join("")).success(function (data) {
             $scope.shop_routers = data.results;
 
             $http.get([window.API.WIFICAT.IS_ONLINE, "?router_mac=", data.results[0].mac].join("")).success(function (data) {
@@ -576,13 +574,13 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
 
     var bind = function () {
         $http.put([window.API.ROUTER.ROUTER_BIND, "?key=", $cookieStore.get("key")].join(""), {
-            "group": shop_id,
+            "group": group_id,
             "router": $scope.bind_router
         }).success(function (data) {
-            alert(data.msg);
-            show_bindRouters();
-            show_selectRouters();
-        })
+                alert(data.msg);
+                show_bindRouters();
+                show_selectRouters();
+            })
             .error(function (data) {
                 alert(data.msg);
             })
@@ -602,7 +600,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
 }]);
 
 iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$cookieStore", "$window", "$timeout", function ($scope, $http, $cookieStore, $window, $timeout) {
-    var router_id = get_param($window.location.href);
+    var router_id = get_param($window.location.href, "router_id");
     //放行设置
     var reload_blackwhite = function () {
         $scope.type = ["MAC", "域名"];
@@ -622,7 +620,7 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     reload_blackwhite();
 
     $scope.goToShopManagement = function () {
-        $window.location.href = ["#/main/shop_management_routers?id=", $scope.group_id].join("")
+        $window.location.href = ["#/main/shop_management_routers?group_id=", $scope.group_id].join("")
     };
 
     $scope.router = {
@@ -636,9 +634,9 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         data.content_type = "0";
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            alert("添加成功");
-            reload_blackwhite();
-        })
+                alert("添加成功");
+                reload_blackwhite();
+            })
             .error(function (data) {
                 alert(data.msg);
             })
@@ -648,20 +646,19 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         data.content_type = "1";
         data.enable = "1";
         $http.post([window.API.ROUTER.NEW_BLACK_WHITES, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            alert("添加成功");
-            reload_blackwhite();
-        })
+                alert("添加成功");
+                reload_blackwhite();
+            })
             .error(function (data) {
                 alert(data.msg);
             })
     };
     $scope.delete = function (id) {
         var ids = [id];
-        console.log(ids);
         $http.delete([window.API.ROUTER.REMOVE_BLACK_WHITES, "?key=", $cookieStore.get("key"), "&ids=", ids.join()].join("")).success(function (data) {
-            alert("删除成功");
-            reload_blackwhite();
-        })
+                alert("删除成功");
+                reload_blackwhite();
+            })
             .error(function (data) {
                 alert(data.msg);
             })
@@ -696,12 +693,12 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
         //路由器实时信息
         var routerStatus = function () {
             $http.get([window.API.WIFICAT.STATUS, "?router_mac=", data.router.mac].join("")).success(function (data) {
-                $scope.wificat = data;
-                $scope.upTime = parseInt(data.basicInformation.upTime / 60);
-                timer = $timeout(function () {
-                    routerStatus();
-                }, 3000)
-            })
+                    $scope.wificat = data;
+                    $scope.upTime = parseInt(data.basicInformation.upTime / 60);
+                    timer = $timeout(function () {
+                        routerStatus();
+                    }, 3000)
+                })
                 .error(function (data) {
                     $scope.error_msg = data.msg;
                 });
@@ -751,7 +748,6 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
 
     var loginType;
     $scope.changeLoginType = function (num) {
-        console.log(num);
         if (num == 1) {
             loginType = "手机号认证";
         } else if (num == 2) {
@@ -760,55 +756,50 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
             loginType = "";
         }
         $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType}).success(function (data) {
-            alert(data.msg);
-        })
+                alert(data.msg);
+            })
             .error(function (data) {
                 alert(data.msg)
             });
     };
     $scope.identify_submit = function (data) {
-        console.log(data);
         var times = parseInt(data.hour) * 60 + parseInt(data.minute);
         console.log(times);
         $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {
             "auth_period": times,
             "auth_limit_times": data.num
         }).success(function (data) {
-            alert(data.msg);
-        })
+                $window.alert(data.msg);
+            })
             .error(function (data) {
-                alert(data.msg);
+                $window.alert(data.msg);
             })
     };
 
     $scope.weixin_load = function () {
-        location.href = ["#/main/weixin_config?group_id=", $scope.group_id].join("");
+        $window.location.href = ["#/main/weixin_config?group_id=", $scope.group_id].join("");
     }
 
 }]);
 
 iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cookieStore", function ($scope, $http, $cookieStore) {
-    var group_id = get_param(location.href);
+    var group_id = get_param(location.href, "group_id");
     $http.get([window.API.WEIXIN.GET_WECHAT, "?group_id=", group_id, "&key=", $cookieStore.get("key")].join("")).success(function (data) {
-        console.log(data);
         $scope.weixin = data;
     });
     $scope.submit = function (weixin) {
-        console.log(weixin);
         $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key")].join(""), weixin).success(function (data) {
-            alert(data.msg);
-            location.href = ["#/main/details?router_id=", router_id].join("");
-        })
-            .error(function (data) {
-                alert(data.msg);
-                location.href = ["#/main/details?router_id=", router_id].join("");
+                $window.location.href = ["#/main/details?router_id=", router_id].join("");
             })
             .error(function (data) {
-                alert(data.msg);
+                $window.location.href = ["#/main/details?router_id=", router_id].join("");
+            })
+            .error(function (data) {
+                $window.alert(data.msg);
             })
     };
     $scope.routerDetails = function () {
-        location.href = ["#/main/details?router_id=", router_id].join("");
+        $window.location.href = ["#/main/details?router_id=", router_id].join("");
     }
 }]);
 
@@ -820,8 +811,8 @@ iCloudController.controller("BusinessManageController", ["$scope", "$http", "$co
 
 iCloudController.controller("BusinessInfoController", ["$scope", "$http", "$cookieStore", "$window",
     function ($scope, $http, $cookieStore, $window) {
-        var tel = get_param($window.location.href);
-        $http.get([window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&tel=", tel].join("")).success(function (data) {
+        var unique = get_param($window.location.href, "unique");
+        $http.get([window.API.USER.GET_USER_INFO_BY_TEL, "?key=", $cookieStore.get("key"), "&unique=", unique].join("")).success(function (data) {
             $scope.business = data;
         });
     }]);
@@ -846,13 +837,12 @@ iCloudController.controller("CreateBusinessController", ["$scope", "$http", "$co
         };
 
         $scope.submit = function () {
-            console.log($scope.business);
             $http.post([window.API.USER.CREATE_BUSINESS, "?key=", $cookieStore.get("key")].join(""), $scope.business)
-                .success(function (data) {
-                    alert(data.msg);
-                    location.href = "#/main/agent_manage";
-                }).error(function (data) {
+                .success(function () {
+                    $window.location.href = "#/main/agent_manage";
+                })
+                .error(function (data) {
                     $window.alert(data.msg)
-                });
+                })
         };
     }]);

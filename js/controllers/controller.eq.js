@@ -72,7 +72,7 @@ iCloudController.controller("NewDeviceController", ["$scope", "$http", "$cookieS
 
 iCloudController.controller("EditDeviceController", ["$scope", "$http", "$cookieStore", "$window",
     function ($scope, $http, $cookieStore, $window) {
-        var id = get_param($window.location.href);
+        var id = get_param($window.location.href, "router_id");
         $http.get([$window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
             .success(function (data) {
                 if (data.results.length > 0) {
@@ -156,11 +156,11 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
 
 iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', "$timeout", "$rootScope", function ($scope, $http, $cookieStore, $timeout) {
 
-    var router_id = get_param(window.location.href);
+    var router_id = get_param(window.location.href, "router_id");
     $scope.modify_ssid = function () {
         var name = prompt("请输入修改的WIFI名称", "");
         if (name) {
-            if(confirm("修改SSID将重启路由器，确定修改？")){
+            if (confirm("修改SSID将重启路由器，确定修改？")) {
                 $http.put([window.API.ROUTER.ROUTERS_SSID, "?key=", $cookieStore.get("key"), "&id=", router_id].join(""), {"ssid": name}).success(function (data) {
                         console.log(data);
                         get_routerBase();
@@ -269,7 +269,6 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         $http.get([window.API.ROUTER.GET_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router_id=", router_id].join("")).success(function (data) {
             console.log(data);
             $scope.routers_all = data;
-            $scope.group_id = data.router.router_groups.id;
 
             var timer;
 
@@ -656,9 +655,9 @@ iCloudController.controller("CreateDeliveryController", ["$scope", "$http", "$wi
         };
     }]);
 
-iCloudController.controller("DeliveryDetailsController", ["$scope", "$http", "$window", "$cookieStore", "$grid",
-    function ($scope, $http, $window, $cookieStore, $grid) {
-        var deliveryID = get_param($window.location.href);
+iCloudController.controller("DeliveryDetailsController", ["$scope", "$http", "$window", "$cookieStore",
+    function ($scope, $http, $window, $cookieStore) {
+        var deliveryID = get_param($window.location.href, "router_id");
         var getDeliveryInfo = function () {
             $http.get([$window.API.ROUTER.GET_CURRENT_USER_DELIVERIES, "?key=", $cookieStore.get("key"), "&id=", deliveryID].join(""))
                 .success(function (data) {

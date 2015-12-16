@@ -3,7 +3,7 @@
  */
 
 //window.HOST = "http://192.168.178.128:8802/api/";
-window.HOST = "http://mb.idianjia.cn:8801/api/";
+window.HOST = "http://mb.idianjia.cn:8802/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -154,14 +154,14 @@ window.API = {
 
         "GET_SHOP_AD": [window.HOST, "audits/audit_status/"].join(""),
 
-        "":[window.HOST, "adspaces/get_ad_spaces/"].join("")
+        "": [window.HOST, "adspaces/get_ad_spaces/"].join("")
     },
     "WIFICAT": {
         "STATUS": [window.HOST_WIFICAT, "routers/status/"].join(""), //路由器实时信息
 
-        "IS_ONLINE":[window.HOST_WIFICAT,"routers/online_status/"].join(""), //路由器在线状态
+        "IS_ONLINE": [window.HOST_WIFICAT, "routers/online_status/"].join(""), //路由器在线状态
 
-        "REBOOT":[window.HOST_WIFICAT,"reboot/"].join("")//路由器重启
+        "REBOOT": [window.HOST_WIFICAT, "reboot/"].join("")//路由器重启
     },
 
 
@@ -231,9 +231,26 @@ var transform_error_message = function (msg) {
     return msg
 };
 
-var get_param = function (href) {
-    var search_start = href.indexOf("=");
-    return href.slice(search_start + 1);
+var get_param = function (href, paraName) {
+    var index = href.indexOf("?");
+
+    var search = href.substring(index + 1);
+
+    var result = "";
+
+    angular.forEach(search.split("&"), function (value) {
+
+        var t = value.split("=");
+
+        if (t.length > 0) {
+            if (t[0] == paraName) {
+                result = t[1]
+            }
+        }
+
+    });
+
+    return result;
 };
 
 var replaceString = function (str, start, end, rep) {

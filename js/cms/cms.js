@@ -1,10 +1,9 @@
 var component = $(".component>div");//组件
-var pageArea = $("");//页面中部展示区
+var pageArea, conmponentItem = $("");//页面中部展示区
 var editArea = $(".editArea");//编辑区
-var editTemp = $(".editTemp")
-var conmponentItem = $("");
+var editTemp = $(".editTemp");
 var haveData = '';
-var ourShop = get_param(window.location.href);
+var ourShop = get_param(window.location.href, "id");
 function editText(id, type) {
     $('.color').minicolors({
         animationSpeed: 50,
@@ -131,10 +130,10 @@ function editAdress(id, type) {
 function editMap(id, type) {
     var editMapId = addId();
     $('div[data-edit-id=' + id + ']' + ' .dmap').attr('id', editMapId);
-    if($(id).attr("data-address")){
-        freshMap(id,editMapId,$(id).attr("data-address").split(","));
-    }else{
-        freshMap(id,editMapId,"");
+    if ($(id).attr("data-address")) {
+        freshMap(id, editMapId, $(id).attr("data-address").split(","));
+    } else {
+        freshMap(id, editMapId, "");
     }
 }
 
@@ -182,8 +181,8 @@ function addEditItem(id, type) {
         }
     });
 }
-$.get(window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS + '?key=' + $.cookie("key").replace(/\"/g, "")+"&id="+ourShop).success(function (data) {
-    var area=data.results[0].province_object.name+data.results[0].city_object.name+data.results[0].area_object.name+data.results[0].district_object.name;
+$.get(window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS + '?key=' + $.cookie("key").replace(/\"/g, "") + "&id=" + ourShop).success(function (data) {
+    var area = data.results[0].province_object.name + data.results[0].city_object.name + data.results[0].area_object.name + data.results[0].district_object.name;
     console.log(area);
     $('span[data-first-area="userShopArea"]').text(area);
 });
@@ -348,7 +347,7 @@ var user = {
     userId: 'b0d9abc8-d416-4b1d-b9d4-2bc82e48f774',
     address: '四川省成都市锦江区',
     telephone: 18780283005,
-    area: [104.06792346,30.67994285]
+    area: [104.06792346, 30.67994285]
 //            经度、纬度
 }
 
@@ -367,12 +366,12 @@ $('.saveImg').click(function () {
     alert('点击了额');
 
 });
-function loadMap(id){
-    var map = new AMap.Map(id,{
+function loadMap(id) {
+    var map = new AMap.Map(id, {
         resizeEnable: true,
         zoom: 13
     });
-    AMap.plugin('AMap.Geocoder',function() {
+    AMap.plugin('AMap.Geocoder', function () {
         var geocoder = new AMap.Geocoder({
             city: "010"//城市，默认：“全国”
         });
@@ -382,31 +381,31 @@ function loadMap(id){
         })
     });
 }
-function freshMap(id,editMapId,tlnglat) {
-    var map = new AMap.Map(editMapId,{
+function freshMap(id, editMapId, tlnglat) {
+    var map = new AMap.Map(editMapId, {
         resizeEnable: true,
         zoom: 13,
         center: tlnglat
     });
-    AMap.plugin('AMap.Geocoder',function(){
+    AMap.plugin('AMap.Geocoder', function () {
         var geocoder = new AMap.Geocoder({
             city: "010"//城市，默认：“全国”
         });
         var marker = new AMap.Marker({
-            map:map,
-            bubble:true
+            map: map,
+            bubble: true
         })
-        map.on('click',function(e){
+        map.on('click', function (e) {
             marker.setPosition(e.lnglat);
-            geocoder.getAddress(e.lnglat,function(status,result){
-                if(status=='complete'){
-                    var area_position=[e.lnglat.q,e.lnglat.A];
+            geocoder.getAddress(e.lnglat, function (status, result) {
+                if (status == 'complete') {
+                    var area_position = [e.lnglat.q, e.lnglat.A];
                     console.log(area_position);
                     marker = new AMap.Marker({
-                        position:area_position,
-                        map: new AMap.Map(id,{resizeEnable: true,zoom:18, center:area_position})
+                        position: area_position,
+                        map: new AMap.Map(id, {resizeEnable: true, zoom: 18, center: area_position})
                     });
-                    $("#"+id).attr("data-address",area_position);
+                    $("#" + id).attr("data-address", area_position);
                 }
             });
         });

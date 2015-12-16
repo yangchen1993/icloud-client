@@ -1,7 +1,7 @@
 <style>
     .top_border {
         border: 1px solid #cccccc;
-        padding: 30px;
+        padding: 10px;
         background-color: #fff
     }
 
@@ -29,30 +29,30 @@
         <div ng-show="dates==0" style="padding-top:60px">
             <div class="col-xs-3 text-center">
                 <div class="top_border">
-                    <span>当前进店人数</span>
+                    <h3 class="text-muted">当前进店人数</h3>
 
                     <p class="h1">26</p>
                 </div>
             </div>
             <div class="col-xs-3 text-center">
                 <div class="top_border">
-                    <span>当前连接量</span>
+                    <h3 class="text-muted">当前连接量</h3>
 
-                    <p class="h1">26</p>
+                    <p class="h1">22</p>
                 </div>
             </div>
             <div class="col-xs-3 text-center">
                 <div class="top_border">
-                    <span>今日进店人数</span>
+                    <h3 class="text-muted">今日进店人数</h3>
 
-                    <p class="h1">26</p>
+                    <p class="h1">256</p>
                 </div>
             </div>
             <div class="col-xs-3 text-center">
                 <div class="top_border">
-                    <span>今日连接量</span>
+                    <h3 class="text-muted">今日连接量</h3>
 
-                    <p class="h1">26</p>
+                    <p class="h1">126</p>
                 </div>
             </div>
 
@@ -65,7 +65,28 @@
             </div>
         </div>
         <div ng-show="dates==1">
-            <div id="echarts_day" style="height: 400px;position: relative;margin-top: 60px"
+            <div class="form-inline" style="margin-top: 40px">
+                <span>开始时间：</span>
+                <div id="datetimepicker1" class="input-group input-append date">
+                    <input class="form-control" type="text" size="16" disabled >
+                <span class="input-group-addon add-on">
+                  <i class="fa fa-calendar" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+                </div>
+                <span>结束时间</span>
+                <div id="datetimepicker2" class="input-group input-append date">
+                    <input class="form-control" type="text" size="16" disabled>
+                <span class="input-group-addon add-on">
+                  <i class="fa fa-calendar" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+                </div>
+                <span style="color:red">（注：开始时间与结束时间相差不能超过1月）</span>
+                <button class="button button-royal" ng-click="search()">查询</button>
+            </div>
+
+            <div id="echarts_day" style="height: 400px;positilative;margin-top: 60px"
                  class="col-xs-12"></div>
             <div class="text-center col-xs-12 sum_tip">
                 <span>连接量：</span><span>11111</span>

@@ -80,9 +80,34 @@ iCloudController.controller("CustomersListController",['$scope',function($scope)
 }]);
 
 iCloudController.controller("CustomersFlowController",['$scope','$timeout',function($scope,$timeout){
-    $timeout(function () {
+    $("#datetimepicker1").datetimepicker({
+        format: "yyyy-MM-dd"
+    });
+    $("#datetimepicker2").datetimepicker({
+        format: "yyyy-MM-dd"
+    });
+    $scope.search = function(){
+        console.log($("#datetimepicker1 input")[0].value+"到"+$("#datetimepicker2 input")[0].value);
 
-    }, 1000);
+        duibi($("#datetimepicker1 input")[0].value, $("#datetimepicker2 input")[0].value);
+        function duibi(a, b) {
+            var arr = a.split("-");
+            var starttime = new Date(arr[0], arr[1], arr[2]);
+            var starttimes = starttime.getTime();
+
+            var arrs = b.split("-");
+            var lktime = new Date(arrs[0], arrs[1], arrs[2]);
+            var lktimes = lktime.getTime();
+
+            if (starttimes >= lktimes) {
+                alert('开始时间大于离开时间，请检查');
+                return false;
+            }
+            else
+                return true;
+        }
+    };
+
     $scope.dates = 0;
     var myCharts_now = echarts.init(document.getElementById("echarts_now"));
     option_now = {
@@ -226,7 +251,7 @@ iCloudController.controller("CustomersFlowController",['$scope','$timeout',funct
     option_month = {
         backgroundColor:'#fff',
         title:{
-            text:"按月新老客户变化"
+            text:"按月客流量变化"
         },
         legend:{
             data:['连接数','进店数','过客量']

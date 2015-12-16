@@ -22,55 +22,69 @@
     </ol>
     <div class="table_inside row">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#now" data-toggle="tab">当前情况</a></li>
-            <li><a href="#day" data-toggle="tab">当前情况</a></li>
-            <li><a href="#month" data-toggle="tab">当前情况</a></li>
+            <li ng-click="dates=0" style="cursor: pointer" class="active"><a data-toggle="tab">当前情况</a></li>
+            <li ng-click="dates=1" style="cursor: pointer"><a data-toggle="tab">按日统计</a></li>
+            <li ng-click="dates=2" style="cursor: pointer"><a data-toggle="tab">按月统计</a></li>
         </ul>
-        <div class="tab-content" style="padding-top: 30px">
-            <div class="tab-pane active" id="now">
-                <div class="col-xs-3 text-center">
-                    <div class="top_border">
-                        <span>当前进店人数</span>
+        <div ng-show="dates==0" style="padding-top:60px">
+            <div class="col-xs-3 text-center">
+                <div class="top_border">
+                    <span>当前进店人数</span>
 
-                        <p class="h1">26</p>
-                    </div>
-                </div>
-                <div class="col-xs-3 text-center">
-                    <div class="top_border">
-                        <span>当前连接量</span>
-
-                        <p class="h1">26</p>
-                    </div>
-                </div>
-                <div class="col-xs-3 text-center">
-                    <div class="top_border">
-                        <span>今日进店人数</span>
-
-                        <p class="h1">26</p>
-                    </div>
-                </div>
-                <div class="col-xs-3 text-center">
-                    <div class="top_border">
-                        <span>今日连接量</span>
-
-                        <p class="h1">26</p>
-                    </div>
-                </div>
-
-                <div id="echarts" style="width: 100%;height: 400px;position: relative;margin-top: 60px"
-                     class="col-xs-12"></div>
-                <div class="text-center col-xs-12 sum_tip">
-                    <span>连接量：</span><span>11111</span>
-                    <span>进店量：</span><span>11111</span>
-                    <span>过客量：</span><span>11111</span>
+                    <p class="h1">26</p>
                 </div>
             </div>
-            <div class="tab-pane" id="day">
-                111
+            <div class="col-xs-3 text-center">
+                <div class="top_border">
+                    <span>当前连接量</span>
+
+                    <p class="h1">26</p>
+                </div>
             </div>
-            <div class="tab-pane" id="month">
-                222
+            <div class="col-xs-3 text-center">
+                <div class="top_border">
+                    <span>今日进店人数</span>
+
+                    <p class="h1">26</p>
+                </div>
             </div>
+            <div class="col-xs-3 text-center">
+                <div class="top_border">
+                    <span>今日连接量</span>
+
+                    <p class="h1">26</p>
+                </div>
+            </div>
+
+            <div id="echarts_now" style="height: 400px;position: relative;margin-top: 60px"
+                 class="col-xs-12"></div>
+            <div class="text-center col-xs-12 sum_tip">
+                <span>连接量：</span><span>11111</span>
+                <span>进店量：</span><span>11111</span>
+                <span>过客量：</span><span>11111</span>
+            </div>
+        </div>
+        <div ng-show="dates==1">
+            <div id="echarts_day" style="height: 400px;position: relative;margin-top: 60px"
+                 class="col-xs-12"></div>
+            <div class="text-center col-xs-12 sum_tip">
+                <span>连接量：</span><span>11111</span>
+                <span>进店量：</span><span>11111</span>
+                <span>过客量：</span><span>11111</span>
+            </div>
+            <div id="echarts1_day" style="height: 400px;position: relative;margin-top: 60px"
+                 class="col-xs-12"></div>
+        </div>
+        <div ng-show="dates==2">
+            <div id="echarts_month" style="height: 400px;position: relative;margin-top: 60px"
+                 class="col-xs-12"></div>
+            <div class="text-center col-xs-12 sum_tip">
+                <span>连接量：</span><span>11111</span>
+                <span>进店量：</span><span>11111</span>
+                <span>过客量：</span><span>11111</span>
+            </div>
+            <div id="echarts1_month" style="height: 400px;position: relative;margin-top: 60px"
+                 class="col-xs-12"></div>
         </div>
 
     </div>

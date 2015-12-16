@@ -81,18 +81,11 @@ iCloudController.controller("CustomersListController",['$scope',function($scope)
 
 iCloudController.controller("CustomersFlowController",['$scope','$timeout',function($scope,$timeout){
     $timeout(function () {
-        angular.element('a[href="#now"]').click(function (e) {
-            e.preventDefault();
-        });
-        angular.element('a[href="#day"]').click(function (e) {
-            e.preventDefault();
-        });
-        angular.element('a[href="#month"]').click(function (e) {
-            e.preventDefault();
-        });
+
     }, 1000);
-    var myCharts = echarts.init(document.getElementById("echarts"));
-    option = {
+    $scope.dates = 0;
+    var myCharts_now = echarts.init(document.getElementById("echarts_now"));
+    option_now = {
         backgroundColor:'#fff',
         legend:{
             data:['连接数','进店数','过客量']
@@ -110,7 +103,6 @@ iCloudController.controller("CustomersFlowController",['$scope','$timeout',funct
         },
         xAxis:{
             name:'小时',
-            type:'category',
             boundaryGap : false,
             data:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24']
         },
@@ -136,7 +128,191 @@ iCloudController.controller("CustomersFlowController",['$scope','$timeout',funct
             }
         ]
     };
-    myCharts.setOption(option);
+    myCharts_now.setOption(option_now);
+
+    var myCharts_day = echarts.init(document.getElementById("echarts_day"));
+    option_day = {
+        backgroundColor:'#fff',
+        title:{
+          text:"按日期客流量变化"
+        },
+        legend:{
+            data:['连接数','进店数','过客量']
+        },
+        toolbox:{
+            show:true,
+            feature: {
+                mark: {show: true},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        tooltip:{
+            trigger:'axis'
+        },
+        xAxis:{
+            name:'日',
+            boundaryGap : false,
+            data:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        },
+        yAxis:{
+            name:'人数',
+            type:'value'
+        },
+        series:[
+            {
+                name:'连接数',
+                type:"line",
+                data:[1,2,3,4,5,6,5,4,5,6,7,3,2,5,7,6,5,4,3,2,1,6,5,4,6]
+            },
+            {
+                name:'进店数',
+                type:"line",
+                data:[45,12,22,12,47,15,12,11,15,12,32,12,14,15,16,31,55,14,25,12,62,41,51]
+            },
+            {
+                name:'过客量',
+                type:"line",
+                data:[55,45,65,74,52,65,52,32,95,41,51,24,55,74,84,52,62,35,12,45,12,54,12,56,49,44,55]
+            }
+        ]
+    };
+    myCharts_day.setOption(option_day);
+
+    var myCharts1_day = echarts.init(document.getElementById("echarts1_day"));
+    option1_day = {
+        backgroundColor:'#fff',
+        title:{
+            text:"按日新老客户变化"
+        },
+        legend:{
+            data:['新客户','老客户']
+        },
+        toolbox:{
+            show:true,
+            feature: {
+                mark: {show: true},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        tooltip:{
+            trigger:'axis'
+        },
+        xAxis:{
+            name:'日',
+            data:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        },
+        yAxis:{
+            name:'人数',
+            type:'value'
+        },
+        series:[
+            {
+                name:'新客户',
+                type:"bar",
+                data:[1,2,3,4,5,6,5,4,5,6,7,3,2,5,7,6,5,4,3,2,1,6,5,4,6]
+            },
+            {
+                name:'老客户',
+                type:"bar",
+                data:[45,12,22,12,47,15,12,11,15,12,32,12,14,15,16,31,55,14,25,12,62,41,51]
+            }
+        ]
+    };
+    myCharts1_day.setOption(option1_day);
+
+    var myCharts_month = echarts.init(document.getElementById("echarts_month"));
+    option_month = {
+        backgroundColor:'#fff',
+        title:{
+            text:"按月新老客户变化"
+        },
+        legend:{
+            data:['连接数','进店数','过客量']
+        },
+        toolbox:{
+            show:true,
+            feature: {
+                mark: {show: true},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        tooltip:{
+            trigger:'axis'
+        },
+        xAxis:{
+            name:'月',
+            boundaryGap : false,
+            data:['1','2','3','4','5','6','7','8','9','10','11','12']
+        },
+        yAxis:{
+            name:'人数',
+            type:'value'
+        },
+        series:[
+            {
+                name:'连接数',
+                type:"line",
+                data:[1,2,3,4,5,6,5,4,5,6,7,3,2,5,7,6,5,4,3,2,1,6,5,4,6]
+            },
+            {
+                name:'进店数',
+                type:"line",
+                data:[45,12,22,12,47,15,12,11,15,88,32,12,14,15,16,31,55,14,25,12,62,41,51]
+            },
+            {
+                name:'过客量',
+                type:"line",
+                data:[55,45,65,74,52,65,52,32,95,41,51,24,55,74,84,52,62,35,12,45,12,54,12,56,49,44,55]
+            }
+        ]
+    };
+    myCharts_month.setOption(option_month);
+
+    var myCharts1_month = echarts.init(document.getElementById("echarts1_month"));
+    option1_month = {
+        backgroundColor:'#fff',
+        title:{
+            text:"按月新老客户变化"
+        },
+        legend:{
+            data:['新客户','老客户']
+        },
+        toolbox:{
+            show:true,
+            feature: {
+                mark: {show: true},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        tooltip:{
+            trigger:'axis'
+        },
+        xAxis:{
+            name:'月',
+            data:['1','2','3','4','5','6','7','8','9','10','11','12']
+        },
+        yAxis:{
+            name:'人数',
+            type:'value'
+        },
+        series:[
+            {
+                name:'新客户',
+                type:"bar",
+                data:[1,2,3,4,5,6,5,4,5,6,7,3,2,5,7,6,5,4,3,2,1,6,5,4,6]
+            },
+            {
+                name:'老客户',
+                type:"bar",
+                data:[45,12,22,12,47,15,12,11,15,12,32,12,14,15,16,31,55,14,25,12,62,41,51]
+            }
+        ]
+    };
+    myCharts1_month.setOption(option1_month);
 }]);
 
 iCloudController.controller("CustomersLoyaltyController",['$scope','$grid',function($scope,$grid){

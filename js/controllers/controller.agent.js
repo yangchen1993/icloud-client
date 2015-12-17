@@ -93,7 +93,8 @@ iCloudController.controller("CreateAgentController", ['$scope', '$http', '$cooki
         $scope.submit = function () {
             $http.post([window.API.USER.CREATE_AGENT, "?key=", $cookieStore.get("key")].join(""), $scope.agent)
                 .success(function (data) {
-                    $window.location.href = "#/main/agent-manage";
+                    alert(data.msg);
+                    $window.location.href = "#/main/business-manage";
                 })
                 .error(function (data) {
                     $window.alert(data.msg);

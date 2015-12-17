@@ -839,7 +839,8 @@ iCloudController.controller("CreateBusinessController", ["$scope", "$http", "$co
         $scope.submit = function () {
             $http.post([window.API.USER.CREATE_BUSINESS, "?key=", $cookieStore.get("key")].join(""), $scope.business)
                 .success(function () {
-                    $window.location.href = "#/main/agent_manage";
+                    alert(data.msg);
+                    $window.location.href = "#/main/business-manage";
                 })
                 .error(function (data) {
                     $window.alert(data.msg)

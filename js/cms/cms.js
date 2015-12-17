@@ -3,7 +3,7 @@ var pageArea, conmponentItem = $("");//页面中部展示区
 var editArea = $(".editArea");//编辑区
 var editTemp = $(".editTemp");
 var haveData = '';
-var ourShop = get_param(window.location.href, "id");
+var ourShop = get_param(window.location.href, "group_id");
 function editText(id, type) {
     $('.color').minicolors({
         animationSpeed: 50,

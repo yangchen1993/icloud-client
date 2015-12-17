@@ -215,7 +215,7 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
                     })
                 };
 
-                addressPromise.then(function () {
+                addressPromise().then(function () {
                     changed_address[4] = "";
 
                     changed_address[4] = data;
@@ -838,7 +838,7 @@ iCloudController.controller("CreateBusinessController", ["$scope", "$http", "$co
 
         $scope.submit = function () {
             $http.post([window.API.USER.CREATE_BUSINESS, "?key=", $cookieStore.get("key")].join(""), $scope.business)
-                .success(function () {
+                .success(function (data) {
                     alert(data.msg);
                     $window.location.href = "#/main/business-manage";
                 })

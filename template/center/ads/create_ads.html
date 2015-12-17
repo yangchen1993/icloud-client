@@ -173,7 +173,7 @@
     var editTemp = $(".editTemp")
     var conmponentItem = $("");
     var haveData = '';
-    var ourShop = get_param(window.location.href);
+    var ad_id = get_param(window.location.href, "ad_id");
 
 
     function editText(id, type) {
@@ -357,8 +357,8 @@
         }
 
     }
-    if (isNaN(ourShop)) {
-//        新建
+    if (!ad_id) {
+        console.log("新建");
         $('.ad-active').text('新建广告');
         $('#save-ad').click(function () {
             var component = $('.item-list');
@@ -390,9 +390,10 @@
         });
 
     } else {
+        console.log("编辑");
         $('.ad-active').text('编辑广告');
 //        带了ID表示编辑  http://host:port/api/ads/get_ad_info/?key=token&id=1
-        $.get(window.API.AD.GET_AD_INFO + '?key=' + $.cookie("key").replace(/\"/g, "") + '&id=' + ourShop).success(function (data) {
+        $.get(window.API.AD.GET_AD_INFO + '?key=' + $.cookie("key").replace(/\"/g, "") + '&id=' + ad_id).success(function (data) {
             console.log(data);
             $(".category").val('number:' + data.category_id);
             for (var i = 0; i < data.cms_ids.length; i++) {
@@ -430,7 +431,7 @@
             console.log(items);
 //            $.post('http://192.168.10.200/api/cms/new_cms/?key=ee60934d-2838-4892-b1d9-6a630b993f13',{'items':items},{"dataType":"json"});
             $.ajax({
-                url: window.API.AD.EDIT_AD + '?key=' + $.cookie("key").replace(/\"/g, "") + '&id=' + ourShop,
+                url: window.API.AD.EDIT_AD + '?key=' + $.cookie("key").replace(/\"/g, "") + '&id=' + ad_id,
                 type: "PUT",
                 "dataType": "json",
                 'contentType': 'application/json;charset=utf-8',

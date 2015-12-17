@@ -215,7 +215,7 @@ iCloudController.controller("CreateShopController", ["$scope", "$http", "$catego
                     })
                 };
 
-                addressPromise.then(function () {
+                addressPromise().then(function () {
                     changed_address[4] = "";
 
                     changed_address[4] = data;
@@ -483,7 +483,7 @@ iCloudController.controller("EditShopController", ["$scope", "$http", "$category
                     })
                 };
 
-                addressPromise.then(function () {
+                addressPromise().then(function () {
                     changed_address[4] = "";
 
                     changed_address[4] = data;

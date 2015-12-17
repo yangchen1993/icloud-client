@@ -6,14 +6,11 @@ iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore",
     function ($scope, $http, $cookieStore, $window, $grid, $checkBox) {
         $grid.initial($scope, [$window.API.AD.GET_CURRENT_USER_ADS,].join(""));
         $checkBox.enableCheck("table-wemedia");
-        $scope.send = function (data) {
-            $window.location.href = ["#main/wemedia_edit?id=", data.id].join("")
-        };
         $scope.sendindex = function (index) {
             $scope.number = index;
         };
         $scope.editAds = function (id) {
-            $window.location.href = ["#/main/create_ads?id=", id].join("");
+            $window.location.href = ["#/main/create_ads?ad_id=", id].join("");
         };
         $scope.deleteAds = function (id) {
             var _this = $(this);

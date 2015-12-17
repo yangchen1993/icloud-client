@@ -358,6 +358,7 @@
 
     }
     if (isNaN(ourShop)) {
+        console.log("新建");
 //        新建
         $('.ad-active').text('新建广告');
         $('#save-ad').click(function () {
@@ -390,6 +391,7 @@
         });
 
     } else {
+        console.log("编辑");
         $('.ad-active').text('编辑广告');
 //        带了ID表示编辑  http://host:port/api/ads/get_ad_info/?key=token&id=1
         $.get(window.API.AD.GET_AD_INFO + '?key=' + $.cookie("key").replace(/\"/g, "") + '&id=' + ourShop).success(function (data) {

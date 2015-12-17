@@ -3,7 +3,7 @@
  */
 
 //window.HOST = "http://192.168.178.128:8802/api/";
-window.HOST = "http://mb.idianjia.cn:8801/api/";
+window.HOST = "http://server.idianjia.com/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {

@@ -559,15 +559,8 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
 
     var show_selectRouters = function () {
         $scope.router = [];
-        $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
-            var unbingRouters = [], k = 0;
-            for (var i = 0; i < data.results.length; i++) {
-                if (data.results[i].router_groups == null) {
-                    unbingRouters[k] = data.results[i];
-                    k++;
-                }
-            }
-            $scope.router = unbingRouters;
+        $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key"),"&pageSize=unlimited&groups__id__isnull=True"].join("")).success(function (data) {
+             $scope.router = data.results;
         });
     };
     show_selectRouters();

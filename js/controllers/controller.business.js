@@ -560,7 +560,7 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
     var show_selectRouters = function () {
         $scope.router = [];
         $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key"),"&pageSize=unlimited&groups__id__isnull=True"].join("")).success(function (data) {
-             $scope.router = data.results;
+             $scope.router = data;
         });
     };
     show_selectRouters();

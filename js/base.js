@@ -3,7 +3,7 @@
  */
 
 //window.HOST = "http://192.168.178.128:8802/api/";
-window.HOST = "http://mb.idianjia.cn:8801/api/";
+window.HOST = "http://server.idianjia.com/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -32,7 +32,9 @@ window.API = {
 
         "CREATE_AGENT": [window.HOST, "users/new_agent/"].join(""),  //创建代理商
 
-        "CREATE_BUSINESS": [window.HOST, "users/new_business/"].join("") // 新建商户
+        "CREATE_BUSINESS": [window.HOST, "users/new_business/"].join(""), // 新建商户
+
+        "REMOVE_BUSINESS":[window.HOST,"users/remove_business/"].join("")  //删除商户
     },
 
     "SYSTEM": {

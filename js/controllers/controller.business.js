@@ -540,17 +540,18 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
         $window.location.href = ["#/main/routers_details?router_id=", id].join("");
     };
     var show_bindRouters = function () {
+        var router_list;
         $http.get([window.API.ROUTER.GET_ROUTERS_BY_GROUP, "?key=", $cookieStore.get("key"), "&group_id=", group_id].join("")).success(function (data) {
-            $scope.shop_routers = data.results;
-
-            $http.get([window.API.WIFICAT.IS_ONLINE, "?router_mac=", data.results[0].mac].join("")).success(function (data) {
-                if (data.online_status == "online") {
-                    $scope.isonline = "在线"
-                }
-                else {
-                    $scope.isonline = "离线"
-                }
-            })
+            router_list = data.results;
+            for(var i=0;i<data.count;i++){
+                (function(i){
+                    $http.get([window.API.WIFICAT.IS_ONLINE, "?router_mac=", data.results[i].mac].join(""))
+                        .success(function (data) {
+                            router_list[i].online_status = data.online_status;
+                        })
+                })(i);
+            }
+        $scope.shop_routers = router_list;
         });
 
 

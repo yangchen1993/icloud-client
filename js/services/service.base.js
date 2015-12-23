@@ -59,6 +59,7 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
             self.restGet = function (url) {
                 $http.get(url).success(function (data) {
                     self.restPage = scope.grid = scope.pagination = data;
+                    scope.pageLoadingCompleted();
                 })
             };
 
@@ -101,6 +102,10 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
                 pageParams.page = 1;
                 url = [self.url, "?", $.param(pageParams)].join("");
                 self.restPost(url, params)
+            };
+
+            scope.pageLoadingCompleted = function () {
+                console.log("翻页完成");
             };
 
             scope.sort = function (colName) {
@@ -187,21 +192,32 @@ iCloudService.service("$grid", ["$rootScope", "$http", "$cookieStore",
 
 iCloudService.service("$checkBox", ["$rootScope",
     function ($rootScope) {
-        this.enableCheck = function (tableId) {
-            $rootScope.checkAll = function () {
+        this.enableCheck = function (scope, tableId) {
+            scope.checkAll = function () {
                 var selector = ["#", tableId, " :checkbox"].join("");
                 var checkBoxes = angular.element(selector);
                 angular.forEach(checkBoxes, function (v, k) {
                     angular.element(v).prop("checked", true)
-                })
+                });
+
+                scope.checkAllCompleted();
             };
-            $rootScope.checkInverse = function () {
+            scope.checkInverse = function () {
                 var selector = ["#", tableId, " :checkbox"].join("");
                 var checkBoxes = angular.element(selector);
                 angular.forEach(checkBoxes, function (v, k) {
                     angular.element(v).prop("checked", !angular.element(v).prop("checked"));
+                });
 
-                })
+                scope.checkInverseCompleted();
+            };
+
+            scope.checkAllCompleted = function () {
+                console.log("全选完成");
+            };
+
+            scope.checkInverseCompleted = function () {
+                console.log("反选完成");
             }
         }
     }]);
@@ -278,7 +294,7 @@ iCloudService.service("$map", ["$window",
                     });
 
                     geocoder.getLocation(keywords, function (status, result) {
-                        if (status == "complete"){
+                        if (status == "complete") {
                             self.addMarker(result.geocodes[0]);
                             self.map.setFitView();
                         }

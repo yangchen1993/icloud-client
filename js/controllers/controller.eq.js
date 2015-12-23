@@ -19,7 +19,7 @@ iCloudController.controller("EqManagementController", ['$scope', '$http', '$chec
             "1": "手机登录",
             "2": "微信登陆"
         };
-        $checkBox.enableCheck("table-eq");
+        $checkBox.enableCheck($scope, "table-eq");
         $grid.initial($scope, window.API.ROUTER.GET_CURRENT_USER_ROUTERS);
         //行业类型
         var promise = $category.get();
@@ -151,7 +151,7 @@ iCloudController.controller("FirmwareUpdateController", ['$scope', '$checkBox', 
             alert("dvasv");
         }
     };
-    $checkBox.enableCheck("table-fireware");
+    $checkBox.enableCheck($scope, "table-fireware");
 }]);
 
 iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieStore', "$timeout", "$rootScope", function ($scope, $http, $cookieStore, $timeout) {
@@ -377,7 +377,7 @@ iCloudController.controller("IdentifyConfController", ['$scope', function ($scop
 }]);
 
 iCloudController.controller("ReleaseConfController", ['$scope', '$grid', '$cookieStore', '$http', '$checkBox', '$filter', '$category', '$province', '$city', '$area', function ($scope, $grid, $cookieStore, $http, $checkBox, $filter, $category, $province, $city, $area) {
-    $checkBox.enableCheck("table-eq");
+    $checkBox.enableCheck($scope, "table-eq");
     var promise = $category.get();
     promise.success(function (data) {
         $scope.category = data;

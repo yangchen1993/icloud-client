@@ -5,7 +5,7 @@
 iCloudController.controller("AdsController", ["$scope", "$http", "$cookieStore", "$window", "$grid", "$checkBox",
     function ($scope, $http, $cookieStore, $window, $grid, $checkBox) {
         $grid.initial($scope, [$window.API.AD.GET_CURRENT_USER_ADS,].join(""));
-        $checkBox.enableCheck("table-wemedia");
+        $checkBox.enableCheck($scope, "table-wemedia");
         $scope.sendindex = function (index) {
             $scope.number = index;
         };

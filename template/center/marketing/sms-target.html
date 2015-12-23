@@ -3,8 +3,18 @@
         <li><a ui-sref="main.sms-templates">客户营销中心</a></li>
         <li class="active">选择用户</li>
     </ol>
-    <button class="btn btn-sm btn-info" ng-click="send()">发送</button>
-    <div class=" table_inside" id="sms-targets">
+
+    <div class="col-md-3">
+        <span></span>
+        <div class="form-inline" ng-repeat="key in selectedItemKeys">
+            <span ng-bind="selectedItems[key].member.phone"></span>
+            <span ng-bind="selectedItems[key].times"></span>
+            <a href="javascript:" class="btn btn-xs" ng-click="removeFromSelectedList(key)">删除</a>
+        </div>
+        <button class="btn btn-sm btn-info" ng-click="send()">发送</button>
+    </div>
+
+    <div class="col-md-9 table_inside" id="sms-targets">
         <table class="table table-bordered text-center table-hover table-striped">
             <thead style="background-color: #8a8bc4;color:#fff">
             <tr>
@@ -12,24 +22,54 @@
                     <a href="javascript:" ng-click="checkAll()">全选</a>
                     <a href="javascript:" ng-click="checkInverse()">反选</a>
                 </td>
-                <td>手机号</td>
-                <td>访问次数</td>
-                <td>设备型号</td>
-                <td>首次访问时间</td>
-                <td>最近一次访问时间</td>
+                <td id="member__phone">
+                    手机号
+                    <span ng-show="currentSort['member__phone'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['member__phone'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="times" ng-click="sort('times')">
+                    访问次数
+                    <span ng-show="currentSort['times'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['times'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="member__brand" ng-click="sort('member__brand')">
+                    设备型号
+                    <span ng-show="currentSort['member__brand'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['member__brand'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="create_time" ng-click="sort('create_time')">
+                    首次访问时间
+                    <span ng-show="currentSort['create_time'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['create_time'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="modified_time" ng-click="sort('modified_time')">
+                    最近一次访问时间
+                    <span ng-show="currentSort['modified_time'] === true"
+                          class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['modified_time'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
             </tr>
             </thead>
-        <tbody>
-        <tr ng-repeat="m in members">
-            <td align="center"><input type="checkbox" ng-value="m.member.phone"></td>
-            <td ng-bind="m.member.phone"></td>
-            <td ng-bind="m.times"></td>
-            <td ng-bind="m.member.brand"></td>
-            <td ng-bind="m.create_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
-            <td ng-bind="m.modified_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
-        </tr>
-        </tbody>
+            <tbody>
+            <tr ng-repeat="m in grid.results">
+                <td align="center"><input type="checkbox" ng-value="m.id" ng-click="memberChecked($event, m)"></td>
+                <td ng-bind="m.member.phone"></td>
+                <td ng-bind="m.times"></td>
+                <td ng-bind="m.member.brand"></td>
+                <td ng-bind="m.create_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                <td ng-bind="m.modified_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
+            </tr>
+            </tbody>
         </table>
+        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
     </div>
-    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
 </div>

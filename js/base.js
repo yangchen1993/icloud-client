@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.178.128:8802/api/";
+//window.HOST = "http://192.168.10.195:8000/api/";
 window.HOST = "http://dev.idianjia.com:8000/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 

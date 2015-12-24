@@ -26,6 +26,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.marketing_nav = false;
                 $scope.wallet_nav = false;
                 $scope.js_ad_nav = true;
+                $rootScope.delegate_auths = 1;
                 $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;
                 $rootScope.deviceManage = {
@@ -77,6 +78,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.wallet_nav = true;
                 $scope.info_nav = true;
                 $scope.adsType_nav = 2;
+                $rootScope.delegate_auths = 0;
                 $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;
                 $rootScope.putAdSearch = {

@@ -105,7 +105,11 @@ window.API = {
 
         "NEW_DELIVERY": [window.HOST, "deliveries/new_delivery/"].join(""), // 新建路由器发货信息
 
-        "ROUTERS_SSID": [window.HOST, "routers/ssid/"].join("") //设置路由器SSID
+        "ROUTERS_SSID": [window.HOST, "routers/ssid/"].join(""), //设置路由器SSID
+
+        "ROUTERS_DELEGATE":[window.HOST,"routers/delegate/"].join(""),    //托管路由器
+
+        "ROUTERS_UNDELEGATE":[window.HOST,"routers/undelegate/"].join("")     //取消已托管的路由器
 
     },
 

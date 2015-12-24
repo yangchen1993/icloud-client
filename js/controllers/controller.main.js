@@ -66,6 +66,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.account_nav = true;
                 $scope.eq_nav = true;
                 $scope.delivery_nav = true;
+                $scope.delegated_nav = true;
                 $scope.shop_nav = false;
                 $scope.agent_nav = false;
                 $scope.create_agent_nav = false;

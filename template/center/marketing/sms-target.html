@@ -55,7 +55,7 @@
                     <a href="javascript:" ng-click="checkAll()">全选</a>
                     <a href="javascript:" ng-click="checkInverse()">反选</a>
                 </td>
-                <td id="member__phone">
+                <td id="member__phone" ng-click="sort('member__phone')">
                     手机号
                     <span ng-show="currentSort['member__phone'] === true"
                           class="glyphicon glyphicon-triangle-top"></span>

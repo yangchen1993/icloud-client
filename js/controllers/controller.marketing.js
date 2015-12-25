@@ -30,8 +30,8 @@ iCloudController.controller("NewSmsTemplateController", ["$scope", "$http", "$co
         };
     }]);
 
-iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieStore", "$window", "$checkBox", "$grid", "$q",
-    function ($scope, $http, $cookieStore, $window, $checkBox, $grid, $q) {
+iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieStore", "$window", "$checkBox", "$grid", "$q","$filter",
+    function ($scope, $http, $cookieStore, $window, $checkBox, $grid, $q, $filter) {
         $scope.selectedItems = {};
         $scope.selectedItemKeys = _.keys($scope.selectedItems);
 
@@ -45,6 +45,16 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
 
         var template_id = get_param($window.location.href, "template_id");
 
+        var numbers = [];
+        $scope.add_tel = function (tel) {
+            if (!tel) {
+                $("#add_tel").collapse('hide');
+            }
+            else {
+                var tel_list = tel.split(/[;；]/);
+                numbers = tel_list;
+            }
+        };
         $scope.memberChecked = function (e, data) {
             if ($(e.target).prop("checked")) {
                 $scope.selectedItems[data.id] = data;
@@ -85,7 +95,7 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
                 angular.forEach(ck, function (v, k) {
                     var id = angular.element(v).val();
 
-                    if (_.has($scope.selectedItems, id)){
+                    if (_.has($scope.selectedItems, id)) {
                         angular.element(v).prop("checked", true);
                     }
 
@@ -142,7 +152,7 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
         };
 
         $scope.send = function () {
-            var numbers = [];
+
             var c = angular.element("#sms-targets :checkbox");
             angular.forEach(c, function (v, k) {
                 if (angular.element(v).prop("checked")) {
@@ -161,6 +171,31 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
                 .error(function (data) {
                     $window.alert(data.msg);
                 })
+        };
+
+        $("#datetimepicker1").datetimepicker({
+            format: "yyyy-MM-dd"
+        });
+        $("#datetimepicker2").datetimepicker({
+            format: "yyyy-MM-dd"
+        });
+        $("#datetimepicker3").datetimepicker({
+            format: "yyyy-MM-dd"
+        });
+        $("#datetimepicker4").datetimepicker({
+            format: "yyyy-MM-dd"
+        });
+
+        $scope.search = function(){
+            var tmp;
+            tmp = {
+                "create_time__gte" : $filter('date')($("#datetimepicker1 input")[0].value,'yyyy-MM-dd HH:mm:ss'),
+                "create_time__lte" : $filter('date')($("#datetimepicker2 input")[0].value,'yyyy-MM-dd HH:mm:ss'),
+                "modified_time__gte" : $filter('date')($("#datetimepicker3 input")[0].value,'yyyy-MM-dd HH:mm:ss'),
+                "modified_time__lte" : $filter('date')($("#datetimepicker4 input")[0].value,'yyyy-MM-dd HH:mm:ss')
+            };
+            console.log(tmp);
+            $scope.filtering(tmp);
         }
     }]);
 
@@ -175,7 +210,7 @@ iCloudController.controller("CustomersListController", ['$scope', function ($sco
 
 }]);
 
-iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', function ($scope, $timeout) {
+iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$http', '$cookieStore', function ($scope, $timeout, $http, $cookieStore) {
     $("#datetimepicker1").datetimepicker({
         format: "yyyy-MM-dd"
     });
@@ -203,13 +238,18 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', fu
                 return true;
         }
     };
+    //每小时店铺客流情况
+
+    $http.get([window.API.MARKETING.GET_CURRENT_HOUR_INFO, "?key=", $cookieStore.get("key"),"&page=1&time_range_end__lte=2015-12-31 00:00:00&time_range_start__gte=2015-12-1 00:00:00"].join("")).success(function (data) {
+        console.log(data);
+    });
 
     $scope.dates = 0;
     var myCharts_now = echarts.init(document.getElementById("echarts_now"));
     option_now = {
         backgroundColor: '#fff',
         legend: {
-            data: ['连接数', '进店数', '过客量']
+            data: ['在线数', '进店数', '过客量']
         },
         toolbox: {
             show: true,
@@ -224,7 +264,7 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', fu
         },
         xAxis: {
             name: '小时',
-            boundaryGap: false,
+            //boundaryGap : false,
             data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24']
         },
         yAxis: {
@@ -233,7 +273,7 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', fu
         },
         series: [
             {
-                name: '连接数',
+                name: '在线数',
                 type: "line",
                 data: [1, 2, 3, 4, 5, 6, 5, 4, 5, 6, 7, 3, 2, 5, 7, 6, 5, 4, 3, 2, 1, 6, 5, 4, 6]
             },
@@ -251,6 +291,10 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', fu
     };
     myCharts_now.setOption(option_now);
 
+    //每天店铺客流情况
+    $http.get([window.API.MARKETING.GET_CURRENT_DAY_INFO, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+        console.log(data);
+    });
     var myCharts_day = echarts.init(document.getElementById("echarts_day"));
     option_day = {
         backgroundColor: '#fff',
@@ -258,7 +302,7 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', fu
             text: "按日期客流量变化"
         },
         legend: {
-            data: ['连接数', '进店数', '过客量']
+            data: ['在线数', '进店数', '过客量']
         },
         toolbox: {
             show: true,
@@ -282,7 +326,7 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', fu
         },
         series: [
             {
-                name: '连接数',
+                name: '在线数',
                 type: "line",
                 data: [1, 2, 3, 4, 5, 6, 5, 4, 5, 6, 7, 3, 2, 5, 7, 6, 5, 4, 3, 2, 1, 6, 5, 4, 6]
             },
@@ -343,6 +387,10 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', fu
     };
     myCharts1_day.setOption(option1_day);
 
+    //每月店铺客流情况
+    $http.get([window.API.MARKETING.GET_MONTH_INFO, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+        console.log(data);
+    });
     var myCharts_month = echarts.init(document.getElementById("echarts_month"));
     option_month = {
         backgroundColor: '#fff',
@@ -350,7 +398,7 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', fu
             text: "按月客流量变化"
         },
         legend: {
-            data: ['连接数', '进店数', '过客量']
+            data: ['在线数', '进店数', '过客量']
         },
         toolbox: {
             show: true,
@@ -374,7 +422,7 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', fu
         },
         series: [
             {
-                name: '连接数',
+                name: '在线数',
                 type: "line",
                 data: [1, 2, 3, 4, 5, 6, 5, 4, 5, 6, 7, 3, 2, 5, 7, 6, 5, 4, 3, 2, 1, 6, 5, 4, 6]
             },

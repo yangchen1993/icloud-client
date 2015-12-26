@@ -42,3 +42,86 @@ header.top-bar{
     width:100%;
     height:350px;
 }
+
+.swiper-container {
+    width: 320px;
+    height:150px;
+    line-height: 150px;
+    text-align: center;
+    background: orangered;
+    overflow: hidden;
+}
+.swiper-container>div{
+    height:150px;
+}
+.swiper-container img{
+    width:100%;
+    height:150px;
+}
+.swiper-pagination-switch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background: #999;
+    box-shadow: 0px 1px 2px #555 inset;
+    margin: 0 3px;
+    cursor: pointer;
+}
+.swiper-active-switch {
+    background: #fff;
+}
+.pagination {
+    position: absolute;
+    left: 0;
+    height:70px!important;
+    text-align: center;
+    bottom:5px;
+    width: 100%;
+}
+#slider-edit-img0 .modal-body,#slider-edit-img1 .modal-body,#slider-edit-img2 .modal-body{
+    width:598px;
+    height:300px;
+}
+#slider-edit-img .modal-body img{
+    width: 100%;
+}
+.pic-box{
+    position: relative;
+}
+.pic-box>div img{
+   width: 100%;
+}
+.img-box{
+    width:100%;
+    background: lightgrey;
+    margin-bottom: 5px;
+}
+.img-for-edit{
+    height:70px;
+    line-height: 70px;
+    margin-right:5px;
+}
+.img-box>div{
+    display: inline-block;
+}
+.img-box>div img{
+    width:128px !important;
+    height:60px;
+}
+#drag .picmenu>div{
+    float: left;
+    width: 50%;
+    height:160px;
+    border-bottom: solid 1px;
+    padding: 5px;
+    background: orangered;
+}
+.picmenu>div img{
+    width: 100%;
+}
+.picmenu:after{
+    content: "";
+    display: table;
+    clear: both;
+}

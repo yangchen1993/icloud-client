@@ -303,15 +303,15 @@ function editSlider(id,type){
         //    loop:true,
         //    grabCursor: true,
         //    paginationClickable: true
+        //'pagination: '+'"#'+id+' .pagination",'+
+        //"hashnav:true,"+
         //})
         $("#"+id+" .slider").append(
             "<div class='script'>"+
             '<script>'+
                 'var slider=new Swiper("#'+id+' .swiper-container",{'+
-                'pagination: '+'"#'+id+' .pagination",'+
                 "autoplay: 4000,"+
                 "continuous: true,"+
-                "hashnav:true,"+
                 "loop:true,"+
                 "grabCursor: true,"+
                 "paginationClickable: true"+

@@ -192,7 +192,13 @@ window.API = {
 
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join(""),
 
-        "GET_CURRENT_USER_MEMBERS": [window.HOST, "members/get_current_user_members/"].join("")
+        "GET_CURRENT_USER_MEMBERS": [window.HOST, "members/get_current_user_members/"].join(""),
+
+        "GET_CURRENT_HOUR_INFO":[window.HOST,"hourdata/get_current_hour_info/"].join(""), //每小时店铺客流情况
+
+        "GET_CURRENT_DAY_INFO":[window.HOST,"daydata/get_current_day_info/"].join(""),  //每天店铺客流情况
+
+        "GET_MONTH_INFO":[window.HOST,"monthdata/get_month_info/"].join("") //每月店铺客流情况
     },
 
     "JSADS": {

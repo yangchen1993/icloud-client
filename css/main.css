@@ -43,6 +43,7 @@ p, ul, ol, ul, .h3 {
 .nav_out{
     position: fixed;
     top:60px;
+    left:0px;
     bottom: 0;
     width: 230px;
     background-color: #383e4b;
@@ -255,8 +256,8 @@ p, ul, ol, ul, .h3 {
 
 .content {
     position: absolute;
+    left:230px;
     top: 60px;
-    left: 230px;
     right: 0;
     bottom: 0;
     overflow-y: auto;

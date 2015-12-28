@@ -30,7 +30,7 @@ iCloudController.controller("NewSmsTemplateController", ["$scope", "$http", "$co
         };
     }]);
 
-iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieStore", "$window", "$checkBox", "$grid", "$q","$filter",
+iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieStore", "$window", "$checkBox", "$grid", "$q", "$filter",
     function ($scope, $http, $cookieStore, $window, $checkBox, $grid, $q, $filter) {
         $scope.selectedItems = {};
         $scope.selectedItemKeys = _.keys($scope.selectedItems);
@@ -174,7 +174,7 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
         };
 
         $("#datetimepicker1").datetimepicker({
-            format: "yyyy-MM-dd"
+            format: "yyyy/MM/dd"
         });
         $("#datetimepicker2").datetimepicker({
             format: "yyyy-MM-dd"
@@ -186,13 +186,13 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
             format: "yyyy-MM-dd"
         });
 
-        $scope.search = function(){
+        $scope.search = function () {
             var tmp;
             tmp = {
-                "create_time__gte" : $filter('date')($("#datetimepicker1 input")[0].value,'yyyy-MM-dd HH:mm:ss'),
-                "create_time__lte" : $filter('date')($("#datetimepicker2 input")[0].value,'yyyy-MM-dd HH:mm:ss'),
-                "modified_time__gte" : $filter('date')($("#datetimepicker3 input")[0].value,'yyyy-MM-dd HH:mm:ss'),
-                "modified_time__lte" : $filter('date')($("#datetimepicker4 input")[0].value,'yyyy-MM-dd HH:mm:ss')
+                "create_time__gte": $filter('date')($("#datetimepicker1 input")[0].value, 'yyyy-MM-dd HH:mm:ss'),
+                "create_time__lte": $filter('date')($("#datetimepicker2 input")[0].value, 'yyyy-MM-dd HH:mm:ss'),
+                "modified_time__gte": $filter('date')($("#datetimepicker3 input")[0].value, 'yyyy-MM-dd HH:mm:ss'),
+                "modified_time__lte": $filter('date')($("#datetimepicker4 input")[0].value, 'yyyy-MM-dd HH:mm:ss')
             };
             console.log(tmp);
             $scope.filtering(tmp);
@@ -202,15 +202,16 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
 
 iCloudController.controller("CustomersController", ["$scope", "$http", "$cookieStore", "$window", "$grid",
     function ($scope, $http, $cookieStore, $window, $grid) {
-        console.log($grid.initial($scope, $window.API.MARKETING.GET_CURRENT_USER_MEMBERS));
+        $grid.initial($scope, $window.API.MARKETING.GET_CURRENT_USER_MEMBERS)
 
     }]);
 
-iCloudController.controller("CustomersListController", ['$scope', function ($scope) {
+iCloudController.controller("CustomersListController", ['$scope', '$window', '$http', '$grid',
+    function ($scope, $window, $http, $gird) {
+        $gird.initial($scope, $window.API.GROUP.GET_GUESTS_FLOW)
+    }]);
 
-}]);
-
-iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$http', '$cookieStore', function ($scope, $timeout, $http, $cookieStore) {
+iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$http', '$cookieStore', '$filter', function ($scope, $timeout, $http, $cookieStore, $filter) {
     $("#datetimepicker1").datetimepicker({
         format: "yyyy-MM-dd"
     });
@@ -239,249 +240,338 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
         }
     };
     //每小时店铺客流情况
-
-    $http.get([window.API.MARKETING.GET_CURRENT_HOUR_INFO, "?key=", $cookieStore.get("key"),"&page=1&time_range_end__lte=2015-12-31 00:00:00&time_range_start__gte=2015-12-1 00:00:00"].join("")).success(function (data) {
-        console.log(data);
-    });
-
-    $scope.dates = 0;
     var myCharts_now = echarts.init(document.getElementById("echarts_now"));
-    option_now = {
-        backgroundColor: '#fff',
-        legend: {
-            data: ['在线数', '进店数', '过客量']
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                mark: {show: true},
-                restore: {show: true},
-                saveAsImage: {show: true}
+    var myDate = new Date();
+    var today_time = $filter('date')(myDate, 'yyyy-MM-dd 00:00:00');
+    var tomorrow_time = $filter('date')(new Date(myDate.setDate(myDate.getDate() + 1)), 'yyyy-MM-dd 00:00:00');
+
+    $http.get([window.API.MARKETING.GET_CURRENT_HOUR_INFO, "?key=", $cookieStore.get("key"), "&ordering=-time_range_end&time_range_end__lt=", tomorrow_time, "&time_range_start__gte=", today_time].join(""))
+        .success(function (data) {
+
+            var allHourX = [];
+
+            var onlineData = [];
+            var comeInData = angular.copy(onlineData);
+            var passData = angular.copy(onlineData);
+            var inlineDatas = 0;
+            var comeInDatas = 0;
+            var passDatas = 0;
+
+
+            for (var j = 0; j < 24; j++) {
+
+                allHourX.push(j);
+
+                onlineData.push("-");
+                comeInData.push("-");
+                passData.push("-");
             }
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        xAxis: {
-            name: '小时',
-            //boundaryGap : false,
-            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24']
-        },
-        yAxis: {
-            name: '人数',
-            type: 'value'
-        },
-        series: [
-            {
-                name: '在线数',
-                type: "line",
-                data: [1, 2, 3, 4, 5, 6, 5, 4, 5, 6, 7, 3, 2, 5, 7, 6, 5, 4, 3, 2, 1, 6, 5, 4, 6]
-            },
-            {
-                name: '进店数',
-                type: "line",
-                data: [45, 12, 22, 12, 47, 15, 12, 11, 15, 12, 32, 12, 14, 15, 16, 31, 55, 14, 25, 12, 62, 41, 51]
-            },
-            {
-                name: '过客量',
-                type: "line",
-                data: [55, 45, 65, 74, 52, 65, 52, 32, 95, 41, 51, 24, 55, 74, 84, 52, 62, 35, 12, 45, 12, 54, 12, 56, 49, 44, 55]
+
+            for (var i = 0; i < data.length; i++) {
+                var start = new Date(data[i].time_range_start).getHours();
+
+
+                var index = _.indexOf(allHourX, start);
+
+
+                if (index >= 0) {
+                    onlineData[index] = data[i].online;
+                    if (i == data.length - 1) $scope.now_inline = data[i].online;
+                    comeInData[index] = data[i].stay;
+                    passData[index] = data[i].passing;
+                    inlineDatas = data[i].online + inlineDatas;
+                    comeInDatas = data[i].stay + comeInDatas;
+                    passDatas = data[i].passing + passDatas;
+                }
             }
-        ]
-    };
-    myCharts_now.setOption(option_now);
+            $scope.inline = inlineDatas;
+            $scope.comein = comeInDatas;
+            $scope.pass = passDatas;
+            $scope.dates = 0;
+            var option_now = {
+                backgroundColor: '#fff',
+                legend: {
+                    data: ['在线数', '进店数', '过客量']
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    name: '小时',
+                    boundaryGap: false,
+                    data: allHourX
+                },
+                yAxis: {
+                    name: '人数',
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '在线数',
+                        type: "line",
+                        data: onlineData
+                        //data:['1','2','1','3','1','2','3','9','11','12','8','9','11','12','7','13','21','19','18','15','13','10','5','1']
+                    },
+                    {
+                        name: '进店数',
+                        type: "line",
+                        data: comeInData
+                        //data:['0','1','3','2','4','3','4','11','21','22','19','22','23','25','17','12','17','17','16','24','13','8','5','1']
+                    },
+                    {
+                        name: '过客量',
+                        type: "line",
+                        data: passData
+                        //data:['12','14','15','14','15','7','13','15','19','18','22','45','33','46','57','58','67','84','57','36','26','32','14','16']
+                    }
+                ]
+            };
+            myCharts_now.setOption(option_now);
+        })
+        .error(function () {
+        });
+
 
     //每天店铺客流情况
-    $http.get([window.API.MARKETING.GET_CURRENT_DAY_INFO, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
-        console.log(data);
-    });
     var myCharts_day = echarts.init(document.getElementById("echarts_day"));
-    option_day = {
-        backgroundColor: '#fff',
-        title: {
-            text: "按日期客流量变化"
-        },
-        legend: {
-            data: ['在线数', '进店数', '过客量']
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                mark: {show: true},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        xAxis: {
-            name: '日',
-            boundaryGap: false,
-            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
-        },
-        yAxis: {
-            name: '人数',
-            type: 'value'
-        },
-        series: [
-            {
-                name: '在线数',
-                type: "line",
-                data: [1, 2, 3, 4, 5, 6, 5, 4, 5, 6, 7, 3, 2, 5, 7, 6, 5, 4, 3, 2, 1, 6, 5, 4, 6]
-            },
-            {
-                name: '进店数',
-                type: "line",
-                data: [45, 12, 22, 12, 47, 15, 12, 11, 15, 12, 32, 12, 14, 15, 16, 31, 55, 14, 25, 12, 62, 41, 51]
-            },
-            {
-                name: '过客量',
-                type: "line",
-                data: [55, 45, 65, 74, 52, 65, 52, 32, 95, 41, 51, 24, 55, 74, 84, 52, 62, 35, 12, 45, 12, 54, 12, 56, 49, 44, 55]
-            }
-        ]
-    };
-    myCharts_day.setOption(option_day);
+    var this_month = $filter('date')(myDate, 'yyyy-MM-01 00:00:00');
+    var next_month = $filter('date')(new Date(myDate.setMonth(myDate.getMonth() + 1)), 'yyyy-MM-01 00:00:00');
 
-    var myCharts1_day = echarts.init(document.getElementById("echarts1_day"));
-    option1_day = {
-        backgroundColor: '#fff',
-        title: {
-            text: "按日新老客户变化"
-        },
-        legend: {
-            data: ['新客户', '老客户']
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                mark: {show: true},
-                restore: {show: true},
-                saveAsImage: {show: true}
+
+    $http.get([window.API.MARKETING.GET_CURRENT_DAY_INFO, "?ordering=-time_range_end&key=", $cookieStore.get("key"),
+            "&time_range_start__gte=", this_month, "&time_range_end__lt=", next_month].join(""))
+        .success(function (data) {
+            var allDayX = [];
+
+            var dayOfMonth = new Date(myDate.getYear(), myDate.getMonth(), 0).getDate();
+
+            var dayOnlineDataList = [];
+            var dayComeInDataList = angular.copy(dayOnlineDataList);
+            var dayPassDataList = angular.copy(dayOnlineDataList);
+
+            for (var d = 1; d < dayOfMonth; d++) {
+                allDayX.push(d);
+                dayOnlineDataList.push("-");
+                dayComeInDataList.push("-");
+                dayPassDataList.push("-")
             }
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        xAxis: {
-            name: '日',
-            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
-        },
-        yAxis: {
-            name: '人数',
-            type: 'value'
-        },
-        series: [
-            {
-                name: '新客户',
-                type: "bar",
-                data: [1, 2, 3, 4, 5, 6, 5, 4, 5, 6, 7, 3, 2, 5, 7, 6, 5, 4, 3, 2, 1, 6, 5, 4, 6]
-            },
-            {
-                name: '老客户',
-                type: "bar",
-                data: [45, 12, 22, 12, 47, 15, 12, 11, 15, 12, 32, 12, 14, 15, 16, 31, 55, 14, 25, 12, 62, 41, 51]
-            }
-        ]
-    };
-    myCharts1_day.setOption(option1_day);
+
+
+            var option_day = {
+                backgroundColor: '#fff',
+                title: {
+                    text: "按日期客流量变化"
+                },
+                legend: {
+                    data: ['日平均在线数', '日进店数', '日过客量']
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    name: '日',
+                    boundaryGap: false,
+                    data: allDayX
+                },
+                yAxis: {
+                    name: '人数',
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '日平均在线数',
+                        type: "line",
+                        data: dayOnlineDataList
+                    },
+                    {
+                        name: '日进店数',
+                        type: "line",
+                        data: dayComeInDataList
+                    },
+                    {
+                        name: '日过客量',
+                        type: "line",
+                        data: dayPassDataList
+                    }
+                ]
+            };
+            myCharts_day.setOption(option_day);
+
+        });
+
+    //var myCharts1_day = echarts.init(document.getElementById("echarts1_day"));
+    //option1_day = {
+    //    backgroundColor: '#fff',
+    //    title: {
+    //        text: "按日新老客户变化"
+    //    },
+    //    legend: {
+    //        data: ['新客户', '老客户']
+    //    },
+    //    toolbox: {
+    //        show: true,
+    //        feature: {
+    //            mark: {show: true},
+    //            restore: {show: true},
+    //            saveAsImage: {show: true}
+    //        }
+    //    },
+    //    tooltip: {
+    //        trigger: 'axis'
+    //    },
+    //    xAxis: {
+    //        name: '日',
+    //        data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+    //    },
+    //    yAxis: {
+    //        name: '人数',
+    //        type: 'value'
+    //    },
+    //    series: [
+    //        {
+    //            name: '新客户',
+    //            type: "bar",
+    //            data: [1, 2, 3, 4, 5, 6, 5, 4, 5, 6, 7, 3, 2, 5, 7, 6, 5, 4, 3, 2, 1, 6, 5, 4, 6]
+    //        },
+    //        {
+    //            name: '老客户',
+    //            type: "bar",
+    //            data: [45, 12, 22, 12, 47, 15, 12, 11, 15, 12, 32, 12, 14, 15, 16, 31, 55, 14, 25, 12, 62, 41, 51]
+    //        }
+    //    ]
+    //};
+    //myCharts1_day.setOption(option1_day);
 
     //每月店铺客流情况
-    $http.get([window.API.MARKETING.GET_MONTH_INFO, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
-        console.log(data);
-    });
     var myCharts_month = echarts.init(document.getElementById("echarts_month"));
-    option_month = {
-        backgroundColor: '#fff',
-        title: {
-            text: "按月客流量变化"
-        },
-        legend: {
-            data: ['在线数', '进店数', '过客量']
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                mark: {show: true},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        xAxis: {
-            name: '月',
-            boundaryGap: false,
-            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
-        },
-        yAxis: {
-            name: '人数',
-            type: 'value'
-        },
-        series: [
-            {
-                name: '在线数',
-                type: "line",
-                data: [1, 2, 3, 4, 5, 6, 5, 4, 5, 6, 7, 3, 2, 5, 7, 6, 5, 4, 3, 2, 1, 6, 5, 4, 6]
-            },
-            {
-                name: '进店数',
-                type: "line",
-                data: [45, 12, 22, 12, 47, 15, 12, 11, 15, 88, 32, 12, 14, 15, 16, 31, 55, 14, 25, 12, 62, 41, 51]
-            },
-            {
-                name: '过客量',
-                type: "line",
-                data: [55, 45, 65, 74, 52, 65, 52, 32, 95, 41, 51, 24, 55, 74, 84, 52, 62, 35, 12, 45, 12, 54, 12, 56, 49, 44, 55]
-            }
-        ]
-    };
-    myCharts_month.setOption(option_month);
+    var this_year = $filter('date')(myDate, 'yyyy-01-01 00:00:00');
+    var next_year = $filter('date')(new Date(myDate.setYear(myDate.getYear() + 1)), 'yyyy-01-01 00:00:00');
 
-    var myCharts1_month = echarts.init(document.getElementById("echarts1_month"));
-    option1_month = {
-        backgroundColor: '#fff',
-        title: {
-            text: "按月新老客户变化"
-        },
-        legend: {
-            data: ['新客户', '老客户']
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                mark: {show: true},
-                restore: {show: true},
-                saveAsImage: {show: true}
+    $http.get([window.API.MARKETING.GET_MONTH_INFO, "?ordering=-time_range_start&key=", $cookieStore.get("key"), "&time_range_start__gte=", this_year,
+            "&time_range_end__lt=", next_year].join(""))
+        .success(function (data) {
+
+            var allMonthX = [];
+            var onlineMonthDataList = [];
+            var comeInMonthDataList = [];
+            var passMonthDataList = [];
+
+            for (var i = 1; i <= 12; i++) {
+                allMonthX.push(i);
+                onlineMonthDataList.push("-");
+                comeInMonthDataList.push("-");
+                passMonthDataList.push("-");
             }
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        xAxis: {
-            name: '月',
-            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
-        },
-        yAxis: {
-            name: '人数',
-            type: 'value'
-        },
-        series: [
-            {
-                name: '新客户',
-                type: "bar",
-                data: [1, 2, 3, 4, 5, 6, 5, 4, 5, 6, 7, 3, 2, 5, 7, 6, 5, 4, 3, 2, 1, 6, 5, 4, 6]
-            },
-            {
-                name: '老客户',
-                type: "bar",
-                data: [45, 12, 22, 12, 47, 15, 12, 11, 15, 12, 32, 12, 14, 15, 16, 31, 55, 14, 25, 12, 62, 41, 51]
-            }
-        ]
-    };
-    myCharts1_month.setOption(option1_month);
+
+            var option_month = {
+                backgroundColor: '#fff',
+                title: {
+                    text: "按月客流量变化"
+                },
+                legend: {
+                    data: ['在线数', '进店数', '过客量']
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    name: '月',
+                    boundaryGap: false,
+                    data: allMonthX
+                },
+                yAxis: {
+                    name: '人数',
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '在线数',
+                        type: "line",
+                        data: onlineMonthDataList
+                    },
+                    {
+                        name: '进店数',
+                        type: "line",
+                        data: comeInMonthDataList
+                    },
+                    {
+                        name: '过客量',
+                        type: "line",
+                        data: passMonthDataList
+                    }
+                ]
+            };
+            myCharts_month.setOption(option_month);
+
+        });
+
+
+    //var myCharts1_month = echarts.init(document.getElementById("echarts1_month"));
+    //option1_month = {
+    //    backgroundColor: '#fff',
+    //    title: {
+    //        text: "按月新老客户变化"
+    //    },
+    //    legend: {
+    //        data: ['新客户', '老客户']
+    //    },
+    //    toolbox: {
+    //        show: true,
+    //        feature: {
+    //            mark: {show: true},
+    //            restore: {show: true},
+    //            saveAsImage: {show: true}
+    //        }
+    //    },
+    //    tooltip: {
+    //        trigger: 'axis'
+    //    },
+    //    xAxis: {
+    //        name: '月',
+    //        data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+    //    },
+    //    yAxis: {
+    //        name: '人数',
+    //        type: 'value'
+    //    },
+    //    series: [
+    //        {
+    //            name: '新客户',
+    //            type: "bar",
+    //            data: [1, 2, 3, 4, 5, 6, 5, 4, 5, 6, 7, 3, 2, 5, 7, 6, 5, 4, 3, 2, 1, 6, 5, 4, 6]
+    //        },
+    //        {
+    //            name: '老客户',
+    //            type: "bar",
+    //            data: [45, 12, 22, 12, 47, 15, 12, 11, 15, 12, 32, 12, 14, 15, 16, 31, 55, 14, 25, 12, 62, 41, 51]
+    //        }
+    //    ]
+    //};
+    //myCharts1_month.setOption(option1_month);
 }]);
 
 iCloudController.controller("CustomersLoyaltyController", ['$scope', '$grid', function ($scope, $grid) {

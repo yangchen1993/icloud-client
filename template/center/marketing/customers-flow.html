@@ -27,85 +27,78 @@
             <li ng-click="dates=2" style="cursor: pointer"><a data-toggle="tab">按月统计</a></li>
         </ul>
         <div ng-show="dates==0" style="padding-top:60px">
-            <div class="col-xs-3 text-center">
+            <div class="col-xs-2 col-xs-offset-3 text-center">
                 <div class="top_border">
-                    <h3 class="text-muted">当前进店人数</h3>
+                    <h3 class="text-muted">当前在线人数</h3>
 
-                    <p class="h1">26</p>
+                    <p class="h1" ng-bind="now_inline"></p>
                 </div>
             </div>
-            <div class="col-xs-3 text-center">
+            <div class="col-xs-2 text-center">
                 <div class="top_border">
-                    <h3 class="text-muted">当前连接量</h3>
+                    <h3 class="text-muted">今日进店人次</h3>
 
-                    <p class="h1">22</p>
+                    <p class="h1" ng-bind="comein"></p>
                 </div>
             </div>
-            <div class="col-xs-3 text-center">
+            <div class="col-xs-2 text-center">
                 <div class="top_border">
-                    <h3 class="text-muted">今日进店人数</h3>
+                    <h3 class="text-muted">今日过客人次</h3>
 
-                    <p class="h1">256</p>
-                </div>
-            </div>
-            <div class="col-xs-3 text-center">
-                <div class="top_border">
-                    <h3 class="text-muted">今日连接量</h3>
-
-                    <p class="h1">126</p>
+                    <p class="h1" ng-bind="pass"></p>
                 </div>
             </div>
 
             <div id="echarts_now" style="height: 400px;position: relative;margin-top: 60px"
                  class="col-xs-12"></div>
-            <div class="text-center col-xs-12 sum_tip">
-                <span>连接量：</span><span>11111</span>
-                <span>进店量：</span><span>11111</span>
-                <span>过客量：</span><span>11111</span>
-            </div>
+            <!--<div class="text-center col-xs-12 sum_tip">-->
+                <!--<span>在线量：</span><span ng-bind="inline"></span>-->
+                <!--<span>进店量：</span><span ng-bind="comein"></span>-->
+                <!--<span>过客量：</span><span ng-bind="pass"></span>-->
+            <!--</div>-->
         </div>
         <div ng-show="dates==1">
-            <div class="form-inline" style="margin-top: 40px">
-                <span>开始时间：</span>
-                <div id="datetimepicker1" class="input-group input-append date">
-                    <input class="form-control" type="text" size="16" disabled >
-                <span class="input-group-addon add-on">
-                  <i class="fa fa-calendar" data-date-icon="icon-calendar">
-                  </i>
-                </span>
-                </div>
-                <span>结束时间</span>
-                <div id="datetimepicker2" class="input-group input-append date">
-                    <input class="form-control" type="text" size="16" disabled>
-                <span class="input-group-addon add-on">
-                  <i class="fa fa-calendar" data-date-icon="icon-calendar">
-                  </i>
-                </span>
-                </div>
-                <span style="color:red">（注：开始时间与结束时间相差不能超过1月）</span>
-                <button class="button button-royal" ng-click="search()">查询</button>
-            </div>
+            <!--<div class="form-inline" style="margin-top: 40px">-->
+                <!--<span>开始时间：</span>-->
+                <!--<div id="datetimepicker1" class="input-group input-append date">-->
+                    <!--<input class="form-control" type="text" size="16" disabled>-->
+                <!--<span class="input-group-addon add-on">-->
+                  <!--<i class="fa fa-calendar" data-date-icon="icon-calendar">-->
+                  <!--</i>-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--<span>结束时间</span>-->
+                <!--<div id="datetimepicker2" class="input-group input-append date">-->
+                    <!--<input class="form-control" type="text" size="16" disabled>-->
+                <!--<span class="input-group-addon add-on">-->
+                  <!--<i class="fa fa-calendar" data-date-icon="icon-calendar">-->
+                  <!--</i>-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--<span style="color:red">（注：开始时间与结束时间相差不能超过1月）</span>-->
+                <!--<button class="button button-royal" ng-click="search()">查询</button>-->
+            <!--</div>-->
 
             <div id="echarts_day" style="height: 400px;positilative;margin-top: 60px"
                  class="col-xs-12"></div>
-            <div class="text-center col-xs-12 sum_tip">
-                <span>连接量：</span><span>11111</span>
-                <span>进店量：</span><span>11111</span>
-                <span>过客量：</span><span>11111</span>
-            </div>
-            <div id="echarts1_day" style="height: 400px;position: relative;margin-top: 60px"
-                 class="col-xs-12"></div>
+            <!--<div class="text-center col-xs-12 sum_tip">-->
+                <!--<span>连接量：</span><span>11111</span>-->
+                <!--<span>进店量：</span><span>11111</span>-->
+                <!--<span>过客量：</span><span>11111</span>-->
+            <!--</div>-->
+            <!--<div id="echarts1_day" style="height: 400px;position: relative;margin-top: 60px"-->
+                 <!--class="col-xs-12"></div>-->
         </div>
         <div ng-show="dates==2">
             <div id="echarts_month" style="height: 400px;position: relative;margin-top: 60px"
                  class="col-xs-12"></div>
-            <div class="text-center col-xs-12 sum_tip">
-                <span>连接量：</span><span>11111</span>
-                <span>进店量：</span><span>11111</span>
-                <span>过客量：</span><span>11111</span>
-            </div>
-            <div id="echarts1_month" style="height: 400px;position: relative;margin-top: 60px"
-                 class="col-xs-12"></div>
+            <!--<div class="text-center col-xs-12 sum_tip">-->
+                <!--<span>连接量：</span><span>11111</span>-->
+                <!--<span>进店量：</span><span>11111</span>-->
+                <!--<span>过客量：</span><span>11111</span>-->
+            <!--</div>-->
+            <!--<div id="echarts1_month" style="height: 400px;position: relative;margin-top: 60px"-->
+                 <!--class="col-xs-12"></div>-->
         </div>
 
     </div>

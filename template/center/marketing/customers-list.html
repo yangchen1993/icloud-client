@@ -9,20 +9,16 @@
             <thead style="background-color: #8a8bc4;color: #fff">
             <tr>
                 <td>店铺名称</td>
-                <td>当前进店人数</td>
-                <td>当前连接人数</td>
-                <td>今日进店人数</td>
-                <td>今日连接人数</td>
+                <td>当前在线人数</td>
+                <td>今日进店人次</td>
                 <td>操作</td>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
+            <tr ng-repeat="g in grid.results">
+                <td ng-bind="g.name"></td>
+                <td ng-bind="g.current_online"></td>
+                <td ng-bind="g.stay_count"></td>
                 <td>
                     <button class="btn btn-xs btn-info" ui-sref="main.customers-flow">店铺客流量</button>
                     <button class="btn btn-xs btn-info" ui-sref="main.customers-loyalty">用户忠诚度</button>
@@ -31,5 +27,7 @@
             </tr>
             </tbody>
         </table>
+
+        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
     </div>
 </div>

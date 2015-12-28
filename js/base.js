@@ -34,7 +34,7 @@ window.API = {
 
         "CREATE_BUSINESS": [window.HOST, "users/new_business/"].join(""), // 新建商户
 
-        "REMOVE_BUSINESS":[window.HOST,"users/remove_business/"].join("")  //删除商户
+        "REMOVE_BUSINESS": [window.HOST, "users/remove_business/"].join("")  //删除商户
     },
 
     "SYSTEM": {
@@ -118,7 +118,9 @@ window.API = {
 
         "EDIT_GROUP": [window.HOST, "groups/edit_group/"].join(""), // 删除路由器分组
 
-        "GET_ROUTER_BY_GROUP": [window.HOST, "routers/get_current_user_routers/"].join("")//获取当前店铺所有路由器
+        "GET_ROUTER_BY_GROUP": [window.HOST, "routers/get_current_user_routers/"].join(""),//获取当前店铺所有路由器
+
+        "GET_GUESTS_FLOW": [window.HOST, "groups/get_guests_flow/"].join("")
     },
 
 
@@ -192,7 +194,13 @@ window.API = {
 
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join(""),
 
-        "GET_CURRENT_USER_MEMBERS": [window.HOST, "members/get_current_user_members/"].join("")
+        "GET_CURRENT_USER_MEMBERS": [window.HOST, "members/get_current_user_members/"].join(""),
+
+        "GET_CURRENT_HOUR_INFO": [window.HOST, "hourdata/get_current_hour_info/"].join(""), //每小时店铺客流情况
+
+        "GET_CURRENT_DAY_INFO": [window.HOST, "daydata/get_current_day_info/"].join(""),  //每天店铺客流情况
+
+        "GET_MONTH_INFO": [window.HOST, "monthdata/get_month_info/"].join("") //每月店铺客流情况
     },
 
     "JSADS": {

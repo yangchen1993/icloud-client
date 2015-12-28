@@ -277,7 +277,7 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
                 if (index >= 0) {
                     onlineData[index] = data[i].online;
                     if (i == data.length - 1) $scope.now_inline = data[i].online;
-                    comeInData[index] = data[i].stay + data[i].online;
+                    comeInData[index] = data[i].stay;
                     passData[index] = data[i].passing;
                     inlineDatas = data[i].online + inlineDatas;
                     comeInDatas = data[i].stay + comeInDatas;

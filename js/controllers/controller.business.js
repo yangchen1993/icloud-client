@@ -783,13 +783,14 @@ iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cook
     });
     $scope.submit = function (weixin) {
         $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key")].join(""), weixin).success(function (data) {
+                alert(data.msg);
                 $window.location.href = ["#/main/details?router_id=", router_id].join("");
+
             })
             .error(function (data) {
+                alert(data.msg);
                 $window.location.href = ["#/main/details?router_id=", router_id].join("");
-            })
-            .error(function (data) {
-                $window.alert(data.msg);
+
             })
     };
     $scope.routerDetails = function () {

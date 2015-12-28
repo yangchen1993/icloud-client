@@ -3,7 +3,7 @@ var pageArea, conmponentItem = $("");//页面中部展示区
 var editArea = $(".editArea");//编辑区
 var editTemp = $(".editTemp");
 var haveData = '';
-var ourShop = get_param(window.location.href, "id");
+var ourShop = get_param(window.location.href, "group_id");
 function editText(id, type) {
     $('.color').minicolors({
         animationSpeed: 50,
@@ -187,9 +187,8 @@ $.get(window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS + '?key=' + $.cookie("key"
     $('span[data-first-area="userShopArea"]').text(area);
 });
 
-$.get(window.API.CMS.GET_DATA + '?key=' + $.cookie("key").replace(/\"/g, "") + '&group_id=' + ourShop).success(function (data) {
-    if (data) {
-        console.log(data);
+$.get(window.API.CMS.GET_DATA + '?key=' + $.cookie("key").replace(/\"/g, "") + '&group_id=' + ourShop)
+    .success(function (data) {
         for (var i = 0; i < data.cms_ids.length; i++) {
             for (var j = 0; j <= data.cms.length; j++) {
                 if (data.cms[j].component_id == data.cms_ids[i]) {
@@ -214,29 +213,12 @@ $.get(window.API.CMS.GET_DATA + '?key=' + $.cookie("key").replace(/\"/g, "") + '
                 }
             }
         }
-        //for(var i=0;i<data.cms.length;i++){
-        //    $('#drag').append(data.cms[i].div);
-        //    switch(data.cms[i].content_type){
-        //        case 'text':
-        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
-        //            break;
-        //        case 'img':
-        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
-        //            break;
-        //        case 'map':
-        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
-        //            break;
-        //        case 'address':
-        //            addEditItem(data.cms[i].component_id,data.cms[i].content_type);
-        //            break;
-        //    }
-        //}
         $('#savePage').html('更新页面');
         haveData = true;
-    } else {
-        console.log('可以新建');
-    }
-});
+    })
+    .error(function (data) {
+        haveData = false;
+    });
 
 //生成新Id
 function addId() {

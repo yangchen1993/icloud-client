@@ -200,7 +200,9 @@ window.API = {
 
         "GET_CURRENT_DAY_INFO": [window.HOST, "daydata/get_current_day_info/"].join(""),  //每天店铺客流情况
 
-        "GET_MONTH_INFO": [window.HOST, "monthdata/get_month_info/"].join("") //每月店铺客流情况
+        "GET_MONTH_INFO": [window.HOST, "monthdata/get_month_info/"].join(""), //每月店铺客流情况
+
+        "GET_GUESTS_LOYALTY":[window.HOST,"memberlog/get_guests_loyalty/"].join("")  //用戶忠誠度
     },
 
     "JSADS": {

@@ -239,9 +239,11 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
                 return true;
         }
     };
+
+
+    var myDate = new Date();
     //每小时店铺客流情况
     var myCharts_now = echarts.init(document.getElementById("echarts_now"));
-    var myDate = new Date();
     var today_time = $filter('date')(myDate, 'yyyy-MM-dd 00:00:00');
     var tomorrow_time = $filter('date')(new Date(myDate.setDate(myDate.getDate() + 1)), 'yyyy-MM-dd 00:00:00');
 
@@ -270,7 +272,6 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
             for (var i = 0; i < data.length; i++) {
                 var start = new Date(data[i].time_range_start).getHours();
 
-
                 var index = _.indexOf(allHourX, start);
 
 
@@ -297,6 +298,10 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
                     show: true,
                     feature: {
                         mark: {show: true},
+                        magicType: {
+                            show: true,
+                            type: ['line', 'bar']
+                        },
                         restore: {show: true},
                         saveAsImage: {show: true}
                     }
@@ -306,7 +311,7 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
                 },
                 xAxis: {
                     name: '小时',
-                    boundaryGap: false,
+                    //boundaryGap: false,
                     data: allHourX
                 },
                 yAxis: {
@@ -316,21 +321,18 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
                 series: [
                     {
                         name: '在线数',
-                        type: "line",
+                        type: "bar",
                         data: onlineData
-                        //data:['1','2','1','3','1','2','3','9','11','12','8','9','11','12','7','13','21','19','18','15','13','10','5','1']
                     },
                     {
                         name: '进店数',
-                        type: "line",
+                        type: "bar",
                         data: comeInData
-                        //data:['0','1','3','2','4','3','4','11','21','22','19','22','23','25','17','12','17','17','16','24','13','8','5','1']
                     },
                     {
                         name: '过客量',
-                        type: "line",
+                        type: "bar",
                         data: passData
-                        //data:['12','14','15','14','15','7','13','15','19','18','22','45','33','46','57','58','67','84','57','36','26','32','14','16']
                     }
                 ]
             };
@@ -357,11 +359,23 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
             var dayComeInDataList = angular.copy(dayOnlineDataList);
             var dayPassDataList = angular.copy(dayOnlineDataList);
 
-            for (var d = 1; d < dayOfMonth; d++) {
+            for (var d = 1; d <= dayOfMonth; d++) {
                 allDayX.push(d);
                 dayOnlineDataList.push("-");
                 dayComeInDataList.push("-");
                 dayPassDataList.push("-")
+            }
+
+            for (var i = 0; i < data.length; i++) {
+                var start = new Date(data[i].time_range_start).getDate();
+
+                var index = _.indexOf(allDayX, start);
+
+                if (index >= 0) {
+                    dayOnlineDataList[index] = data[i].online;
+                    dayComeInDataList[index] = data[i].stay;
+                    dayPassDataList[index] = data[i].passing;
+                }
             }
 
 
@@ -377,6 +391,10 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
                     show: true,
                     feature: {
                         mark: {show: true},
+                        magicType: {
+                            show: true,
+                            type: ['line', 'bar']
+                        },
                         restore: {show: true},
                         saveAsImage: {show: true}
                     }
@@ -386,7 +404,7 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
                 },
                 xAxis: {
                     name: '日',
-                    boundaryGap: false,
+                    //boundaryGap: false,
                     data: allDayX
                 },
                 yAxis: {
@@ -396,17 +414,17 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
                 series: [
                     {
                         name: '日平均在线数',
-                        type: "line",
+                        type: "bar",
                         data: dayOnlineDataList
                     },
                     {
                         name: '日进店数',
-                        type: "line",
+                        type: "bar",
                         data: dayComeInDataList
                     },
                     {
                         name: '日过客量',
-                        type: "line",
+                        type: "bar",
                         data: dayPassDataList
                     }
                 ]
@@ -574,9 +592,44 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
     //myCharts1_month.setOption(option1_month);
 }]);
 
-iCloudController.controller("CustomersLoyaltyController", ['$scope', '$grid', function ($scope, $grid) {
-    $grid.initial(($scope, window.API));
+iCloudController.controller("CustomersLoyaltyController", ['$scope','$http', '$cookieStore','$grid', function ($scope,$http, $cookieStore, $grid) {
     var myCharts = echarts.init(document.getElementById("charts"));
+    var grades1 = [];
+    var grades2 = [];
+    var grades3 = [];
+    var grades4 = [];
+    var grades5 = [];
+    var counts1 = 0;
+    var counts2 = 0;
+    var counts3 = 0;
+    var counts4 = 0;
+    var counts5 = 0;
+    $http.get([window.API.MARKETING.GET_GUESTS_LOYALTY,"?key=",$cookieStore.get("key")].join("")).success(function(data){
+        console.log(data);
+        for(var i=0;i<data.length;i++){
+            if(1<=data[i].count&&data[i].count<=2){
+                grades1[counts1] = data[i];
+                counts1++;
+            }
+            else if(3<=data[i].count&&data[i].count<=5){
+                grades2[counts2] = data[i];
+                counts2++;
+            }
+            else if(6<=data[i].count&&data[i].count<=9){
+                grades3[counts3] = data[i];
+                counts3++;
+            }
+            else if(10<=data[i].count&&data[i].count<=14){
+                grades4[counts4] = data[i];
+                counts4++;
+            }
+            else{
+                grades5[counts5] = data[i];
+                counts5++;
+            }
+
+        }
+        console.log(grades1);
     option = {
         title: {
             text: "用户忠诚度占比"
@@ -604,22 +657,38 @@ iCloudController.controller("CustomersLoyaltyController", ['$scope', '$grid', fu
                 center: ["50%", "60%"],
                 radius: "55%",
                 data: [
-                    {name: "1-2次", value: 100},
-                    {name: "3-5次", value: 89},
-                    {name: "6-9次", value: 66},
-                    {name: "10-14次", value: 54},
-                    {name: "15次以上", value: 33}
+                    {name: "1-2次", value: grades1.length,obj:grades1},
+                    {name: "3-5次", value: grades2.length,obj:grades1},
+                    {name: "6-9次", value: grades3.length,obj:grades3},
+                    {name: "10-14次", value: grades4.length,obj:grades4},
+                    {name: "15次以上", value: grades5.length,obj:grades5}
                 ]
             }
         ]
     };
-    myCharts.setOption(option);
-    myCharts.on('click', function () {
-        $("#table_yc").css("display", "table");
+        myCharts.setOption(option);
     });
-    $scope.send_SMS = function () {
-        $scope.SMS_table = true;
+
+    console.log($grid.initial($scope, window.API.MARKETING.GET_CURRENT_USER_SMS_TEMPLATES));
+    myCharts.on('click', function (e) {
+        console.log(e.data.obj);
+        $("#loyalty_table").css("display","inline-table");
+    });
+    $scope.send_SMS = function(template_id){
+        var data = {
+            "template_id": template_id,
+            "phone_numbers": numbers
+        };
+        $http.post([$window.API.MARKETING.SEND_SMS_TEMPLATE, "?key=", $cookieStore.get("key")].join(""), data)
+            .success(function (data) {
+                $window.alert(data.msg);
+            })
+            .error(function (data) {
+                $window.alert(data.msg);
+            })
+
     }
+
 }]);
 
 iCloudController.controller("CustomersLostController", ['$scope', '$grid', function ($scope, $grid) {
@@ -663,7 +732,8 @@ iCloudController.controller("CustomersLostController", ['$scope', '$grid', funct
     };
     myCharts.setOption(option);
     myCharts.on('click', function () {
-        $("#table_yc").css("display", "table");
+        $scope.SMS_table = true;
+        console.log($scope.SMS_table)
     });
     $scope.send_SMS = function () {
         $scope.SMS_table = true;

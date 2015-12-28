@@ -559,8 +559,8 @@ iCloudController.controller("ShopManagementRoutersController", ["$scope", "$wind
 
     var show_selectRouters = function () {
         $scope.router = [];
-        $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key"),"&pageSize=unlimited&groups__id__isnull=True"].join("")).success(function (data) {
-             $scope.router = data;
+        $http.get([window.API.ROUTER.GET_CURRENT_USER_ROUTERS, "?key=", $cookieStore.get("key"), "&pageSize=unlimited&groups__id__isnull=True"].join("")).success(function (data) {
+            $scope.router = data;
         });
     };
     show_selectRouters();
@@ -782,13 +782,12 @@ iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cook
     });
     $scope.submit = function (weixin) {
         $http.post([window.API.WEIXIN.NEW_WECHAT, "?key=", $cookieStore.get("key")].join(""), weixin).success(function (data) {
+                alert(data.msg);
                 $window.location.href = ["#/main/details?router_id=", router_id].join("");
             })
             .error(function (data) {
+                alert(data.msg);
                 $window.location.href = ["#/main/details?router_id=", router_id].join("");
-            })
-            .error(function (data) {
-                $window.alert(data.msg);
             })
     };
     $scope.routerDetails = function () {
@@ -800,13 +799,13 @@ iCloudController.controller("WeiXinConfigController", ["$scope", "$http", "$cook
 iCloudController.controller("BusinessManageController", ["$scope", "$http", "$cookieStore", "$window", "$grid",
     function ($scope, $http, $cookieStore, $window, $grid) {
         $grid.initial($scope, window.API.USER.GET_SUB_BUSINESSES);
-        $scope.delete_shanghu = function(id){
-            if(confirm("删除商户后，商户所属路由自动回归，商户不能再登录云平台，是否继续？")){
-                if(confirm("您真的要删除此用户吗？")){
-                    $http.delete([window.API.USER.REMOVE_BUSINESS,"?key=",$cookieStore.get("key"),"&id=",id].join("")).success(function(data){
-                        alert(data.msg);
-                    })
-                        .error(function(data){
+        $scope.delete_shanghu = function (id) {
+            if (confirm("删除商户后，商户所属路由自动回归，商户不能再登录云平台，是否继续？")) {
+                if (confirm("您真的要删除此用户吗？")) {
+                    $http.delete([window.API.USER.REMOVE_BUSINESS, "?key=", $cookieStore.get("key"), "&id=", id].join("")).success(function (data) {
+                            alert(data.msg);
+                        })
+                        .error(function (data) {
                             alert(data.msg);
                         })
                 }

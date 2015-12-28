@@ -274,10 +274,10 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
 
                 var index = _.indexOf(allHourX, start);
 
+                $scope.now_inline = data[0].online;
 
                 if (index >= 0) {
                     onlineData[index] = data[i].online;
-                    if (i == data.length - 1) $scope.now_inline = data[i].online;
                     comeInData[index] = data[i].stay;
                     passData[index] = data[i].passing;
                     inlineDatas = data[i].online + inlineDatas;
@@ -592,104 +592,110 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
     //myCharts1_month.setOption(option1_month);
 }]);
 
-iCloudController.controller("CustomersLoyaltyController", ['$scope','$http', '$cookieStore','$grid', function ($scope,$http, $cookieStore, $grid) {
-    var myCharts = echarts.init(document.getElementById("charts"));
-    var grades1 = [];
-    var grades2 = [];
-    var grades3 = [];
-    var grades4 = [];
-    var grades5 = [];
-    var counts1 = 0;
-    var counts2 = 0;
-    var counts3 = 0;
-    var counts4 = 0;
-    var counts5 = 0;
-    $http.get([window.API.MARKETING.GET_GUESTS_LOYALTY,"?key=",$cookieStore.get("key")].join("")).success(function(data){
-        console.log(data);
-        for(var i=0;i<data.length;i++){
-            if(1<=data[i].count&&data[i].count<=2){
-                grades1[counts1] = data[i];
-                counts1++;
+iCloudController.controller("CustomersLoyaltyController", ['$scope', '$http', '$cookieStore', '$grid', '$window',
+    function ($scope, $http, $cookieStore, $grid, $window) {
+        var myCharts = echarts.init(document.getElementById("charts"));
+        var grades1 = [];
+        var grades2 = [];
+        var grades3 = [];
+        var grades4 = [];
+        var grades5 = [];
+        var counts1 = 0;
+        var counts2 = 0;
+        var counts3 = 0;
+        var counts4 = 0;
+        var counts5 = 0;
+        $http.get([window.API.MARKETING.GET_GUESTS_LOYALTY, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                if (1 <= data[i].count && data[i].count <= 2) {
+                    grades1[counts1] = data[i];
+                    counts1++;
+                }
+                else if (3 <= data[i].count && data[i].count <= 5) {
+                    grades2[counts2] = data[i];
+                    counts2++;
+                }
+                else if (6 <= data[i].count && data[i].count <= 9) {
+                    grades3[counts3] = data[i];
+                    counts3++;
+                }
+                else if (10 <= data[i].count && data[i].count <= 14) {
+                    grades4[counts4] = data[i];
+                    counts4++;
+                }
+                else {
+                    grades5[counts5] = data[i];
+                    counts5++;
+                }
+
             }
-            else if(3<=data[i].count&&data[i].count<=5){
-                grades2[counts2] = data[i];
-                counts2++;
+            console.log(grades1);
+            option = {
+                title: {
+                    text: "用户忠诚度占比"
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                tooltip: {
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    y: "50px",
+                    data: ["1-2次", "3-5次", "6-9次", "10-14次", "15次以上"]
+                },
+                series: [
+                    {
+                        y: "220px",
+                        name: "用户忠诚度",
+                        type: "pie",
+                        center: ["50%", "60%"],
+                        radius: "55%",
+                        data: [
+                            {name: "1-2次", value: grades1.length, obj: grades1},
+                            {name: "3-5次", value: grades2.length, obj: grades1},
+                            {name: "6-9次", value: grades3.length, obj: grades3},
+                            {name: "10-14次", value: grades4.length, obj: grades4},
+                            {name: "15次以上", value: grades5.length, obj: grades5}
+                        ]
+                    }
+                ]
+            };
+            myCharts.setOption(option);
+        });
+
+        $grid.initial($scope, window.API.MARKETING.GET_CURRENT_USER_SMS_TEMPLATES);
+
+        var numbers = [];
+
+        myCharts.on('click', function (e) {
+            for (var i = 0; i < e.data.obj.length; i++) {
+                numbers.push(e.data.obj[i].phone)
             }
-            else if(6<=data[i].count&&data[i].count<=9){
-                grades3[counts3] = data[i];
-                counts3++;
-            }
-            else if(10<=data[i].count&&data[i].count<=14){
-                grades4[counts4] = data[i];
-                counts4++;
-            }
-            else{
-                grades5[counts5] = data[i];
-                counts5++;
-            }
+            $("#loyalty_table").css("display", "inline-table");
+        });
+        $scope.send_SMS = function (template_id) {
+            var data = {
+                "template_id": template_id,
+                "phone_numbers": numbers
+            };
+            $http.post([$window.API.MARKETING.SEND_SMS_TEMPLATE, "?key=", $cookieStore.get("key")].join(""), data)
+                .success(function (data) {
+                    $window.alert(data.msg);
+                })
+                .error(function (data) {
+                    $window.alert(data.msg);
+                })
 
         }
-        console.log(grades1);
-    option = {
-        title: {
-            text: "用户忠诚度占比"
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                mark: {show: true},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        tooltip: {
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            y: "50px",
-            data: ["1-2次", "3-5次", "6-9次", "10-14次", "15次以上"]
-        },
-        series: [
-            {
-                y: "220px",
-                name: "用户忠诚度",
-                type: "pie",
-                center: ["50%", "60%"],
-                radius: "55%",
-                data: [
-                    {name: "1-2次", value: grades1.length,obj:grades1},
-                    {name: "3-5次", value: grades2.length,obj:grades1},
-                    {name: "6-9次", value: grades3.length,obj:grades3},
-                    {name: "10-14次", value: grades4.length,obj:grades4},
-                    {name: "15次以上", value: grades5.length,obj:grades5}
-                ]
-            }
-        ]
-    };
-        myCharts.setOption(option);
-    });
 
-    console.log($grid.initial($scope, window.API.MARKETING.GET_CURRENT_USER_SMS_TEMPLATES));
-    myCharts.on('click', function (e) {
-        console.log(e.data.obj);
-        $("#loyalty_table").css("display","inline-table");
-    });
-    $scope.send_SMS = function(template_id){
-        var data = {
-            "template_id": template_id,
-            "phone_numbers": numbers
-        };
-        $http.post([$window.API.MARKETING.SEND_SMS_TEMPLATE, "?key=", $cookieStore.get("key")].join(""), data)
-            .success(function (data) {
-                $window.alert(data.msg);
-            })
-            .error(function (data) {
-                $window.alert(data.msg);
-            })
-
-    }
-
-}]);
+    }]);
 
 iCloudController.controller("CustomersLostController", ['$scope', '$grid', function ($scope, $grid) {
     $grid.initial(($scope, window.API));

@@ -68,7 +68,7 @@ iCloudController.controller("CreateAdsController", ["$scope", "$http", "$categor
         $scope.ads = {
             "id": data[0].id
         };
-    })
+    });
 }]);
 
 iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$grid", "$checkBox", "$category", "$cookieStore",

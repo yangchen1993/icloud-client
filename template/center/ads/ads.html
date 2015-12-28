@@ -8,6 +8,9 @@
             <table id="table-wemedia" class="table table-hover table-bordered table-selectable text-center ads_table table-striped">
                 <thead style="background-color: #8a8bc4;color:#fff">
                 <tr>
+                    <td style="cursor: pointer">
+                        广告名称
+                    </td>
                     <td id="{{ headers[10] }}" ng-click="sort(headers[10])" style="cursor: pointer">
                         行业类型
                         <span ng-show="currentSort[headers[10]] === true" class="glyphicon glyphicon-triangle-top"></span>
@@ -31,6 +34,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="p in grid.results" class="wemedia_table">
+                    <td ng-bind="p.title"></td>
                     <td ng-bind="p.category"></td>
                     <td ng-bind="p.create_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
                     <td ng-bind="p.modified_time | date:'yyyy-MM-dd HH:mm:ss'"></td>

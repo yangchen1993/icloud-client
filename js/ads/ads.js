@@ -174,8 +174,7 @@ function editSlider(id,type){
                     '<img  src="' + imgPostUrl + '">'+
                     '</div>'+
                     '<div class="link"><div>图片链接</div><div>'+
-                    '<input type="text" class="form-control" placeholder="不加http://">'+
-                    '</div></div><div class="close">&times</div></div>'
+                    '<input type="text" class="form-control links" placeholder="如:idianjia.com">'
                 );
             });
         });
@@ -226,8 +225,7 @@ function editSlider(id,type){
                     '<img  src="' + imgPostUrl + '">'+
                     '</div>'+
                     '<div class="link"><div>图片链接</div><div>'+
-                    '<input type="text" class="form-control" placeholder="不加http://">'+
-                    '</div></div><div class="close">&times</div></div>'
+                    '<input type="text" class="form-control links" placeholder="如:idianjia.com">'
                 );
             });
         });
@@ -278,8 +276,7 @@ function editSlider(id,type){
                     '<img  src="' + imgPostUrl + '">'+
                     '</div>'+
                     '<div class="link"><div>图片链接</div><div>'+
-                    '<input type="text" class="links form-control" placeholder="不加http://">'+
-                    '</div></div><div class="close">&times</div></div>'
+                    '<input type="text" class="form-control links" placeholder="如:idianjia.com">'
                 );
             });
         });
@@ -505,9 +502,12 @@ if (!ad_id) {
     $.get(window.API.AD.GET_AD_INFO + '?key=' + $.cookie("key").replace(/\"/g, "") + '&id=' + ad_id).success(function (data) {
         console.log(data);
         $(".category").val('number:' + data.category_id);
+        $("#ad_title").val(data.title);
         for (var i = 0; i < data.cms_ids.length; i++) {
-            for (var j = 0; j <= data.cms.length; j++) {
+            for (var j = 0; j < data.cms.length; j++) {
                 if (data.cms[j].component_id == data.cms_ids[i]) {
+                    console.log('----');
+                    console.log(data.cms[j].component_id);
                     $('#drag').append(data.cms[j].div);
                     switch (data.cms[j].content_type) {
                         case 'text':
@@ -551,9 +551,10 @@ if (!ad_id) {
             type: "PUT",
             "dataType": "json",
             'contentType': 'application/json;charset=utf-8',
-            "data": JSON.stringify({"category_id": $(".category").val().split(':')[1], "items": items}),
+            "data": JSON.stringify({"category_id": $(".category").val().split(':')[1], "items": items,"title":$("#ad_title").val().toString()}),
             success: function (data) {
                 alert('更新成功');
+                window.location.href="/#/main/ads"
             }
         });
     });

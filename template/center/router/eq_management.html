@@ -19,21 +19,21 @@
                             <option value="">选择行业</option>
                         </select>
 
-                        <!--<div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>-->
-                        <!--<div>-->
+                    <!--<div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>-->
+                    <!--<div>-->
                         <!--<span>地区：</span>-->
                         <!--<select class="form-control" style="width: 15% !important;"-->
-                        <!--ng-model="search.router_groups__trade__province" ng-options="v.id as v.name for v in province1"-->
-                        <!--ng-change="select_p(search.groups__trade__province)">-->
-                        <!--<option value="">省</option>-->
+                                <!--ng-model="search.router_groups__trade__province" ng-options="v.id as v.name for v in province1"-->
+                                <!--ng-change="select_p(search.groups__trade__province)">-->
+                            <!--<option value="">省</option>-->
                         <!--</select>-->
                         <!--<select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__city"-->
-                        <!--ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">-->
-                        <!--<option value="">市</option>-->
+                                <!--ng-options="v.id as v.name for v in city1" ng-change="select_c(search.groups__trade__city)">-->
+                            <!--<option value="">市</option>-->
                         <!--</select>-->
                         <!--<select class="form-control" style="width: 15% !important;" ng-model="search.groups__trade__area"-->
-                        <!--ng-options="v.id as v.name for v in area1">-->
-                        <!--<option value="">区/县</option>-->
+                                <!--ng-options="v.id as v.name for v in area1">-->
+                            <!--<option value="">区/县</option>-->
                         <!--</select>-->
                         <!--</div>-->
                         <div style="border-top: 1px dotted #cccccc;margin-top: 10px;padding-bottom: 9px"></div>
@@ -130,6 +130,7 @@
                     <span ng-show="currentSort['create_time'] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
                 </td>
+                <td ng-show="delegated_nav">托管状态</td>
                 <td>操作</td>
             </tr>
             </thead>
@@ -143,13 +144,17 @@
                 <td ng-bind="p.mac"></td>
                 <td ng-bind="p.ssid"></td>
                 <td ng-bind="p.register_number"></td>
+                <td ng-bind="p.register_member_numbers"></td>
                 <td ng-bind="p.create_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
+
+                <td ng-if="p.delegated" ng-show="delegated_nav">已托管</td>
+                <td ng-if="!p.delegated" ng-show="delegated_nav">未托管</td>
                 <td>
                     <a class="btn btn-xs btn-info" href="javascript:" ng-click="see_router(p.id)">查看</a>
-                    <a ng-if="deviceManage.editRouterMenu" class="btn btn-xs btn-info"
-                       href="#/main/edit-device?router_id={{ p.id }}">编辑</a>
-                    <a ng-if="deviceManage.removeRouterMenu" class="btn btn-xs btn-danger" href="javascript:"
-                       ng-click="removeRouter(p.id)">删除</a>
+                    <a class="btn btn-info btn-xs" ng-click="add_delegated(p.mac)" ng-if="!p.delegated" ng-show="delegated_nav">托管</a>
+                    <a class="btn btn-info btn-xs" ng-click="cancel_delegated(p.mac)" ng-if="p.delegated" ng-show="delegated_nav">回收</a>
+                    <a ng-if="deviceManage.editRouterMenu" class="btn btn-xs btn-info" href="#/main/edit-device?router_id={{ p.id }}">编辑</a>
+                    <a ng-if="deviceManage.removeRouterMenu" class="btn btn-xs btn-danger" href="javascript:" ng-click="removeRouter(p.id)">删除</a>
                 </td>
             </tr>
             </tbody>

@@ -71,8 +71,8 @@ iCloudController.controller("CreateAdsController", ["$scope", "$http", "$categor
     });
 }]);
 
-iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$grid", "$checkBox", "$category", "$cookieStore",
-    function ($scope, $http, $window, $grid, $checkBox, $category, $cookieStore) {
+iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$grid", "$checkBox", "$category", "$cookieStore","$rootScope",
+    function ($scope, $http, $window, $grid, $checkBox, $category, $cookieStore,$rootScope) {
         var ad_id = get_param(window.location.href, "ad_id");
         $grid.initial($scope, $window.API.ROUTER.GET_CURRENT_USER_ROUTERS, {"groups_id__isnull": "False"});
         $scope.sjTouFang = function () {
@@ -148,6 +148,7 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
 
             var data = {};
 
+
             if (checkedBusinesses.length > 0) {
                 data.user__id__in = checkedBusinesses.join(",")
             }
@@ -157,6 +158,18 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
             if (checkedShop.length > 0) {
                 data.groups__id__in = checkedShop.join(",");
             }
+
+
+            if($rootScope.delegate_auths==1){
+                data.delegated = "True"
+            }
+
+
+            if($rootScope.delegate_auths==0){
+                console.log($rootScope.delegate_auths);
+                data.delegated = "False"
+            }
+
 
             return data;
         };

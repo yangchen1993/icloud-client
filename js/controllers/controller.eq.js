@@ -54,6 +54,22 @@ iCloudController.controller("EqManagementController", ['$scope', '$http', '$chec
                     $scope.refresh()
                 })
         };
+        $scope.add_delegated = function(mac){
+            var macs=[];
+            macs.push(mac);
+            $http.put([window.API.ROUTER.ROUTERS_DELEGATE,"?key=",$cookieStore.get("key")].join(""),{deviceMacs:macs}).success(function(data){
+                alert(data.msg);
+                $scope.refresh();
+            })
+        };
+        $scope.cancel_delegated = function(mac){
+            var macs=[];
+            macs.push(mac);
+            $http.put([window.API.ROUTER.ROUTERS_UNDELEGATE,"?key=",$cookieStore.get("key")].join(""),{deviceMacs:macs}).success(function(data){
+                alert(data.msg);
+                $scope.refresh();
+            })
+        }
 
     }]);
 

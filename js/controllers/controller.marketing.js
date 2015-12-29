@@ -258,6 +258,7 @@ iCloudController.controller("CustomersFlowController", ['$scope', '$timeout', '$
             var inlineDatas = 0;
             var comeInDatas = 0;
             var passDatas = 0;
+            $scope.now_inline=0;
 
 
             for (var j = 0; j < 24; j++) {

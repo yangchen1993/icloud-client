@@ -9,13 +9,13 @@ var conmponentItem = $("");
 var haveData = '';
 var ad_id = get_param(window.location.href, "ad_id");
 
-function showSlider(id){
-    var slider=new Swiper("#"+id+" .swiper-container",{
+function showSlider(id) {
+    var slider = new Swiper("#" + id + " .swiper-container", {
         pagination: '.pagination',
         autoplay: 3000,
         continuous: true,
         hashnav: true,
-        loop:true,
+        loop: true,
         grabCursor: true,
         paginationClickable: true
     })
@@ -69,6 +69,7 @@ function editText(id, type) {
         $('div[data-edit-id=' + id + ']' + ' .text-count').text(3000 - numCounter);
         $("#" + id + " .text-content").html(numText);
     }
+
     $(document).ready(function () {
         validateText();
     });
@@ -128,11 +129,11 @@ function editImg(id, type) {
     });
 
 }
-function editSlider(id,type){
-    var imgBox=[];
-    $('div[data-edit-id=' + id + '] #upload-img0').change(function(){
+function editSlider(id, type) {
+    var imgBox = [];
+    $('div[data-edit-id=' + id + '] #upload-img0').change(function () {
         //$("#slider-edit-img").removeClass("fade").css("display","block");
-        var upInput=$(this);
+        var upInput = $(this);
         console.log($(this));
         var files;
         var file;
@@ -142,7 +143,7 @@ function editSlider(id,type){
             file = files[0];
             if (isImageFile(file)) {
                 if (this.url) {
-                    this.url=''; // Revoke the old one
+                    this.url = ''; // Revoke the old one
                 }
                 this.url = URL.createObjectURL(file);
             }
@@ -150,13 +151,13 @@ function editSlider(id,type){
         var img = $('<img src="' + this.url + '">');
         $('#slider-edit-img0  .modal-body').html(img);
         $("#slider-edit-img0").modal();
-        $("#slider-edit-img0").on("hidden.bs.modal",function(){
+        $("#slider-edit-img0").on("hidden.bs.modal", function () {
             upInput.val("");
         });
         img.cropper({
             aspectRatio: 2
         });
-        var imgData="";
+        var imgData = "";
         $('#slider-edit-img0  .save').on('click', function () {
             $("#slider-edit-img0").modal("hide");
             upInput.val("");
@@ -169,20 +170,20 @@ function editSlider(id,type){
                 var imgPostUrl = data.link;
                 imgBox.push('<img  src="' + imgPostUrl + '">');
                 $('div[data-edit-id=' + id + '] .edit0').html(
-                    '<div  class="img-box form-inline">'+
-                    '<div class="img-for-edit">'+
-                    '<img  src="' + imgPostUrl + '">'+
-                    '</div>'+
-                    '<div class="link"><div>图片链接</div><div>'+
+                    '<div  class="img-box form-inline">' +
+                    '<div class="img-for-edit">' +
+                    '<img  src="' + imgPostUrl + '">' +
+                    '</div>' +
+                    '<div class="link"><div>图片链接</div><div>' +
                     '<input type="text" class="form-control links" placeholder="如:idianjia.com">'
                 );
             });
         });
     })
 
-    $('div[data-edit-id=' + id + '] #upload-img1').change(function(){
+    $('div[data-edit-id=' + id + '] #upload-img1').change(function () {
         //$("#slider-edit-img").removeClass("fade").css("display","block");
-        var upInput=$(this);
+        var upInput = $(this);
         console.log($(this));
         var files;
         var file;
@@ -192,7 +193,7 @@ function editSlider(id,type){
             file = files[0];
             if (isImageFile(file)) {
                 if (this.url) {
-                    this.url=''; // Revoke the old one
+                    this.url = ''; // Revoke the old one
                 }
                 this.url = URL.createObjectURL(file);
             }
@@ -200,13 +201,13 @@ function editSlider(id,type){
         var img = $('<img src="' + this.url + '">');
         $('#slider-edit-img1  .modal-body').html(img);
         $("#slider-edit-img1").modal();
-        $("#slider-edit-img1").on("hidden.bs.modal",function(){
+        $("#slider-edit-img1").on("hidden.bs.modal", function () {
             upInput.val("");
         });
         img.cropper({
             aspectRatio: 2
         });
-        var imgData="";
+        var imgData = "";
         $('#slider-edit-img1  .save').on('click', function () {
             $("#slider-edit-img1").modal("hide");
             upInput.val("");
@@ -220,20 +221,20 @@ function editSlider(id,type){
                 imgBox.push('<img  src="' + imgPostUrl + '">');
                 console.log(imgBox);
                 $('div[data-edit-id=' + id + '] .edit1').html(
-                    '<div  class="img-box form-inline">'+
-                    '<div class="img-for-edit">'+
-                    '<img  src="' + imgPostUrl + '">'+
-                    '</div>'+
-                    '<div class="link"><div>图片链接</div><div>'+
+                    '<div  class="img-box form-inline">' +
+                    '<div class="img-for-edit">' +
+                    '<img  src="' + imgPostUrl + '">' +
+                    '</div>' +
+                    '<div class="link"><div>图片链接</div><div>' +
                     '<input type="text" class="form-control links" placeholder="如:idianjia.com">'
                 );
             });
         });
     })
 
-    $('div[data-edit-id=' + id + '] #upload-img2').change(function(){
+    $('div[data-edit-id=' + id + '] #upload-img2').change(function () {
         //$("#slider-edit-img").removeClass("fade").css("display","block");
-        var upInput=$(this);
+        var upInput = $(this);
         console.log($(this));
         var files;
         var file;
@@ -243,7 +244,7 @@ function editSlider(id,type){
             file = files[0];
             if (isImageFile(file)) {
                 if (this.url) {
-                    this.url=''; // Revoke the old one
+                    this.url = ''; // Revoke the old one
                 }
                 this.url = URL.createObjectURL(file);
             }
@@ -251,13 +252,13 @@ function editSlider(id,type){
         var img = $('<img src="' + this.url + '">');
         $('#slider-edit-img2  .modal-body').html(img);
         $("#slider-edit-img2").modal();
-        $("#slider-edit-img2").on("hidden.bs.modal",function(){
+        $("#slider-edit-img2").on("hidden.bs.modal", function () {
             upInput.val("");
         });
         img.cropper({
             aspectRatio: 2
         });
-        var imgData="";
+        var imgData = "";
         $('#slider-edit-img2  .save').on('click', function () {
             $("#slider-edit-img2").modal("hide");
             upInput.val("");
@@ -271,26 +272,26 @@ function editSlider(id,type){
                 imgBox.push('<img  src="' + imgPostUrl + '">');
                 console.log(imgBox);
                 $('div[data-edit-id=' + id + '] .edit2').html(
-                    '<div  class="img-box form-inline">'+
-                    '<div class="img-for-edit">'+
-                    '<img  src="' + imgPostUrl + '">'+
-                    '</div>'+
-                    '<div class="link"><div>图片链接</div><div>'+
+                    '<div  class="img-box form-inline">' +
+                    '<div class="img-for-edit">' +
+                    '<img  src="' + imgPostUrl + '">' +
+                    '</div>' +
+                    '<div class="link"><div>图片链接</div><div>' +
                     '<input type="text" class="form-control links" placeholder="如:idianjia.com">'
                 );
             });
         });
     });
-    $("#enter").click(function(){
-        $("#"+id+" .swiper-wrapper").html("");
-        $("#"+id+" .script").remove();
-        var div="";
-        for(var i=0;i<imgBox.length;i++){
-            var link=$('div[data-edit-id=' + id + '] .edit'+i+' .links').val();
-            div=div+"<div class='swiper-slide'><a href='http://"+link+"'>"+imgBox[i]+"</a></div>";
+    $("#enter").click(function () {
+        $("#" + id + " .swiper-wrapper").html("");
+        $("#" + id + " .script").remove();
+        var div = "";
+        for (var i = 0; i < imgBox.length; i++) {
+            var link = $('div[data-edit-id=' + id + '] .edit' + i + ' .links').val();
+            div = div + "<div class='swiper-slide'><a href='http://" + link + "'>" + imgBox[i] + "</a></div>";
         }
         console.log(div);
-        $("#"+id+" .swiper-wrapper").html(div);
+        $("#" + id + " .swiper-wrapper").html(div);
         //var slider=new Swiper("#"+id+" .swiper-container",{
         //    pagination: '.pagination',
         //    autoplay: 3000,
@@ -303,29 +304,29 @@ function editSlider(id,type){
         //'pagination: '+'"#'+id+' .pagination",'+
         //"hashnav:true,"+
         //})
-        $("#"+id+" .slider").append(
-            "<div class='script'>"+
-            '<script>'+
-                'var slider=new Swiper("#'+id+' .swiper-container",{'+
-                "autoplay: 4000,"+
-                "continuous: true,"+
-                "loop:true,"+
-                "grabCursor: true,"+
-                "paginationClickable: true"+
-                "})"+
-            '</script>'+
+        $("#" + id + " .slider").append(
+            "<div class='script'>" +
+            '<script>' +
+            'var slider=new Swiper("#' + id + ' .swiper-container",{' +
+            "autoplay: 4000," +
+            "continuous: true," +
+            "loop:true," +
+            "grabCursor: true," +
+            "paginationClickable: true" +
+            "})" +
+            '</script>' +
             "</div>"
         );
-        imgBox=[];
+        imgBox = [];
     });
 }
-function testeditSlider(id,type){
-    var imgBox=[];
-    var a=0;
-    $('div[data-edit-id=' + id + '] #upload-img').change(function(){
+function testeditSlider(id, type) {
+    var imgBox = [];
+    var a = 0;
+    $('div[data-edit-id=' + id + '] #upload-img').change(function () {
         //$('#slider-edit-img .save').attr('id','t'+a);
         //$("#slider-edit-img").removeClass("fade").css("display","block");
-        var upInput=$(this);
+        var upInput = $(this);
         console.log($(this));
         var files;
         var file;
@@ -335,7 +336,7 @@ function testeditSlider(id,type){
             file = files[0];
             if (isImageFile(file)) {
                 if (this.url) {
-                    this.url=''; // Revoke the old one
+                    this.url = ''; // Revoke the old one
                 }
                 this.url = URL.createObjectURL(file);
             }
@@ -343,15 +344,15 @@ function testeditSlider(id,type){
         var img = $('<img src="' + this.url + '">');
         $('#slider-edit-img .modal-body').html(img);
         $("#slider-edit-img").modal();
-        $("#slider-edit-img").on("hidden.bs.modal",function(){
+        $("#slider-edit-img").on("hidden.bs.modal", function () {
             upInput.val("");
         });
         img.cropper({
             aspectRatio: 2
         });
-        var imgData="";
-        console.log(img.size()+"第一次");
-        $('#slider-edit-img #t'+a).on('click', function () {
+        var imgData = "";
+        console.log(img.size() + "第一次");
+        $('#slider-edit-img #t' + a).on('click', function () {
             $("#slider-edit-img").modal("hide");
             console.log(a);
             a++;
@@ -378,13 +379,13 @@ function testeditSlider(id,type){
             //});
         });
     });
-    $("#enter").click(function(){
-        var div="";
-        for(var i=0;i<imgBox.length;i++){
+    $("#enter").click(function () {
+        var div = "";
+        for (var i = 0; i < imgBox.length; i++) {
             console.log(i);
-            div=div+"<div class='swiper-slide'>"+imgBox[i]+"</div>";
+            div = div + "<div class='swiper-slide'>" + imgBox[i] + "</div>";
         }
-        $("#"+id+" .swiper-wrapper").html(div);
+        $("#" + id + " .swiper-wrapper").html(div);
         showSlider(id);
     });
 }
@@ -487,7 +488,11 @@ if (!ad_id) {
             type: "POST",
             "dataType": "json",
             'contentType': 'application/json;charset=utf-8',
-            "data": JSON.stringify({"category_id": $(".category").val().split(':')[1], "items": items}),
+            "data": JSON.stringify({
+                "category_id": $(".category").val().split(':')[1],
+                "items": items,
+                "title": $("#ad_title").val()
+            }),
             success: function (data) {
                 window.location.href = "#/main/ads";
             }
@@ -551,10 +556,14 @@ if (!ad_id) {
             type: "PUT",
             "dataType": "json",
             'contentType': 'application/json;charset=utf-8',
-            "data": JSON.stringify({"category_id": $(".category").val().split(':')[1], "items": items,"title":$("#ad_title").val().toString()}),
+            "data": JSON.stringify({
+                "category_id": $(".category").val().split(':')[1],
+                "items": items,
+                "title": $("#ad_title").val().toString()
+            }),
             success: function (data) {
                 alert('更新成功');
-                window.location.href="/#/main/ads"
+                window.location.href = "/#/main/ads"
             }
         });
     });

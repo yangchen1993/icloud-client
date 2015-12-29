@@ -303,7 +303,7 @@ thead {
     background-color: #fff
 }
 .table_inside label{
-    font-weight: 100 !important;
+    font-weight: 100;
 }
 .panel_outside{
     height: auto;

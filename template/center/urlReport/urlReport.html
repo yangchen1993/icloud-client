@@ -1,0 +1,64 @@
+<style>
+    label{
+        font-size: 18px;
+        font-family: 微软雅黑;
+        font-weight: 500 !important;
+    }
+</style>
+<div class="panel_outside">
+    <ol class="breadcrumb">
+        <li class="active">URL上报</li>
+    </ol>
+    <div class="table_inside">
+            <button class="button button-royal" data-toggle="collapse" data-target="#search_panel">过滤条件</button>
+        <div class="collapse" id="search_panel">
+            <div class="well row" style="margin-top: 10px;background-color: #fff">
+                <div class="form-inline col-xs-4 col-xs-offset-2">
+                    <label>过滤规则：</label>
+                    <select class="form-control">
+                        <option>引用规则一</option>
+                        <option>引用规则二</option>
+                    </select>
+                </div>
+                <div class="form-inline form-group col-xs-5 col-xs-offset-1">
+                    <label>区域过滤：</label>
+                    <select class="form-control">
+                        <option>--省--</option>
+                    </select>
+                    <select class="form-control">
+                        <option>--市--</option>
+                    </select>
+                    <select class="form-control">
+                        <option>--区/县--</option>
+                    </select>
+                </div>
+                <div class="form-inline form-group col-xs-4 col-xs-offset-2">
+                    <label>时间范围：</label>
+                    <select class="form-control">
+                        <option>最近一周</option>
+                        <option>最近一月</option>
+                    </select>
+                </div>
+                <div class="form-inline form-group col-xs-5 col-xs-offset-1">
+                    <label>过滤地址：</label>
+                    <input class="form-control">
+                    <button class="btn btn-info">新增</button>
+                </div>
+                <div class="form-inline col-xs-4 col-xs-offset-2">
+                    <label>展示数量：</label>
+                    <select class="form-control">
+                        <option>访问次数前10</option>
+                        <option>访问次数前50</option>
+                        <option>访问次数前100</option>
+                    </select>
+                </div>
+                <div class="form-inline col-xs-5 col-xs-offset-1">
+                    <label>已选地址：</label>
+                    <textarea class="form-control" style="height: 100px"></textarea>
+                    <button class="btn btn-danger">删除</button>
+                </div>
+            </div>
+        </div>
+        <div id="url" style="width: 100%;height: 400px"></div>
+    </div>
+</div>

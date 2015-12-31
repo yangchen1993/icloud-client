@@ -72,6 +72,8 @@ iCloudController.controller("UrlReportController", ["$scope", "$http", "$cookieS
         console.log(data);
         $http.post([window.API.URLREPORT.CREATE_URL_COLLECT_RULE, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
             console.log(data.data);
+            echartsUrls=[];
+            echartsNums=[];
             for(var i=0;i<data.data.length;i++){
                 echartsUrls[i] = data.data[i].url;
                 echartsNums[i] = data.data[i].num;

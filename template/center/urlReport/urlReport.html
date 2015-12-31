@@ -1,5 +1,5 @@
 <style>
-    label{
+    label {
         font-size: 18px;
         font-family: 微软雅黑;
         font-weight: 500 !important;
@@ -10,53 +10,65 @@
         <li class="active">URL上报</li>
     </ol>
     <div class="table_inside">
-            <button class="button button-royal" data-toggle="collapse" data-target="#search_panel">过滤条件</button>
+        <button class="button button-royal" data-toggle="collapse" data-target="#search_panel">过滤条件</button>
         <div class="collapse" id="search_panel">
             <div class="well row" style="margin-top: 10px;background-color: #fff">
                 <div class="form-inline col-xs-4 col-xs-offset-2">
                     <label>过滤规则：</label>
-                    <select class="form-control">
-                        <option>引用规则一</option>
-                        <option>引用规则二</option>
+                    <select class="form-control" ng-model="urlId" ng-options="v.id as v.name for v in urlRuleName"
+                            ng-change="watch_id(urlId)">
+                        <option value="">自定义规则</option>
                     </select>
+                    <input class="form-control" placeholder="规则名称" ng-model="urlRule.name" ng-show="urlId==null">
                 </div>
                 <div class="form-inline form-group col-xs-5 col-xs-offset-1">
                     <label>区域过滤：</label>
-                    <select class="form-control">
-                        <option>--省--</option>
+                    <select class="form-control" ng-options="v.id as v.name for v in provinces" ng-model="urlRule.province" ng-change="select_p(urlRule.province)">
+                        <option value="">--省--</option>
                     </select>
-                    <select class="form-control">
-                        <option>--市--</option>
+                    <select class="form-control" ng-options="v.id as v.name for v in cities" ng-model="urlRule.city" ng-change="select_c(urlRule.city)">
+                        <option value="">--市--</option>
                     </select>
-                    <select class="form-control">
-                        <option>--区/县--</option>
+                    <select class="form-control" ng-options="v.id as v.name for v in areas" ng-model="urlRule.area">
+                        <option value="">--区/县--</option>
                     </select>
                 </div>
                 <div class="form-inline form-group col-xs-4 col-xs-offset-2">
-                    <label>时间范围：</label>
-                    <select class="form-control">
-                        <option>最近一周</option>
-                        <option>最近一月</option>
-                    </select>
+                    <label>过滤地址：</label>
+                    <input class="form-control" ng-model="addUrl">
+                    <button class="btn btn-info" ng-click="add_url()">新增</button>
                 </div>
                 <div class="form-inline form-group col-xs-5 col-xs-offset-1">
-                    <label>过滤地址：</label>
-                    <input class="form-control">
-                    <button class="btn btn-info">新增</button>
+                    <label>时间范围：</label>
+                    <div id="datetimepicker1" class="input-group input-append date">
+                        <input class="form-control" type="text" size="16" disabled>
+                <span class="input-group-addon add-on">
+                  <i class="fa fa-calendar" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+                    </div>   到 <div id="datetimepicker2" class="input-group input-append date">
+                    <input class="form-control" type="text" size="16" disabled>
+                <span class="input-group-addon add-on">
+                  <i class="fa fa-calendar" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+                </div>
                 </div>
                 <div class="form-inline col-xs-4 col-xs-offset-2">
-                    <label>展示数量：</label>
-                    <select class="form-control">
-                        <option>访问次数前10</option>
-                        <option>访问次数前50</option>
-                        <option>访问次数前100</option>
-                    </select>
-                </div>
-                <div class="form-inline col-xs-5 col-xs-offset-1">
                     <label>已选地址：</label>
-                    <textarea class="form-control" style="height: 100px"></textarea>
-                    <button class="btn btn-danger">删除</button>
+                    <select class="form-control" ng-model="urlRule.filter_urls" ng-options="v for v in addUrlList" size="5" style="width:250px" >
+                        <option value="" class="text-center" disabled>---请选择---</option>
+                    </select>
+                    <button class="btn btn-danger" ng-click="removeUrl()">删除</button>
                 </div>
+                <div class="col-xs-5 col-xs-offset-1">
+                <div class="form-inline">
+                    <label>展示数量：</label>
+                    <input class="form-control" ng-model="urlRule.sort_nums">
+                </div>
+                        <button class="button button-royal" style="margin-top: 20px" ng-click="search_submit(urlRule)">確定</button>
+                </div>
+
             </div>
         </div>
         <div id="url" style="width: 100%;height: 400px"></div>

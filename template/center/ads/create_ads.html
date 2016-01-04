@@ -506,7 +506,8 @@
                 items.push({
                     'component_id': $(component[i]).attr("id"),
                     'content_type': $(component[i]).attr("data-type"),
-                    'div': $(component[i]).prop("outerHTML")
+                    'div': $(component[i]).prop("outerHTML"),
+                    'link':$(component[i]).find('a').attr("href")?$(component[i]).find('a').attr("href"):""
                 });
 
             }
@@ -560,7 +561,8 @@
                 items.push({
                     'component_id': $(component[i]).attr("id"),
                     'content_type': $(component[i]).attr("data-type"),
-                    'div': $(component[i]).prop("outerHTML")
+                    'div': $(component[i]).prop("outerHTML"),
+                    'link':$(component[i]).find('a').attr("href")?$(component[i]).find('a').attr("href"):""
                 });
 
             }

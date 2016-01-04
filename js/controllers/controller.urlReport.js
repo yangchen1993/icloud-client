@@ -4,12 +4,38 @@
 iCloudController.controller("UrlReportController", ["$scope", "$http", "$cookieStore", "$districts", function ($scope, $http, $cookieStore, $districts) {
     var echartsUrls = [];
     var echartsNums = [];
+    var myCharts = echarts.init(document.getElementById("url"));//初始化echarts
     $http.get([window.API.URLREPORT.GET_URL_COLLECT_RULE, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
         console.log(data);
         for(var i=0;i<data.charts.length;i++){
             echartsUrls[i] = data.charts[i].url;
             echartsNums[i] = data.charts[i].num;
         }
+        //默认加载的第一个规则图表
+        var option = {
+            title: {
+                text: "访问次数",
+                x: 'center'
+            },
+            tooltip: {},
+            xAxis: {
+                name: "URL",
+                data: echartsUrls
+            },
+            yAxis: {
+                name: "次数",
+                type: "value"
+            },
+            series: [
+                {
+                    name: "访问次数",
+                    type: "bar",
+                    data: echartsNums
+                }
+            ]
+        };
+        myCharts.setOption(option);
+
         $scope.urlRuleName = data.rules;
         $scope.watch_id = function (newData) {
             for (var i = 0; i < data.rules.length; i++) {
@@ -35,18 +61,25 @@ iCloudController.controller("UrlReportController", ["$scope", "$http", "$cookieS
                 $scope.provinces = data[0].subdistricts;
             })
     })();
-    $scope.select_p = function (data) {
-        $districts.get({id: data})
-            .success(function (data) {
-                $scope.cities = data[0].subdistricts;
-            });
-    };
-    $scope.select_c = function (data) {
-        $districts.get({id: data})
-            .success(function (data) {
-                $scope.areas = data[0].subdistricts;
-            });
-    };
+
+    $scope.$watch("urlRule.province",function(data){
+        console.log(data);
+        if(data){
+            $districts.get({id: data})
+                .success(function (data) {
+                    $scope.cities = data[0].subdistricts;
+                });
+        }
+    });
+    $scope.$watch("urlRule.city",function(data){
+        console.log(data);
+        if(data){
+            $districts.get({id: data})
+                .success(function (data) {
+                    $scope.areas = data[0].subdistricts;
+                });
+        }
+    });
 
     $scope.addUrlList = [];
     $scope.add_url = function () {
@@ -79,40 +112,30 @@ iCloudController.controller("UrlReportController", ["$scope", "$http", "$cookieS
                 echartsNums[i] = data.data[i].num;
             }
             console.log(echartsUrls);
-            refash_echarts();
+            var myCharts = echarts.init(document.getElementById("url"));//更新echarts
+                var option = {
+                    title: {
+                        text: "访问次数",
+                        x: 'center'
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        name: "URL",
+                        data: echartsUrls
+                    },
+                    yAxis: {
+                        name: "次数",
+                        type: "value"
+                    },
+                    series: [
+                        {
+                            name: "访问次数",
+                            type: "bar",
+                            data: echartsNums
+                        }
+                    ]
+                };
+                myCharts.setOption(option);
         })
     };
-
-    var refash_echarts = function(){
-        setTimeout(function(){
-            var myCharts = echarts.init(document.getElementById("url"));
-            var option = {
-                title: {
-                    text: "访问次数",
-                    x: 'center'
-                },
-                tooltip: {},
-                xAxis: {
-                    name: "URL",
-                    data: echartsUrls
-                },
-                yAxis: {
-                    name: "次数",
-                    type: "value"
-                },
-                series: [
-                    {
-                        name: "访问次数",
-                        type: "bar",
-                        data: echartsNums
-                    }
-                ]
-            };
-            myCharts.setOption(option);
-        },1000);
-    }
-    refash_echarts();
-
-
-
 }]);

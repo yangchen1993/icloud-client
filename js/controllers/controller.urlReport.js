@@ -137,5 +137,9 @@ iCloudController.controller("UrlReportController", ["$scope", "$http", "$cookieS
                 };
                 myCharts.setOption(option);
         })
+            .error(function(data){
+                alert(data.msg+"，请重新输入！");
+                $scope.urlRule.name = "";
+            })
     };
 }]);

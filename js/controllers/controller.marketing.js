@@ -153,11 +153,8 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
 
         $scope.send = function () {
 
-            var c = angular.element("#sms-targets :checkbox");
-            angular.forEach(c, function (v, k) {
-                if (angular.element(v).prop("checked")) {
-                    numbers.push(angular.element(v).val())
-                }
+            angular.forEach($scope.selectedItemKeys, function (value ,index) {
+                numbers.push($scope.selectedItems[value].member.phone);
             });
             var data = {
                 "template_id": template_id,

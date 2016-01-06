@@ -26,6 +26,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.marketing_nav = false;
                 $scope.wallet_nav = false;
                 $scope.js_ad_nav = true;
+                $scope.urlReport = true;
                 $rootScope.delegate_auths = 1;
                 $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;

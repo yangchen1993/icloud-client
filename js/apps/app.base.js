@@ -271,4 +271,9 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/help-files.html",
             controller: "FileController"
         })
+        .state("main.urlReport", {
+            url: "/urlReport",
+            templateUrl: "template/center/urlReport/urlReport.html",
+            controller: "UrlReportController"
+        })
 });

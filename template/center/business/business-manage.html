@@ -13,8 +13,9 @@
                     <span ng-show="currentSort['username'] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
                 </td>
+                <td>商户名称</td>
                 <td id="legal_person_name" ng-click="sort('legal_person_name')">
-                    商户名称
+                    法人姓名
                     <span ng-show="currentSort['legal_person_name'] === true" class="glyphicon glyphicon-triangle-top"></span>
                     <span ng-show="currentSort['legal_person_name'] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
@@ -28,6 +29,7 @@
             <tbody>
             <tr ng-repeat="p in grid.results">
                 <td ng-bind="p.username"></td>
+                <td ng-bind="p.name"></td>
                 <td ng-bind="p.legal_person_name"></td>
                 <td ng-bind="p.province_object.name+ ' '+p.city_object.name+' '+ p.area_object.name+' '+p.address_additional"></td>
                 <td ng-bind="p.role_object.name"></td>

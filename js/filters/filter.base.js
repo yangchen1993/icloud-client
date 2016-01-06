@@ -11,19 +11,3 @@ iCloudFilter.filter('monitorWords',function(){
         else return 0;
     }
 });
-iCloudFilter.filter('monitorBranches',function(){
-    return function(input){
-        if(input){
-            return parseInt(input.length/70)+1;
-        }
-        else return 1;
-    }
-});
-iCloudFilter.filter('monitorMultiple',function(){
-    return function(input){
-        if(input){
-            return (parseInt(input.length/70)+1)*70;
-        }
-        else return 70;
-    }
-});

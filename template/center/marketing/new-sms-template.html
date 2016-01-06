@@ -23,9 +23,9 @@
                 </div>
                 <div class="form-inline" style="position: absolute">
                     <span>短信内容：</span>
-                <textarea class="form-control" ng-model="template.template">
+                <textarea class="form-control" ng-model="template.template" maxlength="70">
                 </textarea>
-                    <p style="position: absolute;right:10px;bottom: 0" class="text-muted">{{template.template | monitorWords}}/{{template.template | monitorMultiple}} {{template.template | monitorBranches}}条</p>
+                    <p style="position: absolute;right:10px;bottom: 0" class="text-muted">{{template.template | monitorWords}}/70</p>
                 </div>
                 <div class="text-center">
                     <button class="btn btn-info" ng-click="createTemplate(template)">提交</button>

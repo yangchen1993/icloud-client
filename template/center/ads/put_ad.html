@@ -1,59 +1,56 @@
-<div class="table_outside">
+<style>
+    .search_panel{
+        border:1px solid #cccccc;
+        padding:20px
+    }
+    .search_panel>p{
+        font-family: 微软雅黑;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .search_panel span{
+        font-family: 微软雅黑;
+        font-size: 16px;
+        font-weight: 500;
+    }
+</style>
+
+<div class="panel_outside">
     <ol class="breadcrumb">
         <li><a ui-sref="main.ads">我的广告</a></li>
         <li class="active">投放广告</li>
     </ol>
-    <div style="margin-top:50px">
-        <div class="form-inline">
-
-            <div class="col-md-12 form-horizontal" ng-if="putAdSearch.showBusinessLabel">
-                <label class="col-md-1">商户:</label>
-
-                <div class="form-group col-md-11 business">
-                    <label ng-repeat="b in subBusinesses">
-                        <input type="checkbox" value="{{ b.id }}">
-                        <span ng-bind="b.name"></span>&nbsp;&nbsp;
-                    </label>
-                </div>
-            </div>
-
-            <div class="col-md-12 form-horizontal" ng-if="putAdSearch.showShopLabel">
-                <label class="col-md-1">店铺:</label>
-
-                <div class="form-group col-md-11 shop">
-                    <label ng-repeat="s in subShop">
-                        <input type="checkbox" value="{{ s.id }}">
-                        <span ng-bind="s.name"></span>&nbsp;&nbsp;
-                    </label>
-                </div>
-            </div>
-
-            <div class="col-md-12 form-horizontal">
-                <label class="col-md-1">行业:</label>
-
-                <div class="form-group col-md-11 category">
-                    <label ng-repeat="c in categories">
-                        <input type="checkbox" value="{{ c.name }}">
-                        <span ng-bind="c.name"></span>&nbsp;&nbsp;
-                    </label>
-                </div>
-            </div>
-
-
-            <div class="col-md-12">
-                <button class="btn btn-info col-md-offset-1 col-md-4" ng-click="routerSearch()">筛　　选</button>
-                <button class="btn btn-info col-md-offset-1 col-md-4" ng-click="sjTouFang()">确认投放</button>
-            </div>
-
+    <div class="search_panel">
+        <p>路由器筛选：</p>
+        <div class="form-inline shop" ng-if="putAdSearch.showShopLabel">
+            <span>店铺：</span>
+            <label ng-repeat="s in subShop">
+                <input type="checkbox" value="{{ s.id }}">
+                <span ng-bind="s.name"></span>&nbsp;&nbsp;
+            </label>
         </div>
 
-        <div class="table_inside" style="margin-top: 20px;">
+        <div class="form-inline category">
+            <span>行业：</span>
+            <label ng-repeat="c in categories">
+                <input type="checkbox" value="{{ c.name }}">
+                <span ng-bind="c.name"></span>&nbsp;&nbsp;
+            </label>
+        </div>
+        <button class="button button-royal" ng-click="routerSearch()">确定</button>
+    </div>
+
+        <div class="table_inside">
             <div class="col-md-5">
-                <label>共<span ng-bind="grid.count"></span>台路由器</label>
+                <p>共<span ng-bind="grid.count"></span>台路由器</p>
             </div>
-            <table id="table-ad" class="table table-hover table-bordered table-selectable text-center ads_table">
+            <table id="table-ad" class="table table-hover table-bordered table-striped table-selectable text-center ads_table">
                 <thead style="background-color: #8a8bc4;color:#fff">
                 <tr>
+                    <td>
+                        <a href="javascript:" ng-click="checkAll()">全选</a>
+                        <a href="javascript:" ng-click="checkInverse()">反选</a>
+                    </td>
                     <td>路由器名称</td>
                     <td>路由器MAC</td>
                     <td>所属商铺</td>
@@ -62,6 +59,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="p in grid.results" class="wemedia_table">
+                    <td><input type="checkbox" ng-value="p.id"></td>
                     <td ng-bind="p.ssid"></td>
                     <td ng-bind="p.mac"></td>
                     <td ng-bind="p.router_groups.name"></td>
@@ -69,9 +67,11 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="text-right">
+                <button class="button button-royal" ng-click="sjTouFang()">投放</button>
+            </div>
         </div>
         <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
-    </div>
 </div>
 
 

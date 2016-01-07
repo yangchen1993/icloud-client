@@ -147,6 +147,7 @@ iCloudController.controller("SmsTargetController", ["$scope", "$http", "$cookieS
             delete $scope.selectedItems[key];
         };
 
+
         $scope.clearSelectedList = function () {
             $scope.selectedItems = {};
         };

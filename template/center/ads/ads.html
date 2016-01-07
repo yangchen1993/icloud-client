@@ -3,55 +3,74 @@
         <li class="active">我的广告</li>
     </ol>
     <div class="table_inside">
-    <button class="button button-royal button-rounded" ui-sref="main.create_ads"><i class="fa fa-plus"></i>&nbsp&nbsp新建</button>
+        <button class="button button-royal button-rounded" ui-sref="main.create_ads"><i class="fa fa-plus"></i>&nbsp&nbsp新建
+        </button>
         <a ui-sref="main.eq_management" class="pull-right" style="margin-top: 10px" ng-show="delegated_nav">广告权限托管</a>
 
-            <table id="table-wemedia" class="table table-hover table-bordered table-selectable text-center ads_table table-striped">
-                <thead style="background-color: #8a8bc4;color:#fff">
-                <tr>
-                    <td style="cursor: pointer">
-                        广告名称
-                    </td>
-                    <td id="{{ headers[10] }}" ng-click="sort(headers[10])" style="cursor: pointer">
-                        行业类型
-                        <span ng-show="currentSort[headers[10]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                    <span ng-show="currentSort[headers[10]] === false"
+        <table id="table-wemedia"
+               class="table table-hover table-bordered table-selectable text-center ads_table table-striped">
+            <thead style="background-color: #8a8bc4;color:#fff">
+            <tr>
+                <td style="cursor: pointer">
+                    广告名称
+                </td>
+                <td id="category" ng-click="sort('category')" style="cursor: pointer">
+                    行业类型
+                    <span ng-show="currentSort['category'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['category'] === false"
                           class="glyphicon glyphicon-triangle-bottom"></span>
-                    </td>
-                    <td id="{{ headers[5] }}" ng-click="sort(headers[5])" style="cursor: pointer">
-                        创建时间
-                        <span ng-show="currentSort[headers[5]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                        <span ng-show="currentSort[headers[5]] === false"
-                              class="glyphicon glyphicon-triangle-bottom"></span>
-                    </td>
-                    <td id="{{ headers[6] }}" ng-click="sort(headers[6])" style="cursor: pointer">
-                        修改时间
-                        <span ng-show="currentSort[headers[6]] === true" class="glyphicon glyphicon-triangle-top"></span>
-                    <span ng-show="currentSort[headers[6]] === false"
-                          class="glyphicon glyphicon-triangle-bottom"></span>
-                    </td>
-                    <td>操作</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="p in grid.results" class="wemedia_table">
-                    <td ng-bind="p.title"></td>
-                    <td ng-bind="p.category"></td>
-                    <td ng-bind="p.create_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
-                    <td ng-bind="p.modified_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
-                    <td>
-                        <a href="javascript:" ng-if="p.audit_status == -1" ng-click="editAds(p.id)">修改</a>
-                        <a href="javascript:" ng-if="p.audit_status == -1" ng-click="deleteAds(p.id)">删除</a>
-                        <a href="#/main/put_ad?ad_id={{ p.id }}" ng-if="p.audit_status==-1" style="color:blue;">投放</a>
-                        <a href="javascript:" ng-if="p.audit_status==0" style="color:red;">审核未通过</a>
-                        <a href="javascript:" ng-if="p.audit_status==1" style="color:orangered">审核中……</a>
-                        <a href="javascript:" style="color:orangered;"  ng-if="p.audit_status==2" ng-click="takeOffAd(p.id)">下架</a>
-                    </td>
-                </tr>
-                </tbody>
+                </td>
 
-            </table>
-        </div>
-        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
+                <td ng-if="adHitsAndBrowser" id="views" ng-click="sort('views')" style="cursor: pointer">
+                    浏览次数
+                    <span ng-show="currentSort['views'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['views'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+
+                <td ng-if="adHitsAndBrowser" id="hits" ng-click="sort('hits')" style="cursor: pointer">
+                    点击次数
+                    <span ng-show="currentSort['hits'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['hits'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+
+                <td id="create_time" ng-click="sort('create_time')" style="cursor: pointer">
+                    创建时间
+                    <span ng-show="currentSort['create_time'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['create_time'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td id="modified_time" ng-click="sort('modified_time')" style="cursor: pointer">
+                    修改时间
+                    <span ng-show="currentSort['modified_time'] === true" class="glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="currentSort['modified_time'] === false"
+                          class="glyphicon glyphicon-triangle-bottom"></span>
+                </td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="p in grid.results" class="wemedia_table">
+                <td ng-bind="p.title"></td>
+                <td ng-bind="p.category"></td>
+                <td ng-if="adHitsAndBrowser" ng-bind="p.views"></td>
+                <td ng-if="adHitsAndBrowser" ng-bind="p.hits"></td>
+                <td ng-bind="p.create_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                <td ng-bind="p.modified_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                <td>
+                    <a href="javascript:" ng-if="p.audit_status == -1" ng-click="editAds(p.id)">修改</a>
+                    <a href="javascript:" ng-if="p.audit_status == -1" ng-click="deleteAds(p.id)">删除</a>
+                    <a href="#/main/put_ad?ad_id={{ p.id }}" ng-if="p.audit_status==-1" style="color:blue;">投放</a>
+                    <a href="javascript:" ng-if="p.audit_status==0" style="color:red;">审核未通过</a>
+                    <a href="javascript:" ng-if="p.audit_status==1" style="color:orangered">审核中……</a>
+                    <a href="javascript:" style="color:orangered;" ng-if="p.audit_status==2" ng-click="takeOffAd(p.id)">下架</a>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
     </div>
+    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
+</div>
 </div>

@@ -84,7 +84,8 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $rootScope.putAdSearch = {
                     "showBusinessLabel": true,
                     "showShopLabel": false
-                }
+                };
+                $rootScope.adHitsAndBrowser = true;
             }
         });
     }]);

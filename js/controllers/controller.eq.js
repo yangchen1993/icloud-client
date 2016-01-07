@@ -673,7 +673,7 @@ iCloudController.controller("CreateDeliveryController", ["$scope", "$http", "$wi
 
 iCloudController.controller("DeliveryDetailsController", ["$scope", "$http", "$window", "$cookieStore",
     function ($scope, $http, $window, $cookieStore) {
-        var deliveryID = get_param($window.location.href, "router_id");
+        var deliveryID = get_param($window.location.href, "deliveryID");
         var getDeliveryInfo = function () {
             $http.get([$window.API.ROUTER.GET_CURRENT_USER_DELIVERIES, "?key=", $cookieStore.get("key"), "&id=", deliveryID].join(""))
                 .success(function (data) {

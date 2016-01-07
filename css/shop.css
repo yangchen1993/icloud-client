@@ -86,12 +86,6 @@
 .shop_message>div>div{
     margin-top: 10px;
 }
-.top-daohang li{
-    color:#fff;
-}
-.top-daohang a{
-    color:#fff;
-}
 .breadcrumb > li + li:before{
     color:#fff;
 }

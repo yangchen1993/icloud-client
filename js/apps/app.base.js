@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-var iCloudApp = angular.module("iCloudApp", ["ui.router", "iCloudController", "iCloudService"]);
+var iCloudApp = angular.module("iCloudApp", ["ui.router", "iCloudController", "iCloudService","iCloudFilter"]);
 
 
 iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
@@ -270,5 +270,10 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             url: "/help-files",
             templateUrl: "template/center/help-files.html",
             controller: "FileController"
+        })
+        .state("main.urlReport", {
+            url: "/urlReport",
+            templateUrl: "template/center/urlReport/urlReport.html",
+            controller: "UrlReportController"
         })
 });

@@ -264,12 +264,6 @@ p, ul, ol, ul, .h3 {
     padding:30px
 }
 
-thead {
-    font-family: "Microsoft YaHei";
-    background-color: #8a8bc4;
-    color: #fff
-}
-
 .footer {
     width: 82%;
     height: 50px;
@@ -303,7 +297,7 @@ thead {
     background-color: #fff
 }
 .table_inside label{
-    font-weight: 100 !important;
+    font-weight: 100;
 }
 .panel_outside{
     height: auto;

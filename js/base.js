@@ -2,7 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.178.128:8802/api/";
+//window.HOST = "http://192.168.10.213:8001/api/";
+//window.HOST = "http://dev.idianjia.com:8000/api/";
 window.HOST = "http://server.idianjia.com/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
@@ -232,6 +233,11 @@ window.API = {
         "GET_CURRENT_USER_ROUTERS": [window.HOST, "account/get_current_user_routers/"].join(""),
 
         "GET_CURRENT_USER_TOTAL_CASH": [window.HOST, "account/get_current_user_total_cash/"].join("")
+    },
+
+    "URLREPORT":{
+        "GET_URL_COLLECT_RULE":[window.HOST,"url_analyze_rule/get_all_url_collect_rules/"].join(""),
+        "CREATE_URL_COLLECT_RULE":[window.HOST,"url_analyze_rule/create_url_collect_rule/"].join("")
     }
 };
 

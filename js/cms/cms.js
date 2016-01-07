@@ -40,12 +40,14 @@ function editText(id, type) {
             CKEDITOR.document.getById('txtarea').setHtml(
                 $("#" + id + " .text-content").text()
             );
-
-            CKEDITOR.replace('txtarea', {
-                toolbar: [
-                    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
-                ]
-            });
+            CKEDITOR.config.toolbarGroups = [
+                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+                { name: 'links' },
+                { name: 'styles' },
+                { name: 'colors' }, { name: 'tools' }
+            ];
+            CKEDITOR.replace('txtarea');
             CKEDITOR.instances["txtarea"].on("instanceReady", function () {
                 this.document.on("keyup", function () {
                     validateText();

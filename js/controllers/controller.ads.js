@@ -109,14 +109,12 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
                 })
         };
 
-        var getSubShop = function () {
+        (function(){
             $http.get([$window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?pageSize=unlimited&key=", $cookieStore.get("key")].join(""))
                 .success(function (data) {
                     $scope.subShop = data;
                 })
-        };
-
-        getSubShop();
+        })();
 
         var getPutConditions = function () {
             var businessCheckbox = angular.element(".business :checkbox");

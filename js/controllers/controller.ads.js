@@ -76,6 +76,43 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
         var ad_id = get_param(window.location.href, "ad_id");
         $grid.initial($scope, $window.API.ROUTER.GET_CURRENT_USER_ROUTERS, {"groups_id__isnull": "False"});
         $checkBox.enableCheck($scope, "table-ad");
+        $scope.checkedIds = [];
+        $scope.memberChecked = function(e,id){
+            if($(e.target).prop("checked")){
+                $scope.checkedIds[id] = id;
+            }
+            else{
+                delete $scope.checkedIds[id]
+            }
+        };
+        $scope.checkAllCompleted = function(){
+            var checkBoxes = angular.element("#table-ad :checkbox");
+            angular.forEach(checkBoxes,function(v,k){
+                    $scope.checkedIds[$(v).prop("value")] = parseInt($(v).prop("value"));
+            });
+        };
+        $scope.checkInverseCompleted = function(){
+            var checkBoxes = angular.element("#table-ad :checkbox");
+            angular.forEach(checkBoxes,function(v,k){
+                delete $scope.checkedIds[$(v).prop("value")];
+            });
+            angular.forEach(checkBoxes,function(v,k){
+                if($(v).prop("checked"))
+                $scope.checkedIds[$(v).prop("value")] = parseInt($(v).prop("value"));
+            })
+        };
+        $scope.pageLoadingCompleted = function () {
+            setTimeout(function(){
+                var checkBoxes = angular.element("#table-ad :checkbox");
+                angular.forEach(checkBoxes,function(v,k){
+                    for(var i=0;i<$scope.checkedIds.length;i++){
+                        if($(v).prop("value") == $scope.checkedIds[i]){
+                            $(v).attr("checked","checked");
+                        }
+                    }
+                })
+            },0);
+        };
         $scope.sjTouFang = function () {
             var data = getPutConditions();
 
@@ -85,16 +122,9 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
             if ($cookieStore.get("role") != "商户" && $cookieStore.get("role") != "系统管理员") {
                 data.ad_space_id = 2
             }
-            var ids = [];
-            var checkBoxes = angular.element("#table-ad :checkbox");
-            angular.forEach(checkBoxes,function(v,k){
-                if($(v).prop("checked"))
-                ids.push($(v).prop("value"));
-            });
-            if(ids.length>0){
-                data.id__in = ids.join(",");
+            if($scope.checkedIds.length>0){
+                data.id__in =(_.values($scope.checkedIds)).join(",");
                 console.log(data);
-
                 $http.post([$window.API.AD.PUT_AD_IN, "?key=", $cookieStore.get("key") + "&id=", ad_id].join(""), data)
                     .success(function () {
                         alert("投放成功");
@@ -105,9 +135,7 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
             }
             else
             alert("请选择投放的路由器");
-
         };
-
         $category.get()
             .success(function (data) {
                 $scope.categories = data;
@@ -115,21 +143,18 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
             .error(function (data) {
                 console.log(data)
             });
-
         var getSubUsers = function () {
             $http.get([$window.API.USER.GET_SUB_BUSINESSES, "?pageSize=unlimited&key=", $cookieStore.get("key")].join(""))
                 .success(function (data) {
                     $scope.subBusinesses = data;
                 })
         };
-
         (function(){
             $http.get([$window.API.GROUP.GET_CURRENT_USER_ROUTER_GROUPS, "?pageSize=unlimited&key=", $cookieStore.get("key")].join(""))
                 .success(function (data) {
                     $scope.subShop = data;
                 })
         })();
-
         var getPutConditions = function () {
             var businessCheckbox = angular.element(".business :checkbox");
 
@@ -181,7 +206,6 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
                 console.log($rootScope.delegate_auths);
                 data.delegated = "False"
             }
-
 
             return data;
         };

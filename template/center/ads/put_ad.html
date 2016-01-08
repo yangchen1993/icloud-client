@@ -59,7 +59,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="p in grid.results" class="wemedia_table">
-                    <td><input type="checkbox" ng-value="p.id"></td>
+                    <td><input type="checkbox" ng-value="p.id" ng-click="memberChecked($event, p.id)"></td>
                     <td ng-bind="p.ssid"></td>
                     <td ng-bind="p.mac"></td>
                     <td ng-bind="p.router_groups.name"></td>

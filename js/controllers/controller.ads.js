@@ -122,7 +122,7 @@ iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$
             if ($cookieStore.get("role") != "商户" && $cookieStore.get("role") != "系统管理员") {
                 data.ad_space_id = 2
             }
-            if($scope.checkedIds.length>0){
+            if($scope.checkedIds.length>0 && !$scope.checkedIds ){
                 data.id__in =(_.values($scope.checkedIds)).join(",");
                 console.log(data);
                 $http.post([$window.API.AD.PUT_AD_IN, "?key=", $cookieStore.get("key") + "&id=", ad_id].join(""), data)

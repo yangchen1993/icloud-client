@@ -104,14 +104,13 @@ iCloudController.controller("UrlReportController", ["$scope", "$http", "$cookieS
         data.time_range = 0;
         console.log(data);
         $http.post([window.API.URLREPORT.CREATE_URL_COLLECT_RULE, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
-            console.log(data.data);
+            alert(data.msg);
             echartsUrls=[];
             echartsNums=[];
             for(var i=0;i<data.data.length;i++){
                 echartsUrls[i] = data.data[i].url;
                 echartsNums[i] = data.data[i].num;
             }
-            console.log(echartsUrls);
             var myCharts = echarts.init(document.getElementById("url"));//更新echarts
                 var option = {
                     title: {
@@ -138,7 +137,7 @@ iCloudController.controller("UrlReportController", ["$scope", "$http", "$cookieS
                 myCharts.setOption(option);
         })
             .error(function(data){
-                alert(data.msg+"，请重新输入！");
+                alert(data.msg);
                 $scope.urlRule.name = "";
             })
     };

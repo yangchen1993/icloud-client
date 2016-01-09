@@ -74,7 +74,14 @@ iCloudController.controller("CreateAdsController", ["$scope", "$http", "$categor
 iCloudController.controller("PutAdController", ["$scope", "$http", "$window", "$grid", "$checkBox", "$category", "$cookieStore","$rootScope",
     function ($scope, $http, $window, $grid, $checkBox, $category, $cookieStore,$rootScope) {
         var ad_id = get_param(window.location.href, "ad_id");
-        $grid.initial($scope, $window.API.ROUTER.GET_CURRENT_USER_ROUTERS, {"groups_id__isnull": "False"});
+        var delegated_auths;
+        if($cookieStore.get("role") == "系统管理员"){
+            delegated_auths = "True"
+        }
+        else if($cookieStore.get("role") != "商户" && $cookieStore.get("role") != "系统管理员"){
+            delegated_auths = "False"
+        }
+        $grid.initial($scope, $window.API.ROUTER.GET_CURRENT_USER_ROUTERS, {"groups_id__isnull": "False","delegated":delegated_auths});
         $checkBox.enableCheck($scope, "table-ad");
         $scope.checkedIds = [];
         $scope.memberChecked = function(e,id){

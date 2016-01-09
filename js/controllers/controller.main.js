@@ -13,7 +13,6 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
 
             if (data.role_object.name == "系统管理员") {
                 $scope.auth_nav = false;
-                $scope.ads_nav = false;
                 $scope.account_nav = true;
                 $scope.eq_nav = true;
                 $scope.delivery_nav = true;
@@ -25,6 +24,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.create_business_nav = true;
                 $scope.marketing_nav = false;
                 $scope.wallet_nav = false;
+                $scope.adsType_nav = 2;
                 $scope.js_ad_nav = true;
                 $scope.urlReport = true;
                 $rootScope.delegate_auths = 1;
@@ -42,7 +42,6 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             }
             else if (data.role_object.name == "商户") {
                 $scope.auth_nav = false;
-                $scope.ads_nav = true;
                 $scope.account_nav = true;
                 $scope.eq_nav = true;
                 $scope.delivery_nav = false;
@@ -64,7 +63,6 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
             }
             else {
                 $scope.auth_nav = false;
-                $scope.ads_nav = true;
                 $scope.account_nav = true;
                 $scope.eq_nav = true;
                 $scope.delivery_nav = true;

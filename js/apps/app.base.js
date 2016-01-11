@@ -276,4 +276,9 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/urlReport/urlReport.html",
             controller: "UrlReportController"
         })
+        .state("main.create-ad", {
+            url:"/create-ad",
+            templateUrl:"template/center/adpay/create-ad.html",
+            controller:"CreateAdController"
+        })
 });

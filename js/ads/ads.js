@@ -282,39 +282,22 @@ function editSlider(id, type) {
             });
         });
     });
-    $("#enter").click(function () {
-        $("#" + id + " .swiper-wrapper").html("");
-        $("#" + id + " .script").remove();
-        var div = "";
-        for (var i = 0; i < imgBox.length; i++) {
-            var link = $('div[data-edit-id=' + id + '] .edit' + i + ' .links').val();
-            div = div + "<div class='swiper-slide'><a href='http://" + link + "'>" + imgBox[i] + "</a></div>";
+    $("#enter").click(function(){
+        $("#"+id+" .swiper-wrapper").html("");
+        $("#"+id+" .script").remove();
+        var div="";
+        for(var i=0;i<imgBox.length;i++){
+            var t=i==1?'active':'';
+            var link=$('div[data-edit-id=' + id + '] .edit'+i+' .links').val();
+            div=div+"<div class='item "+t+"'><a href='http://"+link+"'>"+imgBox[i]+"</a></div>";
         }
         console.log(div);
-        $("#" + id + " .swiper-wrapper").html(div);
-        //var slider=new Swiper("#"+id+" .swiper-container",{
-        //    pagination: '.pagination',
-        //    autoplay: 3000,
-        //    continuous: true,
-        //"pagination: '#"+id+" .pagination',"+
-        //    hashnav: true,
-        //    loop:true,
-        //    grabCursor: true,
-        //    paginationClickable: true
-        //'pagination: '+'"#'+id+' .pagination",'+
-        //"hashnav:true,"+
-        //})
-        $("#" + id + " .slider").append(
-            "<div class='script'>" +
-            '<script>' +
-            'var slider=new Swiper("#' + id + ' .swiper-container",{' +
-            "autoplay: 4000," +
-            "continuous: true," +
-            "loop:true," +
-            "grabCursor: true," +
-            "paginationClickable: true" +
-            "})" +
-            '</script>' +
+        $("#"+id+" .carousel-inner").html(div);
+        $("#"+id+" .carousel-inner").append(
+            "<div class='script'>"+
+            '<script>'+
+                '$("#'+id+' .carousel").carousel()'+
+            '</script>'+
             "</div>"
         );
         imgBox = [];
@@ -477,7 +460,8 @@ if (!ad_id) {
             items.push({
                 'component_id': $(component[i]).attr("id"),
                 'content_type': $(component[i]).attr("data-type"),
-                'div': $(component[i]).prop("outerHTML")
+                'div': $(component[i]).prop("outerHTML"),
+                'link':$(component[i]).find('a').attr("href")=="http://"||$(component[i]).find('a').attr("href")==""?"":$(component[i]).find('a').attr("href")
             });
 
         }
@@ -494,6 +478,7 @@ if (!ad_id) {
                 "title": $("#ad_title").val()
             }),
             success: function (data) {
+                alert('更新成功');
                 window.location.href = "#/main/ads";
             }
         });
@@ -545,7 +530,8 @@ if (!ad_id) {
             items.push({
                 'component_id': $(component[i]).attr("id"),
                 'content_type': $(component[i]).attr("data-type"),
-                'div': $(component[i]).prop("outerHTML")
+                'div': $(component[i]).prop("outerHTML"),
+                'link':$(component[i]).find('a').attr("href")=="http://"||$(component[i]).find('a').attr("href")==""?"":$(component[i]).find('a').attr("href")
             });
 
         }

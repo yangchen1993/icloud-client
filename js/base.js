@@ -238,6 +238,11 @@ window.API = {
     "URLREPORT":{
         "GET_URL_COLLECT_RULE":[window.HOST,"url_analyze_rule/get_all_url_collect_rules/"].join(""),
         "CREATE_URL_COLLECT_RULE":[window.HOST,"url_analyze_rule/create_url_collect_rule/"].join("")
+    },
+
+    "CREATE_AD":{
+        "CREATE_AD_PLATFORM":[window.HOST,"accessed_ad/"].join(""),
+        "GET_AD_PLATFORM":[window.HOST," "].join("")
     }
 };
 

@@ -247,6 +247,22 @@
                 </li>
                 <div style="border-top:1px solid #2c303b" ng-show="urlReport"></div>
                 <div style="border-top:1px solid #535a69" ng-show="urlReport"></div>
+
+                <li ng-show="create_ad">
+                    <div class="open_menu">
+                        <div></div>
+                        <a><span class="fa fa-folder"></span>收账系统</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
+                    </div>
+                    <ul class="menu_child">
+                        <li ng-show="create_ad">
+                            <div></div>
+                            <a ui-sref=".create-ad">创建广告</a>
+                        </li>
+                    </ul>
+                </li>
+                <div style="border-top:1px solid #2c303b" ng-show="create_ad"></div>
+                <div style="border-top:1px solid #535a69" ng-show="create_ad"></div>
             </ul>
         </div>
     </div>

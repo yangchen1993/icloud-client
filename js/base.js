@@ -2,9 +2,9 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.178.203:8001/api/";
+window.HOST = "http://192.168.178.203:8001/api/";
 //window.HOST = "http://mb.idianjia.cn:8801/api/";
-window.HOST = "http://120.26.121.101:8000/api/";
+//window.HOST = "http://120.26.121.101:8000/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -265,6 +265,9 @@ window.API = {
         "AD_INCOME_WITHDRAW_LOG_ROUTERS": [window.HOST, "ad_income_withdraw/get_withdraw_cash_log/"].join(""),
         "AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join(""),
         "AD_INCOME_ADMIN_SURE_WITHDRAW_ROUTERS": [window.HOST, "ad_income_admin/sure_withdraw_cash/"].join(""),
+        "AD_INCOME_ADMIN_MODIFY_AGENT_INCOME_ROUTERS": [window.HOST, "ad_income_partition/modify_agent_income/"].join(""),
+        "AD_INCOME_ADMIN_RATIO_ROUTERS": [window.HOST, "ad_income_partition/get_income_ratio/"].join(""),
+        "AD_INCOME_ADMIN_RATIO_SET_ROUTERS": [window.HOST, "ad_income_partition/set_income_ratio/"].join(""),
 
     }
 };

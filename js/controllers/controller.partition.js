@@ -67,8 +67,8 @@ iCloudController.controller("AdFlowListController", ['$scope', '$http', '$cookie
         };
     }]);
 
-iCloudController.controller("AdFlowAgentListController", ['$scope', '$http', '$cookieStore', "$window", '$grid', '$filter',
-    function ($scope, $http, $cookieStore, $window, $grid, $filter) {
+iCloudController.controller("AdFlowAgentListController", ['$scope', '$http', '$cookieStore', "$window", '$grid',
+    function ($scope, $http, $cookieStore, $window, $grid) {
 
         var ad_id = get_param(window.location.href, "ad_id");
         var date = get_param(window.location.href, "date");
@@ -77,6 +77,25 @@ iCloudController.controller("AdFlowAgentListController", ['$scope', '$http', '$c
         $scope.income=income;
         $scope.url=url;
         $grid.initial($scope, window.API.PARTITION.AD_INCOME_PARTITION_ADS_AGENT_ROUTERS,{'ad_id':ad_id,'date':date});
+        $scope.popDailog=function(id){
+            var result=prompt("请输入修改后的分成","");
+            if(!/^(\+|-)?(\d+)(\.\d*)?$/g.test(result)){
+                alert("请输入数字！");
+                return;
+            }
+            if(result<0){
+                alert("请输入大于0的数字！");
+                return;
+            }
+            $http.post([window.API.PARTITION.AD_INCOME_ADMIN_MODIFY_AGENT_INCOME_ROUTERS, "?key=", $cookieStore.get("key")].join(""), {'id':id,'income':result})
+                .success(function (data) {
+                    alert(data.msg);
+                    $scope.refresh();
+                })
+                .error(function (data) {
+                    $window.alert(data.msg);
+                });
+        }
     }]);
 
 iCloudController.controller("AdFlowAgentIncomeController", ['$scope', '$http', '$cookieStore', "$window", '$grid',
@@ -107,7 +126,6 @@ iCloudController.controller("AdFlowAgentIncomeController", ['$scope', '$http', '
             console.log(tmp);
         };
         $scope.search_b();
-
     }]);
 
 iCloudController.controller("AdFlowIncomeWithdrawController", ['$scope', '$http', '$cookieStore', "$window", '$grid',
@@ -135,6 +153,18 @@ iCloudController.controller("AdFlowIncomeWithdrawLogController", ['$scope', '$ht
                 if(data.result==0){
                     $grid.initial($scope, window.API.PARTITION.AD_INCOME_ADMIN_ROUTERS);
                 };
+            });
+        };
+    }]);
+
+iCloudController.controller("AdFlowRatioController", ['$scope', '$http', '$cookieStore', "$window",
+    function ($scope, $http, $cookieStore, $window) {
+        $http.get([window.API.PARTITION.AD_INCOME_ADMIN_RATIO_ROUTERS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+            $scope.ratio=data
+        });
+        $scope.submit=function () {
+            $http.post([window.API.PARTITION.AD_INCOME_ADMIN_RATIO_SET_ROUTERS, "?key=", $cookieStore.get("key")].join(""),$scope.ratio).success(function (data) {
+                alert(data.msg);
             });
         };
     }]);

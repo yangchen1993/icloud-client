@@ -198,34 +198,34 @@
                 <div style="border-top:1px solid #2c303b"></div>
                 <div style="border-top:1px solid #535a69"></div>
 
-                <li ng-show="account_nav">
+                <li ng-show="partition">
                     <div class="open_menu">
                         <div></div>
                         <a ui-sref="main.account-details"><span class="fa fa-credit-card"></span>广告分账</a>
                         <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
                     <ul class="menu_child">
-                        <li>
+                        <li ng-show="partition_set">
                             <div></div>
                             <a ui-sref="main.create-ad">添加接入的广告</a>
                         </li>
-                        <li>
+                        <li ng-show="partition_set">
                             <div></div>
                             <a ui-sref="main.ad-partition-flow-create">设置广告流量</a>
                         </li>
-                        <li>
+                        <li ng-show="partition_set">
                             <div></div>
                             <a ui-sref="main.ad-partition-flow-list">广告流量记录</a>
                         </li>
-                        <li>
+                        <li ng-show="partition_info">
                             <div></div>
                             <a ui-sref="main.ad-partition-flow-agent-income">广告流量分成</a>
                         </li>
-                        <li>
+                        <li ng-show="partition_info">
                             <div></div>
                             <a ui-sref="main.with-cash">我的分成</a>
                         </li>
-                        <li>
+                        <li ng-show="partition_set">
                             <div></div>
                             <a ui-sref="main.ad-flow-agent-income-withdraw-log">申请提现列表</a>
                         </li>

@@ -243,7 +243,9 @@ window.API = {
 
     "CREATE_AD": {
         "CREATE_AD_PLATFORM": [window.HOST, "accessed_ad/create_ads/"].join(""),
-        "GET_AD_PLATFORM": [window.HOST, "accessed_ad/get_ads/"].join("")
+        "GET_AD_PLATFORM": [window.HOST, "accessed_ad/get_ads/"].join(""),
+        "UPDATE_AD_PLATFORM":[window.HOST,"accessed_ad/update_ads/"].join(""),
+        "DELETE_AD_PLATFORM":[window.HOST,"accessed_ad/delete_ads/"].join("")
     },
 
     "WITH_CASH": {

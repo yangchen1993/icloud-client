@@ -38,6 +38,15 @@ iCloudController.controller("CreateAdController", ["$scope", "$grid", "$http", "
                     case 3:
                         $scope.platform = true;
                         break;
+                    case 4:
+                        $scope.ad_name = true;
+                        break;
+                    case 5:
+                        $scope.ad_url = true;
+                        break;
+                    case 6:
+                        $scope.ad_platform = true;
+                        break;
                 }
             }
             else {
@@ -51,15 +60,46 @@ iCloudController.controller("CreateAdController", ["$scope", "$grid", "$http", "
                     case 3:
                         $scope.platform = false;
                         break;
+                    case 4:
+                        $scope.ad_name = false;
+                        break;
+                    case 5:
+                        $scope.ad_url = false;
+                        break;
+                    case 6:
+                        $scope.ad_platform = false;
+                        break;
                 }
             }
-        }
+        };
 
+        $scope.UpdateAd = function (data) {
+            $http.update([window.API.CREATE_AD.UPDATE_AD_PLATFORM,
+                "?key=", $cookieStore.get("key"), data].join("")).success(function (data) {
+                    alert('修改成功！');
+                })
+                .error(function (data) {
+                    console.log(data);
+                })
 
+        };
+
+        $scope.GetUpdateObject = function(data){
+            $scope.ad=data;
+        };
+
+        $scope.DeleteAd = function (id) {
+            if (confirm('确认要删除吗？')) {
+                $http.delete([window.API.CREATE_AD.DELETE_AD_PLATFORM, "?key=", $cookieStore.get("key"), '&id=', id].join("")).success(function (data) {
+                    console.log(id + "删除成功");
+                    $grid.initial($scope, window.API.CREATE_AD.GET_AD_PLATFORM);
+                });
+            }
+        };
     }]);
 
-iCloudController.controller("WithCashController", ["$scope", "$grid","$http", "$cookieStore",
-    function ($scope,$grid,$http, $cookieStore) {
-        var data = $grid.initial($scope,window.API.WITH_CASH.GET_USER_BALANCE );
+iCloudController.controller("WithCashController", ["$scope", "$grid", "$http", "$cookieStore",
+    function ($scope, $grid, $http, $cookieStore) {
+        var data = $grid.initial($scope, window.API.WITH_CASH.GET_USER_BALANCE);
         console.log(data);
-}]);
+    }]);

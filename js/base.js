@@ -2,8 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.178.128:8802/api/";
-window.HOST = "http://mb.idianjia.cn:8801/api/";
+window.HOST = "http://192.168.178.203:8001/api/";
+//window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -216,6 +216,15 @@ window.API = {
         "GET_CURRENT_USER_ROUTERS": [window.HOST, "account/get_current_user_routers/"].join(""),
 
         "GET_CURRENT_USER_TOTAL_CASH": [window.HOST, "account/get_current_user_total_cash/"].join("")
+    },
+    "PARTITION": {
+        "GET_ACCESSED_ADS_ROUTERS": [window.HOST, "accessed_ad/get_ads/"].join(""),
+        "GET_ACCESSED_ADS_FLOW_INFO_ROUTERS": [window.HOST, "ad_income_partition/get_flow_info/"].join(""),
+        "ACCESSED_AD_CREATE_AD_FLOW_ROUTERS": [window.HOST, "ad_income_partition/create_ad_flow/"].join(""),
+        "AD_INCOME_PARTITION_ADS_AGENT_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_flow_data_by_admin/"].join(""),
+        "AD_INCOME_PARTITION_ADS_AGENT_FLOW_INCOME_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_current_user_flow_income/"].join(""),
+        "AD_INCOME_PARTITION_ADS_AGENT_FLOW_INCOME_LIST_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_current_user_flow_income_list/"].join(""),
+
     }
 };
 

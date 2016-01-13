@@ -271,4 +271,24 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/help-files.html",
             controller: "FileController"
         })
+        .state("main.ad-partition-flow-create", {
+            url: "/ad-partition-flow-create",
+            templateUrl: "template/ad_income_partition/create_ad_flow.html",
+            controller: "CreateAdFlowController"
+        })
+        .state("main.ad-partition-flow-list", {
+            url: "/ad-partition-flow-list",
+            templateUrl: "template/ad_income_partition/ad_flow_details.html",
+            controller: "AdFlowListController"
+        })
+        .state("main.ad-partition-flow-agent-list", {
+            url: "/ad-partition-flow-agent-list",
+            templateUrl: "template/ad_income_partition/ad_flow_agent_details.html",
+            controller: "AdFlowAgentListController"
+        })
+        .state("main.ad-partition-flow-agent-income", {
+            url: "/ad-partition-flow-agent-income",
+            templateUrl: "template/ad_income_partition/ad_flow_agent_income_details.html",
+            controller: "AdFlowAgentIncomeController"
+        })
 });

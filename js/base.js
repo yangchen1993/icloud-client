@@ -240,22 +240,18 @@ window.API = {
 
         "GET_CURRENT_USER_TOTAL_CASH": [window.HOST, "account/get_current_user_total_cash/"].join("")
     },
-<<<<<<< HEAD
-
     "URLREPORT":{
         "GET_URL_COLLECT_RULE":[window.HOST,"url_analyze_rule/get_all_url_collect_rules/"].join(""),
         "CREATE_URL_COLLECT_RULE":[window.HOST,"url_analyze_rule/create_url_collect_rule/"].join("")
     },
-
     "CREATE_AD":{
         "CREATE_AD_PLATFORM":[window.HOST,"accessed_ad/create_ads/"].join(""),
         "GET_AD_PLATFORM":[window.HOST,"accessed_ad/get_ads/"].join("")
     },
-
     "WITH_CASH":{
         //"CREATE_WITH_CASH":[window.HOST,""].join(""),
         "GET_USER_BALANCE":[window.HOST,"ad_agent_income/get_agent_income/"].join("")
-=======
+    },
     "PARTITION": {
         "GET_ACCESSED_ADS_ROUTERS": [window.HOST, "accessed_ad/get_ads/"].join(""),
         "GET_ACCESSED_ADS_FLOW_INFO_ROUTERS": [window.HOST, "ad_income_partition/get_flow_info/"].join(""),
@@ -266,8 +262,6 @@ window.API = {
         "AD_INCOME_WITHDRAW_CREATE_ROUTERS": [window.HOST, "ad_income_withdraw/create_withdraw_cash/"].join(""),
         "AD_INCOME_WITHDRAW_LOG_ROUTERS": [window.HOST, "ad_income_withdraw/get_withdraw_cash_log/"].join(""),
         "AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join(""),
-
->>>>>>> master
     }
 
 };

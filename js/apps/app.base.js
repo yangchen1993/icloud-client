@@ -271,7 +271,6 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/help-files.html",
             controller: "FileController"
         })
-<<<<<<< HEAD
         .state("main.urlReport", {
             url: "/urlReport",
             templateUrl: "template/center/urlReport/urlReport.html",
@@ -286,7 +285,7 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             url:"/with-cash",
             templateUrl:"template/center/adpay/with-cash.html",
             controller:"WithCashController"
-=======
+        })
         .state("main.ad-partition-flow-create", {
             url: "/ad-partition-flow-create",
             templateUrl: "template/ad_income_partition/create_ad_flow.html",
@@ -311,6 +310,5 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             url: "/ad-flow-agent-income-withdraw",
             templateUrl: "template/ad_income_partition/withdraw_cash.html",
             controller: "AdFlowIncomeWithdrawController"
->>>>>>> master
         })
 });

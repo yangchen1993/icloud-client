@@ -47,6 +47,9 @@
                         <span ng-show="currentSort['income'] === false"
                               class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
+                    <td>
+                        操作
+                    </td>
                 </tr>
                 </thead>
                 <tbody>
@@ -61,6 +64,10 @@
                         <span ng-bind="i.uv"></span>
                     </td>
                     <td ng-bind="i.income | currency: '￥'"></td>
+                    <td>
+                        <span ng-show="{{i.can_modify==1}}"><input type="button" ng-click="popDailog(i.id)" value="修改分成" /></span>
+                        <span ng-show="{{i.can_modify==0}}">--</span>
+                    </td>
                 </tr>
                 </tbody>
             </table>

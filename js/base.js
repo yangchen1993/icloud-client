@@ -3,10 +3,15 @@
  */
 
 
+
 //window.HOST = "http://192.168.10.213:8001/api/";
 //window.HOST = "http://dev.idianjia.com:8000/api/";
 window.HOST = "http://dev.idianjia.com:8000/api/";
 //window.HOST = "http://server.idianjia.com/api/";
+//window.HOST = "http://192.168.178.203:8001/api/";
+//window.HOST = "http://mb.idianjia.cn:8801/api/";
+
+
 //window.HOST = "http://192.168.178.203:8001/api/";
 //window.HOST = "http://mb.idianjia.cn:8801/api/";
 
@@ -240,9 +245,10 @@ window.API = {
         "GET_CURRENT_USER_TOTAL_CASH": [window.HOST, "account/get_current_user_total_cash/"].join("")
     },
 
-    "URLREPORT": {
-        "GET_URL_COLLECT_RULE": [window.HOST, "url_analyze_rule/get_all_url_collect_rules/"].join(""),
-        "CREATE_URL_COLLECT_RULE": [window.HOST, "url_analyze_rule/create_url_collect_rule/"].join("")
+    "URLREPORT":{
+        "GET_URL_COLLECT_RULE":[window.HOST,"url_analyze_rule/get_all_url_collect_rules/"].join(""),
+        "CREATE_URL_COLLECT_RULE":[window.HOST,"url_analyze_rule/create_url_collect_rule/"].join("")
+
     },
 
     "CREATE_AD": {
@@ -252,6 +258,7 @@ window.API = {
 
     "WITH_CASH": {
         //"CREATE_WITH_CASH":[window.HOST,""].join(""),
+
         "GET_USER_BALANCE": [window.HOST, "ad_agent_income/get_agent_income/"].join("")
     },
 
@@ -264,7 +271,9 @@ window.API = {
         "AD_INCOME_PARTITION_ADS_AGENT_FLOW_INCOME_LIST_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_current_user_flow_income_list/"].join(""),
         "AD_INCOME_WITHDRAW_CREATE_ROUTERS": [window.HOST, "ad_income_withdraw/create_withdraw_cash/"].join(""),
         "AD_INCOME_WITHDRAW_LOG_ROUTERS": [window.HOST, "ad_income_withdraw/get_withdraw_cash_log/"].join(""),
+        "AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join(""),
         "AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join("")
+
     }
 };
 

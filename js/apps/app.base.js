@@ -286,6 +286,7 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             url: "/with-cash",
             templateUrl: "template/center/ad_income_partition/with-cash.html",
             controller: "WithCashController"
+
         })
         .state("main.ad-partition-flow-create", {
             url: "/ad-partition-flow-create",

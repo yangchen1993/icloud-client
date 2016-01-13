@@ -1,0 +1,32 @@
+<div class="panel_outside">
+    <ol class="breadcrumb">
+        <li class="active">设置广告分账比例</li>
+    </ol>
+
+    <div class="table_inside">
+
+        <div class="form-inline" style="margin-top: 15px">
+            <span>公司分成权重：</span>
+            <input class="form-control" type="number" style="margin-left: 14px" ng-model="ratio.company_ratio" placeholder="公司分成权重" required>
+        </div>
+        <div class="form-inline" style="margin-top: 15px">
+            <span>省级代理分成权重：</span>
+            <input class="form-control" type="number" style="margin-left: 14px" ng-model="ratio.province_ratio" placeholder="省级代理分成权重" required>
+        </div>
+        <div class="form-inline" style="margin-top: 15px">
+            <span>市级代理分成权重：</span>
+            <input class="form-control" type="number" style="margin-left: 14px" ng-model="ratio.city_ratio" placeholder="市级代理分成权重" required>
+        </div>
+        <div class="form-inline" style="margin-top: 15px">
+            <span>区级代理分成权重：</span>
+            <input class="form-control" type="number" style="margin-left: 14px" ng-model="ratio.area_ratio" placeholder="区级代理分成权重" required>
+        </div>
+        <div class="form-inline" style="margin-top: 15px">
+            <span>商圈代理分成权重：</span>
+            <input class="form-control" type="number" style="margin-left: 14px" ng-model="ratio.business_ratio" placeholder="商圈代理分成权重" required>
+        </div>
+        <p class="text-center">
+            <button class="button button-royal" ng-click="submit(ratio)">提交</button>
+        </p>
+    </div>
+</div>

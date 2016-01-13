@@ -156,3 +156,15 @@ iCloudController.controller("AdFlowIncomeWithdrawLogController", ['$scope', '$ht
             });
         };
     }]);
+
+iCloudController.controller("AdFlowRatioController", ['$scope', '$http', '$cookieStore', "$window",
+    function ($scope, $http, $cookieStore, $window) {
+        $http.get([window.API.PARTITION.AD_INCOME_ADMIN_RATIO_ROUTERS, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+            $scope.ratio=data
+        });
+        $scope.submit=function () {
+            $http.post([window.API.PARTITION.AD_INCOME_ADMIN_RATIO_SET_ROUTERS, "?key=", $cookieStore.get("key")].join(""),$scope.ratio).success(function (data) {
+                alert(data.msg);
+            });
+        };
+    }]);

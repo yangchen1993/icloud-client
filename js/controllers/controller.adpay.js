@@ -60,6 +60,8 @@ iCloudController.controller("CreateAdController", ["$scope", "$grid", "$http", "
 
 iCloudController.controller("WithCashController", ["$scope", "$grid","$http", "$cookieStore",
     function ($scope,$grid,$http, $cookieStore) {
-        var data = $grid.initial($scope,window.API.WITH_CASH.GET_USER_BALANCE );
-        console.log(data);
+        $http.get([window.API.WITH_CASH.GET_USER_BALANCE, "?key=", $cookieStore.get("key")].join("")).success(function (data) {
+            $scope.data = data;
+            console.log(data);
+        });
 }]);

@@ -264,7 +264,8 @@ window.API = {
         "AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join(""),
         "AD_INCOME_ADMIN_SURE_WITHDRAW_ROUTERS": [window.HOST, "ad_income_admin/sure_withdraw_cash/"].join(""),
         "AD_INCOME_ADMIN_MODIFY_AGENT_INCOME_ROUTERS": [window.HOST, "ad_income_partition/modify_agent_income/"].join(""),
-
+        "AD_INCOME_ADMIN_RATIO_ROUTERS": [window.HOST, "ad_income_partition/get_income_ratio/"].join(""),
+        "AD_INCOME_ADMIN_RATIO_SET_ROUTERS": [window.HOST, "ad_income_partition/set_income_ratio/"].join(""),
 
     }
 };

@@ -318,4 +318,9 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/ad_income_partition/withdraw_logs.html",
             controller: "AdFlowIncomeWithdrawLogController"
         })
+        .state("main.ad-flow-ratio", {
+            url: "/ad-flow-ratio",
+            templateUrl: "template/center/ad_income_partition/set_ratio.html",
+            controller: "AdFlowRatioController"
+        })
 });

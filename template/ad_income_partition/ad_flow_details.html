@@ -1,0 +1,62 @@
+<div class="table_outside">
+    <ol class="breadcrumb">
+        <li class="active">广告流量记录</li>
+    </ol>
+        <div class="table_inside">
+            <div class="well">
+                <div class="form-inline">
+                    <div>
+                        <select class="form-control" ng-model="selected" style="width: 15% !important;"
+                             ng-options="v.id as v.name for v in ads" ng-model="selected" ng-change="select_a(selected)">
+                        </select>
+                        <span>时间：</span>
+                        <input type="date" class="form-control" ng-model="search.start_date__gte"><span
+                            style="margin-left:5px">到</span>
+                        <input type="date" class="form-control" ng-model="search.end_date__lte">
+                        <button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="search_a(search)">搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <table class="table table-bordered table-hover text-center table-striped">
+                <thead style="background-color: #8a8bc4;color: #fff">
+                <tr>
+                    <td>
+                        日期
+                    </td>
+                    <td>
+                        PV
+                    </td>
+                    <td>
+                        UV
+                    </td>
+                    <td>
+                        收益
+                    </td>
+                    <td>
+                        操作
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="i in grid.results">
+                    <td>
+                        <span ng-bind="i.date"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="i.pv"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="i.uv"></span>
+                    </td>
+                    <td ng-bind="i.income | currency: '￥'"></td>
+                    <td>
+                        <span><a href="#/main/ad-partition-flow-agent-list?ad_id={{i.ad_id}}&date={{i.date}}&income={{i.income}}&url={{ad_url}}">详情</a></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
+</div>

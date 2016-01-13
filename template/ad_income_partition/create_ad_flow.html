@@ -1,0 +1,33 @@
+<div class="panel_outside">
+    <ol class="breadcrumb">
+        <li><a ui-sref="main.account-details">广告分账</a></li>
+        <li class="active">设置广告流量</li>
+    </ol>
+
+    <div class="table_inside">
+        <p class="h3 text-center">昨日广告流量</p>
+
+         <div class="form-inline" style="margin-top: 15px">
+            <span>广告：</span>
+            <select class="form-control" style="margin-left: 14px;width:196px"
+                    ng-options="v.id as v.name for v in ads" ng-model="selected" ng-change="select_a(selected)">
+            </select>
+        </div>
+
+        <div class="form-inline" style="margin-top: 15px">
+            <span>昨日PV：</span>
+            <input class="form-control" type="number" style="margin-left: 14px" ng-model="ad_flow.pv" placeholder="昨日点击量" required>
+        </div>
+        <div class="form-inline" style="margin-top: 15px">
+            <span>昨日UV：</span>
+            <input class="form-control" type="number" style="margin-left: 14px" ng-model="ad_flow.uv" placeholder="昨日访问量">
+        </div>
+        <div class="form-inline" style="margin-top: 15px">
+            <span>昨日收益：</span>
+            <input class="form-control" type="number" style="margin-left: 14px" ng-model="ad_flow.income" placeholder="昨日收益">
+        </div>
+        <p class="text-center">
+            <button class="button button-royal" ng-click="submit()">提交</button>
+        </p>
+    </div>
+</div>

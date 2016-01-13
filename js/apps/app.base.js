@@ -271,6 +271,7 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/help-files.html",
             controller: "FileController"
         })
+<<<<<<< HEAD
         .state("main.urlReport", {
             url: "/urlReport",
             templateUrl: "template/center/urlReport/urlReport.html",
@@ -285,5 +286,31 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             url:"/with-cash",
             templateUrl:"template/center/adpay/with-cash.html",
             controller:"WithCashController"
+=======
+        .state("main.ad-partition-flow-create", {
+            url: "/ad-partition-flow-create",
+            templateUrl: "template/ad_income_partition/create_ad_flow.html",
+            controller: "CreateAdFlowController"
+        })
+        .state("main.ad-partition-flow-list", {
+            url: "/ad-partition-flow-list",
+            templateUrl: "template/ad_income_partition/ad_flow_details.html",
+            controller: "AdFlowListController"
+        })
+        .state("main.ad-partition-flow-agent-list", {
+            url: "/ad-partition-flow-agent-list",
+            templateUrl: "template/ad_income_partition/ad_flow_agent_details.html",
+            controller: "AdFlowAgentListController"
+        })
+        .state("main.ad-flow-agent-income-withdraw", {
+            url: "/ad-flow-agent-income-withdraw",
+            templateUrl: "template/ad_income_partition/withdraw_cash.html",
+            controller: "AdFlowIncomeWithdrawController"
+        })
+        .state("main.ad-flow-agent-income-withdraw", {
+            url: "/ad-flow-agent-income-withdraw",
+            templateUrl: "template/ad_income_partition/withdraw_cash.html",
+            controller: "AdFlowIncomeWithdrawController"
+>>>>>>> master
         })
 });

@@ -1,0 +1,69 @@
+<div class="table_outside">
+    <ol class="breadcrumb">
+        <li class="active">广告分账明细</li>
+    </ol>
+        <div class="table_inside">
+
+            <div class="row" style="padding: 10px;font-size: 18px;font-family: 'Microsoft YaHei'">
+                <div class="col-md-4">
+                    当日总额：<span ng-bind="income | currency: '￥'"></span>
+                </div>
+                <div class="col-md-4">
+                    商家数量：<span ng-bind="grid.count"></span>
+                </div>
+                <div class="col-md-4">
+                    广告地址：<span>{{url}}</span>
+                </div>
+            </div>
+
+            <table class="table table-bordered table-hover text-center table-striped">
+                <thead style="background-color: #8a8bc4;color: #fff">
+                <tr>
+                    <td id="user_id" ng-click="sort('user_id')">
+                        代理商
+                        <span ng-show="currentSort['user_id'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['user_id'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="pv" ng-click="sort('pv')">
+                        PV
+                        <span ng-show="currentSort['pv'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['pv'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="uv" ng-click="sort('uv')">
+                        UV
+                        <span ng-show="currentSort['uv'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['uv'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="income" ng-click="sort('income')">
+                        分成
+                        <span ng-show="currentSort['income'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['income'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="i in grid.results">
+                    <td>
+                        <span ng-bind="i.user.username"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="i.pv"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="i.uv"></span>
+                    </td>
+                    <td ng-bind="i.income | currency: '￥'"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
+</div>

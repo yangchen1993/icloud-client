@@ -1,0 +1,45 @@
+<div class="table_outside">
+    <ol class="breadcrumb">
+        <li class="active">广告分成提现</li>
+    </ol>
+        <div class="table_inside">
+            <div class="well">
+                <div class="form-inline">
+                    <div>
+                        <span>提现金额：</span>
+                        <input class="form-control" type="number" style="margin-left: 14px" ng-model="cash" placeholder="请输入提现金额" required>
+                        <button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="withdraw()">提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <table class="table table-bordered table-hover text-center table-striped">
+                <thead style="background-color: #8a8bc4;color: #fff">
+                <tr>
+                    <td>
+                        提现日期
+                    </td>
+                    <td>
+                       提现金额
+                    </td>
+                    <td>
+                        状态
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="i in grid.results">
+                    <td>
+                        <span ng-bind="i.create_time"></span>
+                    </td>
+                    <td ng-bind="i.withdraw_cash | currency: '￥'"></td>
+                    <td>
+                        <span ng-bind="i.status"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
+</div>

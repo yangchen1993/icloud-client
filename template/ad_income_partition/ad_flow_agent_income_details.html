@@ -1,0 +1,95 @@
+<div class="table_outside">
+    <ol class="breadcrumb">
+        <li class="active">广告分账明细</li>
+    </ol>
+        <div class="table_inside">
+            <div class="row" style="padding: 10px;font-size: 18px;font-family: 'Microsoft YaHei'">
+                <div class="col-md-3" style="background-color: #00FFFF;text-align:center;">
+                    结算分成<div>{{income_info.incomes}}</div>
+                </div>
+                <div class="col-md-3" style="background-color: #00A6C7;text-align:center;">
+                    点击量<div>{{income_info.pvs}}</div>
+                </div>
+                <div class="col-md-3" style="background-color: #00B0E8;text-align:center;">
+                    UV<div>{{income_info.uvs}}</div>
+                </div>
+                <div class="col-md-3" style="background-color: #0d5ab1;text-align:center;">
+                    设备数量<div>{{income_info.nums}}</div>
+                </div>
+            </div>
+            <div class="form-inline" style="float:right;margin: 10px ">
+                <select class="form-control " style="margin-left: 14px;width:196px"
+                        ng-options="v.id as v.name for v in date_list" ng-model="selected" ng-change="select_a(selected)">
+                </select>
+            </div>
+            <table class="table table-bordered table-hover text-center table-striped">
+                <thead style="background-color: #8a8bc4;color: #fff">
+                <tr>
+                    <td id="router_mac" ng-click="sort('router_mac')">
+                        设备MC
+                        <span ng-show="currentSort['router_mac'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['router_mac'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="router_owner_name" ng-click="sort('router_owner_name')">
+                        所属商户
+                        <span ng-show="currentSort['router_owner_name'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['router_owner_name'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="income" ng-click="sort('income')">
+                        结算分成
+                        <span ng-show="currentSort['income'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['income'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="pv" ng-click="sort('pv')">
+                        点击数量
+                        <span ng-show="currentSort['pv'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['pv'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="uv" ng-click="sort('uv')">
+                        UV
+                        <span ng-show="currentSort['uv'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['uv'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                    <td id="date" ng-click="sort('date')">
+                        日期
+                        <span ng-show="currentSort['date'] === true"
+                              class="glyphicon glyphicon-triangle-top"></span>
+                        <span ng-show="currentSort['date'] === false"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="i in grid.results">
+                    <td>
+                        <span ng-bind="i.router_mac"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="i.router_owner_name"></span>
+                    </td>
+                    <td ng-bind="i.income | currency: '￥'"></td>
+                    <td>
+                        <span ng-bind="i.pv"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="i.uv"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="i.date"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
+</div>

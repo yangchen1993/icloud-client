@@ -27,6 +27,8 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.adsType_nav = 2;
                 $scope.js_ad_nav = true;
                 $scope.urlReport = true;
+                $scope.partition = true;
+                $scope.partition_set = true;
                 $rootScope.delegate_auths = 1;
                 $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;
@@ -80,6 +82,8 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.wallet_nav = true;
                 $scope.info_nav = true;
                 $scope.adsType_nav = 2;
+                $scope.partition = true;
+                $scope.partition_info = true;
                 $rootScope.delegate_auths = 0;
                 $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;

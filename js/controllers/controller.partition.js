@@ -91,7 +91,11 @@ iCloudController.controller("AdFlowAgentIncomeController", ['$scope', '$http', '
 
         $scope.search_b=function () {
             $http.get([window.API.PARTITION.AD_INCOME_PARTITION_ADS_AGENT_FLOW_INCOME_ROUTERS, "?key=", $cookieStore.get("key")+"&date_type="+$scope.search.date_type].join("")).success(function (data) {
-                $scope.income_info = data;
+                //$scope.income_info = data;
+                if(data)
+                    $scope.income_info = data;
+                else
+                    $scope.income_info={'incomes':0,'pvs':0,'uvs':0,'nums':0};
             });
         };
         $scope.select_a = function (id) {

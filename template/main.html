@@ -207,6 +207,10 @@
                     <ul class="menu_child">
                         <li>
                             <div></div>
+                            <a ui-sref="main.create-ad">添加接入的广告</a>
+                        </li>
+                        <li>
+                            <div></div>
                             <a ui-sref="main.ad-partition-flow-create">设置广告流量</a>
                         </li>
                         <li>
@@ -219,15 +223,11 @@
                         </li>
                         <li>
                             <div></div>
-                            <a ui-sref="main.ad-flow-agent-income-withdraw">提现</a>
+                            <a ui-sref="main.with-cash">我的分成</a>
                         </li>
-                        <li ng-show="create_ad">
+                        <li>
                             <div></div>
-                            <a ui-sref=".create-ad">创建广告</a>
-                        </li>
-                        <li ng-show="with_cash">
-                            <div></div>
-                            <a ui-sref=".with-cash">商家提现</a>
+                            <a ui-sref="main.ad-flow-agent-income-withdraw-log">申请提现列表</a>
                         </li>
                     </ul>
                 </li>

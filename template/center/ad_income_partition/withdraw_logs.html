@@ -18,6 +18,9 @@
                     <td>
                         状态
                     </td>
+                    <td>
+                        操作
+                    </td>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,6 +34,11 @@
                     <td ng-bind="i.withdraw_cash | currency: '￥'"></td>
                     <td>
                         <span ng-bind="i.status"></span>
+                    </td>
+                    <td>
+                        <div ng-if="i.status=='待处理'"><button class="btn btn-info pull-right" style="margin-right: 10px" ng-click="withdraw(i.id)">提现完成
+                        </button></div>
+                        <div ng-if="i.status!='待处理'"><span>--</span></div>
                     </td>
                 </tr>
                 </tbody>

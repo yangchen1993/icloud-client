@@ -125,11 +125,11 @@ iCloudController.controller("AdFlowIncomeWithdrawLogController", ['$scope', '$ht
     function ($scope, $http, $cookieStore, $window, $grid) {
         $grid.initial($scope, window.API.PARTITION.AD_INCOME_ADMIN_ROUTERS);
 
-        $scope.withdraw=function () {
-            $http.post([window.API.PARTITION.AD_INCOME_WITHDRAW_CREATE_ROUTERS, "?key=", $cookieStore.get("key")].join(""),{'cash':$scope.cash}).success(function (data) {
+        $scope.withdraw=function (id) {
+            $http.post([window.API.PARTITION.AD_INCOME_ADMIN_SURE_WITHDRAW_ROUTERS, "?key=", $cookieStore.get("key")].join(""),{'id':id}).success(function (data) {
                 alert(data.msg);
                 if(data.result==0){
-                    $grid.initial($scope, window.API.PARTITION.AD_INCOME_WITHDRAW_LOG_ROUTERS);
+                    $grid.initial($scope, window.API.PARTITION.AD_INCOME_ADMIN_ROUTERS);
                 };
             });
         };

@@ -15,7 +15,7 @@
             <label class="font-style">
                 账户余额：
             </label>
-            <label class="BigFont" ng-bind="grid.data[0].balance">
+            <label class="BigFont" ng-bind="data.balance">
 
             </label>
             <span style="margin-left: 20px;" class="font-style">
@@ -24,15 +24,14 @@
         </div>
         <div class="col-xs-4">
             <span style="">
-                <input type="button"  class="btn btn-primary" value="充值" style="width: 100px">
-                <input type="button"  class="btn btn-primary" value="提现" style="width: 100px;margin-left: 20px;">
+                <a href="#/main/ad-flow-agent-income-withdraw" class="btn btn-primary" style="width: 100px;margin-left: 20px;">提现</a>
             </span>
         </div>
         <div class="col-xs-4">
             <label class="font-style">
                 至今为止总共提现金额：
             </label>
-            <label class="BigFont" ng-bind="grid.data[0].withdraw_cash" >
+            <label class="BigFont" ng-bind="data.withdraw_cash" >
 
             </label>
             <span style="margin-left: 20px;" class="font-style">

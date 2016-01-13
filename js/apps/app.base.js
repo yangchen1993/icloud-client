@@ -303,10 +303,19 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/ad_income_partition/ad_flow_agent_details.html",
             controller: "AdFlowAgentListController"
         })
+        .state("main.ad-partition-flow-agent-income", {
+            url: "/ad-partition-flow-agent-income",
+            templateUrl: "template/center/ad_income_partition/ad_flow_agent_income_details.html",
+            controller: "AdFlowAgentIncomeController"
+        })
         .state("main.ad-flow-agent-income-withdraw", {
             url: "/ad-flow-agent-income-withdraw",
             templateUrl: "template/center/ad_income_partition/withdraw_cash.html",
             controller: "AdFlowIncomeWithdrawController"
         })
-
+        .state("main.ad-flow-agent-income-withdraw-log", {
+            url: "/ad-flow-agent-income-withdraw-log",
+            templateUrl: "template/center/ad_income_partition/withdraw_logs.html",
+            controller: "AdFlowIncomeWithdrawLogController"
+        })
 });

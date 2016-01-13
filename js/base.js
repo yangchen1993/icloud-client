@@ -10,16 +10,14 @@ window.HOST = "http://dev.idianjia.com:8000/api/";
 //window.HOST = "http://server.idianjia.com/api/";
 //window.HOST = "http://192.168.178.203:8001/api/";
 //window.HOST = "http://mb.idianjia.cn:8801/api/";
-
-
 //window.HOST = "http://192.168.178.203:8001/api/";
 //window.HOST = "http://mb.idianjia.cn:8801/api/";
 
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
+    "USER": {
         "LOGIN": [window.HOST, "users/login/"].join(""), // 登录
-        "USER": {
 
         "LOGOUT": [window.HOST, "users/logout/"].join(""), // 登出
 
@@ -270,9 +268,9 @@ window.API = {
         "AD_INCOME_PARTITION_ADS_AGENT_FLOW_INCOME_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_current_user_flow_income/"].join(""),
         "AD_INCOME_PARTITION_ADS_AGENT_FLOW_INCOME_LIST_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_current_user_flow_income_list/"].join(""),
         "AD_INCOME_WITHDRAW_CREATE_ROUTERS": [window.HOST, "ad_income_withdraw/create_withdraw_cash/"].join(""),
-        "AD_INCOME_WITHDRAW_LOG_ROUTERS": [window.HOST, "ad_income_withdraw/get_withdraw_cash_log/"].join(""),
-        "AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join(""),
-        "AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join("")
+        "AD_INCOME_WITHDRAW_LOG_ROUTERS": [window.HOST, "ad_income_withdraw/get_withdraw_cash_log/"].join("")
+        //"AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join(""),
+        //"AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join("")
 
     }
 };

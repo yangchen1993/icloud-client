@@ -308,9 +308,5 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/ad_income_partition/withdraw_cash.html",
             controller: "AdFlowIncomeWithdrawController"
         })
-        .state("main.ad-flow-agent-income-withdraw", {
-            url: "/ad-flow-agent-income-withdraw",
-            templateUrl: "template/center/ad_income_partition/withdraw_cash.html",
-            controller: "AdFlowIncomeWithdrawController"
-        })
+
 });

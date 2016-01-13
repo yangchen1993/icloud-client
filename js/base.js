@@ -244,7 +244,13 @@ window.API = {
     "CREATE_AD":{
         "CREATE_AD_PLATFORM":[window.HOST,"accessed_ad/create_ads/"].join(""),
         "GET_AD_PLATFORM":[window.HOST,"accessed_ad/get_ads/"].join("")
+    },
+
+    "WITH_CASH":{
+        //"CREATE_WITH_CASH":[window.HOST,""].join(""),
+        "GET_USER_BALANCE":[window.HOST,"ad_agent_income/get_agent_income/"].join("")
     }
+
 };
 
 

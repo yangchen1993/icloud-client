@@ -27,7 +27,7 @@ iCloudController.controller("CreateAdController", ["$scope", "$grid", "$http", "
 
         $scope.checks = function (index, data) {
             console.log(index, data);
-            if (!data)
+            if (!data) {
                 switch (index) {
                     case 1:
                         $scope.name = true;
@@ -39,8 +39,28 @@ iCloudController.controller("CreateAdController", ["$scope", "$grid", "$http", "
                         $scope.platform = true;
                         break;
                 }
-
+            }
+            else {
+                switch (index) {
+                    case 1:
+                        $scope.name = false;
+                        break;
+                    case 2:
+                        $scope.url = false;
+                        break;
+                    case 3:
+                        $scope.platform = false;
+                        break;
+                }
+            }
         }
 
 
     }]);
+
+iCloudController.controller("WithCashController", ["$scope", "$grid", "$http", "$cookieStore",
+    function ($scope, $grid, $http, $cookieStore) {
+        var log = $grid.initial($scope,window.API.WITH_CASH.GET_USER_BALANCE);
+        console.log(log);
+
+}]);

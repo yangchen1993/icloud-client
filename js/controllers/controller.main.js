@@ -56,7 +56,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.adsType_nav = 1;
                 //Jiangtao
                 $scope.create_ad=true; //应当为admin
-
+                $scope.with_cash=true;
                 $rootScope.update_ssid = true;
                 $rootScope.isShow_balckwhite = true;
                 $rootScope.putAdSearch = {

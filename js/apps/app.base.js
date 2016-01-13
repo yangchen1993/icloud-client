@@ -281,4 +281,9 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl:"template/center/adpay/create-ad.html",
             controller:"CreateAdController"
         })
+        .state("main.with-cash", {
+            url:"/with-cash",
+            templateUrl:"template/center/adpay/with-cash.html",
+            controller:"WithCashController"
+        })
 });

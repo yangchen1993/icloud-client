@@ -1,0 +1,40 @@
+<div class="table_outside">
+    <ol class="breadcrumb">
+        <li class="active">广告分成提现申请列表</li>
+    </ol>
+        <div class="table_inside">
+            <table class="table table-bordered table-hover text-center table-striped">
+                <thead style="background-color: #8a8bc4;color: #fff">
+                <tr>
+                    <td>
+                        申请日期
+                    </td>
+                    <td>
+                        申请用户
+                    </td>
+                    <td>
+                       提现金额
+                    </td>
+                    <td>
+                        状态
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="i in grid.results">
+                    <td>
+                        <span ng-bind="i.create_time"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="i.username"></span>
+                    </td>
+                    <td ng-bind="i.withdraw_cash | currency: '￥'"></td>
+                    <td>
+                        <span ng-bind="i.status"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
+</div>

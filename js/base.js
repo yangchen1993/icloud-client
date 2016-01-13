@@ -224,6 +224,9 @@ window.API = {
         "AD_INCOME_PARTITION_ADS_AGENT_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_flow_data_by_admin/"].join(""),
         "AD_INCOME_PARTITION_ADS_AGENT_FLOW_INCOME_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_current_user_flow_income/"].join(""),
         "AD_INCOME_PARTITION_ADS_AGENT_FLOW_INCOME_LIST_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_current_user_flow_income_list/"].join(""),
+        "AD_INCOME_WITHDRAW_CREATE_ROUTERS": [window.HOST, "ad_income_withdraw/create_withdraw_cash/"].join(""),
+        "AD_INCOME_WITHDRAW_LOG_ROUTERS": [window.HOST, "ad_income_withdraw/get_withdraw_cash_log/"].join(""),
+        "AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join(""),
 
     }
 };

@@ -105,3 +105,32 @@ iCloudController.controller("AdFlowAgentIncomeController", ['$scope', '$http', '
         $scope.search_b();
 
     }]);
+
+iCloudController.controller("AdFlowIncomeWithdrawController", ['$scope', '$http', '$cookieStore', "$window", '$grid',
+    function ($scope, $http, $cookieStore, $window, $grid) {
+        $scope.cash=0
+        $grid.initial($scope, window.API.PARTITION.AD_INCOME_WITHDRAW_LOG_ROUTERS);
+
+        $scope.withdraw=function () {
+            $http.post([window.API.PARTITION.AD_INCOME_WITHDRAW_CREATE_ROUTERS, "?key=", $cookieStore.get("key")].join(""),{'cash':$scope.cash}).success(function (data) {
+                alert(data.msg);
+                if(data.result==0){
+                    $grid.initial($scope, window.API.PARTITION.AD_INCOME_WITHDRAW_LOG_ROUTERS);
+                };
+            });
+        };
+    }]);
+
+iCloudController.controller("AdFlowIncomeWithdrawLogController", ['$scope', '$http', '$cookieStore', "$window", '$grid',
+    function ($scope, $http, $cookieStore, $window, $grid) {
+        $grid.initial($scope, window.API.PARTITION.AD_INCOME_ADMIN_ROUTERS);
+
+        $scope.withdraw=function () {
+            $http.post([window.API.PARTITION.AD_INCOME_WITHDRAW_CREATE_ROUTERS, "?key=", $cookieStore.get("key")].join(""),{'cash':$scope.cash}).success(function (data) {
+                alert(data.msg);
+                if(data.result==0){
+                    $grid.initial($scope, window.API.PARTITION.AD_INCOME_WITHDRAW_LOG_ROUTERS);
+                };
+            });
+        };
+    }]);

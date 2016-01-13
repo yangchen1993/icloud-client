@@ -251,6 +251,31 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/personal/safe.html",
             controller: "PersonalSafeController"
         })
+        //以下代码实现发布系统功能.
+        .state("main.msgsystem-message",{
+            url: "/msgsystem-message",
+            templateUrl: "template/center/msgsystem/message.html",
+            controller: "MessageController"
+        })
+        //新增"发布中心"，并在发布中心下新增"消息中心".
+        .state("main.history",{
+            url: "/history",
+            templateUrl: "template/center/msgsystem/history.html",
+            controller: "MessageController"
+        })
+        //点击"新建消息",弹出"消息发布"界面.
+        .state("main.msgsystem-new",{
+            url: "/msgsystem-new",
+            templateUrl: "template/center/msgsystem/new.html",
+            controller: "MessageController"
+        })
+        //点击详情弹出"内容详情"界面
+         .state("main.msgsystem-detail",{
+            url: "/msg-detail",
+            templateUrl: "template/center/msgsystem/detail.html",
+            controller: "MessageDetailController"
+        })
+
         .state("main.white-space", {
             url: "/white-space",
             templateUrl: "template/center/jsads/white-space.html",

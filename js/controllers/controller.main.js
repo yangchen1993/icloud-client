@@ -30,6 +30,8 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.partition = true;
                 $scope.partition_set = true;
                 $rootScope.delegate_auths = 1;
+                $scope.Message_nav = false; //实现发布系统功能
+                $scope.sysMessage_nav = true;//实现发布系统功能
                 $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;
                 $rootScope.deviceManage = {
@@ -56,9 +58,10 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.wallet_nav = true;
                 $scope.info_nav = true;
                 $scope.adsType_nav = 1;
-                //Jiangtao
                 $scope.create_ad=true; //应当为admin
                 $scope.with_cash=true;
+                $scope.Message_nav = true; //实现发布系统功能
+                $scope.sysMessage_nav = false;//实现发布系统功能
                 $rootScope.update_ssid = true;
                 $rootScope.isShow_balckwhite = true;
                 $rootScope.putAdSearch = {
@@ -85,6 +88,8 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.partition = true;
                 $scope.partition_info = true;
                 $rootScope.delegate_auths = 0;
+                $scope.Message_nav = true; //实现发布系统功能
+                $scope.sysMessage_nav = false;//实现发布系统功能
                 $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;
                 $rootScope.putAdSearch = {

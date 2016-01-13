@@ -2,10 +2,8 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.178.203:8001/api/";
-//window.HOST = "http://mb.idianjia.cn:8801/api/";
-window.HOST="http://server.idianjia.com/api/";
-//window.HOST = "http://120.26.121.101:8000/api/";
+//window.HOST = "http://192.168.178.128:8802/api/";
+window.HOST = "http://mb.idianjia.cn:8801/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -107,11 +105,7 @@ window.API = {
 
         "NEW_DELIVERY": [window.HOST, "deliveries/new_delivery/"].join(""), // 新建路由器发货信息
 
-        "ROUTERS_SSID": [window.HOST, "routers/ssid/"].join(""), //设置路由器SSID
-
-        "ROUTERS_DELEGATE": [window.HOST, "routers/delegate/"].join(""),    //托管路由器
-
-        "ROUTERS_UNDELEGATE": [window.HOST, "routers/undelegate/"].join("")     //取消已托管的路由器
+        "ROUTERS_SSID": [window.HOST, "routers/ssid/"].join("") //设置路由器SSID
 
     },
 
@@ -124,9 +118,7 @@ window.API = {
 
         "EDIT_GROUP": [window.HOST, "groups/edit_group/"].join(""), // 删除路由器分组
 
-        "GET_ROUTER_BY_GROUP": [window.HOST, "routers/get_current_user_routers/"].join(""),//获取当前店铺所有路由器
-
-        "GET_GUESTS_FLOW": [window.HOST, "groups/get_guests_flow/"].join("")
+        "GET_ROUTER_BY_GROUP": [window.HOST, "routers/get_current_user_routers/"].join("")//获取当前店铺所有路由器
     },
 
 
@@ -271,7 +263,14 @@ window.API = {
         "AD_INCOME_ADMIN_RATIO_SET_ROUTERS": [window.HOST, "ad_income_partition/set_income_ratio/"].join(""),
         "GET_ACCESSED_ADS_FLOW_INFO_BY_AD_ID_ROUTERS": [window.HOST, "ad_income_partition/get_flow_by_ad_id/"].join(""),
 
-    }
+    },
+
+    "MSGSYSTEM": {
+        "GET_ALL": [window.HOST, "message/get_all/"].join(""),  //获取历史系统消息
+        "ADD_MESSAGE": [window.HOST, "message/add/"].join(""),
+        "DELETE_MESSAGE": [window.HOST, "message/delete/"].join(""),
+        "DETAIL_MESSAGE": [window.HOST, "message/get_detail/"].join("")
+    },
 };
 
 

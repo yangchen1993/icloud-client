@@ -1,0 +1,26 @@
+<div class="panel_outside row">
+    <ol class="breadcrumb">
+        <li class="active">内容详情</li>
+    </ol>
+    <table class="table table-bordered table-striped table-hover text-left">
+    <!--<table width="100%">-->
+        <thead style="background-color: #fff; color: #000">
+            <tr>
+                <td align="left" >主题</td>
+                <td align="left" >{{detail.title}}</td>
+            </tr>
+            <tr>
+                <td align="left" width="20%" >发布时间</td>
+                <td align="left" width="80%" >{{detail.create_time}}</td>
+            </tr>
+            <tr>
+                <td align="left">详细内容</td>
+                <!--<td align="left" height="800px">{{detail.info}}</td>-->
+                <td align="left" height="800px">
+                    <textarea style="resize: none; width: 100%; height: 800px; border: none; background: none" disabled="disabled" >{{detail.info}}</textarea>
+                </td>
+            </tr>
+            </thead>
+        </table>
+
+</div>

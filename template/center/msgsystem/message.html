@@ -1,0 +1,26 @@
+<div class="panel_outside row" >
+    <ol class="breadcrumb">
+        <li class="active">消息中心</li>
+    </ol>
+    <div>
+        <!--<table width="100%" align="center" height="120px" border="1"> -->
+        <table class="table table-bordered table-striped table-hover text-left">
+            <thead style="background-color: #8a8bc4;color: #fff">
+            <tr>
+                <td align="left" width="20%">发布时间</td>
+                <td align="left" width="20%">主题</td>
+                <td align="left" width="50%">内容概述</td>
+                <td align="left" width="10%">详情</td>
+            </tr>
+            </thead>
+            <tr ng-repeat="item in grid.results">
+                <td>{{item.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{item.title}}</td>
+                <td>{{(item.info | limitTo: 20) + '……'}}</td>
+                <td><a ng-click="see_detail(item.id)" style="cursor: pointer">详情</a></td>
+            </tr>
+        </table>
+        <hr>
+    </div>
+    <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
+</div>

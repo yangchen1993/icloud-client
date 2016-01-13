@@ -4,7 +4,8 @@
 
 //window.HOST = "http://192.168.10.213:8001/api/";
 //window.HOST = "http://dev.idianjia.com:8000/api/";
-window.HOST = "http://server.idianjia.com/api/";
+window.HOST = "http://dev.idianjia.com:8000/api/";
+//window.HOST = "http://server.idianjia.com/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -241,8 +242,8 @@ window.API = {
     },
 
     "CREATE_AD":{
-        "CREATE_AD_PLATFORM":[window.HOST,"accessed_ad/"].join(""),
-        "GET_AD_PLATFORM":[window.HOST," "].join("")
+        "CREATE_AD_PLATFORM":[window.HOST,"accessed_ad/create_ads/"].join(""),
+        "GET_AD_PLATFORM":[window.HOST,"accessed_ad/get_ads/"].join("")
     }
 };
 

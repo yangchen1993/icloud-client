@@ -20,17 +20,20 @@
             </div>
             <div>
                 <label>名称:</label>
-                <input class="form-control" type="text" ng-model="ads.ad_name">
+                <input class="form-control" type="text" ng-model="ads.name" ng-blur="checks(1,ads.name)">
+                <span ng-show="name" style="color: red">错误：不能为空！</span>
                 <br/>
             </div>
             <div>
                 <label>url:</label>
-                <input class="form-control" type="text" ng-model="ads.ad_url">
+                <input class="form-control" type="text" ng-model="ads.url" ng-blur="checks(2,ads.url)">
+                <span ng-show="url" style="color: red">错误：不能为空！</span>
                 <br/>
             </div>
             <div>
                 <label>平台:</label>
-                <input class="form-control" type="text" ng_model="ads.ad_platform">
+                <input class="form-control" type="text" ng_model="ads.platform" ng-blur="checks(3,ads.name)">
+                <span ng-show="platform" style="color: red">错误：不能为空！</span>
                 <br/>
             </div>
             <div style="float:right;">
@@ -65,10 +68,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="p in grid.result">
-                    <td>p.name</td>
-                    <td>p.url</td>
-                    <td>p.platform</td>
+                <tr ng-repeat="p in grid.data">
+                    <td ng-bind="p.name"></td>
+                    <td ng-bind="p.url"></td>
+                    <td ng-bind="p.platform"></td>
                     <td>
                         <a href="javascript:void(0)">修改</a>
                         <a href="javascript:void(0)">删除</a>+
@@ -76,6 +79,7 @@
                 </tr>
             </tbody>
         </table>
-        <div ng-include="'/template/partial/pagination.html'"></div>
     </div>
+    <div ng-include="'/template/partial/pagination.html'"></div>
+
 </div>

@@ -5,16 +5,16 @@
         <div class="table_inside">
             <div class="row" style="padding: 10px;font-size: 18px;font-family: 'Microsoft YaHei'">
                 <div class="col-md-3" style="background-color: #00FFFF;text-align:center;">
-                    结算分成<div>{{income_info.incomes}}</div>
+                    结算分成<div><label ng-bind="income_info.incomes | currency: '￥'"></label></div>
                 </div>
                 <div class="col-md-3" style="background-color: #00A6C7;text-align:center;">
-                    点击量<div>{{income_info.pvs}}</div>
+                    点击量<div><label ng-bind="income_info.pvs"></label></div>
                 </div>
                 <div class="col-md-3" style="background-color: #00B0E8;text-align:center;">
-                    UV<div>{{income_info.uvs}}</div>
+                    UV<div><label ng-bind="income_info.uvs"></label></div>
                 </div>
                 <div class="col-md-3" style="background-color: #0d5ab1;text-align:center;">
-                    设备数量<div>{{income_info.nums}}</div>
+                    设备数量<div><label ng-bind="income_info.nums"></label></div>
                 </div>
             </div>
             <div class="form-inline" style="float:right;margin: 10px ">
@@ -25,47 +25,23 @@
             <table class="table table-bordered table-hover text-center table-striped">
                 <thead style="background-color: #8a8bc4;color: #fff">
                 <tr>
-                    <td id="router_mac" ng-click="sort('router_mac')">
-                        设备MC
-                        <span ng-show="currentSort['router_mac'] === true"
-                              class="glyphicon glyphicon-triangle-top"></span>
-                        <span ng-show="currentSort['router_mac'] === false"
-                              class="glyphicon glyphicon-triangle-bottom"></span>
+                    <td>
+                        设备MAC
                     </td>
-                    <td id="router_owner_name" ng-click="sort('router_owner_name')">
+                    <td>
                         所属商户
-                        <span ng-show="currentSort['router_owner_name'] === true"
-                              class="glyphicon glyphicon-triangle-top"></span>
-                        <span ng-show="currentSort['router_owner_name'] === false"
-                              class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
-                    <td id="income" ng-click="sort('income')">
+                    <td>
                         结算分成
-                        <span ng-show="currentSort['income'] === true"
-                              class="glyphicon glyphicon-triangle-top"></span>
-                        <span ng-show="currentSort['income'] === false"
-                              class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
-                    <td id="pv" ng-click="sort('pv')">
+                    <td>
                         点击数量
-                        <span ng-show="currentSort['pv'] === true"
-                              class="glyphicon glyphicon-triangle-top"></span>
-                        <span ng-show="currentSort['pv'] === false"
-                              class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
-                    <td id="uv" ng-click="sort('uv')">
+                    <td>
                         UV
-                        <span ng-show="currentSort['uv'] === true"
-                              class="glyphicon glyphicon-triangle-top"></span>
-                        <span ng-show="currentSort['uv'] === false"
-                              class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
-                    <td id="date" ng-click="sort('date')">
+                    <td>
                         日期
-                        <span ng-show="currentSort['date'] === true"
-                              class="glyphicon glyphicon-triangle-top"></span>
-                        <span ng-show="currentSort['date'] === false"
-                              class="glyphicon glyphicon-triangle-bottom"></span>
                     </td>
                 </tr>
                 </thead>

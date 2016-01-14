@@ -4,7 +4,7 @@
 
 //window.HOST = "http://192.168.178.203:8001/api/";
 //window.HOST = "http://mb.idianjia.cn:8801/api/";
-window.HOST="http://server.idianjia.com/api";
+window.HOST="http://server.idianjia.com/api/";
 //window.HOST = "http://120.26.121.101:8000/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 

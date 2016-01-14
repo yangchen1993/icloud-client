@@ -1,6 +1,6 @@
 iCloudController.controller("MessageController", ["$scope", "$http", "$cookieStore", "$window", "$grid",
     function ($scope, $http, $cookieStore, $window, $grid) {
-        $grid.initial($scope, $window.API.MSGSYSTEM.GET_ALL);
+        $grid.initial($scope, $window.API.MSGSYSTEM.GET_ALL, {"ordering": "-create_time"});
 
         $scope.addMessage = function (data) {
             $http.post([$window.API.MSGSYSTEM.ADD_MESSAGE, "?key=", $cookieStore.get("key")].join(""), data)
@@ -52,7 +52,7 @@ iCloudController.controller("MessageDetailController", ["$scope", "$http", "$coo
 iCloudController.controller("MessageEditController", ["$scope", "$http", "$cookieStore", "$window", "$grid",
     function ($scope, $http, $cookieStore, $window, $grid) {
         var id = get_param($window.location.href, "id");
-        $http.get([$window.API.MSGSYSTEM.DETAIL_MESSAGE, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
+        $http.get([$window.API.MSGSYSTEM.DETAIL_MESSAGE, "?key=", $cookieStore.get("key"), "&id=", id].join(""), {"ordering": "-create_time"})
             .success(function (data) {
                 $scope.message = data;
                 $scope.roles = [{ value:'2,3,4,5', name: '代理' },

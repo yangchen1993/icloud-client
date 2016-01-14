@@ -11,6 +11,10 @@ iCloudController.controller("CreateAdController", ["$scope", "$grid", "$http", "
             console.log(data);
             $http.post([window.API.CREATE_AD.CREATE_AD_PLATFORM, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
                     console.log(data.msg);
+                    $grid.initial($scope, window.API.CREATE_AD.GET_AD_PLATFORM);
+                    $scope.ads.name="";
+                    $scope.ads.url="";
+                    $scope.ads.platform="";
                 })
                 .error(function (data) {
                     console.log(data.msg);
@@ -74,18 +78,18 @@ iCloudController.controller("CreateAdController", ["$scope", "$grid", "$http", "
         };
 
         $scope.UpdateAd = function (data) {
-            $http.update([window.API.CREATE_AD.UPDATE_AD_PLATFORM,
-                "?key=", $cookieStore.get("key"), data].join("")).success(function (data) {
+            $http.put([window.API.CREATE_AD.UPDATE_AD_PLATFORM,"?key=", $cookieStore.get("key")].join(""),data).success(function (data) {
                     alert('修改成功！');
+                    $grid.initial($scope, window.API.CREATE_AD.GET_AD_PLATFORM);
                 })
                 .error(function (data) {
                     console.log(data);
-                })
+                });
 
         };
 
         $scope.GetUpdateObject = function(data){
-            $scope.ad=data;
+            $scope.ad=angular.copy(data);
         };
 
         $scope.DeleteAd = function (id) {

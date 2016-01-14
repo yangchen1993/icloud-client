@@ -268,6 +268,7 @@ window.API = {
         "AD_INCOME_ADMIN_MODIFY_AGENT_INCOME_ROUTERS": [window.HOST, "ad_income_partition/modify_agent_income/"].join(""),
         "AD_INCOME_ADMIN_RATIO_ROUTERS": [window.HOST, "ad_income_partition/get_income_ratio/"].join(""),
         "AD_INCOME_ADMIN_RATIO_SET_ROUTERS": [window.HOST, "ad_income_partition/set_income_ratio/"].join(""),
+        "GET_ACCESSED_ADS_FLOW_INFO_BY_AD_ID_ROUTERS": [window.HOST, "ad_income_partition/get_flow_by_ad_id/"].join(""),
 
     }
 };

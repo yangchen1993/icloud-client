@@ -8,6 +8,7 @@ iCloudController.controller("CreateAdFlowController", ['$scope', '$http', '$cook
             $scope.ads = data.data;
             $scope.selected=$scope.ads[0].id;//如果想要第一个值
 
+            $scope.select_a($scope.selected);
             $scope.ad_flow = {
                 "ad_id": data.data[0].id,
                 "pv": 0,
@@ -16,7 +17,11 @@ iCloudController.controller("CreateAdFlowController", ['$scope', '$http', '$cook
             };
         });
         $scope.select_a = function (id) {
-            $scope.ad_flow.ad_id=id;
+            //$scope.ad_flow.ad_id=id;
+            $http.get([window.API.PARTITION.GET_ACCESSED_ADS_FLOW_INFO_BY_AD_ID_ROUTERS, "?key=", $cookieStore.get("key")+"&ad_id="+id].join("")).success(function (data) {
+                $scope.ad_flow = data;
+                console.log(data)
+            });
         };
         $scope.submit = function () {
             if($scope.ad_flow.ad_id=='' || $scope.ad_flow.pv<=0 || $scope.ad_flow.uv<=0 || $scope.ad_flow.income<=0){

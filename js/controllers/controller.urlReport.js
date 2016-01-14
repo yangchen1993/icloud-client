@@ -102,6 +102,10 @@ iCloudController.controller("UrlReportController", ["$scope", "$http", "$cookieS
         data.start_time = $("#datetimepicker1 input")[0].value;
         data.end_time = $("#datetimepicker2 input")[0].value;
         data.time_range = 0;
+        if(data.sort_nums==undefined || data.sort_nums<=0){
+            alert('请正确输入信息！');
+            return;
+        }
         console.log(data);
         $http.post([window.API.URLREPORT.CREATE_URL_COLLECT_RULE, "?key=", $cookieStore.get("key")].join(""), data).success(function (data) {
             alert(data.msg);

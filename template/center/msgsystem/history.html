@@ -11,10 +11,10 @@
             <tr>
                 <td align="left" width="20%">发布时间</td>
                 <td align="left" width="15%">主题</td>
-                <td align="left" width="35%">内容概述</td>
+                <td align="left" width="30%">内容概述</td>
                 <td align="left" width="10%">详情</td>
-                <td width="12%">阅读对象</td>
-                <td width="8%">操作</td>
+                <td width="10%">阅读对象</td>
+                <td width="15%">操作</td>
             </tr>
             </thead>
             <tr ng-repeat="item in grid.results">
@@ -24,8 +24,10 @@
                 <td><a ng-click="see_detail(item.id)" style="cursor: pointer">详情</a></td>
                 <td>{{item.read_role}}</td>
                 <td>
-                    <button class="btn btn-xs btn-danger" ng-click="deleteMessage(item.id)">删除</button>
+                    <button class="btn btn-xs btn-primary"    ng-click="toEditPage(item.id)">修改</button>
+                    <button class="btn btn-xs btn-danger"  ng-click="deleteMessage(item.id)">删除</button>
                 </td>
+
             </tr>
         </table>
         <hr>

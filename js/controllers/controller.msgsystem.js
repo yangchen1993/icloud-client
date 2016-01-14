@@ -16,6 +16,10 @@ iCloudController.controller("MessageController", ["$scope", "$http", "$cookieSto
                 alert("未知错误");
             });
         }
+
+        $scope.toEditPage = function (id) {
+            window.location.href = "#/main/msgsystem-edit?id=" + id
+        }
         $scope.deleteMessage = function (id) {
             var _this = $(this);
             if (confirm('确认要删除吗？')) {
@@ -39,14 +43,42 @@ iCloudController.controller("MessageDetailController", ["$scope", "$http", "$coo
         var getDetailInfo = function () {
             $http.get([$window.API.MSGSYSTEM.DETAIL_MESSAGE, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
                 .success(function (data) {
-                    //data.info = data.info.replace('\n','\r');
-                    //data.info = data.info.replaceAll(" ","&nbsp;");
                     $scope.detail = data;
-                    //data.info = data.info.replaceAll(" ;","abc;")
                 })
         };
         getDetailInfo();
  }]);
 
+iCloudController.controller("MessageEditController", ["$scope", "$http", "$cookieStore", "$window", "$grid",
+    function ($scope, $http, $cookieStore, $window, $grid) {
+        var id = get_param($window.location.href, "id");
+        $http.get([$window.API.MSGSYSTEM.DETAIL_MESSAGE, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
+            .success(function (data) {
+                $scope.message = data;
+                $scope.roles = [{ value:'2,3,4,5', name: '代理' },
+                    { value:'6', name: '商户' },
+                    { value:'2,3,4,5,6', name: '所有' }
+                ];
 
+                if (data.read_role == "代理"){
+                    $scope.message.read_role = $scope.roles[0];
+                }
+                else if (data.read_role == "商户"){
+                    $scope.message.read_role = $scope.roles[1];
+                }
+                else{
+                    $scope.message.read_role = $scope.roles[2];
+                }
 
+            });
+
+        $scope.editMessage = function (message) {
+            $http.put([$window.API.MSGSYSTEM.EDIT_MESSAGE, "?key=", $cookieStore.get("key")].join(""), message)
+                .success(function (data) {
+                    window.location.href = "#/main/history"
+                })
+                .error(function (data) {
+                    $window.alert(data.msg);
+                })
+        }
+ }]);

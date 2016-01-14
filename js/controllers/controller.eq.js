@@ -100,6 +100,7 @@ iCloudController.controller("EditDeviceController", ["$scope", "$http", "$cookie
             $http.put([$window.API.ROUTER.EDIT_ROUTER, "?key=", $cookieStore.get("key")].join(""), router)
                 .success(function (data) {
                     $window.alert(data.msg)
+                    alert("更新成功")
                 })
                 .error(function (data) {
                     $window.alert(data.msg)

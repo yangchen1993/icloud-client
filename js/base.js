@@ -269,7 +269,8 @@ window.API = {
         "GET_ALL": [window.HOST, "message/get_all/"].join(""),  //获取历史系统消息
         "ADD_MESSAGE": [window.HOST, "message/add/"].join(""),
         "DELETE_MESSAGE": [window.HOST, "message/delete/"].join(""),
-        "DETAIL_MESSAGE": [window.HOST, "message/get_detail/"].join("")
+        "DETAIL_MESSAGE": [window.HOST, "message/get_detail/"].join(""),
+        "EDIT_MESSAGE": [window.HOST, "message/modified/"].join(""),
     },
 };
 

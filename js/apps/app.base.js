@@ -263,19 +263,24 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/msgsystem/history.html",
             controller: "MessageController"
         })
-        //点击"新建消息",弹出"消息发布"界面.
+        //"新消息发布"界面.
         .state("main.msgsystem-new",{
             url: "/msgsystem-new",
             templateUrl: "template/center/msgsystem/new.html",
             controller: "MessageController"
         })
-        //点击详情弹出"内容详情"界面
+        //"内容详情"界面
          .state("main.msgsystem-detail",{
             url: "/msg-detail",
             templateUrl: "template/center/msgsystem/detail.html",
             controller: "MessageDetailController"
         })
-
+        //"更新消息"界面
+        .state("main.msgsystem-edit",{
+            url: "/msgsystem-edit",
+            templateUrl: "template/center/msgsystem/edit.html",
+            controller: "MessageEditController"
+        })
         .state("main.white-space", {
             url: "/white-space",
             templateUrl: "template/center/jsads/white-space.html",

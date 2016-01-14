@@ -24,7 +24,7 @@ iCloudController.controller("CreateAdFlowController", ['$scope', '$http', '$cook
             });
         };
         $scope.submit = function () {
-            if($scope.ad_flow.ad_id=='' || $scope.ad_flow.pv<=0 || $scope.ad_flow.uv<=0 || $scope.ad_flow.income<=0){
+            if($scope.ad_flow.ad_id=='' || $scope.ad_flow.pv==undefined || $scope.ad_flow.uv==undefined|| $scope.ad_flow.income==undefined|| $scope.ad_flow.pv<=0 || $scope.ad_flow.uv<=0 || $scope.ad_flow.income<=0){
                 alert("请正确填写信息！");
                 return;
             };
@@ -168,6 +168,11 @@ iCloudController.controller("AdFlowRatioController", ['$scope', '$http', '$cooki
             $scope.ratio=data
         });
         $scope.submit=function () {
+            if($scope.ratio.company_ratio==undefined || $scope.ratio.province_ratio==undefined|| $scope.ratio.city_ratio==undefined|| $scope.ratio.area_ratio==undefined || $scope.ratio.business_ratio==undefined
+                || $scope.ratio.company_ratio<=0|| $scope.ratio.province_ratio<=0|| $scope.ratio.city_ratio<=0|| $scope.ratio.area_ratio<=0|| $scope.ratio.business_ratio<=0){
+                alert("请正确填写信息！");
+                return;
+            };
             $http.post([window.API.PARTITION.AD_INCOME_ADMIN_RATIO_SET_ROUTERS, "?key=", $cookieStore.get("key")].join(""),$scope.ratio).success(function (data) {
                 alert(data.msg);
             });

@@ -2,11 +2,12 @@
  * Created by lee on 2015/9/9.
  */
 
-//window.HOST = "http://192.168.178.128:8802/api/";
-window.HOST = "http://mb.idianjia.cn:8801/api/";
+window.HOST = "http://server.idianjia.com/api/";
+//window.HOST = "http://dev.idianjia.com:8000/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
+
     "USER": {
         "LOGIN": [window.HOST, "users/login/"].join(""), // 登录
 
@@ -52,6 +53,7 @@ window.API = {
 
         "GET_DISTRICTS": [window.HOST, "districts/get_districts/"].join("")
     },
+
     "WALLET": {
         "GET_CURRENT_USER_WALLET_INFO": [window.HOST, "wallets/get_current_user_wallet/"].join(""), // 获取当前用户的钱包信息
 
@@ -105,8 +107,11 @@ window.API = {
 
         "NEW_DELIVERY": [window.HOST, "deliveries/new_delivery/"].join(""), // 新建路由器发货信息
 
-        "ROUTERS_SSID": [window.HOST, "routers/ssid/"].join("") //设置路由器SSID
+        "ROUTERS_SSID": [window.HOST, "routers/ssid/"].join(""), //设置路由器SSID
 
+        "ROUTERS_DELEGATE": [window.HOST, "routers/delegate/"].join(""),    //托管路由器
+
+        "ROUTERS_UNDELEGATE": [window.HOST, "routers/undelegate/"].join("")     //取消已托管的路由器
     },
 
     "GROUP": {
@@ -118,9 +123,10 @@ window.API = {
 
         "EDIT_GROUP": [window.HOST, "groups/edit_group/"].join(""), // 删除路由器分组
 
-        "GET_ROUTER_BY_GROUP": [window.HOST, "routers/get_current_user_routers/"].join("")//获取当前店铺所有路由器
-    },
+        "GET_ROUTER_BY_GROUP": [window.HOST, "routers/get_current_user_routers/"].join(""),//获取当前店铺所有路由器
 
+        "GET_GUESTS_FLOW": [window.HOST, "groups/get_guests_flow/"].join("")
+    },
 
     "CMS": {
         "NEW_RESOURCES": [window.HOST, "resources/new_resource/"].join(""), // 新建资源, 供CMS使用
@@ -135,7 +141,6 @@ window.API = {
 
         "POST_IMG": [window.HOST, "resources/new_img_resource/"].join("")
     },
-
 
     "AD": {
         "GET_CURRENT_USER_ADS": [window.HOST, "ads/get_current_user_ads/"].join(""), // 获取当前用户的广告
@@ -158,6 +163,7 @@ window.API = {
 
         "": [window.HOST, "adspaces/get_ad_spaces/"].join("")
     },
+
     "WIFICAT": {
         "STATUS": [window.HOST_WIFICAT, "routers/status/"].join(""), //路由器实时信息
 
@@ -165,7 +171,6 @@ window.API = {
 
         "REBOOT": [window.HOST_WIFICAT, "reboot/"].join("")//路由器重启
     },
-
 
     "WEIXIN": {
         "NEW_WECHAT": [window.HOST, "wechat/new_wechat/"].join(""),
@@ -175,7 +180,6 @@ window.API = {
         "EDIT_WECHAT": [window.HOST, "wechat/edit_wechat/"].join("")
 
     },
-
 
     "MARKETING": {
         "NEW_SMS_TEMPLATE": [window.HOST, "sms_templates/new_sms_template/"].join(""), // 新建群发短信模板

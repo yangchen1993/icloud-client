@@ -1,5 +1,5 @@
 <style>
-    .container-fluid{
+    .container-fluid {
         min-width: 770px !important;
     }
 </style>
@@ -49,7 +49,7 @@
                 <div style="border-top:1px solid #2c303b" ng-show="auth_nav"></div>
                 <div style="border-top:1px solid #535a69" ng-show="auth_nav"></div>
 
-                <li >
+                <li>
                     <div class="open_menu">
                         <div></div>
                         <a><span class="fa fa-user"></span>用户中心</a>
@@ -58,7 +58,7 @@
                     <ul class="menu_child">
                         <li ng-show="Message_nav">
                             <div></div>
-                            <a ui-sref=".msgsystem-message" style="color:red ">消息中心</a>
+                            <a ui-sref=".msgsystem-message">消息中心</a>
                         </li>
                         <li>
                             <div></div>
@@ -182,7 +182,7 @@
                 <div style="border-top:1px solid #2c303b" ng-show="shop_nav"></div>
                 <div style="border-top:1px solid #535a69" ng-show="shop_nav"></div>
 
-                <li ng-show="ads_nav">
+                <li>
                     <div class="open_menu">
                         <div></div>
                         <a><span class="glyphicon glyphicon-text-background"></span>我的广告</a>
@@ -199,14 +199,46 @@
                         </li>
                     </ul>
                 </li>
-                <div style="border-top:1px solid #2c303b" ng-show="ads_nav"></div>
-                <div style="border-top:1px solid #535a69" ng-show="ads_nav"></div>
+                <div style="border-top:1px solid #2c303b"></div>
+                <div style="border-top:1px solid #535a69"></div>
 
                 <li ng-show="account_nav">
                     <div class="open_menu">
                         <div></div>
-                        <a ui-sref="main.account-details"><span class="fa fa-credit-card"></span>广告分账</a>
+                        <a><span class="fa fa-credit-card"></span>广告分账</a>
+                        <i class="glyphicon glyphicon-triangle-right"></i>
                     </div>
+                    <ul class="menu_child">
+                        <li ng-show="partition_set">
+                            <div></div>
+                            <a ui-sref="main.create-ad">添加接入的广告</a>
+                        </li>
+                        <li ng-show="partition_set">
+                            <div></div>
+                            <a ui-sref="main.ad-partition-flow-create">设置广告流量</a>
+                        </li>
+                        <li ng-show="partition_set">
+                            <div></div>
+                            <a ui-sref="main.ad-flow-ratio">设置分成比例</a>
+                        </li>
+
+                        <li ng-show="partition_set">
+                            <div></div>
+                            <a ui-sref="main.ad-partition-flow-list">广告流量记录</a>
+                        </li>
+                        <li ng-show="partition_info">
+                            <div></div>
+                            <a ui-sref="main.ad-partition-flow-agent-income">广告流量分成</a>
+                        </li>
+                        <li ng-show="partition_info">
+                            <div></div>
+                            <a ui-sref="main.with-cash">我的分成</a>
+                        </li>
+                        <li ng-show="partition_set">
+                            <div></div>
+                            <a ui-sref="main.ad-flow-agent-income-withdraw-log">申请提现列表</a>
+                        </li>
+                    </ul>
                 </li>
                 <div style="border-top:1px solid #2c303b" ng-show="account_nav"></div>
                 <div style="border-top:1px solid #535a69" ng-show="account_nav"></div>
@@ -240,10 +272,36 @@
                         <a ui-sref="main.help-files"><span class="fa fa-folder"></span>帮助文档</a>
                     </div>
                 </li>
+                <div style="border-top:1px solid #2c303b" ng-show="helpfiles"></div>
+                <div style="border-top:1px solid #535a69" ng-show="helpfiles"></div>
+
+                <li ng-show="urlReport">
+                    <div class="open_menu">
+                        <div></div>
+                        <a ui-sref=".urlReport"><span class="fa fa-folder"></span>URL上报</a>
+                    </div>
+                </li>
+                <div style="border-top:1px solid #2c303b" ng-show="urlReport"></div>
+                <div style="border-top:1px solid #535a69" ng-show="urlReport"></div>
+
+                <li ng-show="sysMessage_nav">
+                    <div class="open_menu">
+                        <div></div>
+                        <a><span class="fa fa-user"></span>发布中心</a>
+                    </div>
+                    <ul class="menu_child">
+                        <li>
+                            <div></div>
+                            <a ui-sref="main.history">消息发布</a>
+                        </li>
+                    </ul>
+                </li>
+                <div style="border-top:1px solid #2c303b" ng-show="sysMessage_nav"></div>
+                <div style="border-top:1px solid #535a69" ng-show="sysMessage_nav"></div>
             </ul>
         </div>
     </div>
-        <div ui-view="" class="content container-fluid"></div>
+    <div ui-view="" class="content container-fluid"></div>
 </div>
 
 <script>

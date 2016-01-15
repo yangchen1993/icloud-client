@@ -57,6 +57,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $scope.marketing_nav = true;
                 $scope.wallet_nav = true;
                 $scope.info_nav = true;
+                $scope.partition_info = true;
                 $scope.adsType_nav = 1;
                 $scope.create_ad=true; //应当为admin
                 $scope.with_cash=true;

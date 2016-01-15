@@ -117,7 +117,7 @@ function editImg(id, type) {
                 var setLink = $('div[data-edit-id=' + id + ']' + ' .img-link').val();
                 console.log(setLink);
                 if (!setLink) {
-                    setLink = 'javascript:;';
+                    setLink = '';
                 } else {
                     setLink = 'http://' + setLink;
                 }
@@ -457,11 +457,13 @@ if (!ad_id) {
         console.log(items + '----');
         for (var i = 0; i < length; i++) {
             console.log($(component[i]).prop("outerHTML"));
+            var vlink=$(component[i]).find('a').attr("href");
+            console.log(vlink);
             items.push({
                 'component_id': $(component[i]).attr("id"),
                 'content_type': $(component[i]).attr("data-type"),
                 'div': $(component[i]).prop("outerHTML"),
-                'link':$(component[i]).find('a').attr("href")=="http://"||$(component[i]).find('a').attr("href")==""?"":$(component[i]).find('a').attr("href")
+                'link':vlink=="http://"||vlink==""?"":vlink
             });
 
         }
@@ -524,6 +526,7 @@ if (!ad_id) {
         var component = $('.item-list');
         var length = component.length;
         var items = [];
+        var vlink=$(component[i]).find('a').attr("href");
         console.log(items + '----');
         for (var i = 0; i < length; i++) {
             console.log($(component[i]).prop("outerHTML"));
@@ -531,7 +534,7 @@ if (!ad_id) {
                 'component_id': $(component[i]).attr("id"),
                 'content_type': $(component[i]).attr("data-type"),
                 'div': $(component[i]).prop("outerHTML"),
-                'link':$(component[i]).find('a').attr("href")=="http://"||$(component[i]).find('a').attr("href")==""?"":$(component[i]).find('a').attr("href")
+                'link':vlink=="http://"||vlink==""?"":vlink
             });
 
         }

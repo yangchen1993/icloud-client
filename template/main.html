@@ -61,10 +61,8 @@
                             <a ui-sref=".msgsystem-message">
                                 消息中心
                             </a>
-                            <div ng-if="unread_count > 0">
-                                <span class="fa fa-comment-o" style="margin-left:3px; margin-top: -2px; position: absolute; color: #b1aab4; font-size: 20px"></span>
-                                <a style="width: 30px;text-align: center;margin-left:-2px; margin-top: -12px; position: absolute; color: #e1594e; font-size: 10px">{{unread_count}}</a>
-                            </div>
+                            <span ng-if="unread_count > 0" class="fa fa-comment-o" style="margin-left:3px; margin-top: -2px; position: absolute; color: #b1aab4; font-size: 20px"></span>
+                            <a ng-if="unread_count > 0" style="width: 30px;text-align: center;margin-left:-2px; margin-top: -12px; position: absolute; color: #e1594e; font-size: 10px">{{unread_count}}</a>
                         </li>
                         <li>
                             <div></div>

@@ -6,7 +6,8 @@ iCloudController.controller("MessageController", ["$scope", "$http", "$cookieSto
             $http.post([$window.API.MSGSYSTEM.ADD_MESSAGE, "?key=", $cookieStore.get("key")].join(""), data)
             .success(function(msg) {
                 if (msg.msg == "添加成功") {
-                    window.location.href = "#/main/history"
+                    alert("添加成功");
+                    window.location.href = "#/main/msgsystem-msglist"
                 }
                 else{
                     alert(msg.msg);

@@ -43,12 +43,11 @@ iCloudController.controller("IndexController", ["$scope", "$http", "$window", "$
 iCloudController.controller("TopController", ["$scope", "$http", "$auth", "$cookieStore", "$window", "$rootScope",
     function ($scope, $http, $auth, $cookieStore, $window, $rootScope) {
         var role = $cookieStore.get('role');
+        $scope.show_bell = true;
         if(role == "系统管理员"){
             $scope.show_bell = false;
         }
-        else {
-            $scope.show_bell = true;
-        }
+
         $scope.logout = function () {
             $auth.logout();
         };

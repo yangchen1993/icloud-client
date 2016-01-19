@@ -10,11 +10,11 @@ iCloudController.controller("MessageController", ["$scope", "$http", "$cookieSto
                     window.location.href = "#/main/msgsystem-msglist"
                 }
                 else{
-                    alert(msg.msg);
+                    alert("数据填写不完整");
                 }
             })
             .error(function (msg) {
-                alert("未知错误");
+                alert("添加失败");
             });
         }
 

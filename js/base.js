@@ -2,7 +2,7 @@
  * Created by lee on 2015/9/9.
  */
 
-window.HOST = "http://server.idianjia.com/api/";
+window.HOST = "http://localhost:8000/api/";
 //window.HOST = "http://dev.idianjia.com:8000/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
@@ -275,6 +275,7 @@ window.API = {
         "DELETE_MESSAGE": [window.HOST, "message/delete/"].join(""),
         "DETAIL_MESSAGE": [window.HOST, "message/get_detail/"].join(""),
         "EDIT_MESSAGE": [window.HOST, "message/modified/"].join(""),
+        "GET_UNREAD_COUNT": [window.HOST, "message/get_unread_count/"].join(""),
     },
 };
 

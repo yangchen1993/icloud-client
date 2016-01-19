@@ -6,6 +6,11 @@
     <div class="header">
     </div>
     <div class="header text-right">
+        <span ng-click="goToMsgList()">
+            <i ng-if="show_bell" ng-model="unread_count" class="glyphicon glyphicon-bell" style="font-size: 20px;position: relative;top:7px;">
+                <a ng-if="unread_count > 0" id="unread_count_label" style="text-decoration:none; margin-left: -15px;color:#a85141;font-size: 12px;">{{unread_count}}</a>
+            </i>
+        </span>
         <span ng-click="logout()"><i class="glyphicon glyphicon-off" style="font-size: 20px;position: relative;top:7px"></i></span>
     </div>
 </div>

@@ -258,8 +258,8 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: "MessageController"
         })
         //新增"发布中心"，并在发布中心下新增"消息中心".
-        .state("main.history",{
-            url: "/history",
+        .state("main.msgsystem-msglist",{
+            url: "/msgsystem-msglist",
             templateUrl: "template/center/msgsystem/history.html",
             controller: "MessageController"
         })

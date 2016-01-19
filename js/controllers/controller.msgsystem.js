@@ -37,13 +37,24 @@ iCloudController.controller("MessageController", ["$scope", "$http", "$cookieSto
     }]);
 
 
-iCloudController.controller("MessageDetailController", ["$scope", "$http", "$cookieStore", "$window", "$grid",
-    function ($scope, $http, $cookieStore, $window, $grid) {
+iCloudController.controller("MessageDetailController", ["$scope", "$http", "$cookieStore", "$window", "$rootScope",
+    function ($scope, $http, $cookieStore, $window, $rootScope) {
         var id = get_param($window.location.href, "id");
+        var getUnreadMsgCount = function (nextUrl) {
+            $http.get([$window.API.MSGSYSTEM.GET_UNREAD_COUNT, "?key=", $cookieStore.get("key")].join(""))
+                .success(function (data) {
+                    $rootScope.unread_count = data.count;  // 因其他controller需要更新此值，所以采用$rootScope
+                    if(nextUrl){
+                        window.location.href = nextUrl;
+                    }
+                });
+        };
+
         var getDetailInfo = function () {
             $http.get([$window.API.MSGSYSTEM.DETAIL_MESSAGE, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
                 .success(function (data) {
                     $scope.detail = data;
+                    getUnreadMsgCount();  //点击详情时，需要更新未读消息数
                 })
         };
         getDetailInfo();

@@ -8,13 +8,15 @@
         <table class="table table-bordered table-striped table-hover text-left">
             <tr>
                 <td width="20%" height="25" >主题:
-                <td width="80%"><input name="name" type="text" id="name" ng-model="msgItem.title" size="60%" placeholder="温馨提示：主题不能超过30字."></td>
+                <td width="80%">
+                <input class="form-control" name="name" type="text" id="name" ng-model="msgItem.title" size="60%" placeholder="温馨提示：主题不能超过30字."/>
+                </td>
             </tr>
             <tr>
                 <td>发布对象:</td>
                 <td>
-                    <select ng-model="msgItem.read_role">
-                        <option value="2,3,4,5" selected="selected">代理商</option>
+                    <select class="form-control" style="width: 100px" ng-model="msgItem.read_role">
+                        <option value="2,3,4,5">代理商</option>
                         <option value="6">商户</option>
                         <option value="2,3,4,5,6">所有用户</option>
                     </select>
@@ -22,7 +24,7 @@
             </tr>
             <tr>
                 <td>发布内容:</td>
-               <td><textarea name="textarea" ng-model="msgItem.info" style="resize: none; width:100%; height: 300px; " placeholder="温馨提示：发布内容不能超过500字."></textarea></td>
+               <td><textarea class="form-control" name="textarea" ng-model="msgItem.info" style="resize: none; width:100%; height: 300px; " placeholder="温馨提示：发布内容不能超过500字."></textarea></td>
             </tr>
             <tr>
                 <td height="25" colspan="2" align="center">

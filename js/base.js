@@ -276,6 +276,8 @@ window.API = {
         "DETAIL_MESSAGE": [window.HOST, "message/get_detail/"].join(""),
         "EDIT_MESSAGE": [window.HOST, "message/modified/"].join(""),
         "GET_UNREAD_COUNT": [window.HOST, "message/get_unread_count/"].join(""),
+        "GET_PREVIOUS_ID": [window.HOST, "message/get_previous/"].join(""),
+        "GET_NEXT_ID": [window.HOST, "message/get_next/"].join(""),
     },
 };
 

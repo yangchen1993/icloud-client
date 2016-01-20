@@ -15,5 +15,7 @@
         <br/>
         <textarea id="msgInfoId" disabled="disabled" cols="50" readonly="readonly" class="textarea-content">{{detail.info}}</textarea>
         <br/><br/>
+        <input class="button button-royal button-rounded" type="submit" ng-click="previousMsg(detail.id)" value="上一条">
+        <input class="button button-royal button-rounded" type="submit" style="float: right" ng-click="nextMsg(detail.id)" value="下一条">
     </div>
 </div>

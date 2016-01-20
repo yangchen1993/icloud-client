@@ -69,6 +69,43 @@ iCloudController.controller("MessageDetailController", ["$scope", "$http", "$coo
                 })
         };
         getDetailInfo();
+
+        $scope.previousMsg = function(id){
+            $http.get([$window.API.MSGSYSTEM.GET_PREVIOUS_ID, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
+                .success(function (data) {
+                    if (!data.msg) {
+                        $scope.detail = data;
+                        window.location.href = "#/main/msg-detail?id=" + data.id;
+                        var lines = getLineCount(data.info);
+                        var length = data.info.length;
+                        var msgInfo = document.getElementById("msgInfoId");
+                        var lengthLines = length/msgInfo.cols;
+                        msgInfo.rows = lines + 1 + lengthLines;
+                        getUnreadMsgCount();  //点击详情时，需要更新未读消息数
+                    }
+                    else{
+                        alert(data.msg);
+                    }
+                })
+        };
+        $scope.nextMsg = function(id){
+            $http.get([$window.API.MSGSYSTEM.GET_NEXT_ID, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
+                .success(function (data) {
+                    if (!data.msg) {
+                        $scope.detail = data;
+                        window.location.href = "#/main/msg-detail?id=" + data.id;
+                        var lines = getLineCount(data.info);
+                        var length = data.info.length;
+                        var msgInfo = document.getElementById("msgInfoId");
+                        var lengthLines = length/msgInfo.cols;
+                        msgInfo.rows = lines + 1 + lengthLines;
+                        getUnreadMsgCount();  //点击详情时，需要更新未读消息数
+                    }
+                    else{
+                        alert(data.msg);
+                    }
+                })
+        };
  }]);
 
 iCloudController.controller("MessageEditController", ["$scope", "$http", "$cookieStore", "$window", "$grid",

@@ -1,8 +1,8 @@
 .textarea-content{
+    background-color: #b1aab4;
     padding: 10px;
     resize: none;
     width: 100%;
-    height: 800px;
     border: none;
     border-radius: 5px;
     border: 1px cadetblue solid;

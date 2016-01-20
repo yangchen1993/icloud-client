@@ -6,7 +6,7 @@ iCloudController.controller("MessageController", ["$scope", "$http", "$cookieSto
             $http.post([$window.API.MSGSYSTEM.ADD_MESSAGE, "?key=", $cookieStore.get("key")].join(""), data)
             .success(function(msg) {
                 if (msg.msg == "添加成功") {
-                    alert("添加成功");
+                    alert("消息发送成功");
                     window.location.href = "#/main/msgsystem-msglist"
                 }
                 else{
@@ -38,8 +38,8 @@ iCloudController.controller("MessageController", ["$scope", "$http", "$cookieSto
     }]);
 
 
-iCloudController.controller("MessageDetailController", ["$scope", "$http", "$cookieStore", "$window", "$rootScope",
-    function ($scope, $http, $cookieStore, $window, $rootScope) {
+iCloudController.controller("MessageDetailController", ["$scope", "$http", "$cookieStore", "$window", "$rootScope", "$sce",
+    function ($scope, $http, $cookieStore, $window, $rootScope, $sce) {
         var id = get_param($window.location.href, "id");
         var getUnreadMsgCount = function (nextUrl) {
             $http.get([$window.API.MSGSYSTEM.GET_UNREAD_COUNT, "?key=", $cookieStore.get("key")].join(""))
@@ -50,11 +50,21 @@ iCloudController.controller("MessageDetailController", ["$scope", "$http", "$coo
                     }
                 });
         };
-
+        function getLineCount(str){
+            if(/\n/.test(str)){
+                return str.match(/\n/g).length;
+            }
+            return 0;
+        };
         var getDetailInfo = function () {
             $http.get([$window.API.MSGSYSTEM.DETAIL_MESSAGE, "?key=", $cookieStore.get("key"), "&id=", id].join(""))
                 .success(function (data) {
                     $scope.detail = data;
+                    var lines = getLineCount(data.info);
+                    var length = data.info.length;
+                    var msgInfo = document.getElementById("msgInfoId");
+                    var lengthLines = length/msgInfo.cols;
+                    msgInfo.rows = lines + 1 + lengthLines;
                     getUnreadMsgCount();  //点击详情时，需要更新未读消息数
                 })
         };
@@ -67,12 +77,12 @@ iCloudController.controller("MessageEditController", ["$scope", "$http", "$cooki
         $http.get([$window.API.MSGSYSTEM.DETAIL_MESSAGE, "?key=", $cookieStore.get("key"), "&id=", id].join(""), {"ordering": "-create_time"})
             .success(function (data) {
                 $scope.message = data;
-                $scope.roles = [{ value:'2,3,4,5', name: '代理' },
+                $scope.roles = [{ value:'2,3,4,5', name: '代理商' },
                     { value:'6', name: '商户' },
-                    { value:'2,3,4,5,6', name: '所有' }
+                    { value:'2,3,4,5,6', name: '所有人' }
                 ];
 
-                if (data.read_role == "代理"){
+                if (data.read_role == "代理商"){
                     $scope.message.read_role = $scope.roles[0];
                 }
                 else if (data.read_role == "商户"){
@@ -87,7 +97,8 @@ iCloudController.controller("MessageEditController", ["$scope", "$http", "$cooki
         $scope.editMessage = function (message) {
             $http.put([$window.API.MSGSYSTEM.EDIT_MESSAGE, "?key=", $cookieStore.get("key")].join(""), message)
                 .success(function (data) {
-                    window.location.href = "#/main/history"
+                    alert("修改成功");
+                    window.location.href = "#/main/msgsystem-msglist"
                 })
                 .error(function (data) {
                     $window.alert(data.msg);

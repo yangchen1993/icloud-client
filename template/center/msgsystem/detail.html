@@ -3,10 +3,14 @@
         <li class="active">消息详情</li>
     </ol>
     <div style="margin-left:15%; margin-right: 15% ">
-        <h3 align="center" >{{detail.title}}</h3></p>
-        <hr border="1">
-        <p align="right" >{{detail.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</p>
-        <hr>
-        <p><textarea class="textarea-content" disabled="disabled" >{{detail.info}}</textarea></p>
+        <h3 align="center" >{{detail.title}}</h3>
+        <br/>
+        <p style="float: right; width: 113px;font-size: 12px" >接收方：{{detail.read_role}}</p>
+        <br/>
+        <p style="float: right; width: 113px; font-size: 12px" >发送方：管理员</p>
+        <br/>
+        <p align="right" >{{detail.create_time | date:'yyyy-MM-dd HH:mm'}}</p>
+        <br/>
+        <textarea id="msgInfoId" disabled="disabled" cols="50" readonly="readonly" class="textarea-content">{{detail.info}}</textarea>
     </div>
 </div>

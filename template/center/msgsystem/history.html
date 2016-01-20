@@ -20,7 +20,7 @@
             </thead>
             <tr ng-repeat="item in grid.results">
                 <td>{{item.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                <td>{{(item.title | limitTo: 10) + '……'}}</td>
+                <td>{{item.title}}</td>
                 <td>{{(item.info | limitTo: 20) + '……'}}</td>
                 <td>{{item.read_role}}</td>
                 <td>

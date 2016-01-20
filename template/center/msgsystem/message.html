@@ -22,7 +22,7 @@
                 <td>
                     {{item.create_time | date:'yyyy-MM-dd HH:mm:ss'}}
                 </td>
-                <td>{{(item.title | limitTo: 10) + '……'}}</td>
+                <td>{{item.title}}</td>
                 <td>{{(item.info | limitTo: 20) + '……'}}</td>
                 <td>
                     <a ng-click="see_detail(item.id)" style="cursor: pointer">详情</a>

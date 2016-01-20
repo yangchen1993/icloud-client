@@ -7,23 +7,23 @@
         <table class="table table-bordered table-striped table-hover text-left">
             <thead style="background-color: #8a8bc4;color: #fff;">
             <tr>
-                <td align="left" width="10%">阅读状态</td>
-                <td align="left" width="20%">发布时间</td>
-                <td align="left" width="20%">标题</td>
-                <td align="left" width="40%">内容概述</td>
-                <td align="left" width="10%">详情</td>
+                <td align="left" width="8%">状态</td>
+                <td align="left" width="15%">发布时间</td>
+                <td align="left" width="25%">标题</td>
+                <td align="left" width="45%">内容概述</td>
+                <td align="left" width="7%">详情</td>
             </tr>
             </thead>
             <tr ng-repeat="item in grid.results">
                 <td>
-                    <label ng-if="item.read_state == false" style="color: #eb7070; font-size: 12px">&nbsp&nbsp&nbsp未读</label>
-                    <label ng-if="item.read_state == true" style="color: #91a0a8; font-size: 12px">&nbsp&nbsp&nbsp已读</label>
+                    <label align="center" ng-if="item.read_state == false" style="color: #eb7070; font-size: 12px; vertical-align:middle; ">&nbsp&nbsp&nbsp未读</label>
+                    <label align="center" ng-if="item.read_state == true" style="color: #91a0a8; font-size: 12px; vertical-align:middle; ">&nbsp&nbsp&nbsp已读</label>
                 </td>
                 <td>
                     {{item.create_time | date:'yyyy-MM-dd HH:mm:ss'}}
                 </td>
                 <td>{{item.title}}</td>
-                <td>{{(item.info | limitTo: 20) + '……'}}</td>
+                <td>{{(item.info | limitTo: 13) + '……'}}</td>
                 <td>
                     <a ng-click="see_detail(item.id)" style="cursor: pointer">详情</a>
                 </td>

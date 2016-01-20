@@ -1,5 +1,7 @@
 <div class="panel_outside row" >
     <ol class="breadcrumb">
+        <li ng-if="show_bell == true"><a ng-href="#/main/msgsystem-message">消息中心</a></li>
+        <li ng-if="show_bell == false"><a ng-href="#/main/msgsystem-msglist">发布中心</a></li>
         <li class="active">消息详情</li>
     </ol>
     <div style="margin-left:15%; margin-right: 15% ">
@@ -12,5 +14,6 @@
         <p align="right" >{{detail.create_time | date:'yyyy-MM-dd HH:mm'}}</p>
         <br/>
         <textarea id="msgInfoId" disabled="disabled" cols="50" readonly="readonly" class="textarea-content">{{detail.info}}</textarea>
+        <br/><br/>
     </div>
 </div>

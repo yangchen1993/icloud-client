@@ -17,15 +17,11 @@
                     <span>模板名称：</span>
                     <input class="form-control" type="text" ng-model="template.name">
                 </div>
-                <div class="form-inline form-group">
-                    <span>短信签名：</span>
-                    <input class="form-control" ng-model="template.sign">
-                </div>
                 <div class="form-inline form-group" style="position: relative">
                     <span>短信内容：</span>
-                <textarea class="form-control" ng-model="template.template" maxlength="70">
+                <textarea class="form-control" ng-model="template.template" placeholder="便于快速发送信息，建议不超过64个字！">
                 </textarea>
-                    <p style="position: absolute;right: 15px;bottom:0" class="text-muted">{{template.template | monitorWords}}/70</p>
+                    <p style="position: absolute;right: 15px;bottom:0" class="text-muted">{{template.template | monitorWords}}/64</p>
                 </div>
                 <div class="text-center">
                     <button class="button button-royal" ng-click="createTemplate(template)">提交</button>

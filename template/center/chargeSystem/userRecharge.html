@@ -1,0 +1,143 @@
+<style>
+    .charge_nav {
+        font-family: 微软雅黑;
+        font-size: 18px;
+        color: #fff;
+        height: 40px;
+        background-color: #8a8bc4;
+    }
+
+    .charge_nav > div {
+        line-height: 40px;
+    }
+
+    .charge_nav > div:hover {
+        background-color: #7677B0;
+        cursor: pointer;
+    }
+
+    .charge_nav_active {
+        background-color: #7677B0;
+    }
+
+    .recharge_font {
+        font-family: 微软雅黑;
+        font-size: 18px;
+    }
+
+    .rechargePanel > div {
+        height: 30px;
+        color: #fff;
+        margin-left: 40px;
+        text-align: center;
+        background-color: #D7D5D6;
+        border-radius: 3px;
+        padding-top: 3px;
+    }
+
+    .rechargePanel > div:nth-child(2) {
+        margin-left: 0;
+    }
+
+    .rechargePanel > div:hover {
+        background-color: #F85250;
+        cursor: pointer;
+    }
+
+    .recharge_active {
+        background-color: #F85250 !important;
+    }
+
+    .rechargeTable {
+        margin-top: 40px;
+    }
+
+    table {
+        font-family: 微软雅黑;
+        font-size: 18px;
+    }
+</style>
+<div class="panel_outside">
+    <ol class="breadcrumb">
+        <li>收费认证</li>
+        <li class="active">用户充值</li>
+    </ol>
+
+    <div style="padding:0 15px">
+        <div class="row charge_nav">
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==1}"
+                 ui-sref="main.taocanConfig">套餐设置
+            </div>
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==2}"
+                 ui-sref="main.userRecharge">用户充值
+            </div>
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==3}"
+                 ui-sref="main.rechargeDetails">充值明细
+            </div>
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==4}" ui-sref="main.userList">
+                用户列表
+            </div>
+        </div>
+    </div>
+
+    <div class="table_inside recharge_font">
+        <div class="rechargePanel row form-group">
+            <span class="col-xs-2 col-xs-offset-1">充值套餐：</span>
+            <div class="col-xs-1" ng-class="{'recharge_active':moneyStyle==p.id}" ng-click="changesStyle(p.id,p.period,p.price)" ng-repeat="p in packages" ng-bind="p.price+'元'">10元</div>
+        </div>
+        <div class="row form-group">
+            <span class="col-xs-2 col-xs-offset-1">上网时间：</span>
+            <div class="col-xs-2">{{surf_time}}天上网时间</div>
+        </div>
+        <div class="row form-group">
+            <span class="col-xs-2 col-xs-offset-1">支付费用：</span>
+            <div class="col-xs-2" style="color:red;">{{pay_money}}元</div>
+        </div>
+        <div class="row form-inline form-group">
+            <span class="col-xs-2 col-xs-offset-1">充值号码：</span>
+            <input type="text" class="form-control" ng-model="recharge_tel" ng-blur="checkout_tel(recharge_tel)">
+        </div>
+        <div ng-show="show_createPass">
+            <div class="form-group row">
+                <span style="color: red" class="col-xs-3 col-xs-offset-1">新用户请设置登录密码</span>
+            </div>
+            <div class="row form-inline form-group" >
+                <span class="col-xs-2 col-xs-offset-1">上网密码：</span>
+                <input class="form-control" ng-model="surf_pass">
+                <span style="color:red" ng-show="pass_msg">*两次密码不一致，请重新输入</span>
+            </div>
+            <div class="row form-inline form-group">
+                <span class="col-xs-2 col-xs-offset-1">重复密码：</span>
+                <input class="form-control" ng-model="surf_passed" ng-blur="checked_pass()">
+            </div>
+        </div>
+            <div class="row form-inline form-group">
+                <div class="col-xs-2 col-xs-offset-1">
+                    <button class="button button-caution" ng-click="recharge()">立即充值</button>
+                </div>
+            </div>
+    </div>
+
+
+    <div class="rechargeTable">
+        <table class="table table-bordered text-center table-striped table-hover">
+            <thead style="background-color: #8a8bc4;color: #fff">
+            <tr>
+                <td>充值套餐</td>
+                <td>费用</td>
+                <td>上网时间</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="p in packages">
+                <td ng-bind="p.name"></td>
+                <td ng-bind="p.price+'元'"></td>
+                <td ng-bind="p.period+'天'"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</div>

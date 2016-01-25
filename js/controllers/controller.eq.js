@@ -315,8 +315,11 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
             else if (data.login_type == "微信认证") {
                 $scope.login_type = 2;
             }
-            else if (data.login_type == "免认证") {
+            else if (data.login_type == "收费认证") {
                 $scope.login_type = 3;
+            }
+            else if (data.login_type == "免认证") {
+                $scope.login_type = 4;
             }
             //默认认证时间
             if (data.auth_period <= 60) {
@@ -352,9 +355,14 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
         console.log($scope.login_type);
         if (num == 1) {
             loginType = "手机号认证";
-        } else if (num == 2) {
+        }
+        else if (num == 2) {
             loginType = "微信认证";
-        } else {
+        }
+        else if (num == 3) {
+            loginType = "收费认证";
+        }
+        else {
             loginType = "";
         }
         $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType}).success(function (data) {
@@ -381,6 +389,9 @@ iCloudController.controller("DetailsController", ['$scope', '$http', '$cookieSto
 
     $scope.weixin_load = function () {
         location.href = ["#/main/weixin_config?group_id=", $scope.routers_all.router.router_groups.id].join("");
+    };
+    $scope.charge_load = function () {
+        location.href = ["#/main/taocanConfig?group_id=", $scope.group_id].join("");
     }
 
 }]);

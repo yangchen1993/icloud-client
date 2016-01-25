@@ -4,6 +4,11 @@
     </ol>
 
     <div class="table_inside">
+        <div class="form-group form-inline">
+            <label>商户账号:</label>
+            <input class="form-control" placeholder="手机号码" ng-model="tel">
+            <button class="button button-royal" ng-click="search()">查询</button>
+        </div>
         <table class="table table-bordered table-striped text-center table-hover">
             <thead style="background-color: #8a8bc4;color:#fff">
             <tr>
@@ -36,7 +41,10 @@
                 <td>
                     <span ng-bind="p.router_used"></span>/<span ng-bind="p.router_unused"></span>
                 </td>
-                <td><button class="btn btn-danger btn-xs" ng-click="delete_shanghu(p.id)">删除</button></td>
+                <td>
+                    <button class="btn btn-info btn-xs" ng-click="surf(p.username)">权限管理</button>
+                    <button class="btn btn-danger btn-xs" ng-click="delete_shanghu(p.id)">删除</button>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -1,0 +1,25 @@
+<div class="table_outside">
+    <ol class="breadcrumb">
+        <li><a>商户管理</a></li>
+        <li class="active">功能管理</li>
+    </ol>
+    <div class="table_inside">
+        <div style="height:70px;line-height: 70px;font-family: 微软雅黑;font-size: 18px">
+            <span>当前账户：</span>
+            <span ng-bind="username"></span>
+        </div>
+        <div class="row">
+            <div class="col-xs-4" ng-repeat="p in data_" style="height:360px;color: #fff;font-family: 微软雅黑;font-size: 18px">
+                <div style="height:100%;background-color:#67728D;padding: 40px 4%">
+                    <p style="height: 60px;line-height: 60px;border-bottom: 1px dashed #cccccc">功能名称：{{p.name}}</p>
+                    <p style="height:130px;border-bottom: 1px dashed #cccccc">功能描述：{{p.description}}</p>
+                    <p style="padding: 30px 0">
+                        <button class="btn btn-info btn-block" ng-click="submit(p.id,$index)">
+                            <span ng-bind="isOpen(p.id)" id="isOpen{{$index}}"></span>
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

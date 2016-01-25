@@ -135,6 +135,11 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/business/business-manage.html",
             controller: "BusinessManageController"
         })
+        .state("main.functions-manage", {
+            url: "/functions-manage",
+            templateUrl: "template/center/business/functions-manage.html",
+            controller: "FunctionsManageController"
+        })
         .state("main.business-info", {
             url: "/business-info",
             templateUrl: "template/center/business/business-info.html",
@@ -301,7 +306,26 @@ iCloudApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "template/center/help-files.html",
             controller: "FileController"
         })
-
+        .state("main.taocanConfig", {
+            url: "/taocanConfig",
+            templateUrl: "template/center/chargeSystem/taocanConfig.html",
+            controller: "TaoCanConfigController"
+        })
+        .state("main.userRecharge", {
+            url: "/userRecharge",
+            templateUrl: "template/center/chargeSystem/userRecharge.html",
+            controller: "UserRechargeController"
+        })
+        .state("main.rechargeDetails", {
+            url: "/rechargeDetails",
+            templateUrl: "template/center/chargeSystem/rechargeDetails.html",
+            controller: "RechargeDetailsController"
+        })
+        .state("main.userList", {
+            url: "/userList",
+            templateUrl: "template/center/chargeSystem/userList.html",
+            controller: "UserListController"
+        })
         .state("main.urlReport", {
             url: "/urlReport",
             templateUrl: "template/center/urlReport/urlReport.html",

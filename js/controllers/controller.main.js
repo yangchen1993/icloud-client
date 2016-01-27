@@ -10,6 +10,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
         };
 
         $cookieStore.put("role", data.role_object.name);
+        $cookieStore.put("username",data.tel);  //获取商户账号
 
             if (data.role_object.name == "系统管理员") {
                 $scope.auth_nav = false;

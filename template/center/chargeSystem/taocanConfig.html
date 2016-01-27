@@ -1,0 +1,111 @@
+<style>
+    .charge_nav{
+        font-family: 微软雅黑;
+        font-size: 18px;
+        color:#fff;
+        height: 40px;
+        background-color: #8a8bc4;
+    }
+    .charge_nav>div{
+        line-height: 40px;
+    }
+    .charge_nav>div:hover{
+        background-color:#7677B0;
+        cursor: pointer;
+    }
+    .charge_nav_active{
+        background-color:#7677B0;
+    }
+    .taocanPanel{
+        padding:20px 0 0 100px;
+    }
+    .taocanPanel span{
+        font-family: 微软雅黑;
+        font-size: 18px;
+    }
+    .taocanPanel button{
+        margin: 20px 0 0 100px;
+    }
+    .taocanTable{
+        padding-top: 23px;
+    }
+    .taocanTable span,button{
+        font-family: 微软雅黑;
+        font-size: 20px;
+    }
+    table{
+        margin-top: 26px;
+    }
+    table td{
+        font-family: 微软雅黑;
+        font-size: 18px;
+        vertical-align: middle !important
+    }
+    table button span{
+        font-size: 14px !important;
+    }
+</style>
+<div class="panel_outside">
+    <ol class="breadcrumb">
+        <li>收费认证</li>
+        <li class="active">套餐设置</li>
+    </ol>
+
+    <div style="padding:0 15px">
+        <div class="row charge_nav">
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==1}" ui-sref="main.taocanConfig">套餐设置</div>
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==2}" ui-sref="main.userRecharge">用户充值</div>
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==3}" ui-sref="main.rechargeDetails">充值明细</div>
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==4}" ui-sref="main.userList">用户列表</div>
+        </div>
+    </div>
+
+
+    <div class="table_inside">
+        <div class="taocanPanel">
+            <div class="form-inline form-group">
+                <span>套餐名称：</span>
+                <input class="form-control" ng-model="taocan.name" ng-blur="checkeds(1,taocan.name)">
+                <span style="color:red;margin-left: 30px" ng-show="name">*套餐名称必须填写</span>
+            </div>
+            <div class="form-inline form-group">
+                <span>充值金额：</span>
+                <input class="form-control" ng-model="taocan.price" ng-blur="checkeds(2,taocan.price)">
+                <span>元</span>
+                <span style="color:red;margin-left: 30px" ng-show="money">*充值金额必须填写</span>
+            </div>
+            <div class="form-inline form-group">
+                <span>上网时间：</span>
+                <input class="form-control" ng-model="taocan.period" ng-blur="checkeds(3,taocan.period)">
+                <span>天</span>
+                <span style="color:red;margin-left: 30px" ng-show="time">*上网时间必须填写</span>
+            </div>
+            <div class="form-group">
+                <button class="button button-royal" ng-click="add_taocan()">新增套餐</button>
+            </div>
+        </div>
+
+        <div class="taocanTable">
+            <span>套餐列表</span>
+            <table class="table table-bordered text-center table-striped table-hover">
+                <thead style="background-color: #8a8bc4;color: #fff">
+                    <tr>
+                        <td>套餐名称</td>
+                        <td>金额</td>
+                        <td>上网时间</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="p in packages.results">
+                        <td ng-bind="p.name"></td>
+                        <td ng-bind="p.price+'元'"></td>
+                        <td ng-bind="p.period+'天'"></td>
+                        <td><button class="btn btn-danger btn-sm" ng-click="delete_taocan(p.id)"><span>删除</span></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

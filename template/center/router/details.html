@@ -71,44 +71,57 @@
                 <p class="text-muted" style="margin-left: 30px">全部选择关闭则为免认证方式</p>
 
                 <div class="identify_type row">
-                    <div class="text-center col-xs-4">
+                    <div class="text-center col-md-3">
                         <div class="login-icon">
                             <img src="/img/iconfont-shouji.png">
                         </div>
+
                         <p>手机登录</p>
 
                         <div class="btn-group" style="margin-top: 10px;">
                             <label class="btn btn-primary" ng-class="{'route-active': login_type==1}">
-                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type" value="1"
-                                       ng-change="changeLoginType(1)">
+                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type"
+                                       value="1" ng-change="changeLoginType(1)">
                             </label>
                         </div>
                     </div>
-                    <div class="text-center col-xs-4">
+                    <div class="text-center col-md-3">
                         <div class="login-icon">
                             <img src="/img/iconfont-weixin.png">
                         </div>
                         <p style="margin-left: 0">微信登陆<a href="javascript:" ng-click="weixin_load()">设置</a></p>
 
                         <div class="btn-group" style="margin-top: 10px;">
-
                             <label class="btn btn-primary" ng-class="{'route-active': login_type==2}">
-                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type" value="2"
-                                       ng-change="changeLoginType(2)">
+                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type"
+                                       value="2" ng-change="changeLoginType(2)">
                             </label>
                         </div>
                     </div>
-                    <div class="text-center col-xs-4">
+                    <div class="text-center col-md-3">
+                        <div class="login-icon">
+                            <img src="/img/chargeSyetem.png">
+                        </div>
+                        <p style="margin-left: 0">收费认证<a href="javascript:" ng-click="charge_load()">设置</a></p>
+
+                        <div class="btn-group" style="margin-top: 10px;">
+                            <label class="btn btn-primary" ng-class="{'route-active': login_type==3}">
+                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type"
+                                       value="3" ng-change="changeLoginType(3)">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-3">
                         <div class="login-icon">
                             <img src="/img/iconfont-wuxuqueren.png">
                         </div>
+
                         <p style="margin-left: 0">免认证</p>
 
                         <div class="btn-group" style="margin-top: 10px;">
-
-                            <label class="btn btn-primary" ng-class="{'route-active': login_type==3}">
-                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type" value="3"
-                                       ng-change="changeLoginType(3)">
+                            <label class="btn btn-primary" ng-class="{'route-active': login_type==4}">
+                                <input class="hidden" type="radio" name="options_phone" ng-model="login_type"
+                                       value="4" ng-change="changeLoginType(4)">
                             </label>
                         </div>
                     </div>

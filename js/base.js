@@ -1,9 +1,8 @@
 /**
  * Created by lee on 2015/9/9.
  */
-
-//window.HOST = "http://localhost:8000/api/";
-window.HOST = "http://server.idianjia.com/api/";
+window.HOST = "http://dev.idianjia.com:8002/api/";
+//window.HOST = "http://server.idianjia.com/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {
@@ -204,7 +203,7 @@ window.API = {
 
         "GET_MONTH_INFO": [window.HOST, "monthdata/get_month_info/"].join(""), //每月店铺客流情况
 
-        "GET_GUESTS_LOYALTY": [window.HOST, "memberlog/get_guests_loyalty/"].join("")  //用戶忠誠度
+        "GET_GUESTS_LOYALTY":[window.HOST,"memberlog/get_guests_loyalty/"].join("")  //用戶忠誠度
     },
 
     "JSADS": {
@@ -232,16 +231,50 @@ window.API = {
         "GET_CURRENT_USER_TOTAL_CASH": [window.HOST, "account/get_current_user_total_cash/"].join("")
     },
 
+    "CHARGESYSTEM":{
+        "GET_CURRENT_USER_PACKAGES": [window.HOST,"packages/get_current_user_packages/"].join(""),//获取上网套餐
+
+        "NEW_PACKAGE": [window.HOST,"packages/new_package/"].join(""),//新建上网套餐
+
+        "REMOVE_PACKAGE": [window.HOST,"packages/remove_package/"].join(""),//删除上网套餐
+
+        "EDIT_PACKAGE": [window.HOST,"packages/edit_package/"].join(""),//编辑上网套餐
+
+        "GET_PREPAID_MEMBERS_TEL":[window.HOST,"prepaid_members/get_prepaid_member_info_by_phone/"].join(""),//获取已设置密码的上网套餐的号码
+
+        "GET_CURRENT_USER_PREPAID_MEMBERS":[window.HOST,"prepaid_members/get_current_user_prepaid_members"].join(""), //获取上网已充值用户列表
+
+        "RESET_PASSWORD": [window.HOST,"prepaid_members/reset_password/"].join(""), //修改上网密码
+
+        "NEW_CHARGE_HISTORY":[window.HOST,"charges/new_charge_history/"].join(""), //上网充值
+
+        "GET_CURRENT_USER_CHARGE_HISTORY":[window.HOST,"charges/get_current_user_charge_history/"].join(""), //充值明细列表
+
+        "CANCEL_CHARGE_HISTORY":[window.HOST,"charges/cancel_charge_history/"].join(""), //作废已充值用户
+
+        "GET_ALL_FUNCTIONS":[window.HOST,"functions/get_all_functions/"].join(""),//获取所有权限
+
+        "GET_CURRENT_USER_FUNCTIONS":[window.HOST,"functions/get_current_user_functions/"].join(""), //获取当前用户开通的权限列表
+
+        "OPEN_FUNCTION_TO_USER":[window.HOST,"functions/open_function_to_user/"].join(""), //开通功能给当前用户
+
+        "CLOSE_FUNCTION_TO_USER":[window.HOST,"functions/close_function_to_user/"].join("")  //取消当前用户的功能
+    },
+
     "URLREPORT":{
         "GET_URL_COLLECT_RULE":[window.HOST,"url_analyze_rule/get_all_url_collect_rules/"].join(""),
+
         "CREATE_URL_COLLECT_RULE":[window.HOST,"url_analyze_rule/create_url_collect_rule/"].join("")
 
     },
 
     "CREATE_AD": {
         "CREATE_AD_PLATFORM": [window.HOST, "accessed_ad/create_ads/"].join(""),
+
         "GET_AD_PLATFORM": [window.HOST, "accessed_ad/get_ads/"].join(""),
+
         "UPDATE_AD_PLATFORM":[window.HOST,"accessed_ad/update_ads/"].join(""),
+
         "DELETE_AD_PLATFORM":[window.HOST,"accessed_ad/delete_ads/"].join("")
     },
 
@@ -253,32 +286,53 @@ window.API = {
 
     "PARTITION": {
         "GET_ACCESSED_ADS_ROUTERS": [window.HOST, "accessed_ad/get_ads/"].join(""),
+
         "GET_ACCESSED_ADS_FLOW_INFO_ROUTERS": [window.HOST, "ad_income_partition/get_flow_info/"].join(""),
+
         "ACCESSED_AD_CREATE_AD_FLOW_ROUTERS": [window.HOST, "ad_income_partition/create_ad_flow/"].join(""),
+
         "AD_INCOME_PARTITION_ADS_AGENT_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_flow_data_by_admin/"].join(""),
+
         "AD_INCOME_PARTITION_ADS_AGENT_FLOW_INCOME_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_current_user_flow_income/"].join(""),
+
         "AD_INCOME_PARTITION_ADS_AGENT_FLOW_INCOME_LIST_ROUTERS": [window.HOST, "ad_income_partition_ads_agent/get_current_user_flow_income_list/"].join(""),
+
         "AD_INCOME_WITHDRAW_CREATE_ROUTERS": [window.HOST, "ad_income_withdraw/create_withdraw_cash/"].join(""),
+
         "AD_INCOME_WITHDRAW_LOG_ROUTERS": [window.HOST, "ad_income_withdraw/get_withdraw_cash_log/"].join(""),
+
         "AD_INCOME_ADMIN_ROUTERS": [window.HOST, "ad_income_admin/get_withdraw_cash_log/"].join(""),
+
         "AD_INCOME_ADMIN_SURE_WITHDRAW_ROUTERS": [window.HOST, "ad_income_admin/sure_withdraw_cash/"].join(""),
+
         "AD_INCOME_ADMIN_MODIFY_AGENT_INCOME_ROUTERS": [window.HOST, "ad_income_partition/modify_agent_income/"].join(""),
+
         "AD_INCOME_ADMIN_RATIO_ROUTERS": [window.HOST, "ad_income_partition/get_income_ratio/"].join(""),
+
         "AD_INCOME_ADMIN_RATIO_SET_ROUTERS": [window.HOST, "ad_income_partition/set_income_ratio/"].join(""),
-        "GET_ACCESSED_ADS_FLOW_INFO_BY_AD_ID_ROUTERS": [window.HOST, "ad_income_partition/get_flow_by_ad_id/"].join(""),
+
+        "GET_ACCESSED_ADS_FLOW_INFO_BY_AD_ID_ROUTERS": [window.HOST, "ad_income_partition/get_flow_by_ad_id/"].join("")
 
     },
 
     "MSGSYSTEM": {
         "GET_ALL": [window.HOST, "message/get_all/"].join(""),  //获取历史系统消息
+
         "ADD_MESSAGE": [window.HOST, "message/add/"].join(""),
+
         "DELETE_MESSAGE": [window.HOST, "message/delete/"].join(""),
+
         "DETAIL_MESSAGE": [window.HOST, "message/get_detail/"].join(""),
+
         "EDIT_MESSAGE": [window.HOST, "message/modified/"].join(""),
+
         "GET_UNREAD_COUNT": [window.HOST, "message/get_unread_count/"].join(""),
+
         "GET_PREVIOUS_ID": [window.HOST, "message/get_previous/"].join(""),
-        "GET_NEXT_ID": [window.HOST, "message/get_next/"].join(""),
-    },
+
+        "GET_NEXT_ID": [window.HOST, "message/get_next/"].join("")
+    }
+
 };
 
 

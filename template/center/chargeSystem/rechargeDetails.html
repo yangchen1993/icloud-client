@@ -1,0 +1,103 @@
+<style>
+    .charge_nav {
+        font-family: 微软雅黑;
+        font-size: 18px;
+        color: #fff;
+        height: 40px;
+        background-color: #8a8bc4;
+    }
+
+    .charge_nav > div {
+        line-height: 40px;
+    }
+
+    .charge_nav > div:hover {
+        background-color: #7677B0;
+        cursor: pointer;
+    }
+
+    .charge_nav_active {
+        background-color: #7677B0;
+    }
+
+    .recharge_font {
+        font-family: 微软雅黑;
+        font-size: 18px;
+    }
+
+    table td {
+        vertical-align: middle !important
+    }
+
+    table button span {
+        font-size: 14px !important;
+    }
+</style>
+<div class="panel_outside">
+    <ol class="breadcrumb">
+        <li>收费认证</li>
+        <li class="active">充值明细</li>
+    </ol>
+
+    <div style="padding:0 15px">
+        <div class="row charge_nav">
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==1}" ui-sref="main.taocanConfig">套餐设置</div>
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==2}" ui-sref="main.userRecharge">用户充值</div>
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==3}" ui-sref="main.rechargeDetails">充值明细</div>
+            <div class="col-xs-2 text-center" ng-class="{'charge_nav_active':charge_page==4}" ui-sref="main.userList">用户列表</div>
+        </div>
+    </div>
+
+    <div class="table_inside recharge_font">
+        <div class="form-inline form-group">
+            <span class="col-xs-2 text-center" style="margin-top: 4px">手机号：</span>
+            <input class="form-control col-xs-2" ng-model="tel">
+
+            <span class="col-xs-2 text-center" style="margin-top: 4px">充值日期：</span>
+            <div id="datetimepicker1" class="input-group input-append date">
+                <input class="form-control" type="text" size="16" disabled>
+                <span class="input-group-addon add-on">
+                  <i class="fa fa-calendar" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+            </div>
+            <span>到</span>
+            <div id="datetimepicker2" class="input-group input-append date">
+                <input class="form-control" type="text" size="16" disabled>
+                <span class="input-group-addon add-on">
+                  <i class="fa fa-calendar" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+            </div>
+            <button class="button button-royal" style="margin-left: 10px" ng-click="search()">查询</button>
+        </div>
+
+        <div style="margin-top: 30px">
+            <table class="table table-bordered text-center table-striped table-hover">
+                <thead style="background-color: #8a8bc4;color: #fff">
+                <tr>
+                    <td>手机号</td>
+                    <td>充值时间</td>
+                    <td>充值金额</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="p in grid.results">
+                    <td ng-bind="p.phone">15478945678</td>
+                    <td ng-bind="p.create_time | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                    <td ng-bind="p.cash">30.00</td>
+                    <td ng-show="p.status == 1">已付款</td>
+                    <td ng-show="p.status == 0">已作废</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" ng-click="cancel(p.id,p.create_time)" ng-show="p.status == 1"><span>作废</span></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-include="'/template/partial/pagination.html'" style="height: 50px;background-color: #f4f4f6"></div>
+    </div>
+
+</div>

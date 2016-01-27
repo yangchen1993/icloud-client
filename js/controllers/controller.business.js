@@ -706,13 +706,16 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
 
         //默认认证方式
         if (data.login_type == "手机号认证") {
-            $scope.login_type = 1;
+            $scope.login_types = 1;
         }
         else if (data.login_type == "微信认证") {
-            $scope.login_type = 2;
+            $scope.login_types = 2;
+        }
+        else if (data.login_type == "收费认证") {
+            $scope.login_types = 3;
         }
         else if (data.login_type == "免认证") {
-            $scope.login_type = 3;
+            $scope.login_types = 4;
         }
         //默认认证时间
         if (data.auth_period <= 60) {
@@ -744,13 +747,19 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     $scope.changeLoginType = function (num) {
         if (num == 1) {
             loginType = "手机号认证";
-        } else if (num == 2) {
+        }
+        else if (num == 2) {
             loginType = "微信认证";
-        } else {
+        }
+        else if (num == 3) {
+            loginType = "收费认证";
+        }
+        else {
             loginType = "";
         }
         $http.put([window.API.ROUTER.EDIT_ROUTER_SETUP, "?key=", $cookieStore.get("key"), "&router=", router_id].join(""), {"login_type": loginType}).success(function (data) {
                 alert(data.msg);
+            $scope.login_types = num
             })
             .error(function (data) {
                 alert(data.msg)
@@ -772,7 +781,10 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
 
     $scope.weixin_load = function () {
         $window.location.href = ["#/main/weixin_config?group_id=", $scope.group_id].join("");
-    }
+    };
+    $scope.charge_load = function () {
+        $window.location.href = ["#/main/taocanConfig?group_id=", $scope.group_id].join("");
+    };
 
 }]);
 
@@ -819,7 +831,54 @@ iCloudController.controller("BusinessManageController", ["$scope", "$http", "$co
             }
 
         };
+
+        $scope.search = function(){
+            var data_ = {};
+            data_.username = $scope.tel;
+            $scope.filtering(data_);
+        };
+
+        $scope.surf = function(username){
+            location.href = ["#/main/functions-manage","?username=",username].join("")
+        }
     }]);
+
+iCloudController.controller("FunctionsManageController",["$scope","$http","$cookieStore",function($scope,$http,$cookieStore){
+    $scope.username = get_param(location.href,"username");
+    $http.get([window.API.CHARGESYSTEM.GET_ALL_FUNCTIONS,"?key=",$cookieStore.get("key")].join("")).success(function(data){
+        console.log(data);
+        $scope.data_ = data.results;
+    });
+
+    $http.get([window.API.CHARGESYSTEM.GET_ALL_FUNCTIONS,"?key=",$cookieStore.get("key"),"&user__username=",$scope.username].join("")).success(function(data){
+        console.log(data.results);
+        var ids = _.pluck(data.results,'id');
+        $scope.isOpen = function(id){
+            var isExit = _.indexOf(ids,id);
+            if(isExit != -1){
+                return "取消";
+            }
+            else {
+                return "开通";
+            }
+        }
+    });
+    $scope.submit = function(id,index){
+        console.log($("#isOpen"+index).html());
+        if($("#isOpen"+index).html() == "开通"){
+            $http.put([window.API.CHARGESYSTEM.OPEN_FUNCTION_TO_USER,"?key=",$cookieStore.get("key"),"&id=",id].join(""),{"username":$scope.username}).success(function(data){
+                alert(data.msg);
+                location.reload();
+            })
+        }
+        else if($("#isOpen"+index).html() == "取消"){
+            $http.put([window.API.CHARGESYSTEM.CLOSE_FUNCTION_TO_USER,"?key=",$cookieStore.get("key"),"&id=",id].join(""),{"username":$scope.username}).success(function(data){
+                alert(data.msg);
+                location.reload();
+            })
+        }
+    }
+}]);
 
 iCloudController.controller("BusinessInfoController", ["$scope", "$http", "$cookieStore", "$window",
     function ($scope, $http, $cookieStore, $window) {

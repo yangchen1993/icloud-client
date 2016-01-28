@@ -782,9 +782,6 @@ iCloudController.controller("RoutersDetailsController", ["$scope", "$http", "$co
     $scope.weixin_load = function () {
         $window.location.href = ["#/main/weixin_config?group_id=", $scope.group_id].join("");
     };
-    $scope.charge_load = function () {
-        $window.location.href = ["#/main/taocanConfig?group_id=", $scope.group_id].join("");
-    };
 
 }]);
 

@@ -1,8 +1,8 @@
 /**
  * Created by lee on 2015/9/9.
  */
-window.HOST = "http://dev.idianjia.com:8002/api/";
-//window.HOST = "http://server.idianjia.com/api/";
+//window.HOST = "http://dev.idianjia.com:8002/api/";
+window.HOST = "http://server.idianjia.com/api/";
 window.HOST_WIFICAT = "http://r.idianjia.com/ws/";
 
 window.API = {

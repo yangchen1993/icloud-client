@@ -92,6 +92,7 @@ iCloudController.controller("MainController", ["$scope", "$http", "$cookieStore"
                 $rootScope.delegate_auths = 0;
                 $scope.Message_nav = true; //实现发布系统功能
                 $scope.sysMessage_nav = false;//实现发布系统功能
+                $scope.charge_system_function = true;
                 $rootScope.update_ssid = false;
                 $rootScope.isShow_balckwhite = false;
                 $rootScope.putAdSearch = {
